@@ -95,7 +95,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserVO> implements UserServ
 	/*向用户角色中间表批量插入数据.*/
 	public int insertUserRolesBatch(String userid, List<RoleVO> roles){
 		List<UserRoleVO> userRoles = new ArrayList<>();
-		if(roles.size()>0){
+		if(roles!=null && roles.size()>0){
 			for(RoleVO role : roles){
 				UserRoleVO temp = new UserRoleVO();
 				temp.setUserid(userid);

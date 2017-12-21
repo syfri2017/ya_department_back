@@ -23,7 +23,7 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionVO> impleme
 	}
 
 	@Override
-	public List<PermissionVO> getRolePermissionByVO(RoleVO roleVO) {
-		return permissionDAO.getRolePermissionByVO(roleVO);
+	public List<PermissionVO> doFindPermissionByRoleid(String roleid) {
+		return permissionDAO.doFindPermissionByRoleid(roleid);
 	}
 }

@@ -1,24 +1,23 @@
 package com.syfri.userservice.service;
 
 import com.syfri.baseapi.service.BaseService;
-import com.syfri.userservice.model.RoleVO;
-import com.syfri.userservice.model.UserVO;
+import com.syfri.userservice.model.*;
 
 import java.util.List;
 
 public interface RoleService  extends BaseService<RoleVO>{
 	/*根据用户取角色.*/
-	List<RoleVO> getUserRoleByVO(UserVO userVO);
+	List<RoleVO> doFindRoleByUserid(String userid);
 
-	/*--查询：获取用户权限，如果roleVO为null，则获取所有用户权限.--*/
-	List<RoleVO> doFindRolePermissions(RoleVO roleVO);
+	/*--查询：获取用户权限、菜单，如果roleVO为null，则获取所有用户权限、菜单.--*/
+	List<RoleVO> doFindRoles(RoleVO roleVO);
 
-	/*--新增：增加角色并为用户赋予权限.--*/
-	RoleVO doInsertRolePermissions(RoleVO roleVO);
+	/*--新增：增加角色并为用户赋予权限、菜单.--*/
+	RoleVO doInsertRole(RoleVO roleVO);
 
-	/*--修改：修改角色并修改用户权限.--*/
-	RoleVO doUpdateRolePermissions(RoleVO roleVO);
+	/*--修改：修改角色并修改用户权限、菜单.--*/
+	RoleVO doUpdateRole(RoleVO roleVO);
 
-	/*--删除：删除用户同时删除其角色.--*/
-	void doDeleteRolePermissions(String roleid);
+	/*--删除：删除角色同时删除其权限、菜单.--*/
+	void doDeleteRole(String roleid);
 }
