@@ -57,10 +57,10 @@ public class MyShiroRealm extends AuthorizingRealm{
 		ShiroUser shiroUser = new ShiroUser(user.getPkid(), user.getUsername(), user.getRealname());
 		List<String> roles = new ArrayList();
 		List<String> permissions = new ArrayList();
-		List<RoleVO> roleList = roleService.getUserRoleByVO(user);
+		List<RoleVO> roleList = roleService.doFindRoleByUserid(user.getPkid());
 		for(RoleVO role : roleList){
 			roles.add(role.getRolename());
-			List<PermissionVO> permissionList = permissionService.getRolePermissionByVO(role);
+			List<PermissionVO> permissionList = permissionService.doFindPermissionByRoleid(role.getRoleid());
 			for(PermissionVO permission : permissionList){
 				permissions.add(permission.getPermissionname());
 			}
@@ -111,10 +111,10 @@ public class MyShiroRealm extends AuthorizingRealm{
 		UserVO userVO = (UserVO) principalCollection.getPrimaryPrincipal();
 		if(userVO != null){
 			//根据用户取角色
-			List<RoleVO> roleList = roleService.getUserRoleByVO(userVO);
+			List<RoleVO> roleList = roleService.doFindRoleByUserid(userVO);
 			for(RoleVO role : roleList){
 				authorizationInfo.addRole(role.getRolename());
-				List<PermissionVO> permissionList = permissionService.getRolePermissionByVO(role);
+				List<PermissionVO> permissionList = permissionService.doFindPermissionByRoleid(role);
 				for(PermissionVO permission : permissionList){
 					authorizationInfo.addStringPermission(permission.getPermissionname());
 				}
