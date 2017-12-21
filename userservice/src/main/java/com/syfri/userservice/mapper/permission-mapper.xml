@@ -163,8 +163,8 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据用户获取用户的角色-->
-	<select id="getRolePermissionByVO" parameterType="RoleVO" resultType="PermissionVO">
+	<!--12.根据用户ID获取用户的角色-->
+	<select id="doFindPermissionByRoleid" parameterType="String" resultType="PermissionVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM SYS_ROLE_PERMISSION r LEFT JOIN SYS_PERMISSION t ON r.permissionid = t.permissionid where roleid = #{roleid}

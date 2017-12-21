@@ -3,8 +3,8 @@
 <mapper namespace="com.syfri.userservice.dao.MenuDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
-		<if test="pkid != null and pkid != '' ">
-		 and t.pkid = #{pkid}
+		<if test="menuid != null and menuid != '' ">
+		 and t.menuid = #{menuid}
 		</if>
 		<if test="menuname != null and menuname != '' ">
 		 and t.menuname = #{menuname}
@@ -15,8 +15,8 @@
 		<if test="menuinfo != null and menuinfo != '' ">
 		 and t.menuinfo = #{menuinfo}
 		</if>
-		<if test="menuParentid != null and menuParentid != '' ">
-		 and t.menu_parentid = #{menuParentid}
+		<if test="parentid != null and parentid != '' ">
+		 and t.parentid = #{parentid}
 		</if>
 		<if test="isleaf != null and isleaf != '' ">
 		 and t.isleaf = #{isleaf}
@@ -51,15 +51,18 @@
 		<if test="deleteFlag != null and deleteFlag != '' ">
 		 and t.delete_flag = #{deleteFlag}
 		</if>
+		<if test="seqno != null and seqno != '' ">
+			and t.seqno = #{seqno}
+		</if>
 	</sql>
 
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
-		t.pkid pkid,
+		t.menuid menuid,
 		t.menuname menuname,
 		t.menuurl menuurl,
 		t.menuinfo menuinfo,
-		t.menu_parentid menuParentid,
+		t.parentid parentid,
 		t.isleaf isleaf,
 		t.create_id createId,
 		t.create_name createName,
@@ -70,7 +73,8 @@
 		t.reserve1 reserve1,
 		t.reserve2 reserve2,
 		TO_CHAR(t.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3,
-		t.delete_flag deleteFlag
+		t.delete_flag deleteFlag,
+		t.seqno
 	</sql>
 
 	<!--3.查询记录数-->
@@ -92,26 +96,26 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SYS_MENU t 
-		WHERE t.DELETE_FLAG = 'N' AND  t.PKID = #{value} 
+		WHERE t.DELETE_FLAG = 'N' AND  t.menuid = #{value} 
 	</select>
 
 	<!--6.按照VO插入-->
 	<insert  id="doInsertByVO"  parameterType="MenuVO"> 
-		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
-			SELECT SYS_GUID() AS pkid FROM DUAL
+		<selectKey resultType="String" order="BEFORE" keyProperty="menuid">
+			SELECT SYS_GUID() AS menuid FROM DUAL
 		</selectKey>
-		INSERT INTO SYS_MENU(pkid,menuname,menuurl,menuinfo,menu_parentid,isleaf,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag)
-		VALUES(#{pkid,jdbcType=VARCHAR},#{menuname,jdbcType=VARCHAR},#{menuurl,jdbcType=VARCHAR},#{menuinfo,jdbcType=VARCHAR},#{menuParentid,jdbcType=VARCHAR},#{isleaf,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE},'N')
+		INSERT INTO SYS_MENU(menuid,menuname,menuurl,menuinfo,parentid,isleaf,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag,seqno)
+		VALUES(#{menuid,jdbcType=VARCHAR},#{menuname,jdbcType=VARCHAR},#{menuurl,jdbcType=VARCHAR},#{menuinfo,jdbcType=VARCHAR},#{parentid,jdbcType=VARCHAR},#{isleaf,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE},'N',#{seqno,jdbcType=VARCHAR})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO SYS_MENU(pkid,menuname,menuurl,menuinfo,menu_parentid,isleaf,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag)
-		SELECT SYS_GUID() pkid, A.* 
+		INSERT INTO SYS_MENU(menuid,menuname,menuurl,menuinfo,parentid,isleaf,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag,seqno)
+		SELECT SYS_GUID() menuid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.menuname,jdbcType=VARCHAR} menuname,#{item.menuurl,jdbcType=VARCHAR} menuurl,#{item.menuinfo,jdbcType=VARCHAR} menuinfo,#{item.menuParentid,jdbcType=VARCHAR} menu_parentid,#{item.isleaf,jdbcType=VARCHAR} isleaf,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag
+			#{item.menuname,jdbcType=VARCHAR} menuname,#{item.menuurl,jdbcType=VARCHAR} menuurl,#{item.menuinfo,jdbcType=VARCHAR} menuinfo,#{item.parentid,jdbcType=VARCHAR} parentid,#{item.isleaf,jdbcType=VARCHAR} isleaf,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag,#{item.seqno,jdbcType=Integer} seqno
 		FROM DUAL
 		</foreach>
 		) A
@@ -119,18 +123,18 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SYS_MENU t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  SYS_MENU t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.menuid = #{value} 
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="MenuVO"> 
 		UPDATE   SYS_MENU  
 		<set>
-			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="menuid != null">menuid=#{menuid},</if>
 			<if test="menuname != null">menuname=#{menuname},</if>
 			<if test="menuurl != null">menuurl=#{menuurl},</if>
 			<if test="menuinfo != null">menuinfo=#{menuinfo},</if>
-			<if test="menuParentid != null">menu_parentid=#{menuParentid},</if>
+			<if test="parentid != null">parentid=#{parentid},</if>
 			<if test="isleaf != null">isleaf=#{isleaf},</if>
 			<if test="createId != null">create_id=#{createId},</if>
 			<if test="createName != null">create_name=#{createName},</if>
@@ -142,23 +146,24 @@
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="deleteFlag != null">delete_flag='N'</if>
+			<if test="seqno != null">seqno=#{seqno}</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  menuid = #{menuid}
 	</update>
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO SYS_MENU(pkid,menuname,menuurl,menuinfo,menu_parentid,isleaf,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag)
+		INSERT INTO SYS_MENU(menuid,menuname,menuurl,menuinfo,parentid,isleaf,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.menuname,jdbcType=VARCHAR} menuname,#{item.menuurl,jdbcType=VARCHAR} menuurl,#{item.menuinfo,jdbcType=VARCHAR} menuinfo,#{item.menuParentid,jdbcType=VARCHAR} menu_parentid,#{item.isleaf,jdbcType=VARCHAR} isleaf,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag
+			#{item.menuname,jdbcType=VARCHAR} menuname,#{item.menuurl,jdbcType=VARCHAR} menuurl,#{item.menuinfo,jdbcType=VARCHAR} menuinfo,#{item.parentid,jdbcType=VARCHAR} parentid,#{item.isleaf,jdbcType=VARCHAR} isleaf,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
-			pkid = VALUES(pkid),
+			menuid = VALUES(menuid),
 			menuname = VALUES(menuname),
 			menuurl = VALUES(menuurl),
 			menuinfo = VALUES(menuinfo),
-			menu_parentid = VALUES(menu_parentid),
+			parentid = VALUES(parentid),
 			isleaf = VALUES(isleaf),
 			create_id = VALUES(create_id),
 			create_name = VALUES(create_name),
@@ -179,6 +184,46 @@
 		FROM SYS_MENU t 
 		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.根据用户角色ID获取父菜单-->
+	<select id="doFindMenuByRoleid" parameterType="String" resultType="MenuVO">
+		SELECT m.menuid,m.menuname,m.menuurl,m.menuinfo,m.seqno
+		FROM SYS_MENU m
+		INNER JOIN SYS_ROLE_MENU c ON m.menuid = c.menuid
+		WHERE m.delete_flag = 'N' AND parentid = -1
+		AND roleid = #{roleid}
+		ORDER BY seqno
+	</select>
+
+	<!--13.根据菜单父ID获取子菜单-->
+	<select id="doFindMenusByParentId" parameterType="String" resultType="MenuVO">
+		SELECT m.menuid,m.menuname,m.menuurl,m.menuinfo,m.seqno
+		FROM SYS_MENU m
+		WHERE m.delete_flag = 'N'
+		AND parentid = #{parentid}
+		ORDER BY seqno
+	</select>
+
+	<!--14.根据用户ID获取父菜单-->
+	<select id="doFindMenuByUserid" resultType="MenuVO">
+		SELECT DISTINCT m.menuid,m.menuname,m.menuurl,m.menuinfo,m.seqno
+    	FROM SYS_MENU m
+    	INNER JOIN SYS_ROLE_MENU c ON m.menuid = c.menuid
+    	WHERE m.delete_flag = 'N' AND parentid = #{parentid,jdbcType=VARCHAR}
+    	AND roleid IN (SELECT roleid FROM SYS_USER_ROLE r INNER JOIN SYS_USER u ON r.userid = u.pkid WHERE r.userid = #{userid,jdbcType=VARCHAR})
+    	ORDER BY seqno
+	</select>
+
+	<!--13.根据菜单父ID，用户角色ID获取子菜单-->
+	<select id="doFindMenusByPraUserid" resultType="MenuVO">
+		SELECT m.menuid,m.menuname,m.menuurl,m.menuinfo,m.seqno
+		FROM SYS_MENU m
+		INNER JOIN SYS_ROLE_MENU c ON m.menuid = c.menuid
+		WHERE m.delete_flag = 'N'
+		AND c.roleid = #{roleid,jdbcType=VARCHAR}
+		AND m.parentid = #{parentid,jdbcType=VARCHAR}
+		ORDER BY seqno
 	</select>
 
 </mapper>
