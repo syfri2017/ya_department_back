@@ -8,11 +8,11 @@ public class MenuVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String pkid;	//菜单ID（主键）
+	private String menuid;	//菜单ID（主键）
 	private String menuname;	//菜单名称
 	private String menuurl;	//菜单URL
 	private String menuinfo;	//菜单描述
-	private String menuParentid;	//菜单父ID
+	private String parentid;	//菜单父ID
 	private String isleaf;	//是否为叶子节点（[0]否，[1]是）
 	private String createId;	//创建人ID
 	private String createName;	//创建人
@@ -24,12 +24,13 @@ public class MenuVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
 	private String deleteFlag;	//删除标志
+	private Integer seqno;  //显示顺序
 
-	public String getPkid(){
-		return pkid;
+	public String getMenuid(){
+		return menuid;
 	}
-	public void setPkid(String pkid){
-		this.pkid = pkid;
+	public void setMenuid(String menuid){
+		this.menuid = menuid;
 	}
 	public String getMenuname(){
 		return menuname;
@@ -49,11 +50,11 @@ public class MenuVO extends ValueObject implements Serializable{
 	public void setMenuinfo(String menuinfo){
 		this.menuinfo = menuinfo;
 	}
-	public String getMenuParentid(){
-		return menuParentid;
+	public String getParentid(){
+		return parentid;
 	}
-	public void setMenuParentid(String menuParentid){
-		this.menuParentid = menuParentid;
+	public void setParentid(String parentid){
+		this.parentid = parentid;
 	}
 	public String getIsleaf(){
 		return isleaf;
@@ -120,5 +121,13 @@ public class MenuVO extends ValueObject implements Serializable{
 	}
 	public void setDeleteFlag(String deleteFlag){
 		this.deleteFlag = deleteFlag;
+	}
+
+	public Integer getSeqno() {
+		return seqno;
+	}
+
+	public void setSeqno(Integer seqno) {
+		this.seqno = seqno;
 	}
 }
