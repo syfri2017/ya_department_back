@@ -1,9 +1,6 @@
 package com.syfri.userservice.config;
 
-import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.wall.WallConfig;
-import com.alibaba.druid.wall.WallFilter;
 import com.github.pagehelper.PageHelper;
 import com.syfri.baseapi.filter.AccessFilter;
 import org.apache.ibatis.io.VFS;
@@ -21,16 +18,15 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Properties;
 
 /**
@@ -42,7 +38,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @AutoConfigureAfter(Environment.class)
-public class MybatisConfig implements EnvironmentAware{
+public class MybatisConfig implements EnvironmentAware {
 
 	private static final Logger logger = LoggerFactory.getLogger(MybatisConfig.class);
 
@@ -238,7 +234,11 @@ public class MybatisConfig implements EnvironmentAware{
 		pageHelper.setProperties(properties);
 		//添加插件
 		ssf.setPlugins(new Interceptor[]{pageHelper});
-		return ssf.getObject();
+		try{
+			return ssf.getObject();
+		}catch(Exception e){
+			throw new RuntimeException();
+		}
 	}
 
 	@Bean
@@ -260,5 +260,11 @@ public class MybatisConfig implements EnvironmentAware{
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
 		registrationBean.setFilter(new AccessFilter(environment));
 		return registrationBean;
+	}
+
+	@Bean
+	public DataSourceTransactionManager dataSourceTransactionManager(DataSource ds) throws Exception{
+		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(ds);
+		return transactionManager;
 	}
 }
