@@ -6,11 +6,8 @@
 		<if test="pkid != null and pkid != '' ">
 		 and t.pkid = #{pkid}
 		</if>
-		<if test="username != null and username != '' ">
-		 and t.username = #{username}
-		</if>
-		<if test="password != null and password != '' ">
-		 and t.password = #{password}
+		<if test="userid != null and userid != '' ">
+		 and t.userid = #{userid}
 		</if>
 		<if test="realname != null and realname != '' ">
 		 and t.realname = #{realname}
@@ -35,6 +32,9 @@
 		</if>
 		<if test="email != null and email != '' ">
 		 and t.email = #{email}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+		 and t.delete_flag = #{deleteFlag}
 		</if>
 		<if test="createId != null and createId != '' ">
 		 and t.create_id = #{createId}
@@ -63,19 +63,12 @@
 		<if test="reserve3 != null and reserve3 != '' ">
 		 and t.reserve3 = #{reserve3}
 		</if>
-		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
-		</if>
-		<if test="salt != null and salt != '' ">
-		 and t.salt = #{salt}
-		</if>
 	</sql>
 
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
 		t.pkid pkid,
-		t.username username,
-		t.password password,
+		t.userid userid,
 		t.realname realname,
 		TO_CHAR(t.birth,'yyyy-MM-dd HH24:mi:ss') birth,
 		t.sex sex,
@@ -84,6 +77,7 @@
 		t.phone phone,
 		t.mobile mobile,
 		t.email email,
+		t.delete_flag deleteFlag,
 		t.create_id createId,
 		t.create_name createName,
 		TO_CHAR(t.create_time,'yyyy-MM-dd HH24:mi:ss') createTime,
@@ -92,9 +86,7 @@
 		TO_CHAR(t.alter_time,'yyyy-MM-dd HH24:mi:ss') alterTime,
 		t.reserve1 reserve1,
 		t.reserve2 reserve2,
-		TO_CHAR(t.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3,
-		t.delete_flag deleteFlag,
-		t.salt salt
+		TO_CHAR(t.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3
 	</sql>
 
 	<!--3.查询记录数-->
@@ -124,18 +116,18 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
-		INSERT INTO SYS_USER(pkid,username,password,realname,birth,sex,deptid,position,phone,mobile,email,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag,salt)
-		VALUES(#{pkid,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{realname,jdbcType=VARCHAR},#{birth,jdbcType=DATE},#{sex,jdbcType=VARCHAR},#{deptid,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE},'N',#{salt,jdbcType=VARCHAR})
+		INSERT INTO SYS_USER(pkid,userid,realname,birth,sex,deptid,position,phone,mobile,email,delete_flag,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR},#{realname,jdbcType=VARCHAR},#{birth,jdbcType=DATE},#{sex,jdbcType=VARCHAR},#{deptid,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},'N',#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO SYS_USER(pkid,username,password,realname,birth,sex,deptid,position,phone,mobile,email,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag,salt)
+		INSERT INTO SYS_USER(pkid,userid,realname,birth,sex,deptid,position,phone,mobile,email,delete_flag,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3)
 		SELECT SYS_GUID() pkid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.username,jdbcType=VARCHAR} username,#{item.password,jdbcType=VARCHAR} password,#{item.realname,jdbcType=VARCHAR} realname,#{item.birth,jdbcType=DATE} birth,#{item.sex,jdbcType=VARCHAR} sex,#{item.deptid,jdbcType=VARCHAR} deptid,#{item.position,jdbcType=VARCHAR} position,#{item.phone,jdbcType=VARCHAR} phone,#{item.mobile,jdbcType=VARCHAR} mobile,#{item.email,jdbcType=VARCHAR} email,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag,#{item.salt,jdbcType=VARCHAR} salt
+			#{item.userid,jdbcType=VARCHAR} userid,#{item.realname,jdbcType=VARCHAR} realname,#{item.birth,jdbcType=DATE} birth,#{item.sex,jdbcType=VARCHAR} sex,#{item.deptid,jdbcType=VARCHAR} deptid,#{item.position,jdbcType=VARCHAR} position,#{item.phone,jdbcType=VARCHAR} phone,#{item.mobile,jdbcType=VARCHAR} mobile,#{item.email,jdbcType=VARCHAR} email,'N' delete_flag,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
 		FROM DUAL
 		</foreach>
 		) A
@@ -151,8 +143,7 @@
 		UPDATE   SYS_USER  
 		<set>
 			<if test="pkid != null">pkid=#{pkid},</if>
-			<if test="username != null">username=#{username},</if>
-			<if test="password != null">password=#{password},</if>
+			<if test="userid != null">userid=#{userid},</if>
 			<if test="realname != null">realname=#{realname},</if>
 			<if test="birth != null">birth=TO_DATE(#{birth},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="sex != null">sex=#{sex},</if>
@@ -161,6 +152,7 @@
 			<if test="phone != null">phone=#{phone},</if>
 			<if test="mobile != null">mobile=#{mobile},</if>
 			<if test="email != null">email=#{email},</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
 			<if test="createId != null">create_id=#{createId},</if>
 			<if test="createName != null">create_name=#{createName},</if>
 			<if test="createTime != null">create_time=TO_DATE(#{createTime},'yyyy-MM-dd HH24:mi:ss'),</if>
@@ -169,24 +161,21 @@
 			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="reserve1 != null">reserve1=#{reserve1},</if>
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
-			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="deleteFlag != null">delete_flag='N',</if>
-			<if test="salt != null">salt=#{salt}</if>
+			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
 		WHERE  PKID = #{pkid}
 	</update>
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO SYS_USER(pkid,username,password,realname,birth,sex,deptid,position,phone,mobile,email,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag,salt)
+		INSERT INTO SYS_USER(pkid,userid,realname,birth,sex,deptid,position,phone,mobile,email,delete_flag,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.username,jdbcType=VARCHAR} username,#{item.password,jdbcType=VARCHAR} password,#{item.realname,jdbcType=VARCHAR} realname,#{item.birth,jdbcType=DATE} birth,#{item.sex,jdbcType=VARCHAR} sex,#{item.deptid,jdbcType=VARCHAR} deptid,#{item.position,jdbcType=VARCHAR} position,#{item.phone,jdbcType=VARCHAR} phone,#{item.mobile,jdbcType=VARCHAR} mobile,#{item.email,jdbcType=VARCHAR} email,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag,#{item.salt,jdbcType=VARCHAR} salt
+			#{item.userid,jdbcType=VARCHAR} userid,#{item.realname,jdbcType=VARCHAR} realname,#{item.birth,jdbcType=DATE} birth,#{item.sex,jdbcType=VARCHAR} sex,#{item.deptid,jdbcType=VARCHAR} deptid,#{item.position,jdbcType=VARCHAR} position,#{item.phone,jdbcType=VARCHAR} phone,#{item.mobile,jdbcType=VARCHAR} mobile,#{item.email,jdbcType=VARCHAR} email,'N' delete_flag,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
 			pkid = VALUES(pkid),
-			username = VALUES(username),
-			password = VALUES(password),
+			userid = VALUES(userid),
 			realname = VALUES(realname),
 			birth = VALUES(birth),
 			sex = VALUES(sex),
@@ -195,6 +184,7 @@
 			phone = VALUES(phone),
 			mobile = VALUES(mobile),
 			email = VALUES(email),
+			delete_flag = VALUES(delete_flag),
 			create_id = VALUES(create_id),
 			create_name = VALUES(create_name),
 			create_time = VALUES(create_time),
@@ -203,9 +193,7 @@
 			alter_time = VALUES(alter_time),
 			reserve1 = VALUES(reserve1),
 			reserve2 = VALUES(reserve2),
-			reserve3 = VALUES(reserve3),
-			delete_flag = VALUES(delete_flag),
-			salt = VALUES(salt)
+			reserve3 = VALUES(reserve3)
 	</update>
 
 	<!--11.根据对象查询记录-->
@@ -222,8 +210,7 @@
 	<!--12.根据用户查询用户和其角色-->
 	<resultMap id="UserRolesMap" type="com.syfri.userservice.model.UserVO">
 		<id property="pkid" column="pkid"/>
-		<result property="username" column="username"/>
-		<result property="password" column="password"/>
+		<result property="userid" column="userid"/>
 		<result property="realname" column="realname"/>
 		<result property="birth" column="birth"/>
 		<result property="sex" column="sex"/>
@@ -236,6 +223,12 @@
 		<result property="createTime" column="create_time"/>
 		<result property="alterName" column="alter_name"/>
 		<result property="alterTime" column="alter_time"/>
+		<association property="accountVO" javaType="AccountVO">
+			<id property="userid" column="userid"></id>
+			<result property="username" column="username"/>
+			<result property="password" column="password"/>
+			<result property="salt" column="salt"/>
+		</association>
 		<collection property="roles" ofType="com.syfri.userservice.model.RoleVO">
 			<id property="roleid" column="roleid"></id>
 			<result property="rolename" column="rolename"/>
@@ -245,38 +238,19 @@
 	<select id="doFindUserRoles" parameterType="UserVO"  resultMap="UserRolesMap">
 		SELECT
 		<include refid="SQL_CONTENT"/>
+		,a.username
+		,a.password
+		,a.salt
 		,r.roleid
 		,r.rolename
 		FROM SYS_USER t
-		LEFT JOIN SYS_USER_ROLE m ON t.pkid = m.userid
+		INNER JOIN SYS_ACCOUNT a ON t.userid = a.userid
+		LEFT JOIN SYS_ACCOUNT_ROLE m ON t.pkid = m.userid
 		LEFT JOIN SYS_ROLE r ON r.roleid = m.roleid
 		WHERE t.DELETE_FLAG = 'N'
 		AND (r.DELETE_FLAG = 'N' OR r.DELETE_FLAG IS NULL)
 		<include refid="SQL_CONDITION"/>
 		ORDER BY t.create_time DESC
 	</select>
-
-	<!--13.新增用户时批量插入用户角色（向中间表中）-->
-	<insert  id="doBatchInsertUserRoles"  parameterType="java.util.List">
-		INSERT INTO SYS_USER_ROLE(pkid,userid,roleid,create_id,create_name,create_time,delete_flag)
-		SELECT SYS_GUID() pkid, A.*
-		FROM (
-		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
-			SELECT
-			#{item.userid,jdbcType=VARCHAR} userid,#{item.roleid,jdbcType=VARCHAR} roleid,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,'N' delete_flag
-			FROM DUAL
-		</foreach>
-		) A
-	</insert>
-
-	<!--14.修改用户先删除用户时批量插入用户角色（中间表）-->
-	<delete id="doDeleteUserRoles" parameterType="String">
-		DELETE FROM SYS_USER_ROLE WHERE USERID = #{value}
-	</delete>
-
-	<!--15.删除用户时删除用户角色-->
-	<update id="doBatchDeleteUserRoles"  parameterType="String">
-		UPDATE SYS_USER_ROLE t SET t.DELETE_FLAG = 'Y' WHERE 1=1 AND t.USERID = #{value}
-	</update>
 
 </mapper>
