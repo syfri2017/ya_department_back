@@ -2,7 +2,10 @@ package com.syfri.userservice.service.impl;
 
 import com.syfri.userservice.model.*;
 import com.syfri.userservice.utils.CurrentUserUtil;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import com.syfri.baseapi.service.impl.BaseServiceImpl;
@@ -13,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("roleService")
+@Scope(proxyMode = ScopedProxyMode.INTERFACES)
 public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleService {
 
 	@Autowired
@@ -29,85 +34,68 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 		return roleDAO.doFindRoleByUserid(userid);
 	}
 
-	/*--查询：获取用户权限、菜单，如果roleVO为null，则获取所有用户权限、菜单.--*/
+	/*--查询：获取用户资源，如果roleVO为null，则获取所有用户资源.--*/
 	@Override
-	public List<RoleVO> doFindRoles(RoleVO roleVO){
-		return roleDAO.doFindRolePermissions(roleVO);
+	public List<RoleVO> doFindRoleResources(RoleVO roleVO){
+		return roleDAO.doFindRoleResources(roleVO);
 	}
 
-	/*--新增：增加角色并为用户赋予权限、菜单.--*/
+	/*--新增：增加角色并为用户赋予资源.--*/
 	@Override
-	@Transactional
-	public RoleVO doInsertRole(RoleVO roleVO){
+	public RoleVO doInsertRoleResources(RoleVO roleVO){
+
+		//向角色表SYS_ROLE中增加数据
 		roleVO.setCreateId(CurrentUserUtil.getCurrentUserId());
 		roleVO.setCreateName(CurrentUserUtil.getCurrentUserName());
 		roleDAO.doInsertByVO(roleVO);
 
-		String roleid = roleVO.getRoleid();
-		//向角色权限中间表插入数据
-		this.insertRolePermissionsBatch(roleid, roleVO.getPermissions());
-		//向角色菜单中间表插入数据
-		this.insertRoleMenusBatch(roleid, roleVO.getMenus());
+		//向角色资源中间表SYS_ROLE_RESOURCE中增加数据
+		this.doInsertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
+		//((RoleService)AopContext.currentProxy()).doInsertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
+
 		return roleVO;
 	}
 
-	/*--修改：修改角色并修改用户权限、菜单.--*/
+	/*--修改：修改角色并修改用户资源.--*/
 	@Override
-	@Transactional
-	public RoleVO doUpdateRole(RoleVO roleVO){
+	public RoleVO doUpdateRoleResources(RoleVO roleVO) throws Exception {
+
+		//修改角色表SYS_ROLE数据
+		roleVO.setAlterId(CurrentUserUtil.getCurrentUserId());
+		roleVO.setAlterName(CurrentUserUtil.getCurrentUserName());
 		roleDAO.doUpdateByVO(roleVO);
 
+		//修改角色资源中间表SYS_ROLE_RESOURCE数据
 		String roleid = roleVO.getRoleid();
-		//角色权限表修改数据
-		roleDAO.doDeleteRolePermissions(roleid);
-		this.insertRolePermissionsBatch(roleid, roleVO.getPermissions());
-		//角色菜单表修改数据
-		roleDAO.doDeleteRoleMenus(roleid);
-		this.insertRoleMenusBatch(roleid, roleVO.getMenus());
+		roleDAO.doDeleteRoleResources(roleid);
+		((RoleService)AopContext.currentProxy()).doInsertRoleResourcesBatch(roleid, roleVO.getResources());
 
 		return roleVO;
 	}
 
-	/*--删除：删除角色同时删除其权限、菜单.--*/
+	/*--删除：删除角色同时删除其资源.--*/
 	@Override
-	@Transactional
 	public void doDeleteRole(String roleid){
+		//输出角色表SYS_ROLE
 		roleDAO.doDeleteById(roleid);
-		roleDAO.doBatchDeleteRolePermissions(roleid);
-		roleDAO.doBatchDeleteRoleMenus(roleid);
+		//删除角色资源中间表SYS_ROLE_RESOURCE
+		roleDAO.doDeleteRoleResourcesBatch(roleid);
 	}
 
 	/*批量向角色权限中间表插入数据.*/
-	public int insertRolePermissionsBatch(String roleid, List<PermissionVO> permissions){
-		List<RolePermissionVO> list = new ArrayList<>();
-		if(permissions!=null && permissions.size()>0){
-			for(PermissionVO permission : permissions){
-				RolePermissionVO temp = new RolePermissionVO();
+	@Override
+	public int doInsertRoleResourcesBatch(String roleid, List<ResourceVO> resources){
+		List<RoleResourceVO> list = new ArrayList<>();
+		if(resources!=null && resources.size()>0){
+			for(ResourceVO resource : resources){
+				RoleResourceVO temp = new RoleResourceVO();
 				temp.setRoleid(roleid);
-				temp.setPermissionid(permission.getPermissionid());
+				temp.setResourceid(resource.getResourceid());
 				temp.setCreateId(CurrentUserUtil.getCurrentUserId());
 				temp.setCreateName(CurrentUserUtil.getCurrentUserName());
 				list.add(temp);
 			}
-			return roleDAO.doBatchInsertRolePermissions(list);
-		}else{
-			return 0;
-		}
-	}
-
-	/*批量向角色菜单中间表插入数据.*/
-	public int insertRoleMenusBatch(String roleid, List<MenuVO> menus){
-		List<RoleMenuVO> list = new ArrayList<>();
-		if(menus!=null && menus.size()>0){
-			for(MenuVO menu : menus){
-				RoleMenuVO temp = new RoleMenuVO();
-				temp.setRoleid(roleid);
-				temp.setMenuid(menu.getMenuid());
-				temp.setCreateId(CurrentUserUtil.getCurrentUserId());
-				temp.setCreateName(CurrentUserUtil.getCurrentUserName());
-				list.add(temp);
-			}
-			return roleDAO.doBatchInsertRoleMenus(list);
+			return roleDAO.doInsertRoleResourcesBatch(list);
 		}else{
 			return 0;
 		}

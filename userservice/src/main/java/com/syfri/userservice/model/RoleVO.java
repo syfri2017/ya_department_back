@@ -22,8 +22,7 @@ public class RoleVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
 	private String deleteFlag;	//删除标志
-	private List<PermissionVO> permissions;  //权限
-	private List<MenuVO> menus;  //菜单
+	private List<ResourceVO> resources;  //资源权限
 
 
 	public String getRoleid(){
@@ -105,19 +104,11 @@ public class RoleVO extends ValueObject implements Serializable{
 		this.deleteFlag = deleteFlag;
 	}
 
-	public List<PermissionVO> getPermissions() {
-		return permissions;
+	public List<ResourceVO> getResources() {
+		return resources;
 	}
 
-	public void setPermissions(List<PermissionVO> permissions) {
-		this.permissions = permissions;
-	}
-
-	public List<MenuVO> getMenus() {
-		return menus;
-	}
-
-	public void setMenus(List<MenuVO> menus) {
-		this.menus = menus;
+	public void setResources(List<ResourceVO> resources) {
+		this.resources = resources;
 	}
 }
