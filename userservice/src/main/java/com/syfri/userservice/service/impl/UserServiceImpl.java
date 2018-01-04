@@ -3,7 +3,6 @@ package com.syfri.userservice.service.impl;
 import com.syfri.userservice.model.AccountVO;
 import com.syfri.userservice.service.AccountService;
 import com.syfri.userservice.utils.CurrentUserUtil;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("userService")
-@Transactional
 public class UserServiceImpl extends BaseServiceImpl<UserVO> implements UserService {
 
 	@Autowired
