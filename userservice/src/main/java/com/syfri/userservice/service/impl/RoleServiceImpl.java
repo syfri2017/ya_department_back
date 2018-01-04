@@ -50,15 +50,14 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 		roleDAO.doInsertByVO(roleVO);
 
 		//向角色资源中间表SYS_ROLE_RESOURCE中增加数据
-		this.doInsertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
-		//((RoleService)AopContext.currentProxy()).doInsertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
+		((RoleService)AopContext.currentProxy()).doInsertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
 
 		return roleVO;
 	}
 
 	/*--修改：修改角色并修改用户资源.--*/
 	@Override
-	public RoleVO doUpdateRoleResources(RoleVO roleVO) throws Exception {
+	public RoleVO doUpdateRoleResources(RoleVO roleVO) {
 
 		//修改角色表SYS_ROLE数据
 		roleVO.setAlterId(CurrentUserUtil.getCurrentUserId());
