@@ -64,6 +64,7 @@ public class FileTemplate {
 			"import $packagePath$.dao.$_daoName$;\n"+
 			"import $packagePath$.model.$_voName$;\n"+
 			"import $packagePath$.service.$_serviceName$;\n\n"+
+			"@Transactional(rollbackFor = {Exception.class, RuntimeException.class})\n"+
 			"@Service(\"$serviceName$\")\n"+
 			"public class $_serviceName$Impl extends BaseServiceImpl<$_voName$> implements $_serviceName$ {\n\n"+
 			"\t@Autowired\n"+
