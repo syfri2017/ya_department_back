@@ -59,9 +59,12 @@ public class UserController  extends BaseController<UserVO>{
 		return resultVO;
 	}
 
-	@ApiOperation(value="根据用户新增用户（包括账户和角色）",notes="修改")
+	/**
+	 * 新增用户，同时新增账号及用户角色
+	 */
+	@ApiOperation(value="根据用户新增用户（包括账户和角色）",notes="新增")
 	@ApiImplicitParam(name="vo",value="用户对象")
-	@RequiresPermissions("user:insert")
+	@RequiresPermissions("user:add")
 	@PostMapping("/insertByUser")
 	public @ResponseBody ResultVO insertByUser(UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
@@ -74,7 +77,10 @@ public class UserController  extends BaseController<UserVO>{
 		return resultVO;
 	}
 
-	@ApiOperation(value="根据用户修改用户（包括账户和角色）",notes="新增")
+	/**
+	 * 修改用户，同时修改账号及用户角色
+	 */
+	@ApiOperation(value="根据用户修改用户（包括账户和角色）",notes="修改")
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("user:update")
 	@PostMapping("/updateByUser")
@@ -89,6 +95,9 @@ public class UserController  extends BaseController<UserVO>{
 		return resultVO;
 	}
 
+	/**
+	 * 删除用户，同时删除账号及用户角色
+	 */
 	@ApiOperation(value="根据主键删除用户（包括账户和角色）",notes="删除")
 	@ApiImplicitParam(name="id",value="用户主键")
 	@RequiresPermissions("user:delete")
@@ -96,7 +105,8 @@ public class UserController  extends BaseController<UserVO>{
 	public @ResponseBody ResultVO deleteById(String pkid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(userService.doDeleteById(pkid));
+			userService.doDeleteUserRoles(pkid);
+			resultVO.setMsg("删除成功");
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
