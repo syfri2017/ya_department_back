@@ -2,6 +2,7 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.userservice.model.RoleVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.userservice.model.ResourceVO;
 import com.syfri.userservice.service.ResourceService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("resource")
@@ -91,6 +94,24 @@ public class ResourceController  extends BaseController<ResourceVO>{
 		try{
 			resourceService.doDeleteResourcePermissions(resourceid);
 			resultVO.setMsg("删除成功");
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 根据角色获取资源树
+	 */
+	@ApiOperation(value="根据角色获取资源树",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="资源对象")
+	@RequiresPermissions("resource:list")
+	@GetMapping("/getResourceTree")
+	public @ResponseBody ResultVO getResourceTree(List<RoleVO> roleList){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(resourceService.getResourceTree(roleList));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
