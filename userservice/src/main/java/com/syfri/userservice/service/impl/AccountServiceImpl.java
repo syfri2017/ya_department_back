@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
+@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("accountService")
 public class AccountServiceImpl extends BaseServiceImpl<AccountVO> implements AccountService {
 
@@ -82,7 +82,7 @@ public class AccountServiceImpl extends BaseServiceImpl<AccountVO> implements Ac
 			}
 			return accountDAO.doBatchInsertAccountRoles(accountRoles);
 		}else{
-			return 0;
+			return -1;
 		}
 	}
 

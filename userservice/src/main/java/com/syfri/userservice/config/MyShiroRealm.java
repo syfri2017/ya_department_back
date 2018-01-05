@@ -1,12 +1,7 @@
 package com.syfri.userservice.config;
 
-import com.syfri.userservice.model.PermissionVO;
-import com.syfri.userservice.model.RoleVO;
-import com.syfri.userservice.model.ShiroUser;
-import com.syfri.userservice.model.UserVO;
-import com.syfri.userservice.service.PermissionService;
-import com.syfri.userservice.service.RoleService;
-import com.syfri.userservice.service.UserService;
+import com.syfri.userservice.model.*;
+import com.syfri.userservice.service.*;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -25,10 +20,13 @@ public class MyShiroRealm extends AuthorizingRealm{
 	private static final Logger logger = LoggerFactory.getLogger(MyShiroRealm.class);
 
 	@Resource
-	private UserService userService;
+	private AccountService accountService;
 
 	@Resource
 	private RoleService roleService;
+
+	@Resource
+	private ResourceService resourceService;
 
 	@Resource
 	private PermissionService permissionService;
@@ -42,32 +40,38 @@ public class MyShiroRealm extends AuthorizingRealm{
 		logger.info("【MyShiroRealm】身份验证");
 
 		String username = (String) token.getPrincipal();
-		UserVO userVO = new UserVO();
-		userVO.setUsername(username);
-		//UserVO user = userService.doFindByVO(userVO);
-		List<UserVO> users = userService.doSearchListByVO(userVO);
-		if(users == null){
+		AccountVO accountVO = new AccountVO();
+		accountVO.setUsername(username);
+		List<AccountVO> accounts = accountService.doSearchListByVO(accountVO);
+		if(accounts == null){
 			return null;
 		}
-		UserVO user = users.get(0);
-		if("Y".equals(user.getDeleteFlag())){
-			return null;
-		}
+		AccountVO account = accounts.get(0);
 
-		ShiroUser shiroUser = new ShiroUser(user.getPkid(), user.getUsername(), user.getRealname());
+		ShiroUser shiroUser = new ShiroUser(account.getUserid(), account.getUsername(), account.getRealname());
+
 		List<String> roles = new ArrayList();
 		List<String> permissions = new ArrayList();
-		List<RoleVO> roleList = roleService.doFindRoleByUserid(user.getPkid());
-		for(RoleVO role : roleList){
-			roles.add(role.getRolename());
-			List<PermissionVO> permissionList = permissionService.doFindPermissionByRoleid(role.getRoleid());
-			for(PermissionVO permission : permissionList){
-				permissions.add(permission.getPermissionname());
-			}
+
+		//根据用户ID获取用户角色
+		List<RoleVO> roleList = roleService.doFindRoleByUserid(account.getUserid());
+
+		//根据用户角色列表获取用户资源
+		List<ResourceVO> resourceList = resourceService.doFindResourceByRoleList(roleList);
+
+		//根据资源列表获取用户权限
+		List<PermissionVO> permissionList = permissionService.doFindPermissionByResourceList(resourceList);
+
+		for(PermissionVO permission : permissionList){
+			permissions.add(permission.getPermissionname());
 		}
+
 		shiroUser.setRoles(roles);
 		shiroUser.setPermissions(permissions);
 
+		//根据用户角色列表获取角色资源树
+		List<ResourceTree> resourceTrees = resourceService.getResourceTree(roleList);
+		shiroUser.setResourceTrees(resourceTrees);
 
 		//获取权限信息
 
@@ -82,8 +86,8 @@ public class MyShiroRealm extends AuthorizingRealm{
 		//账号判断（密文）
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				shiroUser,
-				user.getPassword(),
-				ByteSource.Util.bytes(user.getSalt()),
+				account.getPassword(),
+				ByteSource.Util.bytes(account.getSalt()),
 				getName()
 		);
 		return authenticationInfo;

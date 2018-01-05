@@ -5,20 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.syfri.userservice.model.MenuVO;
-import com.syfri.userservice.service.MenuService;
+import com.syfri.userservice.model.ResourceVO;
+import com.syfri.userservice.service.ResourceService;
 import com.syfri.baseapi.controller.BaseController;
 
 @RestController
-@RequestMapping("menu")
-public class MenuController  extends BaseController<MenuVO>{
+@RequestMapping("resource")
+public class ResourceController  extends BaseController<ResourceVO>{
 
 	@Autowired
-	private MenuService menuService;
+	private ResourceService resourceService;
 
 	@Override
-	public MenuService getBaseService() {
-		return this.menuService;
+	public ResourceService getBaseService() {
+		return this.resourceService;
 	}
 
 }

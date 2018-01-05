@@ -50,7 +50,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 		roleDAO.doInsertByVO(roleVO);
 
 		//向角色资源中间表SYS_ROLE_RESOURCE中增加数据
-		((RoleService)AopContext.currentProxy()).doInsertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
+		((RoleService)AopContext.currentProxy()).insertRoleResourcesBatch(roleVO.getRoleid(), roleVO.getResources());
 
 		return roleVO;
 	}
@@ -67,7 +67,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 		//修改角色资源中间表SYS_ROLE_RESOURCE数据
 		String roleid = roleVO.getRoleid();
 		roleDAO.doDeleteRoleResources(roleid);
-		((RoleService)AopContext.currentProxy()).doInsertRoleResourcesBatch(roleid, roleVO.getResources());
+		((RoleService)AopContext.currentProxy()).insertRoleResourcesBatch(roleid, roleVO.getResources());
 
 		return roleVO;
 	}
@@ -83,7 +83,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 
 	/*批量向角色权限中间表插入数据.*/
 	@Override
-	public int doInsertRoleResourcesBatch(String roleid, List<ResourceVO> resources){
+	public int insertRoleResourcesBatch(String roleid, List<ResourceVO> resources){
 		List<RoleResourceVO> list = new ArrayList<>();
 		if(resources!=null && resources.size()>0){
 			for(ResourceVO resource : resources){
@@ -96,7 +96,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 			}
 			return roleDAO.doInsertRoleResourcesBatch(list);
 		}else{
-			return 0;
+			return -1;
 		}
 	}
 }

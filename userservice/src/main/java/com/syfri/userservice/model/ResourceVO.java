@@ -1,16 +1,22 @@
 package com.syfri.userservice.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 
-public class RolePermissionVO extends ValueObject implements Serializable{
+public class ResourceVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String pkid;	//主键
-	private String roleid;	//角色ID
-	private String permissionid;	//权限ID
+	private String resourceid;	//资源ID（主键）
+	private String resourcename;	//资源名称
+	private String resourceinfo;	//资源描述
+	private String parentid;	//父节点
+	private Integer seqno;	//顺序
+	private String icon;	//图标
+	private String type;	//资源类型
+	private String deleteFlag;	//删除标志
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
@@ -20,25 +26,55 @@ public class RolePermissionVO extends ValueObject implements Serializable{
 	private String reserve1;	//备用1
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
-	private String deleteFlag;	//删除标志
+	private List<PermissionVO> permissions;  //资源权限
 
-	public String getPkid(){
-		return pkid;
+	public String getResourceid(){
+		return resourceid;
 	}
-	public void setPkid(String pkid){
-		this.pkid = pkid;
+	public void setResourceid(String resourceid){
+		this.resourceid = resourceid;
 	}
-	public String getRoleid(){
-		return roleid;
+	public String getResourcename(){
+		return resourcename;
 	}
-	public void setRoleid(String roleid){
-		this.roleid = roleid;
+	public void setResourcename(String resourcename){
+		this.resourcename = resourcename;
 	}
-	public String getPermissionid(){
-		return permissionid;
+	public String getResourceinfo(){
+		return resourceinfo;
 	}
-	public void setPermissionid(String permissionid){
-		this.permissionid = permissionid;
+	public void setResourceinfo(String resourceinfo){
+		this.resourceinfo = resourceinfo;
+	}
+	public String getParentid(){
+		return parentid;
+	}
+	public void setParentid(String parentid){
+		this.parentid = parentid;
+	}
+	public Integer getSeqno(){
+		return seqno;
+	}
+	public void setSeqno(Integer seqno){
+		this.seqno = seqno;
+	}
+	public String getIcon(){
+		return icon;
+	}
+	public void setIcon(String icon){
+		this.icon = icon;
+	}
+	public String getType(){
+		return type;
+	}
+	public void setType(String type){
+		this.type = type;
+	}
+	public String getDeleteFlag(){
+		return deleteFlag;
+	}
+	public void setDeleteFlag(String deleteFlag){
+		this.deleteFlag = deleteFlag;
 	}
 	public String getCreateId(){
 		return createId;
@@ -94,10 +130,12 @@ public class RolePermissionVO extends ValueObject implements Serializable{
 	public void setReserve3(String reserve3){
 		this.reserve3 = reserve3;
 	}
-	public String getDeleteFlag(){
-		return deleteFlag;
+
+	public List<PermissionVO> getPermissions() {
+		return permissions;
 	}
-	public void setDeleteFlag(String deleteFlag){
-		this.deleteFlag = deleteFlag;
+
+	public void setPermissions(List<PermissionVO> permissions) {
+		this.permissions = permissions;
 	}
 }

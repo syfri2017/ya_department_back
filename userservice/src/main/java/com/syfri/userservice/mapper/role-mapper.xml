@@ -172,7 +172,7 @@
 	</select>
 
 	<!--13.根据角色查询角色及权限-->
-	<resultMap id="RolePermissionMap" type="com.syfri.userservice.model.RoleVO">
+	<resultMap id="RoleResourceMap" type="com.syfri.userservice.model.RoleVO">
 		<id property="roleid" column="roleid"/>
 		<result property="rolename" column="rolename"/>
 		<result property="roleinfo" column="roleinfo"/>
@@ -190,7 +190,7 @@
 			<!--</collection>-->
 		</collection>
 	</resultMap>
-	<select id="doFindRoleResources" parameterType="RoleVO"  resultMap="RolePermissionMap">
+	<select id="doFindRoleResources" parameterType="RoleVO"  resultMap="RoleResourceMap">
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		,r.resourceid
@@ -215,7 +215,7 @@
 		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 			SELECT
-			#{item.roleid,jdbcType=VARCHAR} roleid,#{item.resourceid,jdbcType=VARCHAR} permissionid,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,'N' delete_flag
+			#{item.roleid,jdbcType=VARCHAR} roleid,#{item.resourceid,jdbcType=VARCHAR} resourceid,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,'N' delete_flag
 			FROM DUAL
 		</foreach>
 		) A

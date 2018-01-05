@@ -4,16 +4,15 @@ import java.io.Serializable;
 
 import com.syfri.baseapi.model.ValueObject;
 
-public class MenuVO extends ValueObject implements Serializable{
+public class ResourcePermissionVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String menuid;	//菜单ID（主键）
-	private String menuname;	//菜单名称
-	private String menuurl;	//菜单URL
-	private String menuinfo;	//菜单描述
-	private String parentid;	//菜单父ID
-	private String isleaf;	//是否为叶子节点（[0]否，[1]是）
+	private String pkid;	//主键
+	private String resourceid;	//资源ID
+	private String permissionid;	//权限ID
+	private String dataauth;	//数据权限
+	private String deleteFlag;	//删除标志
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
@@ -23,44 +22,36 @@ public class MenuVO extends ValueObject implements Serializable{
 	private String reserve1;	//备用1
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
-	private String deleteFlag;	//删除标志
-	private Integer seqno;  //显示顺序
 
-	public String getMenuid(){
-		return menuid;
+	public String getPkid(){
+		return pkid;
 	}
-	public void setMenuid(String menuid){
-		this.menuid = menuid;
+	public void setPkid(String pkid){
+		this.pkid = pkid;
 	}
-	public String getMenuname(){
-		return menuname;
+	public String getResourceid(){
+		return resourceid;
 	}
-	public void setMenuname(String menuname){
-		this.menuname = menuname;
+	public void setResourceid(String resourceid){
+		this.resourceid = resourceid;
 	}
-	public String getMenuurl(){
-		return menuurl;
+	public String getPermissionid(){
+		return permissionid;
 	}
-	public void setMenuurl(String menuurl){
-		this.menuurl = menuurl;
+	public void setPermissionid(String permissionid){
+		this.permissionid = permissionid;
 	}
-	public String getMenuinfo(){
-		return menuinfo;
+	public String getDataauth(){
+		return dataauth;
 	}
-	public void setMenuinfo(String menuinfo){
-		this.menuinfo = menuinfo;
+	public void setDataauth(String dataauth){
+		this.dataauth = dataauth;
 	}
-	public String getParentid(){
-		return parentid;
+	public String getDeleteFlag(){
+		return deleteFlag;
 	}
-	public void setParentid(String parentid){
-		this.parentid = parentid;
-	}
-	public String getIsleaf(){
-		return isleaf;
-	}
-	public void setIsleaf(String isleaf){
-		this.isleaf = isleaf;
+	public void setDeleteFlag(String deleteFlag){
+		this.deleteFlag = deleteFlag;
 	}
 	public String getCreateId(){
 		return createId;
@@ -115,19 +106,5 @@ public class MenuVO extends ValueObject implements Serializable{
 	}
 	public void setReserve3(String reserve3){
 		this.reserve3 = reserve3;
-	}
-	public String getDeleteFlag(){
-		return deleteFlag;
-	}
-	public void setDeleteFlag(String deleteFlag){
-		this.deleteFlag = deleteFlag;
-	}
-
-	public Integer getSeqno() {
-		return seqno;
-	}
-
-	public void setSeqno(Integer seqno) {
-		this.seqno = seqno;
 	}
 }

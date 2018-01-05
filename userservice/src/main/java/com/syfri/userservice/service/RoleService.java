@@ -22,5 +22,5 @@ public interface RoleService  extends BaseService<RoleVO>{
 	void doDeleteRole(String roleid);
 
 	/*--向角色资源中间表中批量增加数据.--*/
-	int doInsertRoleResourcesBatch(String roleid, List<ResourceVO> resources);
+	int insertRoleResourcesBatch(String roleid, List<ResourceVO> resources);
 }

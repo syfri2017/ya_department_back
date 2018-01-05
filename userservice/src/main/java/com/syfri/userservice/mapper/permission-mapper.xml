@@ -163,11 +163,20 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据用户ID获取用户的角色-->
-	<select id="doFindPermissionByRoleid" parameterType="String" resultType="PermissionVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM SYS_ROLE_PERMISSION r LEFT JOIN SYS_PERMISSION t ON r.permissionid = t.permissionid where roleid = #{roleid}
+	<!--12.根据资源列表查询权限-->
+	<select id="doFindPermissionByResourceList" parameterType="java.util.List" resultType="PermissionVO">
+		SELECT DISTINCT t1.permissionid,substr(t2.resourcename,2)||':'||t3.permissionname permissionname
+		FROM(
+			SELECT r.resourceid,r.resourcename,r.parentid,c.permissionid FROM SYS_RESOURCE_PERMISSION c
+			LEFT JOIN SYS_RESOURCE r ON c.resourceid = r.resourceid
+			WHERE r.delete_flag = 'N' AND c.delete_flag = 'N'
+			AND r.resourceid IN
+			<foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+				#{item.resourceid,jdbcType=VARCHAR}
+			</foreach>
+		) t1
+		LEFT JOIN (SELECT resourceid,resourcename FROM SYS_RESOURCE WHERE delete_flag = 'N') t2 ON t1.parentid = t2.resourceid
+		LEFT JOIN (SELECT permissionid,permissionname FROM SYS_PERMISSION WHERE delete_flag = 'N') t3 ON t1.permissionid = t3.permissionid
 	</select>
 
 </mapper>

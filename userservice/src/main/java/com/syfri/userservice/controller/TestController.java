@@ -2,11 +2,9 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.controller.BaseController;
 import com.syfri.userservice.model.*;
-import com.syfri.userservice.service.MenuService;
-import com.syfri.userservice.service.PermissionService;
-import com.syfri.userservice.service.RoleService;
-import com.syfri.userservice.service.UserService;
+import com.syfri.userservice.service.*;
 import com.syfri.userservice.utils.CurrentUserUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +26,7 @@ public class TestController extends BaseController<UserVO>{
 	private PermissionService permissionService;
 
 	@Autowired
-	private MenuService menuService;
+	private ResourceService resourceService;
 
 	@Override
 	public UserService getBaseService() {
@@ -49,36 +47,36 @@ public class TestController extends BaseController<UserVO>{
 	}
 
 	//3
-	@RequestMapping("/findByVO")
-	public List<UserVO> findByVO(){
-		UserVO vo = new UserVO();
-		vo.setUsername("aa");
-		return userService.doSearchListByVO(vo);
-	}
+//	@RequestMapping("/findByVO")
+//	public List<UserVO> findByVO(){
+//		UserVO vo = new UserVO();
+//		vo.setUsername("aa");
+//		return userService.doSearchListByVO(vo);
+//	}
 
 	//4
-	@RequestMapping("/insertByVO")
-	public int insertByVO(){
-		UserVO vo = new UserVO();
-		vo.setUsername("zzz");
-		vo.setPassword("1");
-		return userService.doInsertByVO(vo);
-	}
+//	@RequestMapping("/insertByVO")
+//	public int insertByVO(){
+//		UserVO vo = new UserVO();
+//		vo.setUsername("zzz");
+//		vo.setPassword("1");
+//		return userService.doInsertByVO(vo);
+//	}
 
 	//5
-	@RequestMapping("/insertByList")
-	public int insertByList(){
-		List<UserVO> list = new ArrayList<UserVO>();
-		UserVO vo1 = new UserVO();
-		vo1.setUsername("aa");
-		vo1.setPassword("1");
-		list.add(vo1);
-		UserVO vo2 = new UserVO();
-		vo2.setUsername("bb");
-		vo2.setPassword("1");
-		list.add(vo2);
-		return userService.doBatchInsertByList(list);
-	}
+//	@RequestMapping("/insertByList")
+//	public int insertByList(){
+//		List<UserVO> list = new ArrayList<UserVO>();
+//		UserVO vo1 = new UserVO();
+//		vo1.setUsername("aa");
+//		vo1.setPassword("1");
+//		list.add(vo1);
+//		UserVO vo2 = new UserVO();
+//		vo2.setUsername("bb");
+//		vo2.setPassword("1");
+//		list.add(vo2);
+//		return userService.doBatchInsertByList(list);
+//	}
 
 	//6
 	@RequestMapping("/deleteById")
@@ -87,43 +85,42 @@ public class TestController extends BaseController<UserVO>{
 	}
 
 	//7
-	@RequestMapping("updateByVO")
-	public int updateByVO(){
-		UserVO vo = userService.doFindById("1");
-		vo = userService.getPasswordEncry(vo);
-		UserVO vo2 = userService.doFindById("2");
-		vo2 = userService.getPasswordEncry(vo2);
-		userService.doUpdateByVO(vo2);
-		return userService.doUpdateByVO(vo);
-	}
+//	@RequestMapping("updateByVO")
+//	public int updateByVO(){
+//		UserVO vo = userService.doFindById("1");
+//		vo = userService.getPasswordEncry(vo);
+//		UserVO vo2 = userService.doFindById("2");
+//		vo2 = userService.getPasswordEncry(vo2);
+//		userService.doUpdateByVO(vo2);
+//		return userService.doUpdateByVO(vo);
+//	}
 
 	//8
-	@RequestMapping("/updateByList")
-	public int updateByList(){
-		List<UserVO> list = new ArrayList<UserVO>();
-		UserVO vo1 = new UserVO();
-		vo1.setPkid("2");
-		vo1.setUsername("lucy22");
-		vo1.setPassword("1");
-		list.add(vo1);
-		UserVO vo2 = new UserVO();
-		vo2.setPkid("3");
-		vo2.setUsername("smith33");
-		vo2.setPassword("1");
-		list.add(vo2);
-		return userService.doBatchUpdateByList(list);
-	}
+//	@RequestMapping("/updateByList")
+//	public int updateByList(){
+//		List<UserVO> list = new ArrayList<UserVO>();
+//		UserVO vo1 = new UserVO();
+//		vo1.setPkid("2");
+//		vo1.setUsername("lucy22");
+//		vo1.setPassword("1");
+//		list.add(vo1);
+//		UserVO vo2 = new UserVO();
+//		vo2.setPkid("3");
+//		vo2.setUsername("smith33");
+//		vo2.setPassword("1");
+//		list.add(vo2);
+//		return userService.doBatchUpdateByList(list);
+//	}
 	//9
-	@RequestMapping("doFindByVO")
-	public UserVO doFindByVO(){
-		UserVO userVO = new UserVO();
-		userVO.setUsername("aaa");
-		return userService.doFindByVO(userVO);
-	}
+//	@RequestMapping("doFindByVO")
+//	public UserVO doFindByVO(){
+//		UserVO userVO = new UserVO();
+//		userVO.setUsername("aaa");
+//		return userService.doFindByVO(userVO);
+//	}
 	//10
 	@RequestMapping("getRoleByUserid")
 	public List<RoleVO> getUserRoleByVO(){
-		UserVO userVO = new UserVO();
 		return roleService.doFindRoleByUserid("1");
 	}
 
@@ -131,7 +128,9 @@ public class TestController extends BaseController<UserVO>{
 	@RequestMapping("getUsers")
 	public List<UserVO> getUsers(){
 		UserVO vo = new UserVO();
-		vo.setUsername("111");
+		AccountVO accountVO = new AccountVO();
+		accountVO.setUsername("lucy222");
+		vo.setAccountVO(accountVO);
 		List<UserVO> lists = userService.doFindUserRoles(vo);
 		return lists;
 	}
@@ -140,14 +139,17 @@ public class TestController extends BaseController<UserVO>{
 	@RequestMapping("insertUser")
 	public UserVO insertUser(){
 		UserVO vo = new UserVO();
-		vo.setUsername("lucy");
-		vo.setPassword("1");
-//		List<RoleVO> roles = new ArrayList<RoleVO>();
-//		RoleVO role = new RoleVO();
-//		role.setRolename("normal");
-//		role.setRoleid("2");
-//		roles.add(role);
-//		vo.setRoles(roles);
+		AccountVO accountVO = new AccountVO();
+		accountVO.setUsername("aaaa");
+		accountVO.setPassword("1");
+		vo.setAccountVO(accountVO);
+		vo.setRealname("aaaa222aaaa");
+		List<RoleVO> roles = new ArrayList<RoleVO>();
+		RoleVO role = new RoleVO();
+		role.setRolename("normal");
+		role.setRoleid("2");
+		roles.add(role);
+		vo.setRoles(roles);
 		return userService.doInsertUserRoles(vo);
 	}
 
@@ -157,7 +159,7 @@ public class TestController extends BaseController<UserVO>{
 		UserVO user = new UserVO();
 		user.setPkid("3");
 		UserVO vo = userService.doFindUserRoles(user).get(0);
-		vo.setRealname("adminadmin1111");
+		vo.setRealname("20180103");
 		List<RoleVO> roles = new ArrayList<>();
 		RoleVO role = new RoleVO();
 		role.setRolename("normal");
@@ -178,7 +180,7 @@ public class TestController extends BaseController<UserVO>{
 	public List<RoleVO> getRoles(){
 		RoleVO vo = new RoleVO();
 		vo.setRolename("admin");
-		List<RoleVO> lists = roleService.doFindRoles(vo);
+		List<RoleVO> lists = roleService.doFindRoleResources(vo);
 		return lists;
 	}
 
@@ -186,52 +188,44 @@ public class TestController extends BaseController<UserVO>{
 	@RequestMapping("insertRole")
 	public RoleVO insertRole(){
 		RoleVO vo = new RoleVO();
-		vo.setRolename("角色1");
+		vo.setRolename("角色3");
 
-		List<PermissionVO> list = new ArrayList<>();
-		PermissionVO rp = new PermissionVO();
-		rp.setPermissionid("2");
+		List<ResourceVO> list = new ArrayList<>();
+		ResourceVO rp = new ResourceVO();
+		rp.setResourceid("1");
 		list.add(rp);
-		vo.setPermissions(list);
+		ResourceVO rp2 = new ResourceVO();
+		rp2.setResourceid("2");
+		list.add(rp2);
+		vo.setResources(list);
 
-		List<MenuVO> list2 = new ArrayList<>();
-		MenuVO rm = new MenuVO();
-		rm.setMenuid("1");
-		list2.add(rm);
-		vo.setMenus(list2);
-
-		return roleService.doInsertRole(vo);
+		return roleService.doInsertRoleResources(vo);
 	}
 
 	//17
 	@RequestMapping("updateRole")
-	public RoleVO updateRole(){
+	public RoleVO updateRole() throws Exception {
 		RoleVO vo = new RoleVO();
-		vo.setRoleid("02EAC2EA3BC24D1E8ABE7AA7CA6EB5DA");
-		vo.setRoleinfo("没有描述222");
+		vo.setRoleid("A1AEACA6D7DD4131A8D7F9ADF1A5DAB0");
+		vo.setRoleinfo("111weadsadadewq1");
 
-		List<PermissionVO> list = new ArrayList<>();
-		PermissionVO p1 = new PermissionVO();
-		p1.setPermissionid("4");
+		List<ResourceVO> list = new ArrayList<>();
+		ResourceVO p1 = new ResourceVO();
+		p1.setResourceid("1");
 		list.add(p1);
-		PermissionVO p2 = new PermissionVO();
-		p2.setPermissionid("1");
+		ResourceVO p2 = new ResourceVO();
+		p2.setResourceid("2");
+		p2.setReserve1(null);
 		list.add(p2);
-		vo.setPermissions(list);
+		vo.setResources(list);
 
-		List<MenuVO> list2 = new ArrayList<>();
-		MenuVO rm = new MenuVO();
-		rm.setMenuid("6");
-		list2.add(rm);
-		vo.setMenus(list2);
-
-		return roleService.doUpdateRole(vo);
+		return roleService.doUpdateRoleResources(vo);
 	}
 
 	//18
 	@RequestMapping("deleteRole")
 	public void deleteRole(){
-		roleService.doDeleteRole("02EAC2EA3BC24D1E8ABE7AA7CA6EB5DA");
+		roleService.doDeleteRole("A1AEACA6D7DD4131A8D7F9ADF1A5DAB0");
 	}
 
 	//19
@@ -272,59 +266,79 @@ public class TestController extends BaseController<UserVO>{
 	}
 
 	//24
-	@RequestMapping("getMenu")
-	public List<MenuVO> getMenu(){
-		MenuVO vo = new MenuVO();
-		vo.setMenuid("1");
-		return menuService.doSearchListByVO(vo);
+	@RequestMapping("getResource")
+	@RequiresPermissions("test:list")
+	public List<ResourceVO> getResource(){
+		ResourceVO vo = new ResourceVO();
+		vo.setResourceid("2");
+		return resourceService.doFindResourcePermissions(vo);
 	}
 
 	//25
-	@RequestMapping("getMenus")
-	public List<MenuVO> getMenus(){
-		return menuService.doSearchListByVO(null);
+	@RequestMapping("getResources")
+	@RequiresPermissions("test:list")
+	public List<ResourceVO> getResources(){
+		return resourceService.doSearchListByVO(null);
 	}
 
 	//26
-	@RequestMapping("insertMenu")
-	public int insertMenu(){
-		MenuVO vo = new MenuVO();
-		vo.setMenuname("权限管理");
-		vo.setMenuurl("/test/");
-		vo.setIsleaf("0");
+	@RequestMapping("insertResource")
+	@RequiresPermissions("test:add")
+	public ResourceVO insertResource(){
+		ResourceVO vo = new ResourceVO();
+		vo.setResourcename("/test/test");
+		vo.setResourceinfo("权限管理");
 		vo.setParentid("-1");
 		vo.setSeqno(3);
-		return menuService.doInsertByVO(vo);
+
+		List<PermissionVO> permissions = new ArrayList<>();
+		PermissionVO permission = new PermissionVO();
+		permission.setPermissionid("1");
+		permissions.add(permission);
+		vo.setPermissions(permissions);
+
+		return resourceService.doInsertResourcePermissions(vo);
 	}
 
 	//27
-	@RequestMapping("updateMenu")
-	public int updateMenu(){
-		MenuVO vo = new MenuVO();
-		vo.setMenuinfo("权限管理总页面");
-		vo.setMenuid("25285BA352204C47A1D7536F6631D7BD");
-		vo.setIsleaf("0");
-		vo.setParentid("-1");
-		return menuService.doUpdateByVO(vo);
+	@RequestMapping("updateResource")
+	@RequiresPermissions("test:update")
+	public ResourceVO updateResource(){
+		ResourceVO vo = new ResourceVO();
+		vo.setResourceinfo("权限管理测试2");
+		vo.setResourceid("5EB53C0711D343FA884992B3ABC68936");
+
+		List<PermissionVO> permissions = new ArrayList<>();
+		PermissionVO permission1 = new PermissionVO();
+		permission1.setPermissionid("1");
+		permissions.add(permission1);
+		vo.setPermissions(permissions);
+
+		PermissionVO permission2 = new PermissionVO();
+		permission2.setPermissionid("3");
+		permissions.add(permission2);
+
+		return resourceService.doUpdateResourcePermissions(vo);
 	}
 
 	//28
-	@RequestMapping("deleteMenu")
-	public int deleteMenu(){
-		return menuService.doDeleteById("25285BA352204C47A1D7536F6631D7BD");
+	@RequestMapping("deleteResource")
+	@RequiresPermissions("test:delete")
+	public void deleteResource(){
+		resourceService.doDeleteResourcePermissions("5EB53C0711D343FA884992B3ABC68936");
 	}
 
 	//29
-	@RequestMapping("getMenuByRoleid")
-	public List<MenuTree> getMenuByRoleid(){
-		return menuService.doFindMenuByRoleid("2");
-	}
-
-	//30
-	@RequestMapping("getMenuByUser")
-	public List<MenuTree> getMenuByUserid(){
-		ShiroUser user = CurrentUserUtil.getCurrentUser();
-		return menuService.doFindMenusByUser(user);
-	}
+//	@RequestMapping("getMenuByRoleid")
+//	public List<ResourceTree> getMenuByRoleid(){
+//		return menuService.doFindMenuByRoleid("2");
+//	}
+//
+//	//30
+//	@RequestMapping("getMenuByUser")
+//	public List<ResourceTree> getMenuByUserid(){
+//		ShiroUser user = CurrentUserUtil.getCurrentUser();
+//		return menuService.doFindMenusByUser(user);
+//	}
 
 }

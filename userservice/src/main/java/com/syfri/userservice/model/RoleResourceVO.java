@@ -1,16 +1,17 @@
 package com.syfri.userservice.model;
 
-import com.syfri.baseapi.model.ValueObject;
-
 import java.io.Serializable;
 
-public class RoleMenuVO extends ValueObject implements Serializable{
+import com.syfri.baseapi.model.ValueObject;
+
+public class RoleResourceVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private String pkid;	//主键
 	private String roleid;	//角色ID
-	private String menuid;	//权限ID
+	private String resourceid;	//资源ID
+	private String deleteFlag;	//删除标志
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
@@ -20,7 +21,6 @@ public class RoleMenuVO extends ValueObject implements Serializable{
 	private String reserve1;	//备用1
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
-	private String deleteFlag;	//删除标志
 
 	public String getPkid(){
 		return pkid;
@@ -34,11 +34,17 @@ public class RoleMenuVO extends ValueObject implements Serializable{
 	public void setRoleid(String roleid){
 		this.roleid = roleid;
 	}
-	public String getMenuid(){
-		return menuid;
+	public String getResourceid(){
+		return resourceid;
 	}
-	public void setMenuid(String menuid){
-		this.menuid = menuid;
+	public void setResourceid(String resourceid){
+		this.resourceid = resourceid;
+	}
+	public String getDeleteFlag(){
+		return deleteFlag;
+	}
+	public void setDeleteFlag(String deleteFlag){
+		this.deleteFlag = deleteFlag;
 	}
 	public String getCreateId(){
 		return createId;
@@ -93,11 +99,5 @@ public class RoleMenuVO extends ValueObject implements Serializable{
 	}
 	public void setReserve3(String reserve3){
 		this.reserve3 = reserve3;
-	}
-	public String getDeleteFlag(){
-		return deleteFlag;
-	}
-	public void setDeleteFlag(String deleteFlag){
-		this.deleteFlag = deleteFlag;
 	}
 }
