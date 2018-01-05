@@ -3,7 +3,6 @@ package com.syfri.userservice.controller;
 import com.syfri.baseapi.controller.BaseController;
 import com.syfri.userservice.model.*;
 import com.syfri.userservice.service.*;
-import com.syfri.userservice.utils.CurrentUserUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -126,6 +125,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//11
 	@RequestMapping("getUsers")
+	@RequiresPermissions("user:list")
 	public List<UserVO> getUsers(){
 		UserVO vo = new UserVO();
 		AccountVO accountVO = new AccountVO();
@@ -137,6 +137,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//12
 	@RequestMapping("insertUser")
+	@RequiresPermissions("user:add")
 	public UserVO insertUser(){
 		UserVO vo = new UserVO();
 		AccountVO accountVO = new AccountVO();
@@ -155,6 +156,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//13
 	@RequestMapping("updateUser")
+	@RequiresPermissions("user:update")
 	public UserVO updateUser(){
 		UserVO user = new UserVO();
 		user.setPkid("3");
@@ -171,12 +173,14 @@ public class TestController extends BaseController<UserVO>{
 
 	//14
 	@RequestMapping("deleteUser")
+	@RequiresPermissions("user:delete")
 	public void deleteUser(){
 		userService.doDeleteUserRoles("3");
 	}
 
 	//15
 	@RequestMapping("getRoles")
+	@RequiresPermissions("role:list")
 	public List<RoleVO> getRoles(){
 		RoleVO vo = new RoleVO();
 		vo.setRolename("admin");
@@ -186,6 +190,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//16
 	@RequestMapping("insertRole")
+	@RequiresPermissions("role:add")
 	public RoleVO insertRole(){
 		RoleVO vo = new RoleVO();
 		vo.setRolename("角色3");
@@ -204,6 +209,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//17
 	@RequestMapping("updateRole")
+	@RequiresPermissions("role:update")
 	public RoleVO updateRole() throws Exception {
 		RoleVO vo = new RoleVO();
 		vo.setRoleid("A1AEACA6D7DD4131A8D7F9ADF1A5DAB0");
@@ -224,12 +230,14 @@ public class TestController extends BaseController<UserVO>{
 
 	//18
 	@RequestMapping("deleteRole")
+	@RequiresPermissions("role:delete")
 	public void deleteRole(){
 		roleService.doDeleteRole("A1AEACA6D7DD4131A8D7F9ADF1A5DAB0");
 	}
 
 	//19
 	@RequestMapping("getPermission")
+	@RequiresPermissions("permission:list")
 	public List<PermissionVO> getPermission(){
 		PermissionVO vo = new PermissionVO();
 		vo.setPermissionid("1");
@@ -238,12 +246,14 @@ public class TestController extends BaseController<UserVO>{
 
 	//20
 	@RequestMapping("getPermissions")
+	@RequiresPermissions("permission:list")
 	public List<PermissionVO> getPermissions(){
 		return permissionService.doSearchListByVO(null);
 	}
 
 	//21
 	@RequestMapping("insertPermission")
+	@RequiresPermissions("permission:add")
 	public int insertPermission(){
 		PermissionVO vo = new PermissionVO();
 		vo.setPermissionname("test");
@@ -252,6 +262,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//22
 	@RequestMapping("updatePermission")
+	@RequiresPermissions("permission:update")
 	public int updatePermission(){
 		PermissionVO vo = new PermissionVO();
 		vo.setPermissioninfo("test");
@@ -261,13 +272,14 @@ public class TestController extends BaseController<UserVO>{
 
 	//23
 	@RequestMapping("deletePermission")
+	@RequiresPermissions("permission:delete")
 	public int deletePermission(){
 		return permissionService.doDeleteById("2E85A37D74314CBDAFA0AC0148F41BA1");
 	}
 
 	//24
 	@RequestMapping("getResource")
-	@RequiresPermissions("test:list")
+	@RequiresPermissions("resource:list")
 	public List<ResourceVO> getResource(){
 		ResourceVO vo = new ResourceVO();
 		vo.setResourceid("2");
@@ -276,14 +288,14 @@ public class TestController extends BaseController<UserVO>{
 
 	//25
 	@RequestMapping("getResources")
-	@RequiresPermissions("test:list")
+	@RequiresPermissions("resource:list")
 	public List<ResourceVO> getResources(){
 		return resourceService.doSearchListByVO(null);
 	}
 
 	//26
 	@RequestMapping("insertResource")
-	@RequiresPermissions("test:add")
+	@RequiresPermissions("resource:add")
 	public ResourceVO insertResource(){
 		ResourceVO vo = new ResourceVO();
 		vo.setResourcename("/test/test");
@@ -302,7 +314,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//27
 	@RequestMapping("updateResource")
-	@RequiresPermissions("test:update")
+	@RequiresPermissions("resource:update")
 	public ResourceVO updateResource(){
 		ResourceVO vo = new ResourceVO();
 		vo.setResourceinfo("权限管理测试2");
@@ -323,22 +335,9 @@ public class TestController extends BaseController<UserVO>{
 
 	//28
 	@RequestMapping("deleteResource")
-	@RequiresPermissions("test:delete")
+	@RequiresPermissions("resource:delete")
 	public void deleteResource(){
 		resourceService.doDeleteResourcePermissions("5EB53C0711D343FA884992B3ABC68936");
 	}
-
-	//29
-//	@RequestMapping("getMenuByRoleid")
-//	public List<ResourceTree> getMenuByRoleid(){
-//		return menuService.doFindMenuByRoleid("2");
-//	}
-//
-//	//30
-//	@RequestMapping("getMenuByUser")
-//	public List<ResourceTree> getMenuByUserid(){
-//		ShiroUser user = CurrentUserUtil.getCurrentUser();
-//		return menuService.doFindMenusByUser(user);
-//	}
 
 }
