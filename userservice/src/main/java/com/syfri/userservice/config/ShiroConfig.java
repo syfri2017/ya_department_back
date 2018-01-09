@@ -92,9 +92,21 @@ public class ShiroConfig {
 		filterMap.put("/**/*.js", "anon");
 		filterMap.put("/**/*.html", "anon");
 		filterMap.put("/fonts/**", "anon");
-		filterMap.put("/swagger/**", "anon");
 		filterMap.put("/favicon.ico", "anon");
 		filterMap.put("/*.jpg", "anon");
+
+		//swagger
+		filterMap.put("/swagger/**", "anon");
+		//swagger api json
+		filterMap.put("/v2/api-docs", "anon");
+		//swagger 安全选项
+		//filterMap.put("/swagger-resources/configuration/security", "anon");
+		//用来获取支持的动作，如果不加入这个，显示swagger空白页面
+		filterMap.put("/swagger-resources/configuration/ui", "anon");
+		//用来获取api-docs的URI
+		filterMap.put("/swagger-resources", "anon");
+		filterMap.put("/swagger-ui.html", "anon");
+
 		//验证码可以不经授权访问
 		filterMap.put("/imageCode", "anon");
 

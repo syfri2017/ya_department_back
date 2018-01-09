@@ -51,4 +51,16 @@ pagehelper:
 logging:
   level: debug
 #------------------------------------------------------------
+#swagger:
+#  title: springboot
+#  description: springboot swagger
+#  version: 1.0
+#  license: 111
+#  license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+#  terms-of-service-url: https://github.com/dyc87112/spring-boot-starter-swagger
+#  contact:
+#    email: xxx@syfri.cn
+#    name: lx
+#    url: http://blog.didispace.com
+#  base-package: com.syfri
 #------------------------------------------------------------

@@ -2,6 +2,7 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -15,6 +16,7 @@ import com.syfri.userservice.model.UserVO;
 import com.syfri.userservice.service.UserService;
 import com.syfri.baseapi.controller.BaseController;
 
+@Api(value = "用户管理",tags = "用户管理API",description = "用户管理")
 @RestController
 @RequestMapping("user")
 public class UserController  extends BaseController<UserVO>{

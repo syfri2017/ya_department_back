@@ -1,6 +1,7 @@
 package com.syfri.userservice.controller;
 
 import com.syfri.userservice.utils.ImageCodeUtil;
+import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -26,6 +27,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.Map;
 
+@Api(value = "登录",tags = "登录API",description = "登录")
 @Controller
 public class LoginController {
 

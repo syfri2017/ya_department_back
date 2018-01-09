@@ -3,6 +3,7 @@ package com.syfri.userservice.controller;
 import com.syfri.baseapi.controller.BaseController;
 import com.syfri.userservice.model.*;
 import com.syfri.userservice.service.*;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@Api(value = "测试",tags = "测试API",description = "测试")
 @RestController
 @RequestMapping("/test")
 public class TestController extends BaseController<UserVO>{
@@ -40,6 +42,7 @@ public class TestController extends BaseController<UserVO>{
 	}
 
 	//2
+
 	@RequestMapping("/findById")
 	public UserVO findById(){
 		return userService.doFindById("1");

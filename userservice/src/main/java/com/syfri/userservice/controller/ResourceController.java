@@ -3,6 +3,7 @@ package com.syfri.userservice.controller;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.userservice.model.RoleVO;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,6 +17,7 @@ import com.syfri.baseapi.controller.BaseController;
 
 import java.util.List;
 
+@Api(value = "资源管理",tags = "资源管理API",description = "资源管理")
 @RestController
 @RequestMapping("resource")
 public class ResourceController  extends BaseController<ResourceVO>{
