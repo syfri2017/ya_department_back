@@ -165,7 +165,9 @@
 
 	<!--12.根据资源列表查询权限-->
 	<select id="doFindPermissionByResourceList" parameterType="java.util.List" resultType="PermissionVO">
-		SELECT DISTINCT t1.permissionid,substr(t2.resourcename,2)||':'||t3.permissionname permissionname
+		SELECT DISTINCT t1.permissionid,
+			CASE WHEN t2.resourcename IS NULL THEN substr(t1.resourcename,2,INSTR(t1.resourcename,'/',2)-2)||':'||t3.permissionname
+			ELSE substr(t2.resourcename,2)||':'||t3.permissionname END permissionname
 		FROM(
 			SELECT r.resourceid,r.resourcename,r.parentid,c.permissionid FROM SYS_RESOURCE_PERMISSION c
 			LEFT JOIN SYS_RESOURCE r ON c.resourceid = r.resourceid
