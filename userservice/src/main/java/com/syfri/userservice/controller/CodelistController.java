@@ -46,8 +46,9 @@ public class CodelistController  extends BaseController<CodelistVO>{
 
 	@ApiOperation(value="新增代码集",notes="注意事项")
 	@ApiImplicitParam(name="vo",value = "业务实体")
-	@PostMapping("/insertByVO")
-	public @ResponseBody ResultVO insertByVO(@RequestBody CodelistVO vo) throws Exception{
+	@RequiresPermissions("codelist:add")
+	@PostMapping("/insertByCodelist")
+	public @ResponseBody ResultVO insertCodelist(@RequestBody CodelistVO vo) throws Exception{
 		ResultVO resultVO = ResultVO.build();
 		try {
 			resultVO.setResult(codelistService.doInsertByVO(vo));
@@ -61,8 +62,9 @@ public class CodelistController  extends BaseController<CodelistVO>{
 
 	@ApiOperation(value="修改代码集",notes="注意事项")
 	@ApiImplicitParam(name="vo",value = "业务实体")
-	@PutMapping("updateByVO")
-	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistVO vo) throws Exception{
+	@RequiresPermissions("codelist:update")
+	@PutMapping("updateByCodelist")
+	public @ResponseBody ResultVO updateCodelist(@RequestBody CodelistVO vo) throws Exception{
 		ResultVO resultVO = ResultVO.build();
 		try {
 			resultVO.setResult(codelistService.doUpdateByVO(vo));
