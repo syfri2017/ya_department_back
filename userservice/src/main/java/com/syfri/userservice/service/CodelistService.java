@@ -10,4 +10,9 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 	/*--获取所有的代码集类型--*/
 	List<CodelistVO> doFindCodelistType();
 
+	/*--新增：新增代码集--*/
+	int doInsertByVO(CodelistVO vo);
+
+	/*--修改：新增代码集--*/
+	int doUpdateByVO(CodelistVO vo);
 }

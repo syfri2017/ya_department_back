@@ -1,5 +1,6 @@
 package com.syfri.userservice.service.impl;
 
+import com.syfri.userservice.utils.CurrentUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,19 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 	@Override
 	public List<CodelistVO> doFindCodelistType() {
 		return codelistDAO.doFindCodelistType();
+	}
+
+	/*--新增：新增代码集--*/
+	public int doInsertByVO(CodelistVO vo){
+		vo.setCreateId(CurrentUserUtil.getCurrentUserId());
+		vo.setCreateName(CurrentUserUtil.getCurrentUserName());
+		return codelistDAO.doInsertByVO(vo);
+	}
+
+	/*--修改：新增代码集--*/
+	public int doUpdateByVO(CodelistVO vo){
+		vo.setAlterId(CurrentUserUtil.getCurrentUserId());
+		vo.setAlterName(CurrentUserUtil.getCurrentUserName());
+		return codelistDAO.doUpdateByVO(vo);
 	}
 }

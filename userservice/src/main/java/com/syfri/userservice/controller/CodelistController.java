@@ -3,14 +3,12 @@ package com.syfri.userservice.controller;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.syfri.userservice.model.CodelistVO;
 import com.syfri.userservice.service.CodelistService;
@@ -44,6 +42,35 @@ public class CodelistController  extends BaseController<CodelistVO>{
 			resultVO.setCode(EConstants.CODE.FAILURE);
 		}
 		return resultVO;
+	}
+
+	@ApiOperation(value="新增代码集",notes="注意事项")
+	@ApiImplicitParam(name="vo",value = "业务实体")
+	@PostMapping("/insertByVO")
+	public @ResponseBody ResultVO insertByVO(@RequestBody CodelistVO vo) throws Exception{
+		ResultVO resultVO = ResultVO.build();
+		try {
+			resultVO.setResult(codelistService.doInsertByVO(vo));
+		} catch (Exception e) {
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+
+		return 	resultVO;
+	}
+
+	@ApiOperation(value="修改代码集",notes="注意事项")
+	@ApiImplicitParam(name="vo",value = "业务实体")
+	@PutMapping("updateByVO")
+	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistVO vo) throws Exception{
+		ResultVO resultVO = ResultVO.build();
+		try {
+			resultVO.setResult(codelistService.doUpdateByVO(vo));
+		} catch (Exception e) {
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return 	resultVO;
 	}
 
 }
