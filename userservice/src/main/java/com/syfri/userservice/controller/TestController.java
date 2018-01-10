@@ -29,6 +29,9 @@ public class TestController extends BaseController<UserVO>{
 	@Autowired
 	private ResourceService resourceService;
 
+	@Autowired
+	private CodelistService codelistService;
+
 	@Override
 	public UserService getBaseService() {
 		return this.userService;
@@ -341,6 +344,14 @@ public class TestController extends BaseController<UserVO>{
 	@RequiresPermissions("resource:delete")
 	public void deleteResource(){
 		resourceService.doDeleteResourcePermissions("5EB53C0711D343FA884992B3ABC68936");
+	}
+
+	//29
+	@RequestMapping("findType")
+	public List<CodelistVO> findType(){
+		CodelistVO vo = new CodelistVO();
+		vo.setCodetype("CA01");
+		return codelistService.doSearchListByVO(vo);
 	}
 
 }
