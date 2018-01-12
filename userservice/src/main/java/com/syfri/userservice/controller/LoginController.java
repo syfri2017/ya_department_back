@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -113,6 +114,7 @@ public class LoginController {
 	}
 
 	@RequestMapping("/shiro")
+	@ResponseBody
 	public ShiroUser getShiroUser(){
 		Subject subject = SecurityUtils.getSubject();
 		return (ShiroUser)subject.getPrincipal();
