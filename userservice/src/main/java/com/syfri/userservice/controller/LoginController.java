@@ -111,4 +111,10 @@ public class LoginController {
 		subject.logout();
 		return "redirect:/login";
 	}
+
+	@RequestMapping("/shiro")
+	public ShiroUser getShiroUser(){
+		Subject subject = SecurityUtils.getSubject();
+		return (ShiroUser)subject.getPrincipal();
+	}
 }
