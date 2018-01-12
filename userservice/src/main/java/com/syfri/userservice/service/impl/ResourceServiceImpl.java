@@ -125,6 +125,16 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 				if(temps!=null && temps.size()>0){
 					for(ResourceVO temp : temps){
 						ResourceTree child = ((ResourceService)AopContext.currentProxy()).getResourceToTree(temp);
+						List<ResourceTree> actions = new ArrayList<>();
+						map.put("parentid", child.getResourceid());
+						List<ResourceVO> actionTemps = resourceDAO.doFindResourceByParentId(map);
+						if(actionTemps!=null && actionTemps.size()>0){
+							for(ResourceVO actionTemp : actionTemps){
+								ResourceTree action = ((ResourceService)AopContext.currentProxy()).getResourceToTree(actionTemp);
+								actions.add(action);
+							}
+							child.setChildren(actions);
+						}
 						children.add(child);
 					}
 				}
