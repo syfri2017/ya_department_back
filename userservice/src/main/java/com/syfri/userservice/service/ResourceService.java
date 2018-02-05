@@ -1,10 +1,7 @@
 package com.syfri.userservice.service;
 
 import com.syfri.baseapi.service.BaseService;
-import com.syfri.userservice.model.PermissionVO;
-import com.syfri.userservice.model.ResourceTree;
-import com.syfri.userservice.model.ResourceVO;
-import com.syfri.userservice.model.RoleVO;
+import com.syfri.userservice.model.*;
 
 import java.util.List;
 
@@ -29,8 +26,8 @@ public interface ResourceService  extends BaseService<ResourceVO>{
 	int insertResourcePermissionsBatch(String resourceid, List<PermissionVO> permissions);
 
 	/*--根据角色列表构造资源树状结构.--*/
-	List<ResourceTree> getResourceTree(List<RoleVO> roleList);
+	List<MenuTree> getMenuTree(List<RoleVO> roleList);
 
 	/*--将ResourceVO对象转换成ResourceTree对象.--*/
-	ResourceTree getResourceToTree(ResourceVO resourceVO);
+	MenuTree getResourceToTree(ResourceVO resourceVO);
 }

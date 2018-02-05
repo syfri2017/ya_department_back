@@ -10,8 +10,10 @@ public class UserVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String pkid;	//用户ID（主键）
+	private String pkid;	//主键
 	private String userid;	//用户ID
+	private String username;    //登录名
+	private String password;    //密码
 	private String realname;	//真实姓名
 	private String birth;	//生日
 	private String sex;	//性别([1]男，[2]女)
@@ -31,7 +33,6 @@ public class UserVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
 	private List<RoleVO> roles;    //角色
-	private AccountVO accountVO;  //登录名密码
 
 
 	public String getPkid(){
@@ -45,6 +46,18 @@ public class UserVO extends ValueObject implements Serializable{
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getRealname(){
 		return realname;
@@ -154,21 +167,11 @@ public class UserVO extends ValueObject implements Serializable{
 	public void setDeleteFlag(String deleteFlag){
 		this.deleteFlag = deleteFlag;
 	}
-
 	public List<RoleVO> getRoles() {
 		return roles;
 	}
-
 	public void setRoles(List<RoleVO> roles) {
 		this.roles = roles;
-	}
-
-	public AccountVO getAccountVO() {
-		return accountVO;
-	}
-
-	public void setAccountVO(AccountVO accountVO) {
-		this.accountVO = accountVO;
 	}
 
 	@Override
@@ -176,6 +179,8 @@ public class UserVO extends ValueObject implements Serializable{
 		return "UserVO{" +
 				"pkid='" + pkid + '\'' +
 				", userid='" + userid + '\'' +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
 				", realname='" + realname + '\'' +
 				", birth='" + birth + '\'' +
 				", sex='" + sex + '\'' +
@@ -187,15 +192,14 @@ public class UserVO extends ValueObject implements Serializable{
 				", deleteFlag='" + deleteFlag + '\'' +
 				", createId='" + createId + '\'' +
 				", createName='" + createName + '\'' +
-				", createTime='" + createTime + '\'' +
+				", createTime=" + createTime +
 				", alterId='" + alterId + '\'' +
 				", alterName='" + alterName + '\'' +
-				", alterTime='" + alterTime + '\'' +
+				", alterTime=" + alterTime +
 				", reserve1='" + reserve1 + '\'' +
 				", reserve2='" + reserve2 + '\'' +
 				", reserve3='" + reserve3 + '\'' +
 				", roles=" + roles +
-				", accountVO=" + accountVO +
 				'}';
 	}
 }

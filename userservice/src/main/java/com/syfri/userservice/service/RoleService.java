@@ -23,4 +23,10 @@ public interface RoleService  extends BaseService<RoleVO>{
 
 	/*--向角色资源中间表中批量增加数据.--*/
 	int insertRoleResourcesBatch(String roleid, List<ResourceVO> resources);
+
+	/*--获取所有角色.--*/
+	List<RoleVO> doFindAll();
+
+	/*--根据用户ID取角色Map.--*/
+	List<String> getRolesByUserid(String userid);
 }

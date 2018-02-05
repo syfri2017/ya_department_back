@@ -104,8 +104,8 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 
 	/*--根据角色列表构造资源树状结构*/
 	@Override
-	public List<ResourceTree> getResourceTree(List<RoleVO> roleList){
-		List<ResourceTree> trees = new ArrayList<>();
+	public List<MenuTree> getMenuTree(List<RoleVO> roleList){
+		List<MenuTree> trees = new ArrayList<>();
 
 		//获取角色列表下的父资源
 		Map map = new HashMap<>();
@@ -115,31 +115,42 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 
 		//根据父资源获取子资源
 		if(resources!=null && resources.size()>0){
+			Integer index = 1;
 			for(ResourceVO resource : resources){
-				ResourceTree tree = ((ResourceService)AopContext.currentProxy()).getResourceToTree(resource);
+				MenuTree tree = ((ResourceService)AopContext.currentProxy()).getResourceToTree(resource);
+				tree.setIndex(index.toString());
 
 				//获取父资源的子资源
-				List<ResourceTree> children = new ArrayList<>();
+				List<MenuTree> children = new ArrayList<>();
 				map.put("parentid", resource.getResourceid());
 				List<ResourceVO> temps = resourceDAO.doFindResourceByParentId(map);
 				if(temps!=null && temps.size()>0){
+					//如果有子菜单children
+					tree.setUrl("");
+
+					Integer index2 = index*10+1;
 					for(ResourceVO temp : temps){
-						ResourceTree child = ((ResourceService)AopContext.currentProxy()).getResourceToTree(temp);
-						List<ResourceTree> actions = new ArrayList<>();
-						map.put("parentid", child.getResourceid());
+						MenuTree child = ((ResourceService)AopContext.currentProxy()).getResourceToTree(temp);
+						child.setIndex(index2.toString());
+						/*
+						List<MenuTree> actions = new ArrayList<>();
+						map.put("parentid", child.getMenuid());
 						List<ResourceVO> actionTemps = resourceDAO.doFindResourceByParentId(map);
 						if(actionTemps!=null && actionTemps.size()>0){
 							for(ResourceVO actionTemp : actionTemps){
-								ResourceTree action = ((ResourceService)AopContext.currentProxy()).getResourceToTree(actionTemp);
+								MenuTree action = ((ResourceService)AopContext.currentProxy()).getResourceToTree(actionTemp);
 								actions.add(action);
 							}
 							child.setChildren(actions);
 						}
+						*/
 						children.add(child);
+						index2++;
 					}
 				}
 				tree.setChildren(children);
 				trees.add(tree);
+				index++;
 			}
 		}
 		return trees;
@@ -147,7 +158,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 
 	/*--将ResourceVO对象转换成ResourceTree对象.--*/
 	@Override
-	public ResourceTree getResourceToTree(ResourceVO resourceVO){
-		return new ResourceTree(resourceVO.getResourceid(), resourceVO.getResourcename(), resourceVO.getResourceinfo(), resourceVO.getSeqno(), resourceVO.getIcon(), resourceVO.getType());
+	public MenuTree getResourceToTree(ResourceVO resourceVO){
+		return new MenuTree(resourceVO.getResourceid(), resourceVO.getResourcename(), resourceVO.getResourceinfo(),resourceVO.getIcon(), resourceVO.getParentid());
 	}
 }

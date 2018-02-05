@@ -7,6 +7,7 @@ import com.syfri.userservice.model.UserVO;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface UserService  extends BaseService<UserVO>{
 

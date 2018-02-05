@@ -10,5 +10,4 @@ public interface UserDAO extends BaseDAO<UserVO>{
 
 	/*获取用户，如果userVO为null，则获取所有用户.*/
 	List<UserVO> doFindUserRoles(UserVO userVO);
-
 }

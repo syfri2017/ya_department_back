@@ -166,9 +166,10 @@
 
 	<!--12.根据用户获取用户的角色-->
 	<select id="doFindRoleByUserid" parameterType="String" resultType="RoleVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>
-			FROM SYS_ACCOUNT_ROLE r LEFT JOIN SYS_ROLE t ON r.roleid = t.roleid where userid = #{pkid}
+		SELECT t.roleid,t.rolename,t.roleinfo
+		FROM SYS_ACCOUNT_ROLE r
+		LEFT JOIN (select roleid,rolename,roleinfo from SYS_ROLE where delete_flag = 'N') t ON r.roleid = t.roleid
+		WHERE r.delete_flag = 'N' AND userid = #{pkid}
 	</select>
 
 	<!--13.根据角色查询角色及权限-->
@@ -230,4 +231,9 @@
 	<update id="doDeleteRoleResourcesBatch"  parameterType="String">
 		UPDATE SYS_ROLE_RESOURCE t SET t.DELETE_FLAG = 'Y' WHERE 1=1 AND t.ROLEID = #{value}
 	</update>
+
+	<!--17.获取所有的角色-->
+	<select id="doFindAll" resultType="RoleVO">
+		SELECT DISTINCT roleid,rolename,roleinfo FROM sys_role WHERE delete_flag = 'N'
+	</select>
 </mapper>

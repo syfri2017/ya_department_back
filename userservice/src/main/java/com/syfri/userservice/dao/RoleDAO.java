@@ -21,4 +21,7 @@ public interface RoleDAO extends BaseDAO<RoleVO>{
 
 	/*--删除角色时修改用户中间表数据--*/
 	int doDeleteRoleResourcesBatch(String roleid);
+
+	/*--获取所有角色.--*/
+	List<RoleVO> doFindAll();
 }

@@ -13,6 +13,7 @@ import com.syfri.userservice.service.UserService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("userService")
@@ -40,7 +41,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserVO> implements UserServ
 	public UserVO doInsertUserRoles(UserVO userVO){
 
 		//向账户表SYS_ACCOUNT插入账户信息
-		AccountVO accountVO = userVO.getAccountVO();
+		AccountVO accountVO = new AccountVO();
+		accountVO.setUsername(userVO.getUsername());
+		accountVO.setPassword(userVO.getPassword());
+		accountVO.setRealname(userVO.getRealname());
 		accountService.doInsertAccountByVO(accountVO);
 
 		//向用户表SYS_USER插入用户信息
@@ -58,7 +62,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserVO> implements UserServ
 	@Override
 	public UserVO doUpdateUserRoles(UserVO userVO){
 		//修改账户表
-		AccountVO accountVO = userVO.getAccountVO();
+		AccountVO accountVO = new AccountVO(userVO.getUserid(), userVO.getUsername(), userVO.getPassword(), userVO.getRealname());
 		accountService.doUpdateAccountByVO(accountVO);
 
 		//修改用户表基本信息

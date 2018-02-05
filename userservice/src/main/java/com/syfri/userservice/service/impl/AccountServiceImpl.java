@@ -62,8 +62,13 @@ public class AccountServiceImpl extends BaseServiceImpl<AccountVO> implements Ac
 	public int doUpdateAccountByVO(AccountVO accountVO){
 		accountVO.setAlterName(CurrentUserUtil.getCurrentUserName());
 		accountVO.setAlterId(CurrentUserUtil.getCurrentUserId());
-		accountVO = this.getPasswordEncry(accountVO);
-		//accountVO = ((AccountService) AopContext.currentProxy()).getPasswordEncry(accountVO);
+		System.out.println(accountVO.getPassword());
+		if(accountVO.getPassword() == null || "".equals(accountVO.getPassword())){
+			accountVO.setPassword(null);
+		}else{
+			accountVO = this.getPasswordEncry(accountVO);
+			//accountVO = ((AccountService) AopContext.currentProxy()).getPasswordEncry(accountVO);
+		}
 		return accountDAO.doUpdateByVO(accountVO);
 	}
 

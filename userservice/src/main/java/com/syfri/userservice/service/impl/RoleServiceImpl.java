@@ -99,4 +99,21 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 			return -1;
 		}
 	}
+
+	/*--获取所有角色.--*/
+	@Override
+	public List<RoleVO> doFindAll(){
+		return roleDAO.doFindAll();
+	}
+
+	/*--根据用户ID取角色Map.--*/
+	@Override
+	public List<String> getRolesByUserid(String userid){
+		List<String> list = new ArrayList<>();
+		List<RoleVO> roles = roleDAO.doFindRoleByUserid(userid);
+		for(RoleVO role : roles){
+			list.add(role.getRolename());
+		}
+		return list;
+	}
 }

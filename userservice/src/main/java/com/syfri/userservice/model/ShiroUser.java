@@ -25,8 +25,8 @@ public class ShiroUser implements Serializable{
 	/*权限.*/
 	private List<String> permissions;
 
-	/*资源树.*/
-	private List<ResourceTree> resourceTrees;
+	/*菜单树.*/
+	private List<MenuTree> menuTrees;
 
 	public ShiroUser() {
 	}
@@ -77,11 +77,11 @@ public class ShiroUser implements Serializable{
 		this.permissions = permissions;
 	}
 
-	public List<ResourceTree> getResourceTrees() {
-		return resourceTrees;
+	public List<MenuTree> getMenuTrees() {
+		return menuTrees;
 	}
 
-	public void setResourceTrees(List<ResourceTree> resourceTrees) {
-		this.resourceTrees = resourceTrees;
+	public void setMenuTrees(List<MenuTree> menuTrees) {
+		this.menuTrees = menuTrees;
 	}
 }

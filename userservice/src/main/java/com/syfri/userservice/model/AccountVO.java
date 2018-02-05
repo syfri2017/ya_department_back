@@ -25,6 +25,16 @@ public class AccountVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
 
+	public AccountVO() {
+	}
+
+	public AccountVO(String userid, String username, String password, String realname) {
+		this.userid = userid;
+		this.username = username;
+		this.password = password;
+		this.realname = realname;
+	}
+
 	public String getUserid(){
 		return userid;
 	}
