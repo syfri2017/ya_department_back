@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数字化预案管理平台</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/element.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/zxx.lib.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/app.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/sync.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/formal.css">
+</head>
+
+<body class="fw map-bg m0">
+    <div id="app" style="height:100%">
+        <el-carousel name="carousel" height="580px">
+            <el-carousel-item :key="1">
+                <iframe src="templates/bigscreen/big_screen_map.html" height="100%" width="100%" frameborder=0></iframe>
+            </el-carousel-item>
+            <el-carousel-item :key="2">
+                <iframe src="templates/bigscreen/big_screen_data.html" height="100%" width="100%" frameborder=0></iframe>
+            </el-carousel-item>
+        </el-carousel>
+    </div>
+    <div class="application-back">
+        <a href="index.html">
+            <p class="m0 l">
+                <img src="../../static/images/icon-back.png" />
+            </p>
+            <div>返回数据</div>
+        </a>
+    </div>
+</body>
+<!-- 引入js -->
+<script type="text/javascript" src="../../static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../static/js/vue.js"></script>
+<script type="text/javascript" src="../../static/js/element.js"></script>
+<script type="text/javascript" src="../../static/js/echarts-2/echarts-all.js"></script>
+<script type="text/javascript" src="../../static/js/echarts-4/echarts.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {}
+    });
+</script>
+
+</html>

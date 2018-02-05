@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>index</h1>
-</body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="lib :: common_header"></head>
+    <body style="overflow-y:hidden">
+        <div th:replace="lib :: header_box"></div>
+        <div th:replace="lib :: menu_box (1)"></div>
+        <div th:replace="lib :: javascript_box"></div>
+
+        <div class="main-box">
+            <div class="main-container">
+                <div id="index">
+                    <table width="100%">
+                        <tr>
+                            <td class="tc">
+                                <div style="vertical-align: middle; display: inline-block;">
+                                    <div><span><h1><font color="#6d6e7d" size="16" face="黑体">公安部消防局数字化预案管理平台</font></h1></span></div>
+                                    <br>
+                                    <div><img th:src="@{/static/images/tu.png}" style="width:100%; max-width:693px;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
