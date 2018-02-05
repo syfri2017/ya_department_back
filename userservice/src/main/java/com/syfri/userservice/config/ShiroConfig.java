@@ -78,7 +78,7 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
 		shiroFilterFactoryBean.setLoginUrl("/login");
-		shiroFilterFactoryBean.setSuccessUrl("/index");
+		shiroFilterFactoryBean.setSuccessUrl("/bigscreen");
 		//未授权页面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
@@ -93,7 +93,8 @@ public class ShiroConfig {
 		filterMap.put("/**/*.html", "anon");
 		filterMap.put("/fonts/**", "anon");
 		filterMap.put("/favicon.ico", "anon");
-		filterMap.put("/*.jpg", "anon");
+		filterMap.put("/**/*.jpg", "anon");
+		filterMap.put("/**/*.png", "anon");
 
 		//swagger
 		filterMap.put("/swagger/**", "anon");
@@ -112,6 +113,7 @@ public class ShiroConfig {
 
 		//anon:所有URL均可以匿名访问，authc：需要认证才能访问，user：配置记住我或认证通过可以访问
 		filterMap.put("/login", "authc");
+		filterMap.put("/logout", "logout");
 		filterMap.put("/**", "user");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);

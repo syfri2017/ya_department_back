@@ -2,11 +2,15 @@ package com.syfri.userservice.config;
 
 import com.syfri.userservice.model.*;
 import com.syfri.userservice.service.*;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +66,10 @@ public class MyShiroRealm extends AuthorizingRealm{
 		//根据资源列表获取用户权限
 		List<PermissionVO> permissionList = permissionService.doFindPermissionByResourceList(resourceList);
 
+		for(RoleVO role : roleList){
+			roles.add(role.getRolename());
+		}
+
 		for(PermissionVO permission : permissionList){
 			permissions.add(permission.getPermissionname());
 		}
@@ -70,8 +78,8 @@ public class MyShiroRealm extends AuthorizingRealm{
 		shiroUser.setPermissions(permissions);
 
 		//根据用户角色列表获取角色资源树
-		List<ResourceTree> resourceTrees = resourceService.getResourceTree(roleList);
-		shiroUser.setResourceTrees(resourceTrees);
+		List<MenuTree> menuTrees = resourceService.getMenuTree(roleList);
+		shiroUser.setMenuTrees(menuTrees);
 
 		//获取权限信息
 
@@ -90,6 +98,8 @@ public class MyShiroRealm extends AuthorizingRealm{
 				ByteSource.Util.bytes(account.getSalt()),
 				getName()
 		);
+		Session session = SecurityUtils.getSubject().getSession();
+		session.setAttribute("realname", shiroUser.getRealName());
 		return authenticationInfo;
 	}
 
@@ -127,6 +137,31 @@ public class MyShiroRealm extends AuthorizingRealm{
 		}
 		*/
 		return null;
+	}
+
+	@Override
+	public void onLogout(PrincipalCollection principals){
+		super.clearCachedAuthorizationInfo(principals);
+		ShiroUser shiroUser = (ShiroUser)principals.getPrimaryPrincipal();
+		removeUserCache(shiroUser);
+	}
+
+	/**
+	 * 清除用户缓存
+	 * @param shiroUser
+	 */
+	public void removeUserCache(ShiroUser shiroUser){
+		removeUserCache(shiroUser.getUsername());
+	}
+
+	/**
+	 * 清除用户缓存
+	 * @param username
+	 */
+	public void removeUserCache(String username){
+		SimplePrincipalCollection principals = new SimplePrincipalCollection();
+		principals.add(username, super.getName());
+		super.clearCachedAuthenticationInfo(principals);
 	}
 
 }
