@@ -1,5 +1,7 @@
 package com.syfri.userservice.controller;
 
+import com.syfri.baseapi.model.ResultVO;
+import com.syfri.userservice.model.MenuTree;
 import com.syfri.userservice.model.ShiroUser;
 import com.syfri.userservice.utils.CurrentUserUtil;
 import com.syfri.userservice.utils.ImageCodeUtil;
@@ -11,11 +13,11 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Api(value = "登录",tags = "登录API",description = "登录")
@@ -33,13 +36,34 @@ public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+	@Autowired
+	protected Environment environment;
+
+	@ModelAttribute
+	public void Model(Model model){
+		if (environment.containsProperty("server.context-path")) {
+			model.addAttribute("contextPath", environment.getProperty("server.context-path"));
+		}else{
+			model.addAttribute("contextPath", "/");
+		}
+	}
+
 	@RequestMapping("/index")
 	public String index(){
 		return "/index";
 	}
 
+	@RequestMapping("/bigscreen")
+	public String bigscreen(){
+		return "/bigscreen/big_screen_all";
+	}
+
 	@GetMapping({"/","/login"})
 	public String login(){
+		logger.info("-----GET请求方式登录-----");
+		if(SecurityUtils.getSubject().isAuthenticated()){
+			return "redirect:/index";
+		}
 		return "/login";
 	}
 
@@ -48,6 +72,7 @@ public class LoginController {
 	 */
 	@PostMapping("/login")
 	public String login(HttpServletRequest request, Map<String,Object> map) throws Exception{
+		logger.info("-----POST请求方式登录-----");
 		ShiroUser user = CurrentUserUtil.getCurrentUser();
 		if(user != null){
 			return "/index";
@@ -106,7 +131,7 @@ public class LoginController {
 	/**
 	 * logout
 	 */
-	@RequestMapping("/logout")
+	@GetMapping("/logout")
 	public String logout(){
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
@@ -118,5 +143,13 @@ public class LoginController {
 	public ShiroUser getShiroUser(){
 		Subject subject = SecurityUtils.getSubject();
 		return (ShiroUser)subject.getPrincipal();
+	}
+
+	@GetMapping("/getMenu")
+	public @ResponseBody ResultVO getMenu(){
+		List<MenuTree> menus = CurrentUserUtil.getCurrentUser().getMenuTrees();
+		ResultVO resultVO = ResultVO.build();
+		resultVO.setResult(menus);
+		return resultVO;
 	}
 }

@@ -6,14 +6,16 @@ import com.syfri.userservice.service.*;
 import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Api(value = "测试",tags = "测试API",description = "测试")
-@RestController
+@Controller
 @RequestMapping("/test")
 public class TestController extends BaseController<UserVO>{
 
@@ -39,6 +41,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//1
 	@RequestMapping("/count")
+	@ResponseBody
 	public int count(){
 		UserVO vo = new UserVO();
 		return userService.doSearchCount(vo);
@@ -47,9 +50,16 @@ public class TestController extends BaseController<UserVO>{
 	//2
 
 	@RequestMapping("/findById")
+	@ResponseBody
 	public UserVO findById(){
 		return userService.doFindById("1");
 	}
+
+	@RequestMapping("/list2")
+	public String list2(){
+		return "system/userList2";
+	}
+
 
 	//3
 //	@RequestMapping("/findByVO")
@@ -85,6 +95,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//6
 	@RequestMapping("/deleteById")
+	@ResponseBody
 	public int insertByMap(){
 		return userService.doDeleteById("11111");
 	}
@@ -125,43 +136,49 @@ public class TestController extends BaseController<UserVO>{
 //	}
 	//10
 	@RequestMapping("getRoleByUserid")
+	@ResponseBody
 	public List<RoleVO> getUserRoleByVO(){
 		return roleService.doFindRoleByUserid("1");
 	}
 
 	//11
-	@RequestMapping("getUsers")
-	@RequiresPermissions("user:list")
-	public List<UserVO> getUsers(){
-		UserVO vo = new UserVO();
-		AccountVO accountVO = new AccountVO();
-		accountVO.setUsername("lucy222");
-		vo.setAccountVO(accountVO);
-		List<UserVO> lists = userService.doFindUserRoles(vo);
-		return lists;
-	}
+//	@RequestMapping("getUsers")
+//	@RequiresPermissions("user:list")
+//	public List<UserVO> getUsers(){
+//		UserVO vo = new UserVO();
+//		AccountVO accountVO = new AccountVO();
+//		accountVO.setUsername("lucy222");
+//		vo.setAccountVO(accountVO);
+//		List<UserVO> lists = userService.doFindUserRoles(vo);
+//		return lists;
+//	}
 
 	//12
 	@RequestMapping("insertUser")
-	@RequiresPermissions("user:add")
+	@ResponseBody
 	public UserVO insertUser(){
 		UserVO vo = new UserVO();
-		AccountVO accountVO = new AccountVO();
-		accountVO.setUsername("aaaa");
-		accountVO.setPassword("1");
-		vo.setAccountVO(accountVO);
-		vo.setRealname("aaaa222aaaa");
+		vo.setUsername("111");
+		vo.setPassword("1");
+		vo.setRealname("系统管理员");
+
 		List<RoleVO> roles = new ArrayList<RoleVO>();
 		RoleVO role = new RoleVO();
 		role.setRolename("normal");
 		role.setRoleid("2");
 		roles.add(role);
+
+		RoleVO role1 = new RoleVO();
+		role1.setRolename("admin");
+		role1.setRoleid("1");
+		roles.add(role1);
 		vo.setRoles(roles);
 		return userService.doInsertUserRoles(vo);
 	}
 
 	//13
 	@RequestMapping("updateUser")
+	@ResponseBody
 	@RequiresPermissions("user:update")
 	public UserVO updateUser(){
 		UserVO user = new UserVO();
@@ -179,6 +196,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//14
 	@RequestMapping("deleteUser")
+	@ResponseBody
 	@RequiresPermissions("user:delete")
 	public void deleteUser(){
 		userService.doDeleteUserRoles("3");
@@ -186,6 +204,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//15
 	@RequestMapping("getRoles")
+	@ResponseBody
 	@RequiresPermissions("role:list")
 	public List<RoleVO> getRoles(){
 		RoleVO vo = new RoleVO();
@@ -196,6 +215,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//16
 	@RequestMapping("insertRole")
+	@ResponseBody
 	@RequiresPermissions("role:add")
 	public RoleVO insertRole(){
 		RoleVO vo = new RoleVO();
@@ -215,6 +235,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//17
 	@RequestMapping("updateRole")
+	@ResponseBody
 	@RequiresPermissions("role:update")
 	public RoleVO updateRole() throws Exception {
 		RoleVO vo = new RoleVO();
@@ -236,6 +257,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//18
 	@RequestMapping("deleteRole")
+	@ResponseBody
 	@RequiresPermissions("role:delete")
 	public void deleteRole(){
 		roleService.doDeleteRole("A1AEACA6D7DD4131A8D7F9ADF1A5DAB0");
@@ -243,6 +265,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//19
 	@RequestMapping("getPermission")
+	@ResponseBody
 	@RequiresPermissions("permission:list")
 	public List<PermissionVO> getPermission(){
 		PermissionVO vo = new PermissionVO();
@@ -252,6 +275,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//20
 	@RequestMapping("getPermissions")
+	@ResponseBody
 	@RequiresPermissions("permission:list")
 	public List<PermissionVO> getPermissions(){
 		return permissionService.doSearchListByVO(null);
@@ -259,6 +283,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//21
 	@RequestMapping("insertPermission")
+	@ResponseBody
 	@RequiresPermissions("permission:add")
 	public int insertPermission(){
 		PermissionVO vo = new PermissionVO();
@@ -268,6 +293,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//22
 	@RequestMapping("updatePermission")
+	@ResponseBody
 	@RequiresPermissions("permission:update")
 	public int updatePermission(){
 		PermissionVO vo = new PermissionVO();
@@ -278,6 +304,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//23
 	@RequestMapping("deletePermission")
+	@ResponseBody
 	@RequiresPermissions("permission:delete")
 	public int deletePermission(){
 		return permissionService.doDeleteById("2E85A37D74314CBDAFA0AC0148F41BA1");
@@ -285,6 +312,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//24
 	@RequestMapping("getResource")
+	@ResponseBody
 	@RequiresPermissions("resource:list")
 	public List<ResourceVO> getResource(){
 		ResourceVO vo = new ResourceVO();
@@ -294,6 +322,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//25
 	@RequestMapping("getResources")
+	@ResponseBody
 	@RequiresPermissions("resource:list")
 	public List<ResourceVO> getResources(){
 		return resourceService.doSearchListByVO(null);
@@ -301,6 +330,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//26
 	@RequestMapping("insertResource")
+	@ResponseBody
 	@RequiresPermissions("resource:add")
 	public ResourceVO insertResource(){
 		ResourceVO vo = new ResourceVO();
@@ -320,6 +350,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//27
 	@RequestMapping("updateResource")
+	@ResponseBody
 	@RequiresPermissions("resource:update")
 	public ResourceVO updateResource(){
 		ResourceVO vo = new ResourceVO();
@@ -341,6 +372,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//28
 	@RequestMapping("deleteResource")
+	@ResponseBody
 	@RequiresPermissions("resource:delete")
 	public void deleteResource(){
 		resourceService.doDeleteResourcePermissions("5EB53C0711D343FA884992B3ABC68936");
@@ -348,6 +380,7 @@ public class TestController extends BaseController<UserVO>{
 
 	//29
 	@RequestMapping("findType")
+	@ResponseBody
 	public List<CodelistVO> findType(){
 		CodelistVO vo = new CodelistVO();
 		vo.setCodetype("CA01");

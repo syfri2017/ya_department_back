@@ -2,12 +2,17 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.userservice.model.ShiroUser;
+import com.syfri.userservice.utils.CurrentUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.syfri.userservice.model.RoleVO;
@@ -15,9 +20,12 @@ import com.syfri.userservice.service.RoleService;
 import com.syfri.baseapi.controller.BaseController;
 
 @Api(value = "角色管理",tags = "角色管理API",description = "角色管理")
-@RestController
+@Controller
 @RequestMapping("role")
 public class RoleController  extends BaseController<RoleVO>{
+
+	@Autowired
+	protected Environment environment;
 
 	@Autowired
 	private RoleService roleService;
@@ -25,6 +33,23 @@ public class RoleController  extends BaseController<RoleVO>{
 	@Override
 	public RoleService getBaseService() {
 		return this.roleService;
+	}
+
+	@ModelAttribute
+	public void Model(Model model){
+		if (environment.containsProperty("server.context-path")) {
+			model.addAttribute("contextPath", environment.getProperty("server.context-path"));
+		}else{
+			model.addAttribute("contextPath", "/");
+		}
+	}
+
+	@GetMapping("")
+	public String user(Model model){
+		ShiroUser user = CurrentUserUtil.getCurrentUser();
+		model.addAttribute("user", user);
+		model.addAttribute("menu", user.getMenuTrees());
+		return "userAdd";
 	}
 
 	/**
@@ -93,6 +118,33 @@ public class RoleController  extends BaseController<RoleVO>{
 		try{
 			roleService.doDeleteRole(roleid);
 			resultVO.setMsg("删除成功");
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="获取所有的角色",notes="查询")
+	@GetMapping("/getAll")
+	public @ResponseBody ResultVO findAll(){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(roleService.doFindAll());
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="根据用户ID查询其角色",notes="查询")
+	@ApiImplicitParam(name="id",value="用户ID")
+	@GetMapping("/getRole/{userid}")
+	public @ResponseBody ResultVO getRole(@PathVariable String userid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(roleService.doFindRoleByUserid(userid));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

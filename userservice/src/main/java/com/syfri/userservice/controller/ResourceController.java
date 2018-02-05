@@ -113,7 +113,7 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	public @ResponseBody ResultVO getResourceTree(List<RoleVO> roleList){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(resourceService.getResourceTree(roleList));
+			resultVO.setResult(resourceService.getMenuTree(roleList));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

@@ -1,7 +1,12 @@
 package com.syfri.userservice.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.userservice.model.ShiroUser;
+import com.syfri.userservice.utils.CurrentUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.syfri.userservice.model.UserVO;
@@ -17,11 +25,14 @@ import com.syfri.userservice.service.UserService;
 import com.syfri.baseapi.controller.BaseController;
 
 @Api(value = "用户管理",tags = "用户管理API",description = "用户管理")
-@RestController
+@Controller
 @RequestMapping("user")
 public class UserController  extends BaseController<UserVO>{
 
 	private static final Logger logger  = LoggerFactory.getLogger(UserController.class);
+
+	@Autowired
+	protected Environment environment;
 
 	@Autowired
 	private UserService userService;
@@ -31,16 +42,32 @@ public class UserController  extends BaseController<UserVO>{
 		return this.userService;
 	}
 
-	@RequestMapping("/list")
-	@RequiresPermissions("user:list")
-	public String userList(){
-		return "userList";
+	@ModelAttribute
+	public void Model(Model model){
+		if (environment.containsProperty("server.context-path")) {
+			model.addAttribute("contextPath", environment.getProperty("server.context-path"));
+		}else{
+			model.addAttribute("contextPath", "/");
+		}
 	}
 
-	@RequestMapping("/add")
-	@RequiresPermissions("user:add")
-	public String userAdd(){
-		return "userAdd";
+	@GetMapping("")
+	public String user(Model model){
+		ShiroUser user = CurrentUserUtil.getCurrentUser();
+		model.addAttribute("user", user);
+		return "system/user_list";
+	}
+
+	@GetMapping("/add")
+	public String userAdd(Model model){
+		model.addAttribute("pageTitle", "创建用户");
+		return "system/user_edit";
+	}
+
+	@GetMapping("/update")
+	public String userUpdate(Model model){
+		model.addAttribute("pageTitle", "修改用户");
+		return "system/user_edit";
 	}
 
 	/**
@@ -49,8 +76,8 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiOperation(value="根据用户查询用户信息及角色信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("user:list")
-	@GetMapping("/listByUser")
-	public @ResponseBody ResultVO listByUser(UserVO userVO){
+	@PostMapping("/findByVO")
+	public @ResponseBody ResultVO findByUser(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(userService.doFindUserRoles(userVO));
@@ -67,8 +94,8 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiOperation(value="根据用户新增用户（包括账户和角色）",notes="新增")
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("user:add")
-	@PostMapping("/insertByUser")
-	public @ResponseBody ResultVO insertByUser(UserVO userVO){
+	@PostMapping("/insertByVO")
+	public @ResponseBody ResultVO insertByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(userService.doInsertUserRoles(userVO));
@@ -85,8 +112,8 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiOperation(value="根据用户修改用户（包括账户和角色）",notes="修改")
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("user:update")
-	@PostMapping("/updateByUser")
-	public @ResponseBody ResultVO updateByUser(UserVO userVO){
+	@PostMapping("/updateByVO")
+	public @ResponseBody ResultVO updateByUser(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(userService.doUpdateUserRoles(userVO));
@@ -103,11 +130,16 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiOperation(value="根据主键删除用户（包括账户和角色）",notes="删除")
 	@ApiImplicitParam(name="id",value="用户主键")
 	@RequiresPermissions("user:delete")
-	@PostMapping("/deleteById")
-	public @ResponseBody ResultVO deleteById(String pkid){
+	@PostMapping("/deleteByIds")
+	public @ResponseBody ResultVO deleteById(@RequestBody String id){
+		JSONObject jsonObject = JSON.parseObject(id);
+		JSONArray ids = jsonObject.getJSONArray("ids");
 		ResultVO resultVO = ResultVO.build();
 		try{
-			userService.doDeleteUserRoles(pkid);
+			for(int i=0;i<ids.size();i++){
+				String pkid = (String)ids.get(i);
+				userService.doDeleteUserRoles(pkid);
+			}
 			resultVO.setMsg("删除成功");
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
