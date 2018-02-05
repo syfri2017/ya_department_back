@@ -28,7 +28,8 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
   mybatis:
-    mapperLocations: classpath*:com/syfri/userservice/mapper/*-mapper.xml
+#    mapperLocations: classpath*:com/syfri/userservice/mapper/*-mapper.xml
+    mapperLocations: classpath:mapper/*-mapper.xml
     typeAliasesPackage: com.syfri.userservice
     basePackage: com.syfri.userservice.dao
     configuration:
