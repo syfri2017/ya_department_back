@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="lib :: common_header"></head>
+    <body class="main-index-body">
+        <div id="app">
+            <div th:replace="lib :: header_box"></div>
+            <div th:replace="lib :: menu_box (21)"></div>
+            <div th:replace="lib :: javascript_box"></div>
+
+            <a onclick="aaa()">ssssssssssssssssssss</a>
+        </div>
+        <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+        <script>
+            function abc(){
+                alert(111);
+                axios.get('/user/listByUser').then(function(res){
+                    alert(222);
+                    console.log(res.data)
+                }.bind(this),function(error){
+                    console.log(error)
+                })
+            }
+
+            function aaa(){
+                alert(2345);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="lib :: common_header"></head>
+    <body class="fw f14 main-index-body">
+        <div th:replace="lib :: header_box"></div>
+        <div th:replace="lib :: menu_box (21)"></div>
+        <div class="main-box">
+            <div class="main-container">
+                <div class="row main-container-header">
+                    <div class="col-md-12 rel">
+                        <div class="main-container-header-line fix">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">
+                                    <h4 class="g4">
+                                        <a class="a-back" href="javascript:history.go(-1)">
+                                            <em class="el-icon-arrow-left"></em>
+                                            <em th:text="${pageTitle}"></em>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="bread-link-box">
+                                    当前位置：<a th:href="@{/user}">用户管理</a> &nbsp;&gt;&nbsp; <em th:text="${pageTitle}"></em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="f14" id="app" v-cloak>
+                    <br>
+                    <br>
+                    <form class="form-horizontal" style="width:90%">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><spa class="red">*</spa>用户名：</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
