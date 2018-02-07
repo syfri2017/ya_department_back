@@ -130,11 +130,9 @@ public class ResourceVO extends ValueObject implements Serializable{
 	public void setReserve3(String reserve3){
 		this.reserve3 = reserve3;
 	}
-
 	public List<PermissionVO> getPermissions() {
 		return permissions;
 	}
-
 	public void setPermissions(List<PermissionVO> permissions) {
 		this.permissions = permissions;
 	}

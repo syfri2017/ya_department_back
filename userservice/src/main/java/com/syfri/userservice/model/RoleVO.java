@@ -15,92 +15,120 @@ public class RoleVO extends ValueObject implements Serializable{
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
+	private String createTimeBegin;
+	private String createTimeEnd;
 	private String alterId;	//修改人ID
 	private String alterName;	//修改人
 	private String alterTime;	//修改时间
+	private String alterTimeBegin;
+	private String alterTimeEnd;
 	private String reserve1;	//备用1
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
 	private String deleteFlag;	//删除标志
 	private List<ResourceVO> resources;  //资源权限
 
-
-	public String getRoleid(){
+	public String getRoleid() {
 		return roleid;
 	}
-	public void setRoleid(String roleid){
+
+	public void setRoleid(String roleid) {
 		this.roleid = roleid;
 	}
-	public String getRolename(){
+
+	public String getRolename() {
 		return rolename;
 	}
-	public void setRolename(String rolename){
+
+	public void setRolename(String rolename) {
 		this.rolename = rolename;
 	}
-	public String getRoleinfo(){
+
+	public String getRoleinfo() {
 		return roleinfo;
 	}
-	public void setRoleinfo(String roleinfo){
+
+	public void setRoleinfo(String roleinfo) {
 		this.roleinfo = roleinfo;
 	}
-	public String getCreateId(){
+
+	public String getCreateId() {
 		return createId;
 	}
-	public void setCreateId(String createId){
+
+	public void setCreateId(String createId) {
 		this.createId = createId;
 	}
-	public String getCreateName(){
+
+	public String getCreateName() {
 		return createName;
 	}
-	public void setCreateName(String createName){
+
+	public void setCreateName(String createName) {
 		this.createName = createName;
 	}
-	public String getCreateTime(){
+
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(String createTime){
+
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getAlterId(){
+
+	public String getAlterId() {
 		return alterId;
 	}
-	public void setAlterId(String alterId){
+
+	public void setAlterId(String alterId) {
 		this.alterId = alterId;
 	}
-	public String getAlterName(){
+
+	public String getAlterName() {
 		return alterName;
 	}
-	public void setAlterName(String alterName){
+
+	public void setAlterName(String alterName) {
 		this.alterName = alterName;
 	}
-	public String getAlterTime(){
+
+	public String getAlterTime() {
 		return alterTime;
 	}
-	public void setAlterTime(String alterTime){
+
+	public void setAlterTime(String alterTime) {
 		this.alterTime = alterTime;
 	}
-	public String getReserve1(){
+
+	public String getReserve1() {
 		return reserve1;
 	}
-	public void setReserve1(String reserve1){
+
+	public void setReserve1(String reserve1) {
 		this.reserve1 = reserve1;
 	}
-	public String getReserve2(){
+
+	public String getReserve2() {
 		return reserve2;
 	}
-	public void setReserve2(String reserve2){
+
+	public void setReserve2(String reserve2) {
 		this.reserve2 = reserve2;
 	}
-	public String getReserve3(){
+
+	public String getReserve3() {
 		return reserve3;
 	}
-	public void setReserve3(String reserve3){
+
+	public void setReserve3(String reserve3) {
 		this.reserve3 = reserve3;
 	}
-	public String getDeleteFlag(){
+
+	public String getDeleteFlag() {
 		return deleteFlag;
 	}
-	public void setDeleteFlag(String deleteFlag){
+
+	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
 

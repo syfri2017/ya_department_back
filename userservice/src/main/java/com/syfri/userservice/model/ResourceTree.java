@@ -16,8 +16,14 @@ public class ResourceTree implements Serializable{
 	/*资源描述.*/
 	private String resourceinfo;
 
+	/*菜单URL.*/
+	private String url;
+
 	/*顺序.*/
 	private Integer seqno;
+
+	/*索引.*/
+	private String index;
 
 	/*图标.*/
 	private String icon;
@@ -25,19 +31,21 @@ public class ResourceTree implements Serializable{
 	/*资源类型.*/
 	private String type;
 
+	/*parentId.*/
+	private String parentId;
+
 	/*子资源.*/
 	private List<ResourceTree> children;
 
 	public ResourceTree() {
 	}
 
-	public ResourceTree(String resourceid, String resourcename, String resourceinfo, Integer seqno, String icon, String type) {
+	public ResourceTree(String resourceid, String resourcename, String resourceinfo,  String icon, String parentId) {
 		this.resourceid = resourceid;
 		this.resourcename = resourcename;
 		this.resourceinfo = resourceinfo;
-		this.seqno = seqno;
 		this.icon = icon;
-		this.type = type;
+		this.parentId = parentId;
 	}
 
 	public String getResourceid() {
@@ -64,12 +72,28 @@ public class ResourceTree implements Serializable{
 		this.resourceinfo = resourceinfo;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public Integer getSeqno() {
 		return seqno;
 	}
 
 	public void setSeqno(Integer seqno) {
 		this.seqno = seqno;
+	}
+
+	public String getIndex() {
+		return index;
+	}
+
+	public void setIndex(String index) {
+		this.index = index;
 	}
 
 	public String getIcon() {
@@ -86,6 +110,14 @@ public class ResourceTree implements Serializable{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 	public List<ResourceTree> getChildren() {
