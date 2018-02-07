@@ -77,11 +77,11 @@ public class ShiroUser implements Serializable{
 		this.permissions = permissions;
 	}
 
-	public List<ResourceTree> getMenuTrees() {
+	public List<ResourceTree> getResourceTrees() {
 		return resourceTrees;
 	}
 
-	public void setMenuTrees(List<ResourceTree> resourceTrees) {
+	public void setResourceTrees(List<ResourceTree> resourceTrees) {
 		this.resourceTrees = resourceTrees;
 	}
 }

@@ -40,9 +40,9 @@ public class ResourceTree implements Serializable{
 	public ResourceTree() {
 	}
 
-	public ResourceTree(String resourceid, String resourcename, String resourceinfo,  String icon, String parentId) {
+	public ResourceTree(String resourceid, String url, String resourceinfo, String icon, String parentId) {
 		this.resourceid = resourceid;
-		this.resourcename = resourcename;
+		this.url = url;
 		this.resourceinfo = resourceinfo;
 		this.icon = icon;
 		this.parentId = parentId;
