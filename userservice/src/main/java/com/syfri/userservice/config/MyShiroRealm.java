@@ -78,8 +78,8 @@ public class MyShiroRealm extends AuthorizingRealm{
 		shiroUser.setPermissions(permissions);
 
 		//根据用户角色列表获取角色资源树
-		List<MenuTree> menuTrees = resourceService.getMenuTree(roleList);
-		shiroUser.setMenuTrees(menuTrees);
+		List<ResourceTree> resourceTrees = resourceService.getMenuTree(roleList);
+		shiroUser.setResourceTrees(resourceTrees);
 
 		//获取权限信息
 
