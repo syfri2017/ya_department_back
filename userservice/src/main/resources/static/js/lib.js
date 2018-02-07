@@ -36,7 +36,7 @@ treeMenuTemplate.push('<i class="el-icon-message" v-if="level == 1"></i>');
 treeMenuTemplate.push('<template v-if="hasChildren()">');
 treeMenuTemplate.push('<i class="el-submenu__icon-arrow" :class="[open ? \'el-icon-arrow-up\': \'el-icon-arrow-down\']"></i>');
 treeMenuTemplate.push('</template>');
-treeMenuTemplate.push('{{ model.menuName }}');
+treeMenuTemplate.push('{{ model.resourceinfo }}');
 treeMenuTemplate.push('</a>');
 treeMenuTemplate.push('<ul class="el-menu" :class="[open ? \'\' : \'dn\']" v-if="hasChildren()">');
 treeMenuTemplate.push('<tree-menu v-for="item in model.children" :model="item" :level="level + 1" :theId="theId"></tree-menu>');
