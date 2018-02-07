@@ -264,10 +264,12 @@
 		FROM SYS_RESOURCE r
 		INNER JOIN SYS_ROLE_RESOURCE c ON r.resourceid = c.resourceid
 		WHERE r.delete_flag = 'N'
-		AND roleid IN
-		<foreach collection="roleList" item="item" index="index" open="(" close=")" separator="," >
-			#{item.roleid,jdbcType=VARCHAR}
-		</foreach>
+		<if test="roleList != null and roleList.size() > 0">
+			AND roleid IN
+			<foreach collection="roleList" item="item" index="index" open="(" close=")" separator="," >
+				#{item.roleid,jdbcType=VARCHAR}
+			</foreach>
+		</if>
 		<if test="parentid!=null">
 			AND parentid = #{parentid}
 		</if>

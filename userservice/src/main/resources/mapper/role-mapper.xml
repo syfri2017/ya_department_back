@@ -18,8 +18,11 @@
 		<if test="createName != null and createName != '' ">
 		 and t.create_name = #{createName}
 		</if>
-		<if test="createTime != null and createTime != '' ">
-		 and t.create_time = #{createTime}
+		<if test="createTimeBegin != null and createTimeBegin != '' ">
+		 and t.create_time &gt;= to_date(#{createTimeBegin},'yyyy-MM-dd')
+		</if>
+		<if test="createTimeEnd != null and createTimeEnd != '' ">
+			and t.create_time &lt;= to_date(#{createTimeEnd},'yyyy-MM-dd')
 		</if>
 		<if test="alterId != null and alterId != '' ">
 		 and t.alter_id = #{alterId}
@@ -27,8 +30,11 @@
 		<if test="alterName != null and alterName != '' ">
 		 and t.alter_name = #{alterName}
 		</if>
-		<if test="alterTime != null and alterTime != '' ">
-		 and t.alter_time = #{alterTime}
+		<if test="alterTimeBegin != null and alterTimeBegin != '' ">
+		 and t.alter_time &gt;= to_date(#{alterTimeBegin},'yyyy-MM-dd')
+		</if>
+		<if test="createTimeEnd != null and createTimeEnd != '' ">
+		 and t.alter_time &lt;= to_date(#{createTimeEnd},'yyyy-MM-dd')
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
 		 and t.reserve1 = #{reserve1}
@@ -177,10 +183,10 @@
 		<id property="roleid" column="roleid"/>
 		<result property="rolename" column="rolename"/>
 		<result property="roleinfo" column="roleinfo"/>
-		<result property="createName" column="create_name"/>
-		<result property="createTime" column="create_time"/>
-		<result property="alterName" column="alter_name"/>
-		<result property="alterTime" column="alter_time"/>
+		<result property="createName" column="createName"/>
+		<result property="createTime" column="createTime"/>
+		<result property="alterName" column="alterName"/>
+		<result property="alterTime" column="alterTime"/>
 		<collection property="resources" ofType="com.syfri.userservice.model.ResourceVO">
 			<id property="resourceid" column="resourceid"/>
 			<result property="resourcename" column="resourcename"/>

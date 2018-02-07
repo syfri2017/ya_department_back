@@ -76,7 +76,7 @@ new Vue({
         this.searchClick();
     },
     methods:{
-        //初始化数据
+        //查询，初始化
         searchClick: function(){
             var params = {
                 username: this.searchForm.username,

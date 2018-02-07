@@ -180,7 +180,7 @@
 						</el-dialog>
 
 						<!--编辑界面-->
-						<el-dialog title="编辑用户" :visible.sync="editFormVisible" :close-on-click-modal="false">
+						<el-dialog title="修改用户" :visible.sync="editFormVisible" :close-on-click-modal="false">
 							<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
 								<!--<el-row>-->
 									<!--<el-col :span="8">-->
@@ -271,7 +271,7 @@
 				</div>
 			</div>
 		</div>
-		<div th:replace="lib :: javascript_box"></div>
-		<script th:src="@{/static/js/system/user.js}"></script>
 	</body>
+	<div th:replace="lib :: javascript_box"></div>
+	<script th:src="@{/static/js/system/user.js}"></script>
 </html>
