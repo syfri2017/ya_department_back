@@ -2,8 +2,6 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
-import com.syfri.userservice.model.ShiroUser;
-import com.syfri.userservice.utils.CurrentUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -46,10 +44,7 @@ public class RoleController  extends BaseController<RoleVO>{
 
 	@GetMapping("")
 	public String user(Model model){
-		ShiroUser user = CurrentUserUtil.getCurrentUser();
-		model.addAttribute("user", user);
-		model.addAttribute("menu", user.getMenuTrees());
-		return "userAdd";
+		return "system/role_list";
 	}
 
 	/**
@@ -58,8 +53,8 @@ public class RoleController  extends BaseController<RoleVO>{
 	@ApiOperation(value="根据角色查询角色及其资源信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="角色对象")
 	@RequiresPermissions("role:list")
-	@GetMapping("/listByRole")
-	public @ResponseBody ResultVO listByRole(RoleVO roleVO){
+	@PostMapping("/findByVO")
+	public @ResponseBody ResultVO findByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(roleService.doFindRoleResources(roleVO));
@@ -76,8 +71,8 @@ public class RoleController  extends BaseController<RoleVO>{
 	@ApiOperation(value="根据角色新增角色及其资源信息",notes="新增")
 	@ApiImplicitParam(name="vo",value="角色对象")
 	@RequiresPermissions("role:add")
-	@PostMapping("/insertByRole")
-	public @ResponseBody ResultVO insertByRole(RoleVO roleVO){
+	@PostMapping("/insertByVO")
+	public @ResponseBody ResultVO insertByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(roleService.doInsertRoleResources(roleVO));
@@ -94,8 +89,8 @@ public class RoleController  extends BaseController<RoleVO>{
 	@ApiOperation(value="根据角色修改角色及其资源信息",notes="修改")
 	@ApiImplicitParam(name="vo",value="角色对象")
 	@RequiresPermissions("role:update")
-	@PostMapping("/updateByRole")
-	public @ResponseBody ResultVO updateByRole(RoleVO roleVO){
+	@PostMapping("/updateByVO")
+	public @ResponseBody ResultVO updateByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(roleService.doUpdateRoleResources(roleVO));
@@ -112,11 +107,11 @@ public class RoleController  extends BaseController<RoleVO>{
 	@ApiOperation(value="根据主键删除角色角色及其资源信息",notes="删除")
 	@ApiImplicitParam(name="id",value="角色主键")
 	@RequiresPermissions("role:delete")
-	@PostMapping("/deleteById")
-	public @ResponseBody ResultVO deleteById(String roleid){
+	@PostMapping("/deleteByIds")
+	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			roleService.doDeleteRole(roleid);
+			roleService.doDeleteRole(id);
 			resultVO.setMsg("删除成功");
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());

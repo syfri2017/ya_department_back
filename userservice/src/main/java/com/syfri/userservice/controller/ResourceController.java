@@ -121,4 +121,31 @@ public class ResourceController  extends BaseController<ResourceVO>{
 		return resultVO;
 	}
 
+	@ApiOperation(value="根据角色ID查询其资源",notes="查询")
+	@ApiImplicitParam(name="id",value="角色ID")
+	@GetMapping("/getResource/{roleid}")
+	public @ResponseBody ResultVO getResource(@PathVariable String roleid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(resourceService.doFindResourceTree(roleid));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="获取所有资源",notes="查询")
+	@GetMapping("/getAll")
+	public @ResponseBody ResultVO getAll(){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(resourceService.doFindResourceTree(""));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
 }

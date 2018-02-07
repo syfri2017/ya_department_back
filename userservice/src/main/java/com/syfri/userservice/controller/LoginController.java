@@ -2,6 +2,7 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.userservice.model.MenuTree;
+import com.syfri.userservice.model.ResourceTree;
 import com.syfri.userservice.model.ShiroUser;
 import com.syfri.userservice.utils.CurrentUserUtil;
 import com.syfri.userservice.utils.ImageCodeUtil;
@@ -147,7 +148,7 @@ public class LoginController {
 
 	@GetMapping("/getMenu")
 	public @ResponseBody ResultVO getMenu(){
-		List<MenuTree> menus = CurrentUserUtil.getCurrentUser().getMenuTrees();
+		List<ResourceTree> menus = CurrentUserUtil.getCurrentUser().getResourceTrees();
 		ResultVO resultVO = ResultVO.build();
 		resultVO.setResult(menus);
 		return resultVO;

@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
-import com.syfri.userservice.model.ShiroUser;
-import com.syfri.userservice.utils.CurrentUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -53,8 +51,8 @@ public class UserController  extends BaseController<UserVO>{
 
 	@GetMapping("")
 	public String user(Model model){
-		ShiroUser user = CurrentUserUtil.getCurrentUser();
-		model.addAttribute("user", user);
+//		ShiroUser user = CurrentUserUtil.getCurrentUser();
+//		model.addAttribute("user", user);
 		return "system/user_list";
 	}
 
@@ -77,7 +75,7 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("user:list")
 	@PostMapping("/findByVO")
-	public @ResponseBody ResultVO findByUser(@RequestBody UserVO userVO){
+	public @ResponseBody ResultVO findByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(userService.doFindUserRoles(userVO));
@@ -113,7 +111,7 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("user:update")
 	@PostMapping("/updateByVO")
-	public @ResponseBody ResultVO updateByUser(@RequestBody UserVO userVO){
+	public @ResponseBody ResultVO updateByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(userService.doUpdateUserRoles(userVO));
@@ -131,7 +129,7 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiImplicitParam(name="id",value="用户主键")
 	@RequiresPermissions("user:delete")
 	@PostMapping("/deleteByIds")
-	public @ResponseBody ResultVO deleteById(@RequestBody String id){
+	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
 		JSONArray ids = jsonObject.getJSONArray("ids");
 		ResultVO resultVO = ResultVO.build();
