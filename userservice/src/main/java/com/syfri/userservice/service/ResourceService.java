@@ -26,8 +26,11 @@ public interface ResourceService  extends BaseService<ResourceVO>{
 	int insertResourcePermissionsBatch(String resourceid, List<PermissionVO> permissions);
 
 	/*--根据角色列表构造资源树状结构.--*/
-	List<MenuTree> getMenuTree(List<RoleVO> roleList);
+	List<ResourceTree> getMenuTree(List<RoleVO> roleList);
 
 	/*--将ResourceVO对象转换成ResourceTree对象.--*/
-	MenuTree getResourceToTree(ResourceVO resourceVO);
+	ResourceTree getResourceToTree(ResourceVO resourceVO);
+
+	/*--根据角色ID获取树状资源.--*/
+	List<ResourceTree> doFindResourceTree(String roleid);
 }
