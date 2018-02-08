@@ -187,7 +187,7 @@ new Vue({
                 });
                 return;
             }else{
-                axios.get('/account/getUserNum/' + this.addForm.username).then(function(res){
+                axios.get('/account/getNum/' + this.addForm.username).then(function(res){
                     if(res.data.result != 0){
                         _self.$message({
                             message: "用户名已存在!",

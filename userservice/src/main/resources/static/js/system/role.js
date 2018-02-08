@@ -206,22 +206,33 @@ new Vue({
         //新建：提交
         addSubmit: function(val) {
             var _self=this;
-            val.resource = this.$refs.tree.getCheckedNodes();
-            var params = {
-                rolename: val.rolename,
-                roleinfo: val.roleinfo,
-                resources: val.resource
-            }
-            axios.post('/role/insertByVO', params).then(function(res){
-                var addData = res.data.result;
-                addData.createTime = new Date();
-                _self.tableData.unshift(addData);
-                _self.total = _self.tableData.length;
+            axios.get('/role/getNum/' + this.addForm.rolename).then(function(res){
+                if(res.data.result != 0){
+                    _self.$message({
+                        message: "角色名已存在!",
+                        type: "error"
+                    });
+                }else{
+                    val.resource = this.$refs.tree.getCheckedNodes();
+                    var params = {
+                        rolename: val.rolename,
+                        roleinfo: val.roleinfo,
+                        resources: val.resource
+                    }
+                    axios.post('/role/insertByVO', params).then(function(res){
+                        var addData = res.data.result;
+                        addData.createTime = new Date();
+                        _self.tableData.unshift(addData);
+                        _self.total = _self.tableData.length;
+                    }.bind(this),function(error){
+                        console.log(error)
+                    })
+                    this.addFormVisible = false;
+                    _self.loadingData();//重新加载数据
+                }
             }.bind(this),function(error){
                 console.log(error)
             })
-            this.addFormVisible = false;
-            _self.loadingData();//重新加载数据
         },
 
         //删除：批量删除
