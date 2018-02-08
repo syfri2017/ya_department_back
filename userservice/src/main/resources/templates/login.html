@@ -65,13 +65,20 @@
 
 <script th:src="@{/static/js/vue.js}"></script>
 <script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/elementUI.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var msg = [[${msg}]];
+    /*]]>*/
+</script>
 <script>
     var vm = new Vue({
         el: "#app",
         data: {
           username: "",
           password: "",
-          validateCode: ""
+          validateCode: "",
+          messages:""
         },
         methods: {
             login: function () {
@@ -86,6 +93,12 @@
                     alert("验证码不能为空！")
                 }else{
                     $('#login-form').submit();
+                    var _self = this;
+                    debugger;
+                    this.messages = msg;
+                    if(msg != null){
+                        alert(msg);
+                    }
                 }
             },
             reset: function () {
