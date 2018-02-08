@@ -111,7 +111,8 @@
 								<el-row>
 									<el-col :span="8">
 										<el-form-item label="用户名" prop="username">
-											<el-input v-model="addForm.username" auto-complete="off" style="width:180px" v-on:change="change('username')"></el-input>
+											<el-input v-model="addForm.username" auto-complete="off" style="width:180px"></el-input>
+											<!--  v-on:change="change('username')" -->
 										</el-form-item>
 									</el-col>
 									<el-col :span="4">&nbsp;</el-col>
@@ -182,19 +183,6 @@
 						<!--编辑界面-->
 						<el-dialog title="修改用户" :visible.sync="editFormVisible" :close-on-click-modal="false">
 							<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-								<!--<el-row>-->
-									<!--<el-col :span="8">-->
-										<!--<el-form-item label="主键" prop="pkid">-->
-											<!--<el-input v-model="editForm.pkid" auto-complete="off" style="width:180px"></el-input>-->
-										<!--</el-form-item>-->
-									<!--</el-col>-->
-									<!--<el-col :span="4">&nbsp;</el-col>-->
-									<!--<el-col :span="8">-->
-										<!--<el-form-item label="用户ID" prop="userid">-->
-											<!--<el-input v-model="editForm.userid" auto-complete="off" style="width:180px"></el-input>-->
-										<!--</el-form-item>-->
-									<!--</el-col>-->
-								<!--</el-row>-->
 								<el-row>
 									<el-col :span="8">
 										<el-form-item label="用户名" prop="username">
@@ -264,7 +252,7 @@
 							</el-form>
 							<div slot="footer" class="dialog-footer">
 								<el-button @click.native="editFormVisible = false">取消</el-button>
-									<el-button type="primary" @click.native="editSubmit(editForm)">提交</el-button>
+								<el-button type="primary" @click.native="editSubmit(editForm)">提交</el-button>
 							</div>
 						</el-dialog>
 					</div>
