@@ -1,10 +1,14 @@
 package com.syfri.userservice.controller;
 
+import com.syfri.baseapi.model.ResultVO;
+import com.syfri.baseapi.utils.EConstants;
+import com.syfri.userservice.model.UserVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.syfri.userservice.model.AccountVO;
 import com.syfri.userservice.service.AccountService;
@@ -21,6 +25,27 @@ public class AccountController  extends BaseController<AccountVO>{
 	@Override
 	public AccountService getBaseService() {
 		return this.accountService;
+	}
+
+	@ApiOperation(value="根据用户名查询用户数量",notes="查询")
+	@ApiImplicitParam(name="username",value="用户名")
+	@GetMapping("/getUserNum/{username}")
+	public @ResponseBody
+	ResultVO getRole(@PathVariable String username){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			AccountVO accountVO = new AccountVO();
+			accountVO.setUsername(username);
+			if(accountService.doFindByVO(accountVO) == null){
+				resultVO.setResult(0);
+			}else{
+				resultVO.setResult(1);
+			}
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
 	}
 
 }

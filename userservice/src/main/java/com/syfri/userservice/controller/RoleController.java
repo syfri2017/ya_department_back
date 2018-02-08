@@ -1,5 +1,8 @@
 package com.syfri.userservice.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import io.swagger.annotations.Api;
@@ -109,9 +112,14 @@ public class RoleController  extends BaseController<RoleVO>{
 	@RequiresPermissions("role:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
+		JSONObject jsonObject = JSON.parseObject(id);
+		JSONArray ids = jsonObject.getJSONArray("ids");
 		ResultVO resultVO = ResultVO.build();
 		try{
-			roleService.doDeleteRole(id);
+			for(int i=0;i<ids.size();i++){
+				String roleid = (String)ids.get(i);
+				roleService.doDeleteRole(roleid);
+			}
 			resultVO.setMsg("删除成功");
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
@@ -146,4 +154,5 @@ public class RoleController  extends BaseController<RoleVO>{
 		}
 		return resultVO;
 	}
+
 }

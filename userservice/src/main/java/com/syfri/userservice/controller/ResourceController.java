@@ -148,4 +148,18 @@ public class ResourceController  extends BaseController<ResourceVO>{
 		return resultVO;
 	}
 
+	@ApiOperation(value="根据用户ID查询角色子节点",notes="查询")
+	@ApiImplicitParam(name="id",value="用户ID")
+	@GetMapping("/getChildren/{roleid}")
+	public @ResponseBody ResultVO getChildrenRole(@PathVariable String roleid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(resourceService.doFindChildren(roleid));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
 }
