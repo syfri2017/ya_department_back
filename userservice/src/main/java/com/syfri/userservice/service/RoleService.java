@@ -29,4 +29,10 @@ public interface RoleService  extends BaseService<RoleVO>{
 
 	/*--根据用户ID取角色Map.--*/
 	List<String> getRolesByUserid(String userid);
+
+	/*--获取角色资源中间表对象.--*/
+	RoleResourceVO getRoleResourceVO(String roleid, String resourceid);
+
+	/*--判断一个List对象是否含有某个对象.--*/
+	boolean getContainsResult(List<RoleResourceVO> list, RoleResourceVO roleResourceVO);
 }

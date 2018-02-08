@@ -33,4 +33,7 @@ public interface ResourceService  extends BaseService<ResourceVO>{
 
 	/*--根据角色ID获取树状资源.--*/
 	List<ResourceTree> doFindResourceTree(String roleid);
+
+	/*--根据角色ID获取其没有子的角色.--*/
+	List<String> doFindChildren(String roleid);
 }

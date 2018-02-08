@@ -1,6 +1,7 @@
 package com.syfri.userservice.service.impl;
 
 import com.syfri.userservice.model.*;
+import com.syfri.userservice.service.ResourceService;
 import com.syfri.userservice.utils.CurrentUserUtil;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 
 	@Autowired
 	private RoleDAO roleDAO;
+
+	@Autowired
+	private ResourceService resourceService;
 
 	@Override
 	public RoleDAO getBaseDAO() {
@@ -87,12 +91,30 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 		List<RoleResourceVO> list = new ArrayList<>();
 		if(resources!=null && resources.size()>0){
 			for(ResourceVO resource : resources){
-				RoleResourceVO temp = new RoleResourceVO();
-				temp.setRoleid(roleid);
-				temp.setResourceid(resource.getResourceid());
-				temp.setCreateId(CurrentUserUtil.getCurrentUserId());
-				temp.setCreateName(CurrentUserUtil.getCurrentUserName());
+				RoleResourceVO temp = ((RoleService)AopContext.currentProxy()).getRoleResourceVO(roleid, resource.getResourceid());
 				list.add(temp);
+
+				ResourceVO resourceVO1 = resourceService.doFindByVO(new ResourceVO(resource.getResourceid()));
+				if(resourceVO1!=null){
+					String parentid1 = resourceVO1.getParentid();
+					if(!"-1".equals(parentid1)){
+						RoleResourceVO parent1 = ((RoleService)AopContext.currentProxy()).getRoleResourceVO(roleid, parentid1);
+						if(!((RoleService)AopContext.currentProxy()).getContainsResult(list, parent1)){
+							list.add(parent1);
+						}
+
+						ResourceVO resourceVO2 = resourceService.doFindByVO(new ResourceVO(resourceVO1.getParentid()));
+						if(resourceVO2!=null){
+							String parentid2 = resourceVO2.getParentid();
+							if(!"-1".equals(parentid2)){
+								RoleResourceVO parent2 = ((RoleService)AopContext.currentProxy()).getRoleResourceVO(roleid, parentid2);
+								if(!((RoleService)AopContext.currentProxy()).getContainsResult(list, parent2)){
+									list.add(parent2);
+								}
+							}
+						}
+					}
+				}
 			}
 			return roleDAO.doInsertRoleResourcesBatch(list);
 		}else{
@@ -115,5 +137,26 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleVO> implements RoleServ
 			list.add(role.getRolename());
 		}
 		return list;
+	}
+
+	/*--获取角色资源中间表对象.--*/
+	@Override
+	public RoleResourceVO getRoleResourceVO(String roleid, String resourceid){
+		RoleResourceVO roleResourceVO = new RoleResourceVO();
+		roleResourceVO.setRoleid(roleid);
+		roleResourceVO.setResourceid(resourceid);
+		roleResourceVO.setCreateId(CurrentUserUtil.getCurrentUserId());
+		roleResourceVO.setCreateName(CurrentUserUtil.getCurrentUserName());
+		return roleResourceVO;
+	}
+
+	/*--判断一个List对象是否含有某个对象.--*/
+	public boolean getContainsResult(List<RoleResourceVO> list, RoleResourceVO roleResourceVO){
+		for(RoleResourceVO temp : list){
+			if(temp.getResourceid().equals(roleResourceVO.getResourceid())){
+				return true;
+			}
+		}
+		return false;
 	}
 }

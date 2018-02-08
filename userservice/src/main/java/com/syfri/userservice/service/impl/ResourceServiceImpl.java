@@ -219,4 +219,29 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 		}
 		return trees;
 	}
+
+	/*--根据角色ID获取其没有子的角色.--*/
+	public List<String> doFindChildren(String roleid){
+		List<String> list = new ArrayList<>();
+		List<RoleVO> roleList = new ArrayList<>();
+		//获取角色列表下的父资源
+		Map map = new HashMap<>();
+		if(roleid != null && !"".equals(roleid)){
+			RoleVO roleVO = new RoleVO();
+			roleVO.setRoleid(roleid);
+			roleList.add(roleVO);
+		}
+		map.put("roleList", roleList);
+
+		List<ResourceVO> resources = resourceDAO.doFindResourceByParentId(map);
+		for(ResourceVO resource : resources){
+			ResourceVO temp = new ResourceVO();
+			temp.setParentid(resource.getResourceid());
+			List<ResourceVO> resourceVOS = resourceDAO.doSearchListByVO(temp);
+			if(resourceVOS.size() == 0){
+				list.add(resource.getResourceid());
+			}
+		}
+		return list;
+	}
 }
