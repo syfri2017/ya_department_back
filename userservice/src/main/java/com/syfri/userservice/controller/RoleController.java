@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.userservice.model.AccountVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -148,6 +149,26 @@ public class RoleController  extends BaseController<RoleVO>{
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(roleService.doFindRoleByUserid(userid));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="根据角色名查询角色数量",notes="查询")
+	@ApiImplicitParam(name="rolename",value="角色名")
+	@GetMapping("/getNum/{rolename}")
+	public @ResponseBody ResultVO getNum(@PathVariable String rolename){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			RoleVO roleVO = new RoleVO();
+			roleVO.setRolename(rolename);
+			if(roleService.doFindByVO(roleVO) == null){
+				resultVO.setResult(0);
+			}else{
+				resultVO.setResult(1);
+			}
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

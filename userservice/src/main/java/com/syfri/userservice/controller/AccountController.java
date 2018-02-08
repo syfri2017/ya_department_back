@@ -29,9 +29,9 @@ public class AccountController  extends BaseController<AccountVO>{
 
 	@ApiOperation(value="根据用户名查询用户数量",notes="查询")
 	@ApiImplicitParam(name="username",value="用户名")
-	@GetMapping("/getUserNum/{username}")
+	@GetMapping("/getNum/{username}")
 	public @ResponseBody
-	ResultVO getRole(@PathVariable String username){
+	ResultVO getNum(@PathVariable String username){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			AccountVO accountVO = new AccountVO();
