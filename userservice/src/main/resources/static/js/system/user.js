@@ -23,6 +23,7 @@ new Vue({
                 //新建页面是否显示
                 addFormVisible: false,
                 addLoading: false,
+                usernameMsg: '',
                 addFormRules: {
                     username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
                     realname: [{ required: true, message: "请输入真实姓名", trigger: "blur" }],
@@ -160,27 +161,6 @@ new Vue({
             })
         },
 
-        //表格删除事件
-        deleteClick: function(index,row) {
-            var _self = this;
-            this.$confirm("确认删除吗?", "提示", {
-                type: "warning",
-                confirmButtonText: '确定',
-                cancelButtonText: '取消'
-            })
-                .then(function() {
-                    _self.tableData.splice(index,1);
-                    _self.$message({
-                        message: "删除成功",
-                        type: "success"
-                    });
-                    _self.loadingData();
-                })
-                .catch(function(e) {
-                    if (e != "cancel") console.log("出现错误：" + e);
-                });
-        },
-
         //获取所有的角色
         getAllRoles: function(){
             axios.get('/role/getAll').then(function(res){
@@ -188,12 +168,6 @@ new Vue({
             }.bind(this),function(error){
                 console.log(error)
             })
-        },
-
-        change: function(el){
-            if(el == 'username'){
-                
-            }
         },
 
         //新增：弹出Dialog
@@ -206,32 +180,43 @@ new Vue({
         //新增：提交按钮
         addSubmit: function(val) {
             var _self = this;
-            if(val.password == val.password2){
-                var params = {
-                    username: val.username,
-                    password: val.password,
-                    realname: val.realname,
-                    birth: val.birth,
-                    sex: val.sex,
-                    mobile: val.mobile,
-                    email: val.email,
-                    roles: val.roles
-                }
-                axios.post('/user/insertByVO', params).then(function(res){
-                    var addData = res.data.result;
-                    _self.tableData.unshift(addData);
-                    _self.total = _self.tableData.length;
-                }.bind(this),function(error){
-                    console.log(error)
-                })
-                this.addFormVisible = false;
-                _self.loadingData();//重新加载数据
-            }else{
+            if(!val.password == val.password2){
                 _self.$message({
                     message: "两次密码输入不一致！",
                     type: "error"
                 });
                 return;
+            }else{
+                axios.get('/account/getUserNum/' + this.addForm.username).then(function(res){
+                    if(res.data.result != 0){
+                        _self.$message({
+                            message: "用户名已存在!",
+                            type: "error"
+                        });
+                    }else{
+                        var params = {
+                            username: val.username,
+                            password: val.password,
+                            realname: val.realname,
+                            birth: val.birth,
+                            sex: val.sex,
+                            mobile: val.mobile,
+                            email: val.email,
+                            roles: val.roles
+                        }
+                        axios.post('/user/insertByVO', params).then(function(res){
+                            var addData = res.data.result;
+                            _self.tableData.unshift(addData);
+                            _self.total = _self.tableData.length;
+                        }.bind(this),function(error){
+                            console.log(error)
+                        })
+                        this.addFormVisible = false;
+                        _self.loadingData();//重新加载数据
+                    }
+                }.bind(this),function(error){
+                    console.log(error)
+                })
             }
         },
 
@@ -352,33 +337,31 @@ new Vue({
                 ids.push(row.pkid);
                 realname.push(row.realname);
             }
-            this.$confirm("确认删除吗？", "提示", {type: "warning"})
-                .then(function() {
-                    var params = {
-                        ids: ids
-                    }
-                    axios.post('/user/deleteByIds', params).then(function(res){
-                        for(var d =0;d< ids.length;d++){
-                            for(var k=0;k< _self.tableData.length;k++) {
-                                if(_self.tableData[k].pkid == ids[d]){
-                                    _self.tableData.splice(k,1);
-                                }
+            this.$confirm("确认删除吗？", "提示", {type: "warning"}).then(function() {
+                var params = {
+                    ids: ids
+                }
+                axios.post('/user/deleteByIds', params).then(function(res){
+                    for(var d =0;d< ids.length;d++){
+                        for(var k=0;k< _self.tableData.length;k++) {
+                            if(_self.tableData[k].pkid == ids[d]){
+                                _self.tableData.splice(k,1);
                             }
                         }
-                        _self.$message({
-                            message: "删除成功",
-                            type: "success"
-                        });
-                        _self.total = _self.tableData.length;
-                        _self.loadingData(); //重新加载数据
-                    }.bind(this),function(error){
-                        console.log(error)
-                    })
-
+                    }
+                    _self.$message({
+                        message: "删除成功",
+                        type: "success"
+                    });
+                    _self.total = _self.tableData.length;
+                    _self.loadingData(); //重新加载数据
+                }.bind(this),function(error){
+                    console.log(error)
                 })
-                .catch(function(e) {
-                    if (e != "cancel") console.log("出现错误：" + e);
-                });
+
+            }).catch(function(e) {
+                if (e != "cancel") console.log("出现错误：" + e);
+            });
         },
         //分页大小修改事件
         pageSizeChange: function(val) {
