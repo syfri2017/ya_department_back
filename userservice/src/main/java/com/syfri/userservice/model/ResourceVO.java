@@ -28,6 +28,13 @@ public class ResourceVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用3
 	private List<PermissionVO> permissions;  //资源权限
 
+	public ResourceVO() {
+	}
+
+	public ResourceVO(String resourceid) {
+		this.resourceid = resourceid;
+	}
+
 	public String getResourceid(){
 		return resourceid;
 	}
