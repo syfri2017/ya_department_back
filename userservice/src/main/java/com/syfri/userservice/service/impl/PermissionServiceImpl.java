@@ -1,6 +1,7 @@
 package com.syfri.userservice.service.impl;
 
 import com.syfri.userservice.model.ResourceVO;
+import com.syfri.userservice.utils.CurrentUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -31,5 +32,31 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionVO> impleme
 	@Override
 	public List<PermissionVO> doFindPermissionByResourceList(List<ResourceVO> resourceList){
 		return permissionDAO.doFindPermissionByResourceList(resourceList);
+	}
+
+	/*--新增；权限.--*/
+	public PermissionVO doInsertPermission(PermissionVO permissionVO){
+		permissionVO.setCreateId(CurrentUserUtil.getCurrentUserId());
+		permissionVO.setCreateName(CurrentUserUtil.getCurrentUserName());
+		permissionDAO.doInsertByVO(permissionVO);
+		return permissionVO;
+	}
+
+	/*--修改：权限.--*/
+	public PermissionVO doUpdatePermission(PermissionVO permissionVO){
+		permissionVO.setAlterId(CurrentUserUtil.getCurrentUserId());
+		permissionVO.setAlterName(CurrentUserUtil.getCurrentUserName());
+		permissionDAO.doUpdateByVO(permissionVO);
+		return permissionVO;
+	}
+
+	/*--删除：权限.--*/
+	public void doDeletePermission(String permissionid){
+		permissionDAO.doDeleteById(permissionid);
+	}
+
+	/*--获取所有的权限.--*/
+	public List<PermissionVO> doFindAll(){
+		return permissionDAO.doFindAll();
 	}
 }
