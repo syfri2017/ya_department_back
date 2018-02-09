@@ -109,7 +109,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	 */
 	@ApiOperation(value="根据主键删除权限权限及其资源信息",notes="删除")
 	@ApiImplicitParam(name="id",value="权限主键")
-	@RequiresPermissions("role:delete")
+	@RequiresPermissions("permission:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
