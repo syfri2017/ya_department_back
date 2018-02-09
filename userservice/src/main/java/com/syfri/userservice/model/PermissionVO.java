@@ -14,6 +14,8 @@ public class PermissionVO extends ValueObject implements Serializable{
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
+	private String createTimeBegin;
+	private String createTimeEnd;
 	private String alterId;	//修改人ID
 	private String alterName;	//修改人
 	private String alterTime;	//修改时间
@@ -102,4 +104,17 @@ public class PermissionVO extends ValueObject implements Serializable{
 	public void setDeleteFlag(String deleteFlag){
 		this.deleteFlag = deleteFlag;
 	}
+	public String getCreateTimeBegin() {
+		return createTimeBegin;
+	}
+	public void setCreateTimeBegin(String createTimeBegin) {
+		this.createTimeBegin = createTimeBegin;
+	}
+	public String getCreateTimeEnd() {
+		return createTimeEnd;
+	}
+	public void setCreateTimeEnd(String createTimeEnd) {
+		this.createTimeEnd = createTimeEnd;
+	}
+
 }
