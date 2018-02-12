@@ -3,17 +3,13 @@ new Vue({
     data: function() {
         return {
             visible: false,
-            //权限下拉框
-            allPermissions: [],
             //搜索表单
             searchForm: {
-                permissionname: "",
+                codetype: "",
                 createTimeBegin: "",
                 createTimeEnd: ""
             },
             tableData: [],
-            //后台返回全部资源列表
-            allPermissionList:[],
             //表高度变量
             tableheight :445,
             //显示加载中样
@@ -26,13 +22,11 @@ new Vue({
             pageSize: 10,
             //总记录数
             total:10,
-            //序号
-            indexData:0,
             //新建页面是否显示
             addFormVisible:false,
             addFormRules:{
-                permissionname: [{ required: true, message: "请输入权限名称", trigger: "blur" }],
-                permissioninfo: [{ required: true, message: "请输入权限描述", trigger: "blur" }]
+                codetype: [{ required: true, message: "请输入代码集类型", trigger: "blur" }],
+                codetypeName: [{ required: true, message: "请输入代码集类型名称", trigger: "blur" }]
             },
             //新建数据
             addForm:{
@@ -44,29 +38,20 @@ new Vue({
             //修改界面是否显示
             editFormVisible: false,
             editFormRules: {
-                permissionname: [{ required: true, message: "请输入权限名称", trigger: "blur" }],
-                permissioninfo: [{ required: true, message: "请输入权限描述", trigger: "blur" }]
+                codetype: [{ required: true, message: "请输入代码集类型", trigger: "blur" }],
+                codetypeName: [{ required: true, message: "请输入代码集类型名称", trigger: "blur" }]
             },
             //修改界面数据
             editForm: {
-                permissionname: "",
-                permissioninfo: ""
+                codetype: "",
+                codetypeName: ""
             }
         }
     },
     created: function () {
-        this.getAllPermissions();
         this.searchClick();
     },
     methods:{
-        //所有的权限列表
-        getAllPermissions: function(){
-            axios.get('/permission/getAll').then(function(res){
-                this.allPermissions = res.data.result;
-            }.bind(this),function(error){
-                console.log(error);
-            })
-        },
         handleNodeClick(data) {
             console.log(data);
         },
@@ -100,6 +85,10 @@ new Vue({
             }
         },
 
+        codetypeCilck: function(val){
+            window.location.href = this.$http.options.root + "/codelist/detail/" + val.codeid;
+        },
+
         //查询，初始化
         searchClick: function() {
             var _self = this;
@@ -111,12 +100,12 @@ new Vue({
                 return;
             }
             var params = {
-                permissionname: this.searchForm.permissionname,
+                codetype: this.searchForm.codetype,
                 createTimeBegin: this.searchForm.createTimeBegin,
                 createTimeEnd: this.searchForm.createTimeEnd
             };
 
-            axios.post('/permission/findByVO', params).then(function(res){
+            axios.post('/codelist/findByVO', params).then(function(res){
                 this.tableData = res.data.result;
                 this.total = res.data.result.length;
             }.bind(this),function(error){
@@ -134,7 +123,6 @@ new Vue({
             var _self = this;
             _self.loading = true;
             setTimeout(function() {
-                console.info("加载数据成功");
                 _self.loading = false;
             }, 300);
         },
@@ -143,24 +131,23 @@ new Vue({
         addClick: function() {
             var _self = this;
             _self.addFormVisible = true;
-
         },
 
         //新建：保存
         addSubmit: function(val) {
             var _self=this;
-            axios.get('/permission/getNum/' + this.addForm.permissionname).then(function(res){
+            axios.get('/codelist/getNum/' + this.addForm.codetype).then(function(res){
                 if(res.data.result != 0){
                     _self.$message({
-                        message: "权限名已存在!",
+                        message: "代码集类型已存在!",
                         type: "error"
                     });
                 }else{
                     var params = {
-                        permissionname: val.permissionname,
-                        permissioninfo: val.permissioninfo
+                        codetype: val.codetype.trim(),
+                        codetypeName: val.codetypeName.trim()
                     }
-                    axios.post('/permission/insertByVO', params).then(function(res){
+                    axios.post('/codelist/insertByVO', params).then(function(res){
                         var addData = res.data.result;
                         addData.createTime = new Date();
                         _self.tableData.unshift(addData);
@@ -195,11 +182,11 @@ new Vue({
                 return;
             }
 
-            var permissionid = multipleSelection[0].permissionid;
+            var codeid = multipleSelection[0].codeid;
 
             //获取选择的行号
             for(var k=0;k< _self.tableData.length;k++) {
-                if(_self.tableData[k].permissionid == permissionid){
+                if(_self.tableData[k].codeid == codeid){
                     _self.selectIndex = k;
                 }
             }
@@ -212,13 +199,17 @@ new Vue({
         //修改：保存
         editSubmit: function(val) {
             var params = {
-                permissionid: val.permissionid,
-                permissionname: val.permissionname,
-                permissioninfo: val.permissioninfo
+                codeid: val.codeid,
+                codetype: val.codetype.trim(),
+                codetypeName: val.codetypeName.trim(),
+                remark: val.remark,
+                language: val.language
             };
-            axios.post('/permission/updateByVO', params).then(function(res){
-                this.tableData[this.selectIndex].permissionname = val.permissionname;
-                this.tableData[this.selectIndex].permissioninfo = val.permissioninfo;
+            axios.post('/codelist/updateByVO', params).then(function(res){
+                this.tableData[this.selectIndex].codetype = val.codetype;
+                this.tableData[this.selectIndex].codetypeName = val.codetypeName;
+                this.tableData[this.selectIndex].remark = val.remark;
+                this.tableData[this.selectIndex].language = val.language;
                 this.tableData[this.selectIndex].alterName = res.data.result.alterName;
                 this.tableData[this.selectIndex].alterTime = new Date();
             }.bind(this),function(error){
@@ -242,17 +233,17 @@ new Vue({
             var ids = [];
             for (var i = 0; i < multipleSelection.length; i++) {
                 var row = multipleSelection[i];
-                ids.push(row.permissionid);
+                ids.push(row.codeid);
             }
             this.$confirm("确认删除吗？", "提示", {type: "warning"})
                 .then(function() {
                     var params = {
                         ids: ids
                     }
-                    axios.post('/permission/deleteByIds', params).then(function(res){
+                    axios.post('/codelist/deleteByIds', params).then(function(res){
                         for(var d =0;d< ids.length;d++){
                             for(var k=0;k< _self.tableData.length;k++) {
-                                if(_self.tableData[k].permissionid == ids[d]){
+                                if(_self.tableData[k].codeid == ids[d]){
                                     _self.tableData.splice(k,1);
                                 }
                             }

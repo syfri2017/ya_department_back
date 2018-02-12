@@ -3,23 +3,11 @@
 <mapper namespace="com.syfri.userservice.dao.CodelistDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
-		<if test="pkid != null and pkid != '' ">
-		 and t.pkid = #{pkid}
-		</if>
-		<if test="codeValue != null and codeValue != '' ">
-		 and t.code_value = #{codeValue}
-		</if>
-		<if test="codeName != null and codeName != '' ">
-		 and t.code_name = #{codeName}
+		<if test="codeid != null and codeid != '' ">
+		 and t.codeid = #{codeid}
 		</if>
 		<if test="codetype != null and codetype != '' ">
 		 and t.codetype = #{codetype}
-		</if>
-		<if test="parent != null and parent != '' ">
-		 and t.parent = #{parent}
-		</if>
-		<if test="codeOrder != null and codeOrder != '' ">
-		 and t.code_order = #{codeOrder}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
 		 and t.delete_flag = #{deleteFlag}
@@ -55,16 +43,12 @@
 
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
-		t.pkid pkid,
-		t.code_value codeValue,
-		t.code_name codeName,
+		t.codeid codeid,
 		t.codetype codetype,
-		t.parent parent,
-		t.code_order codeOrder,
+		t.codetype_name codetypeName,
 		t.delete_flag deleteFlag,
 		t.remark remark,
 		t.language language,
-		t.codetype_name codetypeName,
 		t.create_id createId,
 		t.create_name createName,
 		TO_CHAR(t.create_time,'yyyy-MM-dd HH24:mi:ss') createTime,
@@ -92,26 +76,26 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SYS_CODELIST t 
-		WHERE t.DELETE_FLAG = 'N' AND  t.PKID = #{value} 
+		WHERE t.DELETE_FLAG = 'N' AND  t.codeid = #{value} 
 	</select>
 
 	<!--6.按照VO插入-->
 	<insert  id="doInsertByVO"  parameterType="CodelistVO"> 
-		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
-			SELECT SYS_GUID() AS pkid FROM DUAL
+		<selectKey resultType="String" order="BEFORE" keyProperty="codeid">
+			SELECT SYS_GUID() AS codeid FROM DUAL
 		</selectKey>
-		INSERT INTO SYS_CODELIST(pkid,code_value,code_name,codetype,parent,code_order,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
-		VALUES(#{pkid,jdbcType=VARCHAR},#{codeValue,jdbcType=VARCHAR},#{codeName,jdbcType=VARCHAR},#{codetype,jdbcType=VARCHAR},#{parent,jdbcType=VARCHAR},#{codeOrder,jdbcType=DOUBLE},'N',#{remark,jdbcType=VARCHAR},#{language,jdbcType=VARCHAR},#{codetypeName,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE)
+		INSERT INTO SYS_CODELIST(codeid,codetype,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		VALUES(#{codeid,jdbcType=VARCHAR},#{codetype,jdbcType=VARCHAR},'N',#{remark,jdbcType=VARCHAR},#{language,jdbcType=VARCHAR},#{codetypeName,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE)
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO SYS_CODELIST(pkid,code_value,code_name,codetype,parent,code_order,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
-		SELECT SYS_GUID() pkid, A.* 
+		INSERT INTO SYS_CODELIST(codeid,codetype,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		SELECT SYS_GUID() codeid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.codeValue,jdbcType=VARCHAR} code_value,#{item.codeName,jdbcType=VARCHAR} code_name,#{item.codetype,jdbcType=VARCHAR} codetype,#{item.parent,jdbcType=VARCHAR} parent,#{item.codeOrder,jdbcType=DOUBLE} code_order,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.language,jdbcType=VARCHAR} language,#{item.codetypeName,jdbcType=VARCHAR} codetype_name,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
+			#{item.codetype,jdbcType=VARCHAR} codetype,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.language,jdbcType=VARCHAR} language,#{item.codetypeName,jdbcType=VARCHAR} codetype_name,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
 		FROM DUAL
 		</foreach>
 		) A
@@ -119,19 +103,15 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SYS_CODELIST t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  SYS_CODELIST t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.codeid = #{value} 
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="CodelistVO"> 
 		UPDATE   SYS_CODELIST  
 		<set>
-			<if test="pkid != null">pkid=#{pkid},</if>
-			<if test="codeValue != null">code_value=#{codeValue},</if>
-			<if test="codeName != null">code_name=#{codeName},</if>
+			<if test="codeid != null">codeid=#{codeid},</if>
 			<if test="codetype != null">codetype=#{codetype},</if>
-			<if test="parent != null">parent=#{parent},</if>
-			<if test="codeOrder != null">code_order=#{codeOrder},</if>
 			<if test="deleteFlag != null">delete_flag='N',</if>
 			<if test="remark != null">remark=#{remark},</if>
 			<if test="language != null">language=#{language},</if>
@@ -143,23 +123,19 @@
 			<if test="alterName != null">alter_name=#{alterName},</if>
 			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  codeid = #{codeid}
 	</update>
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO SYS_CODELIST(pkid,code_value,code_name,codetype,parent,code_order,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		INSERT INTO SYS_CODELIST(codeid,codetype,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.codeValue,jdbcType=VARCHAR} code_value,#{item.codeName,jdbcType=VARCHAR} code_name,#{item.codetype,jdbcType=VARCHAR} codetype,#{item.parent,jdbcType=VARCHAR} parent,#{item.codeOrder,jdbcType=DOUBLE} code_order,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.language,jdbcType=VARCHAR} language,#{item.codetypeName,jdbcType=VARCHAR} codetype_name,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
+			 #{item.codetype,jdbcType=VARCHAR} codetype,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.language,jdbcType=VARCHAR} language,#{item.codetypeName,jdbcType=VARCHAR} codetype_name,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
-			pkid = VALUES(pkid),
-			code_value = VALUES(code_value),
-			code_name = VALUES(code_name),
+			codeid = VALUES(codeid),
 			codetype = VALUES(codetype),
-			parent = VALUES(parent),
-			code_order = VALUES(code_order),
 			delete_flag = VALUES(delete_flag),
 			remark = VALUES(remark),
 			language = VALUES(language),
@@ -181,12 +157,87 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.查询所有的代码集类型-->
-	<select id="doFindCodelistType" resultType="CodelistVO">
-		SELECT codetype,codetype_name codetypeName FROM SYS_CODELIST
-		WHERE delete_flag = 'N'
-		GROUP BY codetype,codetype_name
-		ORDER BY codetype
+	<!--12.根据代码类型查询代码集-->
+	<select id="doFindDetail" resultType="CodelistDetailVO">
+		SELECT t.pkid,t.code_value codeValue,t.code_name codeName,t.codeid,t.remark,
+		t.create_id createId,t.create_name createName,TO_CHAR(t.create_time,'yyyy-MM-dd HH24:mi:ss') createTime,
+		t.alter_id alterId,t.alter_name alterName,TO_CHAR(t.alter_time,'yyyy-MM-dd HH24:mi:ss') alterTime
+		FROM SYS_CODELIST_DETAIL t
+		WHERE delete_flag = 'N' AND codeid = #{value}
+		ORDER BY code_value
 	</select>
 
+	<!--13.根据代码类型/代码类型、创建时间查询-->
+	<select id="doSearchByVO" parameterType="CodelistVO"  resultType="CodelistVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST t  WHERE t.DELETE_FLAG = 'N'
+		<if test="codetype != null and codetype != '' ">
+			and (t.codetype = #{codetype} or t.codetype_name LIKE concat(concat('%',#{codetype}),'%'))
+		</if>
+		<if test="createTimeBegin != null and createTimeBegin != '' ">
+			and t.create_time &gt;= to_date(#{createTimeBegin},'yyyy-MM-dd')
+		</if>
+		<if test="createTimeEnd != null and createTimeEnd != '' ">
+			and t.create_time &lt;= to_date(#{createTimeEnd},'yyyy-MM-dd')
+		</if>
+	</select>
+
+	<!--12.从表查询：根据代码类型查询代码集-->
+	<select id="doFindCodelistDetail" parameterType="CodelistDetailVO" resultType="CodelistDetailVO">
+		SELECT t.pkid,t.code_value codeValue,t.code_name codeName,t.codeid,t.remark,
+		t.create_id createId,t.create_name createName,TO_CHAR(t.create_time,'yyyy-MM-dd HH24:mi:ss') createTime,
+		t.alter_id alterId,t.alter_name alterName,TO_CHAR(t.alter_time,'yyyy-MM-dd HH24:mi:ss') alterTime
+		FROM SYS_CODELIST_DETAIL t
+		WHERE delete_flag = 'N'
+	   	<if test="codeid != null and codeid !='' ">
+			and t.codeid = #{codeid}
+		</if>
+		<if test="codeValue != null and codeValue != '' ">
+			and t.code_value = #{codeValue}
+		</if>
+		<if test="codeName != null and codeName != '' ">
+			and t.code_name LIKE concat(concat('%',#{codeName}),'%')
+		</if>
+		ORDER BY code_value
+	</select>
+
+	<!--13.从表新增-->
+	<insert  id="doInsertCodelistDetail"  parameterType="CodelistDetailVO">
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO SYS_CODELIST_DETAIL(pkid,code_value,code_name,codeid,delete_flag,remark,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{codeValue,jdbcType=VARCHAR},#{codeName,jdbcType=VARCHAR},#{codeid,jdbcType=VARCHAR},'N',#{remark,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE)
+	</insert>
+
+	<!--14.从表修改-->
+	<update  id="doUpdateCodelistDetail"  parameterType="CodelistdetailVO">
+		UPDATE   SYS_CODELIST_DETAIL
+		<set>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="codeValue != null">code_value=#{codeValue},</if>
+			<if test="codeName != null">code_name=#{codeName},</if>
+			<if test="codeid != null">codeid=#{codeid},</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="remark != null">remark=#{remark},</if>
+			<if test="createId != null">create_id=#{createId},</if>
+			<if test="createName != null">create_name=#{createName},</if>
+			<if test="createTime != null">create_time=TO_DATE(#{createTime},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="alterId != null">alter_id=#{alterId},</if>
+			<if test="alterName != null">alter_name=#{alterName},</if>
+			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--15.从表删除-->
+	<update id="doDeleteCodelistDetail"  parameterType="String">
+		UPDATE  SYS_CODELIST_DETAIL t SET t.DELETE_FLAG = 'Y'  WHERE 1 = 1 AND t.PKID = #{pkid}
+	</update>
+
+	<!--15.从表删除-->
+	<update id="doDeleteCodelistDetailBatch"  parameterType="String">
+		UPDATE  SYS_CODELIST_DETAIL t SET t.DELETE_FLAG = 'Y'  WHERE 1 = 1 AND t.codeid = #{codeid}
+	</update>
 </mapper>

@@ -3,17 +3,13 @@ new Vue({
     data: function() {
         return {
             visible: false,
-            //权限下拉框
-            allPermissions: [],
+            codeid: null,
             //搜索表单
             searchForm: {
-                permissionname: "",
-                createTimeBegin: "",
-                createTimeEnd: ""
+                codeValue: '',
+                codeName: ''
             },
             tableData: [],
-            //后台返回全部资源列表
-            allPermissionList:[],
             //表高度变量
             tableheight :445,
             //显示加载中样
@@ -26,13 +22,11 @@ new Vue({
             pageSize: 10,
             //总记录数
             total:10,
-            //序号
-            indexData:0,
             //新建页面是否显示
             addFormVisible:false,
             addFormRules:{
-                permissionname: [{ required: true, message: "请输入权限名称", trigger: "blur" }],
-                permissioninfo: [{ required: true, message: "请输入权限描述", trigger: "blur" }]
+                codeValue: [{ required: true, message: "请输入代码值", trigger: "blur" }],
+                codeName: [{ required: true, message: "请输入代码名称", trigger: "blur" }]
             },
             //新建数据
             addForm:{
@@ -44,29 +38,26 @@ new Vue({
             //修改界面是否显示
             editFormVisible: false,
             editFormRules: {
-                permissionname: [{ required: true, message: "请输入权限名称", trigger: "blur" }],
-                permissioninfo: [{ required: true, message: "请输入权限描述", trigger: "blur" }]
+                codeValue: [{ required: true, message: "请输入代码值", trigger: "blur" }],
+                codeName: [{ required: true, message: "请输入代码名称", trigger: "blur" }]
             },
             //修改界面数据
             editForm: {
-                permissionname: "",
-                permissioninfo: ""
+                codetype: "",
+                codetypeName: ""
             }
         }
     },
     created: function () {
-        this.getAllPermissions();
-        this.searchClick();
+        this.codeid = codeid;
+        axios.get('/codelist/detail/doFindById/' + this.codeid).then(function(res){
+            this.tableData = res.data.result;
+            this.total = res.data.result.length;
+        }.bind(this),function(error){
+            console.log(error)
+        })
     },
     methods:{
-        //所有的权限列表
-        getAllPermissions: function(){
-            axios.get('/permission/getAll').then(function(res){
-                this.allPermissions = res.data.result;
-            }.bind(this),function(error){
-                console.log(error);
-            })
-        },
         handleNodeClick(data) {
             console.log(data);
         },
@@ -100,23 +91,19 @@ new Vue({
             }
         },
 
+        codetypeCilck: function(val){
+            window.location.href = this.$http.options.root + "/codelist/getDetailPage/" + val.codeid;
+        },
+
         //查询，初始化
         searchClick: function() {
-            var _self = this;
-            if(this.searchForm.createTimeBegin!="" && this.searchForm.createTimeEnd!="" && this.searchForm.createTimeBegin>this.searchForm.createTimeEnd){
-                _self.$message({
-                    message: "时间选择错误！",
-                    type: "error"
-                });
-                return;
-            }
             var params = {
-                permissionname: this.searchForm.permissionname,
-                createTimeBegin: this.searchForm.createTimeBegin,
-                createTimeEnd: this.searchForm.createTimeEnd
+                codeid: this.codeid,
+                codeValue: this.searchForm.codeValue.trim(),
+                codeName: this.searchForm.codeName.trim()
             };
 
-            axios.post('/permission/findByVO', params).then(function(res){
+            axios.post('/codelist/detail/findByVO', params).then(function(res){
                 this.tableData = res.data.result;
                 this.total = res.data.result.length;
             }.bind(this),function(error){
@@ -149,18 +136,19 @@ new Vue({
         //新建：保存
         addSubmit: function(val) {
             var _self=this;
-            axios.get('/permission/getNum/' + this.addForm.permissionname).then(function(res){
+            axios.get('/codelist/detail/getNum/' + this.addForm.codeValue).then(function(res){
                 if(res.data.result != 0){
                     _self.$message({
-                        message: "权限名已存在!",
+                        message: "代码值已存在!",
                         type: "error"
                     });
                 }else{
                     var params = {
-                        permissionname: val.permissionname,
-                        permissioninfo: val.permissioninfo
+                        codeid: this.codeid,
+                        codeValue: val.codeValue.trim(),
+                        codeName: val.codeName.trim()
                     }
-                    axios.post('/permission/insertByVO', params).then(function(res){
+                    axios.post('/codelist/detail/insertByVO', params).then(function(res){
                         var addData = res.data.result;
                         addData.createTime = new Date();
                         _self.tableData.unshift(addData);
@@ -195,11 +183,11 @@ new Vue({
                 return;
             }
 
-            var permissionid = multipleSelection[0].permissionid;
+            var pkid = multipleSelection[0].pkid;
 
             //获取选择的行号
             for(var k=0;k< _self.tableData.length;k++) {
-                if(_self.tableData[k].permissionid == permissionid){
+                if(_self.tableData[k].pkid == pkid){
                     _self.selectIndex = k;
                 }
             }
@@ -212,13 +200,15 @@ new Vue({
         //修改：保存
         editSubmit: function(val) {
             var params = {
-                permissionid: val.permissionid,
-                permissionname: val.permissionname,
-                permissioninfo: val.permissioninfo
+                pkid: val.pkid,
+                codeValue: val.codeValue.trim(),
+                codeName: val.codeName.trim(),
+                remark: val.remark
             };
-            axios.post('/permission/updateByVO', params).then(function(res){
-                this.tableData[this.selectIndex].permissionname = val.permissionname;
-                this.tableData[this.selectIndex].permissioninfo = val.permissioninfo;
+            axios.post('/codelist/detail/updateByVO', params).then(function(res){
+                this.tableData[this.selectIndex].codeValue = val.codeValue;
+                this.tableData[this.selectIndex].codeName = val.codeName;
+                this.tableData[this.selectIndex].remark = val.remark;
                 this.tableData[this.selectIndex].alterName = res.data.result.alterName;
                 this.tableData[this.selectIndex].alterTime = new Date();
             }.bind(this),function(error){
@@ -238,39 +228,37 @@ new Vue({
                 });
                 return;
             }
-            debugger;
             var ids = [];
             for (var i = 0; i < multipleSelection.length; i++) {
                 var row = multipleSelection[i];
-                ids.push(row.permissionid);
+                ids.push(row.pkid);
             }
-            this.$confirm("确认删除吗？", "提示", {type: "warning"})
-                .then(function() {
-                    var params = {
-                        ids: ids
-                    }
-                    axios.post('/permission/deleteByIds', params).then(function(res){
-                        for(var d =0;d< ids.length;d++){
-                            for(var k=0;k< _self.tableData.length;k++) {
-                                if(_self.tableData[k].permissionid == ids[d]){
-                                    _self.tableData.splice(k,1);
-                                }
+            this.$confirm("确认删除吗？", "提示", {type: "warning"}).then(function() {
+                var params = {
+                    ids: ids
+                };
+                axios.post('/codelist/detail/deleteByIds', params).then(function(res){
+                    for(var d =0;d< ids.length;d++){
+                        for(var k=0;k< _self.tableData.length;k++) {
+                            if(_self.tableData[k].pkid == ids[d]){
+                                _self.tableData.splice(k,1);
                             }
                         }
-                        _self.$message({
-                            message: "删除成功",
-                            type: "success"
-                        });
-                        _self.total = _self.tableData.length;
-                        _self.loadingData(); //重新加载数据
-                    }.bind(this),function(error){
-                        console.log(error)
-                    })
-
+                    }
+                    _self.$message({
+                        message: "删除成功",
+                        type: "success"
+                    });
+                    _self.total = _self.tableData.length;
+                    _self.loadingData(); //重新加载数据
+                }.bind(this),function(error){
+                    console.log(error)
                 })
-                .catch(function(e) {
-                    if (e != "cancel") console.log("出现错误：" + e);
-                });
+
+            })
+            .catch(function(e) {
+                if (e != "cancel") console.log("出现错误：" + e);
+            });
         },
         //分页大小修改事件
         pageSizeChange: function(val) {

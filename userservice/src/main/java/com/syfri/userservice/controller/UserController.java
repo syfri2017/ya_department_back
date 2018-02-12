@@ -51,8 +51,6 @@ public class UserController  extends BaseController<UserVO>{
 
 	@GetMapping("")
 	public String user(Model model){
-//		ShiroUser user = CurrentUserUtil.getCurrentUser();
-//		model.addAttribute("user", user);
 		return "system/user_list";
 	}
 

@@ -8,117 +8,130 @@ public class CodelistVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String pkid;	//主键
-	private String codeValue;	//代码值
-	private String codeName;	//代码名称
+	private String codeid;	//主键
 	private String codetype;	//代码类型
-	private String parent;	//父节点代码值（默认-1）
-	private String codeOrder;	//顺序
+	private String codetypeName;	//代码类型名称
 	private String deleteFlag;	//删除标志
 	private String remark;	//备注
 	private String language;	//国际化信息(默认zh_CN)
-	private String codetypeName;	//代码类型名称
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
+	private String createTimeBegin;
+	private String createTimeEnd;
 	private String alterId;	//修改人ID
 	private String alterName;	//修改人
 	private String alterTime;	//修改时间
 
-	public String getPkid(){
-		return pkid;
+	public String getCodeid() {
+		return codeid;
 	}
-	public void setPkid(String pkid){
-		this.pkid = pkid;
+
+	public void setCodeid(String codeid) {
+		this.codeid = codeid;
 	}
-	public String getCodeValue(){
-		return codeValue;
-	}
-	public void setCodeValue(String codeValue){
-		this.codeValue = codeValue;
-	}
-	public String getCodeName(){
-		return codeName;
-	}
-	public void setCodeName(String codeName){
-		this.codeName = codeName;
-	}
-	public String getCodetype(){
+
+	public String getCodetype() {
 		return codetype;
 	}
-	public void setCodetype(String codetype){
+
+	public void setCodetype(String codetype) {
 		this.codetype = codetype;
 	}
-	public String getParent(){
-		return parent;
-	}
-	public void setParent(String parent){
-		this.parent = parent;
-	}
-	public String getCodeOrder(){
-		return codeOrder;
-	}
-	public void setCodeOrder(String codeOrder){
-		this.codeOrder = codeOrder;
-	}
-	public String getDeleteFlag(){
-		return deleteFlag;
-	}
-	public void setDeleteFlag(String deleteFlag){
-		this.deleteFlag = deleteFlag;
-	}
-	public String getRemark(){
-		return remark;
-	}
-	public void setRemark(String remark){
-		this.remark = remark;
-	}
-	public String getLanguage(){
-		return language;
-	}
-	public void setLanguage(String language){
-		this.language = language;
-	}
-	public String getCodetypeName(){
+
+	public String getCodetypeName() {
 		return codetypeName;
 	}
-	public void setCodetypeName(String codetypeName){
+
+	public void setCodetypeName(String codetypeName) {
 		this.codetypeName = codetypeName;
 	}
-	public String getCreateId(){
+
+	public String getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(String deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getCreateId() {
 		return createId;
 	}
-	public void setCreateId(String createId){
+
+	public void setCreateId(String createId) {
 		this.createId = createId;
 	}
-	public String getCreateName(){
+
+	public String getCreateName() {
 		return createName;
 	}
-	public void setCreateName(String createName){
+
+	public void setCreateName(String createName) {
 		this.createName = createName;
 	}
-	public String getCreateTime(){
+
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(String createTime){
+
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getAlterId(){
+
+	public String getCreateTimeBegin() {
+		return createTimeBegin;
+	}
+
+	public void setCreateTimeBegin(String createTimeBegin) {
+		this.createTimeBegin = createTimeBegin;
+	}
+
+	public String getCreateTimeEnd() {
+		return createTimeEnd;
+	}
+
+	public void setCreateTimeEnd(String createTimeEnd) {
+		this.createTimeEnd = createTimeEnd;
+	}
+
+	public String getAlterId() {
 		return alterId;
 	}
-	public void setAlterId(String alterId){
+
+	public void setAlterId(String alterId) {
 		this.alterId = alterId;
 	}
-	public String getAlterName(){
+
+	public String getAlterName() {
 		return alterName;
 	}
-	public void setAlterName(String alterName){
+
+	public void setAlterName(String alterName) {
 		this.alterName = alterName;
 	}
-	public String getAlterTime(){
+
+	public String getAlterTime() {
 		return alterTime;
 	}
-	public void setAlterTime(String alterTime){
+
+	public void setAlterTime(String alterTime) {
 		this.alterTime = alterTime;
 	}
 }

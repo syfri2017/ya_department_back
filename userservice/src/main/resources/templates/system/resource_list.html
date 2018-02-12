@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="lib :: common_header"></head>
+	<body class="fw f14">
+		<div id="app">
+			<div th:replace="lib :: header_box"></div>
+			<div th:replace="lib :: menu_box (23)"></div>
+			<div class="main-box">
+				<div class="main-container">
+					<div th:replace="lib :: main_container_header('资源管理','资源管理')"></div>
+					<div id="tableView" style="width: 200px; background-color: red">
+
+					</div>
+					<div id="tableView2" style="width: 50%; background-color: green">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+<div th:replace="lib :: javascript_box"></div>
+<script th:src="@{/static/js/system/resource.js}"></script>
+</html>

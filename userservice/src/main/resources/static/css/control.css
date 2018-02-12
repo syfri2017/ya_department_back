@@ -8,3 +8,6 @@
 .table-formal{ width:100%; padding:0px;}
 .table-page-top{ margin-top:20px;}
 .table-page{ float:right;}
+.a-back{color:#333}
+.a-back:hover{text-decoration: none}
+.main-container-header-line{border-bottom:2px solid #eee}

@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="lib :: common_header"></head>
+	<body class="fw f14">
+		<div th:replace="lib :: header_box"></div>
+		<div th:replace="lib :: menu_box(25) "></div>
+		<div id="app">
+			<div class="main-box">
+				<div class="main-container">
+					<div th:replace="lib :: main_container_header_detail('代码集管理','代码集详情')"></div>
+					<div id="tableView">
+						<el-row>
+							<el-form  label-width="75px" :inline="true" class="el-form demo-form-inline">
+								<el-row>
+									<el-col :span="12" class="double-search-left">
+										<el-form-item label="代码值">
+											<el-input class="form-input-text" size="small" v-model="searchForm.codeValue" placeholder="请输入代码值" prefix-icon="el-icon-search"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12" class="double-search-left">
+										<el-form-item label="代码名称">
+											<el-input class="form-input-text" size="small" v-model="searchForm.codeName" placeholder="请输入代码名称" prefix-icon="el-icon-search"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<div>
+									<el-form>
+										<el-col :span="12" class="form-button-left">
+											<el-form-item align="left">
+												<el-button type="primary" icon="edit" size="small" @click="editClick">修改</el-button>
+												<el-button type="danger" icon="delete" size="small" @click="removeSelection">删除</el-button>
+											</el-form-item>
+										</el-col>
+										<el-col :span="12"></el-col>
+										<el-col :span="12" class="form-button-right">
+											<el-form-item>
+												<el-button type="primary" icon="search" size="small" @click="searchClick">查询</el-button>
+												<el-button type="success" icon="plus" size="small" @click="addClick">新增</el-button>
+											</el-form-item>
+										</el-col>
+									</el-form>
+								</div>
+							</el-form>
+						</el-row>
+
+
+
+						<div class="table_container">
+							<el-table class="table-formal" border id="table"
+									:data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+									v-loading.body="loading"
+									@selection-change="selectionChange"
+									:height="tableheight">
+
+								<el-table-column type="selection" width="45"></el-table-column>
+								<el-table-column type="index" label="序号" align="center" width="65"></el-table-column>
+								<el-table-column prop="codeValue" label="代码值" min-width="10%" align="center"></el-table-column>
+								<el-table-column prop="codeName" label="代码名称" min-width="15%" align="center"></el-table-column>
+								<el-table-column prop="remark" label="备注" min-width="10%" align="center"></el-table-column>
+								<el-table-column prop="createName" label="创建人" min-width="10%" align="center"></el-table-column>
+								<el-table-column prop="createTime" label="创建时间" min-width="13%" align="center" :formatter="dateFormat"></el-table-column>
+								<el-table-column prop="alterName" label="修改人" min-width="10%" align="center"></el-table-column>
+								<el-table-column prop="alterTime" label="修改时间" min-width="13%" align="center" :formatter="dateFormat"></el-table-column>
+							</el-table>
+
+							<!--列表底部工具条和分页符-->
+							<el-row class="table-page-top" type="flex" justify="end">
+								<el-col :span="18" >
+									<el-pagination class="table-page"
+											@size-change="pageSizeChange"
+											@current-change="currentPageChange"
+											:current-page="currentPage"
+											:page-sizes="[10, 20, 30, 50]"
+											:page-size="pageSize"
+											layout="total, sizes, prev, pager, next, jumper"
+											:total=parseInt(total)>
+									</el-pagination>
+								</el-col>
+							</el-row>
+						</div>
+						<!--新建界面-->
+						<el-dialog title="新建代码集" :visible.sync="addFormVisible" @close="closeDialog(addForm)" :close-on-click-modal="false">
+							<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="代码值" prop="codeValue">
+											<el-input v-model="addForm.codeValue" auto-complete="off" placeholder="代码值"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="代码名称" prop="codeName">
+											<el-input v-model="addForm.codeName" auto-complete="off" placeholder="代码名称"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="备注" prop="remark">
+											<el-input v-model="addForm.remark" auto-complete="off" placeholder="备注"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</el-form>
+							<div slot="footer" class="dialog-footer">
+								<el-button @click.native="closeDialog(addForm)">取消</el-button>
+								<el-button type="primary" @click.native="addSubmit(addForm)">提交</el-button>
+							</div>
+						</el-dialog>
+
+						<!--修改界面-->
+						<el-dialog title="修改代码集" :visible.sync="editFormVisible" :close-on-click-modal="false">
+							<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+								<<el-row>
+								<el-col :span="22">
+									<el-form-item label="代码值" prop="codeValue">
+										<el-input v-model="editForm.codeValue" auto-complete="off" placeholder="代码值"></el-input>
+									</el-form-item>
+								</el-col>
+							</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="代码名称" prop="codeName">
+											<el-input v-model="editForm.codeName" auto-complete="off" placeholder="代码名称"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="备注" prop="remark">
+											<el-input v-model="editForm.remark" auto-complete="off" placeholder="备注"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</el-form>
+							<div slot="footer" class="dialog-footer">
+								<el-button @click.native="editFormVisible = false">取消</el-button>
+								<el-button type="primary" @click.native="editSubmit(editForm)">提交</el-button>
+							</div>
+						</el-dialog>
+					</div>
+				</div>
+				<!-- main-container -->
+			</div>
+		</div>
+
+	</body>
+	<script th:inline="javascript">
+		var codeid = [[${codeid}]] === '' ? null : [[${codeid}]];
+	</script>
+	<div th:replace="lib :: javascript_box"></div>
+	<script th:src="@{/static/js/system/codelist_detail.js}"></script>
+</html>
