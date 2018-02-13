@@ -46,7 +46,8 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	}
 
 	@GetMapping("")
-	public String user(Model model){
+	public String getPermission(Model model, @RequestParam(value="index") String index){
+		model.addAttribute("index", index);
 		return "system/permission_list";
 	}
 

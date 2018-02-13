@@ -46,7 +46,8 @@ public class RoleController  extends BaseController<RoleVO>{
 	}
 
 	@GetMapping("")
-	public String user(Model model){
+	public String getRole(Model model, @RequestParam(value="index") String index){
+		model.addAttribute("index", index);
 		return "system/role_list";
 	}
 

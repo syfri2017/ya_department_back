@@ -49,7 +49,8 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	}
 
 	@GetMapping("")
-	public String user(Model model){
+	public String getResource(Model model, @RequestParam(value="index") String index){
+		model.addAttribute("index", index);
 		return "system/resource_list";
 	}
 

@@ -49,7 +49,8 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	}
 
 	@GetMapping("")
-	public String user(Model model){
+	public String getCodelist(Model model, @RequestParam(value="index") String index){
+		model.addAttribute("index", index);
 		return "system/codelist_list";
 	}
 
@@ -156,7 +157,8 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="跳转到代码集详情页",notes="页面跳转")
 	@GetMapping("/detail/{codeid}")
-	public String getDetailPage(Model model, @PathVariable String codeid){
+	public String getDetailPage(Model model, @PathVariable String codeid,  @RequestParam(value="index") String index){
+		model.addAttribute("index", index);
 		model.addAttribute("codeid", codeid);
 		return "system/codelist_detail_list";
 	}

@@ -50,7 +50,8 @@ public class UserController  extends BaseController<UserVO>{
 	}
 
 	@GetMapping("")
-	public String user(Model model){
+	public String getUser(Model model, @RequestParam(value="index") String index){
+		model.addAttribute("index", index);
 		return "system/user_list";
 	}
 
