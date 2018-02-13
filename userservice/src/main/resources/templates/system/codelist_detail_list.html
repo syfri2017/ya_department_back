@@ -148,6 +148,8 @@
 	</body>
 	<script th:inline="javascript">
 		var codeid = [[${codeid}]] === '' ? null : [[${codeid}]];
+		var index = [[${index}]];
+		$('#defaultActive').val(index);
 	</script>
 	<div th:replace="lib :: javascript_box"></div>
 	<script th:src="@{/static/js/system/codelist_detail.js}"></script>

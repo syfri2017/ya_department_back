@@ -86,7 +86,7 @@ new Vue({
         },
 
         codetypeCilck: function(val){
-            window.location.href = this.$http.options.root + "/codelist/detail/" + val.codeid;
+            window.location.href = this.$http.options.root + "/codelist/detail/" + val.codeid + "?index=" +index;
         },
 
         //查询，初始化
