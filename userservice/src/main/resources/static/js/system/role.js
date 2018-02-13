@@ -19,10 +19,7 @@ new Vue({
             defaultKeys: ['17'],
 
             //删除成功后台返回数据
-            delStatus:"success",
-            countryList:['法国','英国','德国'],
-            cityList:[['巴黎','普罗旺斯',"马赛"],['伦敦','爱丁堡',"北爱尔兰"],['柏林','慕尼黑',"汉堡"]],
-            rowdata:'',
+            delStatus: 'success',
             //显示加载中样
             loading: false,
             labelPosition: 'right',
@@ -34,10 +31,6 @@ new Vue({
             pageSize: 10,
             //总记录数
             total:10,
-            //行数据保存
-            rowdata:{
-
-            },
             //序号
             indexData:0,
             //资源列表是否显示
@@ -46,7 +39,6 @@ new Vue({
             deleteVisible: false,
             //新建页面是否显示
             addFormVisible:false,
-            addLoading:false,
             addFormRules:{
                 rolename: [{ required: true, message: "请输入角色名称", trigger: "blur" }],
                 roleinfo: [{ required: true, message: "请输入角色描述", trigger: "blur" }]
@@ -61,7 +53,6 @@ new Vue({
             selectIndex: -1,
             //修改界面是否显示
             editFormVisible: false,
-            editLoading: false,
             editFormRules: {
                 rolename: [{ required: true, message: "请输入角色名称", trigger: "blur" }]
             },
