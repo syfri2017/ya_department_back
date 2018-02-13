@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,22 +41,26 @@ public class LoginController {
 	@Autowired
 	protected Environment environment;
 
-	@ModelAttribute
-	public void Model(Model model){
-		if (environment.containsProperty("server.context-path")) {
-			model.addAttribute("contextPath", environment.getProperty("server.context-path"));
-		}else{
-			model.addAttribute("contextPath", "/");
-		}
-	}
+//	@ModelAttribute
+//	public void Model(Model model){
+//		if (environment.containsProperty("server.context-path")) {
+//			model.addAttribute("contextPath", environment.getProperty("server.context-path"));
+//		}else{
+//			model.addAttribute("contextPath", "/");
+//		}
+//	}
 
-	@RequestMapping("/index")
-	public String index(){
+	@RequestMapping("/home")
+	public String bigscreen(Model model, @RequestParam(value="index", required = false) String index){
+		if(index == null || "".equals(index)){
+			index = "1";
+		}
+		model.addAttribute("index", index);
 		return "/index";
 	}
 
-	@RequestMapping("/bigscreen")
-	public String bigscreen(){
+	@GetMapping("/index")
+	public String index(){
 		return "/bigscreen/big_screen_all";
 	}
 
@@ -67,6 +72,16 @@ public class LoginController {
 		}
 		return "/login";
 	}
+
+	/**
+	@PostMapping("/login")
+	public String login(String username, String password, String validateCode, String rememberMe){
+		logger.info("-----POST请求方式登录-----");
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
+		SecurityUtils.getSubject().login(token);
+		return "/bigscreen/big_screen_all";
+	}
+	*/
 
 	/**
 	 * 此方法不处理登录成功的情况，由shiro进行处理
