@@ -65,7 +65,7 @@ var treeMenu = Vue.component('tree-menu', {
             if (this.hasChildren()) {
                 return "javascript:;";
             }
-            return this.model.url;
+            return this.model.url + "?index=" + this.model.index;
         }
     },
 
