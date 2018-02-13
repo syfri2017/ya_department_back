@@ -80,7 +80,8 @@
         <!-- menu_box -->
         <div class="left-sidebar" th:fragment="menu_box (onevar)">
             <a id="menu-toggle-btn" class="abs db el-icon-arrow-left menu-toggle-btn f12 tc" href="javascript:;"></a>
-            <input type="hidden" id="defaultActive" th:value="${onevar}"/>
+            <!--<input type="hidden" id="defaultActive" th:value="${onevar}"/>-->
+            <input type="hidden" id="defaultActive"/>
             <div id="menu-box">
                 <big-tree default-active=""></big-tree>
             </div>
@@ -132,6 +133,8 @@
                 Vue.http.options.root = [[${contextPath}]] === '/' ? '' : [[${contextPath}]];
                 realname = [[${session.realname}]];
                 $('#realname').html(realname);
+                index = [[${index}]];
+                $('#defaultActive').val(index);
                 /*]]>*/
             </script>
 
