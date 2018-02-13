@@ -19,7 +19,7 @@ new Vue({
             defaultKeys: ['17'],
 
             //删除成功后台返回数据
-            delStatus: 'success',
+            delStatus:"success",
             //显示加载中样
             loading: false,
             labelPosition: 'right',
@@ -39,6 +39,7 @@ new Vue({
             deleteVisible: false,
             //新建页面是否显示
             addFormVisible:false,
+            addLoading:false,
             addFormRules:{
                 rolename: [{ required: true, message: "请输入角色名称", trigger: "blur" }],
                 roleinfo: [{ required: true, message: "请输入角色描述", trigger: "blur" }]
@@ -53,6 +54,7 @@ new Vue({
             selectIndex: -1,
             //修改界面是否显示
             editFormVisible: false,
+            editLoading: false,
             editFormRules: {
                 rolename: [{ required: true, message: "请输入角色名称", trigger: "blur" }]
             },
