@@ -78,7 +78,7 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
 		shiroFilterFactoryBean.setLoginUrl("/login");
-		shiroFilterFactoryBean.setSuccessUrl("/bigscreen");
+		shiroFilterFactoryBean.setSuccessUrl("/index");
 		//未授权页面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
