@@ -2,17 +2,160 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="lib :: common_header"></head>
 	<body class="fw f14">
+		<div th:replace="lib :: header_box"></div>
+		<div th:replace="lib :: menu_box (23)"></div>
 		<div id="app">
-			<div th:replace="lib :: header_box"></div>
-			<div th:replace="lib :: menu_box (23)"></div>
 			<div class="main-box">
 				<div class="main-container">
 					<div th:replace="lib :: main_container_header('资源管理','资源管理')"></div>
-					<div id="tableView" style="width: 200px; background-color: red">
+					<div id="tableView">
+						<el-row>
+							<el-form  label-width="70px" :inline="true" class="el-form demo-form-inline" v-model="searchForm">
+								<el-row>
+									<el-col :span="12">
+										<el-form-item label="资源描述">
+											<el-input class="form-input-text" size="small" v-model="searchForm.permissioninfo" placeholder="请输入资源描述" prefix-icon="el-icon-search"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="创建时间">
+											<el-date-picker type="date" style="width:140px;" size="small" v-model="searchForm.createTimeBegin" placeholder="开始时间" value-format="yyyy-MM-dd" @change="begindateChange"></el-date-picker>
+											~
+											<el-date-picker type="date" style="width:140px;" size="small" v-model="searchForm.createTimeEnd" placeholder="结束时间" value-format="yyyy-MM-dd" @change="enddateChange"></el-date-picker>
+											<!--<el-date-picker type="daterange" value-format="yyyy-MM-dd" v-model="searchForm.createTime" size="small" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width: 300px"></el-date-picker>-->
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<div>
+									<el-form>
+										<el-col :span="12" class="form-button-left">
+											<el-form-item align="left">
+												<el-button type="primary" icon="edit" size="small" @click="editClick">修改</el-button>
+												<el-button type="danger" icon="delete" size="small" @click="removeSelection">删除</el-button>
+											</el-form-item>
+										</el-col>
+										<el-col :span="12"></el-col>
+										<el-col :span="12" class="form-button-right">
+											<el-form-item>
+												<el-button type="primary" icon="search" size="small" @click="searchClick">查询</el-button>
+												<el-button type="success" icon="plus" size="small" @click="addClick">新增</el-button>
+											</el-form-item>
+										</el-col>
+									</el-form>
+								</div>
+							</el-form>
+						</el-row>
 
-					</div>
-					<div id="tableView2" style="width: 50%; background-color: green">
+						<div class="table_container">
+							<el-table class="table-formal" border id="table"
+									  :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+									  v-loading.body="loading"
+									  @selection-change="selectionChange"
+									  :height="tableheight">
 
+								<el-table-column type="selection" min-width="5%"></el-table-column>
+								<el-table-column type="index" label="序号" width="65" align="center"></el-table-column>
+								<el-table-column prop="resourcename" label="资源名称" min-width="12%" align="center"></el-table-column>
+								<el-table-column prop="resourceinfo" label="资源描述" min-width="15%" align="center"></el-table-column>
+								<el-table-column prop="createName" label="创建人" min-width="12%" align="center"></el-table-column>
+								<el-table-column prop="createTime" label="创建时间" min-width="13%" align="center" :formatter="dateFormat"></el-table-column>
+								<el-table-column prop="alterName" label="修改人" min-width="12%" align="center"></el-table-column>
+								<el-table-column prop="alterTime" label="修改时间" min-width="13%" align="center" :formatter="dateFormat"></el-table-column>
+								<el-table-column prop="permission" label="权限" min-width="13%" align="center">
+									<template slot-scope="scope">
+										<el-button type="text" @click="resourceDetails(scope.row.resourceid)">查看详情</el-button>
+									</template>
+								</el-table-column>
+							</el-table>
+
+							<!--列表底部工具条和分页符-->
+							<el-row class="table-page-top" type="flex" justify="end">
+								<el-col :span="18" >
+									<el-pagination class="table-page"
+											@size-change="pageSizeChange"
+											@current-change="currentPageChange"
+											:current-page="currentPage"
+											:page-sizes="[10, 20, 30, 50]"
+											:page-size="pageSize"
+											layout="total, sizes, prev, pager, next, jumper"
+											:total=parseInt(total)>
+									</el-pagination>
+								</el-col>
+							</el-row>
+						</div>
+
+						<!--权限列表页-->
+						<el-dialog title="资源权限列表" :visible.sync="permissionVisible" @close="closePermissionDialog()" :close-on-click-modal="false">
+							<el-checkbox-group v-model="roleDetailSelect">
+								<el-checkbox v-for="permission in permissionDetailList" :label="role.permissioninfo" :key="role.permissionid" disabled>{{role.permissioninfo}}<br></el-checkbox>
+							</el-checkbox-group>
+						</el-dialog>
+
+						<!--新建界面-->
+						<el-dialog title="新增角色" :visible.sync="addFormVisible" @close="closeDialog(addForm)" :close-on-click-modal="false">
+							<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="角色名称" prop="rolename">
+											<el-input class="form-edit-text" v-model="addForm.rolename" auto-complete="off" placeholder="角色名称"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="4">&nbsp;</el-col>
+									<el-col :span="8">
+										<el-form-item label="角色描述" prop="roleinfo">
+											<el-input class="form-edit-text" v-model="addForm.roleinfo" auto-complete="off" placeholder="角色描述"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="资源列表">
+											<el-tree :props="defaultProps" :data="allResourceList" node-key="resourceid"
+													ref="tree" highlight-current :default-expanded-keys="defaultKeys" @node-click="handleNodeClick"
+													show-checkbox>
+											</el-tree>
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</el-form>
+							<div slot="footer" class="dialog-footer">
+								<el-button @click.native="closeDialog(addForm)">取消</el-button>
+								<el-button type="primary" @click.native="addSubmit(addForm)">提交</el-button>
+							</div>
+						</el-dialog>
+
+						<!--修改界面-->
+						<el-dialog title="修改角色" :visible.sync="editFormVisible" :close-on-click-modal="false">
+							<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="角色名称" prop="rolename">
+											<el-input class="form-edit-text" v-model="editForm.rolename" auto-complete="off" placeholder="角色名称"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="4">&nbsp;</el-col>
+									<el-col :span="8">
+										<el-form-item label="角色描述" prop="roleinfo">
+											<el-input class="form-edit-text" v-model="editForm.roleinfo" auto-complete="off" placeholder="角色描述"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="资源列表">
+											<el-tree :props="defaultProps" :data="allResourceList" node-key="resourceid"
+													 ref="tree" highlight-current :default-expanded-keys="defaultKeys" :default-checked-keys="defaultCheckKeys" @node-click="handleNodeClick"
+													 show-checkbox>
+											</el-tree>
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</el-form>
+							<div slot="footer" class="dialog-footer">
+								<el-button @click.native="editFormVisible = false">取消</el-button>
+								<el-button type="primary" @click.native="editSubmit(editForm)">提交</el-button>
+							</div>
+						</el-dialog>
 					</div>
 				</div>
 			</div>

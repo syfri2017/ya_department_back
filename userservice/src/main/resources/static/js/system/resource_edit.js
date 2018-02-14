@@ -3,12 +3,12 @@ new Vue({
     data: function() {
         return {
             visible: false,
-            tableheight: 445,//表高度变量
-            //资源权限列表
-            permissionDetailList: [],
+            tableheight :445,//表高度变量
+            //角色下拉框
+            allRoles: [],
             //查询表单
             searchForm: {
-                permissioninfo: '',
+                rolename:'',
                 createTimeBegin: '',
                 createTimeEnd: ''
             },
@@ -19,7 +19,7 @@ new Vue({
             defaultKeys: ['17'],
 
             //删除成功后台返回数据
-            delStatus:"success",
+            delStatus: 'success',
             //显示加载中样
             loading: false,
             labelPosition: 'right',
@@ -34,12 +34,11 @@ new Vue({
             //序号
             indexData:0,
             //资源列表是否显示
-            permissionVisible:false,
+            resourceVisible:false,
             //删除的弹出框
             deleteVisible: false,
             //新建页面是否显示
             addFormVisible:false,
-            addLoading:false,
             addFormRules:{
                 rolename: [{ required: true, message: "请输入角色名称", trigger: "blur" }],
                 roleinfo: [{ required: true, message: "请输入角色描述", trigger: "blur" }]
@@ -54,7 +53,6 @@ new Vue({
             selectIndex: -1,
             //修改界面是否显示
             editFormVisible: false,
-            editLoading: false,
             editFormRules: {
                 rolename: [{ required: true, message: "请输入角色名称", trigger: "blur" }]
             },
@@ -86,10 +84,18 @@ new Vue({
         }
     },
     created: function () {
+        this.getAllRoles();
         this.searchClick();
     },
     methods:{
-
+        //所有的角色列表
+        getAllRoles: function(){
+            axios.get('/role/getAll').then(function(res){
+                this.allRoles = res.data.result;
+            }.bind(this),function(error){
+                console.log(error);
+            })
+        },
         getAllResources: function(){
             axios.get('/resource/getAll').then(function(res){
                 this.allResourceList = res.data.result;
@@ -138,12 +144,12 @@ new Vue({
                 return;
             }
             var params = {
-                permissioninfo: this.searchForm.permissioninfo,
+                rolename: this.searchForm.rolename,
                 createTimeBegin: this.searchForm.createTimeBegin,
                 createTimeEnd: this.searchForm.createTimeEnd
             };
 
-            axios.post('/resource/findByVO', params).then(function(res){
+            axios.post('/role/findByVO', params).then(function(res){
                 this.tableData = res.data.result;
                 this.total = res.data.result.length;
             }.bind(this),function(error){
@@ -347,8 +353,8 @@ new Vue({
             this.defaultCheckKeys = [];
             this.$refs["addForm"].resetFields();
         },
-        closePermissionDialog:function(){
-            this.permissionVisible=false;
+        closeresourceDialog:function(){
+            this.resourceVisible=false;
         }
     },
 
