@@ -20,9 +20,13 @@ public class ResourceVO extends ValueObject implements Serializable{
 	private String createId;	//创建人ID
 	private String createName;	//创建人
 	private String createTime;	//创建时间
+	private String createTimeBegin;
+	private String createTimeEnd;
 	private String alterId;	//修改人ID
 	private String alterName;	//修改人
 	private String alterTime;	//修改时间
+	private String alterTimeBegin;
+	private String alterTimeEnd;
 	private String reserve1;	//备用1
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
@@ -142,5 +146,29 @@ public class ResourceVO extends ValueObject implements Serializable{
 	}
 	public void setPermissions(List<PermissionVO> permissions) {
 		this.permissions = permissions;
+	}
+	public String getCreateTimeBegin() {
+		return createTimeBegin;
+	}
+	public void setCreateTimeBegin(String createTimeBegin) {
+		this.createTimeBegin = createTimeBegin;
+	}
+	public String getCreateTimeEnd() {
+		return createTimeEnd;
+	}
+	public void setCreateTimeEnd(String createTimeEnd) {
+		this.createTimeEnd = createTimeEnd;
+	}
+	public String getAlterTimeBegin() {
+		return alterTimeBegin;
+	}
+	public void setAlterTimeBegin(String alterTimeBegin) {
+		this.alterTimeBegin = alterTimeBegin;
+	}
+	public String getAlterTimeEnd() {
+		return alterTimeEnd;
+	}
+	public void setAlterTimeEnd(String alterTimeEnd) {
+		this.alterTimeEnd = alterTimeEnd;
 	}
 }

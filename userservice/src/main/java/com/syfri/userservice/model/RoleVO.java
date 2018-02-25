@@ -139,4 +139,36 @@ public class RoleVO extends ValueObject implements Serializable{
 	public void setResources(List<ResourceVO> resources) {
 		this.resources = resources;
 	}
+
+	public String getCreateTimeBegin() {
+		return createTimeBegin;
+	}
+
+	public void setCreateTimeBegin(String createTimeBegin) {
+		this.createTimeBegin = createTimeBegin;
+	}
+
+	public String getCreateTimeEnd() {
+		return createTimeEnd;
+	}
+
+	public void setCreateTimeEnd(String createTimeEnd) {
+		this.createTimeEnd = createTimeEnd;
+	}
+
+	public String getAlterTimeBegin() {
+		return alterTimeBegin;
+	}
+
+	public void setAlterTimeBegin(String alterTimeBegin) {
+		this.alterTimeBegin = alterTimeBegin;
+	}
+
+	public String getAlterTimeEnd() {
+		return alterTimeEnd;
+	}
+
+	public void setAlterTimeEnd(String alterTimeEnd) {
+		this.alterTimeEnd = alterTimeEnd;
+	}
 }
