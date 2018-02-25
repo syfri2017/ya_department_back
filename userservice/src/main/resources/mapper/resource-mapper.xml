@@ -10,7 +10,7 @@
 		 and t.resourcename = #{resourcename}
 		</if>
 		<if test="resourceinfo != null and resourceinfo != '' ">
-		 and t.resourceinfo = #{resourceinfo}
+		 and t.resourceinfo LIKE concat(concat('%',#{resourceinfo}),'%')
 		</if>
 		<if test="parentid != null and parentid != '' ">
 		 and t.parentid = #{parentid}
@@ -33,8 +33,11 @@
 		<if test="createName != null and createName != '' ">
 		 and t.create_name = #{createName}
 		</if>
-		<if test="createTime != null and createTime != '' ">
-		 and t.create_time = #{createTime}
+		<if test="createTimeBegin != null and createTimeBegin != '' ">
+			and t.create_time &gt;= to_date(#{createTimeBegin},'yyyy-MM-dd')
+		</if>
+		<if test="createTimeEnd != null and createTimeEnd != '' ">
+			and t.create_time &lt;= to_date(#{createTimeEnd},'yyyy-MM-dd')
 		</if>
 		<if test="alterId != null and alterId != '' ">
 		 and t.alter_id = #{alterId}
@@ -42,8 +45,11 @@
 		<if test="alterName != null and alterName != '' ">
 		 and t.alter_name = #{alterName}
 		</if>
-		<if test="alterTime != null and alterTime != '' ">
-		 and t.alter_time = #{alterTime}
+		<if test="alterTimeBegin != null and alterTimeBegin != '' ">
+			and t.alter_time &gt;= to_date(#{alterTimeBegin},'yyyy-MM-dd')
+		</if>
+		<if test="alterTimeEnd != null and alterTimeEnd != '' ">
+			and t.alter_time &lt;= to_date(#{alterTimeEnd},'yyyy-MM-dd')
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
 		 and t.reserve1 = #{reserve1}
@@ -206,7 +212,7 @@
 			<result property="permissioninfo" column="permissioninfo"/>
 		</collection>
 	</resultMap>
-	<select id="doFindResourcePermissions" parameterType="RoleVO"  resultMap="ResourcePermissionMap">
+	<select id="doFindResourcePermissions" parameterType="ResourceVO"  resultMap="ResourcePermissionMap">
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		,r.permissionid
@@ -221,7 +227,7 @@
 
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
-		ORDER BY t.create_time DESC
+		ORDER BY t.seqno ASC
 	</select>
 
 	<!--13.新增资源时批量插入用权限（中间表）-->

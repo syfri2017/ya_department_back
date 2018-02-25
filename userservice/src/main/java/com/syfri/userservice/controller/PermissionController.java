@@ -143,6 +143,20 @@ public class PermissionController  extends BaseController<PermissionVO>{
 		return resultVO;
 	}
 
+	@ApiOperation(value="根据资源ID查询其权限",notes="查询")
+	@ApiImplicitParam(name="resourceid",value="资源ID")
+	@GetMapping("/getPermission/{resourceid}")
+	public @ResponseBody ResultVO getPermission(@PathVariable String resourceid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(permissionService.doFindPermissionByResourceId(resourceid));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
 	@ApiOperation(value="根据权限名称查询权限数量",notes="查询")
 	@ApiImplicitParam(name="permissionname",value="权限名")
 	@GetMapping("/getNum/{permissionname}")

@@ -34,6 +34,12 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionVO> impleme
 		return permissionDAO.doFindPermissionByResourceList(resourceList);
 	}
 
+	/*--根据资源ID获取权限列表.--*/
+	@Override
+	public List<PermissionVO> doFindPermissionByResourceId(String resourceid){
+		return permissionDAO.doFindPermissionByResourceId(resourceid);
+	}
+
 	/*--新增；权限.--*/
 	public PermissionVO doInsertPermission(PermissionVO permissionVO){
 		permissionVO.setCreateId(CurrentUserUtil.getCurrentUserId());

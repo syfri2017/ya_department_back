@@ -189,4 +189,11 @@
 		SELECT DISTINCT permissionid,permissionname,permissioninfo FROM sys_permission WHERE delete_flag = 'N'
 	</select>
 
+	<!--14.根据资源ID获取权限列表-->
+	<select id="doFindPermissionByResourceId" parameterType="String" resultType="PermissionVO">
+		SELECT p.permissionid,p.permissionname,p.permissioninfo FROM sys_resource_permission m
+		LEFT JOIN (SELECT permissionid,permissionname,permissioninfo FROM sys_permission WHERE delete_flag = 'N') p
+		ON m.permissionid = p.permissionid
+		WHERE m.resourceid = #{value}
+	</select>
 </mapper>

@@ -11,6 +11,9 @@ public interface PermissionService  extends BaseService<PermissionVO>{
 	/*--根据资源列表获取权限列表.--*/
 	List<PermissionVO> doFindPermissionByResourceList(List<ResourceVO> resourceList);
 
+	/*--根据资源ID获取权限列表.--*/
+	List<PermissionVO> doFindPermissionByResourceId(String resourceid);
+
 	/*--新增；权限.--*/
 	PermissionVO doInsertPermission(PermissionVO permissionVO);
 
