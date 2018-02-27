@@ -14,7 +14,7 @@
 								<el-row>
 									<el-col :span="12">
 										<el-form-item label="资源描述">
-											<el-input class="form-input-text" size="small" v-model="searchForm.permissioninfo" placeholder="请输入资源描述" prefix-icon="el-icon-search"></el-input>
+											<el-input class="form-input-text" size="small" v-model="searchForm.resourceinfo" placeholder="请输入资源描述" prefix-icon="el-icon-search"></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col :span="12">
@@ -37,7 +37,7 @@
 										<el-col :span="12"></el-col>
 										<el-col :span="12" class="form-button-right">
 											<el-form-item>
-												<el-button type="primary" icon="search" size="small" @click="searchClick">查询</el-button>
+												<el-button type="primary" icon="search" size="small" @click="searchClick(-1)">查询</el-button>
 												<el-button type="success" icon="plus" size="small" @click="addClick">新增</el-button>
 											</el-form-item>
 										</el-col>
@@ -55,15 +55,17 @@
 
 								<el-table-column type="selection" min-width="5%"></el-table-column>
 								<el-table-column type="index" label="序号" width="65" align="center"></el-table-column>
-								<el-table-column prop="resourcename" label="资源名称" min-width="12%" align="center"></el-table-column>
+								<el-table-column prop="resourcename" label="资源名称" min-width="20%" align="center">
+									<template slot-scope="scope">
+										<el-button @click="resourcenameCilck(scope.row)" type="text">{{scope.row.resourcename}}</el-button>
+									</template>
+								</el-table-column>
 								<el-table-column prop="resourceinfo" label="资源描述" min-width="15%" align="center"></el-table-column>
 								<el-table-column prop="createName" label="创建人" min-width="12%" align="center"></el-table-column>
 								<el-table-column prop="createTime" label="创建时间" min-width="13%" align="center" :formatter="dateFormat"></el-table-column>
-								<el-table-column prop="alterName" label="修改人" min-width="12%" align="center"></el-table-column>
-								<el-table-column prop="alterTime" label="修改时间" min-width="13%" align="center" :formatter="dateFormat"></el-table-column>
 								<el-table-column prop="permission" label="权限" min-width="13%" align="center">
 									<template slot-scope="scope">
-										<el-button type="text" @click="resourceDetails(scope.row.resourceid)">查看详情</el-button>
+										<el-button type="text" @click="permissionDetails(scope.row.resourceid)">查看详情</el-button>
 									</template>
 								</el-table-column>
 							</el-table>
@@ -86,34 +88,46 @@
 
 						<!--权限列表页-->
 						<el-dialog title="资源权限列表" :visible.sync="permissionVisible" @close="closePermissionDialog()" :close-on-click-modal="false">
-							<el-checkbox-group v-model="roleDetailSelect">
-								<el-checkbox v-for="permission in permissionDetailList" :label="role.permissioninfo" :key="role.permissionid" disabled>{{role.permissioninfo}}<br></el-checkbox>
+							<el-checkbox-group v-model="permissionDetailSelect">
+								<el-checkbox v-for="permission in permissionDetailList" :label="permission.permissioninfo" :key="permission.permissionid" disabled>{{permission.permissioninfo}}<br></el-checkbox>
 							</el-checkbox-group>
 						</el-dialog>
 
 						<!--新建界面-->
-						<el-dialog title="新增角色" :visible.sync="addFormVisible" @close="closeDialog(addForm)" :close-on-click-modal="false">
-							<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+						<el-dialog title="新增资源" :visible.sync="addFormVisible" @close="closeDialog(addForm)" :close-on-click-modal="false">
+							<el-form :model="addForm" label-width="120px" :rules="addFormRules" ref="addForm">
 								<el-row>
-									<el-col :span="8">
-										<el-form-item label="角色名称" prop="rolename">
-											<el-input class="form-edit-text" v-model="addForm.rolename" auto-complete="off" placeholder="角色名称"></el-input>
+									<el-col :span="20">
+										<el-form-item label="资源名称" prop="resourcename">
+											<el-input v-model="addForm.resourcename" auto-complete="off" placeholder="资源名称"></el-input>
 										</el-form-item>
 									</el-col>
-									<el-col :span="4">&nbsp;</el-col>
-									<el-col :span="8">
-										<el-form-item label="角色描述" prop="roleinfo">
-											<el-input class="form-edit-text" v-model="addForm.roleinfo" auto-complete="off" placeholder="角色描述"></el-input>
+								</el-row>
+								<el-row>
+									<el-col :span="20">
+										<el-form-item label="资源描述" prop="resourceinfo">
+											<el-input v-model="addForm.resourceinfo" auto-complete="off" placeholder="资源描述"></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row>
 									<el-col :span="22">
-										<el-form-item label="资源列表">
-											<el-tree :props="defaultProps" :data="allResourceList" node-key="resourceid"
-													ref="tree" highlight-current :default-expanded-keys="defaultKeys" @node-click="handleNodeClick"
-													show-checkbox>
-											</el-tree>
+										<el-form-item label="父资源">
+											<el-select v-model="addForm.parentid1" placeholder="请选择" clearable @change="getSecondResource">
+												<el-option v-for="parent in allFirstResource" :label="parent.resourceinfo" :value="parent.resourceid" :key="parent.resourceid"></el-option>
+											</el-select>
+											<el-select v-model="addForm.parentid2" placeholder="请选择" clearable>
+												<el-option v-for="parent in allSecondResource" :label="parent.resourceinfo" :value="parent.resourceid" :key="parent.resourceid"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="22">
+										<el-form-item label="权限列表" prop="permissions">
+											<el-checkbox-group v-model="addForm.permissions">
+												<el-checkbox v-for="permission in allPermissionList" :label="permission" :key="permission.permissionid">{{permission.permissioninfo}}</el-checkbox>
+											</el-checkbox-group>
 										</el-form-item>
 									</el-col>
 								</el-row>
@@ -125,28 +139,40 @@
 						</el-dialog>
 
 						<!--修改界面-->
-						<el-dialog title="修改角色" :visible.sync="editFormVisible" :close-on-click-modal="false">
-							<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+						<el-dialog title="修改资源" :visible.sync="editFormVisible" :close-on-click-modal="false">
+							<el-form :model="editForm" label-width="120px" :rules="editFormRules" ref="editForm">
 								<el-row>
-									<el-col :span="8">
-										<el-form-item label="角色名称" prop="rolename">
-											<el-input class="form-edit-text" v-model="editForm.rolename" auto-complete="off" placeholder="角色名称"></el-input>
+									<el-col :span="20">
+										<el-form-item label="资源名称" prop="resourcename">
+											<el-input v-model="editForm.resourcename" auto-complete="off" placeholder="角色名称"></el-input>
 										</el-form-item>
 									</el-col>
-									<el-col :span="4">&nbsp;</el-col>
-									<el-col :span="8">
-										<el-form-item label="角色描述" prop="roleinfo">
-											<el-input class="form-edit-text" v-model="editForm.roleinfo" auto-complete="off" placeholder="角色描述"></el-input>
+								</el-row>
+								<el-row>
+									<el-col :span="20">
+										<el-form-item label="资源描述" prop="resourceinfo">
+											<el-input v-model="editForm.resourceinfo" auto-complete="off" placeholder="角色描述"></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row>
 									<el-col :span="22">
-										<el-form-item label="资源列表">
-											<el-tree :props="defaultProps" :data="allResourceList" node-key="resourceid"
-													 ref="tree" highlight-current :default-expanded-keys="defaultKeys" :default-checked-keys="defaultCheckKeys" @node-click="handleNodeClick"
-													 show-checkbox>
-											</el-tree>
+										<el-form-item label="父资源">
+											<el-select v-model="editForm.parentid1" placeholder="请选择" clearable @change="getSecondResource">
+												<el-option v-for="parent in allFirstResource" :label="parent.resourceinfo" :value="parent.resourceid" :key="parent.resourceid"></el-option>
+											</el-select>
+											<el-select v-model="editForm.parentid2" placeholder="请选择" clearable>
+												<el-option v-for="parent in allSecondResource" :label="parent.resourceinfo" :value="parent.resourceid" :key="parent.resourceid"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col>
+										<el-form-item label="权限列表" prop="permissions">
+											<el-checkbox-group v-model="editFormSelect" @change="getCheckValue">
+												<el-checkbox v-for="permission in allPermissionList" :label="permission.permissionid" :key="permission.permissionid">{{permission.permissioninfo}}</el-checkbox>
+											</el-checkbox-group>
 										</el-form-item>
 									</el-col>
 								</el-row>

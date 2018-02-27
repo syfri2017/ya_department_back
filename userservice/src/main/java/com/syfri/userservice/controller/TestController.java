@@ -55,9 +55,9 @@ public class TestController extends BaseController<UserVO>{
 		return userService.doFindById("1");
 	}
 
-	@RequestMapping("/list2")
+	@RequestMapping("/test")
 	public String list2(){
-		return "system/userList2";
+		return "test";
 	}
 
 

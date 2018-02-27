@@ -39,6 +39,11 @@ public class ResourceVO extends ValueObject implements Serializable{
 		this.resourceid = resourceid;
 	}
 
+	public ResourceVO(String resourceid,String parentid){
+		this.resourceid = resourceid;
+		this.parentid = parentid;
+	}
+
 	public String getResourceid(){
 		return resourceid;
 	}

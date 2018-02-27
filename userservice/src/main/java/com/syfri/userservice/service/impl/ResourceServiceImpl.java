@@ -50,6 +50,8 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 		//向资源表SYS_RESOURCE中插入数据
 		resourceVO.setCreateId(CurrentUserUtil.getCurrentUserId());
 		resourceVO.setCreateName(CurrentUserUtil.getCurrentUserName());
+		//插入序号
+		resourceVO.setSeqno(Integer.parseInt(((ResourceService)AopContext.currentProxy()).getMaxSegno(resourceVO.getParentid()))+1);
 		resourceDAO.doInsertByVO(resourceVO);
 
 		//向资源权限表SYS_RESOURCE_PERMISSION中插入数据
@@ -79,8 +81,17 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 	public void doDeleteResourcePermissions(String resourceid){
 		//删除资源表SYS_RESOURCE数据
 		resourceDAO.doDeleteById(resourceid);
+
 		//删除资源权限表SYS_RESOURCE_PERMISSION数据
 		resourceDAO.doDeleteResourcePermissionsBatch(resourceid);
+
+		//删除其子资源及其权限
+		List<ResourceVO> resourceVOS = resourceDAO.doSearchListByVO(new ResourceVO(null, resourceid));
+		for(int i=0;i<resourceVOS.size();i++){
+			String temp = resourceVOS.get(i).getResourceid();
+			resourceDAO.doDeleteById(temp);
+			resourceDAO.doDeleteResourcePermissionsBatch(temp);
+		}
 	}
 
 	/*--向角色资源中间表中批量增加数据.--*/
@@ -243,5 +254,14 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 			}
 		}
 		return list;
+	}
+
+	/*--根据父节点ID查询最大序号.--*/
+	public String getMaxSegno(String parentid){
+		String maxSeqno = resourceDAO.getMaxSegno(parentid);
+		if(maxSeqno == null || "".equals(maxSeqno)){
+			return resourceDAO.doFindById(parentid).getSeqno() + "0";
+		}
+		return maxSeqno;
 	}
 }

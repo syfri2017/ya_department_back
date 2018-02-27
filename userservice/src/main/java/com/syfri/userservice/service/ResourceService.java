@@ -36,4 +36,7 @@ public interface ResourceService  extends BaseService<ResourceVO>{
 
 	/*--根据角色ID获取其没有子的角色.--*/
 	List<String> doFindChildren(String roleid);
+
+	/*--根据父节点ID查询最大序号.--*/
+	String getMaxSegno(String parentid);
 }

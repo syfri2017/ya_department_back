@@ -202,10 +202,10 @@
 		<result property="seqno" column="seqno"/>
 		<result property="icon" column="icon"/>
 		<result property="type" column="type"/>
-		<result property="createName" column="create_name"/>
-		<result property="createTime" column="create_time"/>
-		<result property="alterName" column="alter_name"/>
-		<result property="alterTime" column="alter_time"/>
+		<result property="createName" column="createName"/>
+		<result property="createTime" column="createTime"/>
+		<result property="alterName" column="alterName"/>
+		<result property="alterTime" column="alterTime"/>
 		<collection property="permissions" ofType="com.syfri.userservice.model.PermissionVO">
 			<id property="permissionid" column="permissionid"/>
 			<result property="permissionname" column="permissionname"/>
@@ -280,6 +280,11 @@
 			AND parentid = #{parentid}
 		</if>
 		ORDER BY seqno
+	</select>
+
+	<!--18.根据父节点ID查询最大序号-->
+	<select id="getMaxSegno" parameterType="String" resultType="String">
+		SELECT MAX(seqno) seqno FROM sys_resource WHERE delete_flag = 'N' AND parentid = #{VALUE}
 	</select>
 
 </mapper>

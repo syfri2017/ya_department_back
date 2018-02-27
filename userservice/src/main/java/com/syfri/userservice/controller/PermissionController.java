@@ -131,8 +131,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 
 	@ApiOperation(value="获取所有的权限",notes="查询")
 	@GetMapping("/getAll")
-	public @ResponseBody
-	ResultVO findAll(){
+	public @ResponseBody ResultVO findAll(){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(permissionService.doFindAll());

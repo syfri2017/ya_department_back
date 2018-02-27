@@ -193,13 +193,14 @@ public class ResourceController  extends BaseController<ResourceVO>{
 
 	@ApiOperation(value="根据资源名称查询资源数量",notes="查询")
 	@ApiImplicitParam(name="resourcename",value="资源名")
-	@GetMapping("/getNum/{resourcename}")
-	public @ResponseBody ResultVO getNum(@PathVariable String resourcename){
+	@PostMapping("/getNum")
+	public @ResponseBody ResultVO getNum(@RequestBody String resourcename){
 		ResultVO resultVO = ResultVO.build();
 		try{
+			JSONObject jsonObject = JSON.parseObject(resourcename);
 			ResourceVO resourceVO = new ResourceVO();
-			resourceVO.setResourcename(resourcename);
-			if(resourceService.doFindByVO(resourceVO) == null){
+			resourceVO.setResourcename(jsonObject.getString("resourcename"));
+			if(resourceService.doSearchListByVO(resourceVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
 				resultVO.setResult(1);
@@ -211,4 +212,49 @@ public class ResourceController  extends BaseController<ResourceVO>{
 		return resultVO;
 	}
 
+	@ApiOperation(value="获取所有第一父类资源",notes="查询")
+	@GetMapping("/getParentResource")
+	public @ResponseBody ResultVO getFirstResource(){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(resourceService.doSearchListByVO(new ResourceVO(null,"-1")));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+	@ApiOperation(value="获取所有第二父类资源",notes="查询")
+	@ApiImplicitParam(name="parentid",value="父节点ID")
+	@GetMapping("/getParentResource/{parentid}")
+	public @ResponseBody ResultVO getSecondResource(@PathVariable String parentid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(resourceService.doSearchListByVO(new ResourceVO(null, parentid)));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="根据父节点取其父节点",notes="查询")
+	@ApiImplicitParam(name="parentid",value="父节点ID")
+	@GetMapping("/getParentid/{parentid}")
+	public @ResponseBody ResultVO getParentid(@PathVariable String parentid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			String tempParentid = resourceService.doFindByVO(new ResourceVO(parentid)).getParentid();
+			if("-1".equals(tempParentid)){
+				resultVO.setResult("-1111");
+			}else{
+				resultVO.setResult(tempParentid);
+			}
+//			resultVO.setResult(resourceService.doFindByVO(new ResourceVO(parentid)));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

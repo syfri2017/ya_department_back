@@ -27,4 +27,7 @@ public interface ResourceDAO extends BaseDAO<ResourceVO>{
 
 	/*--通过用户角色列表、父节点获取资源列表.--*/
 	List<ResourceVO> doFindResourceByParentId(Map map);
+
+	/*--根据父节点ID查询最大序号.--*/
+	String getMaxSegno(String parentid);
 }
