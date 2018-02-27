@@ -65,7 +65,7 @@ new Vue({
                     sex: '',
                     mobile: '',
                     email: '',
-                    roles: ''
+                    roles: []
                 },
                 editFormSelect: [],
                 roleDetailVisible: false,
@@ -255,7 +255,7 @@ new Vue({
             this.getAllRoles();
             this.editFormSelect = [];
             for(var i=0;i<this.editForm.roles.length;i++){
-                this.editFormSelect.push(this.editForm.roles[i].rolename);
+                this.editFormSelect.push(this.editForm.roles[i].roleid);
             }
             this.editFormVisible = true;
 
@@ -281,9 +281,20 @@ new Vue({
             */
 
         },
+
+        //获取复选框选中值
+        getCheckValue(val){
+            this.editFormSelect = val;
+        },
+
         //修改：提交按钮
         editSubmit: function(val) {
             var _self = this;
+            val.roles = [];
+            for(var i=0;i<this.editFormSelect.length;i++){
+                var temp = {roleid : this.editFormSelect[i]};
+                val.roles.push(temp);
+            }
             if(val.password == val.password2){
                 var params = {
                     pkid: val.pkid,
