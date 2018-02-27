@@ -268,7 +268,7 @@
 	<select id="doFindResourceByParentId" parameterType="java.util.Map" resultType="ResourceVO">
 		SELECT DISTINCT r.resourceid,r.resourcename,r.resourceinfo,r.parentid,r.seqno,r.icon
 		FROM SYS_RESOURCE r
-		INNER JOIN SYS_ROLE_RESOURCE c ON r.resourceid = c.resourceid
+		LEFT JOIN SYS_ROLE_RESOURCE c ON r.resourceid = c.resourceid
 		WHERE r.delete_flag = 'N'
 		<if test="roleList != null and roleList.size() > 0">
 			AND roleid IN
