@@ -58,7 +58,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 查询代码集
 	 */
 	@ApiOperation(value="根据代码集查询代码集",notes="列表信息")
-	@ApiImplicitParam(name="codelistVO",value="代码集对象")
+	@ApiImplicitParam(name="vo",value="代码集对象")
 	@RequiresPermissions("codelist:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody CodelistVO codelistVO){
@@ -76,7 +76,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 新增代码集
 	 */
 	@ApiOperation(value="根据代码集新增代码集",notes="新增")
-	@ApiImplicitParam(name="codelistVO",value="代码集对象")
+	@ApiImplicitParam(name="vo",value="代码集对象")
 	@RequiresPermissions("codelist:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody CodelistVO codelistVO){
@@ -94,7 +94,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 修改代码集
 	 */
 	@ApiOperation(value="根据代码集修改代码集",notes="修改")
-	@ApiImplicitParam(name="codelistVO",value="代码集对象")
+	@ApiImplicitParam(name="vo",value="代码集对象")
 	@RequiresPermissions("codelist:update")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistVO codelistVO){
@@ -184,7 +184,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 根据代码集获取资源信息
 	 */
 	@ApiOperation(value="根据代码值、代码名称查询代码值",notes="列表信息")
-	@ApiImplicitParam(name="codelistDetailVO",value="代码集详细对象")
+	@ApiImplicitParam(name="vo",value="代码集详细对象")
 	@RequiresPermissions("codelist:list")
 	@PostMapping("/detail/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody CodelistDetailVO codelistDetailVO){
@@ -202,7 +202,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 新增代码值
 	 */
 	@ApiOperation(value="根据代码集新增代码值",notes="新增")
-	@ApiImplicitParam(name="codelistDetailVO",value="代码值对象")
+	@ApiImplicitParam(name="vo",value="代码值对象")
 	@RequiresPermissions("codelist:add")
 	@PostMapping("/detail/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody CodelistDetailVO codelistDetailVO){
@@ -220,7 +220,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 修改代码值
 	 */
 	@ApiOperation(value="根据代码集修改代码值",notes="修改")
-	@ApiImplicitParam(name="codelistVO",value="代码值对象")
+	@ApiImplicitParam(name="vo",value="代码值对象")
 	@RequiresPermissions("codelist:update")
 	@PostMapping("/detail/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistDetailVO codelistDetailVO){
