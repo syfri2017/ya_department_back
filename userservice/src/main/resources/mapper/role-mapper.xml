@@ -95,7 +95,7 @@
 			SELECT SYS_GUID() AS roleid FROM DUAL
 		</selectKey>
 		INSERT INTO SYS_ROLE(roleid,rolename,roleinfo,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,delete_flag)
-		VALUES(#{roleid,jdbcType=VARCHAR},#{rolename,jdbcType=VARCHAR},#{roleinfo,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE},'N')
+		VALUES(#{roleid,jdbcType=VARCHAR},#{rolename,jdbcType=VARCHAR},#{roleinfo,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},#{alterTime,jdbcType=TIMESTAMP},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE},'N')
 	 </insert>
 
 	<!--7.批量插入-->
@@ -105,7 +105,7 @@
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.rolename,jdbcType=VARCHAR} rolename,#{item.roleinfo,jdbcType=VARCHAR} roleinfo,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag
+			#{item.rolename,jdbcType=VARCHAR} rolename,#{item.roleinfo,jdbcType=VARCHAR} roleinfo,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,#{item.alterTime,jdbcType=TIMESTAMP} alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3,'N' delete_flag
 		FROM DUAL
 		</foreach>
 		) A
@@ -128,7 +128,7 @@
 			<if test="createTime != null">create_time=#{createTime},</if>
 			<if test="alterId != null">alter_id=#{alterId},</if>
 			<if test="alterName != null">alter_name=#{alterName},</if>
-			<if test="alterTime != null">alter_time=#{alterTime},</if>
+			alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),
 			<if test="reserve1 != null">reserve1=#{reserve1},</if>
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>

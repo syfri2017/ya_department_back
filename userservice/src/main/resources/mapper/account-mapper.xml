@@ -97,7 +97,7 @@
 			SELECT SYS_GUID() AS userid FROM DUAL
 		</selectKey>
 		INSERT INTO SYS_ACCOUNT(userid,username,password,salt,delete_flag,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3,realname)
-		VALUES(#{userid,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{salt,jdbcType=VARCHAR},'N',#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=TIMESTAMP},#{realname,jdbcType=VARCHAR})
+		VALUES(#{userid,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{salt,jdbcType=VARCHAR},'N',#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},#{alterTime,jdbcType=TIMESTAMP},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=TIMESTAMP},#{realname,jdbcType=VARCHAR})
 	 </insert>
 
 	<!--7.批量插入-->
@@ -107,7 +107,7 @@
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.userid,jdbcType=VARCHAR} userid,#{item.username,jdbcType=VARCHAR} username,#{item.password,jdbcType=VARCHAR} password,#{item.salt,jdbcType=VARCHAR} salt,'N' delete_flag,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=TIMESTAMP} reserve3,#{item.realname,jdbcType=VARCHAR} realname
+			#{item.userid,jdbcType=VARCHAR} userid,#{item.username,jdbcType=VARCHAR} username,#{item.password,jdbcType=VARCHAR} password,#{item.salt,jdbcType=VARCHAR} salt,'N' delete_flag,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,#{item.alterTime,jdbcType=TIMESTAMP} alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=TIMESTAMP} reserve3,#{item.realname,jdbcType=VARCHAR} realname
 		FROM DUAL
 		</foreach>
 		) A
@@ -132,7 +132,7 @@
 			<if test="createTime != null">create_time=#{createTime},</if>
 			<if test="alterId != null">alter_id=#{alterId},</if>
 			<if test="alterName != null">alter_name=#{alterName},</if>
-			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),</if>
+			alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),
 			<if test="reserve1 != null">reserve1=#{reserve1},</if>
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>

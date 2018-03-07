@@ -117,7 +117,7 @@
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
 		INSERT INTO SYS_USER(pkid,userid,realname,birth,sex,deptid,position,phone,mobile,email,delete_flag,create_id,create_name,create_time,alter_id,alter_name,alter_time,reserve1,reserve2,reserve3)
-		VALUES(#{pkid,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR},#{realname,jdbcType=VARCHAR},to_date(#{birth,jdbcType=VARCHAR},'yyyy-MM-dd'),#{sex,jdbcType=VARCHAR},#{deptid,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},'N',#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE,#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
+		VALUES(#{pkid,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR},#{realname,jdbcType=VARCHAR},to_date(#{birth,jdbcType=VARCHAR},'yyyy-MM-dd'),#{sex,jdbcType=VARCHAR},#{deptid,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},'N',#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},#{alterTime,jdbcType=TIMESTAMP},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
@@ -127,7 +127,7 @@
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.userid,jdbcType=VARCHAR} userid,#{item.realname,jdbcType=VARCHAR} realname,#{item.birth,jdbcType=DATE} birth,#{item.sex,jdbcType=VARCHAR} sex,#{item.deptid,jdbcType=VARCHAR} deptid,#{item.position,jdbcType=VARCHAR} position,#{item.phone,jdbcType=VARCHAR} phone,#{item.mobile,jdbcType=VARCHAR} mobile,#{item.email,jdbcType=VARCHAR} email,'N' delete_flag,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+			#{item.userid,jdbcType=VARCHAR} userid,#{item.realname,jdbcType=VARCHAR} realname,#{item.birth,jdbcType=DATE} birth,#{item.sex,jdbcType=VARCHAR} sex,#{item.deptid,jdbcType=VARCHAR} deptid,#{item.position,jdbcType=VARCHAR} position,#{item.phone,jdbcType=VARCHAR} phone,#{item.mobile,jdbcType=VARCHAR} mobile,#{item.email,jdbcType=VARCHAR} email,'N' delete_flag,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,#{item.alterTime,jdbcType=TIMESTAMP} alter_time,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
 		FROM DUAL
 		</foreach>
 		) A
@@ -158,7 +158,7 @@
 			<if test="createTime != null">create_time=TO_DATE(#{createTime},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="alterId != null">alter_id=#{alterId},</if>
 			<if test="alterName != null">alter_name=#{alterName},</if>
-			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),</if>
+			alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),
 			<if test="reserve1 != null">reserve1=#{reserve1},</if>
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss')</if>
