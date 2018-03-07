@@ -164,7 +164,7 @@ public class RoleController  extends BaseController<RoleVO>{
 		try{
 			RoleVO roleVO = new RoleVO();
 			roleVO.setRolename(rolename);
-			if(roleService.doFindByVO(roleVO) == null){
+			if(roleService.doSearchListByVO(roleVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
 				resultVO.setResult(1);

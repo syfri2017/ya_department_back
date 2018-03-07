@@ -164,7 +164,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 		try{
 			PermissionVO permissionVO = new PermissionVO();
 			permissionVO.setPermissionname(permissionname);
-			if(permissionService.doFindByVO(permissionVO) == null){
+			if(permissionService.doSearchListByVO(permissionVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
 				resultVO.setResult(1);

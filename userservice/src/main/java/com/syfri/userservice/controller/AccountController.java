@@ -36,7 +36,7 @@ public class AccountController  extends BaseController<AccountVO>{
 		try{
 			AccountVO accountVO = new AccountVO();
 			accountVO.setUsername(username);
-			if(accountService.doFindByVO(accountVO) == null){
+			if(accountService.doSearchListByVO(accountVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
 				resultVO.setResult(1);

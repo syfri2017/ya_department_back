@@ -140,7 +140,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		try{
 			CodelistVO codelistVO = new CodelistVO();
 			codelistVO.setCodetype(codetype);
-			if(codelistService.doFindByVO(codelistVO) == null){
+			if(codelistService.doSearchListByVO(codelistVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
 				resultVO.setResult(1);
