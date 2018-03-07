@@ -90,12 +90,12 @@
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO SYS_CODELIST(codeid,codetype,delete_flag,remark,language,codetype_name,create_id,create_name,create_time)
+		INSERT INTO SYS_CODELIST(codeid,codetype,delete_flag,remark,language,codetype_name,create_id,create_name,create_time,alter_id,alter_name,alter_time)
 		SELECT SYS_GUID() codeid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.codetype,jdbcType=VARCHAR} codetype,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.language,jdbcType=VARCHAR} language,#{item.codetypeName,jdbcType=VARCHAR} codetype_name,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time
+			#{item.codetype,jdbcType=VARCHAR} codetype,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.language,jdbcType=VARCHAR} language,#{item.codetypeName,jdbcType=VARCHAR} codetype_name,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
 		FROM DUAL
 		</foreach>
 		) A
@@ -116,9 +116,9 @@
 			<if test="remark != null">remark=#{remark},</if>
 			<if test="language != null">language=#{language},</if>
 			<if test="codetypeName != null">codetype_name=#{codetypeName},</if>
-			alter_id=#{alterId},
-			alter_name=#{alterName},
-			alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')
+			<if test="alterId != null">alter_id=#{alterId},</if>
+			<if test="alterName != null">alter_name=#{alterName},</if>
+			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
 		WHERE  codeid = #{codeid}
 	</update>
@@ -136,6 +136,10 @@
 			delete_flag = VALUES(delete_flag),
 			remark = VALUES(remark),
 			language = VALUES(language),
+			codetype_name = VALUES(codetype_name),
+			create_id = VALUES(create_id),
+			create_name = VALUES(create_name),
+			create_time = VALUES(create_time),
 			alter_id = VALUES(alter_id),
 			alter_name = VALUES(alter_name),
 			alter_time = VALUES(alter_time)
@@ -214,9 +218,9 @@
 			<if test="codeid != null">codeid=#{codeid},</if>
 			<if test="deleteFlag != null">delete_flag='N',</if>
 			<if test="remark != null">remark=#{remark},</if>
-			alter_id=#{alterId},
-			alter_name=#{alterName},
-			alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')
+			<if test="alterId != null">alter_id=#{alterId},</if>
+			<if test="alterName != null">alter_name=#{alterName},</if>
+			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
 		WHERE  PKID = #{pkid}
 	</update>
