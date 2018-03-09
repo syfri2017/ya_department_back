@@ -127,29 +127,30 @@
 
 						<!--修改界面-->
 						<el-dialog title="修改代码集" :visible.sync="editFormVisible" :close-on-click-modal="false">
-							<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+							<el-form :model="editForm" label-width="120px" :rules="editFormRules" ref="editForm">
 								<el-row>
-									<el-col :span="12">
+									<el-col :span="22">
 										<el-form-item label="代码类型" prop="codetype">
 											<el-input v-model="editForm.codetype" auto-complete="off" placeholder="代码类型"></el-input>
 										</el-form-item>
 									</el-col>
-									<el-col :span="4"></el-col>
-									<el-col :span="12">
+								</el-row>
+								<el-row>
+									<el-col :span="22">
 										<el-form-item label="代码类型名称" prop="codetypeName">
 											<el-input v-model="editForm.codetypeName" auto-complete="off" placeholder="代码类型名称"></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row>
-									<el-col :span="20">
+									<el-col :span="22">
 										<el-form-item label="备注" prop="remark">
 											<el-input v-model="editForm.remark" auto-complete="off" placeholder="备注"></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
 								<el-row>
-									<el-col :span="20">
+									<el-col :span="22">
 										<el-form-item label="国际化信息" prop="language" value="zh_CN">
 											<el-input v-model="editForm.language" auto-complete="off" placeholder="国际化信息"></el-input>
 										</el-form-item>
