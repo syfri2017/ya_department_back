@@ -11,6 +11,7 @@
         <module>generator</module>
         <module>baseapi</module>
         <module>userservice</module>
+        <module>digitalplan</module>
     </modules>
 
     <parent>
