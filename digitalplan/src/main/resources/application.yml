@@ -4,6 +4,12 @@ server:
 #------------------------------------------------------------
 #spring
 spring:
+  http:
+      converters:
+        preferred-json-mapper: fastjson
+      multipart:
+        max-request-size: 512MB #最大请求大小
+        max-file-size: 512MB #最大文件大小
   druid:
     #配置druid连接池
     datasource:
