@@ -34,4 +34,7 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--删除从表：根据主键删除.--*/
 	void doDeleteCodelistDetail(String pkid);
+
+	/*--根据代码类型查询代码集.--*/
+	List<CodelistDetailVO> doFindCodelistByType(String codetype);
 }

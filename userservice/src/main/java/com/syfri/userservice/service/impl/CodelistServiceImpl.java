@@ -97,4 +97,10 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 	public void doDeleteCodelistDetail(String pkid){
 		codelistDAO.doDeleteCodelistDetail(pkid);
 	}
+
+	/*--根据代码类型查询代码集.--*/
+	@Override
+	public List<CodelistDetailVO> doFindCodelistByType(String codetype){
+		return codelistDAO.doFindCodelistByType(codetype);
+	}
 }

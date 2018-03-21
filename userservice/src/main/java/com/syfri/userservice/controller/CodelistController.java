@@ -278,4 +278,17 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
+	@ApiOperation(value="根据代码集类型查询代码项",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@GetMapping("/getCodetype/{codetype}")
+	public @ResponseBody ResultVO getCodeType(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindCodelistByType(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
