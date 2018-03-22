@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.basicinfo.watersource.ShuiyuanDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="id != null and id != '' ">
+		 and t.id = #{id}
+		</if>
+		<if test="sybh != null and sybh != '' ">
+		 and t.sybh = #{sybh}
+		</if>
+		<if test="symc != null and symc != '' ">
+		 and t.symc = #{symc}
+		</if>
+		<if test="sydz != null and sydz != '' ">
+		 and t.sydz = #{sydz}
+		</if>
+		<if test="sylx != null and sylx != '' ">
+		 and t.sylx = #{sylx}
+		</if>
+		<if test="sysxxxid != null and sysxxxid != '' ">
+		 and t.sysxxxid = #{sysxxxid}
+		</if>
+		<if test="jgid != null and jgid != '' ">
+		 and t.jgid = #{jgid}
+		</if>
+		<if test="qsxs != null and qsxs != '' ">
+		 and t.qsxs = #{qsxs}
+		</if>
+		<if test="kyzt != null and kyzt != '' ">
+		 and t.kyzt = #{kyzt}
+		</if>
+		<if test="syzt != null and syzt != '' ">
+		 and t.syzt = #{syzt}
+		</if>
+		<if test="xz != null and xz != '' ">
+		 and t.xz = #{xz}
+		</if>
+		<if test="czyid != null and czyid != '' ">
+		 and t.czyid = #{czyid}
+		</if>
+		<if test="shzt != null and shzt != '' ">
+		 and t.shzt = #{shzt}
+		</if>
+		<if test="zpwjurl != null and zpwjurl != '' ">
+		 and t.zpwjurl = #{zpwjurl}
+		</if>
+		<if test="gisX != null and gisX != '' ">
+		 and t.gis_x = #{gisX}
+		</if>
+		<if test="gisY != null and gisY != '' ">
+		 and t.gis_y = #{gisY}
+		</if>
+		<if test="gisH != null and gisH != '' ">
+		 and t.gis_h = #{gisH}
+		</if>
+		<if test="glid != null and glid != '' ">
+		 and t.glid = #{glid}
+		</if>
+		<if test="ssld != null and ssld != '' ">
+		 and t.ssld = #{ssld}
+		</if>
+		<if test="jzsj != null and jzsj != '' ">
+		 and t.jzsj = #{jzsj}
+		</if>
+		<if test="qysj != null and qysj != '' ">
+		 and t.qysj = #{qysj}
+		</if>
+		<if test="fwtd != null and fwtd != '' ">
+		 and t.fwtd = #{fwtd}
+		</if>
+		<if test="fwtn != null and fwtn != '' ">
+		 and t.fwtn = #{fwtn}
+		</if>
+		<if test="fwtx != null and fwtx != '' ">
+		 and t.fwtx = #{fwtx}
+		</if>
+		<if test="fwtb != null and fwtb != '' ">
+		 and t.fwtb = #{fwtb}
+		</if>
+		<if test="blgxd != null and blgxd != '' ">
+		 and t.blgxd = #{blgxd}
+		</if>
+		<if test="blgxn != null and blgxn != '' ">
+		 and t.blgxn = #{blgxn}
+		</if>
+		<if test="blgxx != null and blgxx != '' ">
+		 and t.blgxx = #{blgxx}
+		</if>
+		<if test="blgxb != null and blgxb != '' ">
+		 and t.blgxb = #{blgxb}
+		</if>
+		<if test="jlzt != null and jlzt != '' ">
+		 and t.jlzt = #{jlzt}
+		</if>
+		<if test="cszt != null and cszt != '' ">
+		 and t.cszt = #{cszt}
+		</if>
+		<if test="sjbb != null and sjbb != '' ">
+		 and t.sjbb = #{sjbb}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and t.cjsj = #{cjsj}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and t.sjc = #{sjc}
+		</if>
+		<if test="ywxtbsid != null and ywxtbsid != '' ">
+		 and t.ywxtbsid = #{ywxtbsid}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and t.bz = #{bz}
+		</if>
+		<if test="dwlxdm != null and dwlxdm != '' ">
+		 and t.dwlxdm = #{dwlxdm}
+		</if>
+		<if test="dwid != null and dwid != '' ">
+		 and t.dwid = #{dwid}
+		</if>
+		<if test="vercol != null and vercol != '' ">
+		 and t.vercol = #{vercol}
+		</if>
+		<if test="pkid != null and pkid != '' ">
+		 and t.pkid = #{pkid}
+		</if>
+		<if test="tbjdh != null and tbjdh != '' ">
+		 and t.tbjdh = #{tbjdh}
+		</if>
+		<if test="tbsjc != null and tbsjc != '' ">
+		 and t.tbsjc = #{tbsjc}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		t.id id,
+		t.sybh sybh,
+		t.symc symc,
+		t.sydz sydz,
+		t.sylx sylx,
+		t.sysxxxid sysxxxid,
+		t.jgid jgid,
+		t.qsxs qsxs,
+		t.kyzt kyzt,
+		t.syzt syzt,
+		t.xz xz,
+		t.czyid czyid,
+		t.shzt shzt,
+		t.zpwjurl zpwjurl,
+		t.gis_x gisX,
+		t.gis_y gisY,
+		t.gis_h gisH,
+		t.glid glid,
+		t.ssld ssld,
+		TO_CHAR(t.jzsj,'yyyy-MM-dd HH24:mi:ss') jzsj,
+		TO_CHAR(t.qysj,'yyyy-MM-dd HH24:mi:ss') qysj,
+		t.fwtd fwtd,
+		t.fwtn fwtn,
+		t.fwtx fwtx,
+		t.fwtb fwtb,
+		t.blgxd blgxd,
+		t.blgxn blgxn,
+		t.blgxx blgxx,
+		t.blgxb blgxb,
+		t.jlzt jlzt,
+		t.cszt cszt,
+		t.sjbb sjbb,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.ywxtbsid ywxtbsid,
+		t.bz bz,
+		t.dwlxdm dwlxdm,
+		t.dwid dwid,
+		TO_CHAR(t.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
+		t.pkid pkid,
+		t.tbjdh tbjdh,
+		TO_CHAR(t.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="ShuiyuanVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM SY_SYJBXX t WHERE 1=1 AND JLZT = 0
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>
+		FROM SY_SYJBXX t  WHERE JLZT = 0
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM SY_SYJBXX t 
+		WHERE t.JLZT = 0 AND  t.PKID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="ShuiyuanVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO SY_SYJBXX(id,sybh,symc,sydz,sylx,sysxxxid,jgid,qsxs,kyzt,syzt,xz,czyid,shzt,zpwjurl,gis_x,gis_y,gis_h,glid,ssld,jzsj,qysj,fwtd,fwtn,fwtx,fwtb,blgxd,blgxn,blgxx,blgxb,jlzt,cszt,sjbb,cjsj,sjc,ywxtbsid,bz,dwlxdm,dwid,vercol,pkid,tbjdh,tbsjc)
+		VALUES(#{id,jdbcType=VARCHAR},#{sybh,jdbcType=VARCHAR},#{symc,jdbcType=VARCHAR},#{sydz,jdbcType=VARCHAR},#{sylx,jdbcType=VARCHAR},#{sysxxxid,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{qsxs,jdbcType=VARCHAR},#{kyzt,jdbcType=DOUBLE},#{syzt,jdbcType=DOUBLE},#{xz,jdbcType=VARCHAR},#{czyid,jdbcType=VARCHAR},#{shzt,jdbcType=VARCHAR},#{zpwjurl,jdbcType=VARCHAR},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE},#{gisH,jdbcType=DOUBLE},#{glid,jdbcType=VARCHAR},#{ssld,jdbcType=VARCHAR},#{jzsj,jdbcType=DATE},#{qysj,jdbcType=DATE},#{fwtd,jdbcType=VARCHAR},#{fwtn,jdbcType=VARCHAR},#{fwtx,jdbcType=VARCHAR},#{fwtb,jdbcType=VARCHAR},#{blgxd,jdbcType=VARCHAR},#{blgxn,jdbcType=VARCHAR},#{blgxx,jdbcType=VARCHAR},#{blgxb,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{sjc,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{dwlxdm,jdbcType=VARCHAR},#{dwid,jdbcType=VARCHAR},#{vercol,jdbcType=DATE},#{pkid,jdbcType=VARCHAR},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO SY_SYJBXX(id,sybh,symc,sydz,sylx,sysxxxid,jgid,qsxs,kyzt,syzt,xz,czyid,shzt,zpwjurl,gis_x,gis_y,gis_h,glid,ssld,jzsj,qysj,fwtd,fwtn,fwtx,fwtb,blgxd,blgxn,blgxx,blgxb,jlzt,cszt,sjbb,cjsj,sjc,ywxtbsid,bz,dwlxdm,dwid,vercol,pkid,tbjdh,tbsjc)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.id,jdbcType=VARCHAR} id,#{item.sybh,jdbcType=VARCHAR} sybh,#{item.symc,jdbcType=VARCHAR} symc,#{item.sydz,jdbcType=VARCHAR} sydz,#{item.sylx,jdbcType=VARCHAR} sylx,#{item.sysxxxid,jdbcType=VARCHAR} sysxxxid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.qsxs,jdbcType=VARCHAR} qsxs,#{item.kyzt,jdbcType=DOUBLE} kyzt,#{item.syzt,jdbcType=DOUBLE} syzt,#{item.xz,jdbcType=VARCHAR} xz,#{item.czyid,jdbcType=VARCHAR} czyid,#{item.shzt,jdbcType=VARCHAR} shzt,#{item.zpwjurl,jdbcType=VARCHAR} zpwjurl,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.gisH,jdbcType=DOUBLE} gis_h,#{item.glid,jdbcType=VARCHAR} glid,#{item.ssld,jdbcType=VARCHAR} ssld,#{item.jzsj,jdbcType=DATE} jzsj,#{item.qysj,jdbcType=DATE} qysj,#{item.fwtd,jdbcType=VARCHAR} fwtd,#{item.fwtn,jdbcType=VARCHAR} fwtn,#{item.fwtx,jdbcType=VARCHAR} fwtx,#{item.fwtb,jdbcType=VARCHAR} fwtb,#{item.blgxd,jdbcType=VARCHAR} blgxd,#{item.blgxn,jdbcType=VARCHAR} blgxn,#{item.blgxx,jdbcType=VARCHAR} blgxx,#{item.blgxb,jdbcType=VARCHAR} blgxb,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.sjc,jdbcType=DATE} sjc,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.bz,jdbcType=VARCHAR} bz,#{item.dwlxdm,jdbcType=VARCHAR} dwlxdm,#{item.dwid,jdbcType=VARCHAR} dwid,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  SY_SYJBXX t SET t.JLZT = 1  WHERE 1=1   AND t.PKID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="ShuiyuanVO"> 
+		UPDATE   SY_SYJBXX  
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="sybh != null">sybh=#{sybh},</if>
+			<if test="symc != null">symc=#{symc},</if>
+			<if test="sydz != null">sydz=#{sydz},</if>
+			<if test="sylx != null">sylx=#{sylx},</if>
+			<if test="sysxxxid != null">sysxxxid=#{sysxxxid},</if>
+			<if test="jgid != null">jgid=#{jgid},</if>
+			<if test="qsxs != null">qsxs=#{qsxs},</if>
+			<if test="kyzt != null">kyzt=#{kyzt},</if>
+			<if test="syzt != null">syzt=#{syzt},</if>
+			<if test="xz != null">xz=#{xz},</if>
+			<if test="czyid != null">czyid=#{czyid},</if>
+			<if test="shzt != null">shzt=#{shzt},</if>
+			<if test="zpwjurl != null">zpwjurl=#{zpwjurl},</if>
+			<if test="gisX != null">gis_x=#{gisX},</if>
+			<if test="gisY != null">gis_y=#{gisY},</if>
+			<if test="gisH != null">gis_h=#{gisH},</if>
+			<if test="glid != null">glid=#{glid},</if>
+			<if test="ssld != null">ssld=#{ssld},</if>
+			<if test="jzsj != null">jzsj=TO_DATE(#{jzsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="qysj != null">qysj=TO_DATE(#{qysj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="fwtd != null">fwtd=#{fwtd},</if>
+			<if test="fwtn != null">fwtn=#{fwtn},</if>
+			<if test="fwtx != null">fwtx=#{fwtx},</if>
+			<if test="fwtb != null">fwtb=#{fwtb},</if>
+			<if test="blgxd != null">blgxd=#{blgxd},</if>
+			<if test="blgxn != null">blgxn=#{blgxn},</if>
+			<if test="blgxx != null">blgxx=#{blgxx},</if>
+			<if test="blgxb != null">blgxb=#{blgxb},</if>
+			<if test="jlzt != null">jlzt=#{jlzt},</if>
+			<if test="cszt != null">cszt=#{cszt},</if>
+			<if test="sjbb != null">sjbb=#{sjbb},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="dwlxdm != null">dwlxdm=#{dwlxdm},</if>
+			<if test="dwid != null">dwid=#{dwid},</if>
+			<if test="vercol != null">vercol=TO_DATE(#{vercol},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
+			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO SY_SYJBXX(id,sybh,symc,sydz,sylx,sysxxxid,jgid,qsxs,kyzt,syzt,xz,czyid,shzt,zpwjurl,gis_x,gis_y,gis_h,glid,ssld,jzsj,qysj,fwtd,fwtn,fwtx,fwtb,blgxd,blgxn,blgxx,blgxb,jlzt,cszt,sjbb,cjsj,sjc,ywxtbsid,bz,dwlxdm,dwid,vercol,pkid,tbjdh,tbsjc)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.id,jdbcType=VARCHAR} id,#{item.sybh,jdbcType=VARCHAR} sybh,#{item.symc,jdbcType=VARCHAR} symc,#{item.sydz,jdbcType=VARCHAR} sydz,#{item.sylx,jdbcType=VARCHAR} sylx,#{item.sysxxxid,jdbcType=VARCHAR} sysxxxid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.qsxs,jdbcType=VARCHAR} qsxs,#{item.kyzt,jdbcType=DOUBLE} kyzt,#{item.syzt,jdbcType=DOUBLE} syzt,#{item.xz,jdbcType=VARCHAR} xz,#{item.czyid,jdbcType=VARCHAR} czyid,#{item.shzt,jdbcType=VARCHAR} shzt,#{item.zpwjurl,jdbcType=VARCHAR} zpwjurl,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.gisH,jdbcType=DOUBLE} gis_h,#{item.glid,jdbcType=VARCHAR} glid,#{item.ssld,jdbcType=VARCHAR} ssld,#{item.jzsj,jdbcType=DATE} jzsj,#{item.qysj,jdbcType=DATE} qysj,#{item.fwtd,jdbcType=VARCHAR} fwtd,#{item.fwtn,jdbcType=VARCHAR} fwtn,#{item.fwtx,jdbcType=VARCHAR} fwtx,#{item.fwtb,jdbcType=VARCHAR} fwtb,#{item.blgxd,jdbcType=VARCHAR} blgxd,#{item.blgxn,jdbcType=VARCHAR} blgxn,#{item.blgxx,jdbcType=VARCHAR} blgxx,#{item.blgxb,jdbcType=VARCHAR} blgxb,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.sjc,jdbcType=DATE} sjc,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.bz,jdbcType=VARCHAR} bz,#{item.dwlxdm,jdbcType=VARCHAR} dwlxdm,#{item.dwid,jdbcType=VARCHAR} dwid,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			id = VALUES(id),
+			sybh = VALUES(sybh),
+			symc = VALUES(symc),
+			sydz = VALUES(sydz),
+			sylx = VALUES(sylx),
+			sysxxxid = VALUES(sysxxxid),
+			jgid = VALUES(jgid),
+			qsxs = VALUES(qsxs),
+			kyzt = VALUES(kyzt),
+			syzt = VALUES(syzt),
+			xz = VALUES(xz),
+			czyid = VALUES(czyid),
+			shzt = VALUES(shzt),
+			zpwjurl = VALUES(zpwjurl),
+			gis_x = VALUES(gis_x),
+			gis_y = VALUES(gis_y),
+			gis_h = VALUES(gis_h),
+			glid = VALUES(glid),
+			ssld = VALUES(ssld),
+			jzsj = VALUES(jzsj),
+			qysj = VALUES(qysj),
+			fwtd = VALUES(fwtd),
+			fwtn = VALUES(fwtn),
+			fwtx = VALUES(fwtx),
+			fwtb = VALUES(fwtb),
+			blgxd = VALUES(blgxd),
+			blgxn = VALUES(blgxn),
+			blgxx = VALUES(blgxx),
+			blgxb = VALUES(blgxb),
+			jlzt = VALUES(jlzt),
+			cszt = VALUES(cszt),
+			sjbb = VALUES(sjbb),
+			cjsj = VALUES(cjsj),
+			sjc = VALUES(sjc),
+			ywxtbsid = VALUES(ywxtbsid),
+			bz = VALUES(bz),
+			dwlxdm = VALUES(dwlxdm),
+			dwid = VALUES(dwid),
+			vercol = VALUES(vercol),
+			pkid = VALUES(pkid),
+			tbjdh = VALUES(tbjdh),
+			tbsjc = VALUES(tbsjc)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM SY_SYJBXX t 
+		WHERE t.JLZT = 0
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--消火栓查询内容-->
+	<sql id="SQL_CONTENT_XHS">
+		t2.id xhsid,
+		t2.gwid xhsgwid,
+		t2.szxs xhsszxs,
+		t2.gsdw xhsgsdw,
+		t2.lxfs xhslxfs,
+		t2.gwxs xhsgwxs,
+		t2.gwzj xhsgwzj,
+		t2.gwyl xhsgwyl,
+		t2.jkxs xhsjkxs,
+		t2.ll xhsll,
+		t2.jgid xhsjgid,
+		t2.jlzt xhsjlzt,
+		t2.cszt xhscszt,
+		t2.sjbb xhssjbb,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xhscjsj,
+		t2.ywxtbsid xhsywxtbsid,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xhssjc,
+		t2.bz xhsbz,
+		TO_CHAR(t2.vercol,'yyyy-MM-dd HH24:mi:ss') xhsvercol,
+		t2.tbjdh xhstbjdh,
+		TO_CHAR(t2.tbsjc,'yyyy-MM-dd HH24:mi:ss') xhstbsjc,
+		t2.reserve1 xhsreserve1,
+		t2.reserve2 xhsreserve2,
+		TO_CHAR(t2.reserve3,'yyyy-MM-dd HH24:mi:ss') xhsreserve3
+	</sql>
+	<resultMap id="ShuiyuanXhsMap" type="com.syfri.digitalplan.model.basicinfo.watersource.ShuiyuanVO">
+		<id property="id" column="id"/>
+		<result property="symc" column="symc"/>
+		<result property="kyzt" column="kyzt"/>
+		<result property="sybh" column="sybh"/>
+		<result property="sydz" column="sydz"/>
+		<result property="jzsj" column="jzsj"/>
+		<result property="qysj" column="qysj"/>
+		<result property="ssld" column="ssld"/>
+		<result property="gisX" column="gisX"/>
+		<result property="gisY" column="gisY"/>
+		<collection property="xhs" ofType="com.syfri.digitalplan.model.basicinfo.watersource.XhsVO">
+			<id property="id" column="id"></id>
+			<result property="gwid" column="gwid"/>
+			<result property="szxs" column="szxs"/>
+			<result property="gsdw" column="gsdw"/>
+			<result property="lxfs" column="lxfs"/>
+			<result property="gwxs" column="gwxs"/>
+			<result property="gwzj" column="gwzj"/>
+			<result property="gwyl" column="gwyl"/>
+			<result property="jkxs" column="jkxs"/>
+			<result property="ll" column="ll"/>
+			<result property="bz" column="bz"/>
+		</collection>
+	</resultMap>
+
+	<!-- 查询水源信息列表，机构名称-->
+	<select id="doFindShuiyuanList" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SY_SYJBXX t
+		WHERE JLZT = 0
+		<include refid="SQL_CONDITION"/>
+	</select>
+	<!--水源信息详情 -->
+	<select id="doFindShuiyuanById" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SY_SYJBXX t
+		WHERE t.JLZT = 0 AND  t.id = #{id}
+	</select>
+</mapper>

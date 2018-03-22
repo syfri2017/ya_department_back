@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.basicinfo.watersource.XfscDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="pkid != null and pkid != '' ">
+		 and t.pkid = #{pkid}
+		</if>
+		<if test="id != null and id != '' ">
+		 and t.id = #{id}
+		</if>
+		<if test="sybgc != null and sybgc != '' ">
+		 and t.sybgc = #{sybgc}
+		</if>
+		<if test="rl != null and rl != '' ">
+		 and t.rl = #{rl}
+		</if>
+		<if test="jsll != null and jsll != '' ">
+		 and t.jsll = #{jsll}
+		</if>
+		<if test="gwxs != null and gwxs != '' ">
+		 and t.gwxs = #{gwxs}
+		</if>
+		<if test="tcwz != null and tcwz != '' ">
+		 and t.tcwz = #{tcwz}
+		</if>
+		<if test="tcsl != null and tcsl != '' ">
+		 and t.tcsl = #{tcsl}
+		</if>
+		<if test="jgid != null and jgid != '' ">
+		 and t.jgid = #{jgid}
+		</if>
+		<if test="jlzt != null and jlzt != '' ">
+		 and t.jlzt = #{jlzt}
+		</if>
+		<if test="cszt != null and cszt != '' ">
+		 and t.cszt = #{cszt}
+		</if>
+		<if test="sjbb != null and sjbb != '' ">
+		 and t.sjbb = #{sjbb}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and t.cjsj = #{cjsj}
+		</if>
+		<if test="ywxtbsid != null and ywxtbsid != '' ">
+		 and t.ywxtbsid = #{ywxtbsid}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and t.sjc = #{sjc}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and t.bz = #{bz}
+		</if>
+		<if test="vercol != null and vercol != '' ">
+		 and t.vercol = #{vercol}
+		</if>
+		<if test="tbjdh != null and tbjdh != '' ">
+		 and t.tbjdh = #{tbjdh}
+		</if>
+		<if test="tbsjc != null and tbsjc != '' ">
+		 and t.tbsjc = #{tbsjc}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and t.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and t.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and t.reserve3 = #{reserve3}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		t.pkid pkid,
+		t.id id,
+		t.sybgc sybgc,
+		t.rl rl,
+		t.jsll jsll,
+		t.gwxs gwxs,
+		t.tcwz tcwz,
+		t.tcsl tcsl,
+		t.jgid jgid,
+		t.jlzt jlzt,
+		t.cszt cszt,
+		t.sjbb sjbb,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.ywxtbsid ywxtbsid,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.bz bz,
+		TO_CHAR(t.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
+		t.tbjdh tbjdh,
+		TO_CHAR(t.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		TO_CHAR(t.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="XfscVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM SY_XFSCSXXX t WHERE 1=1 AND JLZT = 0
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="XfscVO"  resultType="XfscVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>
+		FROM SY_XFSCSXXX t  WHERE t.JLZT = 0
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="XfscVO"  resultType="XfscVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM SY_XFSCSXXX t 
+		WHERE t.JLZT = 0 AND  t.PKID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="XfscVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO SY_XFSCSXXX(pkid,id,sybgc,rl,jsll,gwxs,tcwz,tcsl,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR},#{sybgc,jdbcType=DOUBLE},#{rl,jdbcType=DOUBLE},#{jsll,jdbcType=DOUBLE},#{gwxs,jdbcType=VARCHAR},#{tcwz,jdbcType=VARCHAR},#{tcsl,jdbcType=DOUBLE},#{jgid,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{vercol,jdbcType=DATE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO SY_XFSCSXXX(pkid,id,sybgc,rl,jsll,gwxs,tcwz,tcsl,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.id,jdbcType=VARCHAR} id,#{item.sybgc,jdbcType=DOUBLE} sybgc,#{item.rl,jdbcType=DOUBLE} rl,#{item.jsll,jdbcType=DOUBLE} jsll,#{item.gwxs,jdbcType=VARCHAR} gwxs,#{item.tcwz,jdbcType=VARCHAR} tcwz,#{item.tcsl,jdbcType=DOUBLE} tcsl,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  SY_XFSCSXXX t SET t.JLZT = 1  WHERE 1=1   AND t.PKID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="XfscVO"> 
+		UPDATE   SY_XFSCSXXX  
+		<set>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="id != null">id=#{id},</if>
+			<if test="sybgc != null">sybgc=#{sybgc},</if>
+			<if test="rl != null">rl=#{rl},</if>
+			<if test="jsll != null">jsll=#{jsll},</if>
+			<if test="gwxs != null">gwxs=#{gwxs},</if>
+			<if test="tcwz != null">tcwz=#{tcwz},</if>
+			<if test="tcsl != null">tcsl=#{tcsl},</if>
+			<if test="jgid != null">jgid=#{jgid},</if>
+			<if test="jlzt != null">jlzt=#{jlzt},</if>
+			<if test="cszt != null">cszt=#{cszt},</if>
+			<if test="sjbb != null">sjbb=#{sjbb},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="vercol != null">vercol=TO_DATE(#{vercol},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
+			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO SY_XFSCSXXX(pkid,id,sybgc,rl,jsll,gwxs,tcwz,tcsl,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.id,jdbcType=VARCHAR} id,#{item.sybgc,jdbcType=DOUBLE} sybgc,#{item.rl,jdbcType=DOUBLE} rl,#{item.jsll,jdbcType=DOUBLE} jsll,#{item.gwxs,jdbcType=VARCHAR} gwxs,#{item.tcwz,jdbcType=VARCHAR} tcwz,#{item.tcsl,jdbcType=DOUBLE} tcsl,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			pkid = VALUES(pkid),
+			id = VALUES(id),
+			sybgc = VALUES(sybgc),
+			rl = VALUES(rl),
+			jsll = VALUES(jsll),
+			gwxs = VALUES(gwxs),
+			tcwz = VALUES(tcwz),
+			tcsl = VALUES(tcsl),
+			jgid = VALUES(jgid),
+			jlzt = VALUES(jlzt),
+			cszt = VALUES(cszt),
+			sjbb = VALUES(sjbb),
+			cjsj = VALUES(cjsj),
+			ywxtbsid = VALUES(ywxtbsid),
+			sjc = VALUES(sjc),
+			bz = VALUES(bz),
+			vercol = VALUES(vercol),
+			tbjdh = VALUES(tbjdh),
+			tbsjc = VALUES(tbsjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="XfscVO"  resultType="XfscVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM SY_XFSCSXXX t 
+		WHERE t.JLZT = 0
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<select id="doFindXfscById" parameterType="XfscVO"  resultType="XfscVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SY_XFSCSXXX t
+		WHERE t.JLZT = 0
+		AND t.id = #{id}
+	</select>
+</mapper>
