@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.basicinfo.equipstocksource.EquipstocksourceDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="pkid != null and pkid != '' ">
+		 and mx.pkid = #{pkid}
+		</if>
+		<if test="id != null and id != '' ">
+		 and mx.id = #{id}
+		</if>
+		<if test="ckid != null and ckid != '' ">
+		 and mx.ckid = #{ckid}
+		</if>
+		<if test="ckmc != null and ckmc != '' ">
+		 and mx.ckmc = #{ckmc}
+		</if>
+		<if test="hwid != null and hwid != '' ">
+		 and mx.hwid = #{hwid}
+		</if>
+		<if test="hwmc != null and hwmc != '' ">
+		 and mx.hwmc = #{hwmc}
+		</if>
+		<if test="zbqcbm != null and zbqcbm != '' ">
+		 and mx.zbqcbm = #{zbqcbm}
+		</if>
+		<if test="zbqcmc != null and zbqcmc != '' ">
+		 and mx.zbqcmc = #{zbqcmc}
+		</if>
+		<if test="ggxh != null and ggxh != '' ">
+		 and mx.ggxh = #{ggxh}
+		</if>
+		<if test="pch != null and pch != '' ">
+		 and mx.pch = #{pch}
+		</if>
+		<if test="yxqz != null and yxqz != '' ">
+		 and mx.yxqz = #{yxqz}
+		</if>
+		<if test="djzbid != null and djzbid != '' ">
+		 and mx.djzbid = #{djzbid}
+		</if>
+		<if test="djzbbm != null and djzbbm != '' ">
+		 and mx.djzbbm = #{djzbbm}
+		</if>
+		<if test="zcbh != null and zcbh != '' ">
+		 and mx.zcbh = #{zcbh}
+		</if>
+		<if test="cph != null and cph != '' ">
+		 and mx.cph = #{cph}
+		</if>
+		<if test="zbztdm != null and zbztdm != '' ">
+		 and mx.zbztdm = #{zbztdm}
+		</if>
+		<if test="sfkzz != null and sfkzz != '' ">
+		 and mx.sfkzz = #{sfkzz}
+		</if>
+		<if test="sfsc != null and sfsc != '' ">
+		 and mx.sfsc = #{sfsc}
+		</if>
+		<if test="kcsl != null and kcsl != '' ">
+		 and mx.kcsl = #{kcsl}
+		</if>
+		<if test="lysl != null and lysl != '' ">
+		 and mx.lysl = #{lysl}
+		</if>
+		<if test="zzsl != null and zzsl != '' ">
+		 and mx.zzsl = #{zzsl}
+		</if>
+		<if test="wxsl != null and wxsl != '' ">
+		 and mx.wxsl = #{wxsl}
+		</if>
+		<if test="ztsl != null and ztsl != '' ">
+		 and mx.ztsl = #{ztsl}
+		</if>
+		<if test="jldw != null and jldw != '' ">
+		 and mx.jldw = #{jldw}
+		</if>
+		<if test="dj != null and dj != '' ">
+		 and mx.dj = #{dj}
+		</if>
+		<if test="je != null and je != '' ">
+		 and mx.je = #{je}
+		</if>
+		<if test="ymxzid != null and ymxzid != '' ">
+		 and mx.ymxzid = #{ymxzid}
+		</if>
+		<if test="tzjlid != null and tzjlid != '' ">
+		 and mx.tzjlid = #{tzjlid}
+		</if>
+		<if test="zzdjzbid != null and zzdjzbid != '' ">
+		 and mx.zzdjzbid = #{zzdjzbid}
+		</if>
+		<if test="zzdjzbbm != null and zzdjzbbm != '' ">
+		 and mx.zzdjzbbm = #{zzdjzbbm}
+		</if>
+		<if test="bysj != null and bysj != '' ">
+		 and mx.bysj = #{bysj}
+		</if>
+		<if test="jcsj != null and jcsj != '' ">
+		 and mx.jcsj = #{jcsj}
+		</if>
+		<if test="jzsj != null and jzsj != '' ">
+		 and mx.jzsj = #{jzsj}
+		</if>
+		<if test="ssxfjgid != null and ssxfjgid != '' ">
+		 and mx.ssxfjgid = #{ssxfjgid}
+		</if>
+		<if test="ssxfjgmc != null and ssxfjgmc != '' ">
+		 and mx.ssxfjgmc = #{ssxfjgmc}
+		</if>
+		<if test="jlzt != null and jlzt != '' ">
+		 and mx.jlzt = #{jlzt}
+		</if>
+		<if test="cszt != null and cszt != '' ">
+		 and mx.cszt = #{cszt}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and mx.sjc = #{sjc}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and mx.bz = #{bz}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and mx.cjsj = #{cjsj}
+		</if>
+		<if test="sjbb != null and sjbb != '' ">
+		 and mx.sjbb = #{sjbb}
+		</if>
+		<if test="ywxtbsid != null and ywxtbsid != '' ">
+		 and mx.ywxtbsid = #{ywxtbsid}
+		</if>
+		<if test="jksjbb != null and jksjbb != '' ">
+		 and mx.jksjbb = #{jksjbb}
+		</if>
+		<if test="tbjdh != null and tbjdh != '' ">
+		 and mx.tbjdh = #{tbjdh}
+		</if>
+		<if test="tbsjc != null and tbsjc != '' ">
+		 and mx.tbsjc = #{tbsjc}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and mx.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and mx.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and mx.reserve3 = #{reserve3}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		mx.pkid pkid,
+		mx.id id,
+		mx.ckid ckid,
+		mx.ckmc ckmc,
+		mx.hwid hwid,
+		mx.hwmc hwmc,
+		mx.zbqcbm zbqcbm,
+		mx.zbqcmc zbqcmc,
+		mx.ggxh ggxh,
+		mx.pch pch,
+		TO_CHAR(mx.yxqz,'yyyy-MM-dd HH24:mi:ss') yxqz,
+		mx.djzbid djzbid,
+		mx.djzbbm djzbbm,
+		mx.zcbh zcbh,
+		mx.cph cph,
+		mx.zbztdm zbztdm,
+		mx.sfkzz sfkzz,
+		mx.sfsc sfsc,
+		mx.kcsl kcsl,
+		mx.lysl lysl,
+		mx.zzsl zzsl,
+		mx.wxsl wxsl,
+		mx.ztsl ztsl,
+		mx.jldw jldw,
+		mx.dj dj,
+		mx.je je,
+		mx.ymxzid ymxzid,
+		mx.tzjlid tzjlid,
+		mx.zzdjzbid zzdjzbid,
+		mx.zzdjzbbm zzdjzbbm,
+		TO_CHAR(mx.bysj,'yyyy-MM-dd HH24:mi:ss') bysj,
+		TO_CHAR(mx.jcsj,'yyyy-MM-dd HH24:mi:ss') jcsj,
+		TO_CHAR(mx.jzsj,'yyyy-MM-dd HH24:mi:ss') jzsj,
+		mx.ssxfjgid ssxfjgid,
+		mx.ssxfjgmc ssxfjgmc,
+		mx.jlzt jlzt,
+		mx.cszt cszt,
+		TO_CHAR(mx.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		mx.bz bz,
+		TO_CHAR(mx.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		mx.sjbb sjbb,
+		mx.ywxtbsid ywxtbsid,
+		mx.jksjbb jksjbb,
+		mx.tbjdh tbjdh,
+		TO_CHAR(mx.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
+		mx.reserve1 reserve1,
+		mx.reserve2 reserve2,
+		TO_CHAR(mx.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="EquipstocksourceVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM WL_ZBMXZ mx WHERE 1=1 AND JLZT = '1'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="EquipstocksourceVO"  resultType="EquipstocksourceVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>
+		FROM WL_ZBMXZ mx  WHERE mx.JLZT = '1'
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="EquipstocksourceVO"  resultType="EquipstocksourceVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBMXZ mx 
+		WHERE mx.JLZT = '1' AND  mx.ID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="EquipstocksourceVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO WL_ZBMXZ(pkid,id,ckid,ckmc,hwid,hwmc,zbqcbm,zbqcmc,ggxh,pch,yxqz,djzbid,djzbbm,zcbh,cph,zbztdm,sfkzz,sfsc,kcsl,lysl,zzsl,wxsl,ztsl,jldw,dj,je,ymxzid,tzjlid,zzdjzbid,zzdjzbbm,bysj,jcsj,jzsj,ssxfjgid,ssxfjgmc,jlzt,cszt,sjc,bz,cjsj,sjbb,ywxtbsid,jksjbb,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR},#{ckid,jdbcType=VARCHAR},#{ckmc,jdbcType=VARCHAR},#{hwid,jdbcType=VARCHAR},#{hwmc,jdbcType=VARCHAR},#{zbqcbm,jdbcType=VARCHAR},#{zbqcmc,jdbcType=VARCHAR},#{ggxh,jdbcType=VARCHAR},#{pch,jdbcType=VARCHAR},#{yxqz,jdbcType=DATE},#{djzbid,jdbcType=VARCHAR},#{djzbbm,jdbcType=VARCHAR},#{zcbh,jdbcType=VARCHAR},#{cph,jdbcType=VARCHAR},#{zbztdm,jdbcType=VARCHAR},#{sfkzz,jdbcType=VARCHAR},#{sfsc,jdbcType=VARCHAR},#{kcsl,jdbcType=DOUBLE},#{lysl,jdbcType=DOUBLE},#{zzsl,jdbcType=DOUBLE},#{wxsl,jdbcType=DOUBLE},#{ztsl,jdbcType=DOUBLE},#{jldw,jdbcType=VARCHAR},#{dj,jdbcType=DOUBLE},#{je,jdbcType=DOUBLE},#{ymxzid,jdbcType=VARCHAR},#{tzjlid,jdbcType=VARCHAR},#{zzdjzbid,jdbcType=VARCHAR},#{zzdjzbbm,jdbcType=VARCHAR},#{bysj,jdbcType=DATE},#{jcsj,jdbcType=DATE},#{jzsj,jdbcType=DATE},#{ssxfjgid,jdbcType=VARCHAR},#{ssxfjgmc,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{sjbb,jdbcType=DOUBLE},#{ywxtbsid,jdbcType=VARCHAR},#{jksjbb,jdbcType=DOUBLE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO WL_ZBMXZ(pkid,id,ckid,ckmc,hwid,hwmc,zbqcbm,zbqcmc,ggxh,pch,yxqz,djzbid,djzbbm,zcbh,cph,zbztdm,sfkzz,sfsc,kcsl,lysl,zzsl,wxsl,ztsl,jldw,dj,je,ymxzid,tzjlid,zzdjzbid,zzdjzbbm,bysj,jcsj,jzsj,ssxfjgid,ssxfjgmc,jlzt,cszt,sjc,bz,cjsj,sjbb,ywxtbsid,jksjbb,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.id,jdbcType=VARCHAR} id,#{item.ckid,jdbcType=VARCHAR} ckid,#{item.ckmc,jdbcType=VARCHAR} ckmc,#{item.hwid,jdbcType=VARCHAR} hwid,#{item.hwmc,jdbcType=VARCHAR} hwmc,#{item.zbqcbm,jdbcType=VARCHAR} zbqcbm,#{item.zbqcmc,jdbcType=VARCHAR} zbqcmc,#{item.ggxh,jdbcType=VARCHAR} ggxh,#{item.pch,jdbcType=VARCHAR} pch,#{item.yxqz,jdbcType=DATE} yxqz,#{item.djzbid,jdbcType=VARCHAR} djzbid,#{item.djzbbm,jdbcType=VARCHAR} djzbbm,#{item.zcbh,jdbcType=VARCHAR} zcbh,#{item.cph,jdbcType=VARCHAR} cph,#{item.zbztdm,jdbcType=VARCHAR} zbztdm,#{item.sfkzz,jdbcType=VARCHAR} sfkzz,#{item.sfsc,jdbcType=VARCHAR} sfsc,#{item.kcsl,jdbcType=DOUBLE} kcsl,#{item.lysl,jdbcType=DOUBLE} lysl,#{item.zzsl,jdbcType=DOUBLE} zzsl,#{item.wxsl,jdbcType=DOUBLE} wxsl,#{item.ztsl,jdbcType=DOUBLE} ztsl,#{item.jldw,jdbcType=VARCHAR} jldw,#{item.dj,jdbcType=DOUBLE} dj,#{item.je,jdbcType=DOUBLE} je,#{item.ymxzid,jdbcType=VARCHAR} ymxzid,#{item.tzjlid,jdbcType=VARCHAR} tzjlid,#{item.zzdjzbid,jdbcType=VARCHAR} zzdjzbid,#{item.zzdjzbbm,jdbcType=VARCHAR} zzdjzbbm,#{item.bysj,jdbcType=DATE} bysj,#{item.jcsj,jdbcType=DATE} jcsj,#{item.jzsj,jdbcType=DATE} jzsj,#{item.ssxfjgid,jdbcType=VARCHAR} ssxfjgid,#{item.ssxfjgmc,jdbcType=VARCHAR} ssxfjgmc,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.cjsj,jdbcType=DATE} cjsj,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.jksjbb,jdbcType=DOUBLE} jksjbb,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  WL_ZBMXZ mx SET mx.JLZT = '0'  WHERE 1=1   AND mx.ID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="EquipstocksourceVO"> 
+		UPDATE   WL_ZBMXZ  
+		<set>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="id != null">id=#{id},</if>
+			<if test="ckid != null">ckid=#{ckid},</if>
+			<if test="ckmc != null">ckmc=#{ckmc},</if>
+			<if test="hwid != null">hwid=#{hwid},</if>
+			<if test="hwmc != null">hwmc=#{hwmc},</if>
+			<if test="zbqcbm != null">zbqcbm=#{zbqcbm},</if>
+			<if test="zbqcmc != null">zbqcmc=#{zbqcmc},</if>
+			<if test="ggxh != null">ggxh=#{ggxh},</if>
+			<if test="pch != null">pch=#{pch},</if>
+			<if test="yxqz != null">yxqz=TO_DATE(#{yxqz},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="djzbid != null">djzbid=#{djzbid},</if>
+			<if test="djzbbm != null">djzbbm=#{djzbbm},</if>
+			<if test="zcbh != null">zcbh=#{zcbh},</if>
+			<if test="cph != null">cph=#{cph},</if>
+			<if test="zbztdm != null">zbztdm=#{zbztdm},</if>
+			<if test="sfkzz != null">sfkzz=#{sfkzz},</if>
+			<if test="sfsc != null">sfsc=#{sfsc},</if>
+			<if test="kcsl != null">kcsl=#{kcsl},</if>
+			<if test="lysl != null">lysl=#{lysl},</if>
+			<if test="zzsl != null">zzsl=#{zzsl},</if>
+			<if test="wxsl != null">wxsl=#{wxsl},</if>
+			<if test="ztsl != null">ztsl=#{ztsl},</if>
+			<if test="jldw != null">jldw=#{jldw},</if>
+			<if test="dj != null">dj=#{dj},</if>
+			<if test="je != null">je=#{je},</if>
+			<if test="ymxzid != null">ymxzid=#{ymxzid},</if>
+			<if test="tzjlid != null">tzjlid=#{tzjlid},</if>
+			<if test="zzdjzbid != null">zzdjzbid=#{zzdjzbid},</if>
+			<if test="zzdjzbbm != null">zzdjzbbm=#{zzdjzbbm},</if>
+			<if test="bysj != null">bysj=TO_DATE(#{bysj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="jcsj != null">jcsj=TO_DATE(#{jcsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="jzsj != null">jzsj=TO_DATE(#{jzsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="ssxfjgid != null">ssxfjgid=#{ssxfjgid},</if>
+			<if test="ssxfjgmc != null">ssxfjgmc=#{ssxfjgmc},</if>
+			<if test="jlzt != null">jlzt=#{jlzt},</if>
+			<if test="cszt != null">cszt=#{cszt},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="sjbb != null">sjbb=#{sjbb},</if>
+			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
+			<if test="jksjbb != null">jksjbb=#{jksjbb},</if>
+			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
+			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  ID = #{id}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO WL_ZBMXZ(pkid,id,ckid,ckmc,hwid,hwmc,zbqcbm,zbqcmc,ggxh,pch,yxqz,djzbid,djzbbm,zcbh,cph,zbztdm,sfkzz,sfsc,kcsl,lysl,zzsl,wxsl,ztsl,jldw,dj,je,ymxzid,tzjlid,zzdjzbid,zzdjzbbm,bysj,jcsj,jzsj,ssxfjgid,ssxfjgmc,jlzt,cszt,sjc,bz,cjsj,sjbb,ywxtbsid,jksjbb,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.id,jdbcType=VARCHAR} id,#{item.ckid,jdbcType=VARCHAR} ckid,#{item.ckmc,jdbcType=VARCHAR} ckmc,#{item.hwid,jdbcType=VARCHAR} hwid,#{item.hwmc,jdbcType=VARCHAR} hwmc,#{item.zbqcbm,jdbcType=VARCHAR} zbqcbm,#{item.zbqcmc,jdbcType=VARCHAR} zbqcmc,#{item.ggxh,jdbcType=VARCHAR} ggxh,#{item.pch,jdbcType=VARCHAR} pch,#{item.yxqz,jdbcType=DATE} yxqz,#{item.djzbid,jdbcType=VARCHAR} djzbid,#{item.djzbbm,jdbcType=VARCHAR} djzbbm,#{item.zcbh,jdbcType=VARCHAR} zcbh,#{item.cph,jdbcType=VARCHAR} cph,#{item.zbztdm,jdbcType=VARCHAR} zbztdm,#{item.sfkzz,jdbcType=VARCHAR} sfkzz,#{item.sfsc,jdbcType=VARCHAR} sfsc,#{item.kcsl,jdbcType=DOUBLE} kcsl,#{item.lysl,jdbcType=DOUBLE} lysl,#{item.zzsl,jdbcType=DOUBLE} zzsl,#{item.wxsl,jdbcType=DOUBLE} wxsl,#{item.ztsl,jdbcType=DOUBLE} ztsl,#{item.jldw,jdbcType=VARCHAR} jldw,#{item.dj,jdbcType=DOUBLE} dj,#{item.je,jdbcType=DOUBLE} je,#{item.ymxzid,jdbcType=VARCHAR} ymxzid,#{item.tzjlid,jdbcType=VARCHAR} tzjlid,#{item.zzdjzbid,jdbcType=VARCHAR} zzdjzbid,#{item.zzdjzbbm,jdbcType=VARCHAR} zzdjzbbm,#{item.bysj,jdbcType=DATE} bysj,#{item.jcsj,jdbcType=DATE} jcsj,#{item.jzsj,jdbcType=DATE} jzsj,#{item.ssxfjgid,jdbcType=VARCHAR} ssxfjgid,#{item.ssxfjgmc,jdbcType=VARCHAR} ssxfjgmc,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.cjsj,jdbcType=DATE} cjsj,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.jksjbb,jdbcType=DOUBLE} jksjbb,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			pkid = VALUES(pkid),
+			id = VALUES(id),
+			ckid = VALUES(ckid),
+			ckmc = VALUES(ckmc),
+			hwid = VALUES(hwid),
+			hwmc = VALUES(hwmc),
+			zbqcbm = VALUES(zbqcbm),
+			zbqcmc = VALUES(zbqcmc),
+			ggxh = VALUES(ggxh),
+			pch = VALUES(pch),
+			yxqz = VALUES(yxqz),
+			djzbid = VALUES(djzbid),
+			djzbbm = VALUES(djzbbm),
+			zcbh = VALUES(zcbh),
+			cph = VALUES(cph),
+			zbztdm = VALUES(zbztdm),
+			sfkzz = VALUES(sfkzz),
+			sfsc = VALUES(sfsc),
+			kcsl = VALUES(kcsl),
+			lysl = VALUES(lysl),
+			zzsl = VALUES(zzsl),
+			wxsl = VALUES(wxsl),
+			ztsl = VALUES(ztsl),
+			jldw = VALUES(jldw),
+			dj = VALUES(dj),
+			je = VALUES(je),
+			ymxzid = VALUES(ymxzid),
+			tzjlid = VALUES(tzjlid),
+			zzdjzbid = VALUES(zzdjzbid),
+			zzdjzbbm = VALUES(zzdjzbbm),
+			bysj = VALUES(bysj),
+			jcsj = VALUES(jcsj),
+			jzsj = VALUES(jzsj),
+			ssxfjgid = VALUES(ssxfjgid),
+			ssxfjgmc = VALUES(ssxfjgmc),
+			jlzt = VALUES(jlzt),
+			cszt = VALUES(cszt),
+			sjc = VALUES(sjc),
+			bz = VALUES(bz),
+			cjsj = VALUES(cjsj),
+			sjbb = VALUES(sjbb),
+			ywxtbsid = VALUES(ywxtbsid),
+			jksjbb = VALUES(jksjbb),
+			tbjdh = VALUES(tbjdh),
+			tbsjc = VALUES(tbsjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="EquipstocksourceVO"  resultType="EquipstocksourceVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBMXZ mx 
+		WHERE mx.JLZT = '1'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.根据条件查询-->
+	<select id="doSearchByVO" parameterType="EquipstocksourceVO"  resultType="EquipstocksourceVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBMXZ mx
+		WHERE mx.JLZT = '1'
+		<if test="zbqcmc != null and zbqcmc != '' ">
+			and mx.zbqcmc LIKE concat(concat('%',#{zbqcmc}),'%')
+		</if>
+		<if test="ckmc != null and ckmc != '' ">
+			and mx.ckmc LIKE concat(concat('%',#{ckmc}),'%')
+		</if>
+		<if test="hwmc != null and hwmc != '' ">
+			and mx.hwmc LIKE concat(concat('%',#{hwmc}),'%')
+		</if>
+	</select>
+
+	<!--13.根据ID查询记录-->
+	<select id="doFindDetailById" parameterType="String"  resultType="EquipstocksourceVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBMXZ mx
+		WHERE mx.JLZT = '1' AND  mx.ID = #{id}
+	</select>
+
+</mapper>
