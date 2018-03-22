@@ -337,7 +337,7 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--消火栓查询内容-->
+	<!--消火栓查询内容
 	<sql id="SQL_CONTENT_XHS">
 		t2.id xhsid,
 		t2.gwid xhsgwid,
@@ -389,6 +389,7 @@
 			<result property="bz" column="bz"/>
 		</collection>
 	</resultMap>
+	-->
 
 	<!-- 查询水源信息列表，机构名称-->
 	<select id="doFindShuiyuanList" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">
