@@ -23,8 +23,8 @@ public class TrsyController  extends BaseController<TrsyVO>{
 	public TrsyService getBaseService() {
 		return this.trsyService;
 	}
-	@ApiOperation(value="通过id获取消火栓信息",notes="查询一条信息")
-	@ApiImplicitParam(name="vo",value="消火栓对象")
+	@ApiOperation(value="通过id获取天然水源信息",notes="查询一条信息")
+	@ApiImplicitParam(name="vo",value="天然水源对象")
 	@PostMapping("/findById")
 	public @ResponseBody
 	ResultVO findById(@RequestBody TrsyVO trsyVO){

@@ -16,7 +16,7 @@
 		 and t.sydz = #{sydz}
 		</if>
 		<if test="sylx != null and sylx != '' ">
-		 and t.sylx = #{sylx}
+		 and t.sylx IN (${sylx})
 		</if>
 		<if test="sysxxxid != null and sysxxxid != '' ">
 		 and t.sysxxxid = #{sysxxxid}
@@ -391,7 +391,7 @@
 	</resultMap>
 	-->
 
-	<!-- 查询水源信息列表，机构名称-->
+	<!-- 查询水源信息列表，机构名称 水源类型可多选 -->
 	<select id="doFindShuiyuanList" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
