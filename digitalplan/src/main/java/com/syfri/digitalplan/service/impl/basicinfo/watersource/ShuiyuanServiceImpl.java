@@ -8,6 +8,7 @@ import com.syfri.digitalplan.model.basicinfo.watersource.ShuiyuanVO;
 import com.syfri.digitalplan.service.basicinfo.watersource.ShuiyuanService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Console;
 import java.util.List;
 
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -22,9 +23,14 @@ public class ShuiyuanServiceImpl extends BaseServiceImpl<ShuiyuanVO> implements 
 		return shuiyuanDAO;
 	}
 
-	/*--查询：根据用户获取用户及其角色--.*/
+	/*--查询：根据查询条件获取水源列表 水源类型为多选值--.*/
 	@Override
 	public List<ShuiyuanVO> doFindShuiyuanList(ShuiyuanVO shuiyuanVO) {
+		String str = shuiyuanVO.getSylx();
+		if(!(str.isEmpty())){
+			str = str.substring(0,str.length()-1);
+			shuiyuanVO.setSylx(str);
+		}
 		return shuiyuanDAO.doFindShuiyuanList(shuiyuanVO);
 	}
 
