@@ -14,6 +14,8 @@ import com.syfri.digitalplan.model.basicinfo.watersource.ShuiyuanVO;
 import com.syfri.digitalplan.service.basicinfo.watersource.ShuiyuanService;
 import com.syfri.baseapi.controller.BaseController;
 
+import java.util.List;
+
 @Api(value = "水源管理",tags = "水源管理API",description = "水源管理")
 @Controller
 @RequestMapping("shuiyuan")
@@ -32,15 +34,13 @@ public class ShuiyuanController  extends BaseController<ShuiyuanVO>{
 	 */
 	@ApiOperation(value="获取水源信息及机构名称",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="水源对象")
-
 	@PostMapping("/findByVO")
-	public @ResponseBody ResultVO findByVO(@RequestBody ShuiyuanVO shuiyuanVO){
+	public @ResponseBody ResultVO list(@RequestBody ShuiyuanVO shuiyuanVO ) {
 		ResultVO resultVO = ResultVO.build();
-		try{
+		try {
 			resultVO.setResult(shuiyuanService.doFindShuiyuanList(shuiyuanVO));
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.error("{}",e.getMessage());
-			resultVO.setCode(EConstants.CODE.FAILURE);
 		}
 		return resultVO;
 	}
@@ -60,5 +60,10 @@ public class ShuiyuanController  extends BaseController<ShuiyuanVO>{
 			resultVO.setCode(EConstants.CODE.FAILURE);
 		}
 		return resultVO;
+	}
+	@RequestMapping("find")
+	public List<ShuiyuanVO> find(){
+		ShuiyuanVO shuiyuanVO = new ShuiyuanVO();
+		return shuiyuanService.doSearchListByVO(shuiyuanVO);
 	}
 }
