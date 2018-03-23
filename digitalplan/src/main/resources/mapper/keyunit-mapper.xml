@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.keyunits.KeyunitDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="id != null and id != '' ">
+		 and k.id = #{id}
+		</if>
+		<if test="fhdwid != null and fhdwid != '' ">
+		 and k.fhdwid = #{fhdwid}
+		</if>
+		<if test="dwmc != null and dwmc != '' ">
+		 and k.dwmc = #{dwmc}
+		</if>
+		<if test="dwpyjc != null and dwpyjc != '' ">
+		 and k.dwpyjc = #{dwpyjc}
+		</if>
+		<if test="jjsyz != null and jjsyz != '' ">
+		 and k.jjsyz = #{jjsyz}
+		</if>
+		<if test="dwclsj != null and dwclsj != '' ">
+		 and k.dwclsj = #{dwclsj}
+		</if>
+		<if test="dwdj != null and dwdj != '' ">
+		 and k.dwdj = #{dwdj}
+		</if>
+		<if test="dwxz != null and dwxz != '' ">
+		 and k.dwxz = #{dwxz}
+		</if>
+		<if test="dwlxdm != null and dwlxdm != '' ">
+		 and k.dwlxdm = #{dwlxdm}
+		</if>
+		<if test="dwlxdmmc != null and dwlxdmmc != '' ">
+		 and k.dwlxdmmc = #{dwlxdmmc}
+		</if>
+		<if test="xzqy != null and xzqy != '' ">
+		 and k.xzqy = #{xzqy}
+		</if>
+		<if test="frdb != null and frdb != '' ">
+		 and k.frdb = #{frdb}
+		</if>
+		<if test="frdbsfz != null and frdbsfz != '' ">
+		 and k.frdbsfz = #{frdbsfz}
+		</if>
+		<if test="frdbdh != null and frdbdh != '' ">
+		 and k.frdbdh = #{frdbdh}
+		</if>
+		<if test="aqzrr != null and aqzrr != '' ">
+		 and k.aqzrr = #{aqzrr}
+		</if>
+		<if test="aqzrrsfz != null and aqzrrsfz != '' ">
+		 and k.aqzrrsfz = #{aqzrrsfz}
+		</if>
+		<if test="aqzrrdh != null and aqzrrdh != '' ">
+		 and k.aqzrrdh = #{aqzrrdh}
+		</if>
+		<if test="dwdzyx != null and dwdzyx != '' ">
+		 and k.dwdzyx = #{dwdzyx}
+		</if>
+		<if test="aqglr != null and aqglr != '' ">
+		 and k.aqglr = #{aqglr}
+		</if>
+		<if test="aqglrsfz != null and aqglrsfz != '' ">
+		 and k.aqglrsfz = #{aqglrsfz}
+		</if>
+		<if test="aqglrdh != null and aqglrdh != '' ">
+		 and k.aqglrdh = #{aqglrdh}
+		</if>
+		<if test="zjzxfglr != null and zjzxfglr != '' ">
+		 and k.zjzxfglr = #{zjzxfglr}
+		</if>
+		<if test="zjzxfglrsfz != null and zjzxfglrsfz != '' ">
+		 and k.zjzxfglrsfz = #{zjzxfglrsfz}
+		</if>
+		<if test="zjzxfglrdh != null and zjzxfglrdh != '' ">
+		 and k.zjzxfglrdh = #{zjzxfglrdh}
+		</if>
+		<if test="dwdz != null and dwdz != '' ">
+		 and k.dwdz = #{dwdz}
+		</if>
+		<if test="dwdh != null and dwdh != '' ">
+		 and k.dwdh = #{dwdh}
+		</if>
+		<if test="yzbm != null and yzbm != '' ">
+		 and k.yzbm = #{yzbm}
+		</if>
+		<if test="gdzc != null and gdzc != '' ">
+		 and k.gdzc = #{gdzc}
+		</if>
+		<if test="zgrs != null and zgrs != '' ">
+		 and k.zgrs = #{zgrs}
+		</if>
+		<if test="zdmj != null and zdmj != '' ">
+		 and k.zdmj = #{zdmj}
+		</if>
+		<if test="jzmj != null and jzmj != '' ">
+		 and k.jzmj = #{jzmj}
+		</if>
+		<if test="dwzsx != null and dwzsx != '' ">
+		 and k.dwzsx = #{dwzsx}
+		</if>
+		<if test="dwcsx != null and dwcsx != '' ">
+		 and k.dwcsx = #{dwcsx}
+		</if>
+		<if test="zdxfss != null and zdxfss != '' ">
+		 and k.zdxfss = #{zdxfss}
+		</if>
+		<if test="xfgxjgid != null and xfgxjgid != '' ">
+		 and k.xfgxjgid = #{xfgxjgid}
+		</if>
+		<if test="xfgxjgname != null and xfgxjgname != '' ">
+		 and k.xfgxjgname = #{xfgxjgname}
+		</if>
+		<if test="gisX != null and gisX != '' ">
+		 and k.gis_x = #{gisX}
+		</if>
+		<if test="gisY != null and gisY != '' ">
+		 and k.gis_y = #{gisY}
+		</if>
+		<if test="dlwz != null and dlwz != '' ">
+		 and k.dlwz = #{dlwz}
+		</if>
+		<if test="jzsl != null and jzsl != '' ">
+		 and k.jzsl = #{jzsl}
+		</if>
+		<if test="czyid != null and czyid != '' ">
+		 and k.czyid = #{czyid}
+		</if>
+		<if test="jgid != null and jgid != '' ">
+		 and k.jgid = #{jgid}
+		</if>
+		<if test="jgname != null and jgname != '' ">
+		 and k.jgname = #{jgname}
+		</if>
+		<if test="cszt != null and cszt != '' ">
+		 and k.cszt = #{cszt}
+		</if>
+		<if test="jlzt != null and jlzt != '' ">
+		 and k.jlzt = #{jlzt}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and k.sjc = #{sjc}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and k.bz = #{bz}
+		</if>
+		<if test="sjbb != null and sjbb != '' ">
+		 and k.sjbb = #{sjbb}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and k.cjsj = #{cjsj}
+		</if>
+		<if test="ywxtbsid != null and ywxtbsid != '' ">
+		 and k.ywxtbsid = #{ywxtbsid}
+		</if>
+		<if test="glid != null and glid != '' ">
+		 and k.glid = #{glid}
+		</if>
+		<if test="vercol != null and vercol != '' ">
+		 and k.vercol = #{vercol}
+		</if>
+		<if test="jksjbb != null and jksjbb != '' ">
+		 and k.jksjbb = #{jksjbb}
+		</if>
+		<if test="tbjdh != null and tbjdh != '' ">
+		 and k.tbjdh = #{tbjdh}
+		</if>
+		<if test="tbsjc != null and tbsjc != '' ">
+		 and k.tbsjc = #{tbsjc}
+		</if>
+		<if test="byzda != null and byzda != '' ">
+		 and k.byzda = #{byzda}
+		</if>
+		<if test="byzdb != null and byzdb != '' ">
+		 and k.byzdb = #{byzdb}
+		</if>
+		<if test="byzdc != null and byzdc != '' ">
+		 and k.byzdc = #{byzdc}
+		</if>
+		<if test="byzdd != null and byzdd != '' ">
+		 and k.byzdd = #{byzdd}
+		</if>
+		<if test="pkid != null and pkid != '' ">
+		 and k.pkid = #{pkid}
+		</if>
+		<if test="exteriorurl != null and exteriorurl != '' ">
+		 and k.exteriorurl = #{exteriorurl}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		k.id id,
+		k.fhdwid fhdwid,
+		k.dwmc dwmc,
+		k.dwpyjc dwpyjc,
+		k.jjsyz jjsyz,
+		TO_CHAR(k.dwclsj,'yyyy-MM-dd HH24:mi:ss') dwclsj,
+		k.dwdj dwdj,
+		k.dwxz dwxz,
+		k.dwlxdm dwlxdm,
+		k.dwlxdmmc dwlxdmmc,
+		k.xzqy xzqy,
+		k.frdb frdb,
+		k.frdbsfz frdbsfz,
+		k.frdbdh frdbdh,
+		k.aqzrr aqzrr,
+		k.aqzrrsfz aqzrrsfz,
+		k.aqzrrdh aqzrrdh,
+		k.dwdzyx dwdzyx,
+		k.aqglr aqglr,
+		k.aqglrsfz aqglrsfz,
+		k.aqglrdh aqglrdh,
+		k.zjzxfglr zjzxfglr,
+		k.zjzxfglrsfz zjzxfglrsfz,
+		k.zjzxfglrdh zjzxfglrdh,
+		k.dwdz dwdz,
+		k.dwdh dwdh,
+		k.yzbm yzbm,
+		k.gdzc gdzc,
+		k.zgrs zgrs,
+		k.zdmj zdmj,
+		k.jzmj jzmj,
+		k.dwzsx dwzsx,
+		k.dwcsx dwcsx,
+		k.zdxfss zdxfss,
+		k.xfgxjgid xfgxjgid,
+		k.xfgxjgname xfgxjgname,
+		k.gis_x gisX,
+		k.gis_y gisY,
+		k.dlwz dlwz,
+		k.jzsl jzsl,
+		k.czyid czyid,
+		k.jgid jgid,
+		k.jgname jgname,
+		k.cszt cszt,
+		k.jlzt jlzt,
+		TO_CHAR(k.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		k.bz bz,
+		k.sjbb sjbb,
+		TO_CHAR(k.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		k.ywxtbsid ywxtbsid,
+		k.glid glid,
+		TO_CHAR(k.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
+		k.jksjbb jksjbb,
+		k.tbjdh tbjdh,
+		TO_CHAR(k.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
+		k.byzda byzda,
+		k.byzdb byzdb,
+		k.byzdc byzdc,
+		k.byzdd byzdd,
+		k.pkid pkid,
+		k.exteriorurl exteriorurl
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="KeyunitVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM YAGL_MHDW k WHERE 1=1 AND JLZT = '1'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="KeyunitVO"  resultType="KeyunitVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>
+		FROM YAGL_MHDW k  WHERE k.JLZT = '1'
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="KeyunitVO"  resultType="KeyunitVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_MHDW k
+		WHERE k.JLZT = '1' AND  zb.PKID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="KeyunitVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO YAGL_MHDW(id,fhdwid,dwmc,dwpyjc,jjsyz,dwclsj,dwdj,dwxz,dwlxdm,dwlxdmmc,xzqy,frdb,frdbsfz,frdbdh,aqzrr,aqzrrsfz,aqzrrdh,dwdzyx,aqglr,aqglrsfz,aqglrdh,zjzxfglr,zjzxfglrsfz,zjzxfglrdh,dwdz,dwdh,yzbm,gdzc,zgrs,zdmj,jzmj,dwzsx,dwcsx,zdxfss,xfgxjgid,xfgxjgname,gis_x,gis_y,dlwz,jzsl,czyid,jgid,jgname,cszt,jlzt,sjc,bz,sjbb,cjsj,ywxtbsid,glid,vercol,jksjbb,tbjdh,tbsjc,byzda,byzdb,byzdc,byzdd,pkid,exteriorurl)
+		VALUES(#{id,jdbcType=VARCHAR},#{fhdwid,jdbcType=VARCHAR},#{dwmc,jdbcType=VARCHAR},#{dwpyjc,jdbcType=VARCHAR},#{jjsyz,jdbcType=VARCHAR},#{dwclsj,jdbcType=DATE},#{dwdj,jdbcType=VARCHAR},#{dwxz,jdbcType=VARCHAR},#{dwlxdm,jdbcType=VARCHAR},#{dwlxdmmc,jdbcType=VARCHAR},#{xzqy,jdbcType=VARCHAR},#{frdb,jdbcType=VARCHAR},#{frdbsfz,jdbcType=VARCHAR},#{frdbdh,jdbcType=VARCHAR},#{aqzrr,jdbcType=VARCHAR},#{aqzrrsfz,jdbcType=VARCHAR},#{aqzrrdh,jdbcType=VARCHAR},#{dwdzyx,jdbcType=VARCHAR},#{aqglr,jdbcType=VARCHAR},#{aqglrsfz,jdbcType=VARCHAR},#{aqglrdh,jdbcType=VARCHAR},#{zjzxfglr,jdbcType=VARCHAR},#{zjzxfglrsfz,jdbcType=VARCHAR},#{zjzxfglrdh,jdbcType=VARCHAR},#{dwdz,jdbcType=VARCHAR},#{dwdh,jdbcType=VARCHAR},#{yzbm,jdbcType=VARCHAR},#{gdzc,jdbcType=DOUBLE},#{zgrs,jdbcType=DOUBLE},#{zdmj,jdbcType=DOUBLE},#{jzmj,jdbcType=DOUBLE},#{dwzsx,jdbcType=VARCHAR},#{dwcsx,jdbcType=VARCHAR},#{zdxfss,jdbcType=DOUBLE},#{xfgxjgid,jdbcType=VARCHAR},#{xfgxjgname,jdbcType=VARCHAR},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE},#{dlwz,jdbcType=VARCHAR},#{jzsl,jdbcType=DOUBLE},#{czyid,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{jgname,jdbcType=VARCHAR},#{cszt,jdbcType=DOUBLE},#{jlzt,jdbcType=DOUBLE},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{glid,jdbcType=VARCHAR},#{vercol,jdbcType=DATE},#{jksjbb,jdbcType=DOUBLE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{byzda,jdbcType=VARCHAR},#{byzdb,jdbcType=VARCHAR},#{byzdc,jdbcType=VARCHAR},#{byzdd,jdbcType=VARCHAR},#{pkid,jdbcType=VARCHAR},#{exteriorurl,jdbcType=VARCHAR})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO YAGL_MHDW(id,fhdwid,dwmc,dwpyjc,jjsyz,dwclsj,dwdj,dwxz,dwlxdm,dwlxdmmc,xzqy,frdb,frdbsfz,frdbdh,aqzrr,aqzrrsfz,aqzrrdh,dwdzyx,aqglr,aqglrsfz,aqglrdh,zjzxfglr,zjzxfglrsfz,zjzxfglrdh,dwdz,dwdh,yzbm,gdzc,zgrs,zdmj,jzmj,dwzsx,dwcsx,zdxfss,xfgxjgid,xfgxjgname,gis_x,gis_y,dlwz,jzsl,czyid,jgid,jgname,cszt,jlzt,sjc,bz,sjbb,cjsj,ywxtbsid,glid,vercol,jksjbb,tbjdh,tbsjc,byzda,byzdb,byzdc,byzdd,pkid,exteriorurl)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.id,jdbcType=VARCHAR} id,#{item.fhdwid,jdbcType=VARCHAR} fhdwid,#{item.dwmc,jdbcType=VARCHAR} dwmc,#{item.dwpyjc,jdbcType=VARCHAR} dwpyjc,#{item.jjsyz,jdbcType=VARCHAR} jjsyz,#{item.dwclsj,jdbcType=DATE} dwclsj,#{item.dwdj,jdbcType=VARCHAR} dwdj,#{item.dwxz,jdbcType=VARCHAR} dwxz,#{item.dwlxdm,jdbcType=VARCHAR} dwlxdm,#{item.dwlxdmmc,jdbcType=VARCHAR} dwlxdmmc,#{item.xzqy,jdbcType=VARCHAR} xzqy,#{item.frdb,jdbcType=VARCHAR} frdb,#{item.frdbsfz,jdbcType=VARCHAR} frdbsfz,#{item.frdbdh,jdbcType=VARCHAR} frdbdh,#{item.aqzrr,jdbcType=VARCHAR} aqzrr,#{item.aqzrrsfz,jdbcType=VARCHAR} aqzrrsfz,#{item.aqzrrdh,jdbcType=VARCHAR} aqzrrdh,#{item.dwdzyx,jdbcType=VARCHAR} dwdzyx,#{item.aqglr,jdbcType=VARCHAR} aqglr,#{item.aqglrsfz,jdbcType=VARCHAR} aqglrsfz,#{item.aqglrdh,jdbcType=VARCHAR} aqglrdh,#{item.zjzxfglr,jdbcType=VARCHAR} zjzxfglr,#{item.zjzxfglrsfz,jdbcType=VARCHAR} zjzxfglrsfz,#{item.zjzxfglrdh,jdbcType=VARCHAR} zjzxfglrdh,#{item.dwdz,jdbcType=VARCHAR} dwdz,#{item.dwdh,jdbcType=VARCHAR} dwdh,#{item.yzbm,jdbcType=VARCHAR} yzbm,#{item.gdzc,jdbcType=DOUBLE} gdzc,#{item.zgrs,jdbcType=DOUBLE} zgrs,#{item.zdmj,jdbcType=DOUBLE} zdmj,#{item.jzmj,jdbcType=DOUBLE} jzmj,#{item.dwzsx,jdbcType=VARCHAR} dwzsx,#{item.dwcsx,jdbcType=VARCHAR} dwcsx,#{item.zdxfss,jdbcType=DOUBLE} zdxfss,#{item.xfgxjgid,jdbcType=VARCHAR} xfgxjgid,#{item.xfgxjgname,jdbcType=VARCHAR} xfgxjgname,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.dlwz,jdbcType=VARCHAR} dlwz,#{item.jzsl,jdbcType=DOUBLE} jzsl,#{item.czyid,jdbcType=VARCHAR} czyid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgname,jdbcType=VARCHAR} jgname,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.glid,jdbcType=VARCHAR} glid,#{item.vercol,jdbcType=DATE} vercol,#{item.jksjbb,jdbcType=DOUBLE} jksjbb,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.byzda,jdbcType=VARCHAR} byzda,#{item.byzdb,jdbcType=VARCHAR} byzdb,#{item.byzdc,jdbcType=VARCHAR} byzdc,#{item.byzdd,jdbcType=VARCHAR} byzdd,#{item.exteriorurl,jdbcType=VARCHAR} exteriorurl
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  YAGL_MHDW k SET k.JLZT = '0'  WHERE 1=1   AND k.PKID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="KeyunitVO"> 
+		UPDATE   YAGL_MHDW  
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="fhdwid != null">fhdwid=#{fhdwid},</if>
+			<if test="dwmc != null">dwmc=#{dwmc},</if>
+			<if test="dwpyjc != null">dwpyjc=#{dwpyjc},</if>
+			<if test="jjsyz != null">jjsyz=#{jjsyz},</if>
+			<if test="dwclsj != null">dwclsj=TO_DATE(#{dwclsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="dwdj != null">dwdj=#{dwdj},</if>
+			<if test="dwxz != null">dwxz=#{dwxz},</if>
+			<if test="dwlxdm != null">dwlxdm=#{dwlxdm},</if>
+			<if test="dwlxdmmc != null">dwlxdmmc=#{dwlxdmmc},</if>
+			<if test="xzqy != null">xzqy=#{xzqy},</if>
+			<if test="frdb != null">frdb=#{frdb},</if>
+			<if test="frdbsfz != null">frdbsfz=#{frdbsfz},</if>
+			<if test="frdbdh != null">frdbdh=#{frdbdh},</if>
+			<if test="aqzrr != null">aqzrr=#{aqzrr},</if>
+			<if test="aqzrrsfz != null">aqzrrsfz=#{aqzrrsfz},</if>
+			<if test="aqzrrdh != null">aqzrrdh=#{aqzrrdh},</if>
+			<if test="dwdzyx != null">dwdzyx=#{dwdzyx},</if>
+			<if test="aqglr != null">aqglr=#{aqglr},</if>
+			<if test="aqglrsfz != null">aqglrsfz=#{aqglrsfz},</if>
+			<if test="aqglrdh != null">aqglrdh=#{aqglrdh},</if>
+			<if test="zjzxfglr != null">zjzxfglr=#{zjzxfglr},</if>
+			<if test="zjzxfglrsfz != null">zjzxfglrsfz=#{zjzxfglrsfz},</if>
+			<if test="zjzxfglrdh != null">zjzxfglrdh=#{zjzxfglrdh},</if>
+			<if test="dwdz != null">dwdz=#{dwdz},</if>
+			<if test="dwdh != null">dwdh=#{dwdh},</if>
+			<if test="yzbm != null">yzbm=#{yzbm},</if>
+			<if test="gdzc != null">gdzc=#{gdzc},</if>
+			<if test="zgrs != null">zgrs=#{zgrs},</if>
+			<if test="zdmj != null">zdmj=#{zdmj},</if>
+			<if test="jzmj != null">jzmj=#{jzmj},</if>
+			<if test="dwzsx != null">dwzsx=#{dwzsx},</if>
+			<if test="dwcsx != null">dwcsx=#{dwcsx},</if>
+			<if test="zdxfss != null">zdxfss=#{zdxfss},</if>
+			<if test="xfgxjgid != null">xfgxjgid=#{xfgxjgid},</if>
+			<if test="xfgxjgname != null">xfgxjgname=#{xfgxjgname},</if>
+			<if test="gisX != null">gis_x=#{gisX},</if>
+			<if test="gisY != null">gis_y=#{gisY},</if>
+			<if test="dlwz != null">dlwz=#{dlwz},</if>
+			<if test="jzsl != null">jzsl=#{jzsl},</if>
+			<if test="czyid != null">czyid=#{czyid},</if>
+			<if test="jgid != null">jgid=#{jgid},</if>
+			<if test="jgname != null">jgname=#{jgname},</if>
+			<if test="cszt != null">cszt=#{cszt},</if>
+			<if test="jlzt != null">jlzt=#{jlzt},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="sjbb != null">sjbb=#{sjbb},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
+			<if test="glid != null">glid=#{glid},</if>
+			<if test="vercol != null">vercol=TO_DATE(#{vercol},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="jksjbb != null">jksjbb=#{jksjbb},</if>
+			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
+			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="byzda != null">byzda=#{byzda},</if>
+			<if test="byzdb != null">byzdb=#{byzdb},</if>
+			<if test="byzdc != null">byzdc=#{byzdc},</if>
+			<if test="byzdd != null">byzdd=#{byzdd},</if>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="exteriorurl != null">exteriorurl=#{exteriorurl}</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO YAGL_MHDW(id,fhdwid,dwmc,dwpyjc,jjsyz,dwclsj,dwdj,dwxz,dwlxdm,dwlxdmmc,xzqy,frdb,frdbsfz,frdbdh,aqzrr,aqzrrsfz,aqzrrdh,dwdzyx,aqglr,aqglrsfz,aqglrdh,zjzxfglr,zjzxfglrsfz,zjzxfglrdh,dwdz,dwdh,yzbm,gdzc,zgrs,zdmj,jzmj,dwzsx,dwcsx,zdxfss,xfgxjgid,xfgxjgname,gis_x,gis_y,dlwz,jzsl,czyid,jgid,jgname,cszt,jlzt,sjc,bz,sjbb,cjsj,ywxtbsid,glid,vercol,jksjbb,tbjdh,tbsjc,byzda,byzdb,byzdc,byzdd,pkid,exteriorurl)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.id,jdbcType=VARCHAR} id,#{item.fhdwid,jdbcType=VARCHAR} fhdwid,#{item.dwmc,jdbcType=VARCHAR} dwmc,#{item.dwpyjc,jdbcType=VARCHAR} dwpyjc,#{item.jjsyz,jdbcType=VARCHAR} jjsyz,#{item.dwclsj,jdbcType=DATE} dwclsj,#{item.dwdj,jdbcType=VARCHAR} dwdj,#{item.dwxz,jdbcType=VARCHAR} dwxz,#{item.dwlxdm,jdbcType=VARCHAR} dwlxdm,#{item.dwlxdmmc,jdbcType=VARCHAR} dwlxdmmc,#{item.xzqy,jdbcType=VARCHAR} xzqy,#{item.frdb,jdbcType=VARCHAR} frdb,#{item.frdbsfz,jdbcType=VARCHAR} frdbsfz,#{item.frdbdh,jdbcType=VARCHAR} frdbdh,#{item.aqzrr,jdbcType=VARCHAR} aqzrr,#{item.aqzrrsfz,jdbcType=VARCHAR} aqzrrsfz,#{item.aqzrrdh,jdbcType=VARCHAR} aqzrrdh,#{item.dwdzyx,jdbcType=VARCHAR} dwdzyx,#{item.aqglr,jdbcType=VARCHAR} aqglr,#{item.aqglrsfz,jdbcType=VARCHAR} aqglrsfz,#{item.aqglrdh,jdbcType=VARCHAR} aqglrdh,#{item.zjzxfglr,jdbcType=VARCHAR} zjzxfglr,#{item.zjzxfglrsfz,jdbcType=VARCHAR} zjzxfglrsfz,#{item.zjzxfglrdh,jdbcType=VARCHAR} zjzxfglrdh,#{item.dwdz,jdbcType=VARCHAR} dwdz,#{item.dwdh,jdbcType=VARCHAR} dwdh,#{item.yzbm,jdbcType=VARCHAR} yzbm,#{item.gdzc,jdbcType=DOUBLE} gdzc,#{item.zgrs,jdbcType=DOUBLE} zgrs,#{item.zdmj,jdbcType=DOUBLE} zdmj,#{item.jzmj,jdbcType=DOUBLE} jzmj,#{item.dwzsx,jdbcType=VARCHAR} dwzsx,#{item.dwcsx,jdbcType=VARCHAR} dwcsx,#{item.zdxfss,jdbcType=DOUBLE} zdxfss,#{item.xfgxjgid,jdbcType=VARCHAR} xfgxjgid,#{item.xfgxjgname,jdbcType=VARCHAR} xfgxjgname,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.dlwz,jdbcType=VARCHAR} dlwz,#{item.jzsl,jdbcType=DOUBLE} jzsl,#{item.czyid,jdbcType=VARCHAR} czyid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgname,jdbcType=VARCHAR} jgname,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.glid,jdbcType=VARCHAR} glid,#{item.vercol,jdbcType=DATE} vercol,#{item.jksjbb,jdbcType=DOUBLE} jksjbb,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.byzda,jdbcType=VARCHAR} byzda,#{item.byzdb,jdbcType=VARCHAR} byzdb,#{item.byzdc,jdbcType=VARCHAR} byzdc,#{item.byzdd,jdbcType=VARCHAR} byzdd,#{item.exteriorurl,jdbcType=VARCHAR} exteriorurl
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			id = VALUES(id),
+			fhdwid = VALUES(fhdwid),
+			dwmc = VALUES(dwmc),
+			dwpyjc = VALUES(dwpyjc),
+			jjsyz = VALUES(jjsyz),
+			dwclsj = VALUES(dwclsj),
+			dwdj = VALUES(dwdj),
+			dwxz = VALUES(dwxz),
+			dwlxdm = VALUES(dwlxdm),
+			dwlxdmmc = VALUES(dwlxdmmc),
+			xzqy = VALUES(xzqy),
+			frdb = VALUES(frdb),
+			frdbsfz = VALUES(frdbsfz),
+			frdbdh = VALUES(frdbdh),
+			aqzrr = VALUES(aqzrr),
+			aqzrrsfz = VALUES(aqzrrsfz),
+			aqzrrdh = VALUES(aqzrrdh),
+			dwdzyx = VALUES(dwdzyx),
+			aqglr = VALUES(aqglr),
+			aqglrsfz = VALUES(aqglrsfz),
+			aqglrdh = VALUES(aqglrdh),
+			zjzxfglr = VALUES(zjzxfglr),
+			zjzxfglrsfz = VALUES(zjzxfglrsfz),
+			zjzxfglrdh = VALUES(zjzxfglrdh),
+			dwdz = VALUES(dwdz),
+			dwdh = VALUES(dwdh),
+			yzbm = VALUES(yzbm),
+			gdzc = VALUES(gdzc),
+			zgrs = VALUES(zgrs),
+			zdmj = VALUES(zdmj),
+			jzmj = VALUES(jzmj),
+			dwzsx = VALUES(dwzsx),
+			dwcsx = VALUES(dwcsx),
+			zdxfss = VALUES(zdxfss),
+			xfgxjgid = VALUES(xfgxjgid),
+			xfgxjgname = VALUES(xfgxjgname),
+			gis_x = VALUES(gis_x),
+			gis_y = VALUES(gis_y),
+			dlwz = VALUES(dlwz),
+			jzsl = VALUES(jzsl),
+			czyid = VALUES(czyid),
+			jgid = VALUES(jgid),
+			jgname = VALUES(jgname),
+			cszt = VALUES(cszt),
+			jlzt = VALUES(jlzt),
+			sjc = VALUES(sjc),
+			bz = VALUES(bz),
+			sjbb = VALUES(sjbb),
+			cjsj = VALUES(cjsj),
+			ywxtbsid = VALUES(ywxtbsid),
+			glid = VALUES(glid),
+			vercol = VALUES(vercol),
+			jksjbb = VALUES(jksjbb),
+			tbjdh = VALUES(tbjdh),
+			tbsjc = VALUES(tbsjc),
+			byzda = VALUES(byzda),
+			byzdb = VALUES(byzdb),
+			byzdc = VALUES(byzdc),
+			byzdd = VALUES(byzdd),
+			pkid = VALUES(pkid),
+			exteriorurl = VALUES(exteriorurl)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="KeyunitVO"  resultType="KeyunitVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_MHDW k 
+		WHERE k.JLZT = '1'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.根据单位名称查询-->
+	<select id="doSearchByVO" parameterType="KeyunitVO"  resultType="KeyunitVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_MHDW k
+		WHERE k.JLZT = '1'
+		<if test="dwmc != null and dwmc != '' ">
+			and k.dwmc LIKE concat(concat('%',#{dwmc}),'%')
+		</if>
+	</select>
+
+	<!--13.根据ID查询记录-->
+	<select id="doFindDetailById" parameterType="String"  resultType="KeyunitVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_MHDW k
+		WHERE k.JLZT = '1' AND  k.PKID = #{pkid}
+	</select>
+
+</mapper>
