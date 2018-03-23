@@ -11,11 +11,6 @@ public class PathController {
 	@Autowired
 	protected Environment environment;
 
-	@RequestMapping("index")
-	public String index(){
-		return "index";
-	}
-
 	@RequestMapping("getPath")
 	public String getPath(){
 		if (environment.containsProperty("server.context-path")) {
