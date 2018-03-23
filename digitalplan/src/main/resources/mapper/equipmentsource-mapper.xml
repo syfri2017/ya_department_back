@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.basicinfo.equipmentsource.EquipmentsourceDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="pkid != null and pkid != '' ">
+		 and zb.pkid = #{pkid}
+		</if>
+		<if test="id != null and id != '' ">
+		 and zb.id = #{id}
+		</if>
+		<if test="zbqcbm != null and zbqcbm != '' ">
+		 and zb.zbqcbm = #{zbqcbm}
+		</if>
+		<if test="zbqcmc != null and zbqcmc != '' ">
+		 and zb.zbqcmc = #{zbqcmc}
+		</if>
+		<if test="zbqclxdm != null and zbqclxdm != '' ">
+		 and zb.zbqclxdm = #{zbqclxdm}
+		</if>
+		<if test="zbqclxmc != null and zbqclxmc != '' ">
+		 and zb.zbqclxmc = #{zbqclxmc}
+		</if>
+		<if test="cllxdm != null and cllxdm != '' ">
+		 and zb.cllxdm = #{cllxdm}
+		</if>
+		<if test="cllxmc != null and cllxmc != '' ">
+		 and zb.cllxmc = #{cllxmc}
+		</if>
+		<if test="sfxhxzb != null and sfxhxzb != '' ">
+		 and zb.sfxhxzb = #{sfxhxzb}
+		</if>
+		<if test="ggxh != null and ggxh != '' ">
+		 and zb.ggxh = #{ggxh}
+		</if>
+		<if test="jldwdm != null and jldwdm != '' ">
+		 and zb.jldwdm = #{jldwdm}
+		</if>
+		<if test="ckj != null and ckj != '' ">
+		 and zb.ckj = #{ckj}
+		</if>
+		<if test="zl != null and zl != '' ">
+		 and zb.zl = #{zl}
+		</if>
+		<if test="tj != null and tj != '' ">
+		 and zb.tj = #{tj}
+		</if>
+		<if test="cz != null and cz != '' ">
+		 and zb.cz = #{cz}
+		</if>
+		<if test="bzh != null and bzh != '' ">
+		 and zb.bzh = #{bzh}
+		</if>
+		<if test="jcph != null and jcph != '' ">
+		 and zb.jcph = #{jcph}
+		</if>
+		<if test="kssj != null and kssj != '' ">
+		 and zb.kssj = #{kssj}
+		</if>
+		<if test="zycf != null and zycf != '' ">
+		 and zb.zycf = #{zycf}
+		</if>
+		<if test="syfw != null and syfw != '' ">
+		 and zb.syfw = #{syfw}
+		</if>
+		<if test="zrjylbdm != null and zrjylbdm != '' ">
+		 and zb.zrjylbdm = #{zrjylbdm}
+		</if>
+		<if test="jkzbgndls != null and jkzbgndls != '' ">
+		 and zb.jkzbgndls = #{jkzbgndls}
+		</if>
+		<if test="shfwdw != null and shfwdw != '' ">
+		 and zb.shfwdw = #{shfwdw}
+		</if>
+		<if test="byzq != null and byzq != '' ">
+		 and zb.byzq = #{byzq}
+		</if>
+		<if test="jczq != null and jczq != '' ">
+		 and zb.jczq = #{jczq}
+		</if>
+		<if test="jlzt != null and jlzt != '' ">
+		 and zb.jlzt = #{jlzt}
+		</if>
+		<if test="cszt != null and cszt != '' ">
+		 and zb.cszt = #{cszt}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and zb.sjc = #{sjc}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and zb.bz = #{bz}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and zb.cjsj = #{cjsj}
+		</if>
+		<if test="sjbb != null and sjbb != '' ">
+		 and zb.sjbb = #{sjbb}
+		</if>
+		<if test="ywxtbsid != null and ywxtbsid != '' ">
+		 and zb.ywxtbsid = #{ywxtbsid}
+		</if>
+		<if test="vercol != null and vercol != '' ">
+		 and zb.vercol = #{vercol}
+		</if>
+		<if test="tbjdh != null and tbjdh != '' ">
+		 and zb.tbjdh = #{tbjdh}
+		</if>
+		<if test="tbsjc != null and tbsjc != '' ">
+		 and zb.tbsjc = #{tbsjc}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and zb.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and zb.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and zb.reserve3 = #{reserve3}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		zb.pkid pkid,
+		zb.id id,
+		zb.zbqcbm zbqcbm,
+		zb.zbqcmc zbqcmc,
+		zb.zbqclxdm zbqclxdm,
+		zb.zbqclxmc zbqclxmc,
+		zb.cllxdm cllxdm,
+		zb.cllxmc cllxmc,
+		zb.sfxhxzb sfxhxzb,
+		zb.ggxh ggxh,
+		zb.jldwdm jldwdm,
+		zb.ckj ckj,
+		zb.zl zl,
+		zb.tj tj,
+		zb.cz cz,
+		zb.bzh bzh,
+		zb.jcph jcph,
+		zb.kssj kssj,
+		zb.zycf zycf,
+		zb.syfw syfw,
+		zb.zrjylbdm zrjylbdm,
+		zb.jkzbgndls jkzbgndls,
+		zb.shfwdw shfwdw,
+		zb.byzq byzq,
+		zb.jczq jczq,
+		zb.jlzt jlzt,
+		zb.cszt cszt,
+		TO_CHAR(zb.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		zb.bz bz,
+		TO_CHAR(zb.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		zb.sjbb sjbb,
+		zb.ywxtbsid ywxtbsid,
+		TO_CHAR(zb.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
+		zb.tbjdh tbjdh,
+		TO_CHAR(zb.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
+		zb.reserve1 reserve1,
+		zb.reserve2 reserve2,
+		TO_CHAR(zb.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="EquipmentsourceVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM WL_ZBQCDY zb WHERE 1=1 AND JLZT = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="EquipmentsourceVO"  resultType="EquipmentsourceVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>
+		FROM WL_ZBQCDY zb  WHERE zb.JLZT = '1'
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="EquipmentsourceVO"  resultType="EquipmentsourceVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBQCDY zb
+		WHERE zb.DELETE_FLAG = 'N' AND  zb.ID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="EquipmentsourceVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO WL_ZBQCDY(pkid,id,zbqcbm,zbqcmc,zbqclxdm,zbqclxmc,cllxdm,cllxmc,sfxhxzb,ggxh,jldwdm,ckj,zl,tj,cz,bzh,jcph,kssj,zycf,syfw,zrjylbdm,jkzbgndls,shfwdw,byzq,jczq,jlzt,cszt,sjc,bz,cjsj,sjbb,ywxtbsid,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR},#{zbqcbm,jdbcType=VARCHAR},#{zbqcmc,jdbcType=VARCHAR},#{zbqclxdm,jdbcType=VARCHAR},#{zbqclxmc,jdbcType=VARCHAR},#{cllxdm,jdbcType=VARCHAR},#{cllxmc,jdbcType=VARCHAR},#{sfxhxzb,jdbcType=VARCHAR},#{ggxh,jdbcType=VARCHAR},#{jldwdm,jdbcType=VARCHAR},#{ckj,jdbcType=DOUBLE},#{zl,jdbcType=DOUBLE},#{tj,jdbcType=DOUBLE},#{cz,jdbcType=VARCHAR},#{bzh,jdbcType=VARCHAR},#{jcph,jdbcType=VARCHAR},#{kssj,jdbcType=VARCHAR},#{zycf,jdbcType=VARCHAR},#{syfw,jdbcType=VARCHAR},#{zrjylbdm,jdbcType=VARCHAR},#{jkzbgndls,jdbcType=VARCHAR},#{shfwdw,jdbcType=VARCHAR},#{byzq,jdbcType=DOUBLE},#{jczq,jdbcType=DOUBLE},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{sjbb,jdbcType=DOUBLE},#{ywxtbsid,jdbcType=VARCHAR},#{vercol,jdbcType=DATE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO WL_ZBQCDY(pkid,id,zbqcbm,zbqcmc,zbqclxdm,zbqclxmc,cllxdm,cllxmc,sfxhxzb,ggxh,jldwdm,ckj,zl,tj,cz,bzh,jcph,kssj,zycf,syfw,zrjylbdm,jkzbgndls,shfwdw,byzq,jczq,jlzt,cszt,sjc,bz,cjsj,sjbb,ywxtbsid,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.id,jdbcType=VARCHAR} id,#{item.zbqcbm,jdbcType=VARCHAR} zbqcbm,#{item.zbqcmc,jdbcType=VARCHAR} zbqcmc,#{item.zbqclxdm,jdbcType=VARCHAR} zbqclxdm,#{item.zbqclxmc,jdbcType=VARCHAR} zbqclxmc,#{item.cllxdm,jdbcType=VARCHAR} cllxdm,#{item.cllxmc,jdbcType=VARCHAR} cllxmc,#{item.sfxhxzb,jdbcType=VARCHAR} sfxhxzb,#{item.ggxh,jdbcType=VARCHAR} ggxh,#{item.jldwdm,jdbcType=VARCHAR} jldwdm,#{item.ckj,jdbcType=DOUBLE} ckj,#{item.zl,jdbcType=DOUBLE} zl,#{item.tj,jdbcType=DOUBLE} tj,#{item.cz,jdbcType=VARCHAR} cz,#{item.bzh,jdbcType=VARCHAR} bzh,#{item.jcph,jdbcType=VARCHAR} jcph,#{item.kssj,jdbcType=VARCHAR} kssj,#{item.zycf,jdbcType=VARCHAR} zycf,#{item.syfw,jdbcType=VARCHAR} syfw,#{item.zrjylbdm,jdbcType=VARCHAR} zrjylbdm,#{item.jkzbgndls,jdbcType=VARCHAR} jkzbgndls,#{item.shfwdw,jdbcType=VARCHAR} shfwdw,#{item.byzq,jdbcType=DOUBLE} byzq,#{item.jczq,jdbcType=DOUBLE} jczq,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.cjsj,jdbcType=DATE} cjsj,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  WL_ZBQCDY zb SET zb.JLZT = '0'  WHERE 1=1   AND zb.id = #{id}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="EquipmentsourceVO"> 
+		UPDATE   WL_ZBQCDY  
+		<set>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="id != null">id=#{id},</if>
+			<if test="zbqcbm != null">zbqcbm=#{zbqcbm},</if>
+			<if test="zbqcmc != null">zbqcmc=#{zbqcmc},</if>
+			<if test="zbqclxdm != null">zbqclxdm=#{zbqclxdm},</if>
+			<if test="zbqclxmc != null">zbqclxmc=#{zbqclxmc},</if>
+			<if test="cllxdm != null">cllxdm=#{cllxdm},</if>
+			<if test="cllxmc != null">cllxmc=#{cllxmc},</if>
+			<if test="sfxhxzb != null">sfxhxzb=#{sfxhxzb},</if>
+			<if test="ggxh != null">ggxh=#{ggxh},</if>
+			<if test="jldwdm != null">jldwdm=#{jldwdm},</if>
+			<if test="ckj != null">ckj=#{ckj},</if>
+			<if test="zl != null">zl=#{zl},</if>
+			<if test="tj != null">tj=#{tj},</if>
+			<if test="cz != null">cz=#{cz},</if>
+			<if test="bzh != null">bzh=#{bzh},</if>
+			<if test="jcph != null">jcph=#{jcph},</if>
+			<if test="kssj != null">kssj=#{kssj},</if>
+			<if test="zycf != null">zycf=#{zycf},</if>
+			<if test="syfw != null">syfw=#{syfw},</if>
+			<if test="zrjylbdm != null">zrjylbdm=#{zrjylbdm},</if>
+			<if test="jkzbgndls != null">jkzbgndls=#{jkzbgndls},</if>
+			<if test="shfwdw != null">shfwdw=#{shfwdw},</if>
+			<if test="byzq != null">byzq=#{byzq},</if>
+			<if test="jczq != null">jczq=#{jczq},</if>
+			<if test="jlzt != null">jlzt=#{jlzt},</if>
+			<if test="cszt != null">cszt=#{cszt},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="sjbb != null">sjbb=#{sjbb},</if>
+			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
+			<if test="vercol != null">vercol=TO_DATE(#{vercol},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
+			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  ID = #{id}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO WL_ZBQCDY(pkid,id,zbqcbm,zbqcmc,zbqclxdm,zbqclxmc,cllxdm,cllxmc,sfxhxzb,ggxh,jldwdm,ckj,zl,tj,cz,bzh,jcph,kssj,zycf,syfw,zrjylbdm,jkzbgndls,shfwdw,byzq,jczq,jlzt,cszt,sjc,bz,cjsj,sjbb,ywxtbsid,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.id,jdbcType=VARCHAR} id,#{item.zbqcbm,jdbcType=VARCHAR} zbqcbm,#{item.zbqcmc,jdbcType=VARCHAR} zbqcmc,#{item.zbqclxdm,jdbcType=VARCHAR} zbqclxdm,#{item.zbqclxmc,jdbcType=VARCHAR} zbqclxmc,#{item.cllxdm,jdbcType=VARCHAR} cllxdm,#{item.cllxmc,jdbcType=VARCHAR} cllxmc,#{item.sfxhxzb,jdbcType=VARCHAR} sfxhxzb,#{item.ggxh,jdbcType=VARCHAR} ggxh,#{item.jldwdm,jdbcType=VARCHAR} jldwdm,#{item.ckj,jdbcType=DOUBLE} ckj,#{item.zl,jdbcType=DOUBLE} zl,#{item.tj,jdbcType=DOUBLE} tj,#{item.cz,jdbcType=VARCHAR} cz,#{item.bzh,jdbcType=VARCHAR} bzh,#{item.jcph,jdbcType=VARCHAR} jcph,#{item.kssj,jdbcType=VARCHAR} kssj,#{item.zycf,jdbcType=VARCHAR} zycf,#{item.syfw,jdbcType=VARCHAR} syfw,#{item.zrjylbdm,jdbcType=VARCHAR} zrjylbdm,#{item.jkzbgndls,jdbcType=VARCHAR} jkzbgndls,#{item.shfwdw,jdbcType=VARCHAR} shfwdw,#{item.byzq,jdbcType=DOUBLE} byzq,#{item.jczq,jdbcType=DOUBLE} jczq,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.cjsj,jdbcType=DATE} cjsj,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			pkid = VALUES(pkid),
+			id = VALUES(id),
+			zbqcbm = VALUES(zbqcbm),
+			zbqcmc = VALUES(zbqcmc),
+			zbqclxdm = VALUES(zbqclxdm),
+			zbqclxmc = VALUES(zbqclxmc),
+			cllxdm = VALUES(cllxdm),
+			cllxmc = VALUES(cllxmc),
+			sfxhxzb = VALUES(sfxhxzb),
+			ggxh = VALUES(ggxh),
+			jldwdm = VALUES(jldwdm),
+			ckj = VALUES(ckj),
+			zl = VALUES(zl),
+			tj = VALUES(tj),
+			cz = VALUES(cz),
+			bzh = VALUES(bzh),
+			jcph = VALUES(jcph),
+			kssj = VALUES(kssj),
+			zycf = VALUES(zycf),
+			syfw = VALUES(syfw),
+			zrjylbdm = VALUES(zrjylbdm),
+			jkzbgndls = VALUES(jkzbgndls),
+			shfwdw = VALUES(shfwdw),
+			byzq = VALUES(byzq),
+			jczq = VALUES(jczq),
+			jlzt = VALUES(jlzt),
+			cszt = VALUES(cszt),
+			sjc = VALUES(sjc),
+			bz = VALUES(bz),
+			cjsj = VALUES(cjsj),
+			sjbb = VALUES(sjbb),
+			ywxtbsid = VALUES(ywxtbsid),
+			vercol = VALUES(vercol),
+			tbjdh = VALUES(tbjdh),
+			tbsjc = VALUES(tbsjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="EquipmentsourceVO"  resultType="EquipmentsourceVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBQCDY zb 
+		WHERE zb.JLZT = '1'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.根据条件查询-->
+	<select id="doSearchByVO" parameterType="EquipmentsourceVO"  resultType="EquipmentsourceVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBQCDY zb
+		WHERE zb.JLZT = '1'
+		<if test="zbqcmc != null and zbqcmc != '' ">
+			and zb.zbqcmc LIKE concat(concat('%',#{zbqcmc}),'%')
+		</if>
+	</select>
+
+	<!--13.根据ID查询记录-->
+	<select id="doFindDetailById" parameterType="String"  resultType="EquipmentsourceVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM WL_ZBQCDY zb
+		WHERE zb.JLZT = '1' AND  zb.ID = #{id}
+	</select>
+
+</mapper>
