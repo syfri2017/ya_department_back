@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,11 @@ import com.syfri.digitalplan.model.keyunits.KeyunitVO;
 import com.syfri.digitalplan.service.keyunits.KeyunitService;
 import com.syfri.baseapi.controller.BaseController;
 
-@RestController
+/*
+ * 获取路径Controller
+ * by liurui 2018/03/26
+ */
+@Controller
 @RequestMapping("keyunit")
 public class KeyunitController  extends BaseController<KeyunitVO>{
 

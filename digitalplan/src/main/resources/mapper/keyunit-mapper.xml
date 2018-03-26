@@ -459,6 +459,13 @@
 		WHERE k.JLZT = '1'
 		<if test="dwmc != null and dwmc != '' ">
 			and k.dwmc LIKE concat(concat('%',#{dwmc}),'%')
+			or k.dwpyjc LIKE concat(concat('%',#{dwmc}),'%')
+		</if>
+		<if test="begintime != null and begintime != '' ">
+			and k.cjsj &gt;= to_date(#{begintime},'yyyy/MM/dd')
+		</if>
+		<if test="endtime != null and endtime != '' ">
+			and k.cjsj &lt;=to_date(#{endtime},'yyyy/MM/dd')
 		</if>
 	</select>
 

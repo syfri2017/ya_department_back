@@ -437,6 +437,21 @@ public class KeyunitVO extends ValueObject implements Serializable{
 		this.exteriorurl = exteriorurl;
 	}
 
+	private String begintime;	//录入开始时间
+	private String endtime;	//录入结束时间
+	public String getBegintime(){
+		return begintime;
+	}
+	public void setBegintime(String begintime){
+		this.begintime = begintime;
+	}
+	public String getEndtime(){
+		return endtime;
+	}
+	public void setEndtime(String endtime){
+		this.endtime = endtime;
+	}
+
 //	private String yamc;	//预案名称
 //	private String yabh;	//预案编号
 //	private String bwmc;	//部位名称

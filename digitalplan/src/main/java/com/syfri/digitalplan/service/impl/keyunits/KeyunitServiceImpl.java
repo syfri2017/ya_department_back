@@ -25,10 +25,20 @@ public class KeyunitServiceImpl extends BaseServiceImpl<KeyunitVO> implements Ke
 	/*--条件查询：重点单位.--*/
 	@Override
 	public List<KeyunitVO> doFindKeyunitlist(KeyunitVO keyunitVO){
+		KeyunitVO keyunit = new KeyunitVO();
+		//单位名称
 		if(keyunitVO.getDwmc()!=null && !"".equals(keyunitVO.getDwmc())){
-			keyunitVO.setDwmc(keyunitVO.getDwmc().toUpperCase());
+			keyunit.setDwmc(keyunitVO.getDwmc().toUpperCase());
 		}
-		return keyunitDAO.doSearchByVO(keyunitVO);
+		//开始时间
+		if(keyunitVO.getBegintime()!=null&&!"".equals(keyunitVO.getBegintime())){
+			keyunit.setBegintime(keyunitVO.getBegintime().toUpperCase());
+		}
+		//结束时间
+		if(keyunitVO.getEndtime()!=null&&!"".equals(keyunitVO.getEndtime())){
+			keyunit.setEndtime(keyunitVO.getEndtime().toUpperCase());
+		}
+		return keyunitDAO.doSearchByVO(keyunit);
 	}
 
 	/*--根据重点单位id获取重点单位详情--*/
