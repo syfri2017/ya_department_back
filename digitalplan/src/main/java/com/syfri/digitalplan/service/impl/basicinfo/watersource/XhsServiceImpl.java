@@ -20,12 +20,5 @@ public class XhsServiceImpl extends BaseServiceImpl<XhsVO> implements XhsService
 	public XhsDAO getBaseDAO() {
 		return xhsDAO;
 	}
-	public XhsVO doFindXhsById(XhsVO xhsVO) {
-		return xhsDAO.doFindXhsById(xhsVO);
-	}
-	/*
-	public XhsVO getXhsByShuiyuanId(String id) {
-		XhsVO xhs = xhsDAO.doFindXhsById(id);
-		return xhs;
-	}*/
+
 }

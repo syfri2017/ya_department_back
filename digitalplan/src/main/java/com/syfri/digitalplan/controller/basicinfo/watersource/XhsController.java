@@ -22,17 +22,4 @@ public class XhsController  extends BaseController<XhsVO>{
 		return this.xhsService;
 	}
 
-	@ApiOperation(value="通过id获取消火栓信息",notes="查询一条信息")
-	@ApiImplicitParam(name="vo",value="消火栓对象")
-	@PostMapping("/findById")
-	public @ResponseBody ResultVO findById(@RequestBody XhsVO xhsVO){
-		ResultVO resultVO = ResultVO.build();
-		try{
-			resultVO.setResult(xhsService.doFindXhsById(xhsVO));
-		}catch(Exception e){
-			logger.error("{}",e.getMessage());
-			resultVO.setCode(EConstants.CODE.FAILURE);
-		}
-		return resultVO;
-	}
 }

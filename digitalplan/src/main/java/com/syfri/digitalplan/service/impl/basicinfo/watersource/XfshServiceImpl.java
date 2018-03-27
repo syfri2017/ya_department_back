@@ -21,7 +21,4 @@ public class XfshServiceImpl extends BaseServiceImpl<XfshVO> implements XfshServ
 		return xfshDAO;
 	}
 
-	public XfshVO doFindXfshById(XfshVO xfshVO) {
-		return xfshDAO.doFindXfshById(xfshVO);
-	}
 }

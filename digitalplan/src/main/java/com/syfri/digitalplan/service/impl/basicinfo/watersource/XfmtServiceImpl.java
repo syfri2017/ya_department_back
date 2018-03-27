@@ -21,7 +21,4 @@ public class XfmtServiceImpl extends BaseServiceImpl<XfmtVO> implements XfmtServ
 		return xfmtDAO;
 	}
 
-	public XfmtVO doFindXfmtById(XfmtVO xfmtVO) {
-		return xfmtDAO.doFindXfmtById(xfmtVO);
-	}
 }

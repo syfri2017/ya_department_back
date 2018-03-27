@@ -20,7 +20,5 @@ public class XfscServiceImpl extends BaseServiceImpl<XfscVO> implements XfscServ
 	public XfscDAO getBaseDAO() {
 		return xfscDAO;
 	}
-	public XfscVO doFindXfscById(XfscVO xfscVO) {
-		return xfscDAO.doFindXfscById(xfscVO);
-	}
+
 }

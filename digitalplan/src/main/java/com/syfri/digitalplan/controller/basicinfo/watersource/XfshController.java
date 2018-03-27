@@ -23,18 +23,4 @@ public class XfshController  extends BaseController<XfshVO>{
 	public XfshService getBaseService() {
 		return this.xfshService;
 	}
-	@ApiOperation(value="通过id获取消防水鹤信息",notes="查询一条信息")
-	@ApiImplicitParam(name="vo",value="消防水鹤")
-	@PostMapping("/findById")
-	public @ResponseBody
-	ResultVO findById(@RequestBody XfshVO xfshVO){
-		ResultVO resultVO = ResultVO.build();
-		try{
-			resultVO.setResult(xfshService.doFindXfshById(xfshVO));
-		}catch(Exception e){
-			logger.error("{}",e.getMessage());
-			resultVO.setCode(EConstants.CODE.FAILURE);
-		}
-		return resultVO;
-	}
 }

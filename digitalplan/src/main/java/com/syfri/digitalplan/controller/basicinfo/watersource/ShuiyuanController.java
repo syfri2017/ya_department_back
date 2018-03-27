@@ -47,6 +47,7 @@ public class ShuiyuanController  extends BaseController<ShuiyuanVO>{
 
 	/**
 	 * 获取水源信息及水源类型属性信息
+	 * by yushch 20180323
 	 */
 	@ApiOperation(value="通过id获取水源信息及水源类型属性信息",notes="查询一条信息")
 	@ApiImplicitParam(name="vo",value="水源对象")

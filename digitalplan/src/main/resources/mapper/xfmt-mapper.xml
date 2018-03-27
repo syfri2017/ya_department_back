@@ -205,12 +205,4 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<select id="doFindXfmtById" parameterType="XfmtVO"  resultType="XfmtVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM SY_XFMTSXXX t
-		WHERE t.JLZT = 0
-		AND t.id = #{id}
-	</select>
-
 </mapper>

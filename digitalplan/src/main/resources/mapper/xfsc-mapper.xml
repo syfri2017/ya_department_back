@@ -217,11 +217,4 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<select id="doFindXfscById" parameterType="XfscVO"  resultType="XfscVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM SY_XFSCSXXX t
-		WHERE t.JLZT = 0
-		AND t.id = #{id}
-	</select>
 </mapper>

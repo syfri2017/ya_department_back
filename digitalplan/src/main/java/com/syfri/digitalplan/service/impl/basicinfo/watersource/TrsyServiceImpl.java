@@ -20,7 +20,4 @@ public class TrsyServiceImpl extends BaseServiceImpl<TrsyVO> implements TrsyServ
 	public TrsyDAO getBaseDAO() {
 		return trsyDAO;
 	}
-	public TrsyVO doFindTrsyById(TrsyVO trsyVO) {
-		return trsyDAO.doFindTrsyById(trsyVO);
-	}
 }
