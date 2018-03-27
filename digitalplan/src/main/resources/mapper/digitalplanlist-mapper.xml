@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.syfri.digitalplan.dao.DigitalplanlistDAO">
+<mapper namespace="com.syfri.digitalplan.dao.digitalplan.DigitalplanlistDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="id != null and id != '' ">
@@ -63,8 +63,11 @@
 		<if test="zzdwmc != null and zzdwmc != '' ">
 		 and t.zzdwmc = #{zzdwmc}
 		</if>
-		<if test="zzrq != null and zzrq != '' ">
-		 and t.zzrq = #{zzrq}
+		<if test="begintime_create != null and begintime_create != '' ">
+			and t.zzrq &gt;= to_date(#{begintime_create},'yyyy/MM/dd')
+		</if>
+		<if test="endtime_create != null and endtime_create != '' ">
+			and t.zzrq &lt;= to_date(#{endtime_create},'yyyy/MM/dd')
 		</if>
 		<if test="czyid != null and czyid != '' ">
 		 and t.czyid = #{czyid}

@@ -1,7 +1,7 @@
-package com.syfri.digitalplan.service;
+package com.syfri.digitalplan.service.digitalplan;
 
 import com.syfri.baseapi.service.BaseService;
-import com.syfri.digitalplan.model.DigitalplanlistVO;
+import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 
 import java.util.List;
 

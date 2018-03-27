@@ -1,4 +1,4 @@
-package com.syfri.digitalplan.model;
+package com.syfri.digitalplan.model.digitalplan;
 
 import java.io.Serializable;
 
@@ -53,6 +53,8 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String byzdc;	//备用字段(3)
 	private String byzdd;	//备用字段(4)
 	private String pkid;	//ID
+	private String begintime_create;
+	private String endtime_create;
 
 	public String getId(){
 		return id;
@@ -323,5 +325,17 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	}
 	public void setPkid(String pkid){
 		this.pkid = pkid;
+	}
+	public String getBegintime_create(){
+		return begintime_create;
+	}
+	public void setBegintime_create(String begintime_create){
+		this.begintime_create = begintime_create;
+	}
+	public String getEndtime_create(){
+		return endtime_create;
+	}
+	public void setEndtime_create(String endtime_create){
+		this.endtime_create = endtime_create;
 	}
 }
