@@ -196,7 +196,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_SYJBXX t 
-		WHERE t.JLZT = 0 AND  t.PKID = #{value}
+		WHERE t.JLZT = 0 AND  t.ID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -223,7 +223,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SY_SYJBXX t SET t.JLZT = 1  WHERE 1=1   AND t.PKID = #{value}
+		UPDATE  SY_SYJBXX t SET t.JLZT = 1  WHERE 1=1   AND t.ID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -336,60 +336,6 @@
 		WHERE t.JLZT = 0
 		<include refid="SQL_CONDITION"/>
 	</select>
-
-	<!--消火栓查询内容
-	<sql id="SQL_CONTENT_XHS">
-		t2.id xhsid,
-		t2.gwid xhsgwid,
-		t2.szxs xhsszxs,
-		t2.gsdw xhsgsdw,
-		t2.lxfs xhslxfs,
-		t2.gwxs xhsgwxs,
-		t2.gwzj xhsgwzj,
-		t2.gwyl xhsgwyl,
-		t2.jkxs xhsjkxs,
-		t2.ll xhsll,
-		t2.jgid xhsjgid,
-		t2.jlzt xhsjlzt,
-		t2.cszt xhscszt,
-		t2.sjbb xhssjbb,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xhscjsj,
-		t2.ywxtbsid xhsywxtbsid,
-		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xhssjc,
-		t2.bz xhsbz,
-		TO_CHAR(t2.vercol,'yyyy-MM-dd HH24:mi:ss') xhsvercol,
-		t2.tbjdh xhstbjdh,
-		TO_CHAR(t2.tbsjc,'yyyy-MM-dd HH24:mi:ss') xhstbsjc,
-		t2.reserve1 xhsreserve1,
-		t2.reserve2 xhsreserve2,
-		TO_CHAR(t2.reserve3,'yyyy-MM-dd HH24:mi:ss') xhsreserve3
-	</sql>
-	<resultMap id="ShuiyuanXhsMap" type="com.syfri.digitalplan.model.basicinfo.watersource.ShuiyuanVO">
-		<id property="id" column="id"/>
-		<result property="symc" column="symc"/>
-		<result property="kyzt" column="kyzt"/>
-		<result property="sybh" column="sybh"/>
-		<result property="sydz" column="sydz"/>
-		<result property="jzsj" column="jzsj"/>
-		<result property="qysj" column="qysj"/>
-		<result property="ssld" column="ssld"/>
-		<result property="gisX" column="gisX"/>
-		<result property="gisY" column="gisY"/>
-		<collection property="xhs" ofType="com.syfri.digitalplan.model.basicinfo.watersource.XhsVO">
-			<id property="id" column="id"></id>
-			<result property="gwid" column="gwid"/>
-			<result property="szxs" column="szxs"/>
-			<result property="gsdw" column="gsdw"/>
-			<result property="lxfs" column="lxfs"/>
-			<result property="gwxs" column="gwxs"/>
-			<result property="gwzj" column="gwzj"/>
-			<result property="gwyl" column="gwyl"/>
-			<result property="jkxs" column="jkxs"/>
-			<result property="ll" column="ll"/>
-			<result property="bz" column="bz"/>
-		</collection>
-	</resultMap>
-	-->
 
 	<!-- 查询水源信息列表，机构名称 水源类型可多选 -->
 	<select id="doFindShuiyuanList" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">

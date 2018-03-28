@@ -116,7 +116,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_XFSCSXXX t 
-		WHERE t.JLZT = 0 AND  t.PKID = #{value}
+		WHERE t.JLZT = 0 AND  t.ID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -143,7 +143,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SY_XFSCSXXX t SET t.JLZT = 1  WHERE 1=1   AND t.PKID = #{value}
+		UPDATE  SY_XFSCSXXX t SET t.JLZT = 1  WHERE 1=1   AND t.ID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
