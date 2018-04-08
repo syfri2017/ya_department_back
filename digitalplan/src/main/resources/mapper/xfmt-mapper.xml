@@ -99,7 +99,7 @@
 	<select id="doSearchListByVO" parameterType="XfmtVO"  resultType="XfmtVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM SY_XFMTSXXX t  WHERE t.JLZT = 0
+		FROM SY_XFMTSXXX t  WHERE t.JLZT = 1
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -108,7 +108,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_XFMTSXXX t 
-		WHERE t.JLZT = 0 AND  t.ID = #{value}
+		WHERE t.JLZT = 1 AND  t.ID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -135,7 +135,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SY_XFMTSXXX t SET t.JLZT = 1  WHERE 1=1   AND t.ID = #{value}
+		UPDATE  SY_XFMTSXXX t SET t.JLZT = 0  WHERE 1=1   AND t.ID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -201,7 +201,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_XFMTSXXX t 
-		WHERE t.JLZT = 0
+		WHERE t.JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 
