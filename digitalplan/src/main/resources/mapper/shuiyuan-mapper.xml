@@ -196,7 +196,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_SYJBXX t 
-		WHERE t.JLZT = 0 AND  t.ID = #{value}
+		WHERE t.JLZT = 1 AND  t.ID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -223,7 +223,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SY_SYJBXX t SET t.JLZT = 1  WHERE 1=1   AND t.ID = #{value}
+		UPDATE  SY_SYJBXX t SET t.JLZT = 0  WHERE 1=1   AND t.ID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -333,7 +333,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_SYJBXX t 
-		WHERE t.JLZT = 0
+		WHERE t.JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -342,7 +342,7 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM SY_SYJBXX t
-		WHERE JLZT = 0
+		WHERE JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 	<!--水源信息详情 -->
@@ -350,6 +350,6 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM SY_SYJBXX t
-		WHERE t.JLZT = 0 AND  t.id = #{id}
+		WHERE t.JLZT = 1 AND  t.id = #{id}
 	</select>
 </mapper>

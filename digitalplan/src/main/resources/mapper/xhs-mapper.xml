@@ -3,9 +3,6 @@
 <mapper namespace="com.syfri.digitalplan.dao.basicinfo.watersource.XhsDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
-		<if test="pkid != null and pkid != '' ">
-		 and t.pkid = #{pkid}
-		</if>
 		<if test="id != null and id != '' ">
 		 and t.id = #{id}
 		</if>
@@ -63,26 +60,10 @@
 		<if test="vercol != null and vercol != '' ">
 		 and t.vercol = #{vercol}
 		</if>
-		<if test="tbjdh != null and tbjdh != '' ">
-		 and t.tbjdh = #{tbjdh}
-		</if>
-		<if test="tbsjc != null and tbsjc != '' ">
-		 and t.tbsjc = #{tbsjc}
-		</if>
-		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
-		</if>
-		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
-		</if>
-		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
-		</if>
 	</sql>
 
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
-		t.pkid pkid,
 		t.id id,
 		t.gwid gwid,
 		t.szxs szxs,
@@ -101,17 +82,12 @@
 		t.ywxtbsid ywxtbsid,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.bz bz,
-		TO_CHAR(t.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
-		t.tbjdh tbjdh,
-		TO_CHAR(t.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
-		t.reserve1 reserve1,
-		t.reserve2 reserve2,
-		TO_CHAR(t.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3
+		t.vercol vercol
 	</sql>
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="XhsVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM SY_XHSSXXX t WHERE 1=1 AND JLZT = 0
+		SELECT COUNT(0) AS NUM FROM SY_XHSSXXX t WHERE 1=1 AND JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -119,7 +95,7 @@
 	<select id="doSearchListByVO" parameterType="XhsVO"  resultType="XhsVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM SY_XHSSXXX t  WHERE t.JLZT = 0
+		FROM SY_XHSSXXX t  WHERE t.JLZT = 1
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -128,7 +104,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_XHSSXXX t 
-		WHERE t.JLZT = 0 AND  t.ID = #{value}
+		WHERE t.JLZT = 1 AND  t.ID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -136,18 +112,18 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
-		INSERT INTO SY_XHSSXXX(pkid,id,gwid,szxs,gsdw,lxfs,gwxs,gwzj,gwyl,jkxs,ll,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
-		VALUES(#{pkid,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR},#{gwid,jdbcType=VARCHAR},#{szxs,jdbcType=VARCHAR},#{gsdw,jdbcType=VARCHAR},#{lxfs,jdbcType=VARCHAR},#{gwxs,jdbcType=VARCHAR},#{gwzj,jdbcType=DOUBLE},#{gwyl,jdbcType=DOUBLE},#{jkxs,jdbcType=VARCHAR},#{ll,jdbcType=DOUBLE},#{jgid,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{vercol,jdbcType=DATE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
+		INSERT INTO SY_XHSSXXX(id,gwid,szxs,gsdw,lxfs,gwxs,gwzj,gwyl,jkxs,ll,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol)
+		VALUES(#{id,jdbcType=VARCHAR},#{gwid,jdbcType=VARCHAR},#{szxs,jdbcType=VARCHAR},#{gsdw,jdbcType=VARCHAR},#{lxfs,jdbcType=VARCHAR},#{gwxs,jdbcType=VARCHAR},#{gwzj,jdbcType=DOUBLE},#{gwyl,jdbcType=DOUBLE},#{jkxs,jdbcType=VARCHAR},#{ll,jdbcType=DOUBLE},#{jgid,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{vercol,jdbcType=VARCHAR})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO SY_XHSSXXX(pkid,id,gwid,szxs,gsdw,lxfs,gwxs,gwzj,gwyl,jkxs,ll,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		INSERT INTO SY_XHSSXXX(id,gwid,szxs,gsdw,lxfs,gwxs,gwzj,gwyl,jkxs,ll,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol)
 		SELECT SYS_GUID() pkid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.id,jdbcType=VARCHAR} id,#{item.gwid,jdbcType=VARCHAR} gwid,#{item.szxs,jdbcType=VARCHAR} szxs,#{item.gsdw,jdbcType=VARCHAR} gsdw,#{item.lxfs,jdbcType=VARCHAR} lxfs,#{item.gwxs,jdbcType=VARCHAR} gwxs,#{item.gwzj,jdbcType=DOUBLE} gwzj,#{item.gwyl,jdbcType=DOUBLE} gwyl,#{item.jkxs,jdbcType=VARCHAR} jkxs,#{item.ll,jdbcType=DOUBLE} ll,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+			#{item.id,jdbcType=VARCHAR} id,#{item.gwid,jdbcType=VARCHAR} gwid,#{item.szxs,jdbcType=VARCHAR} szxs,#{item.gsdw,jdbcType=VARCHAR} gsdw,#{item.lxfs,jdbcType=VARCHAR} lxfs,#{item.gwxs,jdbcType=VARCHAR} gwxs,#{item.gwzj,jdbcType=DOUBLE} gwzj,#{item.gwyl,jdbcType=DOUBLE} gwyl,#{item.jkxs,jdbcType=VARCHAR} jkxs,#{item.ll,jdbcType=DOUBLE} ll,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.vercol,jdbcType=VARCHAR} vercol
 		FROM DUAL
 		</foreach>
 		) A
@@ -155,14 +131,13 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  SY_XHSSXXX t SET t.JLZT = 1  WHERE 1=1   AND t.ID = #{value}
+		UPDATE  SY_XHSSXXX t SET t.JLZT = 0  WHERE 1=1   AND t.ID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="XhsVO"> 
 		UPDATE   SY_XHSSXXX  
 		<set>
-			<if test="pkid != null">pkid=#{pkid},</if>
 			<if test="id != null">id=#{id},</if>
 			<if test="gwid != null">gwid=#{gwid},</if>
 			<if test="szxs != null">szxs=#{szxs},</if>
@@ -181,25 +156,19 @@
 			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
 			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="bz != null">bz=#{bz},</if>
-			<if test="vercol != null">vercol=TO_DATE(#{vercol},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
-			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="reserve1 != null">reserve1=#{reserve1},</if>
-			<if test="reserve2 != null">reserve2=#{reserve2},</if>
-			<if test="reserve3 != null">reserve3=TO_DATE(#{reserve3},'yyyy-MM-dd HH24:mi:ss')</if>
+			<if test="vercol != null">vercol=#{vercol}</if>
 		</set>
 		WHERE  PKID = #{pkid}
 	</update>
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO SY_XHSSXXX(pkid,id,gwid,szxs,gsdw,lxfs,gwxs,gwzj,gwyl,jkxs,ll,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		INSERT INTO SY_XHSSXXX(id,gwid,szxs,gsdw,lxfs,gwxs,gwzj,gwyl,jkxs,ll,jgid,jlzt,cszt,sjbb,cjsj,ywxtbsid,sjc,bz,vercol)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.id,jdbcType=VARCHAR} id,#{item.gwid,jdbcType=VARCHAR} gwid,#{item.szxs,jdbcType=VARCHAR} szxs,#{item.gsdw,jdbcType=VARCHAR} gsdw,#{item.lxfs,jdbcType=VARCHAR} lxfs,#{item.gwxs,jdbcType=VARCHAR} gwxs,#{item.gwzj,jdbcType=DOUBLE} gwzj,#{item.gwyl,jdbcType=DOUBLE} gwyl,#{item.jkxs,jdbcType=VARCHAR} jkxs,#{item.ll,jdbcType=DOUBLE} ll,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
+			#{item.id,jdbcType=VARCHAR} id,#{item.gwid,jdbcType=VARCHAR} gwid,#{item.szxs,jdbcType=VARCHAR} szxs,#{item.gsdw,jdbcType=VARCHAR} gsdw,#{item.lxfs,jdbcType=VARCHAR} lxfs,#{item.gwxs,jdbcType=VARCHAR} gwxs,#{item.gwzj,jdbcType=DOUBLE} gwzj,#{item.gwyl,jdbcType=DOUBLE} gwyl,#{item.jkxs,jdbcType=VARCHAR} jkxs,#{item.ll,jdbcType=DOUBLE} ll,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.vercol,jdbcType=VARCHAR} vercol
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
-			pkid = VALUES(pkid),
 			id = VALUES(id),
 			gwid = VALUES(gwid),
 			szxs = VALUES(szxs),
@@ -218,12 +187,7 @@
 			ywxtbsid = VALUES(ywxtbsid),
 			sjc = VALUES(sjc),
 			bz = VALUES(bz),
-			vercol = VALUES(vercol),
-			tbjdh = VALUES(tbjdh),
-			tbsjc = VALUES(tbsjc),
-			reserve1 = VALUES(reserve1),
-			reserve2 = VALUES(reserve2),
-			reserve3 = VALUES(reserve3)
+			vercol = VALUES(vercol)
 	</update>
 
 	<!--11.根据对象查询记录-->
@@ -231,7 +195,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_XHSSXXX t 
-		WHERE t.JLZT = 0
+		WHERE t.JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 

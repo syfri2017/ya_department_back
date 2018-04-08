@@ -263,7 +263,7 @@
 	<select id="doSearchListByVO" parameterType="FireengineVO"  resultType="FireengineVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM WL_CLXX t  WHERE t.jlzt = 0
+		FROM WL_CLXX t  WHERE t.jlzt = 1
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -272,7 +272,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM WL_CLXX t 
-		WHERE t.jlzt = 0 AND t.id = #{value}
+		WHERE t.jlzt = 1 AND t.id = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -299,7 +299,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  WL_CLXX t SET t.jlzt = 1  WHERE 1=1   AND t.PKID = #{value}
+		UPDATE  WL_CLXX t SET t.jlzt = 0  WHERE 1=1   AND t.PKID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -447,7 +447,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM WL_CLXX t 
-		WHERE t.jlzt = 0
+		WHERE t.jlzt = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 
