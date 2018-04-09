@@ -96,8 +96,8 @@
 	</select>
 
 	<!--4.按条件查询记录-->
-	<select id="doSearchListByVO" parameterType="XfmtVO"  resultType="XfmtVO"> 
-		SELECT 
+	<select id="doSearchListByVO" parameterType="XfmtVO"  resultType="XfmtVO">
+		SELECT
 			<include refid="SQL_CONTENT"/>
 		FROM SY_XFMTSXXX t  WHERE t.JLZT = 1
 			<include refid="SQL_CONDITION"/>
@@ -203,6 +203,53 @@
 		FROM SY_XFMTSXXX t 
 		WHERE t.JLZT = 1
 		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.按id查询消防码头及天然水源属性-->
+	<resultMap id="xfmtTrsyMap" type="com.syfri.digitalplan.model.basicinfo.watersource.XfmtVO">
+		<id property="id" column="id"/>
+		<result property="trsyid" column="trsyid"/>
+		<result property="sybgc" column="sybgc"/>
+		<result property="tcwz" column="tcwz"/>
+		<result property="tcsl" column="tcsl"/>
+		<result property="jgid" column="jgid"/>
+		<result property="jlzt" column="jlzt"/>
+		<result property="cszt" column="cszt"/>
+		<result property="sjbb" column="sjbb"/>
+		<result property="cjsj" column="cjsj"/>
+		<result property="ywxtbsid" column="ywxtbsid"/>
+		<result property="sjc" column="sjc"/>
+		<result property="bz" column="bz"/>
+		<result property="vercol" column="vercol"/>
+		<result property="tbjdh" column="tbjdh"/>
+		<result property="tbsjc" column="tbsjc"/>
+		<result property="pkid" column="pkid"/>
+		<collection property="trsy" ofType="com.syfri.digitalplan.model.basicinfo.watersource.TrsyVO">
+			<id property="id" column="id"></id>
+			<result property="trsymc" column="trsymc"/>
+			<result property="trsywz" column="trsywz"/>
+			<result property="trsylx" column="trsylx"/>
+			<result property="sz" column="sz"/>
+			<result property="ywksq" column="ywksq"/>
+			<result property="sjbh" column="sjbh"/>
+			<result property="trsyrl" column="trsyrl"/>
+			<result property="trsymj" column="trsymj"/>
+		</collection>
+	</resultMap>
+
+	<select id="doFindXfmtById" parameterType="XfmtVO"  resultMap="xfmtTrsyMap">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		t2.trsymc,
+		t2.trsywz,
+		t2.trsylx,
+		t2.sz,
+		t2.ywksq,
+		t2.sjbh,
+		t2.trsyrl,
+		t2.trsymj
+		FROM SY_XFMTSXXX t,SY_TRSYXX t2
+		WHERE t.id = #{id} AND t.JLZT = 1 AND t.trsyid=t2.id
 	</select>
 
 </mapper>

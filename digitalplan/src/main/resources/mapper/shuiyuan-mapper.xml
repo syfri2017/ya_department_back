@@ -196,7 +196,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM SY_SYJBXX t 
-		WHERE t.JLZT = 1 AND  t.ID = #{value}
+		WHERE t.JLZT = 0 AND  t.ID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->

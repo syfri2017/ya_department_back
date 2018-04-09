@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.model.basicinfo.watersource;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 
@@ -28,6 +29,7 @@ public class XfmtVO extends ValueObject implements Serializable{
 	private String reserve1;	//备用字段1
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
+	private List<TrsyVO> trsy;
 
 	public String getPkid(){
 		return pkid;
@@ -148,5 +150,11 @@ public class XfmtVO extends ValueObject implements Serializable{
 	}
 	public void setReserve3(String reserve3){
 		this.reserve3 = reserve3;
+	}
+	public List<TrsyVO> getTrsy() {
+		return trsy;
+	}
+	public void setTrsy(List<TrsyVO> trsy) {
+		this.trsy = trsy;
 	}
 }
