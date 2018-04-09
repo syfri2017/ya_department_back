@@ -337,19 +337,26 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!-- 查询水源信息列表，机构名称 水源类型可多选 -->
+	<!-- 查询水源信息列表，水源类型名称 水源类型可多选 -->
 	<select id="doFindShuiyuanList" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
+		t2.code_name lxmc
 		FROM SY_SYJBXX t
+	  	INNER JOIN SYS_CODELIST_DETAIL t2 ON t.sylx = t2.code_value
 		WHERE JLZT = 1
 		<include refid="SQL_CONDITION"/>
+		AND t2.CODEID = '9C617DE8210445AB9AE776686ABAC3B5'
 	</select>
+
 	<!--水源信息详情 -->
 	<select id="doFindShuiyuanById" parameterType="ShuiyuanVO"  resultType="ShuiyuanVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
+		t2.code_name lxmc
 		FROM SY_SYJBXX t
+		INNER JOIN SYS_CODELIST_DETAIL t2 ON t.sylx = t2.code_value
 		WHERE t.JLZT = 1 AND  t.id = #{id}
+		AND t2.CODEID = '9C617DE8210445AB9AE776686ABAC3B5'
 	</select>
 </mapper>

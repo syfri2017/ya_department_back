@@ -51,6 +51,8 @@ public class ShuiyuanVO extends ValueObject implements Serializable{
 	private String tbjdh;	//undefined
 	private String tbsjc;	//undefined
 
+	private String lxmc;//水源类型名称
+
 	public String getId(){
 		return id;
 	}
@@ -302,5 +304,12 @@ public class ShuiyuanVO extends ValueObject implements Serializable{
 	}
 	public void setTbsjc(String tbsjc){
 		this.tbsjc = tbsjc;
+	}
+
+	public String getLxmc() {
+		return lxmc;
+	}
+	public void setLxmc(String lxmc) {
+		this.lxmc = lxmc;
 	}
 }
