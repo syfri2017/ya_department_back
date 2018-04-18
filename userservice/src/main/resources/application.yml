@@ -10,8 +10,8 @@ spring:
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: oracle.jdbc.OracleDriver
       url: jdbc:oracle:thin:@10.119.119.176:1521/wxusers
-      username: springboot
-      password: springboot
+      username: SZHYAGL
+      password: SZHYAGL
       initialSize: 5
       minIdle: 5
       maxActive: 20
