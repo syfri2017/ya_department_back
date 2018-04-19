@@ -41,4 +41,10 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--根据代码类型获取树状资源.--*/
 	List<CodelistTree> doFindCodelistTreeByType(String codetype);
+
+	/*--根据代码类型获取车辆状态.--*/
+	List<CodelistTree> doFindCarStatesByType(String codetype);
+
+	/*--根据代码类型获取车辆类型.--*/
+	List<CodelistTree> doFindCarTypesByType(String codetype);
 }

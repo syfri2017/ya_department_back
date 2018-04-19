@@ -25,7 +25,7 @@
 			and t.cllx = #{cllx}
 		</if>
 		<if test="cphm != null and cphm != '' ">
-			and t.cphm = #{cphm}
+			and t.cphm LIKE concat(concat('%',#{cphm}),'%')
 		</if>
 		<if test="clzt != null and clzt != '' ">
 			and t.clzt = #{clzt}
@@ -36,9 +36,12 @@
 		<if test="jglgd != null and jglgd != '' ">
 			and t.jglgd = #{jglgd}
 		</if>
-		<if test="sbll != null and sbll != '' ">
-			and t.sbll = #{sbll}
-		</if>
+		<!--<if test="sbll_min != null and sbll_min != '' ">-->
+			<!--and t.sbll >= #{sbll_min}-->
+		<!--</if>-->
+		<!--<if test="sbll_max != null and sbll_max != '' ">-->
+			<!--and t.sbll &lt;= #{sbll_max}-->
+		<!--</if>-->
 		<if test="zsl != null and zsl != '' ">
 			and t.zsl = #{zsl}
 		</if>
