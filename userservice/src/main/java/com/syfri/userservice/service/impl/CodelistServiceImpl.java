@@ -1,6 +1,7 @@
 package com.syfri.userservice.service.impl;
 
 import com.syfri.userservice.model.CodelistDetailVO;
+import com.syfri.userservice.model.CodelistTree;
 import com.syfri.userservice.utils.CurrentUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,10 @@ import com.syfri.userservice.model.CodelistVO;
 import com.syfri.userservice.service.CodelistService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("codelistService")
@@ -102,5 +106,44 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 	@Override
 	public List<CodelistDetailVO> doFindCodelistByType(String codetype){
 		return codelistDAO.doFindCodelistByType(codetype);
+	}
+
+	/*--根据代码类型获取树状资源.--*/
+	@Override
+	public List<CodelistTree> doFindCodelistTreeByType(String codetype) {
+		// 目的树
+		List<CodelistTree> codelistTrees = new ArrayList<>();
+		// 源数据
+		List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
+		// 每级占位数
+		List<Integer> digits = new ArrayList();
+		digits.add(1);
+		digits.add(2);
+
+		if(codelistDetailVOs!=null && codelistDetailVOs.size()>0){
+			for(CodelistDetailVO codelistDetailVO : codelistDetailVOs){
+				// 选出第一级类别
+				if (codelistDetailVO.getCodeValue().replace("0","").length()==digits.get(0)) {
+					CodelistTree tree = new CodelistTree();
+					tree.setCodeName(codelistDetailVO.getCodeName());
+					tree.setCodeValue(codelistDetailVO.getCodeValue());
+					List<CodelistTree> children = new ArrayList();
+					for(CodelistDetailVO codelistDetailVO2 : codelistDetailVOs){
+						// 选出第二级类别
+						if (codelistDetailVO2.getCodeValue().replace("0","").length()==digits.get(1)) {
+							if(codelistDetailVO2.getCodeValue().substring(0,1).equals(codelistDetailVO.getCodeValue().substring(0,1))) {
+								CodelistTree tree2 = new CodelistTree();
+								tree2.setCodeName(codelistDetailVO2.getCodeName());
+								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
+								children.add(tree2);
+							}
+						}
+					}
+					tree.setChildren(children);
+					codelistTrees.add(tree);
+				}
+			}
+		}
+		return codelistTrees;
 	}
 }

@@ -16,7 +16,7 @@
 			and t.yabbh = #{yabbh}
 		</if>
 		<if test="yalxdm != null and yalxdm != '' ">
-			and t.yalxdm = #{yalxdm}
+			and t.yalxdm LIKE concat(RTRIM(#{yalxdm},0),'%')
 		</if>
 		<if test="yamc != null and yamc != '' ">
 			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
