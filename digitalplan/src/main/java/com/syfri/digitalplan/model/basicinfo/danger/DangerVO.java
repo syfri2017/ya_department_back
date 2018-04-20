@@ -1,16 +1,18 @@
 package com.syfri.digitalplan.model.basicinfo.danger;
 
 import java.io.Serializable;
+import java.sql.Blob;
+import java.util.Base64;
 
 import com.syfri.baseapi.model.ValueObject;
+import oracle.sql.BLOB;
 
 public class DangerVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String pkid;	//PKID
-	private String id;	//ID
-	private String name;	//名称
+	private String uuid;	//主键
+	private String name;	//中文名
 	private String englishName;	//英文名
 	private String cas;	//CAS登记号
 	private String rtecs;	//RTECS号
@@ -33,32 +35,52 @@ public class DangerVO extends ValueObject implements Serializable{
 	private String store;	//储存
 	private String leakWay;	//泄漏处理
 	private String traffic;	//运输
-	private String remark;	//附注
-	private String sjbb;	//数据版本
-	private String cjsj;	//创建时间
-	private String ywxtbsid;	//业务系统部署ID
-	private String jlzt;	//记录状态
-	private String cszt;	//传输状态
-	private String sjc;	//时间戳
-	private String vercol;	//版本戳
-	private String tbjdh;	//同步节点号
-	private String tbsjc;	//同步时间戳
+	private String caution;	//特别警示
+	private String bernProperty;	//燃烧、爆炸特性
+	private String mainApplication;	//主要用途
+	private String poisionProperty;	//毒性
+	private String seprarate;	//隔离
+	private String publicSafety;	//公众安全
+	private String deleteFlag;	//删除标志
+	private String datasource;	//数据来源[100000一体化]
+	private String remark;	//备注
 	private String reserve1;	//备用字段1
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
+	private String reserve4;	//备用字段4
 	private String dmz;	//类型名
+	private byte[] flagFile;	//包装标志
+	private String photo64;	//Base64格式图片
 
-	public String getPkid(){
-		return pkid;
+	public String getPhoto64() {
+		return photo64;
 	}
-	public void setPkid(String pkid){
-		this.pkid = pkid;
+
+	public void setPhoto64(String photo64) {
+		this.photo64 = photo64;
 	}
-	public String getId(){
-		return id;
+
+	public byte[] getFlagFile() {
+		return flagFile;
 	}
-	public void setId(String id){
-		this.id = id;
+
+	public void setFlagFile(byte[] flagFile) {
+		this.flagFile = flagFile;
+	}
+
+	public String getDmz() {
+		return dmz;
+	}
+
+	public void setDmz(String dmz) {
+		this.dmz = dmz;
+	}
+
+	public String getUuid(){
+		return uuid;
+	}
+	public void setUuid(String uuid){
+		this.uuid = uuid;
 	}
 	public String getName(){
 		return name;
@@ -198,65 +220,59 @@ public class DangerVO extends ValueObject implements Serializable{
 	public void setTraffic(String traffic){
 		this.traffic = traffic;
 	}
+	public String getCaution(){
+		return caution;
+	}
+	public void setCaution(String caution){
+		this.caution = caution;
+	}
+	public String getBernProperty(){
+		return bernProperty;
+	}
+	public void setBernProperty(String bernProperty){
+		this.bernProperty = bernProperty;
+	}
+	public String getMainApplication(){
+		return mainApplication;
+	}
+	public void setMainApplication(String mainApplication){
+		this.mainApplication = mainApplication;
+	}
+	public String getPoisionProperty(){
+		return poisionProperty;
+	}
+	public void setPoisionProperty(String poisionProperty){
+		this.poisionProperty = poisionProperty;
+	}
+	public String getSeprarate(){
+		return seprarate;
+	}
+	public void setSeprarate(String seprarate){
+		this.seprarate = seprarate;
+	}
+	public String getPublicSafety(){
+		return publicSafety;
+	}
+	public void setPublicSafety(String publicSafety){
+		this.publicSafety = publicSafety;
+	}
+	public String getDeleteFlag(){
+		return deleteFlag;
+	}
+	public void setDeleteFlag(String deleteFlag){
+		this.deleteFlag = deleteFlag;
+	}
+	public String getDatasource(){
+		return datasource;
+	}
+	public void setDatasource(String datasource){
+		this.datasource = datasource;
+	}
 	public String getRemark(){
 		return remark;
 	}
 	public void setRemark(String remark){
 		this.remark = remark;
-	}
-	public String getSjbb(){
-		return sjbb;
-	}
-	public void setSjbb(String sjbb){
-		this.sjbb = sjbb;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getYwxtbsid(){
-		return ywxtbsid;
-	}
-	public void setYwxtbsid(String ywxtbsid){
-		this.ywxtbsid = ywxtbsid;
-	}
-	public String getJlzt(){
-		return jlzt;
-	}
-	public void setJlzt(String jlzt){
-		this.jlzt = jlzt;
-	}
-	public String getCszt(){
-		return cszt;
-	}
-	public void setCszt(String cszt){
-		this.cszt = cszt;
-	}
-	public String getSjc(){
-		return sjc;
-	}
-	public void setSjc(String sjc){
-		this.sjc = sjc;
-	}
-	public String getVercol(){
-		return vercol;
-	}
-	public void setVercol(String vercol){
-		this.vercol = vercol;
-	}
-	public String getTbjdh(){
-		return tbjdh;
-	}
-	public void setTbjdh(String tbjdh){
-		this.tbjdh = tbjdh;
-	}
-	public String getTbsjc(){
-		return tbsjc;
-	}
-	public void setTbsjc(String tbsjc){
-		this.tbsjc = tbsjc;
 	}
 	public String getReserve1(){
 		return reserve1;
@@ -276,8 +292,9 @@ public class DangerVO extends ValueObject implements Serializable{
 	public void setReserve3(String reserve3){
 		this.reserve3 = reserve3;
 	}
-	public String getDmz(){ return dmz; }
-	public void setDmz(String dmz){
-		this.dmz = dmz;
+	public String getReserve4(){
+		return reserve4;
 	}
-}
+	public void setReserve4(String reserve4){
+		this.reserve4 = reserve4;
+	}}
