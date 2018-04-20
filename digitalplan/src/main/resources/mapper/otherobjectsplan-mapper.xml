@@ -153,16 +153,27 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="OtherobjectsplanVO"  resultType="OtherobjectsplanVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_QTDXYA t  WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONTENT"/>,
+		c1.CODE_NAME yalxmc,
+		CASE sfkqy WHEN '0' THEN '否' ELSE '是' END AS sfkqymc
+		FROM YAGL_QTDXYA t
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.YALXDM=c1.CODE_VALUE
+		AND c1.CODEID = 'AB8867B159A440CC80FEACEAC3F6542B'
+		AND c1.DELETE_FLAG = 'N')
+		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="OtherobjectsplanVO"  resultType="OtherobjectsplanVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
+		c1.CODE_NAME yalxmc,
+		CASE sfkqy WHEN '0' THEN '否' ELSE '是' END AS sfkqymc
 		FROM YAGL_QTDXYA t
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.YALXDM=c1.CODE_VALUE
+		AND c1.CODEID = 'AB8867B159A440CC80FEACEAC3F6542B'
+		AND c1.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
@@ -284,11 +295,10 @@
 		c1.CODE_NAME yalxmc,
 		CASE sfkqy WHEN '0' THEN '否' ELSE '是' END AS sfkqymc
 		FROM YAGL_QTDXYA t
-		LEFT JOIN SYS_CODELIST_DETAIL c1 ON t.YALXDM=c1.CODE_VALUE
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.YALXDM=c1.CODE_VALUE
 		AND c1.CODEID = 'AB8867B159A440CC80FEACEAC3F6542B'
-		AND c1.DELETE_FLAG = 'N'
+		AND c1.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
-
 		<include refid="SQL_CONDITION"/>
 	</select>
 
