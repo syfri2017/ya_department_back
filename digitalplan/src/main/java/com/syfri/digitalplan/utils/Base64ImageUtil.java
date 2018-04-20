@@ -6,8 +6,8 @@ public class Base64ImageUtil {
     /**
      * 二进制流转Base64字符串
      * <p>Title: byteArr2String</p>
-     * @author Liyan
-     * @date   2017年3月6日 下午3:04:47
+     * @author dongbo
+     * @date   2018年4月19日 下午3:04:47
      * @param data
      * @return String
      * @throws IOException
