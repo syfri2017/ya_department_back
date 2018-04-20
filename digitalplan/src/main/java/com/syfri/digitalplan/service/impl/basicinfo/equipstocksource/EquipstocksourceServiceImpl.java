@@ -26,14 +26,9 @@ public class EquipstocksourceServiceImpl extends BaseServiceImpl<Equipstocksourc
 	/*--条件查询：重点单位.--*/
 	@Override
 	public List<EquipstocksourceVO> doFindlist(EquipstocksourceVO equipstocksourceVO){
-		if(equipstocksourceVO.getZbqcmc()!=null && !"".equals(equipstocksourceVO.getZbqcmc())){
-			equipstocksourceVO.setZbqcmc(equipstocksourceVO.getZbqcmc().toUpperCase());
-		}
-		if(equipstocksourceVO.getCkmc()!=null && !"".equals(equipstocksourceVO.getCkmc())){
-			equipstocksourceVO.setCkmc(equipstocksourceVO.getCkmc().toUpperCase());
-		}
-		if(equipstocksourceVO.getHwmc()!=null && !"".equals(equipstocksourceVO.getHwmc())){
-			equipstocksourceVO.setHwmc(equipstocksourceVO.getHwmc().toUpperCase());
+		//所属消防机构id
+		if(equipstocksourceVO.getSsxfjgid()!=null && !"".equals(equipstocksourceVO.getSsxfjgid())){
+			equipstocksourceVO.setSsxfjgid(equipstocksourceVO.getSsxfjgid().toUpperCase());
 		}
 		return equipstocksourceDAO.doSearchByVO(equipstocksourceVO);
 	}

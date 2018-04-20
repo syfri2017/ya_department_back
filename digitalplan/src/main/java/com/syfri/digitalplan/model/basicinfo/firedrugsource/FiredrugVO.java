@@ -1,26 +1,24 @@
-package com.syfri.digitalplan.model.basicinfo.fireenginesource;
+package com.syfri.digitalplan.model.basicinfo.firedrugsource;
 
 import java.io.Serializable;
 
 import com.syfri.baseapi.model.ValueObject;
 
-public class FireengineVO extends ValueObject implements Serializable{
+public class FiredrugVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private String uuid;	//主键
-	private String clbm;	//车辆编码
-	private String clmc;	//车辆名称
+	private String yjbm;	//药剂编码
+	private String yjmc;	//药剂名称
 	private String ssdz;	//所属队站
 	private String ssdzmc;	//所属队站名称
 	private String xzqy;	//行政区划CODE（到区县）
-	private String cllx;	//车辆类型CLLX
-	private String cphm;	//车牌号码
-	private String clzt;	//车辆状态（代码）
+	private String yjlx;	//药剂类型YJLX
 	private String sccj;	//生产厂家
-	private String jglgd;	//举高类车辆高度（m）
-	private String sbll;	//水泵流量（L/s）
-	private String zsl;	//载水量（t）
+	private String pc;	//批次
+	private String cbl;	//储备量（t）
+	private String czl;	//车载量（t）
 	private String cjrid;	//创建人ID
 	private String cjrmc;	//创建人名称
 	private String cjsj;	//创建时间
@@ -36,13 +34,6 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
-	private String cllxmc;	//车辆类型（名称）
-	private String clztmc;	//车辆状态（名称）
-
-	private String sbll_min;
-	private String sbll_max;
-	private String zsl_min;
-	private String zsl_max;
 
 	public String getUuid(){
 		return uuid;
@@ -50,17 +41,17 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setUuid(String uuid){
 		this.uuid = uuid;
 	}
-	public String getClbm(){
-		return clbm;
+	public String getYjbm(){
+		return yjbm;
 	}
-	public void setClbm(String clbm){
-		this.clbm = clbm;
+	public void setYjbm(String yjbm){
+		this.yjbm = yjbm;
 	}
-	public String getClmc(){
-		return clmc;
+	public String getYjmc(){
+		return yjmc;
 	}
-	public void setClmc(String clmc){
-		this.clmc = clmc;
+	public void setYjmc(String yjmc){
+		this.yjmc = yjmc;
 	}
 	public String getSsdz(){
 		return ssdz;
@@ -80,23 +71,11 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setXzqy(String xzqy){
 		this.xzqy = xzqy;
 	}
-	public String getCllx(){
-		return cllx;
+	public String getYjlx(){
+		return yjlx;
 	}
-	public void setCllx(String cllx){
-		this.cllx = cllx;
-	}
-	public String getCphm(){
-		return cphm;
-	}
-	public void setCphm(String cphm){
-		this.cphm = cphm;
-	}
-	public String getClzt(){
-		return clzt;
-	}
-	public void setClzt(String clzt){
-		this.clzt = clzt;
+	public void setYjlx(String yjlx){
+		this.yjlx = yjlx;
 	}
 	public String getSccj(){
 		return sccj;
@@ -104,23 +83,23 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setSccj(String sccj){
 		this.sccj = sccj;
 	}
-	public String getJglgd(){
-		return jglgd;
+	public String getPc(){
+		return pc;
 	}
-	public void setJglgd(String jglgd){
-		this.jglgd = jglgd;
+	public void setPc(String pc){
+		this.pc = pc;
 	}
-	public String getSbll(){
-		return sbll;
+	public String getCbl(){
+		return cbl;
 	}
-	public void setSbll(String sbll){
-		this.sbll = sbll;
+	public void setCbl(String cbl){
+		this.cbl = cbl;
 	}
-	public String getZsl(){
-		return zsl;
+	public String getCzl(){
+		return czl;
 	}
-	public void setZsl(String zsl){
-		this.zsl = zsl;
+	public void setCzl(String czl){
+		this.czl = czl;
 	}
 	public String getCjrid(){
 		return cjrid;
@@ -213,17 +192,35 @@ public class FireengineVO extends ValueObject implements Serializable{
 		this.reserve4 = reserve4;
 	}
 
-	public String getCllxmc() { return cllxmc; }
-	public void setCllxmc(String cllxmc) { this.cllxmc = cllxmc; }
-	public String getClztmc() {	return clztmc; }
-	public void setClztmc(String clztmc) { this.clztmc = clztmc; }
+	private String cbl_min;	//储备量（t）
+	public String getCbl_min(){
+		return cbl_min;
+	}
+	public void setCbl_min(String cbl_min){
+		this.cbl_min = cbl_min;
+	}
 
-	public String getSbll_min() { return sbll_min; }
-	public void setSbll_min(String sbll_min) { this.sbll_min = sbll_min; }
-	public String getSbll_max() { return sbll_max; }
-	public void setSbll_max(String sbll_max) { this.sbll_max = sbll_max; }
-	public String getZsl_min() { return zsl_min; }
-	public void setZsl_min(String zsl_min) { this.zsl_min = zsl_min; }
-	public String getZsl_max() { return zsl_max; }
-	public void setZsl_max(String zsl_max) { this.zsl_max = zsl_max; }
+	private String cbl_max;
+	public String getCbl_max(){
+		return cbl_max;
+	}
+	public void setCbl_max(String cbl_max){
+		this.cbl_max = cbl_max;
+	}
+
+	private String czl_min;	//车载量（t）
+	public String getCzl_min(){
+		return czl_min;
+	}
+	public void setCzl_min(String czl_min){
+		this.czl_min = czl_min;
+	}
+
+	private String czl_max;
+	public String getCzl_max(){
+		return czl_max;
+	}
+	public void setCzl_max(String czl_max){
+		this.czl_max = czl_max;
+	}
 }
