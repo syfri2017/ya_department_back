@@ -22,7 +22,7 @@
 			and t.xzqy = #{xzqy}
 		</if>
 		<if test="cllx != null and cllx != '' ">
-			and t.cllx = #{cllx}
+			and t.cllx LIKE concat(RTRIM(#{cllx},0),'%')
 		</if>
 		<if test="cphm != null and cphm != '' ">
 			and t.cphm LIKE concat(concat('%',#{cphm}),'%')
@@ -136,16 +136,33 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="FireengineVO"  resultType="FireengineVO"> 
 		SELECT 
-			<include refid="SQL_CONTENT"/>
-		FROM YAGL_WL_XFCLXX t  WHERE t.DELETE_FLAG = 'N'
-			<include refid="SQL_CONDITION"/>
+		<include refid="SQL_CONTENT"/>,
+		c1.CODE_NAME cllxmc,
+		c2.CODE_NAME clztmc
+		FROM YAGL_WL_XFCLXX t
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.CLLX=c1.CODE_VALUE
+		AND c1.CODEID = '6A16194EFC371324E053B077770A516F'
+		AND c1.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL c2 ON (t.CLZT=c2.CODE_VALUE
+		AND c2.CODEID = 'zh0E8428F627472699AA99932C984A1B'
+		AND c2.DELETE_FLAG = 'N')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="FireengineVO"  resultType="FireengineVO">  
 		SELECT 
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
+		c1.CODE_NAME cllxmc,
+		c2.CODE_NAME clztmc
 		FROM YAGL_WL_XFCLXX t
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.CLLX=c1.CODE_VALUE
+		AND c1.CODEID = '6A16194EFC371324E053B077770A516F'
+		AND c1.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL c2 ON (t.CLZT=c2.CODE_VALUE
+		AND c2.CODEID = 'zh0E8428F627472699AA99932C984A1B'
+		AND c2.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N' AND  t.uuid = #{value}
 	</select>
 
@@ -257,13 +274,13 @@
 		c1.CODE_NAME cllxmc,
 		c2.CODE_NAME clztmc
 		FROM YAGL_WL_XFCLXX t
-		LEFT JOIN SYS_CODELIST_DETAIL c1 ON t.CLLX=c1.CODE_VALUE
-		LEFT JOIN SYS_CODELIST_DETAIL c2 ON t.CLZT=c2.CODE_VALUE
-		WHERE t.DELETE_FLAG = 'N'
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.CLLX=c1.CODE_VALUE
 		AND c1.CODEID = '6A16194EFC371324E053B077770A516F'
-		AND c1.DELETE_FLAG = 'N'
+		AND c1.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL c2 ON (t.CLZT=c2.CODE_VALUE
 		AND c2.CODEID = 'zh0E8428F627472699AA99932C984A1B'
-		AND c2.DELETE_FLAG = 'N'
+		AND c2.DELETE_FLAG = 'N')
+		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
