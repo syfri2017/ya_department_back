@@ -39,6 +39,11 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String cllxmc;	//车辆类型（名称）
 	private String clztmc;	//车辆状态（名称）
 
+	private String sbll_min;
+	private String sbll_max;
+	private String zsl_min;
+	private String zsl_max;
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -212,4 +217,13 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setCllxmc(String cllxmc) { this.cllxmc = cllxmc; }
 	public String getClztmc() {	return clztmc; }
 	public void setClztmc(String clztmc) { this.clztmc = clztmc; }
+
+	public String getSbll_min() { return sbll_min; }
+	public void setSbll_min(String sbll_min) { this.sbll_min = sbll_min; }
+	public String getSbll_max() { return sbll_max; }
+	public void setSbll_max(String sbll_max) { this.sbll_max = sbll_max; }
+	public String getZsl_min() { return zsl_min; }
+	public void setZsl_min(String zsl_min) { this.zsl_min = zsl_min; }
+	public String getZsl_max() { return zsl_max; }
+	public void setZsl_max(String zsl_max) { this.zsl_max = zsl_max; }
 }

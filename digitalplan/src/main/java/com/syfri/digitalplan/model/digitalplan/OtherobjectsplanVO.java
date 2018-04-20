@@ -45,6 +45,9 @@ public class OtherobjectsplanVO extends ValueObject implements Serializable{
 	private String yalxmc;
 	private String sfkqymc;
 
+	private String cjsj_begintime;
+	private String cjsj_endtime;
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -248,4 +251,20 @@ public class OtherobjectsplanVO extends ValueObject implements Serializable{
 	public void setYalxmc(String yalxmc) { this.yalxmc = yalxmc; }
 	public String getSfkqymc() { return sfkqymc; }
 	public void setSfkqymc(String sfkqymc) { this.sfkqymc = sfkqymc; }
+
+	public String getCjsj_begintime() {
+		return cjsj_begintime;
+	}
+
+	public void setCjsj_begintime(String cjsj_begintime) {
+		this.cjsj_begintime = cjsj_begintime;
+	}
+
+	public String getCjsj_endtime() {
+		return cjsj_endtime;
+	}
+
+	public void setCjsj_endtime(String cjsj_endtime) {
+		this.cjsj_endtime = cjsj_endtime;
+	}
 }

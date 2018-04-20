@@ -36,14 +36,17 @@
 		<if test="jglgd != null and jglgd != '' ">
 			and t.jglgd = #{jglgd}
 		</if>
-		<!--<if test="sbll_min != null and sbll_min != '' ">-->
-			<!--and t.sbll >= #{sbll_min}-->
-		<!--</if>-->
-		<!--<if test="sbll_max != null and sbll_max != '' ">-->
-			<!--and t.sbll &lt;= #{sbll_max}-->
-		<!--</if>-->
-		<if test="zsl != null and zsl != '' ">
-			and t.zsl = #{zsl}
+		<if test="sbll_min != null and sbll_min != '' ">
+			and t.sbll &gt;= #{sbll_min}
+		</if>
+		<if test="sbll_max != null and sbll_max != '' ">
+			and t.sbll &lt;= #{sbll_max}
+		</if>
+		<if test="zsl_min != null and zsl_min != '' ">
+			and t.zsl &gt;= #{zsl_min}
+		</if>
+		<if test="zsl_max != null and zsl_max != '' ">
+			and t.zsl &lt;= #{zsl_max}
 		</if>
 		<if test="cjrid != null and cjrid != '' ">
 			and t.cjrid = #{cjrid}

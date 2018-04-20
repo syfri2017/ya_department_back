@@ -63,8 +63,11 @@
 		<if test="cjrmc != null and cjrmc != '' ">
 			and t.cjrmc = #{cjrmc}
 		</if>
-		<if test="cjsj != null and cjsj != '' ">
-			and t.cjsj = #{cjsj}
+		<if test="cjsj_begintime != null and cjsj_begintime != '' ">
+			and t.cjsj &gt;= to_date(#{cjsj_begintime},'yyyy/MM/dd')
+		</if>
+		<if test="cjsj_endtime != null and cjsj_endtime != '' ">
+			and t.cjsj &lt;= to_date(#{cjsj_endtime},'yyyy/MM/dd')
 		</if>
 		<if test="xgrid != null and xgrid != '' ">
 			and t.xgrid = #{xgrid}
