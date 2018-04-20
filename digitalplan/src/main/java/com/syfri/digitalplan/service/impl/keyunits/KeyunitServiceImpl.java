@@ -8,6 +8,8 @@ import com.syfri.digitalplan.dao.keyunits.KeyunitDAO;
 import com.syfri.digitalplan.model.keyunits.KeyunitVO;
 import com.syfri.digitalplan.service.keyunits.KeyunitService;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -25,20 +27,11 @@ public class KeyunitServiceImpl extends BaseServiceImpl<KeyunitVO> implements Ke
 	/*--条件查询：重点单位.--*/
 	@Override
 	public List<KeyunitVO> doFindKeyunitlist(KeyunitVO keyunitVO){
-		KeyunitVO keyunit = new KeyunitVO();
-		//单位名称
-		if(keyunitVO.getDwmc()!=null && !"".equals(keyunitVO.getDwmc())){
-			keyunit.setDwmc(keyunitVO.getDwmc().toUpperCase());
+		//行政区域
+		if(keyunitVO.getXzqy()!=null&&!"".equals(keyunitVO.getXzqy())){
+			keyunitVO.setXzqy(keyunitVO.getXzqy().toUpperCase());
 		}
-		//开始时间
-		if(keyunitVO.getBegintime()!=null&&!"".equals(keyunitVO.getBegintime())){
-			keyunit.setBegintime(keyunitVO.getBegintime().toUpperCase());
-		}
-		//结束时间
-		if(keyunitVO.getEndtime()!=null&&!"".equals(keyunitVO.getEndtime())){
-			keyunit.setEndtime(keyunitVO.getEndtime().toUpperCase());
-		}
-		return keyunitDAO.doSearchByVO(keyunit);
+		return keyunitDAO.doSearchByVO(keyunitVO);
 	}
 
 	/*--根据重点单位id获取重点单位详情--*/

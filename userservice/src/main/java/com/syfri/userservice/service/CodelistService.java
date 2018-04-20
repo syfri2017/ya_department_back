@@ -2,6 +2,7 @@ package com.syfri.userservice.service;
 
 import com.syfri.baseapi.service.BaseService;
 import com.syfri.userservice.model.CodelistDetailVO;
+import com.syfri.userservice.model.CodelistTree;
 import com.syfri.userservice.model.CodelistVO;
 
 import java.util.List;
@@ -37,4 +38,13 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--根据代码类型查询代码集.--*/
 	List<CodelistDetailVO> doFindCodelistByType(String codetype);
+
+	/*--根据代码类型获取树状资源.--*/
+	List<CodelistTree> doFindCodelistTreeByType(String codetype);
+
+	/*--根据代码类型获取车辆状态.--*/
+	List<CodelistTree> doFindCarStatesByType(String codetype);
+
+	/*--根据代码类型获取车辆类型.--*/
+	List<CodelistTree> doFindCarTypesByType(String codetype);
 }

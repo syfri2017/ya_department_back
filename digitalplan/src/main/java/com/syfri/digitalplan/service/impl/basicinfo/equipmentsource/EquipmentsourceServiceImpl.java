@@ -26,8 +26,9 @@ public class EquipmentsourceServiceImpl extends BaseServiceImpl<EquipmentsourceV
 	/*--条件查询：重点单位.--*/
 	@Override
 	public List<EquipmentsourceVO> doFindlist(EquipmentsourceVO equipmentsourceVO){
-		if(equipmentsourceVO.getZbqcmc()!=null && !"".equals(equipmentsourceVO.getZbqcmc())){
-			equipmentsourceVO.setZbqcmc(equipmentsourceVO.getZbqcmc().toUpperCase());
+		//装备器材类型代码
+		if(equipmentsourceVO.getZbqclxdm()!=null && !"".equals(equipmentsourceVO.getZbqclxdm())){
+			equipmentsourceVO.setZbqclxdm(equipmentsourceVO.getZbqclxdm().toUpperCase());
 		}
 		return equipmentsourceDAO.doSearchByVO(equipmentsourceVO);
 	}

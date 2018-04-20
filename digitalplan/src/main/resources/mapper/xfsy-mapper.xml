@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.basicinfo.watersource.XfsyDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="uuid != null and uuid != '' ">
+		 and t.uuid = #{uuid}
+		</if>
+		<if test="sybh != null and sybh != '' ">
+		 and t.sybh = #{sybh}
+		</if>
+		<if test="symc != null and symc != '' ">
+		 and t.symc like concat(concat('%',#{symc}),'%')
+		</if>
+		<if test="sydz != null and sydz != '' ">
+		 and t.sydz like concat(concat('%',#{sydz}),'%')
+		</if>
+		<if test="sylx != null and sylx != '' ">
+		 and t.sylx = #{sylx}
+		</if>
+		<if test="sysxxxid != null and sysxxxid != '' ">
+		 and t.sysxxxid = #{sysxxxid}
+		</if>
+		<if test="gxdz != null and gxdz != '' ">
+		 and t.gxdz = #{gxdz}
+		</if>
+		<if test="gxdzmc != null and gxdzmc != '' ">
+		 and t.gxdzmc = #{gxdzmc}
+		</if>
+		<if test="xzqy != null and xzqy != '' ">
+		 and t.xzqy = #{xzqy}
+		</if>
+		<if test="qsxs != null and qsxs != '' ">
+		 and t.qsxs = #{qsxs}
+		</if>
+		<if test="kyzt != null and kyzt != '' ">
+		 and t.kyzt = #{kyzt}
+		</if>
+		<if test="xz != null and xz != '' ">
+		 and t.xz = #{xz}
+		</if>
+		<if test="gisX != null and gisX != '' ">
+		 and t.gis_x = #{gisX}
+		</if>
+		<if test="gisY != null and gisY != '' ">
+		 and t.gis_y = #{gisY}
+		</if>
+		<if test="gisH != null and gisH != '' ">
+		 and t.gis_h = #{gisH}
+		</if>
+		<if test="glid != null and glid != '' ">
+		 and t.glid = #{glid}
+		</if>
+		<if test="bdLon != null and bdLon != '' ">
+		 and t.bd_lon = #{bdLon}
+		</if>
+		<if test="bdLat != null and bdLat != '' ">
+		 and t.bd_lat = #{bdLat}
+		</if>
+		<if test="ssld != null and ssld != '' ">
+		 and t.ssld = #{ssld}
+		</if>
+		<if test="jzsj != null and jzsj != '' ">
+		 and t.jzsj = #{jzsj}
+		</if>
+		<if test="qysj != null and qysj != '' ">
+		 and t.qysj = #{qysj}
+		</if>
+		<if test="blgxd != null and blgxd != '' ">
+		 and t.blgxd = #{blgxd}
+		</if>
+		<if test="blgxn != null and blgxn != '' ">
+		 and t.blgxn = #{blgxn}
+		</if>
+		<if test="blgxx != null and blgxx != '' ">
+		 and t.blgxx = #{blgxx}
+		</if>
+		<if test="blgxb != null and blgxb != '' ">
+		 and t.blgxb = #{blgxb}
+		</if>
+		<if test="cjrid != null and cjrid != '' ">
+		 and t.cjrid = #{cjrid}
+		</if>
+		<if test="cjrmc != null and cjrmc != '' ">
+		 and t.cjrmc = #{cjrmc}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and t.cjsj = #{cjsj}
+		</if>
+		<if test="xgrid != null and xgrid != '' ">
+		 and t.xgrid = #{xgrid}
+		</if>
+		<if test="xgrmc != null and xgrmc != '' ">
+		 and t.xgrmc = #{xgrmc}
+		</if>
+		<if test="xgsj != null and xgsj != '' ">
+		 and t.xgsj = #{xgsj}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+		 and t.delete_flag = #{deleteFlag}
+		</if>
+		<if test="datasource != null and datasource != '' ">
+		 and t.datasource = #{datasource}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and t.bz = #{bz}
+		</if>
+		<if test="jdh != null and jdh != '' ">
+		 and t.jdh = #{jdh}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and t.sjc = #{sjc}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and t.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and t.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and t.reserve3 = #{reserve3}
+		</if>
+		<if test="reserve4 != null and reserve4 != '' ">
+		 and t.reserve4 = #{reserve4}
+		</if>
+	</sql>
+	<!--消火栓查询条件-->
+	<sql id="SQL_XHS_CONDITION">
+		<if test="xhs_gwid != null and xhs_gwid != '' ">
+			and t2.gwid like concat(concat('%',#{xhs_gwid}),'%')
+		</if>
+		<if test="xhs_szxs != null and xhs_szxs != '' ">
+			and t2.szxs = #{xhs_szxs}
+		</if>
+		<if test="xhs_gwxs != null and xhs_gwxs != '' ">
+			and t2.gwxs = #{xhs_gwxs}
+		</if>
+		<if test="xhs_jkxs != null and xhs_jkxs != '' ">
+			and t2.jkxs = #{xhs_jkxs}
+		</if>
+	</sql>
+	<!--消防水鹤查询条件-->
+	<sql id="SQL_XFSH_CONDITION">
+		<if test="xfsh_gwid != null and xfsh_gwid != '' ">
+			and t2.gwid like concat(concat('%',#{xfsh_gwid}),'%')
+		</if>
+		<if test="xfsh_shgd != null and xfsh_shgd != '' ">
+			and t2.shgd = #{xfsh_shgd}
+		</if>
+		<if test="xfsh_jscd != null and xfsh_jscd != '' ">
+			and t2.jscd = #{xfsh_jscd}
+		</if>
+	</sql>
+	<!--消防水池查询条件-->
+	<sql id="SQL_XFSC_CONDITION">
+		<if test="xfsc_rl != null and xfsc_rl != '' ">
+			and t2.rl = #{xfsc_rl}
+		</if>
+		<if test="xfsc_gwxs != null and xfsc_gwxs != '' ">
+			and t2.gwxs = #{xfsc_gwxs}
+		</if>
+		<if test="xfsc_tcwz != null and xfsc_tcwz != '' ">
+			and t2.tcwz = #{xfsc_tcwz}
+		</if>
+	</sql>
+	<!--消防码头查询条件-->
+	<sql id="SQL_XFMT_CONDITION">
+		<if test="xfmt_tcwz != null and xfmt_tcwz != '' ">
+			and t2.tcwz = #{xfmt_tcwz}
+		</if>
+		<if test="xfmt_ksq != null and xfmt_ksq != '' ">
+			and t2.ksq = #{xfmt_ksq}
+		</if>
+		<if test="xfmt_sz != null and xfmt_sz != '' ">
+			and t2.sz = #{xfmt_sz}
+		</if>
+	</sql>
+	<!--天然水源查询条件-->
+	<sql id="SQL_TRSY_CONDITION">
+		<if test="trsy_trsylx != null and trsy_trsylx != '' ">
+			and t2.trsylx = #{trsy_trsylx}
+		</if>
+		<if test="trsy_ywksq != null and trsy_ywksq != '' ">
+			and t2.ywksq = #{trsy_ywksq}
+		</if>
+	</sql>
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		t.uuid uuid,
+		t.sybh sybh,
+		t.symc symc,
+		t.sydz sydz,
+		t.sylx sylx,
+		t.sysxxxid sysxxxid,
+		t.gxdz gxdz,
+		t.gxdzmc gxdzmc,
+		t.xzqy xzqy,
+		t.qsxs qsxs,
+		t.kyzt kyzt,
+		t.xz xz,
+		t.gis_x gisX,
+		t.gis_y gisY,
+		t.gis_h gisH,
+		t.glid glid,
+		t.bd_lon bdLon,
+		t.bd_lat bdLat,
+		t.ssld ssld,
+		TO_CHAR(t.jzsj,'yyyy-MM-dd') jzsj,
+		TO_CHAR(t.qysj,'yyyy-MM-dd') qysj,
+		t.blgxd blgxd,
+		t.blgxn blgxn,
+		t.blgxx blgxx,
+		t.blgxb blgxb,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	</sql>
+
+	<!--消火栓查询内容-->
+	<sql id="SQL_XHS_CONTENT">
+		t2.uuid xhs_uuid,
+		t2.gwid xhs_gwid,
+		t2.szxs xhs_szxs,
+		t2.gsdw xhs_gsdw,
+		t2.lxfs xhs_lxfs,
+		t2.gwxs xhs_gwxs,
+		t2.gwzj xhs_gwzj,
+		t2.gwyl xhs_gwyl,
+		t2.jkxs xhs_jkxs,
+		t2.jkkj xhs_jkkj,
+		t2.ll xhs_ll,
+		t2.cjrid xhs_cjrid,
+		t2.cjrmc xhs_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xhs_cjsj,
+		t2.xgrid xhs_xgrid,
+		t2.xgrmc xhs_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xhs_xgsj,
+		t2.delete_flag xhs_deleteFlag,
+		t2.datasource xhs_datasource,
+		t2.bz xhs_bz,
+		t2.jdh xhs_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xhs_sjc,
+		t2.reserve1 xhs_reserve1,
+		t2.reserve2 xhs_reserve2,
+		t2.reserve3 xhs_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') xhs_reserve4
+	</sql>
+	<!--消防水池查询内容-->
+	<sql id="SQL_XFSC_CONTENT">
+		t2.uuid xfsc_uuid,
+		t2.sybgc xfsc_sybgc,
+		t2.rl xfsc_rl,
+		t2.jsll xfsc_jsll,
+		t2.qszdll xfsc_qszdll,
+		t2.gwxs xfsc_gwxs,
+		t2.tcwz xfsc_tcwz,
+		t2.tcsl xfsc_tcsl,
+		t2.cjrid xfsc_cjrid,
+		t2.cjrmc xfsc_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xfsc_cjsj,
+		t2.xgrid xfsc_xgrid,
+		t2.xgrmc xfsc_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xfsc_xgsj,
+		t2.delete_flag xfsc_deleteFlag,
+		t2.datasource xfsc_datasource,
+		t2.bz xfsc_bz,
+		t2.jdh xfsc_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xfsc_sjc,
+		t2.reserve1 xfsc_reserve1,
+		t2.reserve2 xfsc_reserve2,
+		t2.reserve3 xfsc_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') xfsc_reserve4
+	</sql>
+	<!--消防水鹤查询内容-->
+	<sql id="SQL_XFSH_CONTENT">
+		t2.uuid xfsh_uuid,
+		t2.gwid xfsh_gwid,
+		t2.szxs xfsh_szxs,
+		t2.gwyl xfsh_gwyl,
+		t2.shgd xfsh_shgd,
+		t2.ll xfsh_ll,
+		t2.jsgzj xfsh_jsgzj,
+		t2.csgzj xfsh_csgzj,
+		t2.jscd xfsh_jscd,
+		t2.cjrid xfsh_cjrid,
+		t2.cjrmc xfsh_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xfsh_cjsj,
+		t2.xgrid xfsh_xgrid,
+		t2.xgrmc xfsh_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xfsh_xgsj,
+		t2.delete_flag xfsh_deleteFlag,
+		t2.datasource xfsh_datasource,
+		t2.bz xfsh_bz,
+		t2.jdh xfsh_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xfsh_sjc,
+		t2.reserve1 xfsh_reserve1,
+		t2.reserve2 xfsh_reserve2,
+		t2.reserve3 xfsh_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') xfsh_reserve4
+	</sql>
+	<!--消防码头查询内容-->
+	<sql id="SQL_XFMT_CONTENT">
+		t2.uuid xfmt_uuid,
+		t2.sybgc xfmt_sybgc,
+		t2.tcwz xfmt_tcwz,
+		t2.tcsl xfmt_tcsl,
+		t2.ksq xfmt_ksq,
+		t2.sz xfmt_sz,
+		t2.cjrid xfmt_cjrid,
+		t2.cjrmc xfmt_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xfmt_cjsj,
+		t2.xgrid xfmt_xgrid,
+		t2.xgrmc xfmt_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xfmt_xgsj,
+		t2.delete_flag xfmt_deleteFlag,
+		t2.datasource xfmt_datasource,
+		t2.bz xfmt_bz,
+		t2.jdh xfmt_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xfmt_sjc,
+		t2.reserve1 xfmt_reserve1,
+		t2.reserve2 xfmt_reserve2,
+		t2.reserve3 xfmt_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') xfmt_reserve4
+	</sql>
+	<!--天然水源查询内容-->
+	<sql id="SQL_TRSY_CONTENT">
+		t2.uuid trsy_uuid,
+		t2.trsylx trsy_trsylx,
+		t2.sz trsy_sz,
+		t2.ywksq trsy_ywksq,
+		t2.sjbh trsy_sjbh,
+		t2.trsyrl trsy_trsyrl,
+		t2.trsymj trsy_trsymj,
+		t2.xssd trsy_xssd,
+		t2.cjrid trsy_cjrid,
+		t2.cjrmc trsy_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') trsy_cjsj,
+		t2.xgrid trsy_xgrid,
+		t2.xgrmc trsy_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') trsy_xgsj,
+		t2.delete_flag trsy_deleteFlag,
+		t2.datasource trsy_datasource,
+		t2.bz trsy_bz,
+		t2.jdh trsy_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') trsy_sjc,
+		t2.reserve1 trsy_reserve1,
+		t2.reserve2 trsy_reserve2,
+		t2.reserve3 trsy_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') trsy_reserve4
+	</sql>
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="XfsyVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM YAGL_XFSY t WHERE 1=1 AND DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="XfsyVO"  resultType="XfsyVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc
+		FROM YAGL_XFSY t LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		WHERE t.DELETE_FLAG = 'N'
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="XfsyVO"  resultType="XfsyVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_XFSY t 
+		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="XfsyVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO YAGL_XFSY(uuid,sybh,symc,sydz,sylx,sysxxxid,gxdz,gxdzmc,xzqy,qsxs,kyzt,xz,gis_x,gis_y,gis_h,glid,bd_lon,bd_lat,ssld,jzsj,qysj,blgxd,blgxn,blgxx,blgxb,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{uuid,jdbcType=VARCHAR},#{sybh,jdbcType=VARCHAR},#{symc,jdbcType=VARCHAR},#{sydz,jdbcType=VARCHAR},#{sylx,jdbcType=VARCHAR},#{sysxxxid,jdbcType=VARCHAR},#{gxdz,jdbcType=VARCHAR},#{gxdzmc,jdbcType=VARCHAR},#{xzqy,jdbcType=VARCHAR},#{qsxs,jdbcType=VARCHAR},#{kyzt,jdbcType=VARCHAR},#{xz,jdbcType=VARCHAR},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE},#{gisH,jdbcType=DOUBLE},#{glid,jdbcType=VARCHAR},#{bdLon,jdbcType=DOUBLE},#{bdLat,jdbcType=DOUBLE},#{ssld,jdbcType=VARCHAR},#{jzsj,jdbcType=DATE},#{qysj,jdbcType=DATE},#{blgxd,jdbcType=VARCHAR},#{blgxn,jdbcType=VARCHAR},#{blgxx,jdbcType=VARCHAR},#{blgxb,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO YAGL_XFSY(uuid,sybh,symc,sydz,sylx,sysxxxid,gxdz,gxdzmc,xzqy,qsxs,kyzt,xz,gis_x,gis_y,gis_h,glid,bd_lon,bd_lat,ssld,jzsj,qysj,blgxd,blgxn,blgxx,blgxb,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.sybh,jdbcType=VARCHAR} sybh,#{item.symc,jdbcType=VARCHAR} symc,#{item.sydz,jdbcType=VARCHAR} sydz,#{item.sylx,jdbcType=VARCHAR} sylx,#{item.sysxxxid,jdbcType=VARCHAR} sysxxxid,#{item.gxdz,jdbcType=VARCHAR} gxdz,#{item.gxdzmc,jdbcType=VARCHAR} gxdzmc,#{item.xzqy,jdbcType=VARCHAR} xzqy,#{item.qsxs,jdbcType=VARCHAR} qsxs,#{item.kyzt,jdbcType=VARCHAR} kyzt,#{item.xz,jdbcType=VARCHAR} xz,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.gisH,jdbcType=DOUBLE} gis_h,#{item.glid,jdbcType=VARCHAR} glid,#{item.bdLon,jdbcType=DOUBLE} bd_lon,#{item.bdLat,jdbcType=DOUBLE} bd_lat,#{item.ssld,jdbcType=VARCHAR} ssld,#{item.jzsj,jdbcType=DATE} jzsj,#{item.qysj,jdbcType=DATE} qysj,#{item.blgxd,jdbcType=VARCHAR} blgxd,#{item.blgxn,jdbcType=VARCHAR} blgxn,#{item.blgxx,jdbcType=VARCHAR} blgxx,#{item.blgxb,jdbcType=VARCHAR} blgxb,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  YAGL_XFSY t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="XfsyVO"> 
+		UPDATE   YAGL_XFSY  
+		<set>
+			<if test="uuid != null">uuid=#{uuid},</if>
+			<if test="sybh != null">sybh=#{sybh},</if>
+			<if test="symc != null">symc=#{symc},</if>
+			<if test="sydz != null">sydz=#{sydz},</if>
+			<if test="sylx != null">sylx=#{sylx},</if>
+			<if test="sysxxxid != null">sysxxxid=#{sysxxxid},</if>
+			<if test="gxdz != null">gxdz=#{gxdz},</if>
+			<if test="gxdzmc != null">gxdzmc=#{gxdzmc},</if>
+			<if test="xzqy != null">xzqy=#{xzqy},</if>
+			<if test="qsxs != null">qsxs=#{qsxs},</if>
+			<if test="kyzt != null">kyzt=#{kyzt},</if>
+			<if test="xz != null">xz=#{xz},</if>
+			<if test="gisX != null">gis_x=#{gisX},</if>
+			<if test="gisY != null">gis_y=#{gisY},</if>
+			<if test="gisH != null">gis_h=#{gisH},</if>
+			<if test="glid != null">glid=#{glid},</if>
+			<if test="bdLon != null">bd_lon=#{bdLon},</if>
+			<if test="bdLat != null">bd_lat=#{bdLat},</if>
+			<if test="ssld != null">ssld=#{ssld},</if>
+			<if test="jzsj != null">jzsj=TO_DATE(#{jzsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="qysj != null">qysj=TO_DATE(#{qysj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="blgxd != null">blgxd=#{blgxd},</if>
+			<if test="blgxn != null">blgxn=#{blgxn},</if>
+			<if test="blgxx != null">blgxx=#{blgxx},</if>
+			<if test="blgxb != null">blgxb=#{blgxb},</if>
+			<if test="cjrid != null">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="datasource != null">datasource=#{datasource},</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="jdh != null">jdh=#{jdh},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO YAGL_XFSY(uuid,sybh,symc,sydz,sylx,sysxxxid,gxdz,gxdzmc,xzqy,qsxs,kyzt,xz,gis_x,gis_y,gis_h,glid,bd_lon,bd_lat,ssld,jzsj,qysj,blgxd,blgxn,blgxx,blgxb,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.sybh,jdbcType=VARCHAR} sybh,#{item.symc,jdbcType=VARCHAR} symc,#{item.sydz,jdbcType=VARCHAR} sydz,#{item.sylx,jdbcType=VARCHAR} sylx,#{item.sysxxxid,jdbcType=VARCHAR} sysxxxid,#{item.gxdz,jdbcType=VARCHAR} gxdz,#{item.gxdzmc,jdbcType=VARCHAR} gxdzmc,#{item.xzqy,jdbcType=VARCHAR} xzqy,#{item.qsxs,jdbcType=VARCHAR} qsxs,#{item.kyzt,jdbcType=VARCHAR} kyzt,#{item.xz,jdbcType=VARCHAR} xz,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.gisH,jdbcType=DOUBLE} gis_h,#{item.glid,jdbcType=VARCHAR} glid,#{item.bdLon,jdbcType=DOUBLE} bd_lon,#{item.bdLat,jdbcType=DOUBLE} bd_lat,#{item.ssld,jdbcType=VARCHAR} ssld,#{item.jzsj,jdbcType=DATE} jzsj,#{item.qysj,jdbcType=DATE} qysj,#{item.blgxd,jdbcType=VARCHAR} blgxd,#{item.blgxn,jdbcType=VARCHAR} blgxn,#{item.blgxx,jdbcType=VARCHAR} blgxx,#{item.blgxb,jdbcType=VARCHAR} blgxb,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			uuid = VALUES(uuid),
+			sybh = VALUES(sybh),
+			symc = VALUES(symc),
+			sydz = VALUES(sydz),
+			sylx = VALUES(sylx),
+			sysxxxid = VALUES(sysxxxid),
+			gxdz = VALUES(gxdz),
+			gxdzmc = VALUES(gxdzmc),
+			xzqy = VALUES(xzqy),
+			qsxs = VALUES(qsxs),
+			kyzt = VALUES(kyzt),
+			xz = VALUES(xz),
+			gis_x = VALUES(gis_x),
+			gis_y = VALUES(gis_y),
+			gis_h = VALUES(gis_h),
+			glid = VALUES(glid),
+			bd_lon = VALUES(bd_lon),
+			bd_lat = VALUES(bd_lat),
+			ssld = VALUES(ssld),
+			jzsj = VALUES(jzsj),
+			qysj = VALUES(qysj),
+			blgxd = VALUES(blgxd),
+			blgxn = VALUES(blgxn),
+			blgxx = VALUES(blgxx),
+			blgxb = VALUES(blgxb),
+			cjrid = VALUES(cjrid),
+			cjrmc = VALUES(cjrmc),
+			cjsj = VALUES(cjsj),
+			xgrid = VALUES(xgrid),
+			xgrmc = VALUES(xgrmc),
+			xgsj = VALUES(xgsj),
+			delete_flag = VALUES(delete_flag),
+			datasource = VALUES(datasource),
+			bz = VALUES(bz),
+			jdh = VALUES(jdh),
+			sjc = VALUES(sjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3),
+			reserve4 = VALUES(reserve4)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="XfsyVO"  resultType="XfsyVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_XFSY t 
+		WHERE t.DELETE_FLAG = 'N' 
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<select id="doFindSyAndSxByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_XFSY t
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.uuid = #{uuid}
+	</select>
+
+	<!--关联消火栓属性-->
+	<select id="doFindSyAndXHSByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_XHS_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name xhs_szxsmc,
+		tcode4.code_name xhs_gwxsmc,
+		tcode5.code_name xhs_jkxsmc,
+		tcode6.code_name kyztmc
+		FROM YAGL_XFSY t
+		LEFT JOIN YAGL_XFSY_XHS t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t2.szxs = tcode3.code_value AND tcode3.codeid='010060F3865E45C2A1F1C640B1AE5590')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.gwxs = tcode4.code_value AND tcode4.codeid='4E94D5E9DDA7410DA445657230E95578')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode5 ON (t2.jkxs = tcode5.code_value AND tcode5.codeid='6A16194EFC2A1324E053B077770A516F')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode6 ON (t.kyzt = tcode6.code_value AND tcode6.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.uuid = #{uuid}
+	</select>
+	<!--关联消防水池属性-->
+	<select id="doFindSyAndXFSCByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_XFSC_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc,
+		tcode4.code_name xfsc_gwxsmc
+		FROM YAGL_XFSY t
+		LEFT JOIN YAGL_XFSY_XFSC t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.gwxs = tcode4.code_value AND tcode4.codeid='4E94D5E9DDA7410DA445657230E95578')
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.uuid = #{uuid}
+	</select>
+	<!--关联消防水鹤属性-->
+	<select id="doFindSyAndXFSHByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_XFSH_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc,
+		tcode4.code_name xfsh_jscdmc
+		FROM YAGL_XFSY t
+		LEFT JOIN YAGL_XFSY_XFSH t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.jscd = tcode4.code_value AND tcode4.codeid='6841EC7E2AC54C07BFB80C0D5B9AFC1E')
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.uuid = #{uuid}
+	</select>
+	<!--关联消防码头属性-->
+	<select id="doFindSyAndXFMTByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_XFMT_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc,
+		tcode4.code_name xfmt_ksqmc,
+		tcode5.code_name xfmt_szmc
+		FROM YAGL_XFSY t
+		LEFT JOIN YAGL_XFSY_XFMT t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.ksq = tcode4.code_value AND tcode4.codeid='AB88633159A440CC80FEACEAC3F65420')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode5 ON (t2.sz = tcode5.code_value AND tcode5.codeid='6A16194EFC321324E053B077770A516F')
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.uuid = #{uuid}
+	</select>
+	<!--关联天然水源属性-->
+	<select id="doFindSyAndTRSYByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_TRSY_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc,
+		tcode4.code_name trsy_trsylxmc,
+		tcode5.code_name trsy_szmc,
+		tcode6.code_name trsy_ywksqmc
+		FROM YAGL_XFSY t
+		LEFT JOIN YAGL_XFSY_TRSY t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.trsylx = tcode4.code_value AND tcode4.codeid='2994314CCD074080ACF6D49BB1879F54')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode5 ON (t2.sz = tcode5.code_value AND tcode5.codeid='6A16194EFC321324E053B077770A516F')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode6 ON (t2.ywksq = tcode6.code_value AND tcode6.codeid='AB88633159A440CC80FEACEAC3F65420')
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.uuid = #{uuid}
+	</select>
+
+	<select id="doFindListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc
+		FROM YAGL_XFSY t LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+	<!--查询消火栓-->
+	<select id="doFindXhsListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc
+		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XHS t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<include refid="SQL_XHS_CONDITION"/>
+	</select>
+	<!--查询消防水鹤-->
+	<select id="doFindXfshListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc
+		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFSH t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<include refid="SQL_XFSH_CONDITION"/>
+	</select>
+	<!--查询消防水池-->
+	<select id="doFindXfscListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc
+		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFSC t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<include refid="SQL_XFSC_CONDITION"/>
+	</select>
+	<!--查询消防码头-->
+	<select id="doFindXfmtListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc
+		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFMT t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<include refid="SQL_XFMT_CONDITION"/>
+	</select>
+	<!--查询天然水源-->
+	<select id="doFindTrsyListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name sylxmc,
+		tcode2.code_name xzmc,
+		tcode3.code_name kyztmc
+		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_TRSY t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
+		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<include refid="SQL_TRSY_CONDITION"/>
+	</select>
+</mapper>
