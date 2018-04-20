@@ -28,7 +28,7 @@
 			and t.cphm LIKE concat(concat('%',#{cphm}),'%')
 		</if>
 		<if test="clzt != null and clzt != '' ">
-			and t.clzt = #{clzt}
+			and t.clzt LIKE concat(RTRIM(#{clzt},0),'%')
 		</if>
 		<if test="sccj != null and sccj != '' ">
 			and t.sccj = #{sccj}
