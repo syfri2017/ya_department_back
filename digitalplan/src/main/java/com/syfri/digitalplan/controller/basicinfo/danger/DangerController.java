@@ -35,7 +35,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("danger")
 public class DangerController  extends BaseController<DangerVO>{
-
+	
 	@Autowired
 	protected Environment environment;
 
@@ -44,12 +44,27 @@ public class DangerController  extends BaseController<DangerVO>{
 
 	@Autowired
 	private DangerDAO dangerDAO;
-
+	/**
+	 * @Description:
+	 * @Param: []
+	 * @Return: com.syfri.digitalplan.service.basicinfo.danger.DangerService
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:37
+	 */
 	@Override
 	public DangerService getBaseService() {
 		return this.dangerService;
 	}
 
+	/**
+	 * @Description:
+	 * @Param: [model]
+	 * @Return: void
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:40
+	 */
 	@ModelAttribute
 	public void Model(Model model){
 		if (environment.containsProperty("server.context-path")) {
@@ -59,6 +74,14 @@ public class DangerController  extends BaseController<DangerVO>{
 		}
 	}
 
+	/**
+	 * @Description:
+	 * @Param: [model, index]
+	 * @Return: java.lang.String
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:41
+	 */
 	@GetMapping("")
 	public String getUser(Model model, @RequestParam(value="index") String index){
 		model.addAttribute("index", index);
@@ -66,7 +89,12 @@ public class DangerController  extends BaseController<DangerVO>{
 	}
 
 	/**
-	 * 根据条件获取化学危险品信息
+	  * @Description: 根据条件获取化学危险品信息
+	  * @Param:
+	  * @Return:
+	  * @Author: dongbo
+	  * @Modified By:
+	  * @Date: 2018/4/20 16:42
 	 */
 	@ApiOperation(value="根据条件获取化学危险品信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="化学危险品对象")
@@ -84,8 +112,15 @@ public class DangerController  extends BaseController<DangerVO>{
 	}
 
 	/**
-	 * 跳转到化危品详情页
+	 * @Description: 跳转到化危品详情页
+	 * @Param:
+	 * @Return:
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:42
 	 */
+
+
 	@ApiOperation(value="跳转到化危品详情页",notes="页面跳转")
 	@GetMapping("/detail/{pkid}")
 	public String getDetailPage(Model model, @PathVariable String id){
@@ -93,7 +128,14 @@ public class DangerController  extends BaseController<DangerVO>{
 		model.addAttribute("id", id);
 		return "basicinfo/danger_detail";
 	}
-
+	/**
+	 * @Description: 根据id获取化学危险品信息
+	 * @Param: [ID]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:43
+	 */
 	@ApiOperation(value="根据id获取化学危险品信息",notes="列表信息")
 	@GetMapping("/doFindById/{ID}")
 	public @ResponseBody ResultVO getDetail(@PathVariable String ID){
@@ -112,12 +154,13 @@ public class DangerController  extends BaseController<DangerVO>{
 	}
 
 	/**
-	 * 附件上传
-	 *
-	 *      主表Id
-	 * @param request
-	 * @return
+	 * @Description: 附件上传
+	 * @Param: [request]
+	 * @Return: java.util.Map<java.lang.String,java.lang.Object>
 	 * @throws UnsupportedEncodingException
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:44
 	 */
 	@ApiOperation(value="根据条件获取化学危险品信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="化学危险品对象")
@@ -125,30 +168,6 @@ public class DangerController  extends BaseController<DangerVO>{
 	public @ResponseBody Map<String, Object> uploadAttachment(HttpServletRequest request)
 			throws UnsupportedEncodingException {
 		Map<String, Object> result = new HashMap<String, Object>();
-
-		/*MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		// 获得文件
-		MultipartFile multipartFile = multipartRequest.getFile("Filedata");// 与前端设置的fileDataName属性值一致
-		String filename = multipartFile.getOriginalFilename();// 文件名称
-		InputStream is = null;
-		try {
-			//读取文件流
-			is = multipartFile.getInputStream();
-			byte[] bytes = FileCopyUtils.copyToByteArray(is);
-			DangerVO blobField = new DangerVO();
-			blobField.setFlagFile(bytes);
-			//保存blob字段
-			this.testService.save(blobField, testId, filename);
-			result.put("flag", true);
-			result.put("attachmentId", blobField.getId());
-			result.put("attachmentNa " +
-					"  me", filename);
-		} catch (IOException e) {
-			e.printStackTrace();
-			result.put("flag", false);
-		} finally {
-			IOUtils.closeQuietly(is);
-		}*/
 		int res = 0;
 		try {
 			byte[] buffer = null;
