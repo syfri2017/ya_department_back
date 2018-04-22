@@ -7,6 +7,14 @@ import java.util.Base64;
 import com.syfri.baseapi.model.ValueObject;
 import oracle.sql.BLOB;
 
+/**
+ * @Description: 化学危险品
+ * @Param:
+ * @Return:
+ * @Author: dongbo
+ * @Modified By:
+ * @Date: 2018/4/20 16:52
+ */
 public class DangerVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
