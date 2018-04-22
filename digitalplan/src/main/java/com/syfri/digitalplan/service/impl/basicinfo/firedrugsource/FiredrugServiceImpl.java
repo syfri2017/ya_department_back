@@ -44,7 +44,14 @@ public class FiredrugServiceImpl extends BaseServiceImpl<FiredrugVO> implements 
 		}
 		return firedrugDAO.doSearchByVO(firedrugVO);
 	}
-
+	/**
+	 * @Description:删除字符串结尾所有0
+	 * @Param: [tempString]
+	 * @Return: java.lang.String
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/4/22 21:14
+	 */
 	public String delZero(String tempString) {
 		int initlen = tempString.length(); // 串的初始长度
 		int finallen = initlen; // 串的最终长度

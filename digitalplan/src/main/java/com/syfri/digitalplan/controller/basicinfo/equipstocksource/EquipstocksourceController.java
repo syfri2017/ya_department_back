@@ -45,7 +45,12 @@ public class EquipstocksourceController  extends BaseController<Equipstocksource
 	}
 
 	/**
-	 * 查询重点单位列表
+	 * @Description:查询装备器材库存列表
+	 * @Param: [equipstocksourceVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/4/22 21:21
 	 */
 	@ApiOperation(value="根据条件查询重点单位",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="重点单位对象")
@@ -64,20 +69,30 @@ public class EquipstocksourceController  extends BaseController<Equipstocksource
 	}
 
 	/**
-	 * 跳转到重点单位详情页
+	 * @Description:跳转到装备库存详情页
+	 * @Param: [model, id]
+	 * @Return: java.lang.String
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/4/22 21:22
 	 */
-	@ApiOperation(value="跳转到重点单位详情页",notes="页面跳转")
+	@ApiOperation(value="跳转到装备库存详情页",notes="页面跳转")
 	@GetMapping("/detail/{pkid}")
 	public String getDetailPage(Model model, @PathVariable String id){
 //		model.addAttribute("index", index);
 		model.addAttribute("id", id);
-		return "planobject/importantunits_detail";
+		return "equipstocksource/equipstocksource_detail";
 	}
 
 	/**
-	 * 获取重点单位详情
+	 * @Description:获取装备库存详情
+	 * @Param: [id]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/4/22 21:24
 	 */
-	@ApiOperation(value="获取重点单位详情",notes="列表信息")
+	@ApiOperation(value="获取重点装备库存",notes="列表信息")
 //	@RequiresPermissions("keyunit:list")
 	@GetMapping("/doFindDetailById/{id}")
 	public @ResponseBody ResultVO getDetail(@PathVariable String id){

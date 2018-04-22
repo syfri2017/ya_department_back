@@ -47,7 +47,12 @@ public class FiredrugController  extends BaseController<FiredrugVO>{
 	}
 
 	/**
-	 * 查询消防药剂列表
+	 * @Description:查询消防药剂列表
+	 * @Param: [firedrugVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/4/22 21:18
 	 */
 	@ApiOperation(value="根据条件查询消防药剂",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="消防药剂对象")
