@@ -248,10 +248,10 @@
 		FROM YAGL_WL_XFYJXX f 
 		WHERE f.DELETE_FLAG = 'N'
 		<if test="ssdz != null and ssdz != '' ">
-			and f.ssdz LIKE concat(#{ssdz},'%')
+			and f.ssdz LIKE concat(rtrim(#{ssdz},'0'),'%')
 		</if>
 		<if test="yjlx != null and yjlx != '' ">
-			and f.yjlx LIKE concat(#{yjlx},'%')
+			and f.yjlx LIKE concat(rtrim(#{yjlx},'0'),'%')
 		</if>
 		<if test="cbl_min != null and cbl_min != '' ">
 			and f.cbl &gt;= #{cbl_min}

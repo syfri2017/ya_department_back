@@ -33,42 +33,7 @@ public class FiredrugServiceImpl extends BaseServiceImpl<FiredrugVO> implements 
 	 */
 	@Override
 	public List<FiredrugVO> doFindlist(FiredrugVO firedrugVO){
-		//所属队站
-		if(firedrugVO.getSsdz()!=null && !"".equals(firedrugVO.getSsdz())){
-			String str = firedrugVO.getSsdz().substring(0,2).toString();
-			firedrugVO.setSsdz(str);
-		}
-		//药剂类型
-		if(firedrugVO.getYjlx()!=null && !"".equals(firedrugVO.getYjlx())){
-			firedrugVO.setYjlx(this.delZero(firedrugVO.getYjlx()));
-		}
 		return firedrugDAO.doSearchByVO(firedrugVO);
 	}
-	/**
-	 * @Description:删除字符串结尾所有0
-	 * @Param: [tempString]
-	 * @Return: java.lang.String
-	 * @Author: liurui
-	 * @Modified By:
-	 * @Date: 2018/4/22 21:14
-	 */
-	public String delZero(String tempString) {
-		int initlen = tempString.length(); // 串的初始长度
-		int finallen = initlen; // 串的最终长度
-		int start = 0; // 串的开始位置
-		int off = 0; // 串的偏移位置
-		char[] val = new char[initlen];
-		tempString.getChars(0, finallen, val, 0); // 保存原数据，用于判断字符
 
-		// 找到以'0'开头的后一位
-		// while ((start < finallen) && (val[off + start] == '0')) {
-		// start++;
-		// }
-		// 找到以'0'结尾的前一位
-		while ((start < finallen) && (val[off + finallen - 1] == '0')) {
-			finallen--;
-		}
-		return ((start > 0) || (finallen < initlen)) ? tempString.substring(start, finallen)
-				: tempString;
-	}
 }

@@ -10,7 +10,4 @@ public interface FiredrugService  extends BaseService<FiredrugVO>{
     /*--查询：消防药剂.--*/
     List<FiredrugVO> doFindlist(FiredrugVO firedrugVO);
 
-    /*--去掉字符串结尾所有0--*/
-    public String delZero(String tempString);
-
 }
