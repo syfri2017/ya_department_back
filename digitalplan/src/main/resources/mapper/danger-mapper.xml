@@ -3,129 +3,122 @@
 <mapper namespace="com.syfri.digitalplan.dao.basicinfo.danger.DangerDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
-		<if test="pkid != null and pkid != '' ">
-		 and t.pkid = #{pkid}
-		</if>
 		<if test="id != null and id != '' ">
-		 and t.id = #{id}
+		 and t.uuid = #{id}
 		</if>
 		<if test="name != null and name != '' ">
-		 and t.name = #{name}
+			and t.name = #{name}
 		</if>
 		<if test="englishName != null and englishName != '' ">
-		 and t.english_name = #{englishName}
+			and t.english_name = #{englishName}
 		</if>
 		<if test="cas != null and cas != '' ">
-		 and t.cas = #{cas}
+			and t.cas = #{cas}
 		</if>
 		<if test="rtecs != null and rtecs != '' ">
-		 and t.rtecs = #{rtecs}
+			and t.rtecs = #{rtecs}
 		</if>
 		<if test="un != null and un != '' ">
-		 and t.un = #{un}
+			and t.un = #{un}
 		</if>
 		<if test="dangerId != null and dangerId != '' ">
-		 and t.danger_id = #{dangerId}
+			and t.danger_id = #{dangerId}
 		</if>
 		<if test="expression != null and expression != '' ">
-		 and t.expression = #{expression}
+			and t.expression = #{expression}
 		</if>
 		<if test="type != null and type != '' ">
-		 and t.type = #{type}
+			and t.type = #{type}
 		</if>
 		<if test="flag != null and flag != '' ">
-		 and t.flag = #{flag}
+			and t.flag = #{flag}
 		</if>
 		<if test="alias != null and alias != '' ">
-		 and t.alias = #{alias}
+			and t.alias = #{alias}
 		</if>
 		<if test="gbId != null and gbId != '' ">
-		 and t.gb_id = #{gbId}
+			and t.gb_id = #{gbId}
 		</if>
 		<if test="property != null and property != '' ">
-		 and t.property = #{property}
+			and t.property = #{property}
 		</if>
 		<if test="airDetermine != null and airDetermine != '' ">
-		 and t.air_determine = #{airDetermine}
+			and t.air_determine = #{airDetermine}
 		</if>
 		<if test="waterDetermine != null and waterDetermine != '' ">
-		 and t.water_determine = #{waterDetermine}
+			and t.water_determine = #{waterDetermine}
 		</if>
 		<if test="tabu != null and tabu != '' ">
-		 and t.tabu = #{tabu}
+			and t.tabu = #{tabu}
 		</if>
 		<if test="thesaurus != null and thesaurus != '' ">
-		 and t.thesaurus = #{thesaurus}
+			and t.thesaurus = #{thesaurus}
 		</if>
 		<if test="symptom != null and symptom != '' ">
-		 and t.symptom = #{symptom}
+			and t.symptom = #{symptom}
 		</if>
 		<if test="firstaid != null and firstaid != '' ">
-		 and t.firstaid = #{firstaid}
+			and t.firstaid = #{firstaid}
 		</if>
 		<if test="defendWay != null and defendWay != '' ">
-		 and t.defend_way = #{defendWay}
+			and t.defend_way = #{defendWay}
 		</if>
 		<if test="dispose != null and dispose != '' ">
-		 and t.dispose = #{dispose}
+			and t.dispose = #{dispose}
 		</if>
 		<if test="store != null and store != '' ">
-		 and t.store = #{store}
+			and t.store = #{store}
 		</if>
 		<if test="leakWay != null and leakWay != '' ">
-		 and t.leak_way = #{leakWay}
+			and t.leak_way = #{leakWay}
 		</if>
 		<if test="traffic != null and traffic != '' ">
-		 and t.traffic = #{traffic}
+			and t.traffic = #{traffic}
+		</if>
+		<if test="caution != null and caution != '' ">
+			and t.caution = #{caution}
+		</if>
+		<if test="bernProperty != null and bernProperty != '' ">
+			and t.bern_property = #{bernProperty}
+		</if>
+		<if test="mainApplication != null and mainApplication != '' ">
+			and t.main_application = #{mainApplication}
+		</if>
+		<if test="poisionProperty != null and poisionProperty != '' ">
+			and t.poision_property = #{poisionProperty}
+		</if>
+		<if test="seprarate != null and seprarate != '' ">
+			and t.seprarate = #{seprarate}
+		</if>
+		<if test="publicSafety != null and publicSafety != '' ">
+			and t.public_safety = #{publicSafety}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+			and t.delete_flag = #{deleteFlag}
+		</if>
+		<if test="datasource != null and datasource != '' ">
+			and t.datasource = #{datasource}
 		</if>
 		<if test="remark != null and remark != '' ">
-		 and t.remark = #{remark}
-		</if>
-		<if test="sjbb != null and sjbb != '' ">
-		 and t.sjbb = #{sjbb}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-		 and t.cjsj = #{cjsj}
-		</if>
-		<if test="ywxtbsid != null and ywxtbsid != '' ">
-		 and t.ywxtbsid = #{ywxtbsid}
-		</if>
-		<if test="jlzt != null and jlzt != '' ">
-		 and t.jlzt = #{jlzt}
-		</if>
-		<if test="cszt != null and cszt != '' ">
-		 and t.cszt = #{cszt}
-		</if>
-		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
-		</if>
-		<if test="vercol != null and vercol != '' ">
-		 and t.vercol = #{vercol}
-		</if>
-		<if test="tbjdh != null and tbjdh != '' ">
-		 and t.tbjdh = #{tbjdh}
-		</if>
-		<if test="tbsjc != null and tbsjc != '' ">
-		 and t.tbsjc = #{tbsjc}
+			and t.remark = #{remark}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
+			and t.reserve1 = #{reserve1}
 		</if>
 		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
+			and t.reserve2 = #{reserve2}
 		</if>
 		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
+			and t.reserve3 = #{reserve3}
 		</if>
-		<if test="dmz != null and dmz != '' ">
-			and t.dmz = #{dmz}
+		<if test="reserve4 != null and reserve4 != '' ">
+			and t.reserve4 = #{reserve4}
 		</if>
 	</sql>
 
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
-		t.pkid pkid,
-		t.id id,
+		t.uuid uuid,
 		t.name name,
 		t.english_name englishName,
 		t.cas cas,
@@ -149,19 +142,19 @@
 		t.store store,
 		t.leak_way leakWay,
 		t.traffic traffic,
+		t.caution caution,
+		t.bern_property bernProperty,
+		t.main_application mainApplication,
+		t.poision_property poisionProperty,
+		t.seprarate seprarate,
+		t.public_safety publicSafety,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
 		t.remark remark,
-		t.sjbb sjbb,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.ywxtbsid ywxtbsid,
-		t.jlzt jlzt,
-		t.cszt cszt,
-		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
-		TO_CHAR(t.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
-		t.tbjdh tbjdh,
-		TO_CHAR(t.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
 		t.reserve1 reserve1,
 		t.reserve2 reserve2,
-		TO_CHAR(t.reserve3,'yyyy-MM-dd HH24:mi:ss') reserve3
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
 	</sql>
 
 	<!--3.查询记录数-->
@@ -182,15 +175,21 @@
 			<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--5.根据ID查询记录-->
+	<!--5.根据UUID查询记录-->
 	<select id="doFindById" parameterType="DangerVO"  resultType="DangerVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		,p.DMZ
-		FROM ZHJC_HXWXP t
-		LEFT JOIN ZHJC_HWPLX p
-		ON t.TYPE = p.ID
-		WHERE t.JLZT = 1 AND  t.ID = #{value}
+		,p.CODE_NAME dmz
+		,f.ZP flagFile
+		,m.CODEID
+		FROM YAGL_ZHJC_HXWXP t
+		LEFT JOIN SYS_CODELIST m
+		ON m.CODETYPE = 'HXWXPLX'
+		LEFT JOIN SYS_CODELIST_DETAIL p
+		ON m.CODEID = p.CODEID AND t.TYPE = p.CODE_VALUE
+		LEFT JOIN YAGL_ZZJG f
+		ON '6db150cf9e764dcfa50160e4d3c8a164' = f.UUID
+		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -321,9 +320,49 @@
 		,p.DMZ
 		FROM ZHJC_HXWXP t
 		LEFT JOIN ZHJC_HWPLX p
-		ON t.TYPE = p.ID
+		ON t.TYPE = p.UUID
 		WHERE t.JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 
+	<!--12.根据条件查询-->
+	<select id="doSearchByVO" parameterType="DangerVO"  resultType="DangerVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		,p.CODE_NAME dmz
+		,f.CODEID
+		FROM YAGL_ZHJC_HXWXP t
+		LEFT JOIN SYS_CODELIST f
+		ON f.CODETYPE = 'HXWXPLX'
+		LEFT JOIN SYS_CODELIST_DETAIL p
+		ON f.CODEID= p.CODEID AND t.TYPE = p.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<if test="name != null and name != '' ">
+			and t.name LIKE concat(concat('%',#{name}),'%')
+		</if>
+		<if test="englishName != null and englishName != '' ">
+			and t.english_name LIKE concat(concat('%',#{englishName}),'%')
+		</if>
+		<if test="cas != null and cas != '' ">
+			and t.cas LIKE concat(concat('%',#{cas}),'%')
+		</if>
+		<if test="dangerId != null and dangerId != '' ">
+			and t.danger_id LIKE concat(concat('%',#{dangerId}),'%')
+		</if>
+		<if test="expression != null and expression != '' ">
+			and t.expression LIKE concat(concat('%',#{expression}),'%')
+		</if>
+		<if test="type != null and type != '' ">
+			and t.type = #{type}
+		</if>
+	</select>
+
+	<!--13.上传图片-->
+	<insert id="doInsertImg" parameterType="DangerVO">
+		INSERT INTO YAGL_ZZJG(
+		ZP,uuid
+		) VALUES (
+		#{flagFile,jdbcType=BLOB},'6db150cf9e764dcfa50160e4d3c8a191'
+		)
+	</insert>
 </mapper>
