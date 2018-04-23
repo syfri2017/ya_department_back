@@ -156,7 +156,6 @@ public class YafjxzController {
 			seyafjxz.setYaid(yaid);
 			yafjxz=yafjxzService.doFindByVO(seyafjxz);
 		}
-
 		if(StringUtils.isNotBlank(pkid)){
 			yafjxz=yafjxzService.doFindById(pkid);
 		}*/
