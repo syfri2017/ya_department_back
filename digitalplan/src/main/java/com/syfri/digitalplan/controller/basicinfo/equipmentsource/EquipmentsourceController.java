@@ -2,6 +2,7 @@ package com.syfri.digitalplan.controller.basicinfo.equipmentsource;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.digitalplan.model.basicinfo.equipmentsource.EquipmentVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.syfri.digitalplan.model.basicinfo.equipmentsource.EquipmentsourceVO;
 import com.syfri.digitalplan.service.basicinfo.equipmentsource.EquipmentsourceService;
 import com.syfri.baseapi.controller.BaseController;
 
 @RestController
 @RequestMapping("equipmentsource")
-public class EquipmentsourceController  extends BaseController<EquipmentsourceVO>{
+public class EquipmentsourceController  extends BaseController<EquipmentVO>{
 
 	@Autowired
 	private EquipmentsourceService equipmentsourceService;
@@ -46,7 +46,7 @@ public class EquipmentsourceController  extends BaseController<EquipmentsourceVO
 
 	/**
 	 * @Description:查询装备器材列表
-	 * @Param: [equipmentsourceVO]
+	 * @Param: [equipmentVO]
 	 * @Return: com.syfri.baseapi.model.ResultVO
 	 * @Author: liurui
 	 * @Modified By:
@@ -57,10 +57,10 @@ public class EquipmentsourceController  extends BaseController<EquipmentsourceVO
 //	@RequiresPermissions("keyunit:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody
-	ResultVO findByVO(@RequestBody EquipmentsourceVO equipmentsourceVO){
+	ResultVO findByVO(@RequestBody EquipmentVO equipmentVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(equipmentsourceService.doFindlist(equipmentsourceVO));
+			resultVO.setResult(equipmentsourceService.doFindlist(equipmentVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
