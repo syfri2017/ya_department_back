@@ -2,47 +2,58 @@ package com.syfri.digitalplan.controller.yafjxz;
 
 import java.io.*;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.syfri.baseapi.model.ResultVO;
+
+import com.syfri.digitalplan.config.properties.YafjxzProperties;
+import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
+import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import com.syfri.digitalplan.service.yafjxz.YafjxzService;
-import com.syfri.digitalplan.utils.DateUtil;
+import com.syfri.digitalplan.utils.DownloadUtil;
 import com.syfri.digitalplan.utils.StringUtils;
+import com.syfri.digitalplan.utils.ZipCompressUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+/**
+ * @author lixiaoyang
+ * @Title: 预案附件下载
+ * @date 2018/4/2 09:30
+ */
 @Controller
 @RequestMapping("yafjxz")
 public class YafjxzController {
 
 	@Autowired
 	private YafjxzService yafjxzService;
-
-	private static final String SFOLDER_NAME = "E://test//upload//";
+	@Autowired
+	private DigitalplanlistService digitalplanlistService;
+	@Autowired
+	private YafjxzProperties yafjxzProperties;
 
 	/**
-	 *上传文件
-	 * @param request
-	 * @param response
+	 * @Description:上传文件
+	 * @Param: [request, response, yafjxzVO]
+	 * @Return: void
+	 * @Author: lixiaoayng
+	 * @Modified By:
+	 * @Date: 2018/4/20 15:49
 	 */
 	@RequestMapping(value = "/upload")
 	@ResponseBody
 	public void upload(HttpServletRequest request, HttpServletResponse response
-			, com.syfri.digitalplan.model.yafjxz.YafjxzVO yafjxzVO) {
+			,YafjxzVO yafjxzVO) {
 		System.out.println("id:"+yafjxzVO.getYaid());
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartRequest.getFileNames();
@@ -61,11 +72,17 @@ public class YafjxzController {
 				e.printStackTrace();
 			}
 			// 文件上传固定的路径
-			StringBuffer relativePath=new StringBuffer(SFOLDER_NAME);
-			//新建的文件夹名称（日期+UUID）
+			StringBuffer relativePath=new StringBuffer(yafjxzProperties.getSavePath());
+			//新建的文件夹名称（预案基本信息创建时间+预案基本信息PKID）
 			//123456为行政代码
-			StringBuffer new_folder=new StringBuffer("123456/").append(DateUtil.NowDateToString("yyyy-MM-dd"))
-					.append("/").append(StringUtils.getUUId()).append("/");
+
+			DigitalplanlistVO digitalplanlist=digitalplanlistService.doFindById(yafjxzVO.getYaid());
+			if(StringUtils.isBlank(digitalplanlist.getPkid())){
+				throw new RuntimeException("未查到预案基本信息！");
+			}
+
+			StringBuffer new_folder=new StringBuffer("123456/").append(digitalplanlist.getCjsj())
+					.append("/").append(digitalplanlist.getId()).append("/");
 
 			String folderName=relativePath.append(new_folder).toString();
 			//创建文件夹
@@ -105,7 +122,7 @@ public class YafjxzController {
 				fos.close();
 				is.close();
 				//插入数据
-				com.syfri.digitalplan.model.yafjxz.YafjxzVO yafjxz =new com.syfri.digitalplan.model.yafjxz.YafjxzVO();
+				YafjxzVO yafjxz =new YafjxzVO();
 				yafjxz.setId(StringUtils.getUUId());
 				yafjxz.setYaid(yafjxzVO.getYaid());
 				yafjxz.setDir(dbPath);
@@ -117,14 +134,43 @@ public class YafjxzController {
 			}
 		}
 	}
+	/**
+	 * @Description:逻辑删除
+	 * @Param: [pkid]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: lixiaoayng
+	 * @Modified By:
+	 * @Date: 2018/4/20 15:48
+	 */
 	@RequestMapping(value = "/deleteById")
-	public @ResponseBody ResultVO deleteById(@RequestBody String pkid) {
+	public @ResponseBody ResultVO deleteById(@RequestBody YafjxzVO yafjxz) {
 		ResultVO resultVO = ResultVO.build();
-		com.syfri.digitalplan.model.yafjxz.YafjxzVO yafjxz=yafjxzService.doFindById(pkid);
-		int dr=yafjxzService.doDeleteById(pkid);
 
+		//注释的内容为先压缩在删除原文件
+		/*
+		if(StringUtils.isBlank(yaid)&&StringUtils.isBlank(pkid)){
+			return null;
+		}
+		if(StringUtils.isNotBlank(yaid)){
+			YafjxzVO seyafjxz =new YafjxzVO();
+			seyafjxz.setYaid(yaid);
+			yafjxz=yafjxzService.doFindByVO(seyafjxz);
+		}
+		if(StringUtils.isNotBlank(pkid)){
+			yafjxz=yafjxzService.doFindById(pkid);
+		}*/
+	/*	DigitalplanlistVO dl=new DigitalplanlistVO();
+		if(null!=yafjxz){
+			dl=digitalplanlistService.doFindById(yafjxz.getYaid());
+		}
+		if(null==dl){
+			return null;
+		}*/
+		//逻辑删除
+		int dr=yafjxzService.doDeleteByVO(yafjxz);
 		if(dr>0){
-			StringBuffer sb=new StringBuffer(SFOLDER_NAME).append(yafjxz.getDir());
+			resultVO.setMsg("删除成功");
+			StringBuffer sb=new StringBuffer(yafjxzProperties.getSavePath()).append(yafjxz.getDir());
 			File file=new File(sb.toString());
 			if(file.exists()){
 				boolean rf=file.delete();
@@ -135,35 +181,54 @@ public class YafjxzController {
 		}
 		return resultVO;
 	}
-
 	/**
-	 *
-	 * @param response
-	 * @param fileName 文件名称（数据库存的dir字段内容 ）
+	 * @Description:下载预案，
+	 * 例子http://localhost:8005/yafjxz/download?yaid=67833B5F91EE2169E053B077770AE803
+	 * @Param: [response, yafjxzVO]
+	 * @Return: void
+	 * @Author: lixiaoayng
+	 * @Modified By:
+	 * @Date: 2018/4/20 13:47
 	 */
-
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public void download(HttpServletResponse response, String fileName) {
-
-//		response.setHeader("content-type", "application/octet-stream");
-//		response.setContentType("application/octet-stream");
-//		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-		response.setHeader("content-type", "text/html");
-		response.setContentType("text/html");
-		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-		byte[] buff = new byte[1024];
-		BufferedInputStream bis = null;
-		OutputStream os = null;
+	public void download(HttpServletRequest request,HttpServletResponse response,YafjxzVO yafjxzVO) {
+		//判断预案id是否为空
+		if(null==yafjxzVO||StringUtils.isBlank(yafjxzVO.getYaid())){
+			return;
+		}
+		List<YafjxzVO> yafjxzs=yafjxzService.doSearchListByVO(yafjxzVO);
+		YafjxzVO yafjxz=new YafjxzVO();
+		//以为只获取文件夹所以只需要第一条数据
+		if(yafjxzs.size()>0){
+			yafjxz=yafjxzs.get(0);
+		}else{
+			return;
+		}
+		DigitalplanlistVO digitalplanlist=digitalplanlistService.doFindById(yafjxzVO.getYaid());
+		//判断预案基本信息是否为空
+		if(null==digitalplanlist){
+			return;
+		}
+		//新生成的文件名（浏览器下载显示的文件名）
+		String newFileName=new StringBuffer(digitalplanlist.getYamc()).append(".zip").toString();
+		//下载文件的源路径
+		String sZipFileName=yafjxz.getDir().replace(yafjxz.getRelname().trim(),"");
+		//生成的zip文件路径
+		String zipfilename=new StringBuffer(yafjxzProperties.getZipPath())
+				.append(newFileName).toString();
+		//压缩文件夹
+		ZipCompressUtil zipCompressUtil=new ZipCompressUtil(zipfilename,sZipFileName);
 		try {
-			os = response.getOutputStream();
-			bis = new BufferedInputStream(new FileInputStream(new File(SFOLDER_NAME
-					+ fileName)));
-			int i = bis.read(buff);
-			while (i != -1) {
-				os.write(buff, 0, buff.length);
-				os.flush();
-				i = bis.read(buff);
-			}
+			zipCompressUtil.zip();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ;
+		}
+		BufferedInputStream bis = null;
+		try {
+			bis = new BufferedInputStream(new FileInputStream(new File(zipfilename)));
+			//返回浏览器输出流
+			DownloadUtil.zip(bis, request, response,  newFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -176,6 +241,14 @@ public class YafjxzController {
 			}
 		}
 	}
+	/**
+	 * @Description:显示预案基本信息列表
+	 * @Param: [yafjxzVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: lixiaoayng
+	 * @Modified By:
+	 * @Date: 2018/4/20 15:47
+	 */
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public ResultVO list(@RequestBody com.syfri.digitalplan.model.yafjxz.YafjxzVO yafjxzVO) {

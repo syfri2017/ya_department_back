@@ -119,7 +119,7 @@
 	<select id="doSearchListByVO" parameterType="YafjxzVO"  resultType="YafjxzVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_YAFJXZ t  WHERE t.DELETE_FLAG = 'N' 
+		FROM YAGL_YAFJXZ t  WHERE t.JLZT = '1' 
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -128,7 +128,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YAFJXZ t 
-		WHERE t.DELETE_FLAG = 'N' AND  t.PKID = #{value} 
+		WHERE t.JLZT = '1' AND  t.PKID = #{value} 
 	</select>
 
 	<!--6.按照VO插入-->
@@ -155,7 +155,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  YAGL_YAFJXZ t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  YAGL_YAFJXZ t SET t.JLZT = '0'  WHERE 1=1   AND t.PKID = #{value} 
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -171,7 +171,7 @@
 			<if test="remark != null">remark=#{remark},</if>
 			<if test="czyid != null">czyid=#{czyid},</if>
 			<if test="czyxm != null">czyxm=#{czyxm},</if>
-			<if test="jlzt != null">jlzt=#{jlzt},</if>
+			<if test="jlzt != null">jlzt='1',</if>
 			<if test="cszt != null">cszt=#{cszt},</if>
 			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="bz != null">bz=#{bz},</if>
@@ -231,18 +231,10 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YAFJXZ t 
-		WHERE t.DELETE_FLAG = 'N' 
+		WHERE t.JLZT = '1' 
 		<include refid="SQL_CONDITION"/>
 	</select>
-
-
-	<!--12.按主键逻辑删除不包含旧的-->
-	<!--<update id="doDeletcNotIn"  parameterType="String">-->
-		<!--UPDATE  YAGL_YAFJXZ t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID NOT IN #{oldYafjxzVOs}-->
-	<!--</update>-->
-
 	<delete id="doDeletcNotIn" parameterType="java.lang.String">
 		DELETE FROM YAGL_YAFJXZ WHERE PKID NOT IN  #{oldYafjxzVOs}
 	</delete>
-
 </mapper>
