@@ -170,14 +170,14 @@ public class YafjxzController {
 		int dr=yafjxzService.doDeleteByVO(yafjxz);
 		if(dr>0){
 			resultVO.setMsg("删除成功");
-			/*StringBuffer sb=new StringBuffer(yafjxzProperties.getSavePath()).append(yafjxz.getDir());
+			StringBuffer sb=new StringBuffer(yafjxzProperties.getSavePath()).append(yafjxz.getDir());
 			File file=new File(sb.toString());
 			if(file.exists()){
 				boolean rf=file.delete();
 				if(rf){
 					resultVO.setMsg("删除成功");
 				}
-			}*/
+			}
 		}
 		return resultVO;
 	}
