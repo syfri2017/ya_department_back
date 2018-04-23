@@ -241,30 +241,30 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据对象查询记录-->
+	<!--12.列表页条件查询记录-->
 	<select id="doSearchByVO" parameterType="FiredrugVO"  resultType="FiredrugVO">
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_WL_XFYJXX f 
 		WHERE f.DELETE_FLAG = 'N'
-		<!--<if test="ssdz != null and ssdz != '' ">-->
-			<!--and f.ssdz = #{ssdz}-->
-		<!--</if>-->
-		<!--<if test="yjlx != null and yjlx != '' ">-->
-			<!--and f.yjlx = #{yjlx}-->
-		<!--</if>-->
-		<!--<if test="cbl_min != null and cbl_min != '' ">-->
-			<!--and f.cbl &gt;= #{cbl_min}-->
-		<!--</if>-->
-		<!--<if test="cbl_max != null and cbl_max != '' ">-->
-			<!--and f.cbl &lt;= #{cbl_max}-->
-		<!--</if>-->
-		<!--<if test="czl_min != null and czl_min != '' ">-->
-			<!--and f.czl &gt;= #{czl_min}-->
-		<!--</if>-->
-		<!--<if test="czl_max != null and czl_max != '' ">-->
-			<!--and f.czl &lt;= #{czl_max}-->
-		<!--</if>-->
+		<if test="ssdz != null and ssdz != '' ">
+			and f.ssdz LIKE concat(#{ssdz},'%')
+		</if>
+		<if test="yjlx != null and yjlx != '' ">
+			and f.yjlx LIKE concat(#{yjlx},'%')
+		</if>
+		<if test="cbl_min != null and cbl_min != '' ">
+			and f.cbl &gt;= #{cbl_min}
+		</if>
+		<if test="cbl_max != null and cbl_max != '' ">
+			and f.cbl &lt;= #{cbl_max}
+		</if>
+		<if test="czl_min != null and czl_min != '' ">
+			and f.czl &gt;= #{czl_min}
+		</if>
+		<if test="czl_max != null and czl_max != '' ">
+			and f.czl &lt;= #{czl_max}
+		</if>
 	</select>
 
 </mapper>
