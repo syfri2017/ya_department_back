@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.baseapi.controller.BaseController;
 
 import java.util.List;
-
+/*
+ * 获取路径Controller
+ * by dongbo 2018/03/26
+ */
 @Api(value = "预案管理",tags = "预案管理API",description = "预案管理")
 @RestController
 @RequestMapping("digitalplanlist")
@@ -46,7 +49,7 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 	}
 
 	@GetMapping("")
-	public String getUser(Model model, @RequestParam(value="index") String index){
+	public String getDigitalplanlist(Model model, @RequestParam(value="index") String index){
 		model.addAttribute("index", index);
 		return "digitalplan/digitalplan_list";
 	}
@@ -60,7 +63,7 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 	public @ResponseBody ResultVO findByVO(@RequestBody DigitalplanlistVO digitalplanlistVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			List<DigitalplanlistVO> result = digitalplanlistService.doSearchListByVO(digitalplanlistVO);
+			List<DigitalplanlistVO> result = digitalplanlistService.doFindlist(digitalplanlistVO);
 			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
