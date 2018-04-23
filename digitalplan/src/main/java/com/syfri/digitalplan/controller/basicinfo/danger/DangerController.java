@@ -44,27 +44,12 @@ public class DangerController  extends BaseController<DangerVO>{
 
 	@Autowired
 	private DangerDAO dangerDAO;
-	/**
-	 * @Description:
-	 * @Param: []
-	 * @Return: com.syfri.digitalplan.service.basicinfo.danger.DangerService
-	 * @Author: dongbo
-	 * @Modified By:
-	 * @Date: 2018/4/20 16:37
-	 */
+
 	@Override
 	public DangerService getBaseService() {
 		return this.dangerService;
 	}
 
-	/**
-	 * @Description:
-	 * @Param: [model]
-	 * @Return: void
-	 * @Author: dongbo
-	 * @Modified By:
-	 * @Date: 2018/4/20 16:40
-	 */
 	@ModelAttribute
 	public void Model(Model model){
 		if (environment.containsProperty("server.context-path")) {
@@ -74,16 +59,8 @@ public class DangerController  extends BaseController<DangerVO>{
 		}
 	}
 
-	/**
-	 * @Description:
-	 * @Param: [model, index]
-	 * @Return: java.lang.String
-	 * @Author: dongbo
-	 * @Modified By:
-	 * @Date: 2018/4/20 16:41
-	 */
 	@GetMapping("")
-	public String getUser(Model model, @RequestParam(value="index") String index){
+	public String getDangerlist(Model model, @RequestParam(value="index") String index){
 		model.addAttribute("index", index);
 		return "basicinfo/danger_list";
 	}

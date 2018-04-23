@@ -358,4 +358,33 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
+	<!--12.根据条件查询-->
+	<select id="doSearchByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_YAJBXX t
+		WHERE t.JLZT = '1'
+		<if test="yamc != null and yamc != '' ">
+			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
+		</if>
+		<if test="dxmc != null and dxmc != '' ">
+			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
+		</if>
+		<if test="yalxdm != null and yalxdm != '' ">
+			and t.yalxdm = #{yalxdm}
+		</if>
+		<if test="dxlxdm != null and dxlxdm != '' ">
+			and t.dxlxdm = #{dxlxdm}
+		</if>
+		<if test="yazl != null and yazl != '' ">
+			and t.yazl = #{yazl}
+		</if>
+		<if test="begintime_create != null and begintime_create != '' ">
+			and t.zzrq &gt;= to_date(#{begintime_create},'yyyy/MM/dd')
+		</if>
+		<if test="endtime_create != null and endtime_create != '' ">
+			and t.zzrq &lt;= to_date(#{endtime_create},'yyyy/MM/dd')
+		</if>
+	</select>
+
 </mapper>
