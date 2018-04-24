@@ -77,12 +77,12 @@ public class YafjxzController {
 			//123456为行政代码
 
 			DigitalplanlistVO digitalplanlist=digitalplanlistService.doFindById(yafjxzVO.getYaid());
-			if(StringUtils.isBlank(digitalplanlist.getPkid())){
+			if(StringUtils.isBlank(digitalplanlist.getUuid())){
 				throw new RuntimeException("未查到预案基本信息！");
 			}
 
 			StringBuffer new_folder=new StringBuffer("123456/").append(digitalplanlist.getCjsj())
-					.append("/").append(digitalplanlist.getId()).append("/");
+					.append("/").append(digitalplanlist.getUuid()).append("/");
 
 			String folderName=relativePath.append(new_folder).toString();
 			//创建文件夹
