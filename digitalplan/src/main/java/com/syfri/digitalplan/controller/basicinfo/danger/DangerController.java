@@ -6,21 +6,13 @@ import com.syfri.digitalplan.dao.basicinfo.danger.DangerDAO;
 import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.core.env.Environment;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
-
 import com.syfri.digitalplan.model.basicinfo.danger.DangerVO;
 import com.syfri.digitalplan.service.basicinfo.danger.DangerService;
 import com.syfri.baseapi.controller.BaseController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.HashMap;
