@@ -38,6 +38,14 @@ public class XfbwjwController extends BaseController<XfbwjwVO>{
 	public XfbwjwService getBaseService() {
 		return this.xfbwjwService;
 	}
+	/**
+	 * @Description:
+	 * @Param: [model]
+	 * @Return: void
+	 * @Author: zhaijianchen
+	 * @Modified By:
+	 * @Date: 2018/4/20 16:37
+	 */
 
 	@ModelAttribute
 	public void Model(Model model){
@@ -64,7 +72,7 @@ public class XfbwjwController extends BaseController<XfbwjwVO>{
 	public @ResponseBody ResultVO findByVO(@RequestBody XfbwjwVO xfbwjwVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			List<XfbwjwVO> result = xfbwjwService.doSearchListByVO(xfbwjwVO);
+			List<XfbwjwVO> result = xfbwjwService.doFindXfbwjwlist(xfbwjwVO);
 			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());

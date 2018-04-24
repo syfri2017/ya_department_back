@@ -1,11 +1,7 @@
 package com.syfri.digitalplan.model.basicinfo.danger;
 
 import java.io.Serializable;
-import java.sql.Blob;
-import java.util.Base64;
-
 import com.syfri.baseapi.model.ValueObject;
-import oracle.sql.BLOB;
 
 /**
  * @Description: 化学危险品

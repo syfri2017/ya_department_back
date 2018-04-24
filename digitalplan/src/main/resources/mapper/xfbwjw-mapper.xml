@@ -19,7 +19,7 @@
 		 and t.yalxdm = #{yalxdm}
 		</if>
 		<if test="yamc != null and yamc != '' ">
-		 and t.yamc = #{yamc}
+			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
 		</if>
 		<if test="yajb != null and yajb != '' ">
 		 and t.yajb = #{yajb}
@@ -28,7 +28,7 @@
 		 and t.dxid = #{dxid}
 		</if>
 		<if test="dxmc != null and dxmc != '' ">
-		 and t.dxmc = #{dxmc}
+			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="bwid != null and bwid != '' ">
 		 and t.bwid = #{bwid}
@@ -284,34 +284,39 @@
 	</select>
 
 	<!--12.根据单位名称查询-->
-	<select id="doSearchByVO" parameterType="KeyunitVO"  resultType="KeyunitVO">
+	<select id="doSearchByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_BWJWYA t
-		WHERE t.JLZT = '1'
+		WHERE t.DELETE_FLAG = 'N'
 		<if test="yamc != null and yamc != '' ">
 			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
 		</if>
 		<if test="dxmc != null and dxmc != '' ">
 			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
-		<if test="begintime != null and begintime != '' ">
-			and t.cjsj &gt;= to_date(#{begintime},'yyyy/MM/dd')
-		</if>
-		<if test="endtime != null and endtime != '' ">
-			and t.cjsj &lt;=to_date(#{endtime},'yyyy/MM/dd')
-		</if>
+		<!--<if test="begintime != null and begintime != '' ">-->
+			<!--and t.cjsj &gt;= to_date(#{begintime},'yyyy/MM/dd')-->
+		<!--</if>-->
+		<!--<if test="endtime != null and endtime != '' ">-->
+			<!--and t.cjsj &lt;=to_date(#{endtime},'yyyy/MM/dd')-->
+		<!--</if>-->
 		<if test="yalxdm != null and yalxdm != '' ">
-			and t.yalxdm =#{yalxdm}
+			and t.yalxdm LIKE concat(rtrim(#{yalxdm},'0'),'%')
+		</if>
+		<if test="sfkqy != null and sfkqy != '' ">
+			and t.sfkqy = #{sfkqy}
 		</if>
 	</select>
 
 	<!--13.根据ID查询记录-->
-	<select id="doFindDetailById" parameterType="String"  resultType="KeyunitVO">
+	<select id="doFindDetailById" parameterType="String"  resultType="XfbwjwVO">
 	SELECT
 	<include refid="SQL_CONTENT"/>
 	FROM YAGL_BWJWYA t
 	WHERE t.JLZT = '1' AND  t.PKID = #{uuid}
 	</select>
+
+
 
 </mapper>

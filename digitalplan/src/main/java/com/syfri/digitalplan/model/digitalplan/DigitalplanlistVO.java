@@ -8,77 +8,50 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String id;	//UUID
-	private String yaid;	//预案ID
-	private String mbid;	//模板ID
-	private String yazl;	//预案种类
+	private String uuid;	//主键
 	private String yabh;	//预案编号
 	private String yasxh;	//预案顺序号
-	private String gxbbh;	//类型与内容项对应
 	private String yabbh;	//预案版本号
-	private String bmdj;	//保密等级
 	private String yalxdm;	//预案类型代码
 	private String yamc;	//预案名称
+	private String yazt;	//预案状态
+	private String yajb;	//预案级别
 	private String dxid;	//对象ID
+	private String dxmc;	//对象名称
 	private String bwid;	//部位ID
-	private String yaztdm;	//预案状态代码
-	private String dxlxdm;	//对象类型代码
-	private String sfkqy;	//是否跨区域
+	private String bwmc;	//部位名称
+	private String sfkqy;	//是否跨区域[0否，1是]
+	private String jgid;	//制作机构ID
+	private String jgbm;	//制作机构编码
+	private String jgmc;	//制作机构名称
 	private String zzrid;	//制作人ID
 	private String zzrmc;	//制作人名称
-	private String zzdwid;	//制作单位ID
-	private String zzdwmc;	//制作单位名称
-	private String zzrq;	//制作日期
-	private String czyid;	//数据操作人编号
-	private String czyxm;	//数据操作人姓名
-	private String jlzt;	//记录状态
-	private String cszt;	//传输状态
-	private String sjc;	//时间戳
-	private String bz;	//备注
-	private String sfmya;	//是否母预案
-	private String jgid;	//机构ID
-	private String jgmc;	//机构名称
-	private String dxmc;	//对象名称
-	private String bwmc;	//部位名称
-	private String sfwlsj;	//是否外部系统数据
-	private String czjg;	//操作机构
-	private String sjbb;	//数据版本
+	private String zzsj;	//制作时间
+	private String shzt;	//审核状态[1]审核中，[2]已通过，[3]未通过
+	private String shrid;	//审核人ID
+	private String shrmc;	//审核人名称
+	private String shsj;	//审核时间
+	private String cjrid;	//创建人ID
+	private String cjrmc;	//创建人名称
 	private String cjsj;	//创建时间
-	private String ywxtbsid;	//业务系统部署
-	private String jksjbb;	//基库数据版本
-	private String tbjdh;	//同步节点号
-	private String tbsjc;	//同步时间戳
-	private String byzda;	//备用字段(1)
-	private String byzdb;	//备用字段(2)
-	private String byzdc;	//备用字段(3)
-	private String byzdd;	//备用字段(4)
-	private String pkid;	//ID
-	private String begintime_create;
-	private String endtime_create;
+	private String xgrid;	//修改人ID
+	private String xgrmc;	//修改人姓名
+	private String xgsj;	//修改时间
+	private String deleteFlag;	//删除标志
+	private String datasource;	//数据来源[100000一体化]
+	private String bz;	//备注
+	private String jdh;	//节点号
+	private String sjc;	//时间戳
+	private String reserve1;	//备用字段1
+	private String reserve2;	//备用字段2
+	private String reserve3;	//备用字段3
+	private String reserve4;	//备用字段4
 
-	public String getId(){
-		return id;
+	public String getUuid(){
+		return uuid;
 	}
-	public void setId(String id){
-		this.id = id;
-	}
-	public String getYaid(){
-		return yaid;
-	}
-	public void setYaid(String yaid){
-		this.yaid = yaid;
-	}
-	public String getMbid(){
-		return mbid;
-	}
-	public void setMbid(String mbid){
-		this.mbid = mbid;
-	}
-	public String getYazl(){
-		return yazl;
-	}
-	public void setYazl(String yazl){
-		this.yazl = yazl;
+	public void setUuid(String uuid){
+		this.uuid = uuid;
 	}
 	public String getYabh(){
 		return yabh;
@@ -92,23 +65,11 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setYasxh(String yasxh){
 		this.yasxh = yasxh;
 	}
-	public String getGxbbh(){
-		return gxbbh;
-	}
-	public void setGxbbh(String gxbbh){
-		this.gxbbh = gxbbh;
-	}
 	public String getYabbh(){
 		return yabbh;
 	}
 	public void setYabbh(String yabbh){
 		this.yabbh = yabbh;
-	}
-	public String getBmdj(){
-		return bmdj;
-	}
-	public void setBmdj(String bmdj){
-		this.bmdj = bmdj;
 	}
 	public String getYalxdm(){
 		return yalxdm;
@@ -122,11 +83,29 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setYamc(String yamc){
 		this.yamc = yamc;
 	}
+	public String getYazt(){
+		return yazt;
+	}
+	public void setYazt(String yazt){
+		this.yazt = yazt;
+	}
+	public String getYajb(){
+		return yajb;
+	}
+	public void setYajb(String yajb){
+		this.yajb = yajb;
+	}
 	public String getDxid(){
 		return dxid;
 	}
 	public void setDxid(String dxid){
 		this.dxid = dxid;
+	}
+	public String getDxmc(){
+		return dxmc;
+	}
+	public void setDxmc(String dxmc){
+		this.dxmc = dxmc;
 	}
 	public String getBwid(){
 		return bwid;
@@ -134,23 +113,35 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setBwid(String bwid){
 		this.bwid = bwid;
 	}
-	public String getYaztdm(){
-		return yaztdm;
+	public String getBwmc(){
+		return bwmc;
 	}
-	public void setYaztdm(String yaztdm){
-		this.yaztdm = yaztdm;
-	}
-	public String getDxlxdm(){
-		return dxlxdm;
-	}
-	public void setDxlxdm(String dxlxdm){
-		this.dxlxdm = dxlxdm;
+	public void setBwmc(String bwmc){
+		this.bwmc = bwmc;
 	}
 	public String getSfkqy(){
 		return sfkqy;
 	}
 	public void setSfkqy(String sfkqy){
 		this.sfkqy = sfkqy;
+	}
+	public String getJgid(){
+		return jgid;
+	}
+	public void setJgid(String jgid){
+		this.jgid = jgid;
+	}
+	public String getJgbm(){
+		return jgbm;
+	}
+	public void setJgbm(String jgbm){
+		this.jgbm = jgbm;
+	}
+	public String getJgmc(){
+		return jgmc;
+	}
+	public void setJgmc(String jgmc){
+		this.jgmc = jgmc;
 	}
 	public String getZzrid(){
 		return zzrid;
@@ -164,107 +155,47 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setZzrmc(String zzrmc){
 		this.zzrmc = zzrmc;
 	}
-	public String getZzdwid(){
-		return zzdwid;
+	public String getZzsj(){
+		return zzsj;
 	}
-	public void setZzdwid(String zzdwid){
-		this.zzdwid = zzdwid;
+	public void setZzsj(String zzsj){
+		this.zzsj = zzsj;
 	}
-	public String getZzdwmc(){
-		return zzdwmc;
+	public String getShzt(){
+		return shzt;
 	}
-	public void setZzdwmc(String zzdwmc){
-		this.zzdwmc = zzdwmc;
+	public void setShzt(String shzt){
+		this.shzt = shzt;
 	}
-	public String getZzrq(){
-		return zzrq;
+	public String getShrid(){
+		return shrid;
 	}
-	public void setZzrq(String zzrq){
-		this.zzrq = zzrq;
+	public void setShrid(String shrid){
+		this.shrid = shrid;
 	}
-	public String getCzyid(){
-		return czyid;
+	public String getShrmc(){
+		return shrmc;
 	}
-	public void setCzyid(String czyid){
-		this.czyid = czyid;
+	public void setShrmc(String shrmc){
+		this.shrmc = shrmc;
 	}
-	public String getCzyxm(){
-		return czyxm;
+	public String getShsj(){
+		return shsj;
 	}
-	public void setCzyxm(String czyxm){
-		this.czyxm = czyxm;
+	public void setShsj(String shsj){
+		this.shsj = shsj;
 	}
-	public String getJlzt(){
-		return jlzt;
+	public String getCjrid(){
+		return cjrid;
 	}
-	public void setJlzt(String jlzt){
-		this.jlzt = jlzt;
+	public void setCjrid(String cjrid){
+		this.cjrid = cjrid;
 	}
-	public String getCszt(){
-		return cszt;
+	public String getCjrmc(){
+		return cjrmc;
 	}
-	public void setCszt(String cszt){
-		this.cszt = cszt;
-	}
-	public String getSjc(){
-		return sjc;
-	}
-	public void setSjc(String sjc){
-		this.sjc = sjc;
-	}
-	public String getBz(){
-		return bz;
-	}
-	public void setBz(String bz){
-		this.bz = bz;
-	}
-	public String getSfmya(){
-		return sfmya;
-	}
-	public void setSfmya(String sfmya){
-		this.sfmya = sfmya;
-	}
-	public String getJgid(){
-		return jgid;
-	}
-	public void setJgid(String jgid){
-		this.jgid = jgid;
-	}
-	public String getJgmc(){
-		return jgmc;
-	}
-	public void setJgmc(String jgmc){
-		this.jgmc = jgmc;
-	}
-	public String getDxmc(){
-		return dxmc;
-	}
-	public void setDxmc(String dxmc){
-		this.dxmc = dxmc;
-	}
-	public String getBwmc(){
-		return bwmc;
-	}
-	public void setBwmc(String bwmc){
-		this.bwmc = bwmc;
-	}
-	public String getSfwlsj(){
-		return sfwlsj;
-	}
-	public void setSfwlsj(String sfwlsj){
-		this.sfwlsj = sfwlsj;
-	}
-	public String getCzjg(){
-		return czjg;
-	}
-	public void setCzjg(String czjg){
-		this.czjg = czjg;
-	}
-	public String getSjbb(){
-		return sjbb;
-	}
-	public void setSjbb(String sjbb){
-		this.sjbb = sjbb;
+	public void setCjrmc(String cjrmc){
+		this.cjrmc = cjrmc;
 	}
 	public String getCjsj(){
 		return cjsj;
@@ -272,70 +203,76 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setCjsj(String cjsj){
 		this.cjsj = cjsj;
 	}
-	public String getYwxtbsid(){
-		return ywxtbsid;
+	public String getXgrid(){
+		return xgrid;
 	}
-	public void setYwxtbsid(String ywxtbsid){
-		this.ywxtbsid = ywxtbsid;
+	public void setXgrid(String xgrid){
+		this.xgrid = xgrid;
 	}
-	public String getJksjbb(){
-		return jksjbb;
+	public String getXgrmc(){
+		return xgrmc;
 	}
-	public void setJksjbb(String jksjbb){
-		this.jksjbb = jksjbb;
+	public void setXgrmc(String xgrmc){
+		this.xgrmc = xgrmc;
 	}
-	public String getTbjdh(){
-		return tbjdh;
+	public String getXgsj(){
+		return xgsj;
 	}
-	public void setTbjdh(String tbjdh){
-		this.tbjdh = tbjdh;
+	public void setXgsj(String xgsj){
+		this.xgsj = xgsj;
 	}
-	public String getTbsjc(){
-		return tbsjc;
+	public String getDeleteFlag(){
+		return deleteFlag;
 	}
-	public void setTbsjc(String tbsjc){
-		this.tbsjc = tbsjc;
+	public void setDeleteFlag(String deleteFlag){
+		this.deleteFlag = deleteFlag;
 	}
-	public String getByzda(){
-		return byzda;
+	public String getDatasource(){
+		return datasource;
 	}
-	public void setByzda(String byzda){
-		this.byzda = byzda;
+	public void setDatasource(String datasource){
+		this.datasource = datasource;
 	}
-	public String getByzdb(){
-		return byzdb;
+	public String getBz(){
+		return bz;
 	}
-	public void setByzdb(String byzdb){
-		this.byzdb = byzdb;
+	public void setBz(String bz){
+		this.bz = bz;
 	}
-	public String getByzdc(){
-		return byzdc;
+	public String getJdh(){
+		return jdh;
 	}
-	public void setByzdc(String byzdc){
-		this.byzdc = byzdc;
+	public void setJdh(String jdh){
+		this.jdh = jdh;
 	}
-	public String getByzdd(){
-		return byzdd;
+	public String getSjc(){
+		return sjc;
 	}
-	public void setByzdd(String byzdd){
-		this.byzdd = byzdd;
+	public void setSjc(String sjc){
+		this.sjc = sjc;
 	}
-	public String getPkid(){
-		return pkid;
+	public String getReserve1(){
+		return reserve1;
 	}
-	public void setPkid(String pkid){
-		this.pkid = pkid;
+	public void setReserve1(String reserve1){
+		this.reserve1 = reserve1;
 	}
-	public String getBegintime_create(){
-		return begintime_create;
+	public String getReserve2(){
+		return reserve2;
 	}
-	public void setBegintime_create(String begintime_create){
-		this.begintime_create = begintime_create;
+	public void setReserve2(String reserve2){
+		this.reserve2 = reserve2;
 	}
-	public String getEndtime_create(){
-		return endtime_create;
+	public String getReserve3(){
+		return reserve3;
 	}
-	public void setEndtime_create(String endtime_create){
-		this.endtime_create = endtime_create;
+	public void setReserve3(String reserve3){
+		this.reserve3 = reserve3;
+	}
+	public String getReserve4(){
+		return reserve4;
+	}
+	public void setReserve4(String reserve4){
+		this.reserve4 = reserve4;
 	}
 }
