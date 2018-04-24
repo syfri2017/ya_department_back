@@ -13,7 +13,15 @@ import java.util.List;
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("xfbwjwService")
 public class XfbwjwServiceImpl extends BaseServiceImpl<XfbwjwVO> implements XfbwjwService {
-
+/**
+ * @Description:
+ * @Param: 
+ * @Return: 
+ * @Author: zhaijianchen
+ * @Modified By:
+ * @Date: 2018/4/20 16:56
+ */
+	
 	@Autowired
 	private XfbwjwDAO xfbwjwDAO;
 
@@ -21,9 +29,17 @@ public class XfbwjwServiceImpl extends BaseServiceImpl<XfbwjwVO> implements Xfbw
 	public XfbwjwDAO getBaseDAO() {
 		return xfbwjwDAO;
 	}
+	/*--条件查询：重点单位.--*/
+	@Override
+	public List<XfbwjwVO> doFindXfbwjwlist(XfbwjwVO xfbwjwVO){
+		return xfbwjwDAO.doSearchByVO(xfbwjwVO);
+	}
 
-
-
+	/*--根据重点单位id获取重点单位详情--*/
+	@Override
+	public List<XfbwjwVO> doFindDetailById(String xfbwjwId) {
+		return xfbwjwDAO.doFindDetailById(xfbwjwId);
+	}
 
 
 }

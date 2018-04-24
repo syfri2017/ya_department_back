@@ -5,8 +5,17 @@ import com.syfri.digitalplan.model.xfbwjw.XfbwjwVO;
 
 import java.util.List;
 
-public interface XfbwjwDAO extends BaseDAO<XfbwjwVO>{
 
+public interface XfbwjwDAO extends BaseDAO<XfbwjwVO>{
+/**
+ * @Description:
+ * @Param: [xfbwjwVO]
+ * @Return: java.util.List<com.syfri.digitalplan.model.xfbwjw.XfbwjwVO>
+ * @Author: zhaijianchen
+ * @Modified By:
+ * @Date: 2018/4/20 16:55
+ */
+    
     /*--根据条件查询记录.--*/
     List<XfbwjwVO> doSearchByVO(XfbwjwVO xfbwjwVO);
 
