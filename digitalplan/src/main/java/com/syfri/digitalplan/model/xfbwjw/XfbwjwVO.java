@@ -5,7 +5,14 @@ import java.io.Serializable;
 import com.syfri.baseapi.model.ValueObject;
 
 public class XfbwjwVO extends ValueObject implements Serializable{
-
+/**
+ * @Description:
+ * @Param: 
+ * @Return: 
+ * @Author: zhaijianchen
+ * @Modified By:
+ * @Date: 2018/4/20 16:55
+ */
 	private static final long serialVersionUID = 1L;
 
 	private String uuid;	//主键
@@ -70,7 +77,6 @@ public class XfbwjwVO extends ValueObject implements Serializable{
 		return yalxdm;
 
 	}
-
 	public void setYalxdm(String yalxdm){
 		this.yalxdm = yalxdm;
 	}
@@ -242,4 +248,5 @@ public class XfbwjwVO extends ValueObject implements Serializable{
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
 	}
+
 }
