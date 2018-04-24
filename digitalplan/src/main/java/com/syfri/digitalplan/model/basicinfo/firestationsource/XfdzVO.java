@@ -55,6 +55,8 @@ public class XfdzVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String xzqhmc;	//行政区划CODE（到区县）
+
 	public String getDzid(){
 		return dzid;
 	}
@@ -330,5 +332,12 @@ public class XfdzVO extends ValueObject implements Serializable{
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public String getXzqhmc() {
+		return xzqhmc;
+	}
+	public void setXzqhmc(String xzqhmc) {
+		this.xzqhmc = xzqhmc;
 	}
 }

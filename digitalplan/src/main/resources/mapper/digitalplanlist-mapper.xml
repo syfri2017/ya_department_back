@@ -180,7 +180,7 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YA_ZZDW t
-		WHERE t.DELETE_FLAG = 'N' AND  t.PKID = #{value}
+		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -207,7 +207,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String">
-		UPDATE  YAGL_YA_ZZDW t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value}
+		UPDATE  YAGL_YA_ZZDW t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.UUID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -253,7 +253,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  UUID = #{pkid}
 	</update>
 
 	<!--10.批量修改-->
