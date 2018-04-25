@@ -345,4 +345,24 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		}
 		return resultVO;
 	}
+
+	/*
+	 * @Description:查询队站类型树状资源，只加载其他消防队伍的子级，其余只保留父级
+	 * @Author: yushch
+	 * @Modified By:
+	 * @Date: 20180423
+	 */
+	@ApiOperation(value="查询队站类型树状资源",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@GetMapping("/getDzlxTree/{codetype}")
+	public @ResponseBody ResultVO getDzlxTree(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindDzlxCodelisttree(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

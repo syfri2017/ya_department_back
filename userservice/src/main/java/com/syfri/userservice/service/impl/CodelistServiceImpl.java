@@ -256,4 +256,41 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 		}
 		return codelistTrees;
 	}
+
+	/*--查询队站类型树状资源
+	* 只加载其他消防队伍的子级，其余只保留父级
+	* -- by yushch -- */
+	@Override
+	public List<CodelistTree> doFindDzlxCodelisttree(String codetype) {
+		// 目的树
+		List<CodelistTree> codelistTrees = new ArrayList<>();
+		// 源数据
+		List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
+		if (codelistDetailVOs != null && codelistDetailVOs.size() > 0) {
+			for (CodelistDetailVO codelistDetailVO : codelistDetailVOs) {
+				// 选出第一级类别
+				if (codelistDetailVO.getCodeValue().endsWith("00")) {
+					CodelistTree tree = new CodelistTree();
+					tree.setCodeName(codelistDetailVO.getCodeName());
+					tree.setCodeValue(codelistDetailVO.getCodeValue());
+					List<CodelistTree> children = new ArrayList();
+					if(codelistDetailVO.getCodeValue().startsWith("06")){
+						for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
+							// 只选出【其他消防队伍】的第二级类别
+							if (codelistDetailVO2.getCodeValue().startsWith("06")&&!codelistDetailVO2.equals(codelistDetailVO)){
+								CodelistTree tree2 = new CodelistTree();
+								tree2.setCodeName(codelistDetailVO2.getCodeName());
+								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
+								children.add(tree2);
+							}
+						}
+					}
+					if(!children.isEmpty() )
+						tree.setChildren(children);
+					codelistTrees.add(tree);
+				}
+			}
+		}
+		return codelistTrees;
+	}
 }
