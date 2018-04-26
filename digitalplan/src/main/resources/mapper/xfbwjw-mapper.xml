@@ -143,7 +143,7 @@
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="XfbwjwVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM YAGL_BWJWYA t WHERE 1=1 AND DELETE_FLAG = 'N'
+		SELECT COUNT(0) AS NUM FROM YAGL_YA_BWJW t WHERE 1=1 AND DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -151,7 +151,7 @@
 	<select id="doSearchListByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_BWJWYA t  WHERE t.DELETE_FLAG = 'N' 
+		FROM YAGL_YA_BWJW t  WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -159,7 +159,7 @@
 	<select id="doFindById" parameterType="XfbwjwVO"  resultType="XfbwjwVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_BWJWYA t
+		FROM YAGL_YA_BWJW t
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
@@ -168,13 +168,13 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_BWJWYA(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_BWJW(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES(#{uuid,jdbcType=VARCHAR},#{yabh,jdbcType=VARCHAR},#{yasxh,jdbcType=VARCHAR},#{yabbh,jdbcType=VARCHAR},#{yalxdm,jdbcType=VARCHAR},#{yamc,jdbcType=VARCHAR},#{yajb,jdbcType=VARCHAR},#{dxid,jdbcType=VARCHAR},#{dxmc,jdbcType=VARCHAR},#{bwid,jdbcType=VARCHAR},#{bwmc,jdbcType=VARCHAR},#{sfkqy,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{jgbm,jdbcType=VARCHAR},#{jgmc,jdbcType=VARCHAR},#{zzrid,jdbcType=VARCHAR},#{zzrmc,jdbcType=VARCHAR},#{zzsj,jdbcType=DATE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO YAGL_BWJWYA(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_BWJW(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		SELECT SYS_GUID() pkid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
@@ -187,12 +187,12 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  YAGL_BWJWYA t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  YAGL_YA_BWJW t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="XfbwjwVO"> 
-		UPDATE   YAGL_BWJWYA  
+		UPDATE   YAGL_YA_BWJW
 		<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="yabh != null">yabh=#{yabh},</if>
@@ -233,7 +233,7 @@
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_BWJWYA(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_BWJW(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
 			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yabh,jdbcType=VARCHAR} yabh,#{item.yasxh,jdbcType=VARCHAR} yasxh,#{item.yabbh,jdbcType=VARCHAR} yabbh,#{item.yalxdm,jdbcType=VARCHAR} yalxdm,#{item.yamc,jdbcType=VARCHAR} yamc,#{item.yajb,jdbcType=VARCHAR} yajb,#{item.dxid,jdbcType=VARCHAR} dxid,#{item.dxmc,jdbcType=VARCHAR} dxmc,#{item.bwid,jdbcType=VARCHAR} bwid,#{item.bwmc,jdbcType=VARCHAR} bwmc,#{item.sfkqy,jdbcType=VARCHAR} sfkqy,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgbm,jdbcType=VARCHAR} jgbm,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.zzrid,jdbcType=VARCHAR} zzrid,#{item.zzrmc,jdbcType=VARCHAR} zzrmc,#{item.zzsj,jdbcType=DATE} zzsj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
@@ -278,7 +278,7 @@
 	<select id="doFindByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_BWJWYA t 
+		FROM YAGL_YA_BWJW t
 		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -287,7 +287,7 @@
 	<select id="doSearchByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_BWJWYA t
+		FROM YAGL_YA_BWJW t
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="yamc != null and yamc != '' ">
 			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
@@ -313,7 +313,7 @@
 	<select id="doFindDetailById" parameterType="String"  resultType="XfbwjwVO">
 	SELECT
 	<include refid="SQL_CONTENT"/>
-	FROM YAGL_BWJWYA t
+	FROM YAGL_YA_BWJW t
 	WHERE t.JLZT = '1' AND  t.PKID = #{uuid}
 	</select>
 

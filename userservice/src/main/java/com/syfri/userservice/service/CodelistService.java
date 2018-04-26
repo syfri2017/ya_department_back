@@ -45,4 +45,7 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--根据代码类型获取树状资源.--*/
 	List<CodelistTree> doFindCodelistTreeByType2(CodelistParams codelistParams);
+
+	/*--查询队站类型树状资源-- by yushch*/
+	List<CodelistTree> doFindDzlxCodelisttree(String codetype);
 }

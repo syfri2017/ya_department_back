@@ -210,9 +210,11 @@
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="XfdzVO"  resultType="XfdzVO">  
 		SELECT 
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_XFDZ t 
-		WHERE t.DELETE_FLAG = 'N' AND  t.PKID = #{value} 
+		<include refid="SQL_CONTENT"/>,
+		tcode1.code_name xzqhmc
+		FROM YAGL_XFDZ t
+		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.xzqh = tcode1.code_value AND tcode1.codeid='61CFA4E7B188490A873395B4FB237C84')
+		WHERE t.DELETE_FLAG = 'N' AND  t.DZID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -239,7 +241,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  YAGL_XFDZ t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  YAGL_XFDZ t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.DZID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -293,7 +295,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  DZID = #{dzid}
 	</update>
 
 	<!--10.批量修改-->
