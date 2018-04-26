@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.userservice.model.CodelistDetailVO;
+import com.syfri.userservice.model.CodelistParams;
+import com.syfri.userservice.model.CodelistTree;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +23,7 @@ import com.syfri.userservice.model.CodelistVO;
 import com.syfri.userservice.service.CodelistService;
 import com.syfri.baseapi.controller.BaseController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Api(value = "代码集",tags = "代码集API",description = "代码集")
@@ -132,6 +135,9 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
+	/**
+	 * 根据代码集类型查询代码集数量
+	 */
 	@ApiOperation(value="根据代码集类型查询代码集数量",notes="查询")
 	@ApiImplicitParam(name="codetype",value="权限名")
 	@GetMapping("/getNum/{codetype}")
@@ -258,6 +264,9 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
+	/**
+	 * 根据代码集类型查询代码集数量
+	 */
 	@ApiOperation(value="根据代码集类型查询代码集数量",notes="查询")
 	@ApiImplicitParam(name="codeValue",value="权限名")
 	@GetMapping("/detail/getNum/{codevalue}")
@@ -278,6 +287,9 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
+	/**
+	 * 根据代码集类型查询代码项
+	 */
 	@ApiOperation(value="根据代码集类型查询代码项",notes="查询")
 	@ApiImplicitParam(name="codetype",value="代码类型")
 	@GetMapping("/getCodetype/{codetype}")
@@ -292,13 +304,20 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
+	/**
+	 * 根据代码类型获取树状资源
+	 * 要求：子类别是父类别代码值的扩充
+	 * 如：01,0101,0102
+	 * 目前只级联两级
+	 */
 	@ApiOperation(value="根据代码类型获取树状资源",notes="查询")
-	@ApiImplicitParam(name="codetype",value="代码类型")
-	@GetMapping("/getCodelisttree/{codetype}")
-	public @ResponseBody ResultVO getCodelisttree(@PathVariable String codetype){
+	@ApiImplicitParam(name="vo",value="树状资源参数对象")
+	@PostMapping("/getCodelisttree")
+	public @ResponseBody ResultVO getCodelisttree(@RequestBody CodelistParams codelistParams){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doFindCodelistTreeByType(codetype));
+			List<CodelistTree> result = codelistService.doFindCodelistTreeByType(codelistParams);
+			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -306,13 +325,20 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
-	@ApiOperation(value="根据代码类型获取车辆状态",notes="查询")
-	@ApiImplicitParam(name="codetype",value="代码类型")
-	@GetMapping("/getCarStates/{codetype}")
-	public @ResponseBody ResultVO getCarStates(@PathVariable String codetype){
+	/**
+	 * 根据代码类型获取树状资源2
+	 * 要求：所有类别的code_value的字段长度相同
+	 * 如：010000,010100,010200,010201
+	 * 目前最多可级联五级，六级不划分
+	 */
+	@ApiOperation(value="根据代码类型获取树状资源2",notes="查询")
+	@ApiImplicitParam(name="vo",value="树状资源参数对象")
+	@PostMapping("/getCodelisttree2")
+	public @ResponseBody ResultVO getCodelisttree2(@RequestBody CodelistParams codelistParams){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doFindCarStatesByType(codetype));
+			List<CodelistTree> result = codelistService.doFindCodelistTreeByType2(codelistParams);
+			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -320,13 +346,19 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
-	@ApiOperation(value="根据代码类型获取车辆类型",notes="查询")
+	/*
+	 * @Description:查询队站类型树状资源，只加载其他消防队伍的子级，其余只保留父级
+	 * @Author: yushch
+	 * @Modified By:
+	 * @Date: 20180423
+	 */
+	@ApiOperation(value="查询队站类型树状资源",notes="查询")
 	@ApiImplicitParam(name="codetype",value="代码类型")
-	@GetMapping("/getCarTypes/{codetype}")
-	public @ResponseBody ResultVO getCarTypes(@PathVariable String codetype){
+	@GetMapping("/getDzlxTree/{codetype}")
+	public @ResponseBody ResultVO getDzlxTree(@PathVariable String codetype){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doFindCarTypesByType(codetype));
+			resultVO.setResult(codelistService.doFindDzlxCodelisttree(codetype));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

@@ -634,12 +634,17 @@
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc
+		tcode3.code_name kyztmc,
+		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
+		<if test="dzbm != null and dzbm != '' ">
+			and txfdz.dzbm like concat(#{dzbm},'%')
+		</if>
 	</select>
 	<!--查询消火栓-->
 	<select id="doFindXhsListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -647,14 +652,19 @@
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc
+		tcode3.code_name kyztmc,
+		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XHS t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XHS_CONDITION"/>
+		<if test="dzbm != null and dzbm != '' ">
+			and txfdz.dzbm like concat(#{dzbm},'%')
+		</if>
 	</select>
 	<!--查询消防水鹤-->
 	<select id="doFindXfshListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -662,14 +672,19 @@
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc
+		tcode3.code_name kyztmc,
+		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFSH t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XFSH_CONDITION"/>
+		<if test="dzbm != null and dzbm != '' ">
+			and txfdz.dzbm like concat(#{dzbm},'%')
+		</if>
 	</select>
 	<!--查询消防水池-->
 	<select id="doFindXfscListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -677,14 +692,19 @@
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc
+		tcode3.code_name kyztmc,
+		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFSC t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XFSC_CONDITION"/>
+		<if test="dzbm != null and dzbm != '' ">
+			and txfdz.dzbm like concat(#{dzbm},'%')
+		</if>
 	</select>
 	<!--查询消防码头-->
 	<select id="doFindXfmtListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -692,14 +712,19 @@
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc
+		tcode3.code_name kyztmc,
+		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFMT t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XFMT_CONDITION"/>
+		<if test="dzbm != null and dzbm != '' ">
+			and txfdz.dzbm like concat(#{dzbm},'%')
+		</if>
 	</select>
 	<!--查询天然水源-->
 	<select id="doFindTrsyListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -707,13 +732,18 @@
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc
+		tcode3.code_name kyztmc,
+		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_TRSY t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_TRSY_CONDITION"/>
+		<if test="dzbm != null and dzbm != '' ">
+			and txfdz.dzbm like concat(#{dzbm},'%')
+		</if>
 	</select>
 </mapper>

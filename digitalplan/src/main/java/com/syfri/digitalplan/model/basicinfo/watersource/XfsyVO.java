@@ -52,7 +52,9 @@ public class XfsyVO extends ValueObject implements Serializable{
 	private String sylxmc;  //水源类型名称
 	private String xzmc;  //水源性质名称
 	private String xzqymc;    //行政区域名称
-	private String kyztmc;
+	private String kyztmc;  //可用状态
+	private String dzjc;  //队站简称
+	private String dzbm; //队站编码
 
     //消火栓属性信息
     private String xhs_uuid;	//主键
@@ -1226,8 +1228,20 @@ public class XfsyVO extends ValueObject implements Serializable{
 	public String getKyztmc() {
 		return kyztmc;
 	}
-
 	public void setKyztmc(String kyztmc) {
 		this.kyztmc = kyztmc;
+	}
+
+	public String getDzjc() {
+		return dzjc;
+	}
+	public void setDzjc(String dzjc) {
+		this.dzjc = dzjc;
+	}
+	public String getDzbm() {
+		return dzbm;
+	}
+	public void setDzbm(String dzbm) {
+		this.dzbm = dzbm;
 	}
 }

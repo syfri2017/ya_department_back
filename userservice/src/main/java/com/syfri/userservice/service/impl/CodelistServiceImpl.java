@@ -1,6 +1,7 @@
 package com.syfri.userservice.service.impl;
 
 import com.syfri.userservice.model.CodelistDetailVO;
+import com.syfri.userservice.model.CodelistParams;
 import com.syfri.userservice.model.CodelistTree;
 import com.syfri.userservice.utils.CurrentUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,84 +109,147 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 		return codelistDAO.doFindCodelistByType(codetype);
 	}
 
-	/*--根据代码类型获取车辆类型.--*/
+	/*--根据代码类型获取树状资源.--*/
 	@Override
-	public List<CodelistTree> doFindCarTypesByType(String codetype) {
+	public List<CodelistTree> doFindCodelistTreeByType(CodelistParams codelistParams) {
+		// 代码类型
+		String codetype=codelistParams.getCodetype();
+		// 每级占位数
+		List<Integer> digits = codelistParams.getList();
+//		List<Integer> digits = new ArrayList();
+//		digits.add(2);
+//		digits.add(4);
 		// 目的树
 		List<CodelistTree> codelistTrees = new ArrayList<>();
 		// 源数据
 		List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
-		// 每级占位数
-		List<Integer> digits = new ArrayList();
-		digits.add(1);
-		digits.add(2);
-		digits.add(4);
-		digits.add(6);
-		digits.add(8);
 
-		if(codelistDetailVOs!=null && codelistDetailVOs.size()>0){
-			for(CodelistDetailVO codelistDetailVO : codelistDetailVOs){
+		if (codelistDetailVOs != null && codelistDetailVOs.size() > 0
+				&& digits.size() > 0 && digits.get(0) > 0) {
+			for (CodelistDetailVO codelistDetailVO : codelistDetailVOs) {
 				// 选出第一级类别
-				if (codelistDetailVO.getCodeValue().replace("0","").length()==digits.get(0)) {
+				if (codelistDetailVO.getCodeValue().length() == digits.get(0)) {
 					CodelistTree tree = new CodelistTree();
 					tree.setCodeName(codelistDetailVO.getCodeName());
 					tree.setCodeValue(codelistDetailVO.getCodeValue());
-					List<CodelistTree> children = new ArrayList();
-					for(CodelistDetailVO codelistDetailVO2 : codelistDetailVOs){
-						// 选出第二级类别
-						if (codelistDetailVO2.getCodeValue().replace("0","").length()==digits.get(1)) {
-							if (codelistDetailVO2.getCodeValue().substring(0,digits.get(0)).equals(codelistDetailVO.getCodeValue().substring(0,digits.get(0)))) {
+					if (digits.size() > 1 && digits.get(1) > 0) {
+						List<CodelistTree> children = new ArrayList();
+						for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
+							// 选出第二级类别
+							if (codelistDetailVO2.getCodeValue().length() == digits.get(1)
+									// 所属父类别下
+									&& codelistDetailVO2.getCodeValue().substring(0, digits.get(0)).equals(codelistDetailVO.getCodeValue())) {
 								CodelistTree tree2 = new CodelistTree();
 								tree2.setCodeName(codelistDetailVO2.getCodeName());
 								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
-								List<CodelistTree> children2 = new ArrayList();
-								for(CodelistDetailVO codelistDetailVO3 : codelistDetailVOs){
-									// 选出第三级类别
-									if (codelistDetailVO3.getCodeValue().substring(0,digits.get(1)).equals(codelistDetailVO2.getCodeValue().substring(0,digits.get(1)))) {
-										if (!codelistDetailVO3.getCodeValue().substring(0,digits.get(2)).equals(codelistDetailVO2.getCodeValue().substring(0,digits.get(2)))) {
-											if (codelistDetailVO3.getCodeValue().substring(digits.get(2),codelistDetailVO3.getCodeValue().length()).equals("0000")) {
-												CodelistTree tree3 = new CodelistTree();
-												tree3.setCodeName(codelistDetailVO3.getCodeName());
-												tree3.setCodeValue(codelistDetailVO3.getCodeValue());
+								children.add(tree2);
+							}
+						}
+						tree.setChildren(children);
+					}
+					codelistTrees.add(tree);
+				}
+			}
+		}
+		return codelistTrees;
+	}
+
+	/*--根据代码类型获取树状资源2.--*/
+	@Override
+	public List<CodelistTree> doFindCodelistTreeByType2(CodelistParams codelistParams) {
+		// 代码类型
+		String codetype=codelistParams.getCodetype();
+		// 每级占位数
+		List<Integer> digits = codelistParams.getList();
+//		List<Integer> digits = new ArrayList();
+//		digits.add(1);
+//		digits.add(2);
+//		digits.add(4);
+//		digits.add(6);
+//		digits.add(8);
+		// 目的树
+		List<CodelistTree> codelistTrees = new ArrayList<>();
+		// 源数据
+		List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
+
+		if (codelistDetailVOs != null && codelistDetailVOs.size() > 0
+				&& digits.size() > 0 && digits.get(0) > 0) {
+			for (CodelistDetailVO codelistDetailVO : codelistDetailVOs) {
+				// 选出第一级类别
+				if (Integer.valueOf(codelistDetailVO.getCodeValue().substring(digits.get(0), codelistDetailVO.getCodeValue().length())) == 0) {
+					CodelistTree tree = new CodelistTree();
+					tree.setCodeName(codelistDetailVO.getCodeName());
+					tree.setCodeValue(codelistDetailVO.getCodeValue());
+					if (digits.size() > 1 && digits.get(1) > 0) {
+						List<CodelistTree> children = new ArrayList();
+						for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
+							// 选出所属第二级类别
+							// 所有第二级类别
+							if (Integer.valueOf(codelistDetailVO2.getCodeValue().substring(digits.get(1), codelistDetailVO2.getCodeValue().length())) == 0
+									// 所属父类别下
+									&& codelistDetailVO2.getCodeValue().substring(0, digits.get(0)).equals(codelistDetailVO.getCodeValue().substring(0, digits.get(0)))
+									// 除去父类别
+									&& !codelistDetailVO2.getCodeValue().equals(codelistDetailVO.getCodeValue())) {
+								CodelistTree tree2 = new CodelistTree();
+								tree2.setCodeName(codelistDetailVO2.getCodeName());
+								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
+								if (digits.size() > 2 && digits.get(2) > 0) {
+									List<CodelistTree> children2 = new ArrayList();
+									for (CodelistDetailVO codelistDetailVO3 : codelistDetailVOs) {
+										// 选出所属第三级类别
+										// 所有第三级类别
+										if (Integer.valueOf(codelistDetailVO3.getCodeValue().substring(digits.get(2), codelistDetailVO3.getCodeValue().length())) == 0
+												// 所属父类别下
+												&& codelistDetailVO3.getCodeValue().substring(0, digits.get(1)).equals(codelistDetailVO2.getCodeValue().substring(0, digits.get(1)))
+												// 除去父类别
+												&& !codelistDetailVO3.getCodeValue().equals(codelistDetailVO2.getCodeValue())) {
+											CodelistTree tree3 = new CodelistTree();
+											tree3.setCodeName(codelistDetailVO3.getCodeName());
+											tree3.setCodeValue(codelistDetailVO3.getCodeValue());
+											if (digits.size() > 3 && digits.get(3) > 0) {
 												List<CodelistTree> children3 = new ArrayList();
 												for (CodelistDetailVO codelistDetailVO4 : codelistDetailVOs) {
-													// 选出第四级类别
-													if (codelistDetailVO4.getCodeValue().substring(0, digits.get(2)).equals(codelistDetailVO3.getCodeValue().substring(0, digits.get(2)))) {
-														if (!codelistDetailVO4.getCodeValue().substring(0, digits.get(3)).equals(codelistDetailVO3.getCodeValue().substring(0, digits.get(3)))) {
-															if (codelistDetailVO4.getCodeValue().substring(digits.get(3), codelistDetailVO4.getCodeValue().length()).equals("00")) {
-																CodelistTree tree4 = new CodelistTree();
-																tree4.setCodeName(codelistDetailVO4.getCodeName());
-																tree4.setCodeValue(codelistDetailVO4.getCodeValue());
-																List<CodelistTree> children4 = new ArrayList();
-																for (CodelistDetailVO codelistDetailVO5 : codelistDetailVOs) {
-																	// 选出第五级类别
-																	if (codelistDetailVO5.getCodeValue().substring(0, digits.get(3)).equals(codelistDetailVO4.getCodeValue().substring(0, digits.get(3)))) {
-																		if (!codelistDetailVO5.getCodeValue().equals(codelistDetailVO4.getCodeValue())) {
-																			CodelistTree tree5 = new CodelistTree();
-																			tree5.setCodeName(codelistDetailVO5.getCodeName());
-																			tree5.setCodeValue(codelistDetailVO5.getCodeValue());
-																			children4.add(tree5);
-																		}
-																	}
+													// 选出所属第四级类别
+													// 所有第四级类别
+													if (Integer.valueOf(codelistDetailVO4.getCodeValue().substring(digits.get(3), codelistDetailVO4.getCodeValue().length())) == 0
+															// 所属父类别下
+															&& codelistDetailVO4.getCodeValue().substring(0, digits.get(2)).equals(codelistDetailVO3.getCodeValue().substring(0, digits.get(2)))
+															// 除去父类别
+															&& !codelistDetailVO4.getCodeValue().equals(codelistDetailVO3.getCodeValue())) {
+														CodelistTree tree4 = new CodelistTree();
+														tree4.setCodeName(codelistDetailVO4.getCodeName());
+														tree4.setCodeValue(codelistDetailVO4.getCodeValue());
+														if (digits.size() > 4 && digits.get(4) > 0) {
+															List<CodelistTree> children4 = new ArrayList();
+															for (CodelistDetailVO codelistDetailVO5 : codelistDetailVOs) {
+																// 选出第五级类别
+																// 所属父类别下
+																if (codelistDetailVO5.getCodeValue().substring(0, digits.get(3)).equals(codelistDetailVO4.getCodeValue().substring(0, digits.get(3)))
+																		// 除去父类别
+																		&& !codelistDetailVO5.getCodeValue().equals(codelistDetailVO4.getCodeValue())) {
+																	CodelistTree tree5 = new CodelistTree();
+																	tree5.setCodeName(codelistDetailVO5.getCodeName());
+																	tree5.setCodeValue(codelistDetailVO5.getCodeValue());
+																	children4.add(tree5);
 																}
-																tree4.setChildren(children4);
-																children3.add(tree4);
 															}
+															tree4.setChildren(children4);
 														}
+														children3.add(tree4);
 													}
 												}
 												tree3.setChildren(children3);
-												children2.add(tree3);
 											}
+											children2.add(tree3);
 										}
 									}
+									tree2.setChildren(children2);
 								}
-								tree2.setChildren(children2);
 								children.add(tree2);
 							}
 						}
+						tree.setChildren(children);
 					}
-					tree.setChildren(children);
 					codelistTrees.add(tree);
 				}
 			}
@@ -193,30 +257,27 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 		return codelistTrees;
 	}
 
-	/*--根据代码类型获取车辆状态.--*/
+	/*--查询队站类型树状资源
+	* 只加载其他消防队伍的子级，其余只保留父级
+	* -- by yushch -- */
 	@Override
-	public List<CodelistTree> doFindCarStatesByType(String codetype) {
+	public List<CodelistTree> doFindDzlxCodelisttree(String codetype) {
 		// 目的树
 		List<CodelistTree> codelistTrees = new ArrayList<>();
 		// 源数据
 		List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
-		// 每级占位数
-		List<Integer> digits = new ArrayList();
-		digits.add(2);
-		digits.add(4);
-
-		if(codelistDetailVOs!=null && codelistDetailVOs.size()>0){
-			for(CodelistDetailVO codelistDetailVO : codelistDetailVOs){
+		if (codelistDetailVOs != null && codelistDetailVOs.size() > 0) {
+			for (CodelistDetailVO codelistDetailVO : codelistDetailVOs) {
 				// 选出第一级类别
-				if (codelistDetailVO.getCodeValue().length()==digits.get(0)) {
+				if (codelistDetailVO.getCodeValue().endsWith("00")) {
 					CodelistTree tree = new CodelistTree();
 					tree.setCodeName(codelistDetailVO.getCodeName());
 					tree.setCodeValue(codelistDetailVO.getCodeValue());
 					List<CodelistTree> children = new ArrayList();
-					for(CodelistDetailVO codelistDetailVO2 : codelistDetailVOs){
-						// 选出第二级类别
-						if(codelistDetailVO2.getCodeValue().length()==digits.get(1)) {
-							if(codelistDetailVO2.getCodeValue().substring(0,digits.get(0)).equals(codelistDetailVO.getCodeValue().substring(0,digits.get(0)))) {
+					if(codelistDetailVO.getCodeValue().startsWith("06")){
+						for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
+							// 只选出【其他消防队伍】的第二级类别
+							if (codelistDetailVO2.getCodeValue().startsWith("06")&&!codelistDetailVO2.equals(codelistDetailVO)){
 								CodelistTree tree2 = new CodelistTree();
 								tree2.setCodeName(codelistDetailVO2.getCodeName());
 								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
@@ -224,46 +285,8 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 							}
 						}
 					}
-					tree.setChildren(children);
-					codelistTrees.add(tree);
-				}
-			}
-		}
-		return codelistTrees;
-	}
-
-	/*--根据代码类型获取树状资源.--*/
-	@Override
-	public List<CodelistTree> doFindCodelistTreeByType(String codetype) {
-		// 目的树
-		List<CodelistTree> codelistTrees = new ArrayList<>();
-		// 源数据
-		List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
-		// 每级占位数
-		List<Integer> digits = new ArrayList();
-		digits.add(1);
-		digits.add(2);
-
-		if(codelistDetailVOs!=null && codelistDetailVOs.size()>0){
-			for(CodelistDetailVO codelistDetailVO : codelistDetailVOs){
-				// 选出第一级类别
-				if (codelistDetailVO.getCodeValue().replace("0","").length()==digits.get(0)) {
-					CodelistTree tree = new CodelistTree();
-					tree.setCodeName(codelistDetailVO.getCodeName());
-					tree.setCodeValue(codelistDetailVO.getCodeValue());
-					List<CodelistTree> children = new ArrayList();
-					for(CodelistDetailVO codelistDetailVO2 : codelistDetailVOs){
-						// 选出第二级类别
-						if (codelistDetailVO2.getCodeValue().replace("0","").length()==digits.get(1)) {
-							if(codelistDetailVO2.getCodeValue().substring(0,1).equals(codelistDetailVO.getCodeValue().substring(0,1))) {
-								CodelistTree tree2 = new CodelistTree();
-								tree2.setCodeName(codelistDetailVO2.getCodeName());
-								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
-								children.add(tree2);
-							}
-						}
-					}
-					tree.setChildren(children);
+					if(!children.isEmpty() )
+						tree.setChildren(children);
 					codelistTrees.add(tree);
 				}
 			}
