@@ -159,9 +159,7 @@
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="FirecalculationlistVO"> 
-		UPDATE   ZHJC_JSGS  
-		<set>
+	<update  id="doUpdateByVO"  parameterType="FirecalculationlistVO">UPDATE ZHJC_JSGS<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="gsmc != null">gsmc=#{gsmc},</if>
 			<if test="gslb != null">gslb=#{gslb},</if>
@@ -184,8 +182,7 @@
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
-		</set>
-		WHERE  UUID = #{uuid}
+		</set>WHERE  UUID = #{uuid}
 	</update>
 
 	<!--10.批量修改-->
@@ -257,6 +254,7 @@
 		,h.SXH sxh
 		FROM ZHJC_JSGS_CS h
 		WHERE h.DELETE_FLAG = 'N' AND  h.gsid = #{value}
+		ORDER BY h.SXH ASC
 	</select>
 
 	<!--14.新增公式时批量插入参数-->
