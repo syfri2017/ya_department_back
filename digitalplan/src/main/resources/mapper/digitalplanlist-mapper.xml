@@ -335,10 +335,10 @@
 			and t.shzt = #{shzt}
 		</if>
 		<if test="begintime != null and begintime != '' ">
-			and t.shsj &gt;= to_date(#{begintime},'yyyy/MM/dd')
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &gt;= #{begintime}
 		</if>
 		<if test="endtime != null and endtime != '' ">
-			and t.shsj &lt;=to_date(#{endtime},'yyyy/MM/dd')
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &lt;= #{endtime}
 		</if>
 	</select>
 
