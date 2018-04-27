@@ -76,6 +76,14 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 		return resultVO;
 	}
 
+	/**
+	 * @Description: 根据条件更新计算信息
+	 * @Param: [firecalculationlistVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:52
+	 */
 	@ApiOperation(value="根据条件更新计算信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="计算信息对象")
 	@PostMapping("/updateByVO")
@@ -93,8 +101,13 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	}
 
 	/**
-	 * 新增公式，同时新增其参数信息
-	 */
+	* @Description: 根据公式新增公式及其参数信息
+	* @Param: [firecalculationlistVO]
+	* @Return: com.syfri.baseapi.model.ResultVO
+	* @Author: dongbo
+	* @Modified By:
+	* @Date: 2018/4/27 9:52
+	*/
 	@ApiOperation(value="根据公式新增公式及其参数信息",notes="新增")
 	@ApiImplicitParam(name="vo",value="公式对象")
 	@RequiresPermissions("Firecalculationlist:add")
@@ -110,7 +123,14 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 		return resultVO;
 	}
 
-
+	/**
+	 * @Description: 根据公式名查询公式数量
+	 * @Param: [gsmc]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:53
+	 */
 	@ApiOperation(value="根据公式名查询公式数量",notes="查询")
 	@ApiImplicitParam(name="gsmc",value="公式名")
 	@GetMapping("/getNum/{gsmc}")
@@ -154,10 +174,15 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	}
 
 	/**
-	 * 删除角色，同时删除其资源信息
+	 * @Description: 根据主键删除公式及其参数信息
+	 * @Param: [id]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:53
 	 */
-	@ApiOperation(value="根据主键删除角色角色及其资源信息",notes="删除")
-	@ApiImplicitParam(name="id",value="角色主键")
+	@ApiOperation(value="根据主键删除公式及其参数信息",notes="删除")
+	@ApiImplicitParam(name="id",value="公式主键")
 	@RequiresPermissions("gsmc:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){

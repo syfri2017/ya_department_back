@@ -40,12 +40,28 @@ public class FirecalculationlistServiceImpl extends BaseServiceImpl<Firecalculat
 		return firecalculationlistDAO.doSearchByVO(firecalculationlistVO);
 	}
 
+	/**
+	 * @Description: 条件查询：根据公式id查询参数信息
+	 * @Param: [gsid]
+	 * @Return: java.util.List<com.syfri.digitalplan.model.auxiliarydecision.firecalculation.FirecalculationparamVO>
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 10:02
+	 */
 	@Override
 	public List<FirecalculationparamVO> doFindCsById(String gsid){
 		return firecalculationlistDAO.doFindCsById(gsid);
 	}
 
-	/*--删除：删除公式同时删除其参数.--*/
+	/*----*/
+	/**
+	 * @Description: 删除：删除公式同时删除其参数.
+	 * @Param: [uuid]
+	 * @Return: void
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 10:03
+	 */
 	@Override
 	public void doDeleteJsgsCs(String uuid){
 		//输出公式表
@@ -54,7 +70,14 @@ public class FirecalculationlistServiceImpl extends BaseServiceImpl<Firecalculat
 		firecalculationlistDAO.doDeleteJsgsCsBatch(uuid);
 	}
 
-	/*--新增：增加公式并增加参数.--*/
+	/**
+	 * @Description: 新增：增加公式并增加参数.
+	 * @Param: [firecalculationlistVO]
+	 * @Return: int
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 10:08
+	 */
 	@Override
 	public int doInsertJsgsCs(FirecalculationlistVO firecalculationlistVO){
 
@@ -67,7 +90,14 @@ public class FirecalculationlistServiceImpl extends BaseServiceImpl<Firecalculat
 		return 1;
 	}
 
-	/*--修改：修改公式并更新参数.--*/
+	/**
+	 * @Description: 修改：修改公式并更新参数.
+	 * @Param: [firecalculationlistVO]
+	 * @Return: int
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 10:08
+	 */
 	@Override
 	public int doUpdateJsgsCs(FirecalculationlistVO firecalculationlistVO){
 
