@@ -1,11 +1,11 @@
-package com.syfri.digitalplan.service.digitalplan;
+package com.syfri.digitalplan.service.basicinfo.organization;
 
 import com.syfri.baseapi.service.BaseService;
-import com.syfri.digitalplan.model.digitalplan.OrganizationVO;
+import com.syfri.digitalplan.model.basicinfo.organization.OrganizationVO;
 
 import java.util.List;
 
-public interface OrganizationService  extends BaseService<OrganizationVO>{
+public interface OrganizationService extends BaseService<OrganizationVO>{
 
 //    /*--查询：重点单位.--*/
 //    List<OrganizationVO> doFindOrganizationlist(OrganizationVO rganizationVO);

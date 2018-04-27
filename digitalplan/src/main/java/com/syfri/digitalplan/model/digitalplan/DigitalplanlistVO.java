@@ -47,6 +47,22 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String begintime;	//审核开始时间
+	private String endtime;	//审核结束时间
+	public String getBegintime(){
+		return begintime;
+	}
+	public void setBegintime(String begintime){
+		this.begintime = begintime;
+	}
+	public String getEndtime(){
+		return endtime;
+	}
+	public void setEndtime(String endtime){
+		this.endtime = endtime;
+	}
+
+
 	public String getUuid(){
 		return uuid;
 	}

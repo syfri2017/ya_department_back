@@ -1,10 +1,11 @@
-package com.syfri.digitalplan.service.impl.digitalplan;
+package com.syfri.digitalplan.service.impl.basicinfo.organization;
+
+import com.syfri.baseapi.service.impl.BaseServiceImpl;
+import com.syfri.digitalplan.dao.basicinfo.organization.OrganizationDAO;
+import com.syfri.digitalplan.model.basicinfo.organization.OrganizationVO;
+import com.syfri.digitalplan.service.basicinfo.organization.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.syfri.baseapi.service.impl.BaseServiceImpl;
-import com.syfri.digitalplan.dao.digitalplan.OrganizationDAO;
-import com.syfri.digitalplan.model.digitalplan.OrganizationVO;
-import com.syfri.digitalplan.service.digitalplan.OrganizationService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,12 +22,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationVO> imp
 		return organizationDAO;
 	}
 
-//	/*--条件查询：重点单位.--*/
-//	@Override
-//	public List<OrganizationVO> doFindOrganizationlist(OrganizationVO organizationVO){
-//		return organizationDAO.doSearchByVO(organizationVO);
-//	}
-//
+
 	/*--根据重点单位id获取重点单位详情--*/
 	@Override
 	public List<OrganizationVO> doFindDetailById(String organizationId){

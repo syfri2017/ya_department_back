@@ -15,4 +15,11 @@ public interface DigitalplanlistDAO extends BaseDAO<DigitalplanlistVO>{
      * @Date: 2018/4/23 9:04
      */
     List<DigitalplanlistVO> doSearchByVO(DigitalplanlistVO digitalplanlistVO);
+
+    /*
+    * 预案审批（更新部分字段）
+    * by yushch
+    * 20180426
+    * */
+    public int doApproveUpdate(DigitalplanlistVO digitalplanlistVO);
 }
