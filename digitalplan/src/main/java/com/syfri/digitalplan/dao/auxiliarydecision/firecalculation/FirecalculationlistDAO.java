@@ -18,13 +18,43 @@ public interface FirecalculationlistDAO extends BaseDAO<FirecalculationlistVO>{
      */
     List<FirecalculationlistVO> doSearchByVO(FirecalculationlistVO firecalculationlistVO);
 
+    /**
+     * @Description: 根据公式id查询参数
+     * @Param: [gsid]
+     * @Return: java.util.List<com.syfri.digitalplan.model.auxiliarydecision.firecalculation.FirecalculationparamVO>
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:54
+     */
     List<FirecalculationparamVO> doFindCsById(String gsid);
-    /*--删除公式时删除参数数据--*/
+
+    /**
+     * @Description: 删除公式时删除参数数据-
+     * @Param: [uuid]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:55
+     */
     int doDeleteJsgsCsBatch(String uuid);
 
-    /*--新增公式时新增参数数据--*/
+    /**
+     * @Description: 新增公式时新增参数数据-
+     * @Param: [gsid, params]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:55
+     */
     int doInsertCsByVO(@Param("gsid") String gsid,@Param("params") List<FirecalculationparamVO> params);
-
-    /*--修改公式时修改参数数据--*/
+    
+    /**
+     * @Description: 修改公式时修改参数数据
+     * @Param: [firecalculationparamVO]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:55
+     */
     int doUpdateCsByVO(FirecalculationparamVO firecalculationparamVO);
 }

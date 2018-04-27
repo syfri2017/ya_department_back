@@ -9,6 +9,9 @@ import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -43,5 +46,17 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 			digitalplanlistVO.setDxmc(digitalplanlistVO.getDxmc().toLowerCase());
 		}
 		return digitalplanlistDAO.doSearchByVO(digitalplanlistVO);
+	}
+	/*
+	* 预案审批（更新部分字段）
+	* by yushch 20180426
+	*/
+	public DigitalplanlistVO doApproveUpdate(DigitalplanlistVO digitalplanlistVO){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String shsj = sdf.format(date);
+		digitalplanlistVO.setShsj(shsj);
+		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
+		return digitalplanlistVO;
 	}
 }

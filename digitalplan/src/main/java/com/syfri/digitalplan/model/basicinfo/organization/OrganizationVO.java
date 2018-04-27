@@ -1,8 +1,8 @@
-package com.syfri.digitalplan.model.digitalplan;
-
-import java.io.Serializable;
+package com.syfri.digitalplan.model.basicinfo.organization;
 
 import com.syfri.baseapi.model.ValueObject;
+
+import java.io.Serializable;
 
 public class OrganizationVO extends ValueObject implements Serializable{
 

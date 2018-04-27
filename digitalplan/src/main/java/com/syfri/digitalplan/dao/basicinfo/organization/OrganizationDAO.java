@@ -1,7 +1,7 @@
-package com.syfri.digitalplan.dao.digitalplan;
+package com.syfri.digitalplan.dao.basicinfo.organization;
 
 import com.syfri.baseapi.dao.BaseDAO;
-import com.syfri.digitalplan.model.digitalplan.OrganizationVO;
+import com.syfri.digitalplan.model.basicinfo.organization.OrganizationVO;
 
 import java.util.List;
 
