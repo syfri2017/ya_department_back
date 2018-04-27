@@ -214,7 +214,7 @@
 	<update  id="doUpdateByVO"  parameterType="DigitalplanlistVO">
 		UPDATE   YAGL_YA_ZZDW
 		<set>
-			<if test="uuid != null">uuid=#{uuid},</if>
+			<!--<if test="uuid != null">uuid=#{uuid},</if>-->
 			<if test="yabh != null">yabh=#{yabh},</if>
 			<if test="yasxh != null">yasxh=#{yasxh},</if>
 			<if test="yabbh != null">yabbh=#{yabbh},</if>
@@ -253,7 +253,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  UUID = #{pkid}
+		WHERE  UUID = #{uuid}
 	</update>
 
 	<!--10.批量修改-->
@@ -333,6 +333,12 @@
 		</if>
 		<if test="shzt != null and shzt != '' ">
 			and t.shzt = #{shzt}
+		</if>
+		<if test="begintime != null and begintime != '' ">
+			and t.shsj &gt;= to_date(#{begintime},'yyyy/MM/dd')
+		</if>
+		<if test="endtime != null and endtime != '' ">
+			and t.shsj &lt;=to_date(#{endtime},'yyyy/MM/dd')
 		</if>
 	</select>
 
