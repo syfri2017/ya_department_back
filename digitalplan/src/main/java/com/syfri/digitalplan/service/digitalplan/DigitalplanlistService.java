@@ -15,4 +15,9 @@ public interface DigitalplanlistService  extends BaseService<DigitalplanlistVO>{
      * @Date: 2018/4/23 9:05
      */
     List<DigitalplanlistVO> doFindlist(DigitalplanlistVO digitalplanlistVO);
+
+    /*预案审批（更新部分字段）
+     *by yushch 20180426
+     */
+    DigitalplanlistVO doApproveUpdate(DigitalplanlistVO digitalplanlistVO);
 }

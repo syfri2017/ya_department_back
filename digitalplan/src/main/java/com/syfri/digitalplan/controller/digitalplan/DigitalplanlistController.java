@@ -87,4 +87,22 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		}
 		return resultVO;
 	}
+
+	/*
+	* 预案审批
+	* by yuahch 20180426
+	*/
+	@ApiOperation(value="预案审批",notes="修改")
+	@ApiImplicitParam(name="vo",value="预案")
+	@PostMapping("/approveByVO")
+	public @ResponseBody ResultVO updateByVO(@RequestBody DigitalplanlistVO digitalplanlistVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(digitalplanlistService.doApproveUpdate(digitalplanlistVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
