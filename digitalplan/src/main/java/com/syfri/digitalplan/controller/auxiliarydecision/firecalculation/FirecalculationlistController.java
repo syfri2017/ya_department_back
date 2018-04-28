@@ -7,6 +7,7 @@ import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.dao.auxiliarydecision.firecalculation.FirecalculationlistDAO;
 import com.syfri.digitalplan.model.auxiliarydecision.firecalculation.FirecalculationparamVO;
+import com.syfri.digitalplan.utils.Calculator;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.digitalplan.model.auxiliarydecision.firecalculation.FirecalculationlistVO;
 import com.syfri.digitalplan.service.auxiliarydecision.firecalculation.FirecalculationlistService;
 import com.syfri.baseapi.controller.BaseController;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.util.List;
 
 @RestController
@@ -76,6 +80,39 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 		return resultVO;
 	}
 
+	static ScriptEngine jse = new ScriptEngineManager().getEngineByName("JavaScript");
+	@ApiOperation(value="根据输入进行计算",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="计算信息对象")
+	@PostMapping("/doCalculate")
+	public @ResponseBody
+	Object fireCalculation(@RequestBody FirecalculationlistVO firecalculationlistVO){
+
+		try{
+			String jsgs = firecalculationlistVO.getJsgs();
+			List<FirecalculationparamVO> paramslist = firecalculationlistVO.getFirecalculationparams();
+			String[] params=new String[paramslist.size()];
+
+			for(int i=0;i<paramslist.size();i++){
+				params[i]=paramslist.get(i).getMrz();
+			}
+			String result = Calculator.string2Calculation(jsgs, params);
+			String resultString=jse.eval(result.toString()).toString();
+			Double resultStr=Double.parseDouble(resultString);
+			return resultStr;
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+		}
+		return null;
+	}
+
+	/**
+	 * @Description: 根据条件更新计算信息
+	 * @Param: [firecalculationlistVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:52
+	 */
 	@ApiOperation(value="根据条件更新计算信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="计算信息对象")
 	@PostMapping("/updateByVO")
@@ -83,8 +120,20 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	ResultVO updateByVO(@RequestBody FirecalculationlistVO firecalculationlistVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			int result = firecalculationlistService.doUpdateJsgsCs(firecalculationlistVO);
-			resultVO.setResult(result);
+			String jsgs = firecalculationlistVO.getJsgs();
+			List<FirecalculationparamVO> paramslist = firecalculationlistVO.getFirecalculationparams();
+			String[] params=new String[paramslist.size()];
+
+			for(int i=0;i<paramslist.size();i++){
+				params[i]=paramslist.get(i).getMrz();
+			}
+			if(Calculator.isCalculationParams(jsgs, params)) {
+				int result = firecalculationlistService.doUpdateJsgsCs(firecalculationlistVO);
+				resultVO.setResult(result);
+			}
+			else{
+				resultVO.setMsg("算式内参数与输入参数个数不符!请重新输入。");
+			}
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -93,8 +142,13 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	}
 
 	/**
-	 * 新增公式，同时新增其参数信息
-	 */
+	* @Description: 根据公式新增公式及其参数信息
+	* @Param: [firecalculationlistVO]
+	* @Return: com.syfri.baseapi.model.ResultVO
+	* @Author: dongbo
+	* @Modified By:
+	* @Date: 2018/4/27 9:52
+	*/
 	@ApiOperation(value="根据公式新增公式及其参数信息",notes="新增")
 	@ApiImplicitParam(name="vo",value="公式对象")
 	@RequiresPermissions("Firecalculationlist:add")
@@ -102,7 +156,19 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	public @ResponseBody ResultVO insertByVO(@RequestBody FirecalculationlistVO firecalculationlistVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(firecalculationlistService.doInsertJsgsCs(firecalculationlistVO));
+			String jsgs = firecalculationlistVO.getJsgs();
+			List<FirecalculationparamVO> paramslist = firecalculationlistVO.getFirecalculationparams();
+			String[] params=new String[paramslist.size()];
+
+			for(int i=0;i<paramslist.size();i++){
+				params[i]=paramslist.get(i).getMrz();
+			}
+			if(Calculator.isCalculationParams(jsgs, params)) {
+				resultVO.setResult(firecalculationlistService.doInsertJsgsCs(firecalculationlistVO));
+			}
+			else{
+				resultVO.setMsg("算式内参数与输入参数个数不符!请重新输入。");
+			}
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -110,7 +176,14 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 		return resultVO;
 	}
 
-
+	/**
+	 * @Description: 根据公式名查询公式数量
+	 * @Param: [gsmc]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:53
+	 */
 	@ApiOperation(value="根据公式名查询公式数量",notes="查询")
 	@ApiImplicitParam(name="gsmc",value="公式名")
 	@GetMapping("/getNum/{gsmc}")
@@ -154,10 +227,15 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	}
 
 	/**
-	 * 删除角色，同时删除其资源信息
+	 * @Description: 根据主键删除公式及其参数信息
+	 * @Param: [id]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:53
 	 */
-	@ApiOperation(value="根据主键删除角色角色及其资源信息",notes="删除")
-	@ApiImplicitParam(name="id",value="角色主键")
+	@ApiOperation(value="根据主键删除公式及其参数信息",notes="删除")
+	@ApiImplicitParam(name="id",value="公式主键")
 	@RequiresPermissions("gsmc:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){

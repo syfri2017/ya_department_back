@@ -18,13 +18,43 @@ public interface FirecalculationlistService  extends BaseService<Firecalculation
      */
     List<FirecalculationlistVO> doFindlist(FirecalculationlistVO firecalculationlistVO);
 
+    /**
+     * @Description: 查询：根据公式id查询参数信息
+     * @Param: [gsid]
+     * @Return: java.util.List<com.syfri.digitalplan.model.auxiliarydecision.firecalculation.FirecalculationparamVO>
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:57
+     */
     List<FirecalculationparamVO> doFindCsById(String gsid);
 
-    /*--删除：删除公式同时删除其参数.--*/
+    /**
+     * @Description: 删除：删除公式同时删除其参数.
+     * @Param: [uuid]
+     * @Return: void
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:58
+     */
     void doDeleteJsgsCs(String uuid);
 
-    /*--新增：增加公式并为公式赋予参数.--*/
+    /**
+     * @Description: 新增：增加公式并为公式赋予参数.
+     * @Param: [firecalculationlistVO]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:58
+     */
     int doInsertJsgsCs(FirecalculationlistVO firecalculationlistVO);
-    /*--修改：修改公式并为公式修改参数.--*/
+
+    /**
+     * @Description: 修改：修改公式并为公式修改参数.
+     * @Param: [firecalculationlistVO]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:59
+     */
     int doUpdateJsgsCs(FirecalculationlistVO firecalculationlistVO);
 }

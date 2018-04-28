@@ -159,9 +159,7 @@
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="FirecalculationlistVO"> 
-		UPDATE   ZHJC_JSGS  
-		<set>
+	<update  id="doUpdateByVO"  parameterType="FirecalculationlistVO">UPDATE ZHJC_JSGS<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="gsmc != null">gsmc=#{gsmc},</if>
 			<if test="gslb != null">gslb=#{gslb},</if>
@@ -184,37 +182,33 @@
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
-		</set>
-		WHERE  UUID = #{uuid}
+		</set>WHERE  UUID = #{uuid}
 	</update>
 
 	<!--10.批量修改-->
-	<update id="doUpdateCsByVO" parameterType="FirecalculationparamVO"> 
-		UPDATE   ZHJC_JSGS_CS
-		<set>
-			<if test="gsid != null">gsid='2'/*#{gsid}*/,</if>
-			<!--<if test="csmc != null">csmc=#{csmc},</if>-->
-			<!--<if test="cslxdm != null">cslxdm=#{cslxdm},</if>-->
-			<!--<if test="jldwdm != null">jldwdm=#{jldwdm},</if>-->
-			<!--<if test="mrz != null">mrz=#{mrz},</if>-->
-			<!--<if test="sxh != null">sxh=#{sxh},</if>-->
-			<!--<if test="cjrid != null">cjrid=#{cjrid},</if>-->
-			<!--<if test="cjrmc != null">cjrmc=#{cjrmc},</if>-->
-			<!--<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>-->
-			<!--<if test="xgrid != null">xgrid=#{xgrid},</if>-->
-			<!--<if test="xgrmc != null">xgrmc=#{xgrmc},</if>-->
-			<!--<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>-->
-			<!--<if test="deleteFlag != null">delete_flag='N',</if>-->
-			<!--<if test="datasource != null">datasource=#{datasource},</if>-->
-			<!--<if test="bz != null">bz=#{bz},</if>-->
-			<!--<if test="jdh != null">jdh=#{jdh},</if>-->
-			<!--<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>-->
-			<!--<if test="reserve1 != null">reserve1=#{reserve1},</if>-->
-			<!--<if test="reserve2 != null">reserve2=#{reserve2},</if>-->
-			<!--<if test="reserve3 != null">reserve3=#{reserve3},</if>-->
-			<!--<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>-->
-		</set>
-		WHERE  UUID = #{uuid}
+	<update id="doUpdateCsByVO" parameterType="FirecalculationparamVO">UPDATE ZHJC_JSGS_CS<set>
+			<if test="gsid != null and gsid != ''">gsid = #{gsid},</if>
+			<if test="csmc != null and csmc != ''">csmc=#{csmc},</if>
+			<if test="cslxdm != null and cslxdm != ''">cslxdm=#{cslxdm},</if>
+			<if test="jldwdm != null and jldwdm != ''">jldwdm=#{jldwdm},</if>
+			<if test="mrz != null and mrz != ''">mrz=#{mrz},</if>
+			<if test="sxh != null and sxh != ''">sxh=#{sxh},</if>
+			<if test="cjrid != null and cjrid != ''">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null and cjrmc != ''">cjrmc=#{cjrmc},</if>
+			<if test="cjsj != null and cjsj != ''">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="xgrid != null and xgrid != ''">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null and xgrmc != ''">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null and xgsj != ''">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null and deleteFlag != ''">delete_flag='N',</if>
+			<if test="datasource != null and datasource != ''">datasource=#{datasource},</if>
+			<if test="bz != null and bz != ''">bz=#{bz},</if>
+			<if test="jdh != null and jdh != ''">jdh=#{jdh},</if>
+			<if test="sjc != null and sjc != ''">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null and reserve1 != ''">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null and reserve2 != ''">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null and reserve3 != ''">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null and reserve4 != ''">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set> WHERE  UUID = #{uuid}
 	</update>
 
 	<!--11.根据对象查询记录-->
@@ -260,6 +254,7 @@
 		,h.SXH sxh
 		FROM ZHJC_JSGS_CS h
 		WHERE h.DELETE_FLAG = 'N' AND  h.gsid = #{value}
+		ORDER BY h.SXH ASC
 	</select>
 
 	<!--14.新增公式时批量插入参数-->
