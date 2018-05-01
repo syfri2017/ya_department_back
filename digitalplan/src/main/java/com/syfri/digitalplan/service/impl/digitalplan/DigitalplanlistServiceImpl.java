@@ -9,7 +9,6 @@ import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +56,14 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		String shsj = sdf.format(date);
 		digitalplanlistVO.setShsj(shsj);
 		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
+		return digitalplanlistVO;
+	}
+
+	/*--新增：代码集.--*/
+	@Override
+	public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO){
+		digitalplanlistVO.setDeleteFlag("N");
+		digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
 		return digitalplanlistVO;
 	}
 }

@@ -291,4 +291,33 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
 	}
+
+	private String yalxmc;	//预案类型
+	private String yaztmc;	//预案状态
+	private String yajbmc;	//预案级别
+	private String shztmc;	//审核状态
+	public String getYalxmc(){
+		return yalxmc;
+	}
+	public void setYalxmc(String yalxmc){
+		this.yalxmc = yalxmc;
+	}
+	public String getYaztmc(){
+		return yaztmc;
+	}
+	public void setYaztmc(String yaztmc){
+		this.yaztmc = yaztmc;
+	}
+	public String getYajbmc(){
+		return yajbmc;
+	}
+	public void setYajbmc(String yajbmc){
+		this.yajbmc = yajbmc;
+	}
+	public String getShztmc(){
+		return shztmc;
+	}
+	public void setShztmc(String shztmc){
+		this.shztmc = shztmc;
+	}
 }
