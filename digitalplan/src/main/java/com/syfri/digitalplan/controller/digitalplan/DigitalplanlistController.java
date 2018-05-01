@@ -7,6 +7,7 @@ import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,24 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(digitalplanlistService.doApproveUpdate(digitalplanlistVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 新增代码集
+	 */
+	@ApiOperation(value="根据代码集新增代码集",notes="新增")
+	@ApiImplicitParam(name="vo",value="代码集对象")
+	@RequiresPermissions("digitalplan:add")
+	@PostMapping("/insertByVO")
+	public @ResponseBody ResultVO insertByVO(@RequestBody DigitalplanlistVO digitalplanlistVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(digitalplanlistService.doInsertDigitalplan(digitalplanlistVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
