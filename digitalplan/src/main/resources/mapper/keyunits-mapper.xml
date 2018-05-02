@@ -447,21 +447,11 @@
 		c4.code_name xzqhmc
 		FROM YAGL_DX_ZDDW t
 		<!--单位类别-->
-		Left Join SYS_CODELIST c1
-		on c1.CODETYPE = 'ZDDWLB'
-		And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2
-		On c1.CODEID = c2.CODEID
-		And c2.DELETE_FLAG = 'N'
-		and t.DWLB = c2.CODE_VALUE
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDDWLB' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWLB = c2.CODE_VALUE
 		<!--行政区划-->
-		Left Join SYS_CODELIST c3
-		on c3.CODETYPE = 'XZQH'
-		And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4
-		On c4.CODEID = c3.CODEID
-		And c4.DELETE_FLAG = 'N'
-		and t.XZQH = c4.CODE_VALUE
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.XZQH = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dwmc != null and dwmc != '' ">
 			and t.dwmc LIKE concat(concat('%',#{dwmc}),'%')

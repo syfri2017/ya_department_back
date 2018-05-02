@@ -244,8 +244,15 @@
 	<!--12.列表页条件查询记录-->
 	<select id="doSearchByVO" parameterType="FiredrugVO"  resultType="FiredrugVO">
 		SELECT 
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_WL_XFYJXX f 
+		<include refid="SQL_CONTENT"/>,
+		dz.DZJC dzmc,
+		c2.code_name yjlxmc
+		FROM YAGL_WL_XFYJXX f
+		<!--消防队站-->
+		Left Join YAGL_XFDZ dz On dz.DZBM = f.SSDZ And dz.DELETE_FLAG = 'N'
+		<!--药剂类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YJLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and f.YJLX = c2.CODE_VALUE
 		WHERE f.DELETE_FLAG = 'N'
 		<if test="ssdz != null and ssdz != '' ">
 			and f.ssdz LIKE concat(rtrim(#{ssdz},'0'),'%')
