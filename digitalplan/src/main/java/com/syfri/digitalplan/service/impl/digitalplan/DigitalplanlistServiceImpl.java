@@ -59,11 +59,40 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		return digitalplanlistVO;
 	}
 
-	/*--新增：代码集.--*/
+	/**
+	 * @Description: 新增：预案
+	 * @Param: [digitalplanlistVO]
+	 * @Return: com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 16:05
+	 */
 	@Override
 	public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String shsj = sdf.format(date);
+		digitalplanlistVO.setZzsj(shsj);
 		digitalplanlistVO.setDeleteFlag("N");
 		digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
+		return digitalplanlistVO;
+	}
+
+	/**
+	 * @Description: 修改：预案
+	 * @Param: [digitalplanlistVO]
+	 * @Return: com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 16:05
+	 */
+	@Override
+	public DigitalplanlistVO doUpdateDigitalplan(DigitalplanlistVO digitalplanlistVO){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String shsj = sdf.format(date);
+		digitalplanlistVO.setCjsj(shsj);
+		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
 		return digitalplanlistVO;
 	}
 }

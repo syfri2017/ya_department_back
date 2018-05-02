@@ -107,17 +107,45 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		return resultVO;
 	}
 
-	/**
-	 * 新增代码集
+	/***
+	 * @Description: 新增预案
+	 * @Param: [DigitalplanlistVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 15:51
 	 */
-	@ApiOperation(value="根据代码集新增代码集",notes="新增")
-	@ApiImplicitParam(name="vo",value="代码集对象")
+	@ApiOperation(value="根据预案新增预案",notes="新增")
+	@ApiImplicitParam(name="vo",value="预案对象")
 	@RequiresPermissions("digitalplan:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody DigitalplanlistVO digitalplanlistVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(digitalplanlistService.doInsertDigitalplan(digitalplanlistVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * @Description: 修改预案
+	 * @Param: [DigitalplanlistVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 15:52
+	 */
+	@ApiOperation(value="根据预案修改预案",notes="修改")
+	@ApiImplicitParam(name="vo",value="预案对象")
+	@RequiresPermissions("digitalplan:update")
+	@PostMapping("/doUpdateByVO")
+	public @ResponseBody ResultVO doUpdateByVO(@RequestBody DigitalplanlistVO digitalplanlistVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(digitalplanlistService.doUpdateDigitalplan(digitalplanlistVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

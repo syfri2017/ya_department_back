@@ -231,43 +231,43 @@
 		UPDATE   YAGL_YA_ZZDW
 		<set>
 			<!--<if test="uuid != null">uuid=#{uuid},</if>-->
-			<if test="yabh != null">yabh=#{yabh},</if>
-			<if test="yasxh != null">yasxh=#{yasxh},</if>
-			<if test="yabbh != null">yabbh=#{yabbh},</if>
-			<if test="yalxdm != null">yalxdm=#{yalxdm},</if>
-			<if test="yamc != null">yamc=#{yamc},</if>
-			<if test="yazt != null">yazt=#{yazt},</if>
-			<if test="yajb != null">yajb=#{yajb},</if>
-			<if test="dxid != null">dxid=#{dxid},</if>
-			<if test="dxmc != null">dxmc=#{dxmc},</if>
-			<if test="bwid != null">bwid=#{bwid},</if>
-			<if test="bwmc != null">bwmc=#{bwmc},</if>
-			<if test="sfkqy != null">sfkqy=#{sfkqy},</if>
-			<if test="jgid != null">jgid=#{jgid},</if>
-			<if test="jgbm != null">jgbm=#{jgbm},</if>
-			<if test="jgmc != null">jgmc=#{jgmc},</if>
-			<if test="zzrid != null">zzrid=#{zzrid},</if>
-			<if test="zzrmc != null">zzrmc=#{zzrmc},</if>
-			<if test="zzsj != null">zzsj=TO_DATE(#{zzsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="shzt != null">shzt=#{shzt},</if>
-			<if test="shrid != null">shrid=#{shrid},</if>
-			<if test="shrmc != null">shrmc=#{shrmc},</if>
-			<if test="shsj != null">shsj=TO_DATE(#{shsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="cjrid != null">cjrid=#{cjrid},</if>
-			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="xgrid != null">xgrid=#{xgrid},</if>
-			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="deleteFlag != null">delete_flag='N',</if>
-			<if test="datasource != null">datasource=#{datasource},</if>
-			<if test="bz != null">bz=#{bz},</if>
-			<if test="jdh != null">jdh=#{jdh},</if>
-			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="reserve1 != null">reserve1=#{reserve1},</if>
-			<if test="reserve2 != null">reserve2=#{reserve2},</if>
-			<if test="reserve3 != null">reserve3=#{reserve3},</if>
-			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+			<if test="yabh != null and yabh != '' ">yabh=#{yabh},</if>
+			<if test="yasxh != null and yasxh != '' ">yasxh=#{yasxh},</if>
+			<if test="yabbh != null and yabbh != '' ">yabbh=#{yabbh},</if>
+			<if test="yalxdm != null and yalxdm != '' ">yalxdm=#{yalxdm},</if>
+			<if test="yamc != null and yamc != '' ">yamc=#{yamc},</if>
+			<if test="yazt!= null and yazt != '' ">yazt=#{yazt},</if>
+			<if test="yajb != null and yajb != '' ">yajb=#{yajb},</if>
+			<if test="dxid != null and dxid != '' ">dxid=#{dxid},</if>
+			<if test="dxmc != null and dxmc != '' ">dxmc=#{dxmc},</if>
+			<if test="bwid != null and bwid != '' ">bwid=#{bwid},</if>
+			<if test="bwmc != null and bwmc != '' ">bwmc=#{bwmc},</if>
+			<if test="sfkqy != null and sfkqy != '' ">sfkqy=#{sfkqy},</if>
+			<if test="jgid != null and jgid != '' ">jgid=#{jgid},</if>
+			<if test="jgbm != null and jgbm != '' ">jgbm=#{jgbm},</if>
+			<if test="jgmc != null and jgmc != '' ">jgmc=#{jgmc},</if>
+			<if test="zzrid != null and zzrid != '' ">zzrid=#{zzrid},</if>
+			<if test="zzrmc != null and zzrmc != '' ">zzrmc=#{zzrmc},</if>
+			<if test="zzsj != null and zzsj != '' ">zzsj=TO_DATE(#{zzsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="shzt != null and shzt != '' ">shzt=#{shzt},</if>
+			<if test="shrid != null and shrid != '' ">shrid=#{shrid},</if>
+			<if test="shrmc != null and shrmc != '' ">shrmc=#{shrmc},</if>
+			<if test="shsj != null and shsj != '' ">shsj=TO_DATE(#{shsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="cjrid != null and cjrid != '' ">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null and cjrmc != '' ">cjrmc=#{cjrmc},</if>
+			<if test="cjsj != null and cjsj != '' ">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="xgrid != null and xgrid != '' ">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null and xgrmc != '' ">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null and xgsj != '' ">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null and deleteFlag != '' ">delete_flag='N',</if>
+			<if test="datasource != null and datasource != '' ">datasource=#{datasource},</if>
+			<if test="bz != null and bz != '' ">bz=#{bz},</if>
+			<if test="jdh != null and jdh != '' ">jdh=#{jdh},</if>
+			<if test="sjc != null and sjc != '' ">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null and reserve1 != '' ">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null and reserve2 != '' ">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null and reserve3 != '' ">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null and reserve4 != '' ">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
 		WHERE  UUID = #{uuid}
 	</update>

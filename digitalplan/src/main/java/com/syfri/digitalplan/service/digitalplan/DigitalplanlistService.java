@@ -30,4 +30,14 @@ public interface DigitalplanlistService  extends BaseService<DigitalplanlistVO>{
      * @Date: 2018/5/1 12:15
      */
     DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO);
+
+    /**
+     * @Description: 修改：预案
+     * @Param: [digitalplanlistVO]
+     * @Return: com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/5/2 15:56
+     */
+    DigitalplanlistVO doUpdateDigitalplan(DigitalplanlistVO digitalplanlistVO);
 }
