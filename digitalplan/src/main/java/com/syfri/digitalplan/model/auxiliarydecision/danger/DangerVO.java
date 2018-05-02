@@ -1,4 +1,4 @@
-package com.syfri.digitalplan.model.basicinfo.danger;
+package com.syfri.digitalplan.model.auxiliarydecision.danger;
 
 import java.io.Serializable;
 import com.syfri.baseapi.model.ValueObject;

@@ -1,8 +1,8 @@
-package com.syfri.digitalplan.service.impl.basicinfo.danger;
+package com.syfri.digitalplan.service.impl.auxiliarydecision.danger;
 
-import com.syfri.digitalplan.dao.basicinfo.danger.DangerDAO;
-import com.syfri.digitalplan.model.basicinfo.danger.DangerVO;
-import com.syfri.digitalplan.service.basicinfo.danger.DangerService;
+import com.syfri.digitalplan.dao.auxiliarydecision.danger.DangerDAO;
+import com.syfri.digitalplan.model.auxiliarydecision.danger.DangerVO;
+import com.syfri.digitalplan.service.auxiliarydecision.danger.DangerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.syfri.baseapi.service.impl.BaseServiceImpl;
@@ -23,7 +23,7 @@ public class DangerServiceImpl extends BaseServiceImpl<DangerVO> implements Dang
 	/**
 	 * @Description: 条件查询：危化品.
 	 * @Param: [dangerVO]
-	 * @Return: java.util.List<com.syfri.digitalplan.model.basicinfo.danger.DangerVO>
+	 * @Return: java.util.List<com.syfri.digitalplan.model.auxiliarydecision.danger.DangerVO>
 	 * @Author: dongbo
 	 * @Modified By:
 	 * @Date: 2018/4/20 16:46
