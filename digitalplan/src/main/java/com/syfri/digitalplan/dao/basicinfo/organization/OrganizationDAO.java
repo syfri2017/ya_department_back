@@ -17,7 +17,10 @@ public interface OrganizationDAO extends BaseDAO<OrganizationVO>{
 /*--根据条件查询记录.--*/
     List<OrganizationVO> doSearchByVO(OrganizationVO organizationVO);
 
-    /*--根据装备id获取装备详情.--*/
+    /*--根据机构id获取机构详情.--*/
     List<OrganizationVO> doFindDetailById(String organizationId);
+
+    /*--获取全部机构.--*/
+    List<OrganizationVO> doFindAllOrganization();
 
 }
