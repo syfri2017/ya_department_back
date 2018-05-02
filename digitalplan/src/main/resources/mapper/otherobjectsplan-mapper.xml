@@ -40,7 +40,12 @@
 			and t.sfkqy = #{sfkqy}
 		</if>
 		<if test="jgid != null and jgid != '' ">
-			and t.jgid = #{jgid}
+			and t.jgid IN (
+			SELECT UUID
+			FROM YAGL_ZZJG t
+			START WITH t.UUID = #{jgid}
+			CONNECT BY PRIOR t.UUID = SJJGID
+			)
 		</if>
 		<if test="jgbm != null and jgbm != '' ">
 			and t.jgbm = #{jgbm}
