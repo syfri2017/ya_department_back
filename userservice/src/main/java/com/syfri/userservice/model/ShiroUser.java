@@ -28,6 +28,9 @@ public class ShiroUser implements Serializable{
 	/*菜单树.*/
 	private List<ResourceTree> resourceTrees;
 
+	/*组织机构*/
+	private OrganizationVO organizationVO;
+
 	public ShiroUser() {
 	}
 
@@ -35,6 +38,14 @@ public class ShiroUser implements Serializable{
 		this.userid = userid;
 		this.username = username;
 		this.realName = realName;
+	}
+
+	public OrganizationVO getOrganizationVO() {
+		return organizationVO;
+	}
+
+	public void setOrganizationVO(OrganizationVO organizationVO) {
+		this.organizationVO = organizationVO;
 	}
 
 	public String getUserid() {

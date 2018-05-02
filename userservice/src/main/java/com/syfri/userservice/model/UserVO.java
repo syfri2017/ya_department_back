@@ -33,6 +33,7 @@ public class UserVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用2
 	private String reserve3;	//备用3
 	private List<RoleVO> roles;    //角色
+	private String organizationId;  //组织机构
 
 
 	public String getPkid(){
@@ -172,6 +173,12 @@ public class UserVO extends ValueObject implements Serializable{
 	}
 	public void setRoles(List<RoleVO> roles) {
 		this.roles = roles;
+	}
+	public String getOrganizationId() {
+		return organizationId;
+	}
+	public void setOrganizationId(String organizationId) {
+		this.organizationId = organizationId;
 	}
 
 	@Override

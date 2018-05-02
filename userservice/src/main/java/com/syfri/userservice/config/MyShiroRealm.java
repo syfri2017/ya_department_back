@@ -35,6 +35,9 @@ public class MyShiroRealm extends AuthorizingRealm{
 	@Resource
 	private PermissionService permissionService;
 
+	@Resource
+	private OrganizationService organizationService;
+
 	/**
 	 * 认证信息（身份验证）
 	 * Authentication 是用来验证用户身份
@@ -53,6 +56,9 @@ public class MyShiroRealm extends AuthorizingRealm{
 		AccountVO account = accounts.get(0);
 
 		ShiroUser shiroUser = new ShiroUser(account.getUserid(), account.getUsername(), account.getRealname());
+
+		//根据用户ID获取其组织机构
+		shiroUser.setOrganizationVO(organizationService.doFindOrganizationByUserid(account.getUserid()));
 
 		List<String> roles = new ArrayList();
 		List<String> permissions = new ArrayList();
