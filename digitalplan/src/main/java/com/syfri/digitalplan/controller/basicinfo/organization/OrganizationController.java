@@ -82,13 +82,13 @@ public class OrganizationController extends BaseController<OrganizationVO>{
 	@PostMapping("/getOrganizationtree")
 	public @ResponseBody ResultVO getOrganizationtree(){
 		ResultVO resultVO = ResultVO.build();
-//		try{
+		try{
 			List<OrganizationTree> result = organizationService.doFindAllOrganization();
 			resultVO.setResult(result);
-//		}catch(Exception e){
-//			logger.error("{}",e.getMessage());
-//			resultVO.setCode(EConstants.CODE.FAILURE);
-//		}
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
 		return resultVO;
 	}
 
