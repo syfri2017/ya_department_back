@@ -91,7 +91,11 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String shsj = sdf.format(date);
-		digitalplanlistVO.setCjsj(shsj);
+		if(digitalplanlistVO.getYazt().equals("03")){
+			digitalplanlistVO.setCjsj(shsj);
+		}else if(digitalplanlistVO.getYazt().equals("01")){
+			digitalplanlistVO.setXgsj(shsj);
+		}
 		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
 		return digitalplanlistVO;
 	}
