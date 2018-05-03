@@ -8,11 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="base" />
         <module name="baseapi" />
-        <module name="demo" />
         <module name="demo1" />
         <module name="digitalplan" />
         <module name="generator" />
-        <module name="userserver" />
         <module name="userservice" />
       </profile>
     </annotationProcessing>
