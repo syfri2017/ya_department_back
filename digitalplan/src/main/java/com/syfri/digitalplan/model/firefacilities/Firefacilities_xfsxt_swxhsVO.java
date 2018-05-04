@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.syfri.baseapi.model.ValueObject;
 
-public class Firefacilities_xfsxt_swxhsVO extends ValueObject implements Serializable{
+public class Firefacilities_xfsxt_swxhsVO extends FirefacilitiesVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
