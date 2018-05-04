@@ -22,6 +22,8 @@ public class BwjwplanController  extends BaseController<BwjwplanVO>{
 	@Autowired
 	private BwjwplanService bwjwplanService;
 
+
+
 	@Override
 	public BwjwplanService getBaseService() {
 		return this.bwjwplanService;
