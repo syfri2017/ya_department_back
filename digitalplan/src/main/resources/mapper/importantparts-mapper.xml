@@ -150,9 +150,9 @@
 	<sql id="SQL_CGL_CONTENT">
 		t2.uuid cgl_uuid,
 		t2.zdbwid cgl_zdbwid,
-		t2.zrj cgl_zrj,
+		to_char(t2.zrj,'fm9999999990.00') cgl_zrj,
 		t2.cgsl cgl_cgsl,
-		t2.cgjg cgl_cgjg,
+		to_char(t2.cgjg,'fm9999999990.00') cgl_cgjg,
 		t2.ccjzms cgl_ccjzms,
 		t2.jsfzr cgl_jsfzr,
 		t2.jsfzrdh cgl_jsfzrdh,
