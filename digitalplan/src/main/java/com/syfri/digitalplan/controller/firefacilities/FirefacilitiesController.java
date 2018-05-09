@@ -23,7 +23,7 @@ public class FirefacilitiesController  extends BaseController<FirefacilitiesVO>{
 		return this.firefacilitiesService;
 	}
 
-	@ApiOperation(value="查询列表",notes="列表信息")
+	@ApiOperation(value="查询安全设施列表",notes="列表信息")
 	@ApiImplicitParam(name="vo",value = "业务实体")
 	@PostMapping("doFindlist")
 	public @ResponseBody ResultVO list(@RequestBody FirefacilitiesVO vo ) {

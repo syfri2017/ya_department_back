@@ -25,6 +25,12 @@ public class FirefacilitiesServiceImpl extends BaseServiceImpl<FirefacilitiesVO>
 	public FirefacilitiesDAO getBaseDAO() {
 		return firefacilitiesDAO;
 	}
+
+	/*
+	* 查询安全设施列表，分类关联从表查询从表信息
+	* 返回map<消防设施类型，类型对应的从表信息list>
+	* by yushch 20180509
+	* */
 	public Map<String, List> doFindlist(FirefacilitiesVO vo) {
 		List<FirefacilitiesVO> firefacilities = firefacilitiesDAO.doSearchListByVO(vo);
 		Map<String,List> map = new HashMap<String,List>();
