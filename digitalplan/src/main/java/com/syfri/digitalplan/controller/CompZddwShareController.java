@@ -1,10 +1,5 @@
 package com.syfri.digitalplan.controller;
 
-//import com.alibaba.fastjson.JSONObject;
-//import com.google.gson.Gson;
-//import com.google.gson.JsonSyntaxException;
-//import com.google.gson.reflect.TypeToken;
-import com.syfri.digitalplan.config.ShareConfig;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -38,8 +33,8 @@ import java.util.Map;
 public class CompZddwShareController {
     private static final Logger logger = LoggerFactory.getLogger(CompZddwShareController.class);
 
-    @Autowired
-    ShareConfig shareConfig;
+//    @Autowired
+//    ShareConfig shareConfig;
 
     @Autowired
     private DigitalplanlistService digitalplanlistService;
