@@ -39,6 +39,21 @@ public class FirefacilitiesServiceImpl extends BaseServiceImpl<FirefacilitiesVO>
 		List xfdt = new ArrayList();
 		List bnc = new ArrayList();
 		List yjgb = new ArrayList();
+		List xfbf = new ArrayList();
+		List xfsx = new ArrayList();
+		List xfsc = new ArrayList();
+		List snxhs = new ArrayList();
+		List swxhs = new ArrayList();
+		List sbjhq = new ArrayList();
+		List plxt = new ArrayList();
+		List lqsxt = new ArrayList();
+		List gdsp = new ArrayList();
+		List bgdss = new ArrayList();
+		List pmbf = new ArrayList();
+		List pmxhs = new ArrayList();
+		List gdpmp = new ArrayList();
+		List pmfsq = new ArrayList();
+		List pm_bgdss = new ArrayList();
 		for (FirefacilitiesVO data : firefacilities){
 			String xfsslx = data.getJbxx_xfsslx();
 			String xfssid = data.getJbxx_xfssid();
@@ -80,24 +95,64 @@ public class FirefacilitiesServiceImpl extends BaseServiceImpl<FirefacilitiesVO>
 				case"2000":
 					break;
 				case"2001":
+					List list_2001 = firefacilitiesDAO.doFindXfbfList(xfssid);
+					for(int i=0;i<list_2001.size();i++){
+						xfbf.add(list_2001.get(i));
+					}
 					break;
 				case"2002":
+					List list_2002 = firefacilitiesDAO.doFindXfsxList(xfssid);
+					for(int i=0;i<list_2002.size();i++){
+						xfsx.add(list_2002.get(i));
+					}
 					break;
 				case"2003":
+					List list_2003 = firefacilitiesDAO.doFindXfscList(xfssid);
+					for(int i=0;i<list_2003.size();i++){
+						xfsc.add(list_2003.get(i));
+					}
 					break;
 				case"2004":
+					List list_2004 = firefacilitiesDAO.doFindSnxhsList(xfssid);
+					for(int i=0;i<list_2004.size();i++){
+						snxhs.add(list_2004.get(i));
+					}
 					break;
 				case"2005":
+					List list_2005 = firefacilitiesDAO.doFindSwxhsList(xfssid);
+					for(int i=0;i<list_2005.size();i++){
+						swxhs.add(list_2005.get(i));
+					}
 					break;
 				case"2006":
+					List list_2006 = firefacilitiesDAO.doFindSbjhqList(xfssid);
+					for(int i=0;i<list_2006.size();i++){
+						sbjhq.add(list_2006.get(i));
+					}
 					break;
 				case"2007":
+					List list_2007 = firefacilitiesDAO.doFindPlxtList(xfssid);
+					for(int i=0;i<list_2007.size();i++){
+						plxt.add(list_2007.get(i));
+					}
 					break;
 				case"2008":
+					List list_2008 = firefacilitiesDAO.doFindLqsxtList(xfssid);
+					for(int i=0;i<list_2008.size();i++){
+						lqsxt.add(list_2008.get(i));
+					}
 					break;
 				case"2009":
+					List list_2009 = firefacilitiesDAO.doFindGdspList(xfssid);
+					for(int i=0;i<list_2009.size();i++){
+						gdsp.add(list_2009.get(i));
+					}
 					break;
 				case"2010":
+					List list_2010 = firefacilitiesDAO.doFindBgdssList(xfssid);
+					for(int i=0;i<list_2010.size();i++){
+						bgdss.add(list_2010.get(i));
+					}
 					break;
 				//泡沫系统
 				case"3000":
@@ -154,6 +209,26 @@ public class FirefacilitiesServiceImpl extends BaseServiceImpl<FirefacilitiesVO>
 			map.put("1004",bnc);
 		if(!yjgb.isEmpty())
 			map.put("1005",yjgb);
+		if(!xfbf.isEmpty())
+			map.put("2001",xfbf);
+		if(!xfsx.isEmpty())
+			map.put("2002",xfsx);
+		if(!xfsc.isEmpty())
+			map.put("2003",xfsc);
+		if(!snxhs.isEmpty())
+			map.put("2004",snxhs);
+		if(!swxhs.isEmpty())
+			map.put("2005",swxhs);
+		if(!sbjhq.isEmpty())
+			map.put("2006",sbjhq);
+		if(!plxt.isEmpty())
+			map.put("2007",plxt);
+		if(!lqsxt.isEmpty())
+			map.put("2008",lqsxt);
+		if(!gdsp.isEmpty())
+			map.put("2009",gdsp);
+		if(!bgdss.isEmpty())
+			map.put("2010",bgdss);
 		return map;
 	}
 }
