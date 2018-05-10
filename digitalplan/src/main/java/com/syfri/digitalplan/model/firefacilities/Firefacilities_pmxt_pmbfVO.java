@@ -31,6 +31,8 @@ public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Seri
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String pmylxmc;	//泡沫液类型名称
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -162,5 +164,12 @@ public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Seri
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public String getPmylxmc() {
+		return pmylxmc;
+	}
+	public void setPmylxmc(String pmylxmc) {
+		this.pmylxmc = pmylxmc;
 	}
 }
