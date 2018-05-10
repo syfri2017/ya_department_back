@@ -37,4 +37,34 @@ public interface FirefacilitiesDAO extends BaseDAO<FirefacilitiesVO>{
     public List<Firefacilities_xfsxt_gdspVO> doFindGdspList(String xfssid);
     //消防水系统-半固定设施
     public List<Firefacilities_xfsxt_bgdssVO> doFindBgdssList(String xfssid);
+
+    //泡沫系统-泡沫泵房
+    public List<Firefacilities_pmxt_pmbfVO> doFindPmbfList(String xfssid);
+    //泡沫系统-泡沫消火栓
+    public List<Firefacilities_pmxt_pmxhsVO> doFindPmxhsList(String xfssid);
+    //泡沫系统-固定泡沫炮
+    public List<Firefacilities_pmxt_gdpmpVO> doFindGdpmpList(String xfssid);
+    //泡沫系统-泡沫发生器
+    public List<Firefacilities_pmxt_pmfsqVO> doFindPmfsqList(String xfssid);
+    //泡沫系统-半固定设施
+    public List<Firefacilities_pmxt_bgdssVO> doFindPmBgdssList(String xfssid);
+
+    //蒸汽灭火系统-固定式
+    public List<Firefacilities_zqmhxt_gdsVO> doFindGdsList(String xfssid);
+    //蒸汽灭火系统-半固定式
+    public List<Firefacilities_zqmhxt_bgdsVO> doFindBgdsList(String xfssid);
+    //消防控制室
+    public List<Firefacilities_xfkzsVO> doFindXfkzsList(String xfssid);
+    //防排烟措施-排烟口/出烟口
+    public List<Firefacilities_fpycs_pycykVO> doFindPycykList(String xfssid);
+    //防排烟措施-防排烟系统
+    public List<Firefacilities_fpycs_fpyxtVO> doFindFpyxtList(String xfssid);
+    //防火分区
+    public List<Firefacilities_fhfqVO> doFindFhfqList(String xfssid);
+    //其他灭火系统-气体灭火系统
+    public List<Firefacilities_qtmhxt_qtmhxtVO> doFindQtmhxtList(String xfssid);
+    //其他灭火系统-干粉灭火系统
+    public List<Firefacilities_qtmhxt_gfmhxtVO> doFindGfmhxtList(String xfssid);
+    //其他消防设施
+    public List<Firefacilities_qtxfssVO> doFindQtxfssList(String xfssid);
 }
