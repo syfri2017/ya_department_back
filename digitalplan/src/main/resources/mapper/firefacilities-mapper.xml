@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.firefacilities.FirefacilitiesDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="jbxx_xfssid != null and jbxx_xfssid != '' ">
+		 and t.xfssid = #{jbxx_xfssid}
+		</if>
+		<if test="jbxx_fqid != null and jbxx_fqid != '' ">
+		 and t.fqid = #{jbxx_fqid}
+		</if>
+		<if test="jbxx_xfssmc != null and jbxx_xfssmc != '' ">
+		 and t.xfssmc = #{jbxx_xfssmc}
+		</if>
+		<if test="jbxx_xfsslx != null and jbxx_xfsslx != '' ">
+		 and t.xfsslx = #{jbxx_xfsslx}
+		</if>
+		<if test="jbxx_iszddw != null and jbxx_iszddw != '' ">
+		 and t.iszddw = #{jbxx_iszddw}
+		</if>
+		<if test="jbxx_zddwid != null and jbxx_zddwid != '' ">
+		 and t.zddwid = #{jbxx_zddwid}
+		</if>
+		<if test="jbxx_cjrid != null and jbxx_cjrid != '' ">
+		 and t.cjrid = #{jbxx_cjrid}
+		</if>
+		<if test="jbxx_cjrmc != null and jbxx_cjrmc != '' ">
+		 and t.cjrmc = #{jbxx_cjrmc}
+		</if>
+		<if test="jbxx_cjsj != null and jbxx_cjsj != '' ">
+		 and t.cjsj = #{jbxx_cjsj}
+		</if>
+		<if test="jbxx_xgrid != null and jbxx_xgrid != '' ">
+		 and t.xgrid = #{jbxx_xgrid}
+		</if>
+		<if test="jbxx_xgrmc != null and jbxx_xgrmc != '' ">
+		 and t.xgrmc = #{jbxx_xgrmc}
+		</if>
+		<if test="jbxx_xgsj != null and jbxx_xgsj != '' ">
+		 and t.xgsj = #{jbxx_xgsj}
+		</if>
+		<if test="jbxx_deleteFlag != null and jbxx_deleteFlag != '' ">
+		 and t.delete_flag = #{jbxx_deleteFlag}
+		</if>
+		<if test="jbxx_datasource != null and jbxx_datasource != '' ">
+		 and t.datasource = #{jbxx_datasource}
+		</if>
+		<if test="jbxx_bz != null and jbxx_bz != '' ">
+		 and t.bz = #{jbxx_bz}
+		</if>
+		<if test="jbxx_jdh != null and jbxx_jdh != '' ">
+		 and t.jdh = #{jbxx_jdh}
+		</if>
+		<if test="jbxx_sjc != null and jbxx_sjc != '' ">
+		 and t.sjc = #{jbxx_sjc}
+		</if>
+		<if test="jbxx_reserve1 != null and jbxx_reserve1 != '' ">
+		 and t.reserve1 = #{jbxx_reserve1}
+		</if>
+		<if test="jbxx_reserve2 != null and jbxx_reserve2 != '' ">
+		 and t.reserve2 = #{jbxx_reserve2}
+		</if>
+		<if test="jbxx_reserve3 != null and jbxx_reserve3 != '' ">
+		 and t.reserve3 = #{jbxx_reserve3}
+		</if>
+		<if test="jbxx_reserve4 != null and jbxx_reserve4 != '' ">
+		 and t.reserve4 = #{jbxx_reserve4}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		t.xfssid jbxx_xfssid,
+		t.fqid jbxx_fqid,
+		t.xfssmc jbxx_xfssmc,
+		t.xfsslx jbxx_xfsslx,
+		t.iszddw jbxx_iszddw,
+		t.zddwid jbxx_zddwid,
+		t.cjrid jbxx_cjrid,
+		t.cjrmc jbxx_cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') jbxx_cjsj,
+		t.xgrid jbxx_xgrid,
+		t.xgrmc jbxx_xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') jbxx_xgsj,
+		t.delete_flag jbxx_deleteFlag,
+		t.datasource jbxx_datasource,
+		t.bz jbxx_bz,
+		t.jdh jbxx_jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') jbxx_sjc,
+		t.reserve1 jbxx_reserve1,
+		t.reserve2 jbxx_reserve2,
+		t.reserve3 jbxx_reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') jbxx_reserve4
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="FirefacilitiesVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM YAGL_XFSS t WHERE 1=1 AND DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="FirefacilitiesVO"  resultType="FirefacilitiesVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>
+		FROM YAGL_XFSS t  WHERE t.DELETE_FLAG = 'N' 
+			<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="FirefacilitiesVO"  resultType="FirefacilitiesVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_XFSS t 
+		WHERE t.DELETE_FLAG = 'N' AND  t.xfssid = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="FirefacilitiesVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO YAGL_XFSS(xfssid,fqid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{xfssid,jdbcType=VARCHAR},#{fqid,jdbcType=VARCHAR},#{xfssmc,jdbcType=VARCHAR},#{xfsslx,jdbcType=VARCHAR},#{iszddw,jdbcType=VARCHAR},#{zddwid,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO YAGL_XFSS(xfssid,fqid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.xfssid,jdbcType=VARCHAR} xfssid,#{item.fqid,jdbcType=VARCHAR} fqid,#{item.xfssmc,jdbcType=VARCHAR} xfssmc,#{item.xfsslx,jdbcType=VARCHAR} xfsslx,#{item.iszddw,jdbcType=VARCHAR} iszddw,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  YAGL_XFSS t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="FirefacilitiesVO"> 
+		UPDATE   YAGL_XFSS  
+		<set>
+			<if test="xfssid != null">xfssid=#{xfssid},</if>
+			<if test="fqid != null">fqid=#{fqid},</if>
+			<if test="xfssmc != null">xfssmc=#{xfssmc},</if>
+			<if test="xfsslx != null">xfsslx=#{xfsslx},</if>
+			<if test="iszddw != null">iszddw=#{iszddw},</if>
+			<if test="zddwid != null">zddwid=#{zddwid},</if>
+			<if test="cjrid != null">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="datasource != null">datasource=#{datasource},</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="jdh != null">jdh=#{jdh},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO YAGL_XFSS(xfssid,fqid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.xfssid,jdbcType=VARCHAR} xfssid,#{item.fqid,jdbcType=VARCHAR} fqid,#{item.xfssmc,jdbcType=VARCHAR} xfssmc,#{item.xfsslx,jdbcType=VARCHAR} xfsslx,#{item.iszddw,jdbcType=VARCHAR} iszddw,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			xfssid = VALUES(xfssid),
+			fqid = VALUES(fqid),
+			xfssmc = VALUES(xfssmc),
+			xfsslx = VALUES(xfsslx),
+			iszddw = VALUES(iszddw),
+			zddwid = VALUES(zddwid),
+			cjrid = VALUES(cjrid),
+			cjrmc = VALUES(cjrmc),
+			cjsj = VALUES(cjsj),
+			xgrid = VALUES(xgrid),
+			xgrmc = VALUES(xgrmc),
+			xgsj = VALUES(xgsj),
+			delete_flag = VALUES(delete_flag),
+			datasource = VALUES(datasource),
+			bz = VALUES(bz),
+			jdh = VALUES(jdh),
+			sjc = VALUES(sjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3),
+			reserve4 = VALUES(reserve4)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="FirefacilitiesVO"  resultType="FirefacilitiesVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_XFSS t 
+		WHERE t.DELETE_FLAG = 'N' 
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--查询安全出口列表-->
+	<select id="doFindAqckList" parameterType="Firefacilities_aqsscs_aqckVO"  resultType="Firefacilities_aqsscs_aqckVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.jzid jzid,
+		t.wz wz,
+		t.sl sl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_AQSSCS_AQCK t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询疏散楼梯列表-->
+	<select id="doFindSsltList" parameterType="Firefacilities_aqsscs_ssltVO"  resultType="Firefacilities_aqsscs_ssltVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.jzid jzid,
+		t.wz wz,
+		t.sl sl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_AQSSCS_SSLT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询消防电梯列表-->
+	<select id="doFindXfdtList" parameterType="Firefacilities_aqsscs_xfdtVO"  resultType="Firefacilities_aqsscs_xfdtVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.jzid jzid,
+		t.wz wz,
+		t.sl sl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_AQSSCS_XFDT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询避难层列表-->
+	<select id="doFindBncList" parameterType="Firefacilities_aqsscs_bncVO"  resultType="Firefacilities_aqsscs_bncVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.jzid jzid,
+		t.wz wz,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_AQSSCS_BNC t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询应急广播列表-->
+	<select id="doFindYjgbList" parameterType="Firefacilities_aqsscs_yjgbVO"  resultType="Firefacilities_aqsscs_yjgbVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.jzid jzid,
+		t.wz wz,
+		t.isyjgb isyjgb,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_AQSSCS_YJGB t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询消防泵房列表-->
+	<select id="doFindXfbfList" parameterType="Firefacilities_xfsxt_xfbfVO"  resultType="Firefacilities_xfsxt_xfbfVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.xhssl xhssl,
+		t.shszdll shszdll,
+		t.blbsl blbsl,
+		t.blbzdll blbzdll,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_XFBF t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询消防水箱列表-->
+	<select id="doFindXfsxList" parameterType="Firefacilities_xfsxt_xfsxVO"  resultType="Firefacilities_xfsxt_xfsxVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sxrl sxrl,
+		t.bjsd bjsd,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_XFSX t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询消防水池列表-->
+	<select id="doFindXfscList" parameterType="Firefacilities_xfsxt_xfscVO"  resultType="Firefacilities_xfsxt_xfscVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sxrl sxrl,
+		t.bjsd bjsd,
+		t.isqsj isqsj,
+		t.qsjwz qsjwz,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_XFSC t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询室内消火栓列表-->
+	<select id="doFindSnxhsList" parameterType="Firefacilities_xfsxt_snxhsVO"  resultType="Firefacilities_xfsxt_snxhsVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.isky isky,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_SNXHS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--查询室外消火栓列表-->
+	<select id="doFindSwxhsList" parameterType="Firefacilities_xfsxt_swxhsVO"  resultType="Firefacilities_xfsxt_swxhsVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.isky isky,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_SWXHS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--水泵接合器-->
+	<select id="doFindSbjhqList" parameterType="Firefacilities_xfsxt_sbjhqVO"  resultType="Firefacilities_xfsxt_sbjhqVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.xh xh,
+		t.azxs azxs,
+		t.jskcc jskcc,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4,
+		c2.code_name azxsmc
+		FROM YAGL_XFSS_XFSXT_SBJHQ t
+		<!--安装形式-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SBJHQAZXS' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and to_char(t.azxs) = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--喷淋系统-->
+	<select id="doFindPlxtList" parameterType="Firefacilities_xfsxt_plxtVO"  resultType="Firefacilities_xfsxt_plxtVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.iscz iscz,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_PLXT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--冷却水系统-->
+	<select id="doFindLqsxtList" parameterType="Firefacilities_xfsxt_lqsxtVO"  resultType="Firefacilities_xfsxt_lqsxtVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.iscz iscz,
+		t.gsqd gsqd,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_LQSXT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--固定水炮-->
+	<select id="doFindGdspList" parameterType="Firefacilities_xfsxt_gdspVO"  resultType="Firefacilities_xfsxt_gdspVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.isky isky,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_GDSP t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--半固定设施-->
+	<select id="doFindBgdssList" parameterType="Firefacilities_xfsxt_bgdssVO"  resultType="Firefacilities_xfsxt_bgdssVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFSXT_BGDSS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--泡沫系统-泡沫泵房-->
+	<select id="doFindPmbfList" parameterType="Firefacilities_pmxt_pmbfVO"  resultType="Firefacilities_pmxt_pmbfVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.pmylx pmylx,
+		t.pmycl pmycl,
+		t.pmbzdll pmbzdll,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4,
+		c2.code_name pmylxmc
+		FROM YAGL_XFSS_PMXT_PMBF t
+		<!--泡沫液类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'PMYLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.pmylx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--泡沫系统-泡沫消火栓-->
+	<select id="doFindPmxhsList" parameterType="Firefacilities_pmxt_pmxhsVO"  resultType="Firefacilities_pmxt_pmxhsVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.isky isky,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_PMXT_PMXHS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--泡沫系统-固定泡沫炮-->
+	<select id="doFindGdpmpList" parameterType="Firefacilities_pmxt_gdpmpVO"  resultType="Firefacilities_pmxt_gdpmpVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.isky isky,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_PMXT_GDPMP t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--泡沫系统-泡沫发生器-->
+	<select id="doFindPmfsqList" parameterType="Firefacilities_pmxt_pmfsqVO"  resultType="Firefacilities_pmxt_pmfsqVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.xh xh,
+		t.sl sl,
+		t.ll ll,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_PMXT_PMFSQ t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--泡沫系统-半固定设施-->
+	<select id="doFindPmBgdssList" parameterType="Firefacilities_pmxt_bgdssVO"  resultType="Firefacilities_pmxt_bgdssVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_PMXT_BGDSS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--蒸汽灭火系统-固定式-->
+	<select id="doFindGdsList" parameterType="Firefacilities_zqmhxt_gdsVO"  resultType="Firefacilities_zqmhxt_gdsVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.edyl edyl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_ZQMHXT_GDS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--蒸汽灭火系统-半固定式-->
+	<select id="doFindBgdsList" parameterType="Firefacilities_zqmhxt_bgdsVO"  resultType="Firefacilities_zqmhxt_bgdsVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.ssjz ssjz,
+		t.wz wz,
+		t.sl sl,
+		t.edyl edyl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_ZQMHXT_BGDS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--消防控制室-->
+	<select id="doFindXfkzsList" parameterType="Firefacilities_xfkzsVO"  resultType="Firefacilities_xfkzsVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.wz wz,
+		t.iszdbj iszdbj,
+		t.isldkz isldkz,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_XFKZS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--防排烟措施-排烟口/出烟口-->
+	<select id="doFindPycykList" parameterType="Firefacilities_fpycs_pycykVO"  resultType="Firefacilities_fpycs_pycykVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.wz wz,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_FPYCS_PYCYK t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--防排烟措施-防排烟系统-->
+	<select id="doFindFpyxtList" parameterType="Firefacilities_fpycs_fpyxtVO"  resultType="Firefacilities_fpycs_fpyxtVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.qbwz qbwz,
+		t.isky isky,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_FPYCS_FPYXT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--防火分区-->
+	<select id="doFindFhfqList" parameterType="Firefacilities_fhfqVO"  resultType="Firefacilities_fhfqVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.qymj qymj,
+		t.qywz qywz,
+		t.fgss fgss,
+		t.fgwz fgwz,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_FHFQ t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--其他灭火系统-气体灭火系统-->
+	<select id="doFindQtmhxtList" parameterType="Firefacilities_qtmhxt_qtmhxtVO"  resultType="Firefacilities_qtmhxt_qtmhxtVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.qbwz qbwz,
+		t.zyfw zyfw,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_QTMHXT_QTMHXT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--其他灭火系统-干粉灭火系统-->
+	<select id="doFindGfmhxtList" parameterType="Firefacilities_qtmhxt_gfmhxtVO"  resultType="Firefacilities_qtmhxt_gfmhxtVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.qbwz qbwz,
+		t.zyfw zyfw,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_QTMHXT_GFMHXT t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+	<!--其他消防设施-->
+	<select id="doFindQtxfssList" parameterType="Firefacilities_qtxfssVO"  resultType="Firefacilities_qtxfssVO">
+		SELECT
+		t.uuid uuid,
+		t.xfssid xfssid,
+		t.wz wz,
+		t.ms ms,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_XFSS_QTXFSS t  WHERE t.DELETE_FLAG = 'N'
+		AND t.xfssid = #{value}
+	</select>
+</mapper>

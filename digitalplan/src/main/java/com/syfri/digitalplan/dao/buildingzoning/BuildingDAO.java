@@ -15,4 +15,6 @@ public interface BuildingDAO extends BaseDAO<BuildingVO>{
     public BuildingVO doFindFqAndCgDetailByVo(BuildingVO vo);
     //通过罐组id 获取罐组中所有储罐信息
     public List<ChuguanVO> doFindChuGuanList(ChuguanVO vo);
+    //通过重点单位id 查询包含分区id
+    public List<String> doFindFqidListByZddwid(String zddwid);
 }

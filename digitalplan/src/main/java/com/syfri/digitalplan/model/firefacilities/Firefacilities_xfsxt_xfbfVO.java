@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.syfri.baseapi.model.ValueObject;
 
-public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Serializable{
+public class Firefacilities_xfsxt_xfbfVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -12,9 +12,10 @@ public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Seri
 	private String xfssid;	//消防设施ID
 	private String ssjz;	//所属建（构）筑
 	private String wz;	//位置
-	private String pmylx;	//泡沫液类型
-	private String pmycl;	//泡沫液储量(t)
-	private String pmbzdll;	//泡沫泵最大流量(L/s)
+	private String xhssl;	//消火栓泵数量
+	private String shszdll;	//消火栓最大流量(L/s）
+	private String blbsl;	//喷淋泵数量
+	private String blbzdll;	//喷淋泵最大流量(L/s）
 	private String cjrid;	//创建人ID
 	private String cjrmc;	//创建人名称
 	private String cjsj;	//创建时间
@@ -30,8 +31,6 @@ public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Seri
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
-
-	private String pmylxmc;	//泡沫液类型名称
 
 	public String getUuid(){
 		return uuid;
@@ -57,23 +56,29 @@ public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Seri
 	public void setWz(String wz){
 		this.wz = wz;
 	}
-	public String getPmylx(){
-		return pmylx;
+	public String getXhssl(){
+		return xhssl;
 	}
-	public void setPmylx(String pmylx){
-		this.pmylx = pmylx;
+	public void setXhssl(String xhssl){
+		this.xhssl = xhssl;
 	}
-	public String getPmycl(){
-		return pmycl;
+	public String getShszdll(){
+		return shszdll;
 	}
-	public void setPmycl(String pmycl){
-		this.pmycl = pmycl;
+	public void setShszdll(String shszdll){
+		this.shszdll = shszdll;
 	}
-	public String getPmbzdll(){
-		return pmbzdll;
+	public String getBlbsl(){
+		return blbsl;
 	}
-	public void setPmbzdll(String pmbzdll){
-		this.pmbzdll = pmbzdll;
+	public void setBlbsl(String blbsl){
+		this.blbsl = blbsl;
+	}
+	public String getBlbzdll(){
+		return blbzdll;
+	}
+	public void setBlbzdll(String blbzdll){
+		this.blbzdll = blbzdll;
 	}
 	public String getCjrid(){
 		return cjrid;
@@ -164,12 +169,5 @@ public class Firefacilities_pmxt_pmbfVO extends FirefacilitiesVO implements Seri
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
-	}
-
-	public String getPmylxmc() {
-		return pmylxmc;
-	}
-	public void setPmylxmc(String pmylxmc) {
-		this.pmylxmc = pmylxmc;
 	}
 }

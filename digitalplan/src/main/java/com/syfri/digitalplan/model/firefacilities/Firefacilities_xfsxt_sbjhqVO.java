@@ -31,6 +31,8 @@ public class Firefacilities_xfsxt_sbjhqVO extends FirefacilitiesVO implements Se
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String azxsmc;	//安装形式名称
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -162,5 +164,12 @@ public class Firefacilities_xfsxt_sbjhqVO extends FirefacilitiesVO implements Se
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public String getAzxsmc() {
+		return azxsmc;
+	}
+	public void setAzxsmc(String azxsmc) {
+		this.azxsmc = azxsmc;
 	}
 }
