@@ -17,7 +17,7 @@
     <div id="content">
         <div id="cover" class="content-block cover-block block-level-1" data-menu-text="封面">
             <div class="cover-body">
-                <span class="cover-area">行政区划:  <#if compZddwInfo.xzqhmc??>${compZddwInfo.xzqhmc}</#if></span>
+                <#--<span class="cover-area">行政区划:  <#if compZddwInfo.xzqhmc??>${compZddwInfo.xzqhmc}</#if></span>-->
                 <span class="cover-code">编码:  <#if compPlanInfo.yabh??>${compPlanInfo.yabh}</#if></span>
                 <h4 class="cover-title"><#if compPlanInfo.yamc??>${compPlanInfo.yamc}</#if></h4>
                 <ul class="cover-info-list">
@@ -32,18 +32,40 @@
                     <img class="qrcode-img" src="" alt="扫码分享" />
                 </div>
                 <div class="update-row">
-                     <span class="update-status-field">
-                        <strong>预案状态：</strong><#if compPlanInfo.yaztmc??>${compPlanInfo.yaztmc}</#if>
-                    </span>
-                    <span class="update-name-field">
-                        <strong>制作人姓名：</strong><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if>
-                    </span>
-                    <span class="update-duty-field">
-                        <strong>制作人职务：</strong><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if>
-                    </span>
-                    <span class="update-date-field">
-                        <strong>预案制作时间：</strong><#if compPlanInfo.zzsj??>${compPlanInfo.zzsj}</#if>
-                    </span>
+                    <table>
+                        <tr>
+                            <th width="140" style="text-align:right">预案状态：</th>
+                            <td style="text-align:left"><#if compPlanInfo.yaztmc??>${compPlanInfo.yaztmc}</#if></td>
+                            <th width="125" style="text-align:right">制作人姓名：</th>
+                            <td style="text-align:left"><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if></td>
+                            <th width="125" style="text-align:right">制作人职务：</th>
+                            <td style="text-align:left"><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if></td>
+                            <th width="120" style="text-align:right">制作时间：</th>
+                            <td style="text-align:left"><#if compPlanInfo.zzsj??>${compPlanInfo.zzsj}</#if></td>
+                        </tr>
+                        <tr>
+                            <th width="140" style="text-align:right">审核状态：</th>
+                            <td style="text-align:left"><#if compPlanInfo.shztmc??>${compPlanInfo.shztmc}</#if></td>
+                            <th width="125" style="text-align:right">审核人姓名：</th>
+                            <td style="text-align:left"><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if></td>
+                            <th width="125" style="text-align:right">审核人职务：</th>
+                            <td style="text-align:left"><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if></td>
+                            <th width="120" style="text-align:right">审核时间：</th>
+                            <td style="text-align:left"><#if compPlanInfo.shsj??>${compPlanInfo.shsj}</#if></td>
+                        </tr>
+                    </table>
+                     <#--<span class="update-status-field">-->
+                        <#--<strong>预案状态：</strong><#if compPlanInfo.yaztmc??>${compPlanInfo.yaztmc}</#if>-->
+                    <#--</span>-->
+                    <#--<span class="update-name-field">-->
+                        <#--<strong>制作人姓名：</strong><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if>-->
+                    <#--</span>-->
+                    <#--<span class="update-duty-field">-->
+                        <#--<strong>制作人职务：</strong><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if>-->
+                    <#--</span>-->
+                    <#--<span class="update-date-field">-->
+                        <#--<strong>预案制作时间：</strong><#if compPlanInfo.zzsj??>${compPlanInfo.zzsj}</#if>-->
+                    <#--</span>-->
                 </div>
                 <#--<div class="update-row">-->
                     <#--<span class="uodate-duty-field">-->
@@ -59,20 +81,20 @@
                         <#--<strong>审核人姓名：</strong><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if>-->
                     <#--</span>-->
                 <#--</div>-->
-                <div class="update-row">
-                     <span class="update-status-field">
-                        <strong>审核状态：</strong><#if compPlanInfo.shztmc??>${compPlanInfo.shztmc}</#if>
-                    </span>
-                    <span class="update-name-field">
-                        <strong>审核人姓名：</strong><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if>
-                    </span>
-                    <span class="update-duty-field">
-                        <strong>审核人职务：</strong><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if>
-                    </span>
-                    <span class="update-date-field">
-                        <strong>预案审核时间：</strong><#if compPlanInfo.shsj??>${compPlanInfo.shsj}</#if>
-                    </span>
-                </div>
+                <#--<div class="update-row">-->
+                     <#--<span class="update-status-field">-->
+                        <#--<strong>审核状态：</strong><#if compPlanInfo.shztmc??>${compPlanInfo.shztmc}</#if>-->
+                    <#--</span>-->
+                    <#--<span class="update-name-field">-->
+                        <#--<strong>审核人姓名：</strong><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if>-->
+                    <#--</span>-->
+                    <#--<span class="update-duty-field">-->
+                        <#--<strong>审核人职务：</strong><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if>-->
+                    <#--</span>-->
+                    <#--<span class="update-date-field">-->
+                        <#--<strong>预案审核时间：</strong><#if compPlanInfo.shsj??>${compPlanInfo.shsj}</#if>-->
+                    <#--</span>-->
+                <#--</div>-->
             </div>
         </div>
         <!-- 封面图片 -->
