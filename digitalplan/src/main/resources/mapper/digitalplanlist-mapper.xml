@@ -374,4 +374,15 @@
 		</if>
 	</select>
 
+	<!--根据审核状态获取审核状态名称 by yushch-->
+	<select id="doFindShztmcByShzt" parameterType="String"  resultType="String">
+		SELECT
+		t2.code_name
+		FROM SYS_CODELIST t1,SYS_CODELIST_DETAIL t2
+		WHERE t1.CODETYPE = 'YASHZT'
+		AND t1.DELETE_FLAG = 'N'
+		AND t2.DELETE_FLAG = 'N'
+		AND t1.CODEID = t2.CODEID
+		AND t2.CODE_VALUE = #{VALUE}
+	</select>
 </mapper>

@@ -22,4 +22,6 @@ public interface DigitalplanlistDAO extends BaseDAO<DigitalplanlistVO>{
     * 20180426
     * */
     public int doApproveUpdate(DigitalplanlistVO digitalplanlistVO);
+
+    public String doFindShztmcByShzt(String shzt);
 }

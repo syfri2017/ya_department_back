@@ -56,6 +56,9 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		String shsj = sdf.format(date);
 		digitalplanlistVO.setShsj(shsj);
 		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
+		String shzt = digitalplanlistVO.getShzt();
+		String shztmc = digitalplanlistDAO.doFindShztmcByShzt(shzt);
+		digitalplanlistVO.setShztmc(shztmc);
 		return digitalplanlistVO;
 	}
 
