@@ -357,6 +357,9 @@
 		<if test="dxmc != null and dxmc != '' ">
 			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
+		<if test="dxid != null and dxid != '' ">
+			and t.dxid = #{dxid}
+		</if>
 		<if test="yalxdm != null and yalxdm != '' ">
 			and t.yalxdm LIKE concat(rtrim(#{yalxdm},'0'),'%')
 		</if>
