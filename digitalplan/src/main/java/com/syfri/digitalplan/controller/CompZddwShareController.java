@@ -18,6 +18,7 @@ import com.syfri.digitalplan.service.planobject.ImportantunitsService;
 import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import com.syfri.digitalplan.service.digitalplan.DisastersetService;
 import com.syfri.digitalplan.service.digitalplan.ForcedevService;
+import com.syfri.digitalplan.service.digitalplan.KeypointsService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,9 @@ public class CompZddwShareController {
 
     @Autowired
     private ForcedevService forcedevService;
+
+    @Autowired
+    private KeypointsService keypointsService;
 
     @ApiOperation(value = "获取重点单位共享信息", notes = "根据url的districtCode和uuid来指定获取对象，并根据传过来的target信息来确定输出目标")
     @ApiImplicitParams({
@@ -92,6 +96,8 @@ public class CompZddwShareController {
         model.addAttribute("disastersetList", disastersetService.doFindByPlanId(uuid));
         // 力量部署
         model.addAttribute("forcedevList", forcedevService.doFindByPlanId(uuid));
+        // 力量部署
+        model.addAttribute("keypointsList", keypointsService.doFindByPlanId(uuid));
 //        // 功能分区-建筑
 //        model.addAttribute("areaBuildingList", zddwWrapperMap.get("areaBuildingList"));
 //        // 功能分区-装置

@@ -2658,9 +2658,9 @@
                 </div>
             </#if>
         </#list>
-
         </div>
         <!-- end 灾情设定 -->
+
         <!-- 力量部署 -->
         <div id="zzbs" class="content-block block-level-1" data-menu-text="力量部署">
             <h2 class="block-header">
@@ -2689,9 +2689,36 @@
                 </div>
             </#if>
         </#list>
-            <!-- end 力量部署 -->
         </div>
-        <!-- end 作战部署 -->
+        <!-- end 力量部署 -->
+
+        <!-- 要点提示 -->
+        <div id="ydts" class="content-block block-level-1" data-menu-text="要点提示">
+            <h2 class="block-header">
+                <span class="header-title-inner">要点提示</span>
+            </h2>
+            <div class="sub-block-body">
+            <#list keypointsList as keypoints>
+                <#if keypoints??>
+                    <table class="data-table">
+                        <tr>
+                            <th class="block-th">战术要点</th>
+                        </tr>
+                        <tr>
+                            <td><#if keypoints.zsyd??>${keypoints.zsyd}</#if></td>
+                        </tr>
+                        <tr>
+                            <th class="block-th">特别警示</th>
+                        </tr>
+                        <tr>
+                            <td><#if keypoints.tbjs??>${keypoints.tbjs}</#if></td>
+                        </tr>
+                    </table>
+                </#if>
+            </#list>
+            </div>
+        </div>
+        <!-- end 要点提示 -->
 
         <!-- 这段注释说不定以后能用上 -->
         <!-- <div id="xgzy" class="content-block block-level-1" data-menu-text="相关资源">
