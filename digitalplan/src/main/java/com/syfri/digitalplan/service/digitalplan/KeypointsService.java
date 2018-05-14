@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface KeypointsService  extends BaseService<KeypointsVO>{
 
-    List<KeypointsVO> doFindByPlanId(String yaid);
+    KeypointsVO doFindByPlanId(String yaid);
 }

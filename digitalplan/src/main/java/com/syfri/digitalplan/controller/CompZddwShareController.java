@@ -97,7 +97,7 @@ public class CompZddwShareController {
         // 力量部署
         model.addAttribute("forcedevList", forcedevService.doFindByPlanId(uuid));
         // 力量部署
-        model.addAttribute("keypointsList", keypointsService.doFindByPlanId(uuid));
+        model.addAttribute("keypointsInfo", keypointsService.doFindByPlanId(uuid));
 //        // 功能分区-建筑
 //        model.addAttribute("areaBuildingList", zddwWrapperMap.get("areaBuildingList"));
 //        // 功能分区-装置

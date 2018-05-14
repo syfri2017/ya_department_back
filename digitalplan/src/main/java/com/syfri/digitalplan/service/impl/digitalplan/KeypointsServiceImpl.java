@@ -24,7 +24,7 @@ public class KeypointsServiceImpl extends BaseServiceImpl<KeypointsVO> implement
 	}
 
 	@Override
-	public List<KeypointsVO> doFindByPlanId(String yaid){
+	public KeypointsVO doFindByPlanId(String yaid){
 		return keypointsDAO.doFindByPlanId(yaid);
 	}
 }

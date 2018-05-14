@@ -2698,24 +2698,20 @@
                 <span class="header-title-inner">要点提示</span>
             </h2>
             <div class="sub-block-body">
-            <#list keypointsList as keypoints>
-                <#if keypoints??>
-                    <table class="data-table">
-                        <tr>
-                            <th class="block-th">战术要点</th>
-                        </tr>
-                        <tr>
-                            <td><#if keypoints.zsyd??>${keypoints.zsyd}</#if></td>
-                        </tr>
-                        <tr>
-                            <th class="block-th">特别警示</th>
-                        </tr>
-                        <tr>
-                            <td><#if keypoints.tbjs??>${keypoints.tbjs}</#if></td>
-                        </tr>
-                    </table>
-                </#if>
-            </#list>
+                <table class="data-table">
+                    <tr>
+                        <th class="block-th">战术要点</th>
+                    </tr>
+                    <tr>
+                        <td><#if keypointsInfo.zsyd??>${keypointsInfo.zsyd}</#if></td>
+                    </tr>
+                    <tr>
+                        <th class="block-th">特别警示</th>
+                    </tr>
+                    <tr>
+                        <td><#if keypointsInfo.tbjs??>${keypointsInfo.tbjs}</#if></td>
+                    </tr>
+                </table>
             </div>
         </div>
         <!-- end 要点提示 -->
