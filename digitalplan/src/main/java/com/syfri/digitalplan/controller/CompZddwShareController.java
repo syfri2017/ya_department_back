@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.syfri.digitalplan.service.planobject.ImportantunitsService;
 import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
+import com.syfri.digitalplan.service.digitalplan.DisastersetService;
+import com.syfri.digitalplan.service.digitalplan.ForcedevService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +43,12 @@ public class CompZddwShareController {
 
     @Autowired
     private ImportantunitsService importantunitsService;
+
+    @Autowired
+    private DisastersetService disastersetService;
+
+    @Autowired
+    private ForcedevService forcedevService;
 
     @ApiOperation(value = "获取重点单位共享信息", notes = "根据url的districtCode和uuid来指定获取对象，并根据传过来的target信息来确定输出目标")
     @ApiImplicitParams({
@@ -80,6 +88,10 @@ public class CompZddwShareController {
         model.addAttribute("compPlanInfo", digitalplanlistService.doFindById(uuid));
         // 重点单位基础信息
         model.addAttribute("compZddwInfo", importantunitsService.doFindById(zddwid));
+        // 灾情设定
+        model.addAttribute("disastersetList", disastersetService.doFindByPlanId(uuid));
+        // 力量部署
+        model.addAttribute("forcedevList", forcedevService.doFindByPlanId(uuid));
 //        // 功能分区-建筑
 //        model.addAttribute("areaBuildingList", zddwWrapperMap.get("areaBuildingList"));
 //        // 功能分区-装置

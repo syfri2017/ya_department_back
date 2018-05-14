@@ -262,8 +262,28 @@
 	<!--12.根据预案ID查询记录-->
 	<select id="doFindByPlanId" parameterType="DisastersetVO"  resultType="DisastersetVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
+		c2.CODE_NAME zqdjmc,
+		c4.CODE_NAME rswzmc,
+		c6.CODE_NAME zhcsmc,
+		c8.CODE_NAME qhyymc,
+		c10.CODE_NAME hzwxxmc
 		FROM YAGL_YA_ZQSD t
+		<!--灾情等级-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZQDJ' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.ZQDJ = c2.CODE_VALUE
+		<!--燃烧物质-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'RSWZ' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c3.CODEID = c4.CODEID And c4.DELETE_FLAG = 'N' and t.RSWZ = c4.CODE_VALUE
+		<!--灾害场所-->
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'ZHCS' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c5.CODEID = c6.CODEID And c6.DELETE_FLAG = 'N' and t.ZHCS = c6.CODE_VALUE
+		<!--起火原因-->
+		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'QHYY' And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8 On c7.CODEID = c8.CODEID And c8.DELETE_FLAG = 'N' and t.QHYY = c8.CODE_VALUE
+		<!--火灾危险性-->
+		Left Join SYS_CODELIST c9 on c9.CODETYPE = 'HZWXX' And c9.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c10 On c9.CODEID = c10.CODEID And c10.DELETE_FLAG = 'N' and t.GYJZHZWXX = c10.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND  t.YAID = #{value}
 	</select>
 

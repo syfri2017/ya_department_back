@@ -212,4 +212,43 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
 	}
+
+	private String zqdjmc;	//灾情等级
+	private String rswzmc;	//燃烧物质
+	private String zhcsmc;	//灾害场所
+	private String qhyymc;	//起火原因
+	private String hzwxxmc;	//工业建筑火灾危险性
+
+	public String getZqdjmc(){
+		return zqdjmc;
+	}
+	public void setZqdjmc(String zqdjmc){
+		this.zqdjmc = zqdjmc;
+	}
+	public String getRswzmc(){
+		return rswzmc;
+	}
+	public void setRswzmc(String rswzmc){
+		this.rswzmc = rswzmc;
+	}
+	public String getZhcsmc(){
+		return zhcsmc;
+	}
+	public void setZhcsmc(String zhcsmc){
+		this.zhcsmc = zhcsmc;
+	}
+	public String getQhyymc(){
+		return qhyymc;
+	}
+	public void setQhyymc(String qhyymc){
+		this.qhyymc = qhyymc;
+	}
+	public String getHzwxxmc(){
+		return hzwxxmc;
+	}
+	public void setHzwxxmc(String hzwxxmc){
+		this.hzwxxmc = hzwxxmc;
+	}
+
+
 }
