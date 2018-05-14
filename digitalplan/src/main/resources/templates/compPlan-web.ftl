@@ -2611,51 +2611,54 @@
             <h2 class="block-header">
                 <span class="header-title-inner">灾情设定</span>
             </h2>
-            <div class="sub-block-body">
-            <#list disastersetList as disaster>
-                <#if disaster??>
-                    <table class="data-table" style="margin-bottom: 10px;">
-                        <tr>
-                            <th colspan="4" style="text-align:left"><strong>灾情部位：<#if disaster.zqbw??>${disaster.zqbw}</#if></strong></th>
-                        </tr>
-                        <tr>
-                            <th width="140">灾害场所：</th>
-                            <td colspan="3"><#if disaster.zhcsmc??>${disaster.zhcsmc}</#if></td>
-                        </tr>
-                        <tr>
-                            <th>灾情等级：</th>
-                            <td width="250"><#if disaster.zqdjmc??>${disaster.zqdjmc}</#if></td>
-                            <th width="170">工业建筑火灾危险性：</th>
-                            <td><#if disaster.hzwxxmc??>${disaster.hzwxxmc}</#if></td>
-                        </tr>
-                        <tr>
-                            <th>起火原因：</th>
-                            <td><#if disaster.qhyymc??>${disaster.qhyymc}</#if></td>
-                            <th>燃烧物质：</th>
-                            <td><#if disaster.rswzmc??>${disaster.rswzmc}</#if></td>
-                        </tr>
-                        <tr>
-                            <th>起火部位高度：</th>
-                            <td><#if disaster.qhbwgd??>${disaster.qhbwgd}</#if></td>
-                            <th>燃烧面积：</th>
-                            <td><#if disaster.rsmj??>${disaster.rsmj}</#if></td>
-                        </tr>
-                        <tr>
-                            <th>灾情描述：</th>
-                            <td colspan="3"><#if disaster.zqms??>${disaster.zqms}</#if></td>
-                        </tr>
-                        <tr>
-                            <th>灾情设定依据：</th>
-                            <td colspan="3"><#if disaster.zqsdyj??>${disaster.zqsdyj}</#if></td>
-                        </tr>
-                        <tr>
-                            <th>备注：</th>
-                            <td colspan="3"><#if disaster.bz??>${disaster.bz}</#if></td>
-                        </tr>
-                    </table>
-                </#if>
-            </#list>
-            </div>
+        <#list disastersetList as disaster>
+            <#if disaster??>
+                <div id="zzbs_1" class="sub-block block-level-2" data-menu-text="灾情部位-${disaster.zqbw}">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if></span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <table class="data-table">
+                            <tr>
+                                <th width="140">灾害场所：</th>
+                                <td colspan="3"><#if disaster.zhcsmc??>${disaster.zhcsmc}</#if></td>
+                            </tr>
+                            <tr>
+                                <th>灾情等级：</th>
+                                <td width="250"><#if disaster.zqdjmc??>${disaster.zqdjmc}</#if></td>
+                                <th width="170">工业建筑火灾危险性：</th>
+                                <td><#if disaster.hzwxxmc??>${disaster.hzwxxmc}</#if></td>
+                            </tr>
+                            <tr>
+                                <th>起火原因：</th>
+                                <td><#if disaster.qhyymc??>${disaster.qhyymc}</#if></td>
+                                <th>燃烧物质：</th>
+                                <td><#if disaster.rswzmc??>${disaster.rswzmc}</#if></td>
+                            </tr>
+                            <tr>
+                                <th>起火部位高度：</th>
+                                <td><#if disaster.qhbwgd??>${disaster.qhbwgd}</#if></td>
+                                <th>燃烧面积：</th>
+                                <td><#if disaster.rsmj??>${disaster.rsmj}</#if></td>
+                            </tr>
+                            <tr>
+                                <th>灾情描述：</th>
+                                <td colspan="3"><#if disaster.zqms??>${disaster.zqms}</#if></td>
+                            </tr>
+                            <tr>
+                                <th>灾情设定依据：</th>
+                                <td colspan="3"><#if disaster.zqsdyj??>${disaster.zqsdyj}</#if></td>
+                            </tr>
+                            <tr>
+                                <th>备注：</th>
+                                <td colspan="3"><#if disaster.bz??>${disaster.bz}</#if></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </#if>
+        </#list>
+
         </div>
         <!-- end 灾情设定 -->
         <!-- 力量部署 -->
@@ -2663,14 +2666,14 @@
             <h2 class="block-header">
                 <span class="header-title-inner">力量部署</span>
             </h2>
-            <#--<div id="zzbs_1" class="sub-block block-level-2" data-menu-text="灾情1-阶段1">-->
-                <div class="sub-block-body">
-                <#list forcedevList as forcedev>
-                    <#if forcedev??>
-                        <table class="data-table" style="margin-bottom: 10px;">
-                            <tr>
-                                <th colspan="4" style="text-align:left"><strong><#if forcedev.djfalxmc??>${forcedev.djfalxmc}</#if></strong></th>
-                            </tr>
+        <#list forcedevList as forcedev>
+            <#if forcedev??>
+                <div id="zzbs_1" class="sub-block block-level-2" data-menu-text="${forcedev.djfalxmc}">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner"><#if forcedev.djfalxmc??>${forcedev.djfalxmc}</#if></span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <table class="data-table">
                             <tr>
                                 <th width="140">队站名称：</th>
                                 <td width="250"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
@@ -2682,10 +2685,10 @@
                                 <td colspan="3"><#if forcedev.clzbts??>${forcedev.clzbts}</#if></td>
                             </tr>
                         </table>
-                    </#if>
-                </#list>
+                    </div>
                 </div>
-            <#--</div>-->
+            </#if>
+        </#list>
             <!-- end 力量部署 -->
         </div>
         <!-- end 作战部署 -->
