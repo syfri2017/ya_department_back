@@ -2667,14 +2667,14 @@
                 <div class="sub-block-body">
                 <#list forcedevList as forcedev>
                     <#if forcedev??>
-                        <table class="data-table">
+                        <table class="data-table" style="margin-bottom: 10px;">
                             <tr>
                                 <th colspan="4" style="text-align:left"><strong><#if forcedev.djfalxmc??>${forcedev.djfalxmc}</#if></strong></th>
                             </tr>
                             <tr>
-                                <th width="120">队站名称：</th>
-                                <td><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
-                                <th width="120">停靠位置：</th>
+                                <th width="140">队站名称：</th>
+                                <td width="250"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
+                                <th width="140">停靠位置：</th>
                                 <td><#if forcedev.tkwz??>${forcedev.tkwz}</#if></td>
                             </tr>
                             <tr>
