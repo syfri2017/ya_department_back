@@ -40,55 +40,6 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		return this.digitalplanlistService;
 	}
 
-	@ModelAttribute
-	public void Model(Model model){
-		if (environment.containsProperty("server.context-path")) {
-			model.addAttribute("contextPath", environment.getProperty("server.context-path"));
-		}else{
-			model.addAttribute("contextPath", "/");
-		}
-	}
-
-	@GetMapping("")
-	public String getDigitalplanlist(Model model, @RequestParam(value="index") String index){
-		model.addAttribute("index", index);
-		return "digitalplan/digitalplan_list";
-	}
-
-	/**
-	 * 根据条件获取预案信息
-	 */
-	@ApiOperation(value="根据条件获取预案信息",notes="列表信息")
-	@ApiImplicitParam(name="vo",value="预案信息对象")
-	@PostMapping("/findByVO")
-	public @ResponseBody ResultVO findByVO(@RequestBody DigitalplanlistVO digitalplanlistVO){
-		ResultVO resultVO = ResultVO.build();
-		try{
-			List<DigitalplanlistVO> result = digitalplanlistService.doFindlist(digitalplanlistVO);
-			resultVO.setResult(result);
-		}catch(Exception e){
-			logger.error("{}",e.getMessage());
-			resultVO.setCode(EConstants.CODE.FAILURE);
-		}
-		return resultVO;
-	}
-
-	/**
-	 * 根据id获取预案信息
-	 */
-	@ApiOperation(value="根据id获取预案信息",notes="列表信息")
-	@GetMapping("/doFindById/{pkid}")
-	public @ResponseBody ResultVO getDetail(@PathVariable String pkid){
-		ResultVO resultVO = ResultVO.build();
-		try{
-			resultVO.setResult(digitalplanlistService.doFindById(pkid));
-		}catch(Exception e){
-			logger.error("{}",e.getMessage());
-			resultVO.setCode(EConstants.CODE.FAILURE);
-		}
-		return resultVO;
-	}
-
 	/*
 	* 预案审批
 	* by yuahch 20180426
