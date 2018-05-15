@@ -1,8 +1,14 @@
 package com.syfri.digitalplan.model.importantparts;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
+import com.syfri.digitalplan.model.buildingzoning.WeixianjiezhiVO;
+import com.syfri.digitalplan.model.buildingzoning.ZuchengVO;
+import com.syfri.digitalplan.model.buildingzoning.YuanliaoVO;
+import com.syfri.digitalplan.model.buildingzoning.ChanwuVO;
+import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
 
 public class ImportantpartsVO extends ValueObject implements Serializable{
 
@@ -54,6 +60,7 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	private String jzl_reserve2;	//备用字段2
 	private String jzl_reserve3;	//备用字段3
 	private String jzl_reserve4;	//备用字段4
+	private List<WeixianjiezhiVO> WeixianjiezhiList;	//危险介质list
 
 	//装置类重点部位信息
 	private String zzl_uuid;	//主键
@@ -79,6 +86,9 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	private String zzl_reserve2;	//备用字段2
 	private String zzl_reserve3;	//备用字段3
 	private String zzl_reserve4;	//备用字段4
+	private List<ZuchengVO> ZuchengList;	//组合list
+	private List<YuanliaoVO> YuanliaoList;	//原料list
+	private List<ChanwuVO> ChanwuList;	//产物list
 
 	//储罐类重点部位信息
 	private String cgl_uuid;	//主键
@@ -108,6 +118,7 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	private String cgl_reserve2;	//备用字段2
 	private String cgl_reserve3;	//备用字段3
 	private String cgl_reserve4;	//备用字段4
+	private List<ChuguanVO> ChuguanList;	//储罐list
 
 	public String getZdbwid(){
 		return zdbwid;
@@ -410,6 +421,10 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 		this.jzl_reserve4 = jzl_reserve4;
 	}
 
+	public List<WeixianjiezhiVO> getWeixianjiezhiList() { return WeixianjiezhiList;	}
+
+	public void setWeixianjiezhiList(List<WeixianjiezhiVO> weixianjiezhiList) { WeixianjiezhiList = weixianjiezhiList; }
+
 	public String getZzl_uuid() {
 		return zzl_uuid;
 	}
@@ -593,6 +608,18 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	public void setZzl_reserve4(String zzl_reserve4) {
 		this.zzl_reserve4 = zzl_reserve4;
 	}
+
+	public List<ZuchengVO> getZuchengList() { return ZuchengList; }
+
+	public void setZuchengList(List<ZuchengVO> zuchengList) { ZuchengList = zuchengList; }
+
+	public List<YuanliaoVO> getYuanliaoList() {	return YuanliaoList; }
+
+	public void setYuanliaoList(List<YuanliaoVO> yuanliaoList) { YuanliaoList = yuanliaoList; }
+
+	public List<ChanwuVO> getChanwuList() {	return ChanwuList; }
+
+	public void setChanwuList(List<ChanwuVO> chanwuList) { ChanwuList = chanwuList;	}
 
 	public String getCgl_uuid() {
 		return cgl_uuid;
@@ -809,4 +836,8 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	public void setCgl_reserve4(String cgl_reserve4) {
 		this.cgl_reserve4 = cgl_reserve4;
 	}
+
+	public List<ChuguanVO> getChuguanList() { return ChuguanList; }
+
+	public void setChuguanList(List<ChuguanVO> chuguanList) { ChuguanList = chuguanList; }
 }

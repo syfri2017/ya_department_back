@@ -377,6 +377,123 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
+	<!--通过建筑ID查询所有危险介质信息-->
+	<select id="doFindWeiXianJieZhiList" parameterType="WeixianjiezhiVO"  resultType="WeixianjiezhiVO">
+		SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.fkid fkid,
+		t.jzmc jzmc,
+		t.jzsjcl jzsjcl,
+		t.jzlhtx jzlhtx,
+		t.jtlcms jtlcms,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_JZBW_JZL_WXJZ t
+		WHERE t.DELETE_FLAG = 'N'
+		and t.fkid = #{fkid}
+	</select>
+
+	<!--通过装置ID查询所有组成信息-->
+	<select id="doFindZuChengList" parameterType="ZuchengVO"  resultType="ZuchengVO">
+	SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.zzid zzid,
+		t.dymc dymc,
+		t.dyms dyms,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	FROM YAGL_JZBW_ZZL_ZC t
+	WHERE t.DELETE_FLAG = 'N'
+	AND t.zzid = #{zzid}
+	</select>
+
+	<!--通过装置ID查询所有原料信息-->
+	<select id="doFindYuanLiaoList" parameterType="YuanliaoVO"  resultType="YuanliaoVO">
+	SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.zzid zzid,
+		t.ylmc ylmc,
+		t.lhxz lhxz,
+		t.ylcl ylcl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	FROM YAGL_JZBW_ZZL_YL t
+	WHERE t.DELETE_FLAG = 'N'
+	AND t.zzid = #{zzid}
+	</select>
+
+	<!--通过装置ID查询所有产物信息-->
+	<select id="doFindChanWuList" parameterType="ChanwuVO"  resultType="ChanwuVO">
+	SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.zzid zzid,
+		t.cwmc cwmc,
+		t.lhxz lhxz,
+		t.cwcl cwcl,
+		t.gylc gylc,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	FROM YAGL_JZBW_ZZL_CW t
+	WHERE t.DELETE_FLAG = 'N'
+	AND t.zzid = #{zzid}
+	</select>
+
 	<!--通过罐组ID查询所有储罐信息-->
 	<select id="doFindChuGuanList" parameterType="ChuguanVO"  resultType="ChuguanVO">
 		SELECT
