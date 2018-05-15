@@ -26,26 +26,6 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		return digitalplanlistDAO;
 	}
 
-	/**
-	 * @Description: 条件查询：预案查询.
-	 * @Param: [digitalplanlistVO]
-	 * @Return: java.util.List<com.syfri.digitalplan.moel.digitalplan.DigitalplanlistVO>
-	 * @Author: dongbo
-	 * @Modified By:
-	 * @Date: 2018/4/20 16:04
-	 */
-	@Override
-	public List<DigitalplanlistVO> doFindlist(DigitalplanlistVO digitalplanlistVO){
-		//预案名称
-		if(digitalplanlistVO.getYamc()!=null && !"".equals(digitalplanlistVO.getYamc())){
-			digitalplanlistVO.setYamc(digitalplanlistVO.getYamc().toLowerCase());
-		}
-		//对象名称
-		if(digitalplanlistVO.getDxmc()!=null && !"".equals(digitalplanlistVO.getDxmc())){
-			digitalplanlistVO.setDxmc(digitalplanlistVO.getDxmc().toLowerCase());
-		}
-		return digitalplanlistDAO.doSearchByVO(digitalplanlistVO);
-	}
 	/*
 	* 预案审批（更新部分字段）
 	* by yushch 20180426
