@@ -19,6 +19,7 @@ import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import com.syfri.digitalplan.service.digitalplan.DisastersetService;
 import com.syfri.digitalplan.service.digitalplan.ForcedevService;
 import com.syfri.digitalplan.service.digitalplan.KeypointsService;
+import com.syfri.digitalplan.service.importantparts.ImportantpartsService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +51,9 @@ public class CompZddwShareController {
 
     @Autowired
     private ForcedevService forcedevService;
+
+    @Autowired
+    private ImportantpartsService importantpartsService;
 
     @Autowired
     private KeypointsService keypointsService;
@@ -96,8 +100,14 @@ public class CompZddwShareController {
         model.addAttribute("disastersetList", disastersetService.doFindByPlanId(uuid));
         // 力量部署
         model.addAttribute("forcedevList", forcedevService.doFindByPlanId(uuid));
-        // 力量部署
+        // 要点提示
         model.addAttribute("keypointsInfo", keypointsService.doFindByPlanId(uuid));
+        // 重点部位（建筑类）
+        model.addAttribute("jzlpartsList", importantpartsService.doFindJzlListByZddwId(zddwid));
+        // 重点部位（装置类）
+        model.addAttribute("zzlpartsList", importantpartsService.doFindZzlListByZddwId(zddwid));
+        // 重点部位（储罐类）
+        model.addAttribute("cglpartsList", importantpartsService.doFindCglListByZddwId(zddwid));
 //        // 功能分区-建筑
 //        model.addAttribute("areaBuildingList", zddwWrapperMap.get("areaBuildingList"));
 //        // 功能分区-装置
