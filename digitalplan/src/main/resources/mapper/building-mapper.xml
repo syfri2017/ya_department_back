@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.buildingzoning.BuildingDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="fqid != null and fqid != '' ">
+		 and t.fqid = #{fqid}
+		</if>
+		<if test="fqmc != null and fqmc != '' ">
+		 and t.fqmc LIKE concat(concat('%',#{fqmc}),'%')
+		</if>
+		<if test="fqlx != null and fqlx != '' ">
+		 and t.fqlx = #{fqlx}
+		</if>
+		<if test="fqwz != null and fqwz != '' ">
+		 and t.fqwz LIKE concat(concat('%',#{fqwz}),'%')
+		</if>
+		<if test="lon != null and lon != '' ">
+		 and t.lon = #{lon}
+		</if>
+		<if test="lat != null and lat != '' ">
+		 and t.lat = #{lat}
+		</if>
+		<if test="xqxclx != null and xqxclx != '' ">
+		 and t.xqxclx = #{xqxclx}
+		</if>
+		<if test="yjddsc != null and yjddsc != '' ">
+		 and t.yjddsc = #{yjddsc}
+		</if>
+		<if test="zyd != null and zyd != '' ">
+		 and t.zyd = #{zyd}
+		</if>
+		<if test="cjrid != null and cjrid != '' ">
+		 and t.cjrid = #{cjrid}
+		</if>
+		<if test="cjrmc != null and cjrmc != '' ">
+		 and t.cjrmc = #{cjrmc}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and t.cjsj = #{cjsj}
+		</if>
+		<if test="xgrid != null and xgrid != '' ">
+		 and t.xgrid = #{xgrid}
+		</if>
+		<if test="xgrmc != null and xgrmc != '' ">
+		 and t.xgrmc = #{xgrmc}
+		</if>
+		<if test="xgsj != null and xgsj != '' ">
+		 and t.xgsj = #{xgsj}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+		 and t.delete_flag = #{deleteFlag}
+		</if>
+		<if test="datasource != null and datasource != '' ">
+		 and t.datasource = #{datasource}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and t.bz = #{bz}
+		</if>
+		<if test="jdh != null and jdh != '' ">
+		 and t.jdh = #{jdh}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and t.sjc = #{sjc}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and t.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and t.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and t.reserve3 = #{reserve3}
+		</if>
+		<if test="reserve4 != null and reserve4 != '' ">
+		 and t.reserve4 = #{reserve4}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		t.fqid fqid,
+		t.fqmc fqmc,
+		t.fqlx fqlx,
+		t.fqwz fqwz,
+		t.lon lon,
+		t.lat lat,
+		t.xqxclx xqxclx,
+		t.yjddsc yjddsc,
+		t.zyd zyd,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	</sql>
+
+	<!--建筑分区建筑类 查询内容-->
+	<sql id="SQL_JZ_CONTENT">
+		t_jzl.uuid jzl_uuid,
+		t_jzl.fqid jzl_fqid,
+		t_jzl.jzqk jzl_jzqk,
+		t_jzl.jzsyxz jzl_jzsyxz,
+		t_jzl.jzjg jzl_jzjg,
+		t_jzl.gnms jzl_gnms,
+		t_jzl.zdmj jzl_zdmj,
+		t_jzl.jzmj jzl_jzmj,
+		t_jzl.dsgd jzl_dsgd,
+		t_jzl.dxgd jzl_dxgd,
+		t_jzl.dscs jzl_dscs,
+		t_jzl.dxcs jzl_dxcs,
+		t_jzl.cjrid jzl_cjrid,
+		t_jzl.cjrmc jzl_cjrmc,
+		TO_CHAR(t_jzl.cjsj,'yyyy-MM-dd HH24:mi:ss') jzl_cjsj,
+		t_jzl.xgrid jzl_xgrid,
+		t_jzl.xgrmc jzl_xgrmc,
+		TO_CHAR(t_jzl.xgsj,'yyyy-MM-dd HH24:mi:ss') jzl_xgsj,
+		t_jzl.delete_flag jzl_deleteFlag,
+		t_jzl.datasource jzl_datasource,
+		t_jzl.bz jzl_bz,
+		t_jzl.jdh jzl_jdh,
+		TO_CHAR(t_jzl.sjc,'yyyy-MM-dd HH24:mi:ss') jzl_sjc,
+		t_jzl.reserve1 jzl_reserve1,
+		t_jzl.reserve2 jzl_reserve2,
+		t_jzl.reserve3 jzl_reserve3,
+		TO_CHAR(t_jzl.reserve4,'yyyy-MM-dd HH24:mi:ss') jzl_reserve4
+	</sql>
+
+	<!--建筑分区装置类 查询内容-->
+	<sql id="SQL_ZZ_CONTENT">
+		t_zzl.uuid zzl_uuid,
+		t_zzl.fqid zzl_fqid,
+		t_zzl.jzjg zzl_jzjg,
+		t_zzl.zdmj zzl_zdmj,
+		t_zzl.zzgd zzl_zzgd,
+		t_zzl.jsfzr zzl_jsfzr,
+		t_zzl.jsfzrdh zzl_jsfzrdh,
+		t_zzl.gylc zzl_gylc,
+		t_zzl.cjrid zzl_cjrid,
+		t_zzl.cjrmc zzl_cjrmc,
+		TO_CHAR(t_zzl.cjsj,'yyyy-MM-dd HH24:mi:ss') zzl_cjsj,
+		t_zzl.xgrid zzl_xgrid,
+		t_zzl.xgrmc zzl_xgrmc,
+		TO_CHAR(t_zzl.xgsj,'yyyy-MM-dd HH24:mi:ss') zzl_xgsj,
+		t_zzl.delete_flag zzl_deleteFlag,
+		t_zzl.datasource zzl_datasource,
+		t_zzl.bz zzl_bz,
+		t_zzl.jdh zzl_jdh,
+		TO_CHAR(t_zzl.sjc,'yyyy-MM-dd HH24:mi:ss') zzl_sjc,
+		t_zzl.reserve1 zzl_reserve1,
+		t_zzl.reserve2 zzl_reserve2,
+		t_zzl.reserve3 zzl_reserve3,
+		TO_CHAR(t_zzl.reserve4,'yyyy-MM-dd HH24:mi:ss') zzl_reserve4
+	</sql>
+	<!--建筑分区储罐类 查询内容-->
+	<sql id="SQL_CG_CONTENT">
+		t_cgl.uuid cgl_uuid,
+		t_cgl.fqid cgl_fqid,
+		t_cgl.zrj cgl_zrj,
+		t_cgl.czsl cgl_czsl,
+		t_cgl.cgjg cgl_cgjg,
+		t_cgl.ccjzms cgl_ccjzms,
+		t_cgl.jsfzr cgl_jsfzr,
+		t_cgl.jsfzrdh cgl_jsfzrdh,
+		t_cgl.blgxd cgl_blgxd,
+		t_cgl.blgxn cgl_blgxn,
+		t_cgl.blgxx cgl_blgxx,
+		t_cgl.blgxb cgl_blgxb,
+		t_cgl.cjrid cgl_cjrid,
+		t_cgl.cjrmc cgl_cjrmc,
+		TO_CHAR(t_cgl.cjsj,'yyyy-MM-dd HH24:mi:ss') cgl_cjsj,
+		t_cgl.xgrid cgl_xgrid,
+		t_cgl.xgrmc cgl_xgrmc,
+		TO_CHAR(t_cgl.xgsj,'yyyy-MM-dd HH24:mi:ss') cgl_xgsj,
+		t_cgl.delete_flag cgl_deleteFlag,
+		t_cgl.datasource cgl_datasource,
+		t_cgl.bz cgl_bz,
+		t_cgl.jdh cgl_jdh,
+		TO_CHAR(t_cgl.sjc,'yyyy-MM-dd HH24:mi:ss') cgl_sjc,
+		t_cgl.reserve1 cgl_reserve1,
+		t_cgl.reserve2 cgl_reserve2,
+		t_cgl.reserve3 cgl_reserve3,
+		TO_CHAR(t_cgl.reserve4,'yyyy-MM-dd HH24:mi:ss') cgl_reserve4
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="BuildingVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM YAGL_JZFQ t WHERE 1=1 AND DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="BuildingVO"  resultType="BuildingVO"> 
+		SELECT 
+			<include refid="SQL_CONTENT"/>,
+		c2.code_name fqlxmc
+		FROM YAGL_JZFQ t
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.fqlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="BuildingVO"  resultType="BuildingVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_JZFQ t 
+		WHERE t.DELETE_FLAG = 'N' AND  t.FQID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="BuildingVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="FQID">
+			SELECT SYS_GUID() AS FQID FROM DUAL
+		</selectKey>
+		INSERT INTO YAGL_JZFQ(fqid,fqmc,fqlx,fqwz,lon,lat,xqxclx,yjddsc,zyd,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{fqid,jdbcType=VARCHAR},#{fqmc,jdbcType=VARCHAR},#{fqlx,jdbcType=VARCHAR},#{fqwz,jdbcType=VARCHAR},#{lon,jdbcType=DOUBLE},#{lat,jdbcType=DOUBLE},#{xqxclx,jdbcType=VARCHAR},#{yjddsc,jdbcType=DOUBLE},#{zyd,jdbcType=DOUBLE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO YAGL_JZFQ(fqid,fqmc,fqlx,fqwz,lon,lat,xqxclx,yjddsc,zyd,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		SELECT SYS_GUID() fqid, A.*
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.fqid,jdbcType=VARCHAR} fqid,#{item.fqmc,jdbcType=VARCHAR} fqmc,#{item.fqlx,jdbcType=VARCHAR} fqlx,#{item.fqwz,jdbcType=VARCHAR} fqwz,#{item.lon,jdbcType=DOUBLE} lon,#{item.lat,jdbcType=DOUBLE} lat,#{item.xqxclx,jdbcType=VARCHAR} xqxclx,#{item.yjddsc,jdbcType=DOUBLE} yjddsc,#{item.zyd,jdbcType=DOUBLE} zyd,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  YAGL_JZFQ t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.FQID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="BuildingVO"> 
+		UPDATE   YAGL_JZFQ  
+		<set>
+			<if test="fqid != null">fqid=#{fqid},</if>
+			<if test="fqmc != null">fqmc=#{fqmc},</if>
+			<if test="fqlx != null">fqlx=#{fqlx},</if>
+			<if test="fqwz != null">fqwz=#{fqwz},</if>
+			<if test="lon != null">lon=#{lon},</if>
+			<if test="lat != null">lat=#{lat},</if>
+			<if test="xqxclx != null">xqxclx=#{xqxclx},</if>
+			<if test="yjddsc != null">yjddsc=#{yjddsc},</if>
+			<if test="zyd != null">zyd=#{zyd},</if>
+			<if test="cjrid != null">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="datasource != null">datasource=#{datasource},</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="jdh != null">jdh=#{jdh},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  FQID = #{fqid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO YAGL_JZFQ(fqid,fqmc,fqlx,fqwz,lon,lat,xqxclx,yjddsc,zyd,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.fqid,jdbcType=VARCHAR} fqid,#{item.fqmc,jdbcType=VARCHAR} fqmc,#{item.fqlx,jdbcType=VARCHAR} fqlx,#{item.fqwz,jdbcType=VARCHAR} fqwz,#{item.lon,jdbcType=DOUBLE} lon,#{item.lat,jdbcType=DOUBLE} lat,#{item.xqxclx,jdbcType=VARCHAR} xqxclx,#{item.yjddsc,jdbcType=DOUBLE} yjddsc,#{item.zyd,jdbcType=DOUBLE} zyd,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			fqid = VALUES(fqid),
+			fqmc = VALUES(fqmc),
+			fqlx = VALUES(fqlx),
+			fqwz = VALUES(fqwz),
+			lon = VALUES(lon),
+			lat = VALUES(lat),
+			xqxclx = VALUES(xqxclx),
+			yjddsc = VALUES(yjddsc),
+			zyd = VALUES(zyd),
+			cjrid = VALUES(cjrid),
+			cjrmc = VALUES(cjrmc),
+			cjsj = VALUES(cjsj),
+			xgrid = VALUES(xgrid),
+			xgrmc = VALUES(xgrmc),
+			xgsj = VALUES(xgsj),
+			delete_flag = VALUES(delete_flag),
+			datasource = VALUES(datasource),
+			bz = VALUES(bz),
+			jdh = VALUES(jdh),
+			sjc = VALUES(sjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3),
+			reserve4 = VALUES(reserve4)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="BuildingVO"  resultType="BuildingVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_JZFQ t 
+		WHERE t.DELETE_FLAG = 'N' 
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--查找建筑分区详情关联建筑分区-建筑类-->
+	<select id="doFindFqAndJzDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_JZ_CONTENT"/>,
+		c2.code_name jzl_jzqkmc,
+		c4.code_name jzl_jzsyxzmc,
+		c6.code_name jzl_jzjgmc
+		FROM YAGL_JZFQ t
+		LEFT JOIN YAGL_JZFQ_JZL t_jzl ON t.fqid = t_jzl.fqid AND t_jzl.DELETE_FLAG = 'N'
+		<!--建筑类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t_jzl.jzqk = c2.CODE_VALUE
+		<!--建筑使用性质-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZSYXZ' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t_jzl.jzsyxz = c4.CODE_VALUE
+		<!--建筑结构-->
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'JZJG' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t_jzl.jzjg = c6.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--查找建筑分区详情关联建筑分区-装置类-->
+	<select id="doFindFqAndZzDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_ZZ_CONTENT"/>,
+		t_zc.dymc zzl_dymc,
+		t_yl.ylmc zzl_ylmc,
+		t_cw.cwmc zzl_cwmc,
+		c2.code_name zzl_jzjgmc
+		FROM YAGL_JZFQ t
+		LEFT JOIN YAGL_JZFQ_ZZL t_zzl ON t.fqid = t_zzl.fqid AND t_zzl.DELETE_FLAG = 'N'
+		LEFT JOIN YAGL_JZBW_ZZL_ZC t_zc ON t_zzl.uuid = t_zc.zzid AND t_zc.DELETE_FLAG = 'N'
+		LEFT JOIN YAGL_JZBW_ZZL_YL t_yl ON t_zzl.uuid = t_yl.zzid AND t_yl.DELETE_FLAG = 'N'
+		LEFT JOIN YAGL_JZBW_ZZL_CW t_cw ON t_zzl.uuid = t_cw.zzid AND t_cw.DELETE_FLAG = 'N'
+		<!--建筑结构-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZJG' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t_zzl.jzjg = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--查找建筑分区详情关联建筑分区-储罐类-->
+	<select id="doFindFqAndCgDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_CG_CONTENT"/>
+		FROM YAGL_JZFQ t
+		LEFT JOIN YAGL_JZFQ_CGL t_cgl ON t.fqid = t_cgl.fqid AND t_cgl.DELETE_FLAG = 'N'
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--通过建筑ID查询所有危险介质信息-->
+	<select id="doFindWeiXianJieZhiList" parameterType="WeixianjiezhiVO"  resultType="WeixianjiezhiVO">
+		SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.fkid fkid,
+		t.jzmc jzmc,
+		t.jzsjcl jzsjcl,
+		t.jzlhtx jzlhtx,
+		t.jtlcms jtlcms,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		FROM YAGL_JZBW_JZL_WXJZ t
+		WHERE t.DELETE_FLAG = 'N'
+		and t.fkid = #{fkid}
+	</select>
+
+	<!--通过装置ID查询所有组成信息-->
+	<select id="doFindZuChengList" parameterType="ZuchengVO"  resultType="ZuchengVO">
+	SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.zzid zzid,
+		t.dymc dymc,
+		t.dyms dyms,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	FROM YAGL_JZBW_ZZL_ZC t
+	WHERE t.DELETE_FLAG = 'N'
+	AND t.zzid = #{zzid}
+	</select>
+
+	<!--通过装置ID查询所有原料信息-->
+	<select id="doFindYuanLiaoList" parameterType="YuanliaoVO"  resultType="YuanliaoVO">
+	SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.zzid zzid,
+		t.ylmc ylmc,
+		t.lhxz lhxz,
+		t.ylcl ylcl,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	FROM YAGL_JZBW_ZZL_YL t
+	WHERE t.DELETE_FLAG = 'N'
+	AND t.zzid = #{zzid}
+	</select>
+
+	<!--通过装置ID查询所有产物信息-->
+	<select id="doFindChanWuList" parameterType="ChanwuVO"  resultType="ChanwuVO">
+	SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.zzid zzid,
+		t.cwmc cwmc,
+		t.lhxz lhxz,
+		t.cwcl cwcl,
+		t.gylc gylc,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	FROM YAGL_JZBW_ZZL_CW t
+	WHERE t.DELETE_FLAG = 'N'
+	AND t.zzid = #{zzid}
+	</select>
+
+	<!--通过罐组ID查询所有储罐信息-->
+	<select id="doFindChuGuanList" parameterType="ChuguanVO"  resultType="ChuguanVO">
+		SELECT
+		t.uuid uuid,
+		t.sjlx sjlx,
+		t.pkid pkid,
+		t.cgmc cgmc,
+		t.cglx cglx,
+		t.cgrl cgrl,
+		t.cgzj cgzj,
+		t.cggd cggd,
+		t.cgzc cgzc,
+		t.gdmj gdmj,
+		t.gzyl gzyl,
+		t.ccwd ccwd,
+		t.ccjzmc ccjzmc,
+		t.ccjzlhtx ccjzlhtx,
+		t.ccjzsjcl ccjzsjcl,
+		t.ccjzywgd ccjzywgd,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4,
+		c2.code_name cglxmc
+		FROM YAGL_JZBW_CGL_CG t
+		<!--储罐类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'CGLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.cglx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		and t.pkid = #{pkid}
+	</select>
+
+	<!--通过重点单位id查询包含分区id-->
+	<select id="doFindFqidListByZddwid" parameterType="String"  resultType="String">
+		SELECT FQID
+ 		FROM YAGL_DX_ZDDW_JZFQ WHERE DELETE_FLAG = 'N'
+ 		AND ZDDWID = #{value}
+	</select>
+</mapper>

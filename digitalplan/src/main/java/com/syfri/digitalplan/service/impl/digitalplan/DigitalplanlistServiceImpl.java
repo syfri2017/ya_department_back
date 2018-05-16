@@ -26,26 +26,6 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		return digitalplanlistDAO;
 	}
 
-	/**
-	 * @Description: 条件查询：预案查询.
-	 * @Param: [digitalplanlistVO]
-	 * @Return: java.util.List<com.syfri.digitalplan.moel.digitalplan.DigitalplanlistVO>
-	 * @Author: dongbo
-	 * @Modified By:
-	 * @Date: 2018/4/20 16:04
-	 */
-	@Override
-	public List<DigitalplanlistVO> doFindlist(DigitalplanlistVO digitalplanlistVO){
-		//预案名称
-		if(digitalplanlistVO.getYamc()!=null && !"".equals(digitalplanlistVO.getYamc())){
-			digitalplanlistVO.setYamc(digitalplanlistVO.getYamc().toLowerCase());
-		}
-		//对象名称
-		if(digitalplanlistVO.getDxmc()!=null && !"".equals(digitalplanlistVO.getDxmc())){
-			digitalplanlistVO.setDxmc(digitalplanlistVO.getDxmc().toLowerCase());
-		}
-		return digitalplanlistDAO.doSearchByVO(digitalplanlistVO);
-	}
 	/*
 	* 预案审批（更新部分字段）
 	* by yushch 20180426
@@ -56,14 +36,50 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		String shsj = sdf.format(date);
 		digitalplanlistVO.setShsj(shsj);
 		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
+		String shzt = digitalplanlistVO.getShzt();
+		String shztmc = digitalplanlistDAO.doFindShztmcByShzt(shzt);
+		digitalplanlistVO.setShztmc(shztmc);
 		return digitalplanlistVO;
 	}
 
-	/*--新增：代码集.--*/
+	/**
+	 * @Description: 新增：预案
+	 * @Param: [digitalplanlistVO]
+	 * @Return: com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 16:05
+	 */
 	@Override
 	public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String shsj = sdf.format(date);
+		digitalplanlistVO.setZzsj(shsj);
 		digitalplanlistVO.setDeleteFlag("N");
 		digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
+		return digitalplanlistVO;
+	}
+
+	/**
+	 * @Description: 修改：预案
+	 * @Param: [digitalplanlistVO]
+	 * @Return: com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 16:05
+	 */
+	@Override
+	public DigitalplanlistVO doUpdateDigitalplan(DigitalplanlistVO digitalplanlistVO){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String shsj = sdf.format(date);
+		if(digitalplanlistVO.getYazt().equals("03")){
+			digitalplanlistVO.setCjsj(shsj);
+		}else if(digitalplanlistVO.getYazt().equals("01")){
+			digitalplanlistVO.setXgsj(shsj);
+		}
+		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
 		return digitalplanlistVO;
 	}
 }

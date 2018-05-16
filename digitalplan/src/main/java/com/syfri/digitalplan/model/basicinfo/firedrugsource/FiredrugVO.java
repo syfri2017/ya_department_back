@@ -223,4 +223,19 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	public void setCzl_max(String czl_max){
 		this.czl_max = czl_max;
 	}
+
+	private String dzmc;	//队站名称
+	private String yjlxmc;	//药剂类型名称
+	public String getDzmc(){
+		return dzmc;
+	}
+	public void setDzmc(String dzmc){
+		this.dzmc = dzmc;
+	}
+	public String getYjlxmc(){
+		return yjlxmc;
+	}
+	public void setYjlxmc(String yjlxmc){
+		this.yjlxmc = yjlxmc;
+	}
 }

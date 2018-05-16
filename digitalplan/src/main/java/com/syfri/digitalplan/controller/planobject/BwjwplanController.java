@@ -2,7 +2,6 @@ package com.syfri.digitalplan.controller.planobject;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
-import com.syfri.digitalplan.model.keyunits.KeyunitVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,8 @@ public class BwjwplanController  extends BaseController<BwjwplanVO>{
 
 	@Autowired
 	private BwjwplanService bwjwplanService;
+
+
 
 	@Override
 	public BwjwplanService getBaseService() {

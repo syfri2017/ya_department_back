@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.digitalplan.dao.importantparts.ImportantpartsDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="zdbwid != null and zdbwid != '' ">
+		 and t.zdbwid = #{zdbwid}
+		</if>
+		<if test="zddwid != null and zddwid != '' ">
+		 and t.zddwid = #{zddwid}
+		</if>
+		<if test="zdbwlx != null and zdbwlx != '' ">
+		 and t.zdbwlx = #{zdbwlx}
+		</if>
+		<if test="zdbwmc != null and zdbwmc != '' ">
+		 and t.zdbwmc = #{zdbwmc}
+		</if>
+		<if test="zdbwwz != null and zdbwwz != '' ">
+		 and t.zdbwwz = #{zdbwwz}
+		</if>
+		<if test="wxxfx != null and wxxfx != '' ">
+		 and t.wxxfx = #{wxxfx}
+		</if>
+		<if test="zysx != null and zysx != '' ">
+		 and t.zysx = #{zysx}
+		</if>
+		<if test="cjrid != null and cjrid != '' ">
+		 and t.cjrid = #{cjrid}
+		</if>
+		<if test="cjrmc != null and cjrmc != '' ">
+		 and t.cjrmc = #{cjrmc}
+		</if>
+		<if test="cjsj != null and cjsj != '' ">
+		 and t.cjsj = #{cjsj}
+		</if>
+		<if test="xgrid != null and xgrid != '' ">
+		 and t.xgrid = #{xgrid}
+		</if>
+		<if test="xgrmc != null and xgrmc != '' ">
+		 and t.xgrmc = #{xgrmc}
+		</if>
+		<if test="xgsj != null and xgsj != '' ">
+		 and t.xgsj = #{xgsj}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+		 and t.delete_flag = #{deleteFlag}
+		</if>
+		<if test="datasource != null and datasource != '' ">
+		 and t.datasource = #{datasource}
+		</if>
+		<if test="bz != null and bz != '' ">
+		 and t.bz = #{bz}
+		</if>
+		<if test="jdh != null and jdh != '' ">
+		 and t.jdh = #{jdh}
+		</if>
+		<if test="sjc != null and sjc != '' ">
+		 and t.sjc = #{sjc}
+		</if>
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and t.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and t.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and t.reserve3 = #{reserve3}
+		</if>
+		<if test="reserve4 != null and reserve4 != '' ">
+		 and t.reserve4 = #{reserve4}
+		</if>
+	</sql>
+
+	<!--2.基本信息查询内容-->
+	<sql id="SQL_CONTENT">
+		t.zdbwid zdbwid,
+		t.zddwid zddwid,
+		t.zdbwlx zdbwlx,
+		t.zdbwmc zdbwmc,
+		t.zdbwwz zdbwwz,
+		t.wxxfx wxxfx,
+		t.zysx zysx,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
+		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+	</sql>
+	<!--21.建筑类查询内容-->
+	<sql id="SQL_JZL_CONTENT">
+		t2.uuid jzl_uuid,
+		t2.zdbwid jzl_zdbwid,
+		t2.syxz jzl_syxz,
+		t2.jzjg jzl_jzjg,
+		t2.qymj jzl_qymj,
+		t2.gnms jzl_gnms,
+		t2.cjrid jzl_cjrid,
+		t2.cjrmc jzl_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') jzl_cjsj,
+		t2.xgrid jzl_xgrid,
+		t2.xgrmc jzl_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') jzl_xgsj,
+		t2.delete_flag jzl_deleteFlag,
+		t2.datasource jzl_datasource,
+		t2.bz jzl_bz,
+		t2.jdh jzl_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') jzl_sjc,
+		t2.reserve1 jzl_reserve1,
+		t2.reserve2 jzl_reserve2,
+		t2.reserve3 jzl_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') jzl_reserve4
+	</sql>
+	<!--22.装置类查询内容-->
+	<sql id="SQL_ZZL_CONTENT">
+		t2.uuid zzl_uuid,
+		t2.zdbwid zzl_zdbwid,
+		t2.jzjg zzl_jzjg,
+		t2.zdmj zzl_zdmj,
+		t2.zzgd zzl_zzgd,
+		t2.zzzc zzl_zzzc,
+		t2.jsfzr zzl_jsfzr,
+		t2.jsfzrdh zzl_jsfzrdh,
+		t2.ylxx zzl_ylxx,
+		t2.cwxx zzl_cwxx,
+		t2.gylc zzl_gylc,
+		t2.cjrid zzl_cjrid,
+		t2.cjrmc zzl_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') zzl_cjsj,
+		t2.xgrid zzl_xgrid,
+		t2.xgrmc zzl_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') zzl_xgsj,
+		t2.delete_flag zzl_deleteFlag,
+		t2.datasource zzl_datasource,
+		t2.bz zzl_bz,
+		t2.jdh zzl_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') zzl_sjc,
+		t2.reserve1 zzl_reserve1,
+		t2.reserve2 zzl_reserve2,
+		t2.reserve3 zzl_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') zzl_reserve4
+	</sql>
+	<!--23.储罐类查询内容-->
+	<sql id="SQL_CGL_CONTENT">
+		t2.uuid cgl_uuid,
+		t2.zdbwid cgl_zdbwid,
+		to_char(t2.zrj,'fm9999999990.00') cgl_zrj,
+		t2.cgsl cgl_cgsl,
+		to_char(t2.cgjg,'fm9999999990.00') cgl_cgjg,
+		t2.ccjzms cgl_ccjzms,
+		t2.jsfzr cgl_jsfzr,
+		t2.jsfzrdh cgl_jsfzrdh,
+		t2.blgxd cgl_blgxd,
+		t2.blgxn cgl_blgxn,
+		t2.blgxx cgl_blgxx,
+		t2.blgxb cgl_blgxb,
+		t2.cjrid cgl_cjrid,
+		t2.cjrmc cgl_cjrmc,
+		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') cgl_cjsj,
+		t2.xgrid cgl_xgrid,
+		t2.xgrmc cgl_xgrmc,
+		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') cgl_xgsj,
+		t2.delete_flag cgl_deleteFlag,
+		t2.datasource cgl_datasource,
+		t2.bz cgl_bz,
+		t2.jdh cgl_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') cgl_sjc,
+		t2.reserve1 cgl_reserve1,
+		t2.reserve2 cgl_reserve2,
+		t2.reserve3 cgl_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') cgl_reserve4
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="ImportantpartsVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM YAGL_ZDBW t WHERE 1=1 AND DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO"> 
+		SELECT 
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name zdbwlxmc
+		FROM YAGL_ZDBW t
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		c2.code_name zdbwlxmc
+		FROM YAGL_ZDBW t
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N' AND  t.ZDBWID = #{value}
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="ImportantpartsVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="zdbwid">
+			SELECT SYS_GUID() AS zdbwid FROM DUAL
+		</selectKey>
+		INSERT INTO YAGL_ZDBW(zdbwid,zddwid,zdbwlx,zdbwmc,zdbwwz,wxxfx,zysx,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{zdbwid,jdbcType=VARCHAR},#{zddwid,jdbcType=VARCHAR},#{zdbwlx,jdbcType=VARCHAR},#{zdbwmc,jdbcType=VARCHAR},#{zdbwwz,jdbcType=VARCHAR},#{wxxfx,jdbcType=VARCHAR},#{zysx,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO YAGL_ZDBW(zdbwid,zddwid,zdbwlx,zdbwmc,zdbwwz,wxxfx,zysx,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		SELECT SYS_GUID() zdbwid, A.*
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.zdbwid,jdbcType=VARCHAR} zdbwid,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.zdbwlx,jdbcType=VARCHAR} zdbwlx,#{item.zdbwmc,jdbcType=VARCHAR} zdbwmc,#{item.zdbwwz,jdbcType=VARCHAR} zdbwwz,#{item.wxxfx,jdbcType=VARCHAR} wxxfx,#{item.zysx,jdbcType=VARCHAR} zysx,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  YAGL_ZDBW t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.ZDBWID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="ImportantpartsVO"> 
+		UPDATE   YAGL_ZDBW  
+		<set>
+			<if test="zdbwid != null">zdbwid=#{zdbwid},</if>
+			<if test="zddwid != null">zddwid=#{zddwid},</if>
+			<if test="zdbwlx != null">zdbwlx=#{zdbwlx},</if>
+			<if test="zdbwmc != null">zdbwmc=#{zdbwmc},</if>
+			<if test="zdbwwz != null">zdbwwz=#{zdbwwz},</if>
+			<if test="wxxfx != null">wxxfx=#{wxxfx},</if>
+			<if test="zysx != null">zysx=#{zysx},</if>
+			<if test="cjrid != null">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
+			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="datasource != null">datasource=#{datasource},</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="jdh != null">jdh=#{jdh},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  ZDBWID = #{zdbwid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO YAGL_ZDBW(zdbwid,zddwid,zdbwlx,zdbwmc,zdbwwz,wxxfx,zysx,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.zdbwid,jdbcType=VARCHAR} zdbwid,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.zdbwlx,jdbcType=VARCHAR} zdbwlx,#{item.zdbwmc,jdbcType=VARCHAR} zdbwmc,#{item.zdbwwz,jdbcType=VARCHAR} zdbwwz,#{item.wxxfx,jdbcType=VARCHAR} wxxfx,#{item.zysx,jdbcType=VARCHAR} zysx,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			zdbwid = VALUES(zdbwid),
+			zddwid = VALUES(zddwid),
+			zdbwlx = VALUES(zdbwlx),
+			zdbwmc = VALUES(zdbwmc),
+			zdbwwz = VALUES(zdbwwz),
+			wxxfx = VALUES(wxxfx),
+			zysx = VALUES(zysx),
+			cjrid = VALUES(cjrid),
+			cjrmc = VALUES(cjrmc),
+			cjsj = VALUES(cjsj),
+			xgrid = VALUES(xgrid),
+			xgrmc = VALUES(xgrmc),
+			xgsj = VALUES(xgsj),
+			delete_flag = VALUES(delete_flag),
+			datasource = VALUES(datasource),
+			bz = VALUES(bz),
+			jdh = VALUES(jdh),
+			sjc = VALUES(sjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3),
+			reserve4 = VALUES(reserve4)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		c2.code_name zdbwlxmc
+		FROM YAGL_ZDBW t
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.根据重点单位id获取建筑类重点部位详情集合-->
+	<select id="doFindJzlListByZddwId" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name zdbwlxmc,
+		<include refid="SQL_JZL_CONTENT"/>,
+		c4.code_name jzl_jzjgmc
+		FROM YAGL_ZDBW t
+		LEFT JOIN YAGL_ZDBW_JZL t2 ON(t.ZDBWID=t2.ZDBWID AND t2.DELETE_FLAG='N')
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		<!--建筑结构-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZJG' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t2.jzjg = c4.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N' AND t.ZDBWLX = '10' AND t.ZDDWID = #{value}
+	</select>
+
+	<!--13.根据重点单位id获取装置类重点部位详情集合-->
+	<select id="doFindZzlListByZddwId" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name zdbwlxmc,
+		<include refid="SQL_ZZL_CONTENT"/>,
+		c4.code_name zzl_jzjgmc
+		FROM YAGL_ZDBW t
+		LEFT JOIN YAGL_ZDBW_ZZL t2 ON(t.ZDBWID=t2.ZDBWID AND t2.DELETE_FLAG='N')
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		<!--建筑结构-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZJG' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t2.jzjg = c4.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N' AND t.ZDBWLX = '20' AND t.ZDDWID = #{value}
+	</select>
+
+	<!--14.根据重点单位id获取储罐类重点部位详情集合-->
+	<select id="doFindCglListByZddwId" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name zdbwlxmc,
+		<include refid="SQL_CGL_CONTENT"/>
+		FROM YAGL_ZDBW t
+		LEFT JOIN YAGL_ZDBW_CGL t2 ON(t.ZDBWID=t2.ZDBWID AND t2.DELETE_FLAG='N')
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N' AND t.ZDBWLX = '30' AND t.ZDDWID = #{value}
+	</select>
+
+</mapper>

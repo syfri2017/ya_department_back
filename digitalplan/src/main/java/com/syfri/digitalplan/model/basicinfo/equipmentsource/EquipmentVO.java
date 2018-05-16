@@ -220,4 +220,26 @@ public class EquipmentVO extends ValueObject implements Serializable{
 	public void setKcsl_max(String kcsl_max){
 		this.kcsl_max = kcsl_max;
 	}
+
+	private String dzmc;	//队站名称
+	private String xzqhmc;	//行政区划名称
+	private String zblxmc;	//装备类型名称
+	public String getDzmc(){
+		return dzmc;
+	}
+	public void setDzmc(String dzmc){
+		this.dzmc = dzmc;
+	}
+	public String getXzqhmc(){
+		return xzqhmc;
+	}
+	public void setXzqhmc(String xzqhmc){
+		this.xzqhmc = xzqhmc;
+	}
+	public String getZblxmc(){
+		return zblxmc;
+	}
+	public void setZblxmc(String zblxmc){
+		this.zblxmc = zblxmc;
+	}
 }
