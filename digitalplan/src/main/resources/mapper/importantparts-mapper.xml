@@ -127,8 +127,11 @@
 		t2.jzjg zzl_jzjg,
 		t2.zdmj zzl_zdmj,
 		t2.zzgd zzl_zzgd,
+		t2.zzzc zzl_zzzc,
 		t2.jsfzr zzl_jsfzr,
 		t2.jsfzrdh zzl_jsfzrdh,
+		t2.ylxx zzl_ylxx,
+		t2.cwxx zzl_cwxx,
 		t2.gylc zzl_gylc,
 		t2.cjrid zzl_cjrid,
 		t2.cjrmc zzl_cjrmc,
@@ -186,16 +189,25 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO"> 
 		SELECT 
-			<include refid="SQL_CONTENT"/>
-		FROM YAGL_ZDBW t  WHERE t.DELETE_FLAG = 'N' 
-			<include refid="SQL_CONDITION"/>
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name zdbwlxmc
+		FROM YAGL_ZDBW t
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--5.根据ID查询记录-->
-	<select id="doFindById" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">  
-		SELECT 
+	<select id="doFindById" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_ZDBW t 
+		c2.code_name zdbwlxmc
+		FROM YAGL_ZDBW t
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND  t.ZDBWID = #{value}
 	</select>
 
@@ -289,11 +301,15 @@
 	</update>
 
 	<!--11.根据对象查询记录-->
-	<select id="doFindByVO" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">  
-		SELECT 
+	<select id="doFindByVO" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
+		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_ZDBW t 
-		WHERE t.DELETE_FLAG = 'N' 
+		c2.code_name zdbwlxmc
+		FROM YAGL_ZDBW t
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -301,9 +317,17 @@
 	<select id="doFindJzlListByZddwId" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
-		<include refid="SQL_JZL_CONTENT"/>
+		c2.code_name zdbwlxmc,
+		<include refid="SQL_JZL_CONTENT"/>,
+		c4.code_name jzl_jzjgmc
 		FROM YAGL_ZDBW t
 		LEFT JOIN YAGL_ZDBW_JZL t2 ON(t.ZDBWID=t2.ZDBWID AND t2.DELETE_FLAG='N')
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		<!--建筑结构-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZJG' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t2.jzjg = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND t.ZDBWLX = '10' AND t.ZDDWID = #{value}
 	</select>
 
@@ -311,9 +335,17 @@
 	<select id="doFindZzlListByZddwId" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
-		<include refid="SQL_ZZL_CONTENT"/>
+		c2.code_name zdbwlxmc,
+		<include refid="SQL_ZZL_CONTENT"/>,
+		c4.code_name zzl_jzjgmc
 		FROM YAGL_ZDBW t
 		LEFT JOIN YAGL_ZDBW_ZZL t2 ON(t.ZDBWID=t2.ZDBWID AND t2.DELETE_FLAG='N')
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
+		<!--建筑结构-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZJG' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t2.jzjg = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND t.ZDBWLX = '20' AND t.ZDDWID = #{value}
 	</select>
 
@@ -321,9 +353,13 @@
 	<select id="doFindCglListByZddwId" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
+		c2.code_name zdbwlxmc,
 		<include refid="SQL_CGL_CONTENT"/>
 		FROM YAGL_ZDBW t
 		LEFT JOIN YAGL_ZDBW_CGL t2 ON(t.ZDBWID=t2.ZDBWID AND t2.DELETE_FLAG='N')
+		<!--重点部位类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDBWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.zdbwlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND t.ZDBWLX = '30' AND t.ZDDWID = #{value}
 	</select>
 

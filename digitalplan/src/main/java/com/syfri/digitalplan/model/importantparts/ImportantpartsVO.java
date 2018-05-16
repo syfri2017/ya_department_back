@@ -38,6 +38,8 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String zdbwlxmc;	//重点部位类型名称
+
 	//建筑类重点部位信息
 	private String jzl_uuid;	//主键
 	private String jzl_zdbwid;	//重点部位ID
@@ -62,14 +64,19 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	private String jzl_reserve4;	//备用字段4
 	private List<WeixianjiezhiVO> WeixianjiezhiList;	//危险介质list
 
+	private String jzl_jzjgmc;	//建筑结构名称
+
 	//装置类重点部位信息
 	private String zzl_uuid;	//主键
 	private String zzl_zdbwid;	//重点部位ID
 	private String zzl_jzjg;	//建筑结构
 	private String zzl_zdmj;	//占地面积(㎡)
 	private String zzl_zzgd;	//装置高度(m)
+	private String zzl_zzzc;	//装置组成
 	private String zzl_jsfzr;	//技术负责人
 	private String zzl_jsfzrdh;	//技术负责人电话
+	private String zzl_ylxx;	//原料信息
+	private String zzl_cwxx;	//产物信息
 	private String zzl_gylc;	//工艺流程
 	private String zzl_cjrid;	//创建人ID
 	private String zzl_cjrmc;	//创建人名称
@@ -86,9 +93,8 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	private String zzl_reserve2;	//备用字段2
 	private String zzl_reserve3;	//备用字段3
 	private String zzl_reserve4;	//备用字段4
-	private List<ZuchengVO> ZuchengList;	//组合list
-	private List<YuanliaoVO> YuanliaoList;	//原料list
-	private List<ChanwuVO> ChanwuList;	//产物list
+
+	private String zzl_jzjgmc;	//建筑结构名称
 
 	//储罐类重点部位信息
 	private String cgl_uuid;	//主键
@@ -252,6 +258,8 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
 	}
+	public String getZdbwlxmc() { return zdbwlxmc; }
+	public void setZdbwlxmc(String zdbwlxmc) { this.zdbwlxmc = zdbwlxmc; }
 
 	public String getJzl_uuid() {
 		return jzl_uuid;
@@ -425,6 +433,10 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 
 	public void setWeixianjiezhiList(List<WeixianjiezhiVO> weixianjiezhiList) { WeixianjiezhiList = weixianjiezhiList; }
 
+	public String getJzl_jzjgmc() { return jzl_jzjgmc; }
+
+	public void setJzl_jzjgmc(String jzl_jzjgmc) { this.jzl_jzjgmc = jzl_jzjgmc; }
+
 	public String getZzl_uuid() {
 		return zzl_uuid;
 	}
@@ -465,6 +477,10 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 		this.zzl_zzgd = zzl_zzgd;
 	}
 
+	public String getZzl_zzzc() { return zzl_zzzc; }
+
+	public void setZzl_zzzc(String zzl_zzzc) { this.zzl_zzzc = zzl_zzzc; }
+
 	public String getZzl_jsfzr() {
 		return zzl_jsfzr;
 	}
@@ -480,6 +496,14 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 	public void setZzl_jsfzrdh(String zzl_jsfzrdh) {
 		this.zzl_jsfzrdh = zzl_jsfzrdh;
 	}
+
+	public String getZzl_ylxx() { return zzl_ylxx; }
+
+	public void setZzl_ylxx(String zzl_ylxx) { this.zzl_ylxx = zzl_ylxx; }
+
+	public String getZzl_cwxx() { return zzl_cwxx; }
+
+	public void setZzl_cwxx(String zzl_cwxx) { this.zzl_cwxx = zzl_cwxx; }
 
 	public String getZzl_gylc() {
 		return zzl_gylc;
@@ -609,17 +633,9 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 		this.zzl_reserve4 = zzl_reserve4;
 	}
 
-	public List<ZuchengVO> getZuchengList() { return ZuchengList; }
+	public String getZzl_jzjgmc() { return zzl_jzjgmc; }
 
-	public void setZuchengList(List<ZuchengVO> zuchengList) { ZuchengList = zuchengList; }
-
-	public List<YuanliaoVO> getYuanliaoList() {	return YuanliaoList; }
-
-	public void setYuanliaoList(List<YuanliaoVO> yuanliaoList) { YuanliaoList = yuanliaoList; }
-
-	public List<ChanwuVO> getChanwuList() {	return ChanwuList; }
-
-	public void setChanwuList(List<ChanwuVO> chanwuList) { ChanwuList = chanwuList;	}
+	public void setZzl_jzjgmc(String zzl_jzjgmc) { this.zzl_jzjgmc = zzl_jzjgmc; }
 
 	public String getCgl_uuid() {
 		return cgl_uuid;
