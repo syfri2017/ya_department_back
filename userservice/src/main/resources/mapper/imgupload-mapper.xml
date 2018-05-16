@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syfri.userservice.dao.ImgUploadDAO">
+	<!--1.查询条件-->
+	<sql id="SQL_CONDITION">
+		<if test="pkid != null and pkid != '' ">
+		 and t.pkid = #{pkid}
+		</if>
+		<if test="picType != null and picType != '' ">
+		 and t.pic_type = #{picType}
+		</if>
+		<if test="picTypename != null and picTypename != '' ">
+		 and t.pic_typename = #{picTypename}
+		</if>
+		<if test="picValue != null and picValue != '' ">
+		 and t.pic_value = #{picValue}
+		</if>
+		<if test="picName != null and picName != '' ">
+		 and t.pic_name = #{picName}
+		</if>
+		<if test="picBlob != null and picBlob != '' ">
+		 and t.pic_blob = #{picBlob}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+		 and t.delete_flag = #{deleteFlag}
+		</if>
+		<if test="remark != null and remark != '' ">
+		 and t.remark = #{remark}
+		</if>
+		<if test="createId != null and createId != '' ">
+		 and t.create_id = #{createId}
+		</if>
+		<if test="createName != null and createName != '' ">
+		 and t.create_name = #{createName}
+		</if>
+		<if test="createTime != null and createTime != '' ">
+		 and t.create_time = #{createTime}
+		</if>
+		<if test="alterId != null and alterId != '' ">
+		 and t.alter_id = #{alterId}
+		</if>
+		<if test="alterName != null and alterName != '' ">
+		 and t.alter_name = #{alterName}
+		</if>
+		<if test="alterTime != null and alterTime != '' ">
+		 and t.alter_time = #{alterTime}
+		</if>
+	</sql>
+
+	<!--2.查询内容-->
+	<sql id="SQL_CONTENT">
+		t.pkid pkid,
+		t.pic_type picType,
+		t.pic_typename picTypename,
+		t.pic_value picValue,
+		t.pic_name picName,
+		t.pic_blob picBlob,
+		t.delete_flag deleteFlag,
+		t.remark remark,
+		t.create_id createId,
+		t.create_name createName,
+		TO_CHAR(t.create_time,'yyyy-MM-dd HH24:mi:ss') createTime,
+		t.alter_id alterId,
+		t.alter_name alterName,
+		TO_CHAR(t.alter_time,'yyyy-MM-dd HH24:mi:ss') alterTime
+	</sql>
+
+	<!--3.查询记录数-->
+	<select id="doSearchCount" parameterType="ImguploadVO" resultType="java.lang.Integer">
+		SELECT COUNT(0) AS NUM FROM SYS_CODELIST_PICTURE t WHERE 1=1 AND DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--4.按条件查询记录-->
+	<select id="doSearchListByVO" parameterType="ImguploadVO"  resultType="ImguploadVO"> 
+		SELECT
+			<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST_PICTURE t  WHERE t.DELETE_FLAG = 'N'
+		<if test="picType != null and picType != '' ">
+			and t.pic_type = #{picType}
+		</if>
+		<if test="picName != null and picName != '' ">
+			and t.pic_name LIKE concat(concat('%',#{picName}),'%')
+		</if>
+	</select>
+
+	<!--5.根据ID查询记录-->
+	<select id="doFindById" parameterType="ImguploadVO"  resultType="ImguploadVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST_PICTURE t 
+		WHERE t.DELETE_FLAG = 'N' AND  t.PKID = #{value} 
+	</select>
+
+	<!--6.按照VO插入-->
+	<insert  id="doInsertByVO"  parameterType="ImguploadVO"> 
+		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
+			SELECT SYS_GUID() AS pkid FROM DUAL
+		</selectKey>
+		INSERT INTO SYS_CODELIST_PICTURE(pkid,pic_type,pic_typename,pic_value,pic_name,pic_blob,delete_flag,remark,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{picType,jdbcType=VARCHAR},#{picTypename,jdbcType=VARCHAR},#{picValue,jdbcType=VARCHAR},#{picName,jdbcType=VARCHAR},#{picBlob,jdbcType=VARCHAR},'N',#{remark,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE)
+	 </insert>
+
+	<!--7.批量插入-->
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+		INSERT INTO SYS_CODELIST_PICTURE(pkid,pic_type,pic_typename,pic_value,pic_name,pic_blob,delete_flag,remark,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		SELECT SYS_GUID() pkid, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
+		SELECT
+			#{item.picType,jdbcType=VARCHAR} pic_type,#{item.picTypename,jdbcType=VARCHAR} pic_typename,#{item.picValue,jdbcType=VARCHAR} pic_value,#{item.picName,jdbcType=VARCHAR} pic_name,#{item.picBlob,jdbcType=VARCHAR} pic_blob,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
+		FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+	<!--8.按主键逻辑删除-->
+	<update id="doDeleteById"  parameterType="String"> 
+		UPDATE  SYS_CODELIST_PICTURE t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value}
+	</update>
+
+	<!--9.按复合条件逻辑更新-->
+	<update  id="doUpdateByVO"  parameterType="ImguploadVO"> 
+		UPDATE   SYS_CODELIST_PICTURE  
+		<set>
+			<if test="pkid != null">pkid=#{pkid},</if>
+			<if test="picType != null">pic_type=#{picType},</if>
+			<if test="picTypename != null">pic_typename=#{picTypename},</if>
+			<if test="picValue != null">pic_value=#{picValue},</if>
+			<if test="picName != null">pic_name=#{picName},</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="remark != null">remark=#{remark},</if>
+			<if test="createId != null">create_id=#{createId},</if>
+			<if test="createName != null">create_name=#{createName},</if>
+			<if test="createTime != null">create_time=TO_DATE(#{createTime},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="alterId != null">alter_id=#{alterId},</if>
+			<if test="alterName != null">alter_name=#{alterName},</if>
+			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')</if>
+		</set>
+		WHERE  PKID = #{pkid}
+	</update>
+
+	<!--10.批量修改-->
+	<update id="doBatchUpdateByList"  parameterType="java.util.List">
+		INSERT INTO SYS_CODELIST_PICTURE(pkid,pic_type,pic_typename,pic_value,pic_name,pic_blob,delete_flag,remark,create_id,create_name,create_time,alter_id,alter_name,alter_time)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+			#{item.picType,jdbcType=VARCHAR} pic_type,#{item.picTypename,jdbcType=VARCHAR} pic_typename,#{item.picValue,jdbcType=VARCHAR} pic_value,#{item.picName,jdbcType=VARCHAR} pic_name,#{item.picBlob,jdbcType=VARCHAR} pic_blob,'N' delete_flag,#{item.remark,jdbcType=VARCHAR} remark,#{item.createId,jdbcType=VARCHAR} create_id,#{item.createName,jdbcType=VARCHAR} create_name,SYSDATE create_time,#{item.alterId,jdbcType=VARCHAR} alter_id,#{item.alterName,jdbcType=VARCHAR} alter_name,SYSDATE alter_time
+		</foreach>
+		ON DUPLICATE KEY UPDATE   
+			pkid = VALUES(pkid),
+			pic_type = VALUES(pic_type),
+			pic_typename = VALUES(pic_typename),
+			pic_value = VALUES(pic_value),
+			pic_name = VALUES(pic_name),
+			pic_blob = VALUES(pic_blob),
+			delete_flag = VALUES(delete_flag),
+			remark = VALUES(remark),
+			create_id = VALUES(create_id),
+			create_name = VALUES(create_name),
+			create_time = VALUES(create_time),
+			alter_id = VALUES(alter_id),
+			alter_name = VALUES(alter_name),
+			alter_time = VALUES(alter_time)
+	</update>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindByVO" parameterType="ImguploadVO"  resultType="ImguploadVO">  
+		SELECT 
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST_PICTURE t 
+		WHERE t.DELETE_FLAG = 'N' 
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--11.根据对象查询记录-->
+	<select id="doFindAll" parameterType="ImgUploadVO"  resultType="ImgUploadVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST t
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--12.上传图片-->
+	<update id="doInsertImg" parameterType="ImgUploadVO">
+		UPDATE  SYS_CODELIST_PICTURE t SET t.pic_blob = #{imgFile,jdbcType=BLOB}   WHERE t.pic_name = #{picName}
+	</update>
+
+</mapper>
