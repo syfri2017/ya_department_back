@@ -5,9 +5,6 @@ import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 import com.syfri.digitalplan.model.buildingzoning.WeixianjiezhiVO;
-import com.syfri.digitalplan.model.buildingzoning.ZuchengVO;
-import com.syfri.digitalplan.model.buildingzoning.YuanliaoVO;
-import com.syfri.digitalplan.model.buildingzoning.ChanwuVO;
 import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
 
 public class ImportantpartsVO extends ValueObject implements Serializable{
@@ -289,9 +286,7 @@ public class ImportantpartsVO extends ValueObject implements Serializable{
 		return jzl_jzjg;
 	}
 
-	public void setJzl_jzjg(String jzl_jzjg) {
-		this.jzl_jzjg = jzl_jzjg;
-	}
+	public void setJzl_jzjg(String jzl_jzjg) { this.jzl_jzjg = jzl_jzjg; }
 
 	public String getJzl_qymj() {
 		return jzl_qymj;

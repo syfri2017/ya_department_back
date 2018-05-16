@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.service.impl.buildingzoning;
 
 import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
+import com.syfri.digitalplan.model.buildingzoning.WeixianjiezhiVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +37,18 @@ public class BuildingServiceImpl extends BaseServiceImpl<BuildingVO> implements 
 			case "40":
 				//查找建筑分区详情关联建筑分区-储罐类
 				vo = buildingDAO.doFindFqAndCgDetailByVo(buildingVO);
+				ChuguanVO chuguanVO = new ChuguanVO();
+				chuguanVO.setPkid(vo.getFqid());
+				List<ChuguanVO> chuguanList = this.buildingDAO.doFindChuGuanList(chuguanVO);
+				vo.setChuguanList(chuguanList);
 				break;
 			default:
 				//分区类型为10和20 查找建筑分区详情关联建筑分区-建筑类
 				vo = buildingDAO.doFindFqAndJzDetailByVo(buildingVO);
+				WeixianjiezhiVO weixianjiezhiVO = new WeixianjiezhiVO();
+				weixianjiezhiVO.setFkid(vo.getFqid());
+				List<WeixianjiezhiVO> weixianjiezhiList = this.buildingDAO.doFindWeiXianJieZhiList(weixianjiezhiVO);
+				vo.setWeixianjiezhiList(weixianjiezhiList);
 				break;
 		}
 		return vo;

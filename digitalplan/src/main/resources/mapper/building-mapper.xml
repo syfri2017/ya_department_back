@@ -104,7 +104,6 @@
 		t.reserve3 reserve3,
 		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
 	</sql>
-
 	<!--建筑分区建筑类 查询内容-->
 	<sql id="SQL_JZ_CONTENT">
 		t_jzl.uuid jzl_uuid,
@@ -135,16 +134,18 @@
 		t_jzl.reserve3 jzl_reserve3,
 		TO_CHAR(t_jzl.reserve4,'yyyy-MM-dd HH24:mi:ss') jzl_reserve4
 	</sql>
-
 	<!--建筑分区装置类 查询内容-->
 	<sql id="SQL_ZZ_CONTENT">
 		t_zzl.uuid zzl_uuid,
 		t_zzl.fqid zzl_fqid,
 		t_zzl.jzjg zzl_jzjg,
 		t_zzl.zdmj zzl_zdmj,
+		t_zzl.zzzc zzl_zzzc,
 		t_zzl.zzgd zzl_zzgd,
 		t_zzl.jsfzr zzl_jsfzr,
 		t_zzl.jsfzrdh zzl_jsfzrdh,
+		t_zzl.ylxx zzl_ylxx,
+		t_zzl.cwxx zzl_cwxx,
 		t_zzl.gylc zzl_gylc,
 		t_zzl.cjrid zzl_cjrid,
 		t_zzl.cjrmc zzl_cjrmc,
@@ -202,7 +203,7 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="BuildingVO"  resultType="BuildingVO"> 
 		SELECT 
-			<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_CONTENT"/>,
 		c2.code_name fqlxmc
 		FROM YAGL_JZFQ t
 		<!--建筑分区类型关联代码集-->
@@ -215,8 +216,12 @@
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="BuildingVO"  resultType="BuildingVO">  
 		SELECT 
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_JZFQ t 
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name fqlxmc
+		FROM YAGL_JZFQ t
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.fqlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND  t.FQID = #{value}
 	</select>
 
@@ -316,8 +321,12 @@
 	<!--11.根据对象查询记录-->
 	<select id="doFindByVO" parameterType="BuildingVO"  resultType="BuildingVO">  
 		SELECT 
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_JZFQ t 
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name fqlxmc
+		FROM YAGL_JZFQ t
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.fqlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -326,21 +335,25 @@
 	<select id="doFindFqAndJzDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
+		c2.code_name fqlxmc,
 		<include refid="SQL_JZ_CONTENT"/>,
-		c2.code_name jzl_jzqkmc,
-		c4.code_name jzl_jzsyxzmc,
-		c6.code_name jzl_jzjgmc
+		c4.code_name jzl_jzqkmc,
+		c6.code_name jzl_jzsyxzmc,
+		c8.code_name jzl_jzjgmc
 		FROM YAGL_JZFQ t
 		LEFT JOIN YAGL_JZFQ_JZL t_jzl ON t.fqid = t_jzl.fqid AND t_jzl.DELETE_FLAG = 'N'
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.fqlx = c2.CODE_VALUE
 		<!--建筑类型-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t_jzl.jzqk = c2.CODE_VALUE
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZLX' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t_jzl.jzqk = c4.CODE_VALUE
 		<!--建筑使用性质-->
-		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZSYXZ' And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t_jzl.jzsyxz = c4.CODE_VALUE
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'JZSYXZ' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t_jzl.jzsyxz = c6.CODE_VALUE
 		<!--建筑结构-->
-		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'JZJG' And c5.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t_jzl.jzjg = c6.CODE_VALUE
+		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'JZJG' And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t_jzl.jzjg = c8.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -349,19 +362,17 @@
 	<select id="doFindFqAndZzDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
+		c2.code_name fqlxmc,
 		<include refid="SQL_ZZ_CONTENT"/>,
-		t_zc.dymc zzl_dymc,
-		t_yl.ylmc zzl_ylmc,
-		t_cw.cwmc zzl_cwmc,
-		c2.code_name zzl_jzjgmc
+		c4.code_name zzl_jzjgmc
 		FROM YAGL_JZFQ t
 		LEFT JOIN YAGL_JZFQ_ZZL t_zzl ON t.fqid = t_zzl.fqid AND t_zzl.DELETE_FLAG = 'N'
-		LEFT JOIN YAGL_JZBW_ZZL_ZC t_zc ON t_zzl.uuid = t_zc.zzid AND t_zc.DELETE_FLAG = 'N'
-		LEFT JOIN YAGL_JZBW_ZZL_YL t_yl ON t_zzl.uuid = t_yl.zzid AND t_yl.DELETE_FLAG = 'N'
-		LEFT JOIN YAGL_JZBW_ZZL_CW t_cw ON t_zzl.uuid = t_cw.zzid AND t_cw.DELETE_FLAG = 'N'
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.fqlx = c2.CODE_VALUE
 		<!--建筑结构-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZJG' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t_zzl.jzjg = c2.CODE_VALUE
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZJG' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t_zzl.jzjg = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -370,9 +381,13 @@
 	<select id="doFindFqAndCgDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
+		c2.code_name fqlxmc,
 		<include refid="SQL_CG_CONTENT"/>
 		FROM YAGL_JZFQ t
 		LEFT JOIN YAGL_JZFQ_CGL t_cgl ON t.fqid = t_cgl.fqid AND t_cgl.DELETE_FLAG = 'N'
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.fqlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -405,93 +420,6 @@
 		FROM YAGL_JZBW_JZL_WXJZ t
 		WHERE t.DELETE_FLAG = 'N'
 		and t.fkid = #{fkid}
-	</select>
-
-	<!--通过装置ID查询所有组成信息-->
-	<select id="doFindZuChengList" parameterType="ZuchengVO"  resultType="ZuchengVO">
-	SELECT
-		t.uuid uuid,
-		t.sjlx sjlx,
-		t.zzid zzid,
-		t.dymc dymc,
-		t.dyms dyms,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
-		t.delete_flag deleteFlag,
-		t.datasource datasource,
-		t.bz bz,
-		t.jdh jdh,
-		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
-		t.reserve1 reserve1,
-		t.reserve2 reserve2,
-		t.reserve3 reserve3,
-		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
-	FROM YAGL_JZBW_ZZL_ZC t
-	WHERE t.DELETE_FLAG = 'N'
-	AND t.zzid = #{zzid}
-	</select>
-
-	<!--通过装置ID查询所有原料信息-->
-	<select id="doFindYuanLiaoList" parameterType="YuanliaoVO"  resultType="YuanliaoVO">
-	SELECT
-		t.uuid uuid,
-		t.sjlx sjlx,
-		t.zzid zzid,
-		t.ylmc ylmc,
-		t.lhxz lhxz,
-		t.ylcl ylcl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
-		t.delete_flag deleteFlag,
-		t.datasource datasource,
-		t.bz bz,
-		t.jdh jdh,
-		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
-		t.reserve1 reserve1,
-		t.reserve2 reserve2,
-		t.reserve3 reserve3,
-		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
-	FROM YAGL_JZBW_ZZL_YL t
-	WHERE t.DELETE_FLAG = 'N'
-	AND t.zzid = #{zzid}
-	</select>
-
-	<!--通过装置ID查询所有产物信息-->
-	<select id="doFindChanWuList" parameterType="ChanwuVO"  resultType="ChanwuVO">
-	SELECT
-		t.uuid uuid,
-		t.sjlx sjlx,
-		t.zzid zzid,
-		t.cwmc cwmc,
-		t.lhxz lhxz,
-		t.cwcl cwcl,
-		t.gylc gylc,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
-		t.delete_flag deleteFlag,
-		t.datasource datasource,
-		t.bz bz,
-		t.jdh jdh,
-		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
-		t.reserve1 reserve1,
-		t.reserve2 reserve2,
-		t.reserve3 reserve3,
-		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
-	FROM YAGL_JZBW_ZZL_CW t
-	WHERE t.DELETE_FLAG = 'N'
-	AND t.zzid = #{zzid}
 	</select>
 
 	<!--通过罐组ID查询所有储罐信息-->

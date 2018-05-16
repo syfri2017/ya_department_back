@@ -202,7 +202,7 @@
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
 		c2.code_name zdbwlxmc
 		FROM YAGL_ZDBW t
 		<!--重点部位类型-->
@@ -303,7 +303,7 @@
 	<!--11.根据对象查询记录-->
 	<select id="doFindByVO" parameterType="ImportantpartsVO"  resultType="ImportantpartsVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
 		c2.code_name zdbwlxmc
 		FROM YAGL_ZDBW t
 		<!--重点部位类型-->
