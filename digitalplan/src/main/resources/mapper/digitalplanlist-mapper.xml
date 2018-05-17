@@ -138,9 +138,49 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_YA_ZDDW t  WHERE t.DELETE_FLAG = 'N'
-		<include refid="SQL_CONDITION"/>
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name yalxmc,
+		c4.code_name yaztmc,
+		c6.code_name yajbmc,
+		c8.code_name shztmc
+		FROM YAGL_YA_ZDDW t
+		<!--预案类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.YALX = c2.CODE_VALUE
+		<!--预案状态-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'YAZT' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.YAZT = c4.CODE_VALUE
+		<!--预案级别-->
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'YAJB' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t.YAJB = c6.CODE_VALUE
+		<!--审核状态-->
+		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'YASHZT' And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t.SHZT = c8.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<if test="yamc != null and yamc != '' ">
+			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
+		</if>
+		<if test="dxmc != null and dxmc != '' ">
+			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
+		</if>
+		<if test="dxid != null and dxid != '' ">
+			and t.dxid = #{dxid}
+		</if>
+		<if test="yalx != null and yalx != '' ">
+			and t.yalx LIKE concat(rtrim(#{yalx},'0'),'%')
+		</if>
+		<if test="yajb != null and yajb != '' ">
+			and t.yajb = #{yajb}
+		</if>
+		<if test="yazt != null and yazt != '' ">
+			and t.yazt = #{yazt}
+		</if>
+		<if test="begintime != null and begintime != '' ">
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &gt;= #{begintime}
+		</if>
+		<if test="endtime != null and endtime != '' ">
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &lt;= #{endtime}
+		</if>
 	</select>
 
 	<!--5.根据ID查询记录-->
@@ -309,8 +349,8 @@
 		<if test="yajb != null and yajb != '' ">
 			and t.yajb = #{yajb}
 		</if>
-		<if test="shzt != null and shzt != '' ">
-			and t.shzt = #{shzt}
+		<if test="yazt != null and yazt != '' ">
+			and t.yazt = #{yazt}
 		</if>
 		<if test="begintime != null and begintime != '' ">
 			and TO_CHAR(t.shsj,'yyyy/MM/dd') &gt;= #{begintime}
