@@ -6,27 +6,21 @@ import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.userservice.dao.ImgUploadDAO;
-
-import com.syfri.userservice.model.CodelistDetailVO;
 import com.syfri.userservice.model.CodelistVO;
-import com.syfri.userservice.model.PermissionVO;
 import com.syfri.userservice.service.CodelistService;
 import com.syfri.userservice.utils.Base64ImageUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.core.env.Environment;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import com.syfri.userservice.model.ImgUploadVO;
 import com.syfri.userservice.service.ImgUploadService;
 import com.syfri.baseapi.controller.BaseController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -89,11 +83,16 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	}
 
 	/**
-	 * 根据权限获取资源信息
+	 * @Description: 根据条件获取图片信息
+	 * @Param: [imgUploadVO]
+	 * @Return: ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/17 11:00
 	 */
-	@ApiOperation(value="根据权限查询权限及其资源信息",notes="列表信息")
-	@ApiImplicitParam(name="permissionVO",value="权限对象")
-	@RequiresPermissions("permission:list")
+	@ApiOperation(value="根据条件获取图片信息",notes="列表信息")
+	@ApiImplicitParam(name="imgUploadVO",value="图片对象")
+	@RequiresPermissions("imgupload:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
@@ -114,8 +113,8 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	 * @Modified By:
 	 * @Date: 2018/4/27 9:53
 	 */
-	@ApiOperation(value="根据公式名查询公式数量",notes="查询")
-	@ApiImplicitParam(name="picName",value="公式名")
+	@ApiOperation(value="根据图片名查询图片数量",notes="查询")
+	@ApiImplicitParam(name="picName",value="图片名")
 	@GetMapping("/getNum/{picName}")
 	public @ResponseBody ResultVO getNum(@PathVariable String picName){
 		ResultVO resultVO = ResultVO.build();
@@ -135,11 +134,16 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	}
 
 	/**
-	 * 新增代码值
+	 * @Description: 新增图片
+	 * @Param: [imgUploadVO]
+	 * @Return: ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/17 11:01
 	 */
-	@ApiOperation(value="根据代码集新增代码值",notes="新增")
-	@ApiImplicitParam(name="vo",value="代码值对象")
-	@RequiresPermissions("codelist:add")
+	@ApiOperation(value="新增图片",notes="新增")
+	@ApiImplicitParam(name="vo",value="图片对象")
+	@RequiresPermissions("imgupload:add")
 	@PostMapping("/detail/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
@@ -160,8 +164,8 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	 * @Modified By:
 	 * @Date: 2018/4/20 16:44
 	 */
-	@ApiOperation(value="根据条件获取化学危险品信息",notes="列表信息")
-	@ApiImplicitParam(name="vo",value="化学危险品对象")
+	@ApiOperation(value="附件上传",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="图片对象")
 	@RequestMapping("/insertImage")
 	@ResponseBody
 	public
@@ -213,11 +217,16 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	}
 
 	/**
-	 * 删除代码值
+	 * @Description: 删除图片
+	 * @Param: [id]
+	 * @Return: ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/17 11:03
 	 */
-	@ApiOperation(value="根据主键删除代码集代码值",notes="删除")
-	@ApiImplicitParam(name="id",value="代码值主键")
-	@RequiresPermissions("codelist:delete")
+	@ApiOperation(value="根据主键删除图片",notes="删除")
+	@ApiImplicitParam(name="id",value="图片主键")
+	@RequiresPermissions("imgupload:delete")
 	@PostMapping("/detail/deleteByIds")
 	public @ResponseBody ResultVO deleteDetailByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
@@ -236,6 +245,14 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 		return resultVO;
 	}
 
+	/**
+	 * @Description: 根据id获取图片信息
+	 * @Param: [pkid]
+	 * @Return: ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/17 11:03
+	 */
 	@ApiOperation(value="根据id获取图片信息",notes="列表信息")
 	@GetMapping("/doFindById/{pkid}")
 	public @ResponseBody ResultVO getDetail(@PathVariable String pkid){
@@ -256,9 +273,17 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	/**
 	 * 修改代码值
 	 */
-	@ApiOperation(value="根据代码集修改代码值",notes="修改")
-	@ApiImplicitParam(name="vo",value="代码值对象")
-	@RequiresPermissions("codelist:update")
+	/**
+	 * @Description: 修改图片信息
+	 * @Param: [imgUploadVO]
+	 * @Return: ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/17 11:03
+	 */
+	@ApiOperation(value="修改图片信息",notes="修改")
+	@ApiImplicitParam(name="vo",value="图片对象")
+	@RequiresPermissions("imgupload:update")
 	@PostMapping("/detail/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();

@@ -23,7 +23,14 @@ public class ImgUploadServiceImpl extends BaseServiceImpl<ImgUploadVO> implement
 		return imgUploadDAO;
 	}
 
-	/*--获取所有角色.--*/
+	/**
+	 * @Description: 获取所有角色
+	 * @Param: []
+	 * @Return: java.util.List<com.syfri.userservice.model.ImgUploadVO>
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/17 11:05
+	 */
 	@Override
 	public List<ImgUploadVO> doFindAll(){
 		return imgUploadDAO.doFindAll();
