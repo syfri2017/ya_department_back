@@ -42,21 +42,7 @@ public class ImportantpartsServiceImpl extends BaseServiceImpl<ImportantpartsVO>
 	/*--根据重点单位id获取装置类重点部位详情集合.--*/
 	@Override
 	public List<ImportantpartsVO> doFindZzlListByZddwId(String zddwId) {
-		List<ImportantpartsVO> resultList = this.importantpartsDAO.doFindJzlListByZddwId(zddwId);
-		for (ImportantpartsVO vo : resultList){
-			ZuchengVO zuchengVO = new ZuchengVO();
-			YuanliaoVO yuanliaoVO = new YuanliaoVO();
-			ChanwuVO chanwuVO = new ChanwuVO();
-			zuchengVO.setZzid(vo.getZdbwid());
-			yuanliaoVO.setZzid(vo.getZdbwid());
-			chanwuVO.setZzid(vo.getZdbwid());
-			List<ZuchengVO> zuchengList = this.buildingDAO.doFindZuChengList(zuchengVO);
-			List<YuanliaoVO> yuanliaoList = this.buildingDAO.doFindYuanLiaoList(yuanliaoVO);
-			List<ChanwuVO> chanwuList = this.buildingDAO.doFindChanWuList(chanwuVO);
-			vo.setZuchengList(zuchengList);
-			vo.setYuanliaoList(yuanliaoList);
-			vo.setChanwuList(chanwuList);
-		}
+		List<ImportantpartsVO> resultList = this.importantpartsDAO.doFindZzlListByZddwId(zddwId);
 		return resultList;
 	}
 	/*--根据重点单位id获取储罐类重点部位详情集合.--*/

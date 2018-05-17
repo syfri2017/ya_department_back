@@ -365,4 +365,24 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		}
 		return resultVO;
 	}
+
+	/*
+	 * @Description:查询行政区划，只保留31个省
+	 * @Author: yushch
+	 * @Modified By:
+	 * @Date: 20180516
+	 */
+	@ApiOperation(value="查询行政区划",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@GetMapping("/getXzqh/{codetype}")
+	public @ResponseBody ResultVO getXzqh(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindXzqhCodelist(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

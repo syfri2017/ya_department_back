@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.model.buildingzoning;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 
@@ -62,6 +63,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String jzl_reserve2;	//备用字段2
 	private String jzl_reserve3;	//备用字段3
 	private String jzl_reserve4;	//备用字段4
+	private List<WeixianjiezhiVO> WeixianjiezhiList;	//危险介质list
 
 	private String jzl_jzqkmc;	//建筑情况名称
 	private String jzl_jzsyxzmc;	//建筑使用性质名称
@@ -71,9 +73,12 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String zzl_fqid;	//建筑分区ID
 	private String zzl_jzjg;	//建筑结构
 	private String zzl_zdmj;	//占地面积
+	private String zzl_zzzc;	//装置组成
 	private String zzl_zzgd;	//装置高度(m)
 	private String zzl_jsfzr;	//技术负责人
 	private String zzl_jsfzrdh;	//技术负责人电话
+	private String zzl_ylxx;	//原料信息
+	private String zzl_cwxx;	//产物信息
 	private String zzl_gylc;	//工艺流程
 	private String zzl_cjrid;	//创建人ID
 	private String zzl_cjrmc;	//创建人名称
@@ -90,9 +95,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String zzl_reserve2;	//备用字段2
 	private String zzl_reserve3;	//备用字段3
 	private String zzl_reserve4;	//备用字段4
-	private String zzl_dymc; //组成单元名称
-	private String zzl_ylmc; //原料名称
-	private String zzl_cwmc; //产物名称
 
 	private String zzl_jzjgmc;	//建筑结构名称
 
@@ -123,6 +125,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String cgl_reserve2;	//备用字段2
 	private String cgl_reserve3;	//备用字段3
 	private String cgl_reserve4;	//备用字段4
+	private List<ChuguanVO> ChuguanList;	//储罐list
 
 	public String getFqid(){
 		return fqid;
@@ -438,6 +441,8 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setJzl_reserve4(String jzl_reserve4) {
 		this.jzl_reserve4 = jzl_reserve4;
 	}
+	public List<WeixianjiezhiVO> getWeixianjiezhiList() { return WeixianjiezhiList; }
+	public void setWeixianjiezhiList(List<WeixianjiezhiVO> weixianjiezhiList) { WeixianjiezhiList = weixianjiezhiList; }
 
 	public String getJzl_jzqkmc() {
 		return jzl_jzqkmc;
@@ -482,6 +487,8 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setZzl_zdmj(String zzl_zdmj) {
 		this.zzl_zdmj = zzl_zdmj;
 	}
+	public String getZzl_zzzc() { return zzl_zzzc; }
+	public void setZzl_zzzc(String zzl_zzzc) { this.zzl_zzzc = zzl_zzzc; }
 	public String getZzl_zzgd() {
 		return zzl_zzgd;
 	}
@@ -500,6 +507,10 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setZzl_jsfzrdh(String zzl_jsfzrdh) {
 		this.zzl_jsfzrdh = zzl_jsfzrdh;
 	}
+	public String getZzl_ylxx() { return zzl_ylxx; }
+	public void setZzl_ylxx(String zzl_ylxx) { this.zzl_ylxx = zzl_ylxx; }
+	public String getZzl_cwxx() { return zzl_cwxx; }
+	public void setZzl_cwxx(String zzl_cwxx) { this.zzl_cwxx = zzl_cwxx; }
 	public String getZzl_gylc() {
 		return zzl_gylc;
 	}
@@ -595,24 +606,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setZzl_reserve4(String zzl_reserve4) {
 		this.zzl_reserve4 = zzl_reserve4;
-	}
-	public String getZzl_dymc() {
-		return zzl_dymc;
-	}
-	public void setZzl_dymc(String zzl_dymc) {
-		this.zzl_dymc = zzl_dymc;
-	}
-	public String getZzl_ylmc() {
-		return zzl_ylmc;
-	}
-	public void setZzl_ylmc(String zzl_ylmc) {
-		this.zzl_ylmc = zzl_ylmc;
-	}
-	public String getZzl_cwmc() {
-		return zzl_cwmc;
-	}
-	public void setZzl_cwmc(String zzl_cwmc) {
-		this.zzl_cwmc = zzl_cwmc;
 	}
 
 	public String getZzl_jzjgmc() {
@@ -784,4 +777,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setCgl_reserve4(String cgl_reserve4) {
 		this.cgl_reserve4 = cgl_reserve4;
 	}
+	public List<ChuguanVO> getChuguanList() {return ChuguanList; }
+	public void setChuguanList(List<ChuguanVO> chuguanList) { ChuguanList = chuguanList; }
 }
