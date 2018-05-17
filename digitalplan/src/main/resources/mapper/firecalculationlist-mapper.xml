@@ -99,7 +99,7 @@
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="FirecalculationlistVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM ZHJC_JSGS t WHERE 1=1 AND DELETE_FLAG = 'N'
+		SELECT COUNT(0) AS NUM FROM YAGL_ZHJC_JSGS t WHERE 1=1 AND DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -107,7 +107,7 @@
 	<select id="doSearchListByVO" parameterType="FirecalculationlistVO"  resultType="FirecalculationlistVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM ZHJC_JSGS t  WHERE t.DELETE_FLAG = 'N' 
+		FROM YAGL_ZHJC_JSGS t  WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -121,7 +121,7 @@
 		/*,m.CODEID
 		,p.CODE_NAME cslxmc*/
 		,h.GSID
-		FROM ZHJC_JSGS_CS h
+		FROM YAGL_ZHJC_JSGS_CS h
 		/*LEFT JOIN (select GSID,CSMC,JLDWDM,MRZ from ZHJC_JSGS_CS where delete_flag = 'N') h
 		ON t.uuid = h.GSID*/
 		/*LEFT JOIN SYS_CODELIST m
@@ -136,13 +136,13 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
 			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
-		INSERT INTO ZHJC_JSGS(uuid,gsmc,gslb,gssm,jsgs,jsgsdw,sfqy,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_ZHJC_JSGS(uuid,gsmc,gslb,gssm,jsgs,jsgsdw,sfqy,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES(#{uuid,jdbcType=VARCHAR},#{gsmc,jdbcType=VARCHAR},#{gslb,jdbcType=VARCHAR},#{gssm,jdbcType=VARCHAR},#{jsgs,jdbcType=VARCHAR},#{jsgsdw,jdbcType=VARCHAR},#{sfqy,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO ZHJC_JSGS(uuid,gsmc,gslb,gssm,jsgs,jsgsdw,sfqy,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_ZHJC_JSGS(uuid,gsmc,gslb,gssm,jsgs,jsgsdw,sfqy,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		SELECT SYS_GUID() pkid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
@@ -155,11 +155,11 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  ZHJC_JSGS t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.uuid = #{value}
+		UPDATE  YAGL_ZHJC_JSGS t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.uuid = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="FirecalculationlistVO">UPDATE ZHJC_JSGS<set>
+	<update  id="doUpdateByVO"  parameterType="FirecalculationlistVO">UPDATE YAGL_ZHJC_JSGS<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="gsmc != null">gsmc=#{gsmc},</if>
 			<if test="gslb != null">gslb=#{gslb},</if>
@@ -186,7 +186,7 @@
 	</update>
 
 	<!--10.批量修改-->
-	<update id="doUpdateCsByVO" parameterType="FirecalculationparamVO">UPDATE ZHJC_JSGS_CS<set>
+	<update id="doUpdateCsByVO" parameterType="FirecalculationparamVO">UPDATE YAGL_ZHJC_JSGS_CS<set>
 			<if test="gsid != null and gsid != ''">gsid = #{gsid},</if>
 			<if test="csmc != null and csmc != ''">csmc=#{csmc},</if>
 			<if test="cslxdm != null and cslxdm != ''">cslxdm=#{cslxdm},</if>
@@ -215,7 +215,7 @@
 	<select id="doFindByVO" parameterType="FirecalculationlistVO"  resultType="FirecalculationlistVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM ZHJC_JSGS t 
+		FROM YAGL_ZHJC_JSGS t
 		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -226,7 +226,7 @@
 		<include refid="SQL_CONTENT"/>
 		,p.CODE_NAME lbmc
 		,f.CODEID
-		FROM ZHJC_JSGS t
+		FROM YAGL_ZHJC_JSGS t
 		LEFT JOIN SYS_CODELIST f
 		ON f.CODETYPE = 'GSLB'
 		LEFT JOIN SYS_CODELIST_DETAIL p
@@ -252,14 +252,14 @@
 		,h.MRZ mrz
 		,h.GSID gsid
 		,h.SXH sxh
-		FROM ZHJC_JSGS_CS h
+		FROM YAGL_ZHJC_JSGS_CS h
 		WHERE h.DELETE_FLAG = 'N' AND  h.gsid = #{value}
 		ORDER BY h.SXH ASC
 	</select>
 
 	<!--14.新增公式时批量插入参数-->
 	<insert  id="doInsertCsByVO">
-		INSERT INTO ZHJC_JSGS_CS(uuid,gsid,csmc,cslxdm,jldwdm,mrz,sxh,cjrid,cjrmc,cjsj,delete_flag)
+		INSERT INTO YAGL_ZHJC_JSGS_CS(uuid,gsid,csmc,cslxdm,jldwdm,mrz,sxh,cjrid,cjrmc,cjsj,delete_flag)
 		SELECT SYS_GUID() uuid, A.*
 		FROM (
 		<foreach collection="params" item="item" index="index" separator="UNION ALL" >
@@ -274,6 +274,6 @@
 
 	<!--16.删除公式时删除公式参数-->
 	<update id="doDeleteJsgsCsBatch"  parameterType="String">
-		UPDATE ZHJC_JSGS_CS t SET t.DELETE_FLAG = 'Y' WHERE 1=1 AND t.GSID = #{value}
+		UPDATE YAGL_ZHJC_JSGS_CS t SET t.DELETE_FLAG = 'Y' WHERE 1=1 AND t.GSID = #{value}
 	</update>
 </mapper>
