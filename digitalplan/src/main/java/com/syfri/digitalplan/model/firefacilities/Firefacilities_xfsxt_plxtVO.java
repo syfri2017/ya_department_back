@@ -12,16 +12,9 @@ public class Firefacilities_xfsxt_plxtVO extends FirefacilitiesVO implements Ser
 	private String xfssid;	//消防设施ID
 	private String ssjz;	//所属建（构）筑
 	private String wz;	//位置
-	private String iscz;	//有/无[0]无，[1]有
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
-	private String xgrid;	//修改人ID
-	private String xgrmc;	//修改人姓名
-	private String xgsj;	//修改时间
+	private String ywplxt;	//有/无[0]无，[1]有
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
-	private String bz;	//备注
 	private String jdh;	//节点号
 	private String sjc;	//时间戳
 	private String reserve1;	//备用字段1
@@ -53,47 +46,11 @@ public class Firefacilities_xfsxt_plxtVO extends FirefacilitiesVO implements Ser
 	public void setWz(String wz){
 		this.wz = wz;
 	}
-	public String getIscz(){
-		return iscz;
+	public String getYwplxt() {
+		return ywplxt;
 	}
-	public void setIscz(String iscz){
-		this.iscz = iscz;
-	}
-	public String getCjrid(){
-		return cjrid;
-	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getXgrid(){
-		return xgrid;
-	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
-	}
-	public String getXgrmc(){
-		return xgrmc;
-	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
-	}
-	public String getXgsj(){
-		return xgsj;
-	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
+	public void setYwplxt(String ywplxt) {
+		this.ywplxt = ywplxt;
 	}
 	public String getDeleteFlag(){
 		return deleteFlag;
@@ -106,12 +63,6 @@ public class Firefacilities_xfsxt_plxtVO extends FirefacilitiesVO implements Ser
 	}
 	public void setDatasource(String datasource){
 		this.datasource = datasource;
-	}
-	public String getBz(){
-		return bz;
-	}
-	public void setBz(String bz){
-		this.bz = bz;
 	}
 	public String getJdh(){
 		return jdh;

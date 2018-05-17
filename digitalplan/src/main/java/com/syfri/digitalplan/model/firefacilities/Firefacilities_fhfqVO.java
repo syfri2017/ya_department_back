@@ -14,15 +14,10 @@ public class Firefacilities_fhfqVO extends FirefacilitiesVO implements Serializa
 	private String qywz;	//undefined
 	private String fgss;	//undefined
 	private String fgwz;	//undefined
-	private String cjrid;	//undefined
-	private String cjrmc;	//undefined
-	private String cjsj;	//undefined
-	private String xgrid;	//undefined
-	private String xgrmc;	//undefined
-	private String xgsj;	//undefined
+
 	private String deleteFlag;	//undefined
 	private String datasource;	//undefined
-	private String bz;	//undefined
+
 	private String jdh;	//undefined
 	private String sjc;	//undefined
 	private String reserve1;	//undefined
@@ -66,42 +61,7 @@ public class Firefacilities_fhfqVO extends FirefacilitiesVO implements Serializa
 	public void setFgwz(String fgwz){
 		this.fgwz = fgwz;
 	}
-	public String getCjrid(){
-		return cjrid;
-	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getXgrid(){
-		return xgrid;
-	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
-	}
-	public String getXgrmc(){
-		return xgrmc;
-	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
-	}
-	public String getXgsj(){
-		return xgsj;
-	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
-	}
+
 	public String getDeleteFlag(){
 		return deleteFlag;
 	}
@@ -114,12 +74,7 @@ public class Firefacilities_fhfqVO extends FirefacilitiesVO implements Serializa
 	public void setDatasource(String datasource){
 		this.datasource = datasource;
 	}
-	public String getBz(){
-		return bz;
-	}
-	public void setBz(String bz){
-		this.bz = bz;
-	}
+
 	public String getJdh(){
 		return jdh;
 	}

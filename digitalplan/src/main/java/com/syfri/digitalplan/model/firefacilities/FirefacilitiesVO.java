@@ -158,17 +158,12 @@ public class FirefacilitiesVO extends ValueObject implements Serializable{
 //	}
 
 	private String jbxx_xfssid;	//消防设施ID（主键）
-	private String jbxx_fqid;	//建筑分区ID
+	private String jbxx_jzid;	//建筑分区ID
 	private String jbxx_xfssmc;	//消防设施名称
 	private String jbxx_xfsslx;	//消防设施类型
 	private String jbxx_iszddw;	//是否重点单位消防设施
 	private String jbxx_zddwid;	//重点单位ID
-	private String jbxx_cjrid;	//创建人ID
-	private String jbxx_cjrmc;	//创建人名称
-	private String jbxx_cjsj;	//创建时间
-	private String jbxx_xgrid;	//修改人ID
-	private String jbxx_xgrmc;	//修改人姓名
-	private String jbxx_xgsj;	//修改时间
+
 	private String jbxx_deleteFlag;	//删除标志
 	private String jbxx_datasource;	//数据来源[100000一体化]
 	private String jbxx_bz;	//备注
@@ -187,12 +182,12 @@ public class FirefacilitiesVO extends ValueObject implements Serializable{
 		this.jbxx_xfssid = jbxx_xfssid;
 	}
 
-	public String getJbxx_fqid() {
-		return jbxx_fqid;
+	public String getJbxx_jzid() {
+		return jbxx_jzid;
 	}
 
-	public void setJbxx_fqid(String jbxx_fqid) {
-		this.jbxx_fqid = jbxx_fqid;
+	public void setJbxx_jzid(String jbxx_jzid) {
+		this.jbxx_jzid = jbxx_jzid;
 	}
 
 	public String getJbxx_xfssmc() {
@@ -225,54 +220,6 @@ public class FirefacilitiesVO extends ValueObject implements Serializable{
 
 	public void setJbxx_zddwid(String jbxx_zddwid) {
 		this.jbxx_zddwid = jbxx_zddwid;
-	}
-
-	public String getJbxx_cjrid() {
-		return jbxx_cjrid;
-	}
-
-	public void setJbxx_cjrid(String jbxx_cjrid) {
-		this.jbxx_cjrid = jbxx_cjrid;
-	}
-
-	public String getJbxx_cjrmc() {
-		return jbxx_cjrmc;
-	}
-
-	public void setJbxx_cjrmc(String jbxx_cjrmc) {
-		this.jbxx_cjrmc = jbxx_cjrmc;
-	}
-
-	public String getJbxx_cjsj() {
-		return jbxx_cjsj;
-	}
-
-	public void setJbxx_cjsj(String jbxx_cjsj) {
-		this.jbxx_cjsj = jbxx_cjsj;
-	}
-
-	public String getJbxx_xgrid() {
-		return jbxx_xgrid;
-	}
-
-	public void setJbxx_xgrid(String jbxx_xgrid) {
-		this.jbxx_xgrid = jbxx_xgrid;
-	}
-
-	public String getJbxx_xgrmc() {
-		return jbxx_xgrmc;
-	}
-
-	public void setJbxx_xgrmc(String jbxx_xgrmc) {
-		this.jbxx_xgrmc = jbxx_xgrmc;
-	}
-
-	public String getJbxx_xgsj() {
-		return jbxx_xgsj;
-	}
-
-	public void setJbxx_xgsj(String jbxx_xgsj) {
-		this.jbxx_xgsj = jbxx_xgsj;
 	}
 
 	public String getJbxx_deleteFlag() {

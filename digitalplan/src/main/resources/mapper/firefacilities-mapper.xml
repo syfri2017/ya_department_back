@@ -6,8 +6,8 @@
 		<if test="jbxx_xfssid != null and jbxx_xfssid != '' ">
 		 and t.xfssid = #{jbxx_xfssid}
 		</if>
-		<if test="jbxx_fqid != null and jbxx_fqid != '' ">
-		 and t.fqid = #{jbxx_fqid}
+		<if test="jbxx_jzid != null and jbxx_jzid != '' ">
+		 and t.jzid = #{jbxx_jzid}
 		</if>
 		<if test="jbxx_xfssmc != null and jbxx_xfssmc != '' ">
 		 and t.xfssmc = #{jbxx_xfssmc}
@@ -20,24 +20,6 @@
 		</if>
 		<if test="jbxx_zddwid != null and jbxx_zddwid != '' ">
 		 and t.zddwid = #{jbxx_zddwid}
-		</if>
-		<if test="jbxx_cjrid != null and jbxx_cjrid != '' ">
-		 and t.cjrid = #{jbxx_cjrid}
-		</if>
-		<if test="jbxx_cjrmc != null and jbxx_cjrmc != '' ">
-		 and t.cjrmc = #{jbxx_cjrmc}
-		</if>
-		<if test="jbxx_cjsj != null and jbxx_cjsj != '' ">
-		 and t.cjsj = #{jbxx_cjsj}
-		</if>
-		<if test="jbxx_xgrid != null and jbxx_xgrid != '' ">
-		 and t.xgrid = #{jbxx_xgrid}
-		</if>
-		<if test="jbxx_xgrmc != null and jbxx_xgrmc != '' ">
-		 and t.xgrmc = #{jbxx_xgrmc}
-		</if>
-		<if test="jbxx_xgsj != null and jbxx_xgsj != '' ">
-		 and t.xgsj = #{jbxx_xgsj}
 		</if>
 		<if test="jbxx_deleteFlag != null and jbxx_deleteFlag != '' ">
 		 and t.delete_flag = #{jbxx_deleteFlag}
@@ -71,17 +53,11 @@
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
 		t.xfssid jbxx_xfssid,
-		t.fqid jbxx_fqid,
+		t.jzid jbxx_jzid,
 		t.xfssmc jbxx_xfssmc,
 		t.xfsslx jbxx_xfsslx,
 		t.iszddw jbxx_iszddw,
 		t.zddwid jbxx_zddwid,
-		t.cjrid jbxx_cjrid,
-		t.cjrmc jbxx_cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') jbxx_cjsj,
-		t.xgrid jbxx_xgrid,
-		t.xgrmc jbxx_xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') jbxx_xgsj,
 		t.delete_flag jbxx_deleteFlag,
 		t.datasource jbxx_datasource,
 		t.bz jbxx_bz,
@@ -120,18 +96,18 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_XFSS(xfssid,fqid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{xfssid,jdbcType=VARCHAR},#{fqid,jdbcType=VARCHAR},#{xfssmc,jdbcType=VARCHAR},#{xfsslx,jdbcType=VARCHAR},#{iszddw,jdbcType=VARCHAR},#{zddwid,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+		INSERT INTO YAGL_XFSS(xfssid,jzid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{xfssid,jdbcType=VARCHAR},#{jzid,jdbcType=VARCHAR},#{xfssmc,jdbcType=VARCHAR},#{xfsslx,jdbcType=VARCHAR},#{iszddw,jdbcType=VARCHAR},#{zddwid,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO YAGL_XFSS(xfssid,fqid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_XFSS(xfssid,jzid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		SELECT SYS_GUID() pkid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.xfssid,jdbcType=VARCHAR} xfssid,#{item.fqid,jdbcType=VARCHAR} fqid,#{item.xfssmc,jdbcType=VARCHAR} xfssmc,#{item.xfsslx,jdbcType=VARCHAR} xfsslx,#{item.iszddw,jdbcType=VARCHAR} iszddw,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.xfssid,jdbcType=VARCHAR} xfssid,#{item.jzid,jdbcType=VARCHAR} jzid,#{item.xfssmc,jdbcType=VARCHAR} xfssmc,#{item.xfsslx,jdbcType=VARCHAR} xfsslx,#{item.iszddw,jdbcType=VARCHAR} iszddw,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		FROM DUAL
 		</foreach>
 		) A
@@ -147,7 +123,7 @@
 		UPDATE   YAGL_XFSS  
 		<set>
 			<if test="xfssid != null">xfssid=#{xfssid},</if>
-			<if test="fqid != null">fqid=#{fqid},</if>
+			<if test="jzid != null">jzid=#{jzid},</if>
 			<if test="xfssmc != null">xfssmc=#{xfssmc},</if>
 			<if test="xfsslx != null">xfsslx=#{xfsslx},</if>
 			<if test="iszddw != null">iszddw=#{iszddw},</if>
@@ -173,14 +149,14 @@
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_XFSS(xfssid,fqid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_XFSS(xfssid,jzid,xfssmc,xfsslx,iszddw,zddwid,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.xfssid,jdbcType=VARCHAR} xfssid,#{item.fqid,jdbcType=VARCHAR} fqid,#{item.xfssmc,jdbcType=VARCHAR} xfssmc,#{item.xfsslx,jdbcType=VARCHAR} xfsslx,#{item.iszddw,jdbcType=VARCHAR} iszddw,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.xfssid,jdbcType=VARCHAR} xfssid,#{item.jzid,jdbcType=VARCHAR} jzid,#{item.xfssmc,jdbcType=VARCHAR} xfssmc,#{item.xfsslx,jdbcType=VARCHAR} xfsslx,#{item.iszddw,jdbcType=VARCHAR} iszddw,#{item.zddwid,jdbcType=VARCHAR} zddwid,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
 			xfssid = VALUES(xfssid),
-			fqid = VALUES(fqid),
+			jzid = VALUES(jzid),
 			xfssmc = VALUES(xfssmc),
 			xfsslx = VALUES(xfsslx),
 			iszddw = VALUES(iszddw),
@@ -216,18 +192,11 @@
 		SELECT
 		t.uuid uuid,
 		t.xfssid xfssid,
-		t.jzid jzid,
+		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -242,18 +211,11 @@
 		SELECT
 		t.uuid uuid,
 		t.xfssid xfssid,
-		t.jzid jzid,
+		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -268,18 +230,11 @@
 		SELECT
 		t.uuid uuid,
 		t.xfssid xfssid,
-		t.jzid jzid,
+		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -294,17 +249,10 @@
 		SELECT
 		t.uuid uuid,
 		t.xfssid xfssid,
-		t.jzid jzid,
+		t.ssjz ssjz,
 		t.wz wz,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -319,18 +267,11 @@
 		SELECT
 		t.uuid uuid,
 		t.xfssid xfssid,
-		t.jzid jzid,
+		t.ssjz ssjz,
 		t.wz wz,
-		CASE t.isyjgb WHEN '1' THEN '有' WHEN '0' THEN '无' END isyjgb,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		CASE t.ywyjgb WHEN '1' THEN '有' WHEN '0' THEN '无' END ywyjgb,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -351,15 +292,10 @@
 		t.shszdll shszdll,
 		t.blbsl blbsl,
 		t.blbzdll blbzdll,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -378,15 +314,10 @@
 		t.wz wz,
 		t.sxrl sxrl,
 		t.bjsd bjsd,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -405,17 +336,10 @@
 		t.wz wz,
 		t.sxrl sxrl,
 		t.bjsd bjsd,
-		CASE t.isqsj WHEN '1' THEN '有' WHEN '0' THEN '无' END isqsj,
+		CASE t.ywqsj WHEN '1' THEN '有' WHEN '0' THEN '无' END ywqsj,
 		t.qsjwz qsjwz,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -433,16 +357,11 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		CASE t.sfky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END sfky,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -460,16 +379,9 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		CASE t.sfky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END sfky,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -489,15 +401,10 @@
 		t.xh xh,
 		t.azxs azxs,
 		to_char(t.jskcc,'fm9999999990.00') jskcc,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -519,16 +426,9 @@
 		t.xfssid xfssid,
 		t.ssjz ssjz,
 		t.wz wz,
-		CASE t.iscz WHEN '1' THEN '有' WHEN '0' THEN '无' END iscz,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		CASE t.ywplxt WHEN '1' THEN '有' WHEN '0' THEN '无' END ywplxt,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -545,17 +445,12 @@
 		t.xfssid xfssid,
 		t.ssjz ssjz,
 		t.wz wz,
-		CASE t.iscz WHEN '1' THEN '有' WHEN '0' THEN '无' END iscz,
+		CASE t.ywlqsxt WHEN '1' THEN '有' WHEN '0' THEN '无' END ywlqsxt,
 		t.gsqd gsqd,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -574,15 +469,10 @@
 		t.wz wz,
 		t.sl sl,
 		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -600,15 +490,10 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -628,15 +513,10 @@
 		t.pmylx pmylx,
 		t.pmycl pmycl,
 		t.pmbzdll pmbzdll,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -659,15 +539,8 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -685,16 +558,9 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		CASE t.sfky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END sfky,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -714,15 +580,10 @@
 		t.xh xh,
 		t.sl sl,
 		t.ll ll,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -740,15 +601,10 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -767,15 +623,10 @@
 		t.wz wz,
 		t.sl sl,
 		t.edyl edyl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -794,15 +645,10 @@
 		t.wz wz,
 		t.sl sl,
 		t.edyl edyl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -820,15 +666,10 @@
 		t.wz wz,
 		CASE t.iszdbj WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END iszdbj,
 		CASE t.isldkz WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isldkz,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -844,15 +685,10 @@
 		t.uuid uuid,
 		t.xfssid xfssid,
 		t.wz wz,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -869,15 +705,10 @@
 		t.xfssid xfssid,
 		t.qbwz qbwz,
 		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -896,15 +727,10 @@
 		t.qywz qywz,
 		t.fgss fgss,
 		t.fgwz fgwz,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -921,15 +747,10 @@
 		t.xfssid xfssid,
 		t.qbwz qbwz,
 		t.zyfw zyfw,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -946,15 +767,10 @@
 		t.xfssid xfssid,
 		t.qbwz qbwz,
 		t.zyfw zyfw,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -971,15 +787,10 @@
 		t.xfssid xfssid,
 		t.wz wz,
 		t.ms ms,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
+
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
