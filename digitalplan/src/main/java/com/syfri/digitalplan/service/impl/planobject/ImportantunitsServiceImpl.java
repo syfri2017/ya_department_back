@@ -41,8 +41,8 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 		List<String> list = this.buildingDAO.doFindFqidListByZddwid(zddwid);
 		for(String fqid : list){
 			BuildingVO buildingVO = new BuildingVO();
-			buildingVO.setFqid(fqid);
-			buildingVO.setFqlx(fqlx);
+			buildingVO.setJzid(fqid);
+			buildingVO.setJzlx(fqlx);
 			BuildingVO resultVO = this.buildingService.doFindFqDetailByVo(buildingVO);
 			resultList.add(resultVO);
 		}

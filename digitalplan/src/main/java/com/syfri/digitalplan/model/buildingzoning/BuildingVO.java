@@ -9,21 +9,14 @@ public class BuildingVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String fqid;	//建筑分区ID
-	private String fqmc;	//建筑分区名称
-	private String fqlx;	//建筑分区类型
-	private String fqwz;	//建筑分区位置
+	private String jzid;	//建筑分区ID
+	private String jzmc;	//建筑分区名称
+	private String jzlx;	//建筑分区类型
+	private String jzwz;	//建筑分区位置
 	private String lon;	//经度
 	private String lat;	//纬度
 	private String xqxclx;	//辖区行车路线
 	private String yjddsc;	//预计到达时长(min)
-	private String zyd;	//重要度(用于排序)
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
-	private String xgrid;	//修改人ID
-	private String xgrmc;	//修改人姓名
-	private String xgsj;	//修改时间
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
 	private String bz;	//备注
@@ -34,10 +27,10 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
-	private String fqlxmc;	//建筑分区类型名称
+	private String jzlxmc;	//建筑分区类型名称
 
 	private String jzl_uuid;	//主键
-	private String jzl_fqid;	//建筑分区ID
+	private String jzl_jzid;	//建筑分区ID
 	private String jzl_jzqk;	//建筑情况
 	private String jzl_jzsyxz;	//建筑使用性质
 	private String jzl_jzjg;	//建筑结构
@@ -48,15 +41,9 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String jzl_dxgd;	//地下高度(m)
 	private String jzl_dscs;	//地上层数
 	private String jzl_dxcs;	//地下层数
-	private String jzl_cjrid;	//创建人ID
-	private String jzl_cjrmc;	//创建人名称
-	private String jzl_cjsj;	//创建时间
-	private String jzl_xgrid;	//修改人ID
-	private String jzl_xgrmc;	//修改人姓名
-	private String jzl_xgsj;	//修改时间
 	private String jzl_deleteFlag;	//删除标志
 	private String jzl_datasource;	//数据来源[100000一体化]
-	private String jzl_bz;	//备注
+	//private String jzl_bz;	//备注
 	private String jzl_jdh;	//节点号
 	private String jzl_sjc;	//时间戳
 	private String jzl_reserve1;	//备用字段1
@@ -70,7 +57,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String jzl_jzjgmc;	//建筑结构名称
 
 	private String zzl_uuid;	//主键
-	private String zzl_fqid;	//建筑分区ID
+	private String zzl_jzid;	//建筑分区ID
 	private String zzl_jzjg;	//建筑结构
 	private String zzl_zdmj;	//占地面积
 	private String zzl_zzzc;	//装置组成
@@ -85,10 +72,9 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String zzl_cjsj;	//创建时间
 	private String zzl_xgrid;	//修改人ID
 	private String zzl_xgrmc;	//修改人姓名
-	private String zzl_xgsj;	//修改时间
 	private String zzl_deleteFlag;	//删除标志
 	private String zzl_datasource;	//数据来源[100000一体化]
-	private String zzl_bz;	//备注
+	//private String zzl_bz;	//备注
 	private String zzl_jdh;	//节点号
 	private String zzl_sjc;	//时间戳
 	private String zzl_reserve1;	//备用字段1
@@ -99,26 +85,20 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String zzl_jzjgmc;	//建筑结构名称
 
 	private String cgl_uuid;	//主键
-	private String cgl_fqid;	//建筑分区ID
+	private String cgl_jzid;	//建筑分区ID
 	private String cgl_zrj;	//总容积(m3)
-	private String cgl_czsl;	//储罐数量
+	private String cgl_cgsl;	//储罐数量
 	private String cgl_cgjg;	//储罐间隔
 	private String cgl_ccjzms;	//存储介质描述
 	private String cgl_jsfzr;	//技术负责人
 	private String cgl_jsfzrdh;	//技术负责人电话
-	private String cgl_blgxd;	//罐组毗邻情况(东)
-	private String cgl_blgxn;	//罐组毗邻情况(南)
-	private String cgl_blgxx;	//罐组毗邻情况(西)
-	private String cgl_blgxb;	//罐组毗邻情况(北)
-	private String cgl_cjrid;	//创建人ID
-	private String cgl_cjrmc;	//创建人名称
-	private String cgl_cjsj;	//创建时间
-	private String cgl_xgrid;	//修改人ID
-	private String cgl_xgrmc;	//修改人姓名
-	private String cgl_xgsj;	//修改时间
+	private String cgl_plqkd;	//罐组毗邻情况(东)
+	private String cgl_plqkn;	//罐组毗邻情况(南)
+	private String cgl_plqkx;	//罐组毗邻情况(西)
+	private String cgl_plqkb;	//罐组毗邻情况(北)
 	private String cgl_deleteFlag;	//删除标志
 	private String cgl_datasource;	//数据来源[100000一体化]
-	private String cgl_bz;	//备注
+	//private String cgl_bz;	//备注
 	private String cgl_jdh;	//节点号
 	private String cgl_sjc;	//时间戳
 	private String cgl_reserve1;	//备用字段1
@@ -127,29 +107,29 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String cgl_reserve4;	//备用字段4
 	private List<ChuguanVO> ChuguanList;	//储罐list
 
-	public String getFqid(){
-		return fqid;
+	public String getJzid() {
+		return jzid;
 	}
-	public void setFqid(String fqid){
-		this.fqid = fqid;
+	public void setJzid(String jzid) {
+		this.jzid = jzid;
 	}
-	public String getFqmc(){
-		return fqmc;
+	public String getJzmc() {
+		return jzmc;
 	}
-	public void setFqmc(String fqmc){
-		this.fqmc = fqmc;
+	public void setJzmc(String jzmc) {
+		this.jzmc = jzmc;
 	}
-	public String getFqlx(){
-		return fqlx;
+	public String getJzlx() {
+		return jzlx;
 	}
-	public void setFqlx(String fqlx){
-		this.fqlx = fqlx;
+	public void setJzlx(String jzlx) {
+		this.jzlx = jzlx;
 	}
-	public String getFqwz(){
-		return fqwz;
+	public String getJzwz() {
+		return jzwz;
 	}
-	public void setFqwz(String fqwz){
-		this.fqwz = fqwz;
+	public void setJzwz(String jzwz) {
+		this.jzwz = jzwz;
 	}
 	public String getLon(){
 		return lon;
@@ -175,48 +155,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setYjddsc(String yjddsc){
 		this.yjddsc = yjddsc;
 	}
-	public String getZyd(){
-		return zyd;
-	}
-	public void setZyd(String zyd){
-		this.zyd = zyd;
-	}
-	public String getCjrid(){
-		return cjrid;
-	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getXgrid(){
-		return xgrid;
-	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
-	}
-	public String getXgrmc(){
-		return xgrmc;
-	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
-	}
-	public String getXgsj(){
-		return xgsj;
-	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
-	}
+
 	public String getDeleteFlag(){
 		return deleteFlag;
 	}
@@ -272,11 +211,11 @@ public class BuildingVO extends ValueObject implements Serializable{
 		this.reserve4 = reserve4;
 	}
 
-	public String getFqlxmc() {
-		return fqlxmc;
+	public String getJzlxmc() {
+		return jzlxmc;
 	}
-	public void setFqlxmc(String fqlxmc) {
-		this.fqlxmc = fqlxmc;
+	public void setJzlxmc(String jzlxmc) {
+		this.jzlxmc = jzlxmc;
 	}
 
 	public String getJzl_uuid() {
@@ -285,11 +224,11 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setJzl_uuid(String jzl_uuid) {
 		this.jzl_uuid = jzl_uuid;
 	}
-	public String getJzl_fqid() {
-		return jzl_fqid;
+	public String getJzl_jzid() {
+		return jzl_jzid;
 	}
-	public void setJzl_fqid(String jzl_fqid) {
-		this.jzl_fqid = jzl_fqid;
+	public void setJzl_jzid(String jzl_jzid) {
+		this.jzl_jzid = jzl_jzid;
 	}
 	public String getJzl_jzqk() {
 		return jzl_jzqk;
@@ -351,42 +290,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setJzl_dxcs(String jzl_dxcs) {
 		this.jzl_dxcs = jzl_dxcs;
 	}
-	public String getJzl_cjrid() {
-		return jzl_cjrid;
-	}
-	public void setJzl_cjrid(String jzl_cjrid) {
-		this.jzl_cjrid = jzl_cjrid;
-	}
-	public String getJzl_cjrmc() {
-		return jzl_cjrmc;
-	}
-	public void setJzl_cjrmc(String jzl_cjrmc) {
-		this.jzl_cjrmc = jzl_cjrmc;
-	}
-	public String getJzl_cjsj() {
-		return jzl_cjsj;
-	}
-	public void setJzl_cjsj(String jzl_cjsj) {
-		this.jzl_cjsj = jzl_cjsj;
-	}
-	public String getJzl_xgrid() {
-		return jzl_xgrid;
-	}
-	public void setJzl_xgrid(String jzl_xgrid) {
-		this.jzl_xgrid = jzl_xgrid;
-	}
-	public String getJzl_xgrmc() {
-		return jzl_xgrmc;
-	}
-	public void setJzl_xgrmc(String jzl_xgrmc) {
-		this.jzl_xgrmc = jzl_xgrmc;
-	}
-	public String getJzl_xgsj() {
-		return jzl_xgsj;
-	}
-	public void setJzl_xgsj(String jzl_xgsj) {
-		this.jzl_xgsj = jzl_xgsj;
-	}
+
 	public String getJzl_deleteFlag() {
 		return jzl_deleteFlag;
 	}
@@ -398,12 +302,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setJzl_datasource(String jzl_datasource) {
 		this.jzl_datasource = jzl_datasource;
-	}
-	public String getJzl_bz() {
-		return jzl_bz;
-	}
-	public void setJzl_bz(String jzl_bz) {
-		this.jzl_bz = jzl_bz;
 	}
 	public String getJzl_jdh() {
 		return jzl_jdh;
@@ -469,11 +367,11 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setZzl_uuid(String zzl_uuid) {
 		this.zzl_uuid = zzl_uuid;
 	}
-	public String getZzl_fqid() {
-		return zzl_fqid;
+	public String getZzl_jzid() {
+		return zzl_jzid;
 	}
-	public void setZzl_fqid(String zzl_fqid) {
-		this.zzl_fqid = zzl_fqid;
+	public void setZzl_jzid(String zzl_jzid) {
+		this.zzl_jzid = zzl_jzid;
 	}
 	public String getZzl_jzjg() {
 		return zzl_jzjg;
@@ -547,12 +445,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setZzl_xgrmc(String zzl_xgrmc) {
 		this.zzl_xgrmc = zzl_xgrmc;
 	}
-	public String getZzl_xgsj() {
-		return zzl_xgsj;
-	}
-	public void setZzl_xgsj(String zzl_xgsj) {
-		this.zzl_xgsj = zzl_xgsj;
-	}
+
 	public String getZzl_deleteFlag() {
 		return zzl_deleteFlag;
 	}
@@ -564,12 +457,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setZzl_datasource(String zzl_datasource) {
 		this.zzl_datasource = zzl_datasource;
-	}
-	public String getZzl_bz() {
-		return zzl_bz;
-	}
-	public void setZzl_bz(String zzl_bz) {
-		this.zzl_bz = zzl_bz;
 	}
 	public String getZzl_jdh() {
 		return zzl_jdh;
@@ -621,11 +508,12 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setCgl_uuid(String cgl_uuid) {
 		this.cgl_uuid = cgl_uuid;
 	}
-	public String getCgl_fqid() {
-		return cgl_fqid;
+
+	public String getCgl_jzid() {
+		return cgl_jzid;
 	}
-	public void setCgl_fqid(String cgl_fqid) {
-		this.cgl_fqid = cgl_fqid;
+	public void setCgl_jzid(String cgl_jzid) {
+		this.cgl_jzid = cgl_jzid;
 	}
 	public String getCgl_zrj() {
 		return cgl_zrj;
@@ -633,11 +521,11 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setCgl_zrj(String cgl_zrj) {
 		this.cgl_zrj = cgl_zrj;
 	}
-	public String getCgl_czsl() {
-		return cgl_czsl;
+	public String getCgl_cgsl() {
+		return cgl_cgsl;
 	}
-	public void setCgl_czsl(String cgl_czsl) {
-		this.cgl_czsl = cgl_czsl;
+	public void setCgl_cgsl(String cgl_cgsl) {
+		this.cgl_cgsl = cgl_cgsl;
 	}
 	public String getCgl_cgjg() {
 		return cgl_cgjg;
@@ -663,66 +551,31 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setCgl_jsfzrdh(String cgl_jsfzrdh) {
 		this.cgl_jsfzrdh = cgl_jsfzrdh;
 	}
-	public String getCgl_blgxd() {
-		return cgl_blgxd;
+	public String getCgl_plqkd() {
+		return cgl_plqkd;
 	}
-	public void setCgl_blgxd(String cgl_blgxd) {
-		this.cgl_blgxd = cgl_blgxd;
+	public void setCgl_plqkd(String cgl_plqkd) {
+		this.cgl_plqkd = cgl_plqkd;
 	}
-	public String getCgl_blgxn() {
-		return cgl_blgxn;
+	public String getCgl_plqkn() {
+		return cgl_plqkn;
 	}
-	public void setCgl_blgxn(String cgl_blgxn) {
-		this.cgl_blgxn = cgl_blgxn;
+	public void setCgl_plqkn(String cgl_plqkn) {
+		this.cgl_plqkn = cgl_plqkn;
 	}
-	public String getCgl_blgxx() {
-		return cgl_blgxx;
+	public String getCgl_plqkx() {
+		return cgl_plqkx;
 	}
-	public void setCgl_blgxx(String cgl_blgxx) {
-		this.cgl_blgxx = cgl_blgxx;
+	public void setCgl_plqkx(String cgl_plqkx) {
+		this.cgl_plqkx = cgl_plqkx;
 	}
-	public String getCgl_blgxb() {
-		return cgl_blgxb;
+	public String getCgl_plqkb() {
+		return cgl_plqkb;
 	}
-	public void setCgl_blgxb(String cgl_blgxb) {
-		this.cgl_blgxb = cgl_blgxb;
+	public void setCgl_plqkb(String cgl_plqkb) {
+		this.cgl_plqkb = cgl_plqkb;
 	}
-	public String getCgl_cjrid() {
-		return cgl_cjrid;
-	}
-	public void setCgl_cjrid(String cgl_cjrid) {
-		this.cgl_cjrid = cgl_cjrid;
-	}
-	public String getCgl_cjrmc() {
-		return cgl_cjrmc;
-	}
-	public void setCgl_cjrmc(String cgl_cjrmc) {
-		this.cgl_cjrmc = cgl_cjrmc;
-	}
-	public String getCgl_cjsj() {
-		return cgl_cjsj;
-	}
-	public void setCgl_cjsj(String cgl_cjsj) {
-		this.cgl_cjsj = cgl_cjsj;
-	}
-	public String getCgl_xgrid() {
-		return cgl_xgrid;
-	}
-	public void setCgl_xgrid(String cgl_xgrid) {
-		this.cgl_xgrid = cgl_xgrid;
-	}
-	public String getCgl_xgrmc() {
-		return cgl_xgrmc;
-	}
-	public void setCgl_xgrmc(String cgl_xgrmc) {
-		this.cgl_xgrmc = cgl_xgrmc;
-	}
-	public String getCgl_xgsj() {
-		return cgl_xgsj;
-	}
-	public void setCgl_xgsj(String cgl_xgsj) {
-		this.cgl_xgsj = cgl_xgsj;
-	}
+
 	public String getCgl_deleteFlag() {
 		return cgl_deleteFlag;
 	}
@@ -734,12 +587,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setCgl_datasource(String cgl_datasource) {
 		this.cgl_datasource = cgl_datasource;
-	}
-	public String getCgl_bz() {
-		return cgl_bz;
-	}
-	public void setCgl_bz(String cgl_bz) {
-		this.cgl_bz = cgl_bz;
 	}
 	public String getCgl_jdh() {
 		return cgl_jdh;

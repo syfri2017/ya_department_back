@@ -21,15 +21,10 @@ public class ChuguanVO extends ValueObject implements Serializable{
 	private String gzyl;	//工作压力
 	private String ccwd;	//存储温度
 	private String ccjzmc;	//存储介质名称
-	private String ccjzlhtx;	//存储介质理化性质
+	private String ccjzlhxz;	//存储介质理化性质
 	private String ccjzsjcl;	//存储介质实际储量(m3)
 	private String ccjzywgd;	//存储机制液位高度(m)
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
-	private String xgrid;	//修改人ID
-	private String xgrmc;	//修改人姓名
-	private String xgsj;	//修改时间
+
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
 	private String bz;	//备注
@@ -120,11 +115,11 @@ public class ChuguanVO extends ValueObject implements Serializable{
 	public void setCcjzmc(String ccjzmc){
 		this.ccjzmc = ccjzmc;
 	}
-	public String getCcjzlhtx(){
-		return ccjzlhtx;
+	public String getCcjzlhxz() {
+		return ccjzlhxz;
 	}
-	public void setCcjzlhtx(String ccjzlhtx){
-		this.ccjzlhtx = ccjzlhtx;
+	public void setCcjzlhxz(String ccjzlhxz) {
+		this.ccjzlhxz = ccjzlhxz;
 	}
 	public String getCcjzsjcl(){
 		return ccjzsjcl;
@@ -137,42 +132,6 @@ public class ChuguanVO extends ValueObject implements Serializable{
 	}
 	public void setCcjzywgd(String ccjzywgd){
 		this.ccjzywgd = ccjzywgd;
-	}
-	public String getCjrid(){
-		return cjrid;
-	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getXgrid(){
-		return xgrid;
-	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
-	}
-	public String getXgrmc(){
-		return xgrmc;
-	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
-	}
-	public String getXgsj(){
-		return xgsj;
-	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
 	}
 	public String getDeleteFlag(){
 		return deleteFlag;

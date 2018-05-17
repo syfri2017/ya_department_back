@@ -33,7 +33,7 @@ public class ImportantpartsServiceImpl extends BaseServiceImpl<ImportantpartsVO>
 		List<ImportantpartsVO> resultList = this.importantpartsDAO.doFindJzlListByZddwId(zddwId);
 		for (ImportantpartsVO vo : resultList){
 			WeixianjiezhiVO weixianjiezhiVO = new WeixianjiezhiVO();
-			weixianjiezhiVO.setFkid(vo.getZdbwid());
+			weixianjiezhiVO.setBwid(vo.getZdbwid());
 			List<WeixianjiezhiVO> weixianjiezhiList = this.buildingDAO.doFindWeiXianJieZhiList(weixianjiezhiVO);
 			vo.setWeixianjiezhiList(weixianjiezhiList);
 		}
