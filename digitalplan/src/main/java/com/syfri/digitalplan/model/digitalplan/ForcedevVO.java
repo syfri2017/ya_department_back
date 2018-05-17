@@ -9,7 +9,7 @@ public class ForcedevVO extends ValueObject implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String uuid;	//主键
-	private String yaid;	//预案ID
+	private String zqid;	//预案ID
 	private String djfalx;	//调集方案类型[1],[2]
 	private String dzid;	//队站ID
 	private String tkwz;	//停靠位置
@@ -36,11 +36,11 @@ public class ForcedevVO extends ValueObject implements Serializable{
 	public void setUuid(String uuid){
 		this.uuid = uuid;
 	}
-	public String getYaid(){
-		return yaid;
+	public String getZqid(){
+		return zqid;
 	}
-	public void setYaid(String yaid){
-		this.yaid = yaid;
+	public void setZqid(String zqid){
+		this.zqid = zqid;
 	}
 	public String getDjfalx(){
 		return djfalx;

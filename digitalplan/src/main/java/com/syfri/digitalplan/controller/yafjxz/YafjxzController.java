@@ -81,7 +81,7 @@ public class YafjxzController {
 				throw new RuntimeException("未查到预案基本信息！");
 			}
 
-			StringBuffer new_folder=new StringBuffer("123456/").append(digitalplanlist.getCjsj())
+			StringBuffer new_folder=new StringBuffer("123456/").append(digitalplanlist.getZzsj())
 					.append("/").append(digitalplanlist.getUuid()).append("/");
 
 			String folderName=relativePath.append(new_folder).toString();

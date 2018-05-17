@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.model.digitalplan;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 
@@ -8,10 +9,10 @@ public class DisastersetVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String uuid;	//主键
+	private String zqid;	//主键
 	private String yaid;	//预案ID
-	private String zddwid;	//重点单位ID
-	private String jzfqid;	//建筑分区ID
+	private String zdbwid;	//重点单位ID
+	private String jzid;	//建筑分区ID
 	private String zqbw;	//灾情部位
 	private String zqdj;	//灾情等级
 	private String qhyy;	//起火原因
@@ -38,11 +39,12 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
-	public String getUuid(){
-		return uuid;
+
+	public String getZqid(){
+		return zqid;
 	}
-	public void setUuid(String uuid){
-		this.uuid = uuid;
+	public void setZqid(String zqid){
+		this.zqid = zqid;
 	}
 	public String getYaid(){
 		return yaid;
@@ -50,17 +52,17 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	public void setYaid(String yaid){
 		this.yaid = yaid;
 	}
-	public String getZddwid(){
-		return zddwid;
+	public String getZdbwid(){
+		return zdbwid;
 	}
-	public void setZddwid(String zddwid){
-		this.zddwid = zddwid;
+	public void setZdbwid(String zdbwid){
+		this.zdbwid = zdbwid;
 	}
-	public String getJzfqid(){
-		return jzfqid;
+	public String getJzid(){
+		return jzid;
 	}
-	public void setJzfqid(String jzfqid){
-		this.jzfqid = jzfqid;
+	public void setJzid(String jzid){
+		this.jzid = jzid;
 	}
 	public String getZqbw(){
 		return zqbw;
@@ -218,6 +220,8 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	private String zhcsmc;	//灾害场所
 	private String qhyymc;	//起火原因
 	private String hzwxxmc;	//工业建筑火灾危险性
+	private List<ForcedevVO> forcedevList;	//力量部署list
+	private KeypointsVO keypointsMap;	//要点提示Map
 
 	public String getZqdjmc(){
 		return zqdjmc;
@@ -249,6 +253,10 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	public void setHzwxxmc(String hzwxxmc){
 		this.hzwxxmc = hzwxxmc;
 	}
+	public List<ForcedevVO> getForcedevList() { return forcedevList; }
+	public void setForcedevList(List<ForcedevVO> forcedevList) { this.forcedevList = forcedevList; }
+	public KeypointsVO getKeypointsMap() { return keypointsMap; }
+	public void setKeypointsMap(KeypointsVO keypointsMap) { this.keypointsMap = keypointsMap; }
 
 
 }

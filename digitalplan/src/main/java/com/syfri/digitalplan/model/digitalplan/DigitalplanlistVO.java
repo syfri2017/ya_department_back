@@ -9,18 +9,13 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String uuid;	//主键
-	private String yabh;	//预案编号
-	private String yasxh;	//预案顺序号
-	private String yabbh;	//预案版本号
-	private String yalxdm;	//预案类型代码
+	private String yabm;	//预案编号
+	private String yalx;	//预案类型代码
 	private String yamc;	//预案名称
 	private String yazt;	//预案状态
 	private String yajb;	//预案级别
 	private String dxid;	//对象ID
 	private String dxmc;	//对象名称
-	private String bwid;	//部位ID
-	private String bwmc;	//部位名称
-	private String sfkqy;	//是否跨区域[0否，1是]
 	private String jgid;	//制作机构ID
 	private String jgbm;	//制作机构编码
 	private String jgmc;	//制作机构名称
@@ -31,9 +26,6 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String shrid;	//审核人ID
 	private String shrmc;	//审核人名称
 	private String shsj;	//审核时间
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
 	private String xgrid;	//修改人ID
 	private String xgrmc;	//修改人姓名
 	private String xgsj;	//修改时间
@@ -69,29 +61,17 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setUuid(String uuid){
 		this.uuid = uuid;
 	}
-	public String getYabh(){
-		return yabh;
+	public String getYabm(){
+		return yabm;
 	}
-	public void setYabh(String yabh){
-		this.yabh = yabh;
+	public void setYabm(String yabm){
+		this.yabm = yabm;
 	}
-	public String getYasxh(){
-		return yasxh;
+	public String getYalx(){
+		return yalx;
 	}
-	public void setYasxh(String yasxh){
-		this.yasxh = yasxh;
-	}
-	public String getYabbh(){
-		return yabbh;
-	}
-	public void setYabbh(String yabbh){
-		this.yabbh = yabbh;
-	}
-	public String getYalxdm(){
-		return yalxdm;
-	}
-	public void setYalxdm(String yalxdm){
-		this.yalxdm = yalxdm;
+	public void setYalx(String yalx){
+		this.yalx = yalx;
 	}
 	public String getYamc(){
 		return yamc;
@@ -122,24 +102,6 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	}
 	public void setDxmc(String dxmc){
 		this.dxmc = dxmc;
-	}
-	public String getBwid(){
-		return bwid;
-	}
-	public void setBwid(String bwid){
-		this.bwid = bwid;
-	}
-	public String getBwmc(){
-		return bwmc;
-	}
-	public void setBwmc(String bwmc){
-		this.bwmc = bwmc;
-	}
-	public String getSfkqy(){
-		return sfkqy;
-	}
-	public void setSfkqy(String sfkqy){
-		this.sfkqy = sfkqy;
 	}
 	public String getJgid(){
 		return jgid;
@@ -200,24 +162,6 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	}
 	public void setShsj(String shsj){
 		this.shsj = shsj;
-	}
-	public String getCjrid(){
-		return cjrid;
-	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
 	}
 	public String getXgrid(){
 		return xgrid;

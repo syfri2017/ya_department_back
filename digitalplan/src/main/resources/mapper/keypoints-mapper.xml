@@ -6,8 +6,8 @@
 		<if test="uuid != null and uuid != '' ">
 		 and t.uuid = #{uuid}
 		</if>
-		<if test="yaid != null and yaid != '' ">
-		 and t.yaid = #{yaid}
+		<if test="zqid != null and zqid != '' ">
+		 and t.zqid = #{zqid}
 		</if>
 		<if test="zsyd != null and zsyd != '' ">
 		 and t.zsyd = #{zsyd}
@@ -65,7 +65,7 @@
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
 		t.uuid uuid,
-		t.yaid yaid,
+		t.zqid zqid,
 		t.zsyd zsyd,
 		t.tbjs tbjs,
 		t.cjrid cjrid,
@@ -112,18 +112,18 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
 			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_YA_YDTS(uuid,yaid,zsyd,tbjs,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{uuid,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},#{zsyd,jdbcType=VARCHAR},#{tbjs,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+		INSERT INTO YAGL_YA_YDTS(uuid,zqid,zsyd,tbjs,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{uuid,jdbcType=VARCHAR},#{zqid,jdbcType=VARCHAR},#{zsyd,jdbcType=VARCHAR},#{tbjs,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO YAGL_YA_YDTS(uuid,yaid,zsyd,tbjs,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_YDTS(uuid,zqid,zsyd,tbjs,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		SELECT SYS_GUID() uuid, A.*
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yaid,jdbcType=VARCHAR} yaid,#{item.zsyd,jdbcType=VARCHAR} zsyd,#{item.tbjs,jdbcType=VARCHAR} tbjs,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.zqid,jdbcType=VARCHAR} zqid,#{item.zsyd,jdbcType=VARCHAR} zsyd,#{item.tbjs,jdbcType=VARCHAR} tbjs,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		FROM DUAL
 		</foreach>
 		) A
@@ -139,7 +139,7 @@
 		UPDATE   YAGL_YA_YDTS  
 		<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
-			<if test="yaid != null">yaid=#{yaid},</if>
+			<if test="zqid != null">zqid=#{zqid},</if>
 			<if test="zsyd != null">zsyd=#{zsyd},</if>
 			<if test="tbjs != null">tbjs=#{tbjs},</if>
 			<if test="cjrid != null">cjrid=#{cjrid},</if>
@@ -163,14 +163,14 @@
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_YA_YDTS(uuid,yaid,zsyd,tbjs,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_YDTS(uuid,zqid,zsyd,tbjs,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yaid,jdbcType=VARCHAR} yaid,#{item.zsyd,jdbcType=VARCHAR} zsyd,#{item.tbjs,jdbcType=VARCHAR} tbjs,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.zqid,jdbcType=VARCHAR} zqid,#{item.zsyd,jdbcType=VARCHAR} zsyd,#{item.tbjs,jdbcType=VARCHAR} tbjs,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
 			uuid = VALUES(uuid),
-			yaid = VALUES(yaid),
+			zqid = VALUES(zqid),
 			zsyd = VALUES(zsyd),
 			tbjs = VALUES(tbjs),
 			cjrid = VALUES(cjrid),
@@ -199,12 +199,12 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据预案ID查询记录-->
+	<!--12.根据灾情ID查询记录-->
 	<select id="doFindByPlanId" parameterType="KeypointsVO"  resultType="KeypointsVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YA_YDTS t
-		WHERE t.DELETE_FLAG = 'N' AND  t.YAID = #{value}
+		WHERE t.DELETE_FLAG = 'N' AND  t.ZQID = #{value}
 	</select>
 
 </mapper>

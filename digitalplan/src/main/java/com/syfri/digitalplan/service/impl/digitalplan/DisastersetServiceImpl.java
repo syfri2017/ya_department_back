@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.syfri.baseapi.service.impl.BaseServiceImpl;
 import com.syfri.digitalplan.dao.digitalplan.DisastersetDAO;
+import com.syfri.digitalplan.dao.digitalplan.ForcedevDAO;
+import com.syfri.digitalplan.dao.digitalplan.KeypointsDAO;
 import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
+import com.syfri.digitalplan.model.digitalplan.ForcedevVO;
+import com.syfri.digitalplan.model.digitalplan.KeypointsVO;
 import com.syfri.digitalplan.service.digitalplan.DisastersetService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +22,12 @@ public class DisastersetServiceImpl extends BaseServiceImpl<DisastersetVO> imple
 	@Autowired
 	private DisastersetDAO disastersetDAO;
 
+	@Autowired
+	private ForcedevDAO forcedevDAO;
+
+	@Autowired
+	private KeypointsDAO keypointsDAO;
+
 	@Override
 	public DisastersetDAO getBaseDAO() {
 		return disastersetDAO;
@@ -25,6 +35,13 @@ public class DisastersetServiceImpl extends BaseServiceImpl<DisastersetVO> imple
 
 	@Override
 	public List<DisastersetVO> doFindByPlanId(String yaid){
-		return disastersetDAO.doFindByPlanId(yaid);
+		List<DisastersetVO> resultList= disastersetDAO.doFindByPlanId(yaid);
+		for (DisastersetVO vo : resultList) {
+			List<ForcedevVO> forcedevList = this.forcedevDAO.doFindByPlanId(vo.getZqid());
+			vo.setForcedevList(forcedevList);
+			KeypointsVO keypointsMap = this.keypointsDAO.doFindByPlanId(vo.getZqid());
+			vo.setKeypointsMap(keypointsMap);
+		}
+		return resultList;
 	}
 }

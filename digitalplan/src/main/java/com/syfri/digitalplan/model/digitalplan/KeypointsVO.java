@@ -9,7 +9,7 @@ public class KeypointsVO extends ValueObject implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String uuid;	//主键
-	private String yaid;	//预案ID
+	private String zqid;	//预案ID
 	private String zsyd;	//战术要点
 	private String tbjs;	//特别警示
 	private String cjrid;	//创建人ID
@@ -34,11 +34,11 @@ public class KeypointsVO extends ValueObject implements Serializable{
 	public void setUuid(String uuid){
 		this.uuid = uuid;
 	}
-	public String getYaid(){
-		return yaid;
+	public String getZqid(){
+		return zqid;
 	}
-	public void setYaid(String yaid){
-		this.yaid = yaid;
+	public void setZqid(String zqid){
+		this.zqid = zqid;
 	}
 	public String getZsyd(){
 		return zsyd;

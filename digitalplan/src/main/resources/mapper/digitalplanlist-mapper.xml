@@ -6,17 +6,11 @@
 		<if test="uuid != null and uuid != '' ">
 			and t.uuid = #{uuid}
 		</if>
-		<if test="yabh != null and yabh != '' ">
-			and t.yabh = #{yabh}
+		<if test="yabm != null and yabm != '' ">
+			and t.yabm = #{yabh}
 		</if>
-		<if test="yasxh != null and yasxh != '' ">
-			and t.yasxh = #{yasxh}
-		</if>
-		<if test="yabbh != null and yabbh != '' ">
-			and t.yabbh = #{yabbh}
-		</if>
-		<if test="yalxdm != null and yalxdm != '' ">
-			and t.yalxdm = #{yalxdm}
+		<if test="yalx != null and yalx != '' ">
+			and t.yalx = #{yalx}
 		</if>
 		<if test="yamc != null and yamc != '' ">
 			and t.yamc = #{yamc}
@@ -32,15 +26,6 @@
 		</if>
 		<if test="dxmc != null and dxmc != '' ">
 			and t.dxmc = #{dxmc}
-		</if>
-		<if test="bwid != null and bwid != '' ">
-			and t.bwid = #{bwid}
-		</if>
-		<if test="bwmc != null and bwmc != '' ">
-			and t.bwmc = #{bwmc}
-		</if>
-		<if test="sfkqy != null and sfkqy != '' ">
-			and t.sfkqy = #{sfkqy}
 		</if>
 		<if test="jgid != null and jgid != '' ">
 			and t.jgid = #{jgid}
@@ -71,15 +56,6 @@
 		</if>
 		<if test="shsj != null and shsj != '' ">
 			and t.shsj = #{shsj}
-		</if>
-		<if test="cjrid != null and cjrid != '' ">
-			and t.cjrid = #{cjrid}
-		</if>
-		<if test="cjrmc != null and cjrmc != '' ">
-			and t.cjrmc = #{cjrmc}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-			and t.cjsj = #{cjsj}
 		</if>
 		<if test="xgrid != null and xgrid != '' ">
 			and t.xgrid = #{xgrid}
@@ -122,18 +98,13 @@
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
 		t.uuid uuid,
-		t.yabh yabh,
-		t.yasxh yasxh,
-		t.yabbh yabbh,
-		t.yalxdm yalxdm,
+		t.yabm yabm,
+		t.yalx yalx,
 		t.yamc yamc,
 		t.yazt yazt,
 		t.yajb yajb,
 		t.dxid dxid,
 		t.dxmc dxmc,
-		t.bwid bwid,
-		t.bwmc bwmc,
-		t.sfkqy sfkqy,
 		t.jgid jgid,
 		t.jgbm jgbm,
 		t.jgmc jgmc,
@@ -144,9 +115,6 @@
 		t.shrid shrid,
 		t.shrmc shrmc,
 		TO_CHAR(t.shsj,'yyyy-MM-dd HH24:mi:ss') shsj,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
 		t.xgrid xgrid,
 		t.xgrmc xgrmc,
 		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
@@ -163,7 +131,7 @@
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="DigitalplanlistVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM YAGL_YA_ZZDW t WHERE 1=1 AND DELETE_FLAG = 'N'
+		SELECT COUNT(0) AS NUM FROM YAGL_YA_ZDDW t WHERE 1=1 AND DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -171,7 +139,7 @@
 	<select id="doSearchListByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_YA_ZZDW t  WHERE t.DELETE_FLAG = 'N'
+		FROM YAGL_YA_ZDDW t  WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -183,10 +151,10 @@
 		c4.code_name yaztmc,
 		c6.code_name yajbmc,
 		c8.code_name shztmc
-		FROM YAGL_YA_ZZDW t
+		FROM YAGL_YA_ZDDW t
 		<!--预案类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.YALXDM = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.YALX = c2.CODE_VALUE
 		<!--预案状态-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'YAZT' And c3.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.YAZT = c4.CODE_VALUE
@@ -204,18 +172,18 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
 			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_YA_ZZDW(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yazt,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,shzt,shrid,shrmc,shsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{uuid,jdbcType=VARCHAR},#{yabh,jdbcType=VARCHAR},#{yasxh,jdbcType=VARCHAR},#{yabbh,jdbcType=VARCHAR},#{yalxdm,jdbcType=VARCHAR},#{yamc,jdbcType=VARCHAR},#{yazt,jdbcType=VARCHAR},#{yajb,jdbcType=VARCHAR},#{dxid,jdbcType=VARCHAR},#{dxmc,jdbcType=VARCHAR},#{bwid,jdbcType=VARCHAR},#{bwmc,jdbcType=VARCHAR},#{sfkqy,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{jgbm,jdbcType=VARCHAR},#{jgmc,jdbcType=VARCHAR},#{zzrid,jdbcType=VARCHAR},#{zzrmc,jdbcType=VARCHAR},#{zzsj,jdbcType=DATE},#{shzt,jdbcType=VARCHAR},#{shrid,jdbcType=VARCHAR},#{shrmc,jdbcType=VARCHAR},#{shsj,jdbcType=DATE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+		INSERT INTO YAGL_YA_ZDDW(uuid,yabm,yalx,yamc,yazt,yajb,dxid,dxmc,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,shzt,shrid,shrmc,shsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{uuid,jdbcType=VARCHAR},#{yabm,jdbcType=VARCHAR},#{yalx,jdbcType=VARCHAR},#{yamc,jdbcType=VARCHAR},#{yazt,jdbcType=VARCHAR},#{yajb,jdbcType=VARCHAR},#{dxid,jdbcType=VARCHAR},#{dxmc,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{jgbm,jdbcType=VARCHAR},#{jgmc,jdbcType=VARCHAR},#{zzrid,jdbcType=VARCHAR},#{zzrmc,jdbcType=VARCHAR},#{zzsj,jdbcType=DATE},#{shzt,jdbcType=VARCHAR},#{shrid,jdbcType=VARCHAR},#{shrmc,jdbcType=VARCHAR},#{shsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	</insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_YA_ZZDW(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yazt,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,shzt,shrid,shrmc,shsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_ZDDW(uuid,yabm,yalx,yamc,yazt,yajb,dxid,dxmc,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,shzt,shrid,shrmc,shsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		SELECT SYS_GUID() pkid, A.*
 		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 			SELECT
-			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yabh,jdbcType=VARCHAR} yabh,#{item.yasxh,jdbcType=VARCHAR} yasxh,#{item.yabbh,jdbcType=VARCHAR} yabbh,#{item.yalxdm,jdbcType=VARCHAR} yalxdm,#{item.yamc,jdbcType=VARCHAR} yamc,#{item.yazt,jdbcType=VARCHAR} yazt,#{item.yajb,jdbcType=VARCHAR} yajb,#{item.dxid,jdbcType=VARCHAR} dxid,#{item.dxmc,jdbcType=VARCHAR} dxmc,#{item.bwid,jdbcType=VARCHAR} bwid,#{item.bwmc,jdbcType=VARCHAR} bwmc,#{item.sfkqy,jdbcType=VARCHAR} sfkqy,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgbm,jdbcType=VARCHAR} jgbm,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.zzrid,jdbcType=VARCHAR} zzrid,#{item.zzrmc,jdbcType=VARCHAR} zzrmc,#{item.zzsj,jdbcType=DATE} zzsj,#{item.shzt,jdbcType=VARCHAR} shzt,#{item.shrid,jdbcType=VARCHAR} shrid,#{item.shrmc,jdbcType=VARCHAR} shrmc,#{item.shsj,jdbcType=DATE} shsj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yabm,jdbcType=VARCHAR} yabm,#{item.yalx,jdbcType=VARCHAR} yalx,#{item.yamc,jdbcType=VARCHAR} yamc,#{item.yazt,jdbcType=VARCHAR} yazt,#{item.yajb,jdbcType=VARCHAR} yajb,#{item.dxid,jdbcType=VARCHAR} dxid,#{item.dxmc,jdbcType=VARCHAR} dxmc,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgbm,jdbcType=VARCHAR} jgbm,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.zzrid,jdbcType=VARCHAR} zzrid,#{item.zzrmc,jdbcType=VARCHAR} zzrmc,#{item.zzsj,jdbcType=DATE} zzsj,#{item.shzt,jdbcType=VARCHAR} shzt,#{item.shrid,jdbcType=VARCHAR} shrid,#{item.shrmc,jdbcType=VARCHAR} shrmc,#{item.shsj,jdbcType=DATE} shsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 			FROM DUAL
 		</foreach>
 		) A
@@ -223,26 +191,21 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String">
-		UPDATE  YAGL_YA_ZZDW t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.UUID = #{value}
+		UPDATE  YAGL_YA_ZDDW t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.UUID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="DigitalplanlistVO">
-		UPDATE   YAGL_YA_ZZDW
+		UPDATE   YAGL_YA_ZDDW
 		<set>
 			<!--<if test="uuid != null">uuid=#{uuid},</if>-->
-			<if test="yabh != null and yabh != '' ">yabh=#{yabh},</if>
-			<if test="yasxh != null and yasxh != '' ">yasxh=#{yasxh},</if>
-			<if test="yabbh != null and yabbh != '' ">yabbh=#{yabbh},</if>
-			<if test="yalxdm != null and yalxdm != '' ">yalxdm=#{yalxdm},</if>
+			<if test="yabm != null and yabm != '' ">yabm=#{yabm},</if>
+			<if test="yalx != null and yalx != '' ">yalx=#{yalx},</if>
 			<if test="yamc != null and yamc != '' ">yamc=#{yamc},</if>
 			<if test="yazt!= null and yazt != '' ">yazt=#{yazt},</if>
 			<if test="yajb != null and yajb != '' ">yajb=#{yajb},</if>
 			<if test="dxid != null and dxid != '' ">dxid=#{dxid},</if>
 			<if test="dxmc != null and dxmc != '' ">dxmc=#{dxmc},</if>
-			<if test="bwid != null and bwid != '' ">bwid=#{bwid},</if>
-			<if test="bwmc != null and bwmc != '' ">bwmc=#{bwmc},</if>
-			<if test="sfkqy != null and sfkqy != '' ">sfkqy=#{sfkqy},</if>
 			<if test="jgid != null and jgid != '' ">jgid=#{jgid},</if>
 			<if test="jgbm != null and jgbm != '' ">jgbm=#{jgbm},</if>
 			<if test="jgmc != null and jgmc != '' ">jgmc=#{jgmc},</if>
@@ -253,9 +216,6 @@
 			<if test="shrid != null and shrid != '' ">shrid=#{shrid},</if>
 			<if test="shrmc != null and shrmc != '' ">shrmc=#{shrmc},</if>
 			<if test="shsj != null and shsj != '' ">shsj=TO_DATE(#{shsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="cjrid != null and cjrid != '' ">cjrid=#{cjrid},</if>
-			<if test="cjrmc != null and cjrmc != '' ">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null and cjsj != '' ">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="xgrid != null and xgrid != '' ">xgrid=#{xgrid},</if>
 			<if test="xgrmc != null and xgrmc != '' ">xgrmc=#{xgrmc},</if>
 			<if test="xgsj != null and xgsj != '' ">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
@@ -274,25 +234,20 @@
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_YA_ZZDW(uuid,yabh,yasxh,yabbh,yalxdm,yamc,yazt,yajb,dxid,dxmc,bwid,bwmc,sfkqy,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,shzt,shrid,shrmc,shsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_YA_ZDDW(uuid,yabm,yalx,yamc,yazt,yajb,dxid,dxmc,jgid,jgbm,jgmc,zzrid,zzrmc,zzsj,shzt,shrid,shrmc,shsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yabh,jdbcType=VARCHAR} yabh,#{item.yasxh,jdbcType=VARCHAR} yasxh,#{item.yabbh,jdbcType=VARCHAR} yabbh,#{item.yalxdm,jdbcType=VARCHAR} yalxdm,#{item.yamc,jdbcType=VARCHAR} yamc,#{item.yazt,jdbcType=VARCHAR} yazt,#{item.yajb,jdbcType=VARCHAR} yajb,#{item.dxid,jdbcType=VARCHAR} dxid,#{item.dxmc,jdbcType=VARCHAR} dxmc,#{item.bwid,jdbcType=VARCHAR} bwid,#{item.bwmc,jdbcType=VARCHAR} bwmc,#{item.sfkqy,jdbcType=VARCHAR} sfkqy,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgbm,jdbcType=VARCHAR} jgbm,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.zzrid,jdbcType=VARCHAR} zzrid,#{item.zzrmc,jdbcType=VARCHAR} zzrmc,#{item.zzsj,jdbcType=DATE} zzsj,#{item.shzt,jdbcType=VARCHAR} shzt,#{item.shrid,jdbcType=VARCHAR} shrid,#{item.shrmc,jdbcType=VARCHAR} shrmc,#{item.shsj,jdbcType=DATE} shsj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yabm,jdbcType=VARCHAR} yabm,#{item.yalx,jdbcType=VARCHAR} yalx,#{item.yamc,jdbcType=VARCHAR} yamc,#{item.yazt,jdbcType=VARCHAR} yazt,#{item.yajb,jdbcType=VARCHAR} yajb,#{item.dxid,jdbcType=VARCHAR} dxid,#{item.dxmc,jdbcType=VARCHAR} dxmc,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.jgbm,jdbcType=VARCHAR} jgbm,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.zzrid,jdbcType=VARCHAR} zzrid,#{item.zzrmc,jdbcType=VARCHAR} zzrmc,#{item.zzsj,jdbcType=DATE} zzsj,#{item.shzt,jdbcType=VARCHAR} shzt,#{item.shrid,jdbcType=VARCHAR} shrid,#{item.shrmc,jdbcType=VARCHAR} shrmc,#{item.shsj,jdbcType=DATE} shsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
 		ON DUPLICATE KEY UPDATE
 		uuid = VALUES(uuid),
-		yabh = VALUES(yabh),
-		yasxh = VALUES(yasxh),
-		yabbh = VALUES(yabbh),
-		yalxdm = VALUES(yalxdm),
+		yabm = VALUES(yabm),
+		yalx = VALUES(yalx),
 		yamc = VALUES(yamc),
 		yazt = VALUES(yazt),
 		yajb = VALUES(yajb),
 		dxid = VALUES(dxid),
 		dxmc = VALUES(dxmc),
-		bwid = VALUES(bwid),
-		bwmc = VALUES(bwmc),
-		sfkqy = VALUES(sfkqy),
 		jgid = VALUES(jgid),
 		jgbm = VALUES(jgbm),
 		jgmc = VALUES(jgmc),
@@ -303,9 +258,6 @@
 		shrid = VALUES(shrid),
 		shrmc = VALUES(shrmc),
 		shsj = VALUES(shsj),
-		cjrid = VALUES(cjrid),
-		cjrmc = VALUES(cjrmc),
-		cjsj = VALUES(cjsj),
 		xgrid = VALUES(xgrid),
 		xgrmc = VALUES(xgrmc),
 		xgsj = VALUES(xgsj),
@@ -328,10 +280,10 @@
 		c4.code_name yaztmc,
 		c6.code_name yajbmc,
 		c8.code_name shztmc
-		FROM YAGL_YA_ZZDW t
+		FROM YAGL_YA_ZDDW t
 		<!--预案类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.YALXDM = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.YALX = c2.CODE_VALUE
 		<!--预案状态-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'YAZT' And c3.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.YAZT = c4.CODE_VALUE
@@ -351,8 +303,8 @@
 		<if test="dxid != null and dxid != '' ">
 			and t.dxid = #{dxid}
 		</if>
-		<if test="yalxdm != null and yalxdm != '' ">
-			and t.yalxdm LIKE concat(rtrim(#{yalxdm},'0'),'%')
+		<if test="yalx != null and yalx != '' ">
+			and t.yalx LIKE concat(rtrim(#{yalx},'0'),'%')
 		</if>
 		<if test="yajb != null and yajb != '' ">
 			and t.yajb = #{yajb}
