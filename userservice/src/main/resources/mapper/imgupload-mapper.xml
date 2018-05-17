@@ -82,6 +82,7 @@
 		<if test="picName != null and picName != '' ">
 			and t.pic_name LIKE concat(concat('%',#{picName}),'%')
 		</if>
+		ORDER BY t.pic_type,t.pic_value
 	</select>
 
 	<!--5.根据ID查询记录-->
