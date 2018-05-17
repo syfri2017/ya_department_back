@@ -24,7 +24,7 @@ public class ImgUploadServiceImpl extends BaseServiceImpl<ImgUploadVO> implement
 	}
 
 	/**
-	 * @Description: 获取所有角色
+	 * @Description: 获取所有图片类型
 	 * @Param: []
 	 * @Return: java.util.List<com.syfri.userservice.model.ImgUploadVO>
 	 * @Author: dongbo
