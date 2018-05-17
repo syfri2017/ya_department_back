@@ -48,4 +48,7 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--查询队站类型树状资源-- by yushch*/
 	List<CodelistTree> doFindDzlxCodelisttree(String codetype);
+
+	/*--查询行政区划，只保留31个省-- by yushch*/
+	List<CodelistDetailVO> doFindXzqhCodelist(String codetype);
 }

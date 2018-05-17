@@ -293,4 +293,11 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 		}
 		return codelistTrees;
 	}
+
+	/*--查询行政区划
+	* 只保留31个省
+	* -- by yushch -- */
+	public List<CodelistDetailVO> doFindXzqhCodelist(String codetype){
+		return codelistDAO.doFindXzqhCodelist(codetype);
+	}
 }
