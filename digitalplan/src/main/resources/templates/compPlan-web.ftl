@@ -2198,7 +2198,7 @@
                             </tr>
                             <tr>
                                 <th>建筑结构：</th>
-                                <td><#if region.jzl_jzjg??>${region.jzl_jzjg}</#if></td>
+                                <td><#if region.jzl_jzjgmc??>${region.jzl_jzjgmc}</#if></td>
                                 <th>区域面积：</th>
                                 <td><#if region.jzl_qymj??>${region.jzl_qymj}</#if> ㎡</td>
                             </tr>
@@ -2275,7 +2275,7 @@
                                 <th width="120">位置：</th>
                                 <td width="300"><#if region.zdbwwz??>${region.zdbwwz}</#if></td>
                                 <th width="120">建筑结构：</th>
-                                <td><#if region.zzl_jzjg??>${region.zzl_jzjg}</#if></td>
+                                <td><#if region.zzl_jzjgmc??>${region.zzl_jzjgmc}</#if></td>
                             </tr>
                             <tr>
                                 <th>占地面积：</th>
@@ -2295,19 +2295,19 @@
                                 <th class="block-th">装置组成</th>
                             </tr>
                             <tr>
-                                <td>--</td>
+                                <td><#if region.zzl_zzzc??>${region.zzl_zzzc}</#if></td>
                             </tr>
                             <tr>
                                 <th class="block-th">装置原料</th>
                             </tr>
                             <tr>
-                                <td>--</td>
+                                <td><#if region.zzl_ylxx??>${region.zzl_ylxx}</#if></td>
                             </tr>
                             <tr>
                                 <th class="block-th">装置产物</th>
                             </tr>
                             <tr>
-                                <td>--</td>
+                                <td><#if region.zzl_cwxx??>${region.zzl_cwxx}</#if></td>
                             </tr>
                             <tr>
                                 <th class="block-th">工艺流程描述</th>
@@ -2370,58 +2370,62 @@
                                 <td><#if region.cgl_jsfzrdh??>${region.cgl_jsfzrdh}</#if></td>
                             </tr>
                         </table>
-                        <table class="data-table">
-                            <tr>
-                                <th colspan="6" class="block-th">罐体信息</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <table class="data-table">
-                                        <tr>
-                                            <th colspan="6" style="text-align:left"><strong>罐体名称</strong></th>
-                                        </tr>
-                                        <tr>
-                                            <th width="120">罐体名称：</th>
-                                            <td width="165">--</td>
-                                            <th width="120">储罐类型：</th>
-                                            <td width="165">--</td>
-                                            <th width="120">存储温度：</th>
-                                            <td>--</td>
+                        <#if region.ChuguanList??>
+                            <table class="data-table">
+                                <tr>
+                                    <th colspan="6" class="block-th">罐体信息</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <#list region.ChuguanList as pot>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left"><strong><#if pot.cgmc??>${pot.cgmc}</#if></strong></th>
+                                                </tr>
+                                                <tr>
+                                                    <th width="120">储罐名称：</th>
+                                                    <td width="165"><#if pot.cgmc??>${pot.cgmc}</#if></td>
+                                                    <th width="120">储罐类型：</th>
+                                                    <td width="165"><#if pot.cglxmc??>${pot.cglxmc}</#if></td>
+                                                    <th width="120">存储温度：</th>
+                                                    <td><#if pot.ccwd??>${pot.ccwd}</#if></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th width="120">工作压力：</th>
-                                            <td>--</td>
-                                            <th>容量：</th>
-                                            <td>--</td>
-                                            <th>罐顶面积：</th>
-                                            <td>-- ㎡</td>
-                                        </tr>
-                                        <tr>
-                                            <th width="120">直径：</th>
-                                            <td>--</td>
-                                            <th>高度：</th>
-                                            <td>--</td>
-                                            <th>周长：</th>
-                                            <td>--</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="6" style="text-align:left"><strong>存储介质</strong></th>
-                                        </tr>
-                                        <tr>
-                                            <th width="120">实际储量：</th>
-                                            <td colspan="2">--</td>
-                                            <th width="120">液位高度：</th>
-                                            <td colspan="2">--</td>
-                                        </tr>
-                                        <tr>
-                                            <th>理化性质：</th>
-                                            <td colspan="5">--</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
+                                                </tr>
+                                                <tr>
+                                                    <th width="120">工作压力：</th>
+                                                    <td><#if pot.gzyl??>${pot.gzyl}</#if></td>
+                                                    <th>容量：</th>
+                                                    <td><#if pot.cgrl??>${pot.cgrl}</#if></td>
+                                                    <th>罐顶面积：</th>
+                                                    <td><#if pot.gdmj??>${pot.gdmj}</#if> ㎡</td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="120">直径：</th>
+                                                    <td><#if pot.cgzj??>${pot.cgzj}</#if></td>
+                                                    <th>高度：</th>
+                                                    <td><#if pot.cggd??>${pot.cggd}</#if></td>
+                                                    <th>周长：</th>
+                                                    <td><#if pot.cgzc??>${pot.cgzc}</#if></td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left"><strong>存储介质-<#if pot.ccjzmc??>${pot.ccjzmc}</#if></strong></th>
+                                                </tr>
+                                                <tr>
+                                                    <th width="120">实际储量：</th>
+                                                    <td colspan="2"><#if pot.ccjzsjcl??>${pot.ccjzsjcl}</#if></td>
+                                                    <th width="120">液位高度：</th>
+                                                    <td colspan="2"><#if pot.ccjzywgd??>${pot.ccjzywgd}</#if></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>理化性质：</th>
+                                                    <td colspan="5"><#if pot.ccjzlhxz??>${pot.ccjzlhxz}</#if></td>
+                                                </tr>
+                                            </table>
+                                        </#list>
+                                    </td>
+                                </tr>
+                            </table>
+                        </#if>
                         <table class="data-table">
                             <tr>
                                 <th class="block-th">危险性分析</th>
