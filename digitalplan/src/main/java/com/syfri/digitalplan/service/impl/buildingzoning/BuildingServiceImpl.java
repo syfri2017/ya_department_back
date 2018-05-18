@@ -51,36 +51,4 @@ public class BuildingServiceImpl extends BaseServiceImpl<BuildingVO> implements 
 		return vo;
 	}
 
-	//高级搜索查询建筑列表
-	public List doSearchGjssListByVO(BuildingVO vo) {
-		String jzlx = vo.getJzlx();
-		List<BuildingVO> buildingList = new ArrayList<>();
-		switch (jzlx){
-			case  "":
-				buildingList = buildingDAO.doSearchGjssListByVO(vo);
-				break;
-			case  "10":
-			case  "20":
-				if (vo.getJzl_dsgd().equals("1")){
-					vo.setJzl_dsgd_max("50");
-				}else if (vo.getJzl_dsgd().equals("2")){
-					vo.setJzl_dsgd_min("50");
-					vo.setJzl_dsgd_max("100");
-				}else if (vo.getJzl_dsgd().equals("3")){
-					vo.setJzl_dsgd_min("100");
-				}
-				buildingList = buildingDAO.doSearchGjssJzlListByVO(vo);
-				break;
-			case  "30":
-				vo.setZzl_jzjg(vo.getJzl_jzjg());
-				buildingList = buildingDAO.doSearchGjssZzlListByVO(vo);
-				break;
-			case  "40":
-				buildingList = buildingDAO.doSearchGjssCglListByVO(vo);
-				break;
-		}
-
-		return buildingList;
-	}
-
 }

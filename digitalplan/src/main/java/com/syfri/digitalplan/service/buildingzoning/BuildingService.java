@@ -10,7 +10,4 @@ public interface BuildingService  extends BaseService<BuildingVO>{
     //通过id获取建筑分区信息及分类信息
      public BuildingVO doFindFqDetailByVo(BuildingVO buildingVO);
 
-    //高级搜索查询建筑列表
-    public List<BuildingVO> doSearchGjssListByVO(BuildingVO vo);
-
 }
