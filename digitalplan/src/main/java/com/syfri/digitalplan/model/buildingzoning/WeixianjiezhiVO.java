@@ -9,14 +9,13 @@ public class WeixianjiezhiVO extends ValueObject implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String uuid;	//主键
-	//private String sjlx;	//数据类型
-	private String bwid;	//建筑ID/部位ID
+	private String bwid;	//部位ID
 	private String jzmc;	//危险介质名称
 	private String jzsjcl;	//危险介质实际储量
 	private String jzlhtx;	//危险介质理化特性
+	private String jzbz;	//危险介质备注
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
-	private String jzbz;	//备注
 	private String jdh;	//节点号
 	private String sjc;	//时间戳
 	private String reserve1;	//备用字段1
@@ -30,11 +29,10 @@ public class WeixianjiezhiVO extends ValueObject implements Serializable{
 	public void setUuid(String uuid){
 		this.uuid = uuid;
 	}
-
-	public String getBwid() {
+	public String getBwid(){
 		return bwid;
 	}
-	public void setBwid(String bwid) {
+	public void setBwid(String bwid){
 		this.bwid = bwid;
 	}
 	public String getJzmc(){
@@ -55,6 +53,12 @@ public class WeixianjiezhiVO extends ValueObject implements Serializable{
 	public void setJzlhtx(String jzlhtx){
 		this.jzlhtx = jzlhtx;
 	}
+	public String getJzbz(){
+		return jzbz;
+	}
+	public void setJzbz(String jzbz){
+		this.jzbz = jzbz;
+	}
 	public String getDeleteFlag(){
 		return deleteFlag;
 	}
@@ -66,12 +70,6 @@ public class WeixianjiezhiVO extends ValueObject implements Serializable{
 	}
 	public void setDatasource(String datasource){
 		this.datasource = datasource;
-	}
-	public String getJzbz() {
-		return jzbz;
-	}
-	public void setJzbz(String jzbz) {
-		this.jzbz = jzbz;
 	}
 	public String getJdh(){
 		return jdh;

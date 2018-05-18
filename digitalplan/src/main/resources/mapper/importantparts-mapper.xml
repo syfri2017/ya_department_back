@@ -4,70 +4,52 @@
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="zdbwid != null and zdbwid != '' ">
-		 and t.zdbwid = #{zdbwid}
+			and t.zdbwid = #{zdbwid}
 		</if>
 		<if test="zddwid != null and zddwid != '' ">
-		 and t.zddwid = #{zddwid}
+			and t.zddwid = #{zddwid}
 		</if>
 		<if test="zdbwlx != null and zdbwlx != '' ">
-		 and t.zdbwlx = #{zdbwlx}
+			and t.zdbwlx = #{zdbwlx}
 		</if>
 		<if test="zdbwmc != null and zdbwmc != '' ">
-		 and t.zdbwmc = #{zdbwmc}
+			and t.zdbwmc = #{zdbwmc}
 		</if>
 		<if test="zdbwwz != null and zdbwwz != '' ">
-		 and t.zdbwwz = #{zdbwwz}
+			and t.zdbwwz = #{zdbwwz}
 		</if>
 		<if test="wxxfx != null and wxxfx != '' ">
-		 and t.wxxfx = #{wxxfx}
+			and t.wxxfx = #{wxxfx}
 		</if>
 		<if test="zysx != null and zysx != '' ">
-		 and t.zysx = #{zysx}
-		</if>
-		<if test="cjrid != null and cjrid != '' ">
-		 and t.cjrid = #{cjrid}
-		</if>
-		<if test="cjrmc != null and cjrmc != '' ">
-		 and t.cjrmc = #{cjrmc}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-		 and t.cjsj = #{cjsj}
-		</if>
-		<if test="xgrid != null and xgrid != '' ">
-		 and t.xgrid = #{xgrid}
-		</if>
-		<if test="xgrmc != null and xgrmc != '' ">
-		 and t.xgrmc = #{xgrmc}
-		</if>
-		<if test="xgsj != null and xgsj != '' ">
-		 and t.xgsj = #{xgsj}
+			and t.zysx = #{zysx}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
+			and t.delete_flag = #{deleteFlag}
 		</if>
 		<if test="datasource != null and datasource != '' ">
-		 and t.datasource = #{datasource}
+			and t.datasource = #{datasource}
 		</if>
 		<if test="bz != null and bz != '' ">
-		 and t.bz = #{bz}
+			and t.bz = #{bz}
 		</if>
 		<if test="jdh != null and jdh != '' ">
-		 and t.jdh = #{jdh}
+			and t.jdh = #{jdh}
 		</if>
 		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
+			and t.sjc = #{sjc}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
+			and t.reserve1 = #{reserve1}
 		</if>
 		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
+			and t.reserve2 = #{reserve2}
 		</if>
 		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
+			and t.reserve3 = #{reserve3}
 		</if>
 		<if test="reserve4 != null and reserve4 != '' ">
-		 and t.reserve4 = #{reserve4}
+			and t.reserve4 = #{reserve4}
 		</if>
 	</sql>
 
@@ -80,12 +62,6 @@
 		t.zdbwwz zdbwwz,
 		t.wxxfx wxxfx,
 		t.zysx zysx,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
 		t.bz bz,
@@ -104,15 +80,8 @@
 		t2.jzjg jzl_jzjg,
 		t2.qymj jzl_qymj,
 		t2.gnms jzl_gnms,
-		t2.cjrid jzl_cjrid,
-		t2.cjrmc jzl_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') jzl_cjsj,
-		t2.xgrid jzl_xgrid,
-		t2.xgrmc jzl_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') jzl_xgsj,
 		t2.delete_flag jzl_deleteFlag,
 		t2.datasource jzl_datasource,
-		t2.bz jzl_bz,
 		t2.jdh jzl_jdh,
 		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') jzl_sjc,
 		t2.reserve1 jzl_reserve1,
@@ -133,15 +102,8 @@
 		t2.ylxx zzl_ylxx,
 		t2.cwxx zzl_cwxx,
 		t2.gylc zzl_gylc,
-		t2.cjrid zzl_cjrid,
-		t2.cjrmc zzl_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') zzl_cjsj,
-		t2.xgrid zzl_xgrid,
-		t2.xgrmc zzl_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') zzl_xgsj,
 		t2.delete_flag zzl_deleteFlag,
 		t2.datasource zzl_datasource,
-		t2.bz zzl_bz,
 		t2.jdh zzl_jdh,
 		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') zzl_sjc,
 		t2.reserve1 zzl_reserve1,
@@ -159,19 +121,12 @@
 		t2.ccjzms cgl_ccjzms,
 		t2.jsfzr cgl_jsfzr,
 		t2.jsfzrdh cgl_jsfzrdh,
-		t2.blgxd cgl_blgxd,
-		t2.blgxn cgl_blgxn,
-		t2.blgxx cgl_blgxx,
-		t2.blgxb cgl_blgxb,
-		t2.cjrid cgl_cjrid,
-		t2.cjrmc cgl_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') cgl_cjsj,
-		t2.xgrid cgl_xgrid,
-		t2.xgrmc cgl_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') cgl_xgsj,
+		t2.plqkd cgl_plqkd,
+		t2.plqkn cgl_plqkn,
+		t2.plqkx cgl_plqkx,
+		t2.plqkb cgl_plqkb,
 		t2.delete_flag cgl_deleteFlag,
 		t2.datasource cgl_datasource,
-		t2.bz cgl_bz,
 		t2.jdh cgl_jdh,
 		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') cgl_sjc,
 		t2.reserve1 cgl_reserve1,
