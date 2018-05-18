@@ -159,7 +159,7 @@
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="DangerVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM ZHJC_HXWXP t WHERE 1=1 AND JLZT = 1
+		SELECT COUNT(0) AS NUM FROM YAGL_ZHJC_HXWXP t WHERE 1=1 AND JLZT = 1
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -168,7 +168,7 @@
 		SELECT 
 			<include refid="SQL_CONTENT"/>
 			,p.DMZ
-			FROM ZHJC_HXWXP t
+			FROM YAGL_ZHJC_HXWXP t
 			LEFT JOIN ZHJC_HWPLX p
 			ON t.TYPE = p.ID
 			WHERE t.JLZT = 1
@@ -180,15 +180,15 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		,p.CODE_NAME dmz
-		,f.ZP flagFile
+		,f.PIC_BLOB flagFile
 		,m.CODEID
 		FROM YAGL_ZHJC_HXWXP t
 		LEFT JOIN SYS_CODELIST m
 		ON m.CODETYPE = 'HXWXPLX'
 		LEFT JOIN SYS_CODELIST_DETAIL p
 		ON m.CODEID = p.CODEID AND t.TYPE = p.CODE_VALUE
-		LEFT JOIN YAGL_ZZJG f
-		ON '6db150cf9e764dcfa50160e4d3c8a164' = f.UUID
+		LEFT JOIN SYS_CODELIST_PICTURE f
+		ON '9515C7AFC4DC4539A066661347513ABE' = f.PKID
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
@@ -197,13 +197,13 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
-		INSERT INTO ZHJC_HXWXP(pkid,id,name,english_name,cas,rtecs,un,danger_id,expression,type,flag,alias,gb_id,property,air_determine,water_determine,tabu,thesaurus,symptom,firstaid,defend_way,dispose,store,leak_way,traffic,remark,sjbb,cjsj,ywxtbsid,jlzt,cszt,sjc,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		INSERT INTO YAGL_ZHJC_HXWXP(pkid,id,name,english_name,cas,rtecs,un,danger_id,expression,type,flag,alias,gb_id,property,air_determine,water_determine,tabu,thesaurus,symptom,firstaid,defend_way,dispose,store,leak_way,traffic,remark,sjbb,cjsj,ywxtbsid,jlzt,cszt,sjc,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
 		VALUES(#{pkid,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{englishName,jdbcType=VARCHAR},#{cas,jdbcType=VARCHAR},#{rtecs,jdbcType=VARCHAR},#{un,jdbcType=VARCHAR},#{dangerId,jdbcType=VARCHAR},#{expression,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR},#{alias,jdbcType=VARCHAR},#{gbId,jdbcType=VARCHAR},#{property,jdbcType=VARCHAR},#{airDetermine,jdbcType=VARCHAR},#{waterDetermine,jdbcType=VARCHAR},#{tabu,jdbcType=VARCHAR},#{thesaurus,jdbcType=VARCHAR},#{symptom,jdbcType=VARCHAR},#{firstaid,jdbcType=VARCHAR},#{defendWay,jdbcType=VARCHAR},#{dispose,jdbcType=VARCHAR},#{store,jdbcType=VARCHAR},#{leakWay,jdbcType=VARCHAR},#{traffic,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjc,jdbcType=DATE},#{vercol,jdbcType=DATE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO ZHJC_HXWXP(pkid,id,name,english_name,cas,rtecs,un,danger_id,expression,type,flag,alias,gb_id,property,air_determine,water_determine,tabu,thesaurus,symptom,firstaid,defend_way,dispose,store,leak_way,traffic,remark,sjbb,cjsj,ywxtbsid,jlzt,cszt,sjc,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		INSERT INTO YAGL_ZHJC_HXWXP(pkid,id,name,english_name,cas,rtecs,un,danger_id,expression,type,flag,alias,gb_id,property,air_determine,water_determine,tabu,thesaurus,symptom,firstaid,defend_way,dispose,store,leak_way,traffic,remark,sjbb,cjsj,ywxtbsid,jlzt,cszt,sjc,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
 		SELECT SYS_GUID() pkid, A.* 
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
@@ -216,12 +216,12 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  ZHJC_HXWXP t SET t.JLZT = 0  WHERE 1=1   AND t.PKID = #{value}
+		UPDATE  YAGL_ZHJC_HXWXP t SET t.JLZT = 0  WHERE 1=1   AND t.PKID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="DangerVO"> 
-		UPDATE   ZHJC_HXWXP  
+		UPDATE   YAGL_ZHJC_HXWXP
 		<set>
 			<if test="pkid != null">pkid=#{pkid},</if>
 			<if test="id != null">id=#{id},</if>
@@ -267,7 +267,7 @@
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO ZHJC_HXWXP(pkid,id,name,english_name,cas,rtecs,un,danger_id,expression,type,flag,alias,gb_id,property,air_determine,water_determine,tabu,thesaurus,symptom,firstaid,defend_way,dispose,store,leak_way,traffic,remark,sjbb,cjsj,ywxtbsid,jlzt,cszt,sjc,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
+		INSERT INTO YAGL_ZHJC_HXWXP(pkid,id,name,english_name,cas,rtecs,un,danger_id,expression,type,flag,alias,gb_id,property,air_determine,water_determine,tabu,thesaurus,symptom,firstaid,defend_way,dispose,store,leak_way,traffic,remark,sjbb,cjsj,ywxtbsid,jlzt,cszt,sjc,vercol,tbjdh,tbsjc,reserve1,reserve2,reserve3)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
 			#{item.id,jdbcType=VARCHAR} id,#{item.name,jdbcType=VARCHAR} name,#{item.englishName,jdbcType=VARCHAR} english_name,#{item.cas,jdbcType=VARCHAR} cas,#{item.rtecs,jdbcType=VARCHAR} rtecs,#{item.un,jdbcType=VARCHAR} un,#{item.dangerId,jdbcType=VARCHAR} danger_id,#{item.expression,jdbcType=VARCHAR} expression,#{item.type,jdbcType=VARCHAR} type,#{item.flag,jdbcType=VARCHAR} flag,#{item.alias,jdbcType=VARCHAR} alias,#{item.gbId,jdbcType=VARCHAR} gb_id,#{item.property,jdbcType=VARCHAR} property,#{item.airDetermine,jdbcType=VARCHAR} air_determine,#{item.waterDetermine,jdbcType=VARCHAR} water_determine,#{item.tabu,jdbcType=VARCHAR} tabu,#{item.thesaurus,jdbcType=VARCHAR} thesaurus,#{item.symptom,jdbcType=VARCHAR} symptom,#{item.firstaid,jdbcType=VARCHAR} firstaid,#{item.defendWay,jdbcType=VARCHAR} defend_way,#{item.dispose,jdbcType=VARCHAR} dispose,#{item.store,jdbcType=VARCHAR} store,#{item.leakWay,jdbcType=VARCHAR} leak_way,#{item.traffic,jdbcType=VARCHAR} traffic,#{item.remark,jdbcType=VARCHAR} remark,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=DATE} reserve3
@@ -318,7 +318,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		,p.DMZ
-		FROM ZHJC_HXWXP t
+		FROM YAGL_ZHJC_HXWXP t
 		LEFT JOIN ZHJC_HWPLX p
 		ON t.TYPE = p.UUID
 		WHERE t.JLZT = 1
