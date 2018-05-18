@@ -43,22 +43,6 @@ public class BuildingController  extends BaseController<BuildingVO>{
 		return resultVO;
 	}
 
-	/*
-	* 通过罐组id 获取罐组中所有储罐信息
-	* by yushch 20180503
-
-	@ApiOperation(value="通过罐组id 获取罐组中所有储罐信息",notes="查询list")
-	@ApiImplicitParam(name="vo",value="储罐对象")
-	@PostMapping("/findChuGuanList")
-	public @ResponseBody ResultVO list(@RequestBody ChuguanVO vo ) {
-		ResultVO resultVO = ResultVO.build();
-		try {
-			resultVO.setResult(buildingService.doFindChuGuanList(vo));
-		} catch (Exception e) {
-			logger.error("{}",e.getMessage());
-		}
-		return resultVO;
-	}*/
 
 	/*
 	* 高级搜索查询建筑列表
@@ -78,20 +62,4 @@ public class BuildingController  extends BaseController<BuildingVO>{
 		return resultVO;
 	}
 
-	/*
-	* 高级搜索查询建筑类建筑列表
-	* by yushch 20180517
-	*/
-	@ApiOperation(value="高级搜索查询建筑类列表",notes="列表信息")
-	@ApiImplicitParam(name="vo",value = "业务实体")
-	@PostMapping("gjssJzlList")
-	public @ResponseBody ResultVO gjssJzlList(@RequestBody BuildingVO vo ) {
-		ResultVO resultVO = ResultVO.build();
-		try {
-			resultVO.setResult(buildingService.doSearchGjssJzlListByVO(vo));
-		} catch (Exception e) {
-			logger.error("{}",e.getMessage());
-		}
-		return resultVO;
-	}
 }

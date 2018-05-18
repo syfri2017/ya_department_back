@@ -11,6 +11,7 @@ import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -45,27 +46,41 @@ public class BuildingServiceImpl extends BaseServiceImpl<BuildingVO> implements 
 			default:
 				//分区类型为10和20 查找建筑分区详情关联建筑分区-建筑类
 				vo = buildingDAO.doFindFqAndJzDetailByVo(buildingVO);
-				WeixianjiezhiVO weixianjiezhiVO = new WeixianjiezhiVO();
-				weixianjiezhiVO.setBwid(vo.getJzid());
-				List<WeixianjiezhiVO> weixianjiezhiList = this.buildingDAO.doFindWeiXianJieZhiList(weixianjiezhiVO);
-				vo.setWeixianjiezhiList(weixianjiezhiList);
-
 				break;
 		}
 		return vo;
 	}
-	//通过罐组id 获取罐组中所有储罐信息
-	public List doFindChuGuanList(ChuguanVO vo) {
-		return buildingDAO.doFindChuGuanList(vo);
-	}
 
 	//高级搜索查询建筑列表
 	public List doSearchGjssListByVO(BuildingVO vo) {
-		return buildingDAO.doSearchGjssListByVO(vo);
+		String jzlx = vo.getJzlx();
+		List<BuildingVO> buildingList = new ArrayList<>();
+		switch (jzlx){
+			case  "":
+				buildingList = buildingDAO.doSearchGjssListByVO(vo);
+				break;
+			case  "10":
+			case  "20":
+				if (vo.getJzl_dsgd().equals("1")){
+					vo.setJzl_dsgd_max("50");
+				}else if (vo.getJzl_dsgd().equals("2")){
+					vo.setJzl_dsgd_min("50");
+					vo.setJzl_dsgd_max("100");
+				}else if (vo.getJzl_dsgd().equals("3")){
+					vo.setJzl_dsgd_min("100");
+				}
+				buildingList = buildingDAO.doSearchGjssJzlListByVO(vo);
+				break;
+			case  "30":
+				vo.setZzl_jzjg(vo.getJzl_jzjg());
+				buildingList = buildingDAO.doSearchGjssZzlListByVO(vo);
+				break;
+			case  "40":
+				buildingList = buildingDAO.doSearchGjssCglListByVO(vo);
+				break;
+		}
+
+		return buildingList;
 	}
 
-	//高级搜索查询建筑类建筑列表
-	public List doSearchGjssJzlListByVO(BuildingVO vo) {
-		return buildingDAO.doSearchGjssJzlListByVO(vo);
-	}
 }
