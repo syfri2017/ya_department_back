@@ -50,11 +50,12 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String jzl_reserve2;	//备用字段2
 	private String jzl_reserve3;	//备用字段3
 	private String jzl_reserve4;	//备用字段4
-	private List<WeixianjiezhiVO> WeixianjiezhiList;	//危险介质list
 
 	private String jzl_jzqkmc;	//建筑情况名称
 	private String jzl_jzsyxzmc;	//建筑使用性质名称
 	private String jzl_jzjgmc;	//建筑结构名称
+	private String jzl_dsgd_min;	//地上高度范围 最小值
+	private String jzl_dsgd_max;	//地上高度范围 最大值
 
 	private String zzl_uuid;	//主键
 	private String zzl_jzid;	//建筑分区ID
@@ -290,7 +291,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setJzl_dxcs(String jzl_dxcs) {
 		this.jzl_dxcs = jzl_dxcs;
 	}
-
 	public String getJzl_deleteFlag() {
 		return jzl_deleteFlag;
 	}
@@ -339,8 +339,6 @@ public class BuildingVO extends ValueObject implements Serializable{
 	public void setJzl_reserve4(String jzl_reserve4) {
 		this.jzl_reserve4 = jzl_reserve4;
 	}
-	public List<WeixianjiezhiVO> getWeixianjiezhiList() { return WeixianjiezhiList; }
-	public void setWeixianjiezhiList(List<WeixianjiezhiVO> weixianjiezhiList) { WeixianjiezhiList = weixianjiezhiList; }
 
 	public String getJzl_jzqkmc() {
 		return jzl_jzqkmc;
@@ -359,6 +357,18 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setJzl_jzjgmc(String jzl_jzjgmc) {
 		this.jzl_jzjgmc = jzl_jzjgmc;
+	}
+	public String getJzl_dsgd_min() {
+		return jzl_dsgd_min;
+	}
+	public void setJzl_dsgd_min(String jzl_dsgd_min) {
+		this.jzl_dsgd_min = jzl_dsgd_min;
+	}
+	public String getJzl_dsgd_max() {
+		return jzl_dsgd_max;
+	}
+	public void setJzl_dsgd_max(String jzl_dsgd_max) {
+		this.jzl_dsgd_max = jzl_dsgd_max;
 	}
 
 	public String getZzl_uuid() {
