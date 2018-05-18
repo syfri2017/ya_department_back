@@ -175,6 +175,9 @@
 		<if test="yazt != null and yazt != '' ">
 			and t.yazt = #{yazt}
 		</if>
+		<if test="shzt != null and shzt != '' ">
+			and t.shzt = #{shzt}
+		</if>
 		<if test="begintime != null and begintime != '' ">
 			and TO_CHAR(t.shsj,'yyyy/MM/dd') &gt;= #{begintime}
 		</if>
