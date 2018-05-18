@@ -43,23 +43,4 @@ public class BuildingController  extends BaseController<BuildingVO>{
 		return resultVO;
 	}
 
-
-	/*
-	* 高级搜索查询建筑列表
-	* 通过输入框值匹配 建筑名称或建筑位置
-	* by yushch 20180516
-	*/
-	@ApiOperation(value="高级搜索查询列表",notes="列表信息")
-	@ApiImplicitParam(name="vo",value = "业务实体")
-	@PostMapping("gjssList")
-	public @ResponseBody ResultVO gjssList(@RequestBody BuildingVO vo ) {
-		ResultVO resultVO = ResultVO.build();
-		try {
-			resultVO.setResult(buildingService.doSearchGjssListByVO(vo));
-		} catch (Exception e) {
-			logger.error("{}",e.getMessage());
-		}
-		return resultVO;
-	}
-
 }
