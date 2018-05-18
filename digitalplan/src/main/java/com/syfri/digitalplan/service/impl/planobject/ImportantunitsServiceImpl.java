@@ -1,5 +1,6 @@
 package com.syfri.digitalplan.service.impl.planobject;
 
+import com.syfri.digitalplan.model.planobject.XiaofangliliangVO;
 import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,11 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 			resultList.add(resultVO);
 		}
 		return resultList;
+	}
+
+	//通过重点单位 查询包含消防队伍详情
+	@Override
+	public List<XiaofangliliangVO> doFindXfllListByZddwId(String zddwId) {
+		return this.importantunitsDAO.doFindXfllListByZddwId(zddwId);
 	}
 }

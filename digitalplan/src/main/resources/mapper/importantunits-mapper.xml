@@ -9,176 +9,113 @@
 		<if test="dwmc != null and dwmc != '' ">
 		 and t.dwmc LIKE concat(concat('%',#{dwmc}),'%')
 		</if>
-		<if test="dwlb != null and dwlb != '' ">
-		 and t.dwlb = #{dwlb}
-		</if>
-		<if test="dwclsj != null and dwclsj != '' ">
-		 and t.dwclsj = #{dwclsj}
+		<if test="dwxz != null and dwxz != '' ">
+			and t.dwxz = #{dwxz}
 		</if>
 		<if test="dwdz != null and dwdz != '' ">
-		 and t.dwdz = #{dwdz}
-		</if>
-		<if test="dzlj != null and dzlj != '' ">
-		 and t.dzlj = #{dzlj}
-		</if>
-		<if test="dzh != null and dzh != '' ">
-		 and t.dzh = #{dzh}
+			and t.dwdz = #{dwdz}
 		</if>
 		<if test="dwgk != null and dwgk != '' ">
-		 and t.dwgk = #{dwgk}
+			and t.dwgk = #{dwgk}
 		</if>
 		<if test="xzqh != null and xzqh != '' ">
-		 and t.xzqh = #{xzqh}
+			and t.xzqh = #{xzqh}
 		</if>
 		<if test="zbdh != null and zbdh != '' ">
-		 and t.zbdh = #{zbdh}
-		</if>
-		<if test="yzbm != null and yzbm != '' ">
-		 and t.yzbm = #{yzbm}
-		</if>
-		<if test="dzyx != null and dzyx != '' ">
-		 and t.dzyx = #{dzyx}
-		</if>
-		<if test="gdzc != null and gdzc != '' ">
-		 and t.gdzc = #{gdzc}
-		</if>
-		<if test="zgrs != null and zgrs != '' ">
-		 and t.zgrs = #{zgrs}
+			and t.zbdh = #{zbdh}
 		</if>
 		<if test="fhdj != null and fhdj != '' ">
-		 and t.fhdj = #{fhdj}
+			and t.fhdj = #{fhdj}
 		</if>
 		<if test="fhdzid != null and fhdzid != '' ">
-		 and t.fhdzid = #{fhdzid}
+			and t.fhdzid = #{fhdzid}
 		</if>
 		<if test="fhdzmc != null and fhdzmc != '' ">
-		 and t.fhdzmc = #{fhdzmc}
+			and t.fhdzmc = #{fhdzmc}
 		</if>
 		<if test="mhdzid != null and mhdzid != '' ">
-		 and t.mhdzid = #{mhdzid}
+			and t.mhdzid = #{mhdzid}
 		</if>
 		<if test="mhdzmc != null and mhdzmc != '' ">
-		 and t.mhdzmc = #{mhdzmc}
+			and t.mhdzmc = #{mhdzmc}
 		</if>
 		<if test="xfzrr != null and xfzrr != '' ">
-		 and t.xfzrr = #{xfzrr}
-		</if>
-		<if test="xfzrrsfz != null and xfzrrsfz != '' ">
-		 and t.xfzrrsfz = #{xfzrrsfz}
+			and t.xfzrr = #{xfzrr}
 		</if>
 		<if test="xfzrrdh != null and xfzrrdh != '' ">
-		 and t.xfzrrdh = #{xfzrrdh}
+			and t.xfzrrdh = #{xfzrrdh}
 		</if>
 		<if test="xfglr != null and xfglr != '' ">
-		 and t.xfglr = #{xfglr}
-		</if>
-		<if test="xfglrsfz != null and xfglrsfz != '' ">
-		 and t.xfglrsfz = #{xfglrsfz}
+			and t.xfglr = #{xfglr}
 		</if>
 		<if test="xfglrdh != null and xfglrdh != '' ">
-		 and t.xfglrdh = #{xfglrdh}
-		</if>
-		<if test="xfdwlx != null and xfdwlx != '' ">
-		 and t.xfdwlx = #{xfdwlx}
-		</if>
-		<if test="xfdwrs != null and xfdwrs != '' ">
-		 and t.xfdwrs = #{xfdwrs}
-		</if>
-		<if test="xfdwcls != null and xfdwcls != '' ">
-		 and t.xfdwcls = #{xfdwcls}
-		</if>
-		<if test="xfdwlxr != null and xfdwlxr != '' ">
-		 and t.xfdwlxr = #{xfdwlxr}
-		</if>
-		<if test="xfdwdh != null and xfdwdh != '' ">
-		 and t.xfdwdh = #{xfdwdh}
-		</if>
-		<if test="xfdwbz != null and xfdwbz != '' ">
-		 and t.xfdwbz = #{xfdwbz}
+			and t.xfglrdh = #{xfglrdh}
 		</if>
 		<if test="xfsssl != null and xfsssl != '' ">
-		 and t.xfsssl = #{xfsssl}
+			and t.xfsssl = #{xfsssl}
 		</if>
 		<if test="jzfl != null and jzfl != '' ">
-		 and t.jzfl = #{jzfl}
+			and t.jzfl = #{jzfl}
 		</if>
 		<if test="jzsl != null and jzsl != '' ">
-		 and t.jzsl = #{jzsl}
+			and t.jzsl = #{jzsl}
 		</if>
 		<if test="zdmj != null and zdmj != '' ">
-		 and t.zdmj = #{zdmj}
+			and t.zdmj = #{zdmj}
 		</if>
 		<if test="jzmj != null and jzmj != '' ">
-		 and t.jzmj = #{jzmj}
+			and t.jzmj = #{jzmj}
 		</if>
 		<if test="gisX != null and gisX != '' ">
-		 and t.gis_x = #{gisX}
+			and t.gis_x = #{gisX}
 		</if>
 		<if test="gisY != null and gisY != '' ">
-		 and t.gis_y = #{gisY}
+			and t.gis_y = #{gisY}
 		</if>
 		<if test="lon != null and lon != '' ">
-		 and t.lon = #{lon}
+			and t.lon = #{lon}
 		</if>
 		<if test="lat != null and lat != '' ">
-		 and t.lat = #{lat}
+			and t.lat = #{lat}
 		</if>
-		<if test="blgxd != null and blgxd != '' ">
-		 and t.blgxd = #{blgxd}
+		<if test="plqkd != null and plqkd != '' ">
+			and t.plqkd = #{plqkd}
 		</if>
-		<if test="blgxn != null and blgxn != '' ">
-		 and t.blgxn = #{blgxn}
+		<if test="plqkn != null and plqkn != '' ">
+			and t.plqkn = #{plqkn}
 		</if>
-		<if test="blgxx != null and blgxx != '' ">
-		 and t.blgxx = #{blgxx}
+		<if test="plqkx != null and plqkx != '' ">
+			and t.plqkx = #{plqkx}
 		</if>
-		<if test="blgxb != null and blgxb != '' ">
-		 and t.blgxb = #{blgxb}
-		</if>
-		<if test="cjrid != null and cjrid != '' ">
-		 and t.cjrid = #{cjrid}
-		</if>
-		<if test="cjrmc != null and cjrmc != '' ">
-		 and t.cjrmc = #{cjrmc}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-		 and t.cjsj = #{cjsj}
-		</if>
-		<if test="xgrid != null and xgrid != '' ">
-		 and t.xgrid = #{xgrid}
-		</if>
-		<if test="xgrmc != null and xgrmc != '' ">
-		 and t.xgrmc = #{xgrmc}
-		</if>
-		<if test="xgsj != null and xgsj != '' ">
-		 and t.xgsj = #{xgsj}
-		</if>
-		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
-		</if>
-		<if test="datasource != null and datasource != '' ">
-		 and t.datasource = #{datasource}
+		<if test="plqkb != null and plqkb != '' ">
+			and t.plqkb = #{plqkb}
 		</if>
 		<if test="bz != null and bz != '' ">
-		 and t.bz = #{bz}
+			and t.bz = #{bz}
+		</if>
+		<if test="deleteFlag != null and deleteFlag != '' ">
+			and t.delete_flag = #{deleteFlag}
+		</if>
+		<if test="datasource != null and datasource != '' ">
+			and t.datasource = #{datasource}
 		</if>
 		<if test="jdh != null and jdh != '' ">
-		 and t.jdh = #{jdh}
+			and t.jdh = #{jdh}
 		</if>
 		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
+			and t.sjc = #{sjc}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
+			and t.reserve1 = #{reserve1}
 		</if>
 		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
+			and t.reserve2 = #{reserve2}
 		</if>
 		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
+			and t.reserve3 = #{reserve3}
 		</if>
 		<if test="reserve4 != null and reserve4 != '' ">
-		 and t.reserve4 = #{reserve4}
+			and t.reserve4 = #{reserve4}
 		</if>
 	</sql>
 
@@ -186,35 +123,20 @@
 	<sql id="SQL_CONTENT">
 		t.uuid uuid,
 		t.dwmc dwmc,
-		t.dwlb dwlb,
-		TO_CHAR(t.dwclsj,'yyyy-MM-dd HH24:mi:ss') dwclsj,
+		t.dwxz dwxz,
 		t.dwdz dwdz,
-		t.dzlj dzlj,
-		t.dzh dzh,
 		t.dwgk dwgk,
 		t.xzqh xzqh,
 		t.zbdh zbdh,
-		t.yzbm yzbm,
-		t.dzyx dzyx,
-		t.gdzc gdzc,
-		t.zgrs zgrs,
 		t.fhdj fhdj,
 		t.fhdzid fhdzid,
 		t.fhdzmc fhdzmc,
 		t.mhdzid mhdzid,
 		t.mhdzmc mhdzmc,
 		t.xfzrr xfzrr,
-		t.xfzrrsfz xfzrrsfz,
 		t.xfzrrdh xfzrrdh,
 		t.xfglr xfglr,
-		t.xfglrsfz xfglrsfz,
 		t.xfglrdh xfglrdh,
-		t.xfdwlx xfdwlx,
-		t.xfdwrs xfdwrs,
-		t.xfdwcls xfdwcls,
-		t.xfdwlxr xfdwlxr,
-		t.xfdwdh xfdwdh,
-		t.xfdwbz xfdwbz,
 		t.xfsssl xfsssl,
 		t.jzfl jzfl,
 		t.jzsl jzsl,
@@ -224,19 +146,13 @@
 		t.gis_y gisY,
 		t.lon lon,
 		t.lat lat,
-		t.blgxd blgxd,
-		t.blgxn blgxn,
-		t.blgxx blgxx,
-		t.blgxb blgxb,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.plqkd plqkd,
+		t.plqkn plqkn,
+		t.plqkx plqkx,
+		t.plqkb plqkb,
+		t.bz bz,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.bz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -252,19 +168,23 @@
 	</select>
 
 	<!--4.按条件查询记录-->
-	<select id="doSearchListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO"> 
-		SELECT 
-			<include refid="SQL_CONTENT"/>,
-		c2.CODE_NAME dwlbmc,
-		c4.code_name xzqhmc,
+	<select id="doSearchListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		c2.CODE_NAME dwxzmc,
+		c4.CODE_NAME xzqhmc,
 		c6.CODE_NAME jzflmc,
 		c8.CODE_NAME fhdjmc,
 		c9.DZMC mhdzidmc,
-		CASE xfdwlx WHEN '0' THEN '否' WHEN '1' THEN '是' END AS xfdwlxmc
+		CASE(SELECT COUNT(t2.UUID) FROM YAGL_DX_ZDDW_XFLL t2 WHERE t2.ZDDWID = t.UUID AND t2.DELETE_FLAG = 'N') WHEN 0 THEN '无' ELSE '有' END AS xfdwlxmc
 		FROM YAGL_DX_ZDDW t
-		<!--单位类别-->
+		<!--单位性质-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDDWLB' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWLB = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWXZ = c2.CODE_VALUE
 		<!--行政区划-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c4 On c3.CODEID = c4.CODEID And c4.DELETE_FLAG = 'N' and t.XZQH = c4.CODE_VALUE
@@ -277,24 +197,32 @@
 		<!--消防队站-->
 		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZBM AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
-		and rownum &lt;= 100
-			<include refid="SQL_CONDITION"/>
+		<include refid="SQL_CONDITION"/>
+		) t
+		where rownum &lt;= 100
+		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
+			and t.xfdwlxmc = #{xfdwlxmc}
+		</if>
+		ORDER BY XZQH,DWXZ,DWMC ASC
 	</select>
 
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
 		SELECT
+		*
+		FROM
+		(SELECT
 		<include refid="SQL_CONTENT"/>,
-		c2.CODE_NAME dwlbmc,
-		c4.code_name xzqhmc,
+		c2.CODE_NAME dwxzmc,
+		c4.CODE_NAME xzqhmc,
 		c6.CODE_NAME jzflmc,
 		c8.CODE_NAME fhdjmc,
 		c9.DZMC mhdzidmc,
-		CASE xfdwlx WHEN '0' THEN '否' WHEN '1' THEN '是' END AS xfdwlxmc
+		CASE(SELECT COUNT(t2.UUID) FROM YAGL_DX_ZDDW_XFLL t2 WHERE t2.ZDDWID = t.UUID AND t2.DELETE_FLAG = 'N') WHEN 0 THEN '无' ELSE '有' END AS xfdwlxmc
 		FROM YAGL_DX_ZDDW t
-		<!--单位类别-->
+		<!--单位性质-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDDWLB' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWLB = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWXZ = c2.CODE_VALUE
 		<!--行政区划-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c4 On c3.CODEID = c4.CODEID And c4.DELETE_FLAG = 'N' and t.XZQH = c4.CODE_VALUE
@@ -308,7 +236,8 @@
 		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZBM AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.UUID = #{value}
-		and rownum &lt;= 100
+		) t
+		ORDER BY XZQH,DWXZ,DWMC ASC
 	</select>
 
 	<!--6.按照VO插入-->
@@ -475,19 +404,22 @@
 	</update>
 
 	<!--11.根据对象查询记录-->
-	<select id="doFindByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">  
-		SELECT 
+	<select id="doFindByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
+		SELECT
+		*
+		FROM
+		(SELECT
 		<include refid="SQL_CONTENT"/>,
-		c2.CODE_NAME dwlbmc,
-		c4.code_name xzqhmc,
+		c2.CODE_NAME dwxzmc,
+		c4.CODE_NAME xzqhmc,
 		c6.CODE_NAME jzflmc,
 		c8.CODE_NAME fhdjmc,
 		c9.DZMC mhdzidmc,
-		CASE xfdwlx WHEN '0' THEN '否' WHEN '1' THEN '是' END AS xfdwlxmc
+		CASE(SELECT COUNT(t2.UUID) FROM YAGL_DX_ZDDW_XFLL t2 WHERE t2.ZDDWID = t.UUID AND t2.DELETE_FLAG = 'N') WHEN 0 THEN '无' ELSE '有' END AS xfdwlxmc
 		FROM YAGL_DX_ZDDW t
-		<!--单位类别-->
+		<!--单位性质-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZDDWLB' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWLB = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWXZ = c2.CODE_VALUE
 		<!--行政区划-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c4 On c3.CODEID = c4.CODEID And c4.DELETE_FLAG = 'N' and t.XZQH = c4.CODE_VALUE
@@ -500,8 +432,40 @@
 		<!--消防队站-->
 		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZBM AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
-		and rownum &lt;= 100
 		<include refid="SQL_CONDITION"/>
+		) t
+		where rownum &lt;= 100
+		<if test="mhdzidmc != null and mhdzidmc != '' and mhdzidmc != '全部'">
+			and t.mhdzidmc = #{mhdzidmc}
+		</if>
+		ORDER BY XZQH,DWXZ,DWMC ASC
 	</select>
 
+	<!--通过重点单位id 获取单位中所有消防力量信息-->
+	<select id="doFindXfllListByZddwId" parameterType="String"  resultType="XiaofangliliangVO">
+		SELECT
+		t.uuid uuid,
+		t.zddwid zddwid,
+		t.xfdwlx xfdwlx,
+		t.xfdwrs xfdwrs,
+		t.xfdwcls xfdwcls,
+		t.xfdwlxr xfdwlxr,
+		t.xfdwdh xfdwdh,
+		t.bz bz,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4,
+		c2.code_name xfdwlxmc
+		FROM YAGL_DX_ZDDW_XFLL t
+		<!--消防力量类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'XFDWLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.xfdwlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		and t.zddwid = #{value}
+	</select>
 </mapper>
