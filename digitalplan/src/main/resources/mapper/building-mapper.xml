@@ -337,9 +337,9 @@
 		t.jzmc jzmc,
 		t.jzsjcl jzsjcl,
 		t.jzlhtx jzlhtx,
+		t.jzbz jzbz,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-		t.jzbz bz,
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -390,7 +390,7 @@
 
 	<!--通过重点单位id查询包含分区id-->
 	<select id="doFindFqidListByZddwid" parameterType="String"  resultType="String">
-		SELECT JZID
+		SELECT FQID
  		FROM YAGL_DX_ZDDW_JZFQ WHERE DELETE_FLAG = 'N'
  		AND ZDDWID = #{value}
 	</select>
