@@ -68,6 +68,14 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 		return "system/imgUpload";
 	}
 
+	/**
+	 * @Description: 获取所有的图片类型
+	 * @Param: []
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/21 9:29
+	 */
 	@ApiOperation(value="获取所有的图片类型",notes="查询")
 	@GetMapping("/getAll")
 	public @ResponseBody ResultVO findAll(){
@@ -85,14 +93,13 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	/**
 	 * @Description: 根据条件获取图片信息
 	 * @Param: [imgUploadVO]
-	 * @Return: ResultVO
+	 * @Return: com.syfri.baseapi.model.ResultVO
 	 * @Author: dongbo
 	 * @Modified By:
-	 * @Date: 2018/5/17 11:00
+	 * @Date: 2018/5/21 9:29
 	 */
 	@ApiOperation(value="根据条件获取图片信息",notes="列表信息")
 	@ApiImplicitParam(name="imgUploadVO",value="图片对象")
-	@RequiresPermissions("imgupload:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
@@ -134,16 +141,16 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	}
 
 	/**
-	 * @Description: 新增图片
+	 * @Description: 新增图片信息
 	 * @Param: [imgUploadVO]
-	 * @Return: ResultVO
+	 * @Return: com.syfri.baseapi.model.ResultVO
 	 * @Author: dongbo
 	 * @Modified By:
-	 * @Date: 2018/5/17 11:01
+	 * @Date: 2018/5/21 9:34
 	 */
-	@ApiOperation(value="新增图片",notes="新增")
+	@ApiOperation(value="新增图片信息",notes="新增")
 	@ApiImplicitParam(name="vo",value="图片对象")
-	@RequiresPermissions("imgupload:add")
+	@RequiresPermissions("codelist:add")
 	@PostMapping("/detail/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
@@ -219,14 +226,14 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	/**
 	 * @Description: 删除图片
 	 * @Param: [id]
-	 * @Return: ResultVO
+	 * @Return: com.syfri.baseapi.model.ResultVO
 	 * @Author: dongbo
 	 * @Modified By:
-	 * @Date: 2018/5/17 11:03
+	 * @Date: 2018/5/21 9:35
 	 */
 	@ApiOperation(value="根据主键删除图片",notes="删除")
 	@ApiImplicitParam(name="id",value="图片主键")
-	@RequiresPermissions("imgupload:delete")
+	@RequiresPermissions("codelist:delete")
 	@PostMapping("/detail/deleteByIds")
 	public @ResponseBody ResultVO deleteDetailByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
@@ -248,10 +255,10 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	/**
 	 * @Description: 根据id获取图片信息
 	 * @Param: [pkid]
-	 * @Return: ResultVO
+	 * @Return: com.syfri.baseapi.model.ResultVO
 	 * @Author: dongbo
 	 * @Modified By:
-	 * @Date: 2018/5/17 11:03
+	 * @Date: 2018/5/21 9:35
 	 */
 	@ApiOperation(value="根据id获取图片信息",notes="列表信息")
 	@GetMapping("/doFindById/{pkid}")
@@ -271,19 +278,16 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	}
 
 	/**
-	 * 修改代码值
-	 */
-	/**
 	 * @Description: 修改图片信息
 	 * @Param: [imgUploadVO]
-	 * @Return: ResultVO
+	 * @Return: com.syfri.baseapi.model.ResultVO
 	 * @Author: dongbo
 	 * @Modified By:
-	 * @Date: 2018/5/17 11:03
+	 * @Date: 2018/5/21 9:35
 	 */
 	@ApiOperation(value="修改图片信息",notes="修改")
 	@ApiImplicitParam(name="vo",value="图片对象")
-	@RequiresPermissions("imgupload:update")
+	@RequiresPermissions("codelist:update")
 	@PostMapping("/detail/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
