@@ -174,7 +174,7 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--11.根据对象查询记录-->
+	<!--12.根据对象查询记录-->
 	<select id="doFindAll" parameterType="ImgUploadVO"  resultType="ImgUploadVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
@@ -183,9 +183,22 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.上传图片-->
+	<!--13.上传图片-->
 	<update id="doInsertImg" parameterType="ImgUploadVO">
 		UPDATE  SYS_CODELIST_PICTURE t SET t.pic_blob = #{imgFile,jdbcType=BLOB}   WHERE t.pic_name = #{picName}
 	</update>
 
+	<!--14.按图片名称查询记录-->
+	<select id="doSearchListByPicName" parameterType="ImguploadVO"  resultType="ImguploadVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST_PICTURE t  WHERE t.DELETE_FLAG = 'N'
+		<if test="picType != null and picType != '' ">
+			and t.pic_type = #{picType}
+		</if>
+		<if test="picName != null and picName != '' ">
+			and t.pic_name  = #{picName}
+		</if>
+		ORDER BY t.pic_type,t.pic_value
+	</select>
 </mapper>
