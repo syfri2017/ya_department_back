@@ -52,7 +52,9 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	private String dwxzmc;
 	private String xzqhmc;
 	private String fhdjmc;
+	private String fhdzbm;
 	private String fhdzidmc;
+	private String mhdzbm;
 	private String mhdzidmc;
 	private String jzflmc;
 	private String xfdwlxmc;
@@ -172,8 +174,8 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	public void setXzqhmc(String xzqhmc) {
 		this.xzqhmc = xzqhmc;
 	}
-	public String getFhdjmc() {
-		return fhdjmc;
+	public String getFhdzbm() {
+		return fhdzbm;
 	}
 	public void setFhdjmc(String fhdjmc) {
 		this.fhdjmc = fhdjmc;
@@ -181,8 +183,20 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	public String getFhdzidmc() {
 		return fhdzidmc;
 	}
+	public void setFhdzbm(String fhdzbm) {
+		this.fhdzbm = fhdzbm;
+	}
+	public String getFhdjmc() {
+		return fhdjmc;
+	}
 	public void setFhdzidmc(String fhdzidmc) {
 		this.fhdzidmc = fhdzidmc;
+	}
+	public String getMhdzbm() {
+		return mhdzbm;
+	}
+	public void setMhdzbm(String mhdzbm) {
+		this.mhdzbm = mhdzbm;
 	}
 	public String getMhdzidmc() {
 		return mhdzidmc;
