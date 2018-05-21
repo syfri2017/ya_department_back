@@ -128,7 +128,7 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 		try{
 			ImgUploadVO imgUploadVO = new ImgUploadVO();
 			imgUploadVO.setPicName(picName);
-			if(imgUploadService.doSearchListByVO(imgUploadVO).size() == 0){
+			if(imgUploadService.doSearchListByPicName(imgUploadVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
 				resultVO.setResult(1);

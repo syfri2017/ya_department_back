@@ -26,4 +26,15 @@ public interface ImgUploadDAO extends BaseDAO<ImgUploadVO>{
      * @Date: 2018/4/20 16:45
      */
     void doInsertImg(ImgUploadVO imgUploadVO);
+
+    /**
+     * @Description: 查询图片名称是否已存在
+     * @Param: [vo]
+     * @Return: java.util.List<com.syfri.userservice.model.ImgUploadVO>
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/5/21 10:26
+     */
+    List<ImgUploadVO> doSearchListByPicName(ImgUploadVO vo);
+
 }

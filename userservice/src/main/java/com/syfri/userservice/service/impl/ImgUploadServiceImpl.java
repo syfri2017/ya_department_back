@@ -35,4 +35,14 @@ public class ImgUploadServiceImpl extends BaseServiceImpl<ImgUploadVO> implement
 	public List<ImgUploadVO> doFindAll(){
 		return imgUploadDAO.doFindAll();
 	}
+
+	/**
+	 * @Description: 查询图片名称是否已存在
+	 * @Param: [vo]
+	 * @Return: java.util.List<com.syfri.userservice.model.ImgUploadVO>
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/21 10:26
+	 */
+	public List<ImgUploadVO> doSearchListByPicName(ImgUploadVO vo){return imgUploadDAO.doSearchListByPicName(vo);}
 }
