@@ -27,6 +27,24 @@ public class ImportantunitsController  extends BaseController<ImportantunitsVO>{
 	}
 
 	/**
+	 * 通过重点单位 查询包含消防队伍详情
+	 */
+	@ApiOperation(value="通过重点单位 查询包含消防队伍详情",notes="列表信息")
+	@ApiImplicitParam(name="zddwId",value="重点单位id")
+	@GetMapping("/doFindXfllListByZddwId/{zddwId}")
+	public @ResponseBody ResultVO doFindXfllListByZddwId(@PathVariable String zddwId){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			List<XiaofangliliangVO> result= importantunitsService.doFindXfllListByZddwId(zddwId);
+			resultVO.setResult(result);
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
 	 * 通过重点单位 查询包含分区详情
 	 */
 	@ApiOperation(value="通过重点单位 查询包含分区详情",notes="列表信息")
@@ -45,16 +63,15 @@ public class ImportantunitsController  extends BaseController<ImportantunitsVO>{
 	}
 
 	/**
-	 * 通过重点单位 查询包含消防队伍详情
+	 * 通过重点单位 查询包含消防设施详情
 	 */
-	@ApiOperation(value="通过重点单位 查询包含消防队伍详情",notes="列表信息")
-	@ApiImplicitParam(name="zddwId",value="重点单位id")
-	@GetMapping("/doFindXfllListByZddwId/{zddwId}")
-	public @ResponseBody ResultVO doFindXfllListByZddwId(@PathVariable String zddwId){
+	@ApiOperation(value="通过重点单位 查询包含消防设施详情",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="重点单位对象")
+	@PostMapping("/doFindFireFacilitiesDetailsByVo")
+	public @ResponseBody ResultVO doFindFireFacilitiesDetailsByVo(@RequestBody ImportantunitsVO vo) {
 		ResultVO resultVO = ResultVO.build();
 		try{
-			List<XiaofangliliangVO> result= importantunitsService.doFindXfllListByZddwId(zddwId);
-			resultVO.setResult(result);
+			resultVO.setResult(importantunitsService.doFindFireFacilitiesDetailsByVo(vo));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

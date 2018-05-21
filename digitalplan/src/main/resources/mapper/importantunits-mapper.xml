@@ -19,7 +19,7 @@
 			and t.dwgk = #{dwgk}
 		</if>
 		<if test="xzqh != null and xzqh != '' ">
-			and t.xzqh = #{xzqh}
+			and t.xzqh LIKE concat(RTRIM(#{xzqh},0),'%')
 		</if>
 		<if test="zbdh != null and zbdh != '' ">
 			and t.zbdh = #{zbdh}

@@ -19,7 +19,7 @@ public class XfbwjwVO extends ValueObject implements Serializable{
 	private String yabh;	//预案编号
 	private String yasxh;	//预案顺序号
 	private String yabbh;	//预案版本号
-	private String yalxdm;	//预案类型代码
+	private String yalx;	//预案类型代码
 	private String yamc;	//预案名称
 	private String yajb;	//预案级别
 	private String dxid;	//对象ID
@@ -73,12 +73,11 @@ public class XfbwjwVO extends ValueObject implements Serializable{
 	public void setYabbh(String yabbh){
 		this.yabbh = yabbh;
 	}
-	public String getYalxdm(){
-		return yalxdm;
-
+	public String getYalx() {
+		return yalx;
 	}
-	public void setYalxdm(String yalxdm){
-		this.yalxdm = yalxdm;
+	public void setYalx(String yalx) {
+		this.yalx = yalx;
 	}
 	public String getYamc(){
 		return yamc;
