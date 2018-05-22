@@ -1,6 +1,8 @@
 package com.syfri.digitalplan.controller.advancedsearch;
 
 import com.syfri.baseapi.model.ResultVO;
+import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
+import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +29,51 @@ public class SearchController  extends BaseController<BuildingVO>{
     }
 
     /*
-    * 高级搜索查询建筑列表
-    * 通过输入框值匹配 建筑名称或建筑位置
-    * by yushch 20180516
+    * 高级搜索查询预案信息
+    * by yushch 20180521
     */
-    @ApiOperation(value="高级搜索查询列表",notes="列表信息")
+    @ApiOperation(value="高级搜索查询预案列表",notes="列表信息")
     @ApiImplicitParam(name="vo",value = "业务实体")
-    @PostMapping("gjssList")
-    public @ResponseBody ResultVO gjssList(@RequestBody BuildingVO vo ) {
+    @PostMapping("gjssYaxxList")
+    public @ResponseBody ResultVO gjssYaxxList(@RequestBody DigitalplanlistVO vo ) {
         ResultVO resultVO = ResultVO.build();
         try {
-            resultVO.setResult(searchService.doSearchGjssListByVO(vo));
+            resultVO.setResult(searchService.doSearchGjssYaxxListByVO(vo));
+        } catch (Exception e) {
+            logger.error("{}",e.getMessage());
+        }
+        return resultVO;
+    }
+
+    /*
+    * 高级搜索查询预案对象信息
+    * by yushch 20180522
+    */
+    @ApiOperation(value="高级搜索查询预案对象信息列表",notes="列表信息")
+    @ApiImplicitParam(name="vo",value = "业务实体")
+    @PostMapping("gjssYadxList")
+    public @ResponseBody ResultVO gjssYadxList(@RequestBody ImportantunitsVO vo ) {
+        ResultVO resultVO = ResultVO.build();
+        try {
+            resultVO.setResult(searchService.doSearchGjssYadxListByVO(vo));
+        } catch (Exception e) {
+            logger.error("{}",e.getMessage());
+        }
+        return resultVO;
+    }
+
+    /*
+    * 高级搜索查询建筑列表
+    * 通过输入框值匹配 建筑名称或建筑位置
+    * by yushch 20180517
+    */
+    @ApiOperation(value="高级搜索查询建筑列表",notes="列表信息")
+    @ApiImplicitParam(name="vo",value = "业务实体")
+    @PostMapping("gjssDwjzList")
+    public @ResponseBody ResultVO gjssDwjzList(@RequestBody BuildingVO vo ) {
+        ResultVO resultVO = ResultVO.build();
+        try {
+            resultVO.setResult(searchService.doSearchGjssDwjzListByVO(vo));
         } catch (Exception e) {
             logger.error("{}",e.getMessage());
         }

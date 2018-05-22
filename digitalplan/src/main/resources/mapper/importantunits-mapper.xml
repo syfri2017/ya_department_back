@@ -28,13 +28,13 @@
 			and t.fhdj = #{fhdj}
 		</if>
 		<if test="fhdzid != null and fhdzid != '' ">
-			and t.fhdzid = #{fhdzid}
+			and t.fhdzid like concat(concat('%',#{fhdzid}),'%')
 		</if>
 		<if test="fhdzmc != null and fhdzmc != '' ">
 			and t.fhdzmc = #{fhdzmc}
 		</if>
 		<if test="mhdzid != null and mhdzid != '' ">
-			and t.mhdzid = #{mhdzid}
+			and t.mhdzid like concat(concat('%',#{mhdzid}),'%')
 		</if>
 		<if test="mhdzmc != null and mhdzmc != '' ">
 			and t.mhdzmc = #{mhdzmc}
@@ -195,7 +195,11 @@
 		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'FHDJ' And c7.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c8 On c7.CODEID = c8.CODEID And c8.DELETE_FLAG = 'N' and t.FHDJ = c8.CODE_VALUE
 		<!--消防队站-->
-		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZBM AND c9.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZID AND c9.DELETE_FLAG = 'N')
+		<if test="mhdzbm != null and mhdzbm != '' ">
+		INNER JOIN YAGL_XFDZ c10
+		ON (t.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))
+		</if>
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		) t
@@ -430,7 +434,11 @@
 		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'FHDJ' And c7.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c8 On c7.CODEID = c8.CODEID And c8.DELETE_FLAG = 'N' and t.FHDJ = c8.CODE_VALUE
 		<!--消防队站-->
-		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZBM AND c9.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZID AND c9.DELETE_FLAG = 'N')
+		<if test="mhdzbm != null and mhdzbm != '' ">
+		INNER JOIN YAGL_XFDZ c10
+		ON (t.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))
+		</if>
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		) t

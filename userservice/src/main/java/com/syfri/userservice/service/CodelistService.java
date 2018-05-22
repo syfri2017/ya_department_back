@@ -40,6 +40,9 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 	/*--根据代码类型查询代码集.--*/
 	List<CodelistDetailVO> doFindCodelistByType(String codetype);
 
+	/*--根据代码类型查询代码集，按数字大小排序.--*/
+	List<CodelistDetailVO> doFindCodelistByTypeOrderByNum(String codetype);
+
 	/*--根据代码类型获取树状资源.--*/
 	List<CodelistTree> doFindCodelistTreeByType(CodelistParams codelistParams);
 

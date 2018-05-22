@@ -49,6 +49,8 @@ public class OtherobjectsplanVO extends ValueObject implements Serializable{
 	private String cjsj_begintime;
 	private String cjsj_endtime;
 
+	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -264,5 +266,12 @@ public class OtherobjectsplanVO extends ValueObject implements Serializable{
 	}
 	public void setCjsj_endtime(String cjsj_endtime) {
 		this.cjsj_endtime = cjsj_endtime;
+	}
+
+	public String getYadxType() {
+		return yadxType;
+	}
+	public void setYadxType(String yadxType) {
+		this.yadxType = yadxType;
 	}
 }

@@ -35,6 +35,8 @@ public class OtherobjectsVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -190,5 +192,12 @@ public class OtherobjectsVO extends ValueObject implements Serializable{
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public String getYadxType() {
+		return yadxType;
+	}
+	public void setYadxType(String yadxType) {
+		this.yadxType = yadxType;
 	}
 }

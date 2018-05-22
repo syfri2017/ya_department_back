@@ -109,6 +109,12 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 		return codelistDAO.doFindCodelistByType(codetype);
 	}
 
+	/*--根据代码类型查询代码集，按数字大小排序.--*/
+	@Override
+	public List<CodelistDetailVO> doFindCodelistByTypeOrderByNum(String codetype){
+		return codelistDAO.doFindCodelistByTypeOrderByNum(codetype);
+	}
+
 	/*--根据代码类型获取树状资源.--*/
 	@Override
 	public List<CodelistTree> doFindCodelistTreeByType(CodelistParams codelistParams) {
