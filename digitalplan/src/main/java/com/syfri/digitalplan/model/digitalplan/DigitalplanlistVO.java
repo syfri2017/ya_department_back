@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.model.digitalplan;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 
@@ -241,6 +242,7 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String yaztmc;	//预案状态
 	private String yajbmc;	//预案级别
 	private String shztmc;	//审核状态
+	private List disasterList; //灾情设定
 	public String getYalxmc(){
 		return yalxmc;
 	}
@@ -264,6 +266,12 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	}
 	public void setShztmc(String shztmc){
 		this.shztmc = shztmc;
+	}
+	public List getDisasterList(){
+		return disasterList;
+	}
+	public void setDisasterList(List disasterList){
+		this.disasterList = disasterList;
 	}
 
 	public String getYadxType() {
