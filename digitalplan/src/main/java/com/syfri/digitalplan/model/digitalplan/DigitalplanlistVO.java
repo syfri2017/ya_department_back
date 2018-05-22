@@ -39,8 +39,9 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
-	private String begintime;	//审核开始时间
-	private String endtime;	//审核结束时间
+	private String begintime;	//开始时间
+	private String endtime;	//结束时间
+	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
 	public String getBegintime(){
 		return begintime;
 	}
@@ -263,5 +264,12 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	}
 	public void setShztmc(String shztmc){
 		this.shztmc = shztmc;
+	}
+
+	public String getYadxType() {
+		return yadxType;
+	}
+	public void setYadxType(String yadxType) {
+		this.yadxType = yadxType;
 	}
 }

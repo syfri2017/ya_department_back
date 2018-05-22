@@ -1,12 +1,10 @@
 package com.syfri.digitalplan.service.impl.advancedsearch;
 
-import com.syfri.baseapi.service.impl.BaseServiceImpl;
 import com.syfri.digitalplan.dao.advancedsearch.SearchDAO;
-import com.syfri.digitalplan.dao.buildingzoning.BuildingDAO;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
-import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
+import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
+import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
 import com.syfri.digitalplan.service.advancedsearch.SearchService;
-import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +20,12 @@ public class SearchServiceImpl implements SearchService {
 	private SearchDAO searchDAO;
 
 	//高级搜索查询建筑列表
-	public List doSearchGjssListByVO(BuildingVO vo) {
+	public List doSearchGjssDwjzListByVO(BuildingVO vo) {
 		String jzlx = vo.getJzlx();
 		List<BuildingVO> buildingList = new ArrayList<>();
 		switch (jzlx){
 			case  "":
-				buildingList = searchDAO.doSearchGjssListByVO(vo);
+				buildingList = searchDAO.doSearchGjssDwjzListByVO(vo);
 				break;
 			case  "10":
 			case  "20":
@@ -53,4 +51,45 @@ public class SearchServiceImpl implements SearchService {
 		return buildingList;
 	}
 
+	//高级搜索 预案搜索
+	public List doSearchGjssYaxxListByVO(DigitalplanlistVO vo) {
+		String yadx = vo.getYadxType();
+		List<DigitalplanlistVO> digitalplanlist = new ArrayList<>();
+		switch (yadx){
+			case "":
+				digitalplanlist = searchDAO.doSearchGjssYaxxByVO(vo);
+				break;
+			case "1":
+				digitalplanlist = searchDAO.doSearchGjssYaxxZddwByVO(vo);
+				break;
+			case "2":
+				digitalplanlist = searchDAO.doSearchGjssYaxxBwjwByVO(vo);
+				break;
+			case "3":
+				digitalplanlist = searchDAO.doSearchGjssYaxxQtdxByVO(vo);
+				break;
+		}
+		return digitalplanlist;
+	}
+
+	//高级搜索 预案对象信息
+	public List doSearchGjssYadxListByVO(ImportantunitsVO vo) {
+		String yadx = vo.getYadxType();
+		List<ImportantunitsVO> importantunitsList = new ArrayList<>();
+		switch (yadx){
+			case "":
+				importantunitsList = searchDAO.doSearchGjssYadxByVO(vo);
+				break;
+			case "1":
+				importantunitsList = searchDAO.doSearchGjssYadxZddwByVO(vo);
+				break;
+			case "2":
+				importantunitsList = searchDAO.doSearchGjssYadxBwjwByVO(vo);
+				break;
+			case "3":
+				importantunitsList = searchDAO.doSearchGjssYadxQtdxByVO(vo);
+				break;
+		}
+		return importantunitsList;
+	}
 }

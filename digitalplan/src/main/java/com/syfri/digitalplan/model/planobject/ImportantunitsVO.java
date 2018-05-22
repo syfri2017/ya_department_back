@@ -59,6 +59,11 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	private String jzflmc;
 	private String xfdwlxmc;
 
+	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
+	private String dxmc;     //高级搜索中对象名称（对应重点单位中dwmc字段）
+	private String dxdz;		//高级搜索中对象地址（对应重点单位中 dwdz 字段）
+	private String 	xfgx;		//高级搜索中消防管辖（对应重点单位中 mhdzid 字段）
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -212,4 +217,29 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	}
 	public String getXfdwlxmc() { return xfdwlxmc; }
 	public void setXfdwlxmc(String xfdwlxmc) { this.xfdwlxmc = xfdwlxmc; }
+
+	public String getYadxType() {
+		return yadxType;
+	}
+	public void setYadxType(String yadxType) {
+		this.yadxType = yadxType;
+	}
+	public String getDxmc() {
+		return dxmc;
+	}
+	public void setDxmc(String dxmc) {
+		this.dxmc = dxmc;
+	}
+	public String getDxdz() {
+		return dxdz;
+	}
+	public void setDxdz(String dxdz) {
+		this.dxdz = dxdz;
+	}
+	public String getXfgx() {
+		return xfgx;
+	}
+	public void setXfgx(String xfgx) {
+		this.xfgx = xfgx;
+	}
 }
