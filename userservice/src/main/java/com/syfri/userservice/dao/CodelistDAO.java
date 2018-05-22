@@ -32,6 +32,9 @@ public interface CodelistDAO extends BaseDAO<CodelistVO>{
 	/*--根据代码类型查询代码集.--*/
 	List<CodelistDetailVO> doFindCodelistByType(String codetype);
 
+	/*--根据代码类型查询代码集，按数字大小排序.--*/
+	List<CodelistDetailVO> doFindCodelistByTypeOrderByNum(String codetype);
+
 	/*--查询行政区划，只保留31个省.--*/
 	List<CodelistDetailVO> doFindXzqhCodelist(String codetype);
 }

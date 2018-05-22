@@ -305,6 +305,23 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	}
 
 	/**
+	 * 根据代码集类型查询代码项，按数字大小排序
+	 */
+	@ApiOperation(value="根据代码集类型查询代码项，按数字大小排序",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@GetMapping("/getCodeTypeOrderByNum/{codetype}")
+	public @ResponseBody ResultVO getCodeTypeOrderByNum(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindCodelistByTypeOrderByNum(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
 	 * 根据代码类型获取树状资源
 	 * 要求：子类别是父类别代码值的扩充
 	 * 如：01,0101,0102
