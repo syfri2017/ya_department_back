@@ -331,6 +331,12 @@
 		<if test="zcbdw != null and zcbdw != '' ">
 			and t.zcbdw LIKE concat(concat('%',#{zcbdw}),'%')
 		</if>
+		<!--add by yushch 20180523-->
+		<!--高级搜索-预案对象-保卫警卫 点击后跳转到查询页面，通过UUID直接查询其对象-->
+		<if test="uuid != null and uuid != '' ">
+			and t.uuid = #{uuid}
+		</if>
+		<!--add end-->
 	</select>
 
 	<!--13.根据ID查询记录-->
