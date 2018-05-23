@@ -147,7 +147,7 @@
 	<select id="doSearchGjssYaxxByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
-		'1' yadxType,
+		'重点单位' yadxType,
 		c2.code_name yalxmc,
 		c6.code_name yajbmc
 		FROM YAGL_YA_ZDDW t
@@ -162,7 +162,7 @@
 		UNION ALL
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
-		'2' yadxType,
+		'消防保卫警卫' yadxType,
 		c2.code_name yalxmc,
 		c6.code_name yajbmc
 		FROM YAGL_YA_BWJW t
@@ -177,7 +177,7 @@
 		UNION ALL
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
-		'2' yadxType,
+		'其他对象' yadxType,
 		c2.code_name yalxmc,
 		c6.code_name yajbmc
 		FROM YAGL_YA_QTDX t
@@ -194,7 +194,7 @@
 	<select id="doSearchGjssYaxxZddwByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
-		'1' yadxType,
+		'重点单位' yadxType,
 		c2.code_name yalxmc,
 		c6.code_name yajbmc
 		FROM YAGL_YA_ZDDW t
@@ -211,7 +211,7 @@
 	<select id="doSearchGjssYaxxBwjwByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
-		'2' yadxType,
+		'消防保卫警卫' yadxType,
 		c2.code_name yalxmc,
 		c6.code_name yajbmc
 		FROM YAGL_YA_BWJW t
@@ -228,7 +228,7 @@
 	<select id="doSearchGjssYaxxQtdxByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
-		'2' yadxType,
+		'其他对象' yadxType,
 		c2.code_name yalxmc,
 		c6.code_name yajbmc
 		FROM YAGL_YA_QTDX t
