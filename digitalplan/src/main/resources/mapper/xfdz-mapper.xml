@@ -202,8 +202,13 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="XfdzVO"  resultType="XfdzVO"> 
 		SELECT 
-			<include refid="SQL_CONTENT"/>
-		FROM YAGL_XFDZ t  WHERE t.DELETE_FLAG = 'N' 
+			<include refid="SQL_CONTENT"/>,
+			c2.code_name dzlxmc
+		FROM YAGL_XFDZ t
+		<!--队站类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'DZLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DZLX = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 	</select>
 
