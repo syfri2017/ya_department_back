@@ -23,4 +23,7 @@ public interface BuildingDAO extends BaseDAO<BuildingVO>{
     //通过重点单位id 查询包含分区id
     public List<String> doFindFqidListByZddwid(String zddwid);
 
+    //通过重点单位id 查询建筑分区list
+    public List<BuildingVO> doSearchJzListByZddwId(BuildingVO buildingVO);
+
 }
