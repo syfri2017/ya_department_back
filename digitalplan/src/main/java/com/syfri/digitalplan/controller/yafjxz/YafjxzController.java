@@ -1,6 +1,8 @@
 package com.syfri.digitalplan.controller.yafjxz;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,8 +54,7 @@ public class YafjxzController {
 	 */
 	@RequestMapping(value = "/upload")
 	@ResponseBody
-	public void upload(HttpServletRequest request, HttpServletResponse response
-			,YafjxzVO yafjxzVO) {
+	public void upload(HttpServletRequest request ,YafjxzVO yafjxzVO) {
 		System.out.println("id:"+yafjxzVO.getYaid());
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartRequest.getFileNames();
@@ -76,13 +77,14 @@ public class YafjxzController {
 			//新建的文件夹名称（预案基本信息创建时间+预案基本信息PKID）
 			//123456为行政代码
 
-			DigitalplanlistVO digitalplanlist=digitalplanlistService.doFindById(yafjxzVO.getYaid());
-			if(StringUtils.isBlank(digitalplanlist.getUuid())){
-				throw new RuntimeException("未查到预案基本信息！");
-			}
-
-			StringBuffer new_folder=new StringBuffer("123456/").append(digitalplanlist.getZzsj())
-					.append("/").append(digitalplanlist.getUuid()).append("/");
+//			DigitalplanlistVO digitalplanlist=digitalplanlistService.doFindById(yafjxzVO.getYaid());
+//			if(StringUtils.isBlank(digitalplanlist.getUuid())){
+//				throw new RuntimeException("未查到预案基本信息！");
+//			}
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String zzsj = sdf.format(date);
+			StringBuffer new_folder=new StringBuffer(yafjxzVO.getYaid()).append("/").append(zzsj).append("/");
 
 			String folderName=relativePath.append(new_folder).toString();
 			//创建文件夹
@@ -123,11 +125,11 @@ public class YafjxzController {
 				is.close();
 				//插入数据
 				YafjxzVO yafjxz =new YafjxzVO();
-				yafjxz.setId(StringUtils.getUUId());
 				yafjxz.setYaid(yafjxzVO.getYaid());
-				yafjxz.setDir(dbPath);
-				yafjxz.setExtension(suffixName);
-				yafjxz.setRelname(fileName);
+				yafjxz.setXzlj(dbPath);
+				yafjxz.setKzm(suffixName);
+				yafjxz.setWjm(fileName);
+				yafjxz.setDeleteFlag("N");
 				yafjxzService.doInsertByVO(yafjxz);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -170,7 +172,7 @@ public class YafjxzController {
 		int dr=yafjxzService.doDeleteByVO(yafjxz);
 		if(dr>0){
 			resultVO.setMsg("删除成功");
-			StringBuffer sb=new StringBuffer(yafjxzProperties.getSavePath()).append(yafjxz.getDir());
+			StringBuffer sb=new StringBuffer(yafjxzProperties.getSavePath()).append(yafjxz.getXzlj());
 			File file=new File(sb.toString());
 			if(file.exists()){
 				boolean rf=file.delete();
@@ -212,7 +214,7 @@ public class YafjxzController {
 		//新生成的文件名（浏览器下载显示的文件名）
 		String newFileName=new StringBuffer(digitalplanlist.getYamc()).append(".zip").toString();
 		//下载文件的源路径
-		String sZipFileName=yafjxz.getDir().replace(yafjxz.getRelname().trim(),"");
+		String sZipFileName=yafjxz.getXzlj().replace(yafjxz.getWjm().trim(),"");
 		//生成的zip文件路径
 		String zipfilename=new StringBuffer(yafjxzProperties.getZipPath())
 				.append(newFileName).toString();
