@@ -4,14 +4,18 @@ import com.syfri.digitalplan.dao.digitalplan.DigitalplanlistDAO;
 import com.syfri.digitalplan.dao.digitalplan.DisastersetDAO;
 import com.syfri.digitalplan.dao.digitalplan.KeypointsDAO;
 import com.syfri.digitalplan.dao.digitalplan.ForcedevDAO;
+import com.syfri.digitalplan.dao.buildingzoning.BuildingDAO;
+
+import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
+import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
+import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.digitalplan.ForcedevVO;
 import com.syfri.digitalplan.model.digitalplan.KeypointsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.syfri.baseapi.service.impl.BaseServiceImpl;
-import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
-import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
+
 import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +34,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 	private KeypointsDAO keypointsDAO;
 	@Autowired
 	private ForcedevDAO forcedevDAO;
+	@Autowired
+	private BuildingDAO buildingDAO;
 
 
 	@Override
@@ -78,19 +84,26 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 			Map ds = (Map) disasterList.get(i);
 			DisastersetVO dsVO = new DisastersetVO();
 			dsVO.setYaid(digitalplanlistVO.getUuid());//预案id
-			dsVO.setZdbwid("");//重点部位id
+			dsVO.setZdbwid(ds.get("zdbwid").toString());//重点部位id
 			dsVO.setJzid(ds.get("jzid").toString());
 			dsVO.setZqbw(ds.get("bwmc").toString());
-			dsVO.setZqdj(ds.get("zqdj").toString());
+			List zqdj = (List)ds.get("zqdj");//灾情等级
+			if(zqdj.size()>=1){
+				dsVO.setZqdj(zqdj.get(zqdj.size()-1).toString());
+			}
 			dsVO.setQhyy(ds.get("qhyy").toString());
 			dsVO.setGyjzhzwxx(ds.get("hzwxx").toString());
 			dsVO.setZhcs(ds.get("zhcs").toString());
-			dsVO.setRswz(ds.get("rswz").toString());
+			List rswz = (List)ds.get("rswz");//燃烧物质
+			if(rswz.size()>=1){
+				dsVO.setRswz(rswz.get(rswz.size()-1).toString());
+			}
 			dsVO.setQhbwgd(ds.get("qhbwgd").toString());
 			dsVO.setRsmj(ds.get("rsmj").toString());
-			dsVO.setZqms("");
-			dsVO.setZqsdyj("");
-			dsVO.setCjrid("");
+			dsVO.setZqms(ds.get("zqms").toString());
+			dsVO.setZqsdyj(ds.get("zqsdyj").toString());
+			dsVO.setCjrid(digitalplanlistVO.getZzrid());
+			dsVO.setCjrmc(digitalplanlistVO.getZzrmc());
 //			dsVO.setCjsj(zzsj);
 			dsVO.setDeleteFlag("N");
 			disastersetDAO.doInsertByVO(dsVO);
@@ -104,7 +117,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 				fdVO.setDzid(fd.get("dzid").toString());
 				fdVO.setTkwz(fd.get("tkwz").toString());
 				fdVO.setClzbts(fd.get("clzbts").toString());
-				fdVO.setCjrid("");
+				fdVO.setCjrid(digitalplanlistVO.getZzrid());
+				fdVO.setCjrmc(digitalplanlistVO.getZzrmc());
 //				fdVO.setCjsj(zzsj);
 				fdVO.setDeleteFlag("N");
 				forcedevDAO.doInsertByVO(fdVO);
@@ -115,7 +129,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 			kpVO.setZqid(dsVO.getZqid());
 			kpVO.setZsyd(kp.get("zsyd").toString());
 			kpVO.setTbjs(kp.get("tbjs").toString());
-			kpVO.setCjrid("");
+			kpVO.setCjrid(digitalplanlistVO.getZzrid());
+			kpVO.setCjrmc(digitalplanlistVO.getZzrmc());
 //			kpVO.setCjsj(zzsj);
 			kpVO.setDeleteFlag("N");
 			keypointsDAO.doInsertByVO(kpVO);
@@ -144,5 +159,18 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 		}
 		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
 		return digitalplanlistVO;
+	}
+
+	/***
+	 * @Description: 查询：通过重点单位id查询建筑分区list
+	 * @Param: [zddwid]
+	 * @Return: java.util.List<com.syfri.digitalplan.model.buildingzoning.BuildingVO>
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/23 10:20
+	 */
+	public List<BuildingVO> doSearchJzListByZddwId(BuildingVO buildingVO){
+		List<BuildingVO> resultList = this.buildingDAO.doSearchJzListByZddwId(buildingVO);
+		return resultList;
 	}
 }

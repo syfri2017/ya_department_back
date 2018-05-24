@@ -107,6 +107,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String cgl_reserve3;	//备用字段3
 	private String cgl_reserve4;	//备用字段4
 	private List<ChuguanVO> ChuguanList;	//储罐list
+	private String zddwid;	//重点单位id
 
 	public String getJzid() {
 		return jzid;
@@ -636,4 +637,11 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public List<ChuguanVO> getChuguanList() {return ChuguanList; }
 	public void setChuguanList(List<ChuguanVO> chuguanList) { ChuguanList = chuguanList; }
+
+	public String getZddwid() {
+		return zddwid;
+	}
+	public void setZddwid(String zddwid) {
+		this.zddwid = zddwid;
+	}
 }

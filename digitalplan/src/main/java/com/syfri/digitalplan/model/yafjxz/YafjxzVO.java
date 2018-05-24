@@ -8,37 +8,33 @@ public class YafjxzVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String id;	//UUID
-	private String yaid;	//预案ID
-	private String dir;	//文件目录
-	private String relname;	//文件名
-	private String extension;	//扩展名
-	private String enabled;	//是否可用
-	private String remark;	//附件备注
-	private String czyid;	//操作员ID
-	private String czyxm;	//操作员姓名
-	private String jlzt;	//记录状态
-	private String cszt;	//传输状态
-	private String sjc;	//时间戳
-	private String bz;	//备注
-	private String jgid;	//机构ID
-	private String sjbb;	//数据版本
+	private String uuid;	//主键
+	private String yaid;	//预案iD
+	private String xzlj;	//下载路径
+	private String yllj;	//预览路径
+	private String wjm;	//文件名
+	private String kzm;	//扩展名
+	private String cjrid;	//创建人ID
+	private String cjrmc;	//创建人名称
 	private String cjsj;	//创建时间
-	private String ywxtbsid;	//业务系统部署ID
-	private String vercol;	//版本戳
-	private String tbjdh;	//同步节点号
-	private String tbsjc;	//同步时间戳
-	private String byzda;	//备用字段(1)
-	private String byzdb;	//备用字段(2)
-	private String byzdc;	//备用字段(3)
-	private String byzdd;	//备用字段(4)
-	private String pkid;	//PKID
+	private String xgrid;	//修改人ID
+	private String xgrmc;	//修改人名称
+	private String xgsj;	//修改时间
+	private String deleteFlag;	//删除标志
+	private String datasource;	//数据来源
+	private String bz;	//备注
+	private String jdh;	//节点号
+	private String sjc;	//时间戳
+	private String reserve1;	//备用字段1
+	private String reserve2;	//备用字段2
+	private String reserve3;	//备用字段3
+	private String reserve4;	//备用字段4
 
-	public String getId(){
-		return id;
+	public String getUuid(){
+		return uuid;
 	}
-	public void setId(String id){
-		this.id = id;
+	public void setUuid(String uuid){
+		this.uuid = uuid;
 	}
 	public String getYaid(){
 		return yaid;
@@ -46,83 +42,41 @@ public class YafjxzVO extends ValueObject implements Serializable{
 	public void setYaid(String yaid){
 		this.yaid = yaid;
 	}
-	public String getDir(){
-		return dir;
+	public String getXzlj(){
+		return xzlj;
 	}
-	public void setDir(String dir){
-		this.dir = dir;
+	public void setXzlj(String xzlj){
+		this.xzlj = xzlj;
 	}
-	public String getRelname(){
-		return relname;
+	public String getYllj(){
+		return yllj;
 	}
-	public void setRelname(String relname){
-		this.relname = relname;
+	public void setYllj(String yllj){
+		this.yllj = yllj;
 	}
-	public String getExtension(){
-		return extension;
+	public String getWjm(){
+		return wjm;
 	}
-	public void setExtension(String extension){
-		this.extension = extension;
+	public void setWjm(String wjm){
+		this.wjm = wjm;
 	}
-	public String getEnabled(){
-		return enabled;
+	public String getKzm(){
+		return kzm;
 	}
-	public void setEnabled(String enabled){
-		this.enabled = enabled;
+	public void setKzm(String kzm){
+		this.kzm = kzm;
 	}
-	public String getRemark(){
-		return remark;
+	public String getCjrid(){
+		return cjrid;
 	}
-	public void setRemark(String remark){
-		this.remark = remark;
+	public void setCjrid(String cjrid){
+		this.cjrid = cjrid;
 	}
-	public String getCzyid(){
-		return czyid;
+	public String getCjrmc(){
+		return cjrmc;
 	}
-	public void setCzyid(String czyid){
-		this.czyid = czyid;
-	}
-	public String getCzyxm(){
-		return czyxm;
-	}
-	public void setCzyxm(String czyxm){
-		this.czyxm = czyxm;
-	}
-	public String getJlzt(){
-		return jlzt;
-	}
-	public void setJlzt(String jlzt){
-		this.jlzt = jlzt;
-	}
-	public String getCszt(){
-		return cszt;
-	}
-	public void setCszt(String cszt){
-		this.cszt = cszt;
-	}
-	public String getSjc(){
-		return sjc;
-	}
-	public void setSjc(String sjc){
-		this.sjc = sjc;
-	}
-	public String getBz(){
-		return bz;
-	}
-	public void setBz(String bz){
-		this.bz = bz;
-	}
-	public String getJgid(){
-		return jgid;
-	}
-	public void setJgid(String jgid){
-		this.jgid = jgid;
-	}
-	public String getSjbb(){
-		return sjbb;
-	}
-	public void setSjbb(String sjbb){
-		this.sjbb = sjbb;
+	public void setCjrmc(String cjrmc){
+		this.cjrmc = cjrmc;
 	}
 	public String getCjsj(){
 		return cjsj;
@@ -130,58 +84,76 @@ public class YafjxzVO extends ValueObject implements Serializable{
 	public void setCjsj(String cjsj){
 		this.cjsj = cjsj;
 	}
-	public String getYwxtbsid(){
-		return ywxtbsid;
+	public String getXgrid(){
+		return xgrid;
 	}
-	public void setYwxtbsid(String ywxtbsid){
-		this.ywxtbsid = ywxtbsid;
+	public void setXgrid(String xgrid){
+		this.xgrid = xgrid;
 	}
-	public String getVercol(){
-		return vercol;
+	public String getXgrmc(){
+		return xgrmc;
 	}
-	public void setVercol(String vercol){
-		this.vercol = vercol;
+	public void setXgrmc(String xgrmc){
+		this.xgrmc = xgrmc;
 	}
-	public String getTbjdh(){
-		return tbjdh;
+	public String getXgsj(){
+		return xgsj;
 	}
-	public void setTbjdh(String tbjdh){
-		this.tbjdh = tbjdh;
+	public void setXgsj(String xgsj){
+		this.xgsj = xgsj;
 	}
-	public String getTbsjc(){
-		return tbsjc;
+	public String getDeleteFlag(){
+		return deleteFlag;
 	}
-	public void setTbsjc(String tbsjc){
-		this.tbsjc = tbsjc;
+	public void setDeleteFlag(String deleteFlag){
+		this.deleteFlag = deleteFlag;
 	}
-	public String getByzda(){
-		return byzda;
+	public String getDatasource(){
+		return datasource;
 	}
-	public void setByzda(String byzda){
-		this.byzda = byzda;
+	public void setDatasource(String datasource){
+		this.datasource = datasource;
 	}
-	public String getByzdb(){
-		return byzdb;
+	public String getBz(){
+		return bz;
 	}
-	public void setByzdb(String byzdb){
-		this.byzdb = byzdb;
+	public void setBz(String bz){
+		this.bz = bz;
 	}
-	public String getByzdc(){
-		return byzdc;
+	public String getJdh(){
+		return jdh;
 	}
-	public void setByzdc(String byzdc){
-		this.byzdc = byzdc;
+	public void setJdh(String jdh){
+		this.jdh = jdh;
 	}
-	public String getByzdd(){
-		return byzdd;
+	public String getSjc(){
+		return sjc;
 	}
-	public void setByzdd(String byzdd){
-		this.byzdd = byzdd;
+	public void setSjc(String sjc){
+		this.sjc = sjc;
 	}
-	public String getPkid(){
-		return pkid;
+	public String getReserve1(){
+		return reserve1;
 	}
-	public void setPkid(String pkid){
-		this.pkid = pkid;
+	public void setReserve1(String reserve1){
+		this.reserve1 = reserve1;
+	}
+	public String getReserve2(){
+		return reserve2;
+	}
+	public void setReserve2(String reserve2){
+		this.reserve2 = reserve2;
+	}
+	public String getReserve3(){
+		return reserve3;
+	}
+	public void setReserve3(String reserve3){
+		this.reserve3 = reserve3;
+	}
+	public String getReserve4(){
+		return reserve4;
+	}
+	public void setReserve4(String reserve4){
+		this.reserve4 = reserve4;
 	}
 }

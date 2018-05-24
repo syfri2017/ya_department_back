@@ -2,7 +2,9 @@ package com.syfri.digitalplan.controller.digitalplan;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
+import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
 import com.syfri.digitalplan.service.digitalplan.DigitalplanlistService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -97,6 +99,29 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(digitalplanlistService.doUpdateDigitalplan(digitalplanlistVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/***
+	 * @Description: 通过重点单位id查询建筑分区list
+	 * @Param: [vo]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/23 10:26
+	 */
+	@ApiOperation(value="通过重点单位id查询建筑分区list",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="建筑分区对象")
+	@PostMapping("/doSearchJzListByZddwId")
+	public @ResponseBody ResultVO doSearchJzListByZddwId(@RequestBody BuildingVO vo) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			List<BuildingVO> result= digitalplanlistService.doSearchJzListByZddwId(vo);
+			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

@@ -112,4 +112,19 @@ public class FirecalculationlistServiceImpl extends BaseServiceImpl<Firecalculat
 
 		return 1;
 	}
+
+	/**
+	 * @Description: 修改：修改公式启用状态
+	 * @Param: [firecalculationlistVO]
+	 * @Return: int
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 10:08
+	 */
+	@Override
+	public int doUpdateSfqy(FirecalculationlistVO firecalculationlistVO){
+		//向公式表ZHJC_JSGS中更新公式启用状态
+		firecalculationlistDAO.doUpdateByVO(firecalculationlistVO);
+		return 1;
+	}
 }

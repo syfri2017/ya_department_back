@@ -3,115 +3,99 @@
 <mapper namespace="com.syfri.digitalplan.dao.yafjxz.YafjxzDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
-		<if test="id != null and id != '' ">
-		 and t.id = #{id}
+		<if test="uuid != null and uuid != '' ">
+		 and t.uuid = #{uuid}
 		</if>
 		<if test="yaid != null and yaid != '' ">
 		 and t.yaid = #{yaid}
 		</if>
-		<if test="dir != null and dir != '' ">
-		 and t.dir = #{dir}
+		<if test="xzlj != null and xzlj != '' ">
+		 and t.xzlj = #{xzlj}
 		</if>
-		<if test="relname != null and relname != '' ">
-		 and t.relname = #{relname}
+		<if test="yllj != null and yllj != '' ">
+		 and t.yllj = #{yllj}
 		</if>
-		<if test="extension != null and extension != '' ">
-		 and t.extension = #{extension}
+		<if test="wjm != null and wjm != '' ">
+		 and t.wjm = #{wjm}
 		</if>
-		<if test="enabled != null and enabled != '' ">
-		 and t.enabled = #{enabled}
+		<if test="kzm != null and kzm != '' ">
+		 and t.kzm = #{kzm}
 		</if>
-		<if test="remark != null and remark != '' ">
-		 and t.remark = #{remark}
+		<if test="cjrid != null and cjrid != '' ">
+		 and t.cjrid = #{cjrid}
 		</if>
-		<if test="czyid != null and czyid != '' ">
-		 and t.czyid = #{czyid}
-		</if>
-		<if test="czyxm != null and czyxm != '' ">
-		 and t.czyxm = #{czyxm}
-		</if>
-		<if test="jlzt != null and jlzt != '' ">
-		 and t.jlzt = #{jlzt}
-		</if>
-		<if test="cszt != null and cszt != '' ">
-		 and t.cszt = #{cszt}
-		</if>
-		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
-		</if>
-		<if test="bz != null and bz != '' ">
-		 and t.bz = #{bz}
-		</if>
-		<if test="jgid != null and jgid != '' ">
-		 and t.jgid = #{jgid}
-		</if>
-		<if test="sjbb != null and sjbb != '' ">
-		 and t.sjbb = #{sjbb}
+		<if test="cjrmc != null and cjrmc != '' ">
+		 and t.cjrmc = #{cjrmc}
 		</if>
 		<if test="cjsj != null and cjsj != '' ">
 		 and t.cjsj = #{cjsj}
 		</if>
-		<if test="ywxtbsid != null and ywxtbsid != '' ">
-		 and t.ywxtbsid = #{ywxtbsid}
+		<if test="xgrid != null and xgrid != '' ">
+		 and t.xgrid = #{xgrid}
 		</if>
-		<if test="vercol != null and vercol != '' ">
-		 and t.vercol = #{vercol}
+		<if test="xgrmc != null and xgrmc != '' ">
+		 and t.xgrmc = #{xgrmc}
 		</if>
-		<if test="tbjdh != null and tbjdh != '' ">
-		 and t.tbjdh = #{tbjdh}
+		<if test="xgsj != null and xgsj != '' ">
+		 and t.xgsj = #{xgsj}
 		</if>
-		<if test="tbsjc != null and tbsjc != '' ">
-		 and t.tbsjc = #{tbsjc}
+		<if test="deleteFlag != null and deleteFlag != '' ">
+		 and t.delete_flag = #{deleteFlag}
 		</if>
-		<if test="byzda != null and byzda != '' ">
-		 and t.byzda = #{byzda}
+		<if test="datasource != null and datasource != '' ">
+		 and t.datasource = #{datasource}
 		</if>
-		<if test="byzdb != null and byzdb != '' ">
-		 and t.byzdb = #{byzdb}
+		<if test="bz != null and bz != '' ">
+		 and t.bz = #{bz}
 		</if>
-		<if test="byzdc != null and byzdc != '' ">
-		 and t.byzdc = #{byzdc}
+		<if test="jdh != null and jdh != '' ">
+		 and t.jdh = #{jdh}
 		</if>
-		<if test="byzdd != null and byzdd != '' ">
-		 and t.byzdd = #{byzdd}
+		<if test="sjc != null and sjc != '' ">
+		 and t.sjc = #{sjc}
 		</if>
-		<if test="pkid != null and pkid != '' ">
-		 and t.pkid = #{pkid}
+		<if test="reserve1 != null and reserve1 != '' ">
+		 and t.reserve1 = #{reserve1}
+		</if>
+		<if test="reserve2 != null and reserve2 != '' ">
+		 and t.reserve2 = #{reserve2}
+		</if>
+		<if test="reserve3 != null and reserve3 != '' ">
+		 and t.reserve3 = #{reserve3}
+		</if>
+		<if test="reserve4 != null and reserve4 != '' ">
+		 and t.reserve4 = #{reserve4}
 		</if>
 	</sql>
 
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
-		t.id id,
+		t.uuid uuid,
 		t.yaid yaid,
-		t.dir dir,
-		t.relname relname,
-		t.extension extension,
-		t.enabled enabled,
-		t.remark remark,
-		t.czyid czyid,
-		t.czyxm czyxm,
-		t.jlzt jlzt,
-		t.cszt cszt,
-		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
-		t.bz bz,
-		t.jgid jgid,
-		t.sjbb sjbb,
+		t.xzlj xzlj,
+		t.yllj yllj,
+		t.wjm wjm,
+		t.kzm kzm,
+		t.cjrid cjrid,
+		t.cjrmc cjrmc,
 		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.ywxtbsid ywxtbsid,
-		TO_CHAR(t.vercol,'yyyy-MM-dd HH24:mi:ss') vercol,
-		t.tbjdh tbjdh,
-		TO_CHAR(t.tbsjc,'yyyy-MM-dd HH24:mi:ss') tbsjc,
-		t.byzda byzda,
-		t.byzdb byzdb,
-		t.byzdc byzdc,
-		t.byzdd byzdd,
-		t.pkid pkid
+		t.xgrid xgrid,
+		t.xgrmc xgrmc,
+		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.delete_flag deleteFlag,
+		t.datasource datasource,
+		t.bz bz,
+		t.jdh jdh,
+		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+		t.reserve1 reserve1,
+		t.reserve2 reserve2,
+		t.reserve3 reserve3,
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
 	</sql>
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="YafjxzVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM YAGL_YAFJXZ t WHERE 1=1 AND DELETE_FLAG = 'N'
+		SELECT COUNT(0) AS NUM FROM YAGL_YA_ZDDW_FJ t WHERE 1=1 AND DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -119,7 +103,7 @@
 	<select id="doSearchListByVO" parameterType="YafjxzVO"  resultType="YafjxzVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_YAFJXZ t  WHERE t.JLZT = '1' 
+		FROM YAGL_YA_ZDDW_FJ t  WHERE t.DELETE_FLAG = 'N' 
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -127,27 +111,27 @@
 	<select id="doFindById" parameterType="YafjxzVO"  resultType="YafjxzVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_YAFJXZ t 
-		WHERE t.JLZT = '1' AND  t.PKID = #{value} 
+		FROM YAGL_YA_ZDDW_FJ t 
+		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
 	<insert  id="doInsertByVO"  parameterType="YafjxzVO"> 
-		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
-			SELECT SYS_GUID() AS pkid FROM DUAL
+		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
+			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_YAFJXZ(id,yaid,dir,relname,extension,enabled,remark,czyid,czyxm,jlzt,cszt,sjc,bz,jgid,sjbb,cjsj,ywxtbsid,vercol,tbjdh,tbsjc,byzda,byzdb,byzdc,byzdd,pkid)
-		VALUES(#{id,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},#{dir,jdbcType=VARCHAR},#{relname,jdbcType=VARCHAR},#{extension,jdbcType=VARCHAR},#{enabled,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{czyid,jdbcType=VARCHAR},#{czyxm,jdbcType=VARCHAR},#{jlzt,jdbcType=DOUBLE},#{cszt,jdbcType=DOUBLE},#{sjc,jdbcType=DATE},#{bz,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{sjbb,jdbcType=DOUBLE},#{cjsj,jdbcType=DATE},#{ywxtbsid,jdbcType=VARCHAR},#{vercol,jdbcType=DATE},#{tbjdh,jdbcType=VARCHAR},#{tbsjc,jdbcType=DATE},#{byzda,jdbcType=VARCHAR},#{byzdb,jdbcType=VARCHAR},#{byzdc,jdbcType=VARCHAR},#{byzdd,jdbcType=VARCHAR},#{pkid,jdbcType=VARCHAR})
+		INSERT INTO YAGL_YA_ZDDW_FJ(uuid,yaid,xzlj,yllj,wjm,kzm,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{uuid,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},#{xzlj,jdbcType=VARCHAR},#{yllj,jdbcType=VARCHAR},#{wjm,jdbcType=VARCHAR},#{kzm,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO YAGL_YAFJXZ(id,yaid,dir,relname,extension,enabled,remark,czyid,czyxm,jlzt,cszt,sjc,bz,jgid,sjbb,cjsj,ywxtbsid,vercol,tbjdh,tbsjc,byzda,byzdb,byzdc,byzdd,pkid)
-		SELECT SYS_GUID() pkid, A.* 
+		INSERT INTO YAGL_YA_ZDDW_FJ(uuid,yaid,xzlj,yllj,wjm,kzm,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		SELECT SYS_GUID() uuid, A.*
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
-			#{item.id,jdbcType=VARCHAR} id,#{item.yaid,jdbcType=VARCHAR} yaid,#{item.dir,jdbcType=VARCHAR} dir,#{item.relname,jdbcType=VARCHAR} relname,#{item.extension,jdbcType=VARCHAR} extension,#{item.enabled,jdbcType=VARCHAR} enabled,#{item.remark,jdbcType=VARCHAR} remark,#{item.czyid,jdbcType=VARCHAR} czyid,#{item.czyxm,jdbcType=VARCHAR} czyxm,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.byzda,jdbcType=VARCHAR} byzda,#{item.byzdb,jdbcType=VARCHAR} byzdb,#{item.byzdc,jdbcType=VARCHAR} byzdc,#{item.byzdd,jdbcType=VARCHAR} byzdd,
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yaid,jdbcType=VARCHAR} yaid,#{item.xzlj,jdbcType=VARCHAR} xzlj,#{item.yllj,jdbcType=VARCHAR} yllj,#{item.wjm,jdbcType=VARCHAR} wjm,#{item.kzm,jdbcType=VARCHAR} kzm,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		FROM DUAL
 		</foreach>
 		) A
@@ -155,86 +139,80 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  YAGL_YAFJXZ t SET t.JLZT = '0'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  YAGL_YA_ZDDW_FJ t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.UUID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
 	<update  id="doUpdateByVO"  parameterType="YafjxzVO"> 
-		UPDATE   YAGL_YAFJXZ  
+		UPDATE   YAGL_YA_ZDDW_FJ  
 		<set>
-			<if test="id != null">id=#{id},</if>
+			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="yaid != null">yaid=#{yaid},</if>
-			<if test="dir != null">dir=#{dir},</if>
-			<if test="relname != null">relname=#{relname},</if>
-			<if test="extension != null">extension=#{extension},</if>
-			<if test="enabled != null">enabled=#{enabled},</if>
-			<if test="remark != null">remark=#{remark},</if>
-			<if test="czyid != null">czyid=#{czyid},</if>
-			<if test="czyxm != null">czyxm=#{czyxm},</if>
-			<if test="jlzt != null">jlzt='1',</if>
-			<if test="cszt != null">cszt=#{cszt},</if>
-			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="bz != null">bz=#{bz},</if>
-			<if test="jgid != null">jgid=#{jgid},</if>
-			<if test="sjbb != null">sjbb=#{sjbb},</if>
+			<if test="xzlj != null">xzlj=#{xzlj},</if>
+			<if test="yllj != null">yllj=#{yllj},</if>
+			<if test="wjm != null">wjm=#{wjm},</if>
+			<if test="kzm != null">kzm=#{kzm},</if>
+			<if test="cjrid != null">cjrid=#{cjrid},</if>
+			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
 			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="ywxtbsid != null">ywxtbsid=#{ywxtbsid},</if>
-			<if test="vercol != null">vercol=TO_DATE(#{vercol},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="tbjdh != null">tbjdh=#{tbjdh},</if>
-			<if test="tbsjc != null">tbsjc=TO_DATE(#{tbsjc},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="byzda != null">byzda=#{byzda},</if>
-			<if test="byzdb != null">byzdb=#{byzdb},</if>
-			<if test="byzdc != null">byzdc=#{byzdc},</if>
-			<if test="byzdd != null">byzdd=#{byzdd},</if>
-			<if test="pkid != null">pkid=#{pkid}</if>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="datasource != null">datasource=#{datasource},</if>
+			<if test="bz != null">bz=#{bz},</if>
+			<if test="jdh != null">jdh=#{jdh},</if>
+			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="reserve1 != null">reserve1=#{reserve1},</if>
+			<if test="reserve2 != null">reserve2=#{reserve2},</if>
+			<if test="reserve3 != null">reserve3=#{reserve3},</if>
+			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  UUID = #{uuid}
 	</update>
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_YAFJXZ(id,yaid,dir,relname,extension,enabled,remark,czyid,czyxm,jlzt,cszt,sjc,bz,jgid,sjbb,cjsj,ywxtbsid,vercol,tbjdh,tbsjc,byzda,byzdb,byzdc,byzdd,pkid)
+		INSERT INTO YAGL_YA_ZDDW_FJ(uuid,yaid,xzlj,yllj,wjm,kzm,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.id,jdbcType=VARCHAR} id,#{item.yaid,jdbcType=VARCHAR} yaid,#{item.dir,jdbcType=VARCHAR} dir,#{item.relname,jdbcType=VARCHAR} relname,#{item.extension,jdbcType=VARCHAR} extension,#{item.enabled,jdbcType=VARCHAR} enabled,#{item.remark,jdbcType=VARCHAR} remark,#{item.czyid,jdbcType=VARCHAR} czyid,#{item.czyxm,jdbcType=VARCHAR} czyxm,#{item.jlzt,jdbcType=DOUBLE} jlzt,#{item.cszt,jdbcType=DOUBLE} cszt,#{item.sjc,jdbcType=DATE} sjc,#{item.bz,jdbcType=VARCHAR} bz,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.sjbb,jdbcType=DOUBLE} sjbb,#{item.cjsj,jdbcType=DATE} cjsj,#{item.ywxtbsid,jdbcType=VARCHAR} ywxtbsid,#{item.vercol,jdbcType=DATE} vercol,#{item.tbjdh,jdbcType=VARCHAR} tbjdh,#{item.tbsjc,jdbcType=DATE} tbsjc,#{item.byzda,jdbcType=VARCHAR} byzda,#{item.byzdb,jdbcType=VARCHAR} byzdb,#{item.byzdc,jdbcType=VARCHAR} byzdc,#{item.byzdd,jdbcType=VARCHAR} byzdd,
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.yaid,jdbcType=VARCHAR} yaid,#{item.xzlj,jdbcType=VARCHAR} xzlj,#{item.yllj,jdbcType=VARCHAR} yllj,#{item.wjm,jdbcType=VARCHAR} wjm,#{item.kzm,jdbcType=VARCHAR} kzm,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
 		ON DUPLICATE KEY UPDATE   
-			id = VALUES(id),
+			uuid = VALUES(uuid),
 			yaid = VALUES(yaid),
-			dir = VALUES(dir),
-			relname = VALUES(relname),
-			extension = VALUES(extension),
-			enabled = VALUES(enabled),
-			remark = VALUES(remark),
-			czyid = VALUES(czyid),
-			czyxm = VALUES(czyxm),
-			jlzt = VALUES(jlzt),
-			cszt = VALUES(cszt),
-			sjc = VALUES(sjc),
-			bz = VALUES(bz),
-			jgid = VALUES(jgid),
-			sjbb = VALUES(sjbb),
+			xzlj = VALUES(xzlj),
+			yllj = VALUES(yllj),
+			wjm = VALUES(wjm),
+			kzm = VALUES(kzm),
+			cjrid = VALUES(cjrid),
+			cjrmc = VALUES(cjrmc),
 			cjsj = VALUES(cjsj),
-			ywxtbsid = VALUES(ywxtbsid),
-			vercol = VALUES(vercol),
-			tbjdh = VALUES(tbjdh),
-			tbsjc = VALUES(tbsjc),
-			byzda = VALUES(byzda),
-			byzdb = VALUES(byzdb),
-			byzdc = VALUES(byzdc),
-			byzdd = VALUES(byzdd),
-			pkid = VALUES(pkid)
+			xgrid = VALUES(xgrid),
+			xgrmc = VALUES(xgrmc),
+			xgsj = VALUES(xgsj),
+			delete_flag = VALUES(delete_flag),
+			datasource = VALUES(datasource),
+			bz = VALUES(bz),
+			jdh = VALUES(jdh),
+			sjc = VALUES(sjc),
+			reserve1 = VALUES(reserve1),
+			reserve2 = VALUES(reserve2),
+			reserve3 = VALUES(reserve3),
+			reserve4 = VALUES(reserve4)
 	</update>
 
 	<!--11.根据对象查询记录-->
 	<select id="doFindByVO" parameterType="YafjxzVO"  resultType="YafjxzVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_YAFJXZ t 
-		WHERE t.JLZT = '1' 
+		FROM YAGL_YA_ZDDW_FJ t 
+		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
 	</select>
+
 	<delete id="doDeletcNotIn" parameterType="java.lang.String">
-		DELETE FROM YAGL_YAFJXZ WHERE PKID NOT IN  #{oldYafjxzVOs}
+		DELETE FROM YAGL_YA_ZDDW_FJ WHERE UUID NOT IN  #{oldYafjxzVOs}
 	</delete>
+
 </mapper>

@@ -57,4 +57,14 @@ public interface FirecalculationlistService  extends BaseService<Firecalculation
      * @Date: 2018/4/27 9:59
      */
     int doUpdateJsgsCs(FirecalculationlistVO firecalculationlistVO);
+
+    /**
+     * @Description: 修改：修改公式启用状态.
+     * @Param: [firecalculationlistVO]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/4/27 9:59
+     */
+    int doUpdateSfqy(FirecalculationlistVO firecalculationlistVO);
 }

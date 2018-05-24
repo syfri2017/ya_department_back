@@ -254,4 +254,28 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 		}
 		return resultVO;
 	}
+
+	/**
+	 * @Description: 根据条件更新是否启用状态
+	 * @Param: [firecalculationlistVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:52
+	 */
+	@ApiOperation(value="根据条件更新是否启用状态",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="计算信息对象")
+	@PostMapping("/updateBySfqy")
+	public @ResponseBody
+	ResultVO updateBySfqy(@RequestBody FirecalculationlistVO firecalculationlistVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			int result = firecalculationlistService.doUpdateSfqy(firecalculationlistVO);
+			resultVO.setResult(result);
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
