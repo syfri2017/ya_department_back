@@ -141,6 +141,12 @@
 		<if test="reserve4 != null and reserve4 != '' ">
 		 and t.reserve4 = #{reserve4}
 		</if>
+		<if test="gisX != null and gisX != '' ">
+			and t.gis_x = #{gisX}
+		</if>
+		<if test="gisY != null and gisY != '' ">
+			and t.gis_y = #{gisY}
+		</if>
 	</sql>
 
 	<!--2.查询内容-->
@@ -190,7 +196,9 @@
 		t.reserve1 reserve1,
 		t.reserve2 reserve2,
 		t.reserve3 reserve3,
-		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4
+		TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4,
+		t.gis_x gisX,
+		t.gis_y gisY
 	</sql>
 
 	<!--3.查询记录数-->

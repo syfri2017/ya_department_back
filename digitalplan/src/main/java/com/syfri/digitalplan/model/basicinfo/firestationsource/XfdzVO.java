@@ -54,6 +54,8 @@ public class XfdzVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
+	private String gisX;	//undefined
+	private String gisY;	//undefined
 
 	private String xzqhmc;	//行政区划CODE（到区县）
 	private String dzlxmc;	//队站类型名称
@@ -346,5 +348,17 @@ public class XfdzVO extends ValueObject implements Serializable{
 	}
 	public void setDzlxmc(String dzlxmc) {
 		this.dzlxmc = dzlxmc;
+	}
+	public String getGisX(){
+		return gisX;
+	}
+	public void setGisX(String gisX){
+		this.gisX = gisX;
+	}
+	public String getGisY(){
+		return gisY;
+	}
+	public void setGisY(String gisY){
+		this.gisY = gisY;
 	}
 }
