@@ -10,13 +10,13 @@
 		 and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="dxdz != null and dxdz != '' ">
-		 and t.dxdz = #{dxdz}
+		 and t.dxdz LIKE concat(concat('%',#{dxdz}),'%')
 		</if>
 		<if test="lxdh != null and lxdh != '' ">
 		 and t.lxdh = #{lxdh}
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-		 and t.xfgx = #{xfgx}
+		 and t.xfgx LIKE concat(RTRIM(#{xfgx},0),'%')
 		</if>
 		<if test="jbqk != null and jbqk != '' ">
 		 and t.jbqk = #{jbqk}
@@ -123,16 +123,22 @@
 	<select id="doSearchListByVO" parameterType="OtherobjectsVO"  resultType="OtherobjectsVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_DX_QTDX t  WHERE t.DELETE_FLAG = 'N' 
-			<include refid="SQL_CONDITION"/>
+			,xfgxmc
+		FROM YAGL_DX_QTDX t
+		LEFT JOIN (select dzbm,dzjc xfgxmc FROM YAGL_XFDZ WHERE DELETE_FLAG = 'N') t1
+		ON t.xfgx = t1.dzbm
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="OtherobjectsVO"  resultType="OtherobjectsVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_DX_QTDX t 
+		,pic_blob photo
+		FROM YAGL_DX_QTDX t,SYS_CODELIST_PICTURE s
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
+		AND s.pic_type = 'YADX' and pic_value = '03'
 	</select>
 
 	<!--6.按照VO插入-->
