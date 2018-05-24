@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.syfri.baseapi.model.ResultVO;
-
 import com.syfri.digitalplan.config.properties.YafjxzProperties;
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
@@ -44,6 +43,8 @@ public class YafjxzController {
 	@Autowired
 	private YafjxzProperties yafjxzProperties;
 
+	private static final String HTML_NAME="index.html";
+
 	/**
 	 * @Description:上传文件
 	 * @Param: [request, response, yafjxzVO]
@@ -54,7 +55,7 @@ public class YafjxzController {
 	 */
 	@RequestMapping(value = "/upload")
 	@ResponseBody
-	public void upload(HttpServletRequest request ,YafjxzVO yafjxzVO) {
+	public boolean upload(HttpServletRequest request ,YafjxzVO yafjxzVO) {
 		System.out.println("id:"+yafjxzVO.getYaid());
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartRequest.getFileNames();
@@ -74,13 +75,8 @@ public class YafjxzController {
 			}
 			// 文件上传固定的路径
 			StringBuffer relativePath=new StringBuffer(yafjxzProperties.getSavePath());
-			//新建的文件夹名称（预案基本信息创建时间+预案基本信息PKID）
-			//123456为行政代码
+			//新建的文件夹名称（预案UUID/预案创建时间）
 
-//			DigitalplanlistVO digitalplanlist=digitalplanlistService.doFindById(yafjxzVO.getYaid());
-//			if(StringUtils.isBlank(digitalplanlist.getUuid())){
-//				throw new RuntimeException("未查到预案基本信息！");
-//			}
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			String zzsj = sdf.format(date);
@@ -123,18 +119,28 @@ public class YafjxzController {
 				}
 				fos.close();
 				is.close();
+
+				//解压
+				File zipfile=new File(allPath.toString());
+				ZipCompressUtil.unZipFiles(zipfile,folderName);
+
 				//插入数据
 				YafjxzVO yafjxz =new YafjxzVO();
 				yafjxz.setYaid(yafjxzVO.getYaid());
 				yafjxz.setXzlj(dbPath);
+				StringBuffer yllj=new StringBuffer(dbPath.replace(suffixName,"")).append("/").append(HTML_NAME);
+				yafjxz.setYllj(yllj.toString());
 				yafjxz.setKzm(suffixName);
 				yafjxz.setWjm(fileName);
 				yafjxz.setDeleteFlag("N");
 				yafjxzService.doInsertByVO(yafjxz);
+
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		return true;
 	}
 	/**
 	 * @Description:逻辑删除
