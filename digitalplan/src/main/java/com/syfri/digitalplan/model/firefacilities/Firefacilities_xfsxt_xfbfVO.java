@@ -13,7 +13,7 @@ public class Firefacilities_xfsxt_xfbfVO extends ValueObject implements Serializ
 	private String ssjz;	//所属建（构）筑
 	private String wz;	//位置
 	private String xhssl;	//消火栓泵数量
-	private String shszdll;	//消火栓最大流量(L/s）
+	private String xhszdll;	//消火栓最大流量(L/s）
 	private String blbsl;	//喷淋泵数量
 	private String blbzdll;	//喷淋泵最大流量(L/s）
 	private String deleteFlag;	//删除标志
@@ -55,11 +55,11 @@ public class Firefacilities_xfsxt_xfbfVO extends ValueObject implements Serializ
 	public void setXhssl(String xhssl){
 		this.xhssl = xhssl;
 	}
-	public String getShszdll(){
-		return shszdll;
+	public String getXhszdll(){
+		return xhszdll;
 	}
-	public void setShszdll(String shszdll){
-		this.shszdll = shszdll;
+	public void setXhszdll(String xhszdll){
+		this.xhszdll = xhszdll;
 	}
 	public String getBlbsl(){
 		return blbsl;
