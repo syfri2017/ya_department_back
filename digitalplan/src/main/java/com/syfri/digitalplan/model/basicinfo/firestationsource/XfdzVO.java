@@ -59,6 +59,10 @@ public class XfdzVO extends ValueObject implements Serializable{
 
 	private String xzqhmc;	//行政区划CODE（到区县）
 	private String dzlxmc;	//队站类型名称
+	private String gisX_min;	//undefined
+	private String gisX_max;	//undefined
+	private String gisY_min;	//undefined
+	private String gisY_max;	//undefined
 
 	public String getDzid(){
 		return dzid;
@@ -360,5 +364,30 @@ public class XfdzVO extends ValueObject implements Serializable{
 	}
 	public void setGisY(String gisY){
 		this.gisY = gisY;
+	}
+
+	public String getGisX_min() {
+		return gisX_min;
+	}
+	public void setGisX_min(String gisX_min) {
+		this.gisX_min = gisX_min;
+	}
+	public String getGisX_max() {
+		return gisX_max;
+	}
+	public void setGisX_max(String gisX_max) {
+		this.gisX_max = gisX_max;
+	}
+	public String getGisY_min() {
+		return gisY_min;
+	}
+	public void setGisY_min(String gisY_min) {
+		this.gisY_min = gisY_min;
+	}
+	public String getGisY_max() {
+		return gisY_max;
+	}
+	public void setGisY_max(String gisY_max) {
+		this.gisY_max = gisY_max;
 	}
 }

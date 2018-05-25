@@ -147,6 +147,18 @@
 		<if test="gisY != null and gisY != '' ">
 			and t.gis_y = #{gisY}
 		</if>
+		<if test="gisX_min != null and gisX_min != '' ">
+			and t.gis_x > #{gisX_min}
+		</if>
+		<if test="gisX_max != null and gisX_max != '' ">
+			and t.gis_x &lt; #{gisX_max}
+		</if>
+		<if test="gisY_min != null and gisY_min != '' ">
+			and t.gis_y > #{gisY_min}
+		</if>
+		<if test="gisY != null and gisY != '' ">
+			and t.gis_y = #{gisY}
+		</if>
 	</sql>
 
 	<!--2.查询内容-->
