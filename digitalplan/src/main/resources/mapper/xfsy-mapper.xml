@@ -123,6 +123,18 @@
 		<if test="reserve4 != null and reserve4 != '' ">
 		 and t.reserve4 = #{reserve4}
 		</if>
+		<if test="gisX_min != null and gisX_min != '' ">
+			and t.gisX > #{gisX_min}
+		</if>
+		<if test="gisX_max != null and gisX_max != '' ">
+			and t.gisX &lt; #{gisX_max}
+		</if>
+		<if test="gisY_min != null and gisY_min != '' ">
+			and t.gisY > #{gisY_min}
+		</if>
+		<if test="gisY_max != null and gisY_max != '' ">
+			and t.gisY &lt; #{gisY_max}
+		</if>
 	</sql>
 	<!--消火栓查询条件-->
 	<sql id="SQL_XHS_CONDITION">
@@ -369,7 +381,7 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="XfsyVO"  resultType="XfsyVO"> 
 		SELECT 
-			<include refid="SQL_CONTENT"/>,
+		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
 		tcode2.code_name xzmc
 		FROM YAGL_XFSY t LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')

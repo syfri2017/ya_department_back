@@ -55,6 +55,10 @@ public class XfsyVO extends ValueObject implements Serializable{
 	private String kyztmc;  //可用状态
 	private String dzjc;  //队站简称
 	private String dzbm; //队站编码
+	private String gisX_min;	//GIS_X
+	private String gisX_max;	//GIS_X
+	private String gisY_min;	//GIS_Y
+	private String gisY_max;	//GIS_Y
 
     //消火栓属性信息
     private String xhs_uuid;	//主键
@@ -1243,5 +1247,30 @@ public class XfsyVO extends ValueObject implements Serializable{
 	}
 	public void setDzbm(String dzbm) {
 		this.dzbm = dzbm;
+	}
+
+	public String getGisX_min() {
+		return gisX_min;
+	}
+	public void setGisX_min(String gisX_min) {
+		this.gisX_min = gisX_min;
+	}
+	public String getGisX_max() {
+		return gisX_max;
+	}
+	public void setGisX_max(String gisX_max) {
+		this.gisX_max = gisX_max;
+	}
+	public String getGisY_min() {
+		return gisY_min;
+	}
+	public void setGisY_min(String gisY_min) {
+		this.gisY_min = gisY_min;
+	}
+	public String getGisY_max() {
+		return gisY_max;
+	}
+	public void setGisY_max(String gisY_max) {
+		this.gisY_max = gisY_max;
 	}
 }
