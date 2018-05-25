@@ -53,25 +53,31 @@ public class XfsyServiceImpl extends BaseServiceImpl<XfsyVO> implements XfsyServ
 	public List doFindListByVO(XfsyVO xfsyVO) {
 		String sylx = xfsyVO.getSylx();
 		List<XfsyVO> list = new ArrayList<XfsyVO>();
-		switch (sylx){
-			case "1100":
-				list = xfsyDAO.doFindXhsListByVO(xfsyVO);
-				break;
-			case "1200":
-				list = xfsyDAO.doFindXfshListByVO(xfsyVO);
-				break;
-			case "1300":
-				list = xfsyDAO.doFindXfscListByVO(xfsyVO);
-				break;
-			case "2100":
-				list = xfsyDAO.doFindXfmtListByVO(xfsyVO);
-				break;
-			case "2900":
-				list = xfsyDAO.doFindTrsyListByVO(xfsyVO);
-				break;
-			default:
-				list = xfsyDAO.doFindListByVO(xfsyVO);
+		if(sylx == null || sylx == "")
+			list = xfsyDAO.doFindListByVO(xfsyVO);
+		else {
+			switch (sylx){
+				case "1100":
+					list = xfsyDAO.doFindXhsListByVO(xfsyVO);
+					break;
+				case "1200":
+					list = xfsyDAO.doFindXfshListByVO(xfsyVO);
+					break;
+				case "1300":
+					list = xfsyDAO.doFindXfscListByVO(xfsyVO);
+					break;
+				case "2100":
+					list = xfsyDAO.doFindXfmtListByVO(xfsyVO);
+					break;
+				case "2900":
+					list = xfsyDAO.doFindTrsyListByVO(xfsyVO);
+					break;
+				default:
+					list = xfsyDAO.doFindListByVO(xfsyVO);
+					break;
+			}
 		}
+
 		return list;
 	}
 }

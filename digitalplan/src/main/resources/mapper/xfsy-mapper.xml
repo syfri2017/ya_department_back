@@ -124,16 +124,16 @@
 		 and t.reserve4 = #{reserve4}
 		</if>
 		<if test="gisX_min != null and gisX_min != '' ">
-			and t.gisX > #{gisX_min}
+			and t.gis_X > #{gisX_min}
 		</if>
 		<if test="gisX_max != null and gisX_max != '' ">
-			and t.gisX &lt; #{gisX_max}
+			and t.gis_X &lt; #{gisX_max}
 		</if>
 		<if test="gisY_min != null and gisY_min != '' ">
-			and t.gisY > #{gisY_min}
+			and t.gis_Y > #{gisY_min}
 		</if>
 		<if test="gisY_max != null and gisY_max != '' ">
-			and t.gisY &lt; #{gisY_max}
+			and t.gis_Y &lt; #{gisY_max}
 		</if>
 	</sql>
 	<!--消火栓查询条件-->
