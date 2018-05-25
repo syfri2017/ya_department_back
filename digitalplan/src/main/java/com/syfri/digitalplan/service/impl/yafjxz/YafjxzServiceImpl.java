@@ -11,6 +11,8 @@ import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
 import com.syfri.digitalplan.service.yafjxz.YafjxzService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("yafjxzService")
 public class YafjxzServiceImpl extends BaseServiceImpl<YafjxzVO> implements YafjxzService {
@@ -26,4 +28,10 @@ public class YafjxzServiceImpl extends BaseServiceImpl<YafjxzVO> implements Yafj
 	public void doDeletcNotIn(String oldYafjxzVOs){
 		yafjxzDAO.doDeletcNotIn(oldYafjxzVOs);
 	};
+
+	@Override
+	public List<YafjxzVO> doFindByPlanId(String yaid){
+		List<YafjxzVO> resultList= yafjxzDAO.doFindByPlanId(yaid);
+		return resultList;
+	}
 }

@@ -9,7 +9,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.syfri.baseapi.controller.BaseController;
 import com.syfri.baseapi.model.ResultVO;
+import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.config.properties.YafjxzProperties;
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
@@ -18,12 +20,10 @@ import com.syfri.digitalplan.service.yafjxz.YafjxzService;
 import com.syfri.digitalplan.utils.DownloadUtil;
 import com.syfri.digitalplan.utils.StringUtils;
 import com.syfri.digitalplan.utils.ZipCompressUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -34,7 +34,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  */
 @Controller
 @RequestMapping("yafjxz")
-public class YafjxzController {
+public class YafjxzController extends BaseController<YafjxzVO> {
+
+	@Override
+	public YafjxzService getBaseService() {
+		return this.yafjxzService;
+	}
 
 	@Autowired
 	private YafjxzService yafjxzService;
@@ -263,6 +268,23 @@ public class YafjxzController {
 		ResultVO resultVO = ResultVO.build();
 		List<com.syfri.digitalplan.model.yafjxz.YafjxzVO> yafjxzVOs=yafjxzService.doSearchListByVO(yafjxzVO);
 		resultVO.setResult(yafjxzVOs);
+		return resultVO;
+	}
+
+	/**
+	 * 根据预案id查询
+	 */
+	@ApiOperation(value="根据预案id获取信息",notes="列表信息")
+	@GetMapping("/doFindByPlanId/{yaid}")
+	public @ResponseBody
+	ResultVO getDetail(@PathVariable String yaid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(yafjxzService.doFindByPlanId(yaid));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
 		return resultVO;
 	}
 }

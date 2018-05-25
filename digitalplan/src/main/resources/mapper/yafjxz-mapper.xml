@@ -215,4 +215,12 @@
 		DELETE FROM YAGL_YA_ZDDW_FJ WHERE UUID NOT IN  #{oldYafjxzVOs}
 	</delete>
 
+	<!-- 根据预案ID查询记录  -->
+	<select id="doFindByPlanId" parameterType="YafjxzVO"  resultType="YafjxzVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_YA_ZDDW_FJ t
+		WHERE t.DELETE_FLAG = 'N' AND  t.YAID = #{value}
+	</select>
+
 </mapper>
