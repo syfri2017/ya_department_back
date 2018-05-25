@@ -203,12 +203,23 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		) t
-		where rownum &lt;= 100
+		where t.rownum &lt;= 100
 		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
 			and t.xfdwlxmc = #{xfdwlxmc}
 		</if>
 		ORDER BY XZQH,DWXZ,DWMC ASC
 	</select>
+<!--lxy start-->
+	<select id="doSearchZddwListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
+		select t.DWMC,t.DWXZ,t.DWDZ,t.ZBDH,c2.CODE_NAME dwxzmc  from
+		YAGL_DX_ZDDW t
+		<!--单位性质-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'DWXZ' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DWXZ = c2.CODE_VALUE
+		where 1=1
+		<include refid="SQL_CONDITION"/>
+	</select>
+	<!--lxy end-->
 
 	<!--5.根据ID查询记录-->
 	<select id="doFindById" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">

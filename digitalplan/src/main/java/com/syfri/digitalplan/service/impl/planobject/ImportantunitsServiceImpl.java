@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.service.impl.planobject;
 
 import com.syfri.digitalplan.model.firefacilities.FirefacilitiesVO;
+import com.syfri.digitalplan.model.importantparts.ImportantpartsVO;
 import com.syfri.digitalplan.model.planobject.XiaofangliliangVO;
 import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +77,13 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 		}
 		return resultMap;
 	}
+
+	/**
+	 * author lxy
+	 * @param vo
+	 * @return
+	 */
+	public List<ImportantunitsVO> doSearchZddwListByVO(ImportantunitsVO vo){
+		return importantunitsDAO.doSearchZddwListByVO(vo);
+	};
 }
