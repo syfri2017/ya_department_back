@@ -200,10 +200,10 @@
 		INNER JOIN YAGL_XFDZ c10
 		ON (t.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))
 		</if>
-		WHERE t.DELETE_FLAG = 'N'
+		WHERE t.DELETE_FLAG = 'N' and rownum &lt;= 100
 		<include refid="SQL_CONDITION"/>
 		) t
-		where t.rownum &lt;= 100
+-- 		where rownum &lt;= 100
 		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
 			and t.xfdwlxmc = #{xfdwlxmc}
 		</if>
