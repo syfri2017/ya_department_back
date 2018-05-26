@@ -6,7 +6,7 @@ import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 
 import java.util.List;
 
-public interface DigitalplanlistService  extends BaseService<DigitalplanlistVO>{
+public interface DigitalplanlistService extends BaseService<DigitalplanlistVO> {
 
     /*预案审批（更新部分字段）
      *by yushch 20180426
@@ -32,6 +32,16 @@ public interface DigitalplanlistService  extends BaseService<DigitalplanlistVO>{
      * @Date: 2018/5/2 15:56
      */
     DigitalplanlistVO doUpdateDigitalplan(DigitalplanlistVO digitalplanlistVO);
+
+    /***
+     * @Description: 删除：预案
+     * @Param: [digitalplanList]
+     * @Return: java.util.List<com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO>
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/5/26 13:54
+     */
+    int doDeleteDigitalplan(List<DigitalplanlistVO> digitalplanList,DigitalplanlistVO digitalplanVo);
 
     /***
      * @Description: 查询：通过重点单位id查询建筑分区list

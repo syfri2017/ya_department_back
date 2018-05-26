@@ -229,15 +229,15 @@
 			<if test="jgmc != null and jgmc != '' ">jgmc=#{jgmc},</if>
 			<if test="zzrid != null and zzrid != '' ">zzrid=#{zzrid},</if>
 			<if test="zzrmc != null and zzrmc != '' ">zzrmc=#{zzrmc},</if>
-			<if test="zzsj != null and zzsj != '' ">zzsj=TO_DATE(#{zzsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="zzsj != null and zzsj != '' ">zzsj=sysdate,</if>
 			<if test="shzt != null and shzt != '' ">shzt=#{shzt},</if>
 			<if test="shrid != null and shrid != '' ">shrid=#{shrid},</if>
 			<if test="shrmc != null and shrmc != '' ">shrmc=#{shrmc},</if>
-			<if test="shsj != null and shsj != '' ">shsj=TO_DATE(#{shsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="shsj != null and shsj != '' ">shsj=sysdate,</if>
 			<if test="xgrid != null and xgrid != '' ">xgrid=#{xgrid},</if>
 			<if test="xgrmc != null and xgrmc != '' ">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null and xgsj != '' ">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="deleteFlag != null and deleteFlag != '' ">delete_flag='N',</if>
+			<if test="xgsj != null and xgsj != '' ">xgsj=sysdate,</if>
+			<if test="deleteFlag != null and deleteFlag != '' ">delete_flag=#{deleteFlag},</if>
 			<if test="datasource != null and datasource != '' ">datasource=#{datasource},</if>
 			<if test="bz != null and bz != '' ">bz=#{bz},</if>
 			<if test="jdh != null and jdh != '' ">jdh=#{jdh},</if>
