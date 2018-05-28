@@ -52,9 +52,17 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String shsj = sdf.format(date);
-//		digitalplanlistVO.setShsj(shsj);
-        digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
+		digitalplanlistVO.setShsj(shsj);
         String shzt = digitalplanlistVO.getShzt();
+        //如果选择“未通过”，预案状态变更为已驳回
+        if(shzt.equals("02")){
+            digitalplanlistVO.setYazt("04");
+        }
+        //如果选择“已通过”，预案状态变更为已审核
+        else if(shzt.equals("03")){
+            digitalplanlistVO.setYazt("05");
+        }
+		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
         String shztmc = digitalplanlistDAO.doFindShztmcByShzt(shzt);
         digitalplanlistVO.setShztmc(shztmc);
         return digitalplanlistVO;

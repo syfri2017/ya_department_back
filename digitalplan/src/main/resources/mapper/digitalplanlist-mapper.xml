@@ -220,7 +220,7 @@
 			<if test="yabm != null and yabm != '' ">yabm=#{yabm},</if>
 			<if test="yalx != null and yalx != '' ">yalx=#{yalx},</if>
 			<if test="yamc != null and yamc != '' ">yamc=#{yamc},</if>
-			<if test="yazt!= null and yazt != '' ">yazt=#{yazt},</if>
+			<if test="yazt != null and yazt != '' ">yazt=#{yazt},</if>
 			<if test="yajb != null and yajb != '' ">yajb=#{yajb},</if>
 			<if test="dxid != null and dxid != '' ">dxid=#{dxid},</if>
 			<if test="dxmc != null and dxmc != '' ">dxmc=#{dxmc},</if>
