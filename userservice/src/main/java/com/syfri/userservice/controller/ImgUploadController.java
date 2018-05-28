@@ -91,6 +91,26 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	}
 
 	/**
+	 * @Description: 获取已存的图片类型
+	 * @Param: []
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/21 9:29
+	 */
+	@ApiOperation(value="获取已存的图片类型",notes="查询")
+	@GetMapping("/getSaved")
+	public @ResponseBody ResultVO findSaved(){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(imgUploadService.doSearchSavedListByVO());
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+	/**
 	 * @Description: 根据条件获取图片信息
 	 * @Param: [imgUploadVO]
 	 * @Return: com.syfri.baseapi.model.ResultVO

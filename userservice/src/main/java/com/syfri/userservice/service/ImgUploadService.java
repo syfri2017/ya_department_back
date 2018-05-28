@@ -25,4 +25,14 @@ public interface ImgUploadService extends BaseService<ImgUploadVO>{
      * @Date: 2018/5/21 10:27
      */
     List<ImgUploadVO> doSearchListByPicName(ImgUploadVO vo);
+
+    /**
+     * @Description: 查询已存的图片类型
+     * @Param: [vo]
+     * @Return: java.util.List<com.syfri.userservice.model.ImgUploadVO>
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/5/28 11:03
+     */
+    List<ImgUploadVO> doSearchSavedListByVO();
 }
