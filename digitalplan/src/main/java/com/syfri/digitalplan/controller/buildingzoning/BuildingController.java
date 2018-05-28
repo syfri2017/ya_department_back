@@ -3,6 +3,7 @@ package com.syfri.digitalplan.controller.buildingzoning;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
+import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,11 @@ public class BuildingController  extends BaseController<BuildingVO>{
 	public @ResponseBody ResultVO findById(@RequestBody BuildingVO buildingVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(buildingService.doFindFqDetailByVo(buildingVO));
+			BuildingVO vo = buildingService.doFindFqDetailByVo(buildingVO);
+			//将二进制转为Base64格式字符串
+			String photo64 = Base64ImageUtil.byteArr2String(vo.getPhoto());
+			vo.setPhoto64(photo64);
+			resultVO.setResult(vo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
