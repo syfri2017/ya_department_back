@@ -106,6 +106,22 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		return resultVO;
 	}
 
+
+	@ApiOperation(value="通过重点单位id查询建筑分区list",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="建筑分区对象")
+	@PostMapping("/doDeleteDigitalplan")
+	public @ResponseBody ResultVO doDeleteDigitalplan(@RequestBody List<DigitalplanlistVO> digitalplanList,DigitalplanlistVO digitalplanVo) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			int result= digitalplanlistService.doDeleteDigitalplan(digitalplanList,digitalplanVo);
+			resultVO.setResult(result);
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
 	/***
 	 * @Description: 通过重点单位id查询建筑分区list
 	 * @Param: [vo]

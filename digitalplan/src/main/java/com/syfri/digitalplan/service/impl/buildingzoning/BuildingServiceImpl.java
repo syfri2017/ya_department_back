@@ -31,6 +31,11 @@ public class BuildingServiceImpl extends BaseServiceImpl<BuildingVO> implements 
 		String fqlx = buildingVO.getJzlx();
 		BuildingVO vo = new BuildingVO();
 		switch (fqlx){
+			case "10":
+			case "20":
+				//分区类型为10和20 查找建筑分区详情关联建筑分区-建筑类
+				vo = buildingDAO.doFindFqAndJzDetailByVo(buildingVO);
+				break;
 			case "30":
 				//查找建筑分区详情关联建筑分区-装置类
 				vo = buildingDAO.doFindFqAndZzDetailByVo(buildingVO);
@@ -44,8 +49,6 @@ public class BuildingServiceImpl extends BaseServiceImpl<BuildingVO> implements 
 				vo.setChuguanList(chuguanList);
 				break;
 			default:
-				//分区类型为10和20 查找建筑分区详情关联建筑分区-建筑类
-				vo = buildingDAO.doFindFqAndJzDetailByVo(buildingVO);
 				break;
 		}
 		return vo;

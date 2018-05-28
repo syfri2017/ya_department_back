@@ -207,4 +207,16 @@
 		WHERE t.DELETE_FLAG = 'N' AND  t.ZQID = #{value}
 	</select>
 
+	<!--按灾情id删除-->
+	<update id="doDeleteByVO"  parameterType="KeypointsVO">
+		UPDATE   YAGL_YA_YDTS
+		<set>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=sysdate,</if>
+			<if test="deleteFlag != null">delete_flag='Y',</if>
+		</set>
+		WHERE ZQID = #{zqid}
+	</update>
+
 </mapper>

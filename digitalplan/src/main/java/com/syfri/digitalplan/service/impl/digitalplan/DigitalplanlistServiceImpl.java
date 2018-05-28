@@ -52,9 +52,17 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String shsj = sdf.format(date);
-//		digitalplanlistVO.setShsj(shsj);
-        digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
+		digitalplanlistVO.setShsj(shsj);
         String shzt = digitalplanlistVO.getShzt();
+        //如果选择“未通过”，预案状态变更为已驳回
+        if(shzt.equals("02")){
+            digitalplanlistVO.setYazt("04");
+        }
+        //如果选择“已通过”，预案状态变更为已审核
+        else if(shzt.equals("03")){
+            digitalplanlistVO.setYazt("05");
+        }
+		digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
         String shztmc = digitalplanlistDAO.doFindShztmcByShzt(shzt);
         digitalplanlistVO.setShztmc(shztmc);
         return digitalplanlistVO;
@@ -143,9 +151,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                 kpVO.setDeleteFlag("N");
                 keypointsDAO.doInsertByVO(kpVO);
             }
-
         }
-
         return digitalplanlistVO;
     }
 
@@ -169,6 +175,59 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         }
         digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
         return digitalplanlistVO;
+    }
+
+    /***
+     * @Description: 删除：预案
+     * @Param: [voList]
+     * @Return: java.util.List<com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO>
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/5/26 13:53
+     */
+    @Override
+    public int doDeleteDigitalplan(List<DigitalplanlistVO> digitalplanList,DigitalplanlistVO digitalplanVo){
+        String xgrid = digitalplanVo.getXgrid();
+        String xgrmc = digitalplanVo.getXgrmc();
+        int num = 0;
+        if (digitalplanList.size() > 0) {
+            for (DigitalplanlistVO dpVo : digitalplanList) {
+                List<DisastersetVO> disasterList = disastersetDAO.doFindByPlanId(dpVo.getUuid());
+                if (disasterList.size() > 0) {
+                    for (DisastersetVO dsVo : disasterList) {
+                        ForcedevVO fdVo = new ForcedevVO();
+                        fdVo.setZqid(dsVo.getZqid());
+                        fdVo.setXgsj("1");
+                        fdVo.setXgrid(xgrid);
+                        fdVo.setXgrmc(xgrmc);
+                        fdVo.setDeleteFlag("Y");
+                        forcedevDAO.doDeleteByVO(fdVo);
+
+                        KeypointsVO kpVo = new KeypointsVO();
+                        kpVo.setZqid(dsVo.getZqid());
+                        kpVo.setXgsj("1");
+                        kpVo.setXgrid(xgrid);
+                        kpVo.setXgrmc(xgrmc);
+                        kpVo.setDeleteFlag("Y");
+                        keypointsDAO.doDeleteByVO(kpVo);
+                    }
+                }
+                DisastersetVO dsVo = new DisastersetVO();
+                dsVo.setYaid(dpVo.getUuid());
+                dsVo.setXgsj("1");
+                dsVo.setXgrid(xgrid);
+                dsVo.setXgrmc(xgrmc);
+                dsVo.setDeleteFlag("Y");
+                disastersetDAO.doDeleteByVO(dsVo);
+
+                dpVo.setXgsj("1");
+                dpVo.setXgrid(xgrid);
+                dpVo.setXgrmc(xgrmc);
+                dpVo.setDeleteFlag("Y");
+                num = num + digitalplanlistDAO.doUpdateByVO(dpVo);
+            }
+        }
+        return num;
     }
 
     /***

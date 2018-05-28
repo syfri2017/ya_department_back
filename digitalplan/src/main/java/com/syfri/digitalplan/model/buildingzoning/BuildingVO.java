@@ -28,6 +28,8 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String reserve4;	//备用字段4
 
 	private String jzlxmc;	//建筑分区类型名称
+	private byte[] photo;
+	private String photo64;
 
 	private String jzl_uuid;	//主键
 	private String jzl_jzid;	//建筑分区ID
@@ -218,6 +220,20 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setJzlxmc(String jzlxmc) {
 		this.jzlxmc = jzlxmc;
+	}
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public String getPhoto64() {
+		return photo64;
+	}
+
+	public void setPhoto64(String photo64) {
+		this.photo64 = photo64;
 	}
 
 	public String getJzl_uuid() {

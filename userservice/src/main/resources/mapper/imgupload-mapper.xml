@@ -201,4 +201,12 @@
 		</if>
 		ORDER BY t.pic_type,t.pic_value
 	</select>
+
+	<!--15.查询已有图片类型-->
+	<select id="doSearchSavedListByVO" resultType="ImguploadVO">
+		SELECT
+		DISTINCT t.pic_typename picTypename
+		,t.pic_type picType
+		FROM SYS_CODELIST_PICTURE t  WHERE t.DELETE_FLAG = 'N'
+	</select>
 </mapper>

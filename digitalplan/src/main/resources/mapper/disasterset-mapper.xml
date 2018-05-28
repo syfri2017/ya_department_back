@@ -159,7 +159,7 @@
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
 		INSERT INTO YAGL_YA_ZQSD(zqid,yaid,zdbwid,jzid,zqbw,zqdj,qhyy,gyjzhzwxx,zhcs,rswz,qhbwgd,rsmj,zqms,zqsdyj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		SELECT SYS_GUID() pkid, A.* 
+		SELECT SYS_GUID() zqid, A.*
 		FROM ( 
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 		SELECT
@@ -171,7 +171,7 @@
 
 	<!--8.按主键逻辑删除-->
 	<update id="doDeleteById"  parameterType="String"> 
-		UPDATE  YAGL_YA_ZQSD t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.PKID = #{value} 
+		UPDATE  YAGL_YA_ZQSD t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.ZQID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
@@ -208,7 +208,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  ZQID = #{zqid}
 	</update>
 
 	<!--10.批量修改-->
@@ -286,5 +286,17 @@
 		Left Join SYS_CODELIST_DETAIL c10 On c9.CODEID = c10.CODEID And c10.DELETE_FLAG = 'N' and t.GYJZHZWXX = c10.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND  t.YAID = #{value}
 	</select>
+
+	<!--8.按预案id删除-->
+	<update id="doDeleteByVO"  parameterType="DisastersetVO">
+		UPDATE  YAGL_YA_ZQSD
+		<set>
+			<if test="xgrid != null">xgrid=#{xgrid},</if>
+			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
+			<if test="xgsj != null">xgsj=sysdate,</if>
+			<if test="deleteFlag != null">delete_flag='Y'</if>
+		</set>
+		WHERE  YAID = #{yaid}
+	</update>
 
 </mapper>

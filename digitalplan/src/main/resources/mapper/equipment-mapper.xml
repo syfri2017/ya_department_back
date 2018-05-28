@@ -130,9 +130,22 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="EquipmentVO"  resultType="EquipmentVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_WL_XFZBXX t  WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONTENT"/>,
+		dz.DZJC dzmc,
+		c2.code_name xzqhmc,
+		c4.code_name zblxmc
+		FROM YAGL_WL_XFZBXX t
+		<!--消防队站-->
+		Left Join YAGL_XFDZ dz On dz.DZID = t.SSDZ And dz.DELETE_FLAG = 'N'
+		<!--行政区划-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'XZQH' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.XZQY = c2.CODE_VALUE
+		<!--装备类型-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'ZBQCLX' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.XSSD = c4.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
+		ORDER BY ssdz,zbmc ASC
 	</select>
 
 	<!--5.根据ID查询记录-->
@@ -145,8 +158,8 @@
 
 	<!--6.按照VO插入-->
 	<insert  id="doInsertByVO"  parameterType="EquipmentVO">
-		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
-			SELECT SYS_GUID() AS pkid FROM DUAL
+		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
+			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
 		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqy,xssd,sccj,zcbl,kcsl,zzsl,wxsl,ztsl,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES(#{uuid,jdbcType=VARCHAR},#{zbbm,jdbcType=VARCHAR},#{zbmc,jdbcType=VARCHAR},#{ssdz,jdbcType=VARCHAR},#{ssdzmc,jdbcType=VARCHAR},#{xzqy,jdbcType=VARCHAR},#{xssd,jdbcType=DOUBLE},#{sccj,jdbcType=VARCHAR},#{zcbl,jdbcType=DOUBLE},#{kcsl,jdbcType=DOUBLE},#{zzsl,jdbcType=DOUBLE},#{wxsl,jdbcType=DOUBLE},#{ztsl,jdbcType=DOUBLE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
@@ -155,7 +168,7 @@
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List">
 		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqy,xssd,sccj,zcbl,kcsl,zzsl,wxsl,ztsl,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		SELECT SYS_GUID() pkid, A.*
+		SELECT SYS_GUID() uuid, A.*
 		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 			SELECT
@@ -203,7 +216,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  PKID = #{pkid}
+		WHERE  UUID = #{uuid}
 	</update>
 
 	<!--10.批量修改-->
@@ -251,48 +264,6 @@
 		FROM YAGL_WL_XFZBXX t
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
-	</select>
-
-	<!--12.根据条件查询-->
-	<select id="doSearchByVO" parameterType="EquipmentVO"  resultType="EquipmentVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>,
-		dz.DZJC dzmc,
-		c2.code_name xzqhmc,
-		c4.code_name zblxmc
-		FROM YAGL_WL_XFZBXX t
-		<!--消防队站-->
-		Left Join YAGL_XFDZ dz On dz.DZBM = t.SSDZ And dz.DELETE_FLAG = 'N'
-		<!--行政区划-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'XZQH' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.XZQY = c2.CODE_VALUE
-		<!--装备类型-->
-		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'ZBQCLX' And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.XSSD = c4.CODE_VALUE
-		WHERE t.DELETE_FLAG = 'N'
-		<if test="zbmc != null and zbmc != '' ">
-			and t.zbmc LIKE concat(concat('%',#{zbmc}),'%')
-		</if>
-		<if test="ssdz != null and ssdz != '' ">
-			and t.ssdz LIKE concat(rtrim(#{ssdz},'0'),'%')
-		</if>
-		<if test="xssd != null and xssd != '' ">
-			and t.xssd LIKE concat(rtrim(#{xssd},'0'),'%')
-		</if>
-		<if test="kcsl_min != null and kcsl_min != '' ">
-			and t.kcsl &gt;= #{kcsl_min}
-		</if>
-		<if test="kcsl_max != null and kcsl_max != '' ">
-			and t.kcsl &lt;= #{kcsl_max}
-		</if>
-	</select>
-
-	<!--13.根据ID查询记录-->
-	<select id="doFindDetailById" parameterType="String"  resultType="EquipmentVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_WL_XFZBXX t
-		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{uuid}
 	</select>
 
 </mapper>
