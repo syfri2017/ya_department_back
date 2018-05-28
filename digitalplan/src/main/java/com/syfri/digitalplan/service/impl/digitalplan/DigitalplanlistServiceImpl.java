@@ -183,4 +183,17 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         List<BuildingVO> resultList = this.buildingDAO.doSearchJzListByZddwId(buildingVO);
         return resultList;
     }
+
+    /***
+     * @Description: 查询：通过重点单位id查询预案list
+     * @Param: [zddwid]
+     * @Return: java.util.List<com.syfri.digitalplan.model.buildingzoning.BuildingVO>
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/5/23 10:20
+     */
+    public List<DigitalplanlistVO> doFindListByZddwId(String zddwId){
+        List<DigitalplanlistVO> resultList = this.digitalplanlistDAO.doFindListByZddwId(zddwId);
+        return resultList;
+    }
 }

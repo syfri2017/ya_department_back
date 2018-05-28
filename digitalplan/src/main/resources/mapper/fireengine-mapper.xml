@@ -106,6 +106,8 @@
 		t.cllx cllx,
 		t.cphm cphm,
 		t.clzt clzt,
+		t.GIS_X gisX,
+		t.GIS_Y gisY,
 		t.sccj sccj,
 		t.jglgd jglgd,
 		t.sbll sbll,

@@ -14,11 +14,56 @@ public class MapVO extends ValueObject implements Serializable{
 	private String xzqhmc;	//行政区划名称
 	private String gisX;	//GIS_X
 	private String gisY;	//GIS_Y
+
+	private String dwmc;	//danweimingcheng
+	private String dwdz;
+	private String xfzrr;
+	private String zbdh;
+
 	private String zddwsl;	//重点单位数量
 	private String reserve1;	//备用字段1
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
+
+
+
+
+	public String getZbdh() {
+
+		return zbdh;
+	}
+
+	public void setZbdh(String zbdh) {
+		this.zbdh = zbdh;
+	}
+
+	public String getXfzrr() {
+
+		return xfzrr;
+	}
+
+	public void setXfzrr(String xfzrr) {
+		this.xfzrr = xfzrr;
+	}
+
+	public String getDwdz() {
+
+		return dwdz;
+	}
+
+	public void setDwdz(String dwdz) {
+		this.dwdz = dwdz;
+	}
+	public String getDwmc() {
+		return dwmc;
+	}
+
+	public void setDwmc(String dwmc) {
+		this.dwmc = dwmc;
+	}
+
+
 
 	public String getUuid(){
 		return uuid;

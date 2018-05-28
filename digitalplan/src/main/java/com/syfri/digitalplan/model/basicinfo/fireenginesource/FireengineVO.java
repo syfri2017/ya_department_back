@@ -43,6 +43,21 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String sbll_max;
 	private String zsl_min;
 	private String zsl_max;
+	private String gisX;	//GIS_X
+	private String gisY;	//GIS_Y
+
+	public String getGisX(){
+		return gisX;
+	}
+	public void setGisX(String gisX){
+		this.gisX = gisX;
+	}
+	public String getGisY(){
+		return gisY;
+	}
+	public void setGisY(String gisY){
+		this.gisY = gisY;
+	}
 
 	public String getUuid(){
 		return uuid;

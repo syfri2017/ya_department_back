@@ -275,7 +275,7 @@ public class YafjxzController extends BaseController<YafjxzVO> {
 	 * 根据预案id查询
 	 */
 	@ApiOperation(value="根据预案id获取信息",notes="列表信息")
-	@GetMapping("/doFindByPlanId/{yaid}")
+	@RequestMapping("/doFindByPlanId/{yaid}")
 	public @ResponseBody
 	ResultVO getDetail(@PathVariable String yaid){
 		ResultVO resultVO = ResultVO.build();

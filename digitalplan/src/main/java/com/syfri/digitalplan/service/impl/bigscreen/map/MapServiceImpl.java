@@ -31,6 +31,10 @@ public class MapServiceImpl extends BaseServiceImpl<MapVO> implements MapService
 	public List<MapVO> getShiMapByVO(MapVO vo){
 		return this.mapDAO.getShiMapByVO(vo);
 	}
+	@Override
+	public List<MapVO> getImportantunitsVO(MapVO vo){
+		return this.mapDAO.getImportantunitsVO(vo);
+	}
 
 
 }

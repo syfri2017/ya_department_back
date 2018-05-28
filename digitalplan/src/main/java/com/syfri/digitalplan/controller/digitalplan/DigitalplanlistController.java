@@ -128,4 +128,27 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		}
 		return resultVO;
 	}
+
+	/***
+	 * @Description: 通过重点单位id查询预案list
+	 * @Param: [vo]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/23 10:26
+	 */
+	@ApiOperation(value="通过重点单位id查询预案list",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="预案对象")
+	@RequestMapping("/doFindListByZddwId/{zddwid}")
+	public @ResponseBody ResultVO doFindListByZddwId(@PathVariable String zddwid) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			List<DigitalplanlistVO> result= digitalplanlistService.doFindListByZddwId(zddwid);
+			resultVO.setResult(result);
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

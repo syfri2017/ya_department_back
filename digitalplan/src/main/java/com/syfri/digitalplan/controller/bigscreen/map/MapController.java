@@ -57,4 +57,17 @@ public class MapController  extends BaseController<MapVO>{
 	}
 
 
+	@PostMapping("/getImportantunitsVO")
+	public @ResponseBody ResultVO getImportantunitsVO(@RequestBody MapVO vo){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(mapService.getImportantunitsVO(vo));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+
 }

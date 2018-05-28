@@ -59,6 +59,11 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	private String jzflmc;
 	private String xfdwlxmc;
 
+	private String gisX_min;	//GIS_X
+	private String gisX_max;	//GIS_X
+	private String gisY_min;	//GIS_Y
+	private String gisY_max;	//GIS_Y
+
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
 	private String dxmc;     //高级搜索中对象名称（对应重点单位中dwmc字段）
 	private String dxdz;		//高级搜索中对象地址（对应重点单位中 dwdz 字段）
@@ -217,6 +222,31 @@ public class ImportantunitsVO extends ValueObject implements Serializable{
 	}
 	public String getXfdwlxmc() { return xfdwlxmc; }
 	public void setXfdwlxmc(String xfdwlxmc) { this.xfdwlxmc = xfdwlxmc; }
+
+	public String getGisX_min() {
+		return gisX_min;
+	}
+	public void setGisX_min(String gisX_min) {
+		this.gisX_min = gisX_min;
+	}
+	public String getGisX_max() {
+		return gisX_max;
+	}
+	public void setGisX_max(String gisX_max) {
+		this.gisX_max = gisX_max;
+	}
+	public String getGisY_min() {
+		return gisY_min;
+	}
+	public void setGisY_min(String gisY_min) {
+		this.gisY_min = gisY_min;
+	}
+	public String getGisY_max() {
+		return gisY_max;
+	}
+	public void setGisY_max(String gisY_max) {
+		this.gisY_max = gisY_max;
+	}
 
 	public String getYadxType() {
 		return yadxType;

@@ -9,4 +9,7 @@ public interface MapService  extends BaseService<MapVO>{
 
     public List<MapVO> getMapByVO(MapVO vo);
     public List<MapVO> getShiMapByVO(MapVO vo);
+    public List<MapVO> getImportantunitsVO(MapVO vo);
+
+
 }
