@@ -84,6 +84,9 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 	public CodelistDetailVO doInsertCodelistDetail(CodelistDetailVO codelistDetailVO){
 		codelistDetailVO.setCreateId(CurrentUserUtil.getCurrentUserId());
 		codelistDetailVO.setCreateName(CurrentUserUtil.getCurrentUserName());
+		CodelistVO codelistVO = codelistDAO.doFindById(codelistDetailVO.getCodeid());
+		codelistDetailVO.setCodetype(codelistVO.getCodetype());
+		codelistDetailVO.setCodetypeName(codelistVO.getCodetypeName());
 		codelistDAO.doInsertCodelistDetail(codelistDetailVO);
 		return codelistDetailVO;
 	}

@@ -269,12 +269,13 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集类型查询代码集数量",notes="查询")
 	@ApiImplicitParam(name="codeValue",value="权限名")
-	@GetMapping("/detail/getNum/{codevalue}")
-	public @ResponseBody ResultVO getDetailNum(@PathVariable String codevalue){
+	@GetMapping("/detail/getNum/{codeid}/{codevalue}")
+	public @ResponseBody ResultVO getDetailNum(@PathVariable String codeid, @PathVariable String codevalue){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			CodelistDetailVO codelistDetailVO = new CodelistDetailVO();
 			codelistDetailVO.setCodeValue(codevalue);
+			codelistDetailVO.setCodeid(codeid);
 				if(codelistService.doFindCodelistDetail(codelistDetailVO).size() == 0){
 				resultVO.setResult(0);
 			}else{
