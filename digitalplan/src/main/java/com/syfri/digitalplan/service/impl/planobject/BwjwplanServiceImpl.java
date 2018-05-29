@@ -29,7 +29,7 @@ public class BwjwplanServiceImpl extends BaseServiceImpl<BwjwplanVO> implements 
 	}
 
 	/*--根据重点单位ID获取保卫警卫详情-*/
-	public List<BwjwplanVO> doFindDetailById(String bwjwplanId){
+	public BwjwplanVO doFindDetailById(String bwjwplanId){
           return bwjwplanDAO.doFindDetailById(bwjwplanId);
 	}
 
