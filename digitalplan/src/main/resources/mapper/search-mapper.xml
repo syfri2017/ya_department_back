@@ -304,6 +304,11 @@
 		t.uuid uuid,
 		t.dwmc dxmc,
 		t.dwdz dxdz,
+		t.GIS_X gisX,
+		t.GIS_Y gisY,
+		t.XFZRR xfzrr,
+		t.ZBDH zbdh,
+		t.FHDJ fhdj,
 		c9.DZMC xfgx,
 		'重点单位' yadxType
 		FROM YAGL_DX_ZDDW t
