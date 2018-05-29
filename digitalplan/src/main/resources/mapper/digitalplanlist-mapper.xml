@@ -93,6 +93,12 @@
 		<if test="reserve4 != null and reserve4 != '' ">
 			and t.reserve4 = #{reserve4}
 		</if>
+		<if test="begintime != null and begintime != '' ">
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &gt;= #{begintime}
+		</if>
+		<if test="endtime != null and endtime != '' ">
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &lt;= #{endtime}
+		</if>
 	</sql>
 
 	<!--2.查询内容-->
