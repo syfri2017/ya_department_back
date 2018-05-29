@@ -11,7 +11,7 @@ public interface BwjwplanService  extends BaseService<BwjwplanVO>{
     List<BwjwplanVO> doFindBwjwplanlist(BwjwplanVO bwjwplanVO);
 
     /*--根据重点单位ID获取重点单位详情-*/
-    List<BwjwplanVO> doFindDetailById(String bwjwplanId);
+    BwjwplanVO doFindDetailById(String bwjwplanId);
 
 
 

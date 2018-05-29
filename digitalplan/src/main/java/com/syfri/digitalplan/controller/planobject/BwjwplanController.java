@@ -2,6 +2,7 @@ package com.syfri.digitalplan.controller.planobject;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,11 @@ public class BwjwplanController  extends BaseController<BwjwplanVO>{
 	public @ResponseBody ResultVO getDetail(@PathVariable String uuid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(bwjwplanService.doFindDetailById(uuid));
+			BwjwplanVO bwjwplanVO = bwjwplanService.doFindDetailById(uuid);
+			//将二进制转为Base64格式字符串
+			String photo64 = Base64ImageUtil.byteArr2String(bwjwplanVO.getPhoto());
+			bwjwplanVO.setPhoto64(photo64);
+			resultVO.setResult(bwjwplanVO);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

@@ -12,6 +12,8 @@ public class CodelistDetailVO extends ValueObject implements Serializable{
 	private String codeValue;	//代码值
 	private String codeName;	//代码名称
 	private String codeid;	//代码集主表主键（父）
+	private String codetype;  //代码集类型
+	private String codetypeName;  //代码集类型名称
 	private String deleteFlag;	//删除标志(默认'N')
 	private String remark;	//备注
 	private String createId;	//创建人ID
@@ -44,6 +46,18 @@ public class CodelistDetailVO extends ValueObject implements Serializable{
 	}
 	public void setCodeid(String codeid){
 		this.codeid = codeid;
+	}
+	public String getCodetype() {
+		return codetype;
+	}
+	public void setCodetype(String codetype) {
+		this.codetype = codetype;
+	}
+	public String getCodetypeName() {
+		return codetypeName;
+	}
+	public void setCodetypeName(String codetypeName) {
+		this.codetypeName = codetypeName;
 	}
 	public String getDeleteFlag(){
 		return deleteFlag;

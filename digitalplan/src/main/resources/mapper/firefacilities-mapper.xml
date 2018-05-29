@@ -292,10 +292,8 @@
 		t.xhszdll xhszdll,
 		t.blbsl blbsl,
 		t.blbzdll blbzdll,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -314,10 +312,8 @@
 		t.wz wz,
 		t.sxrl sxrl,
 		t.bjsd bjsd,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -358,10 +354,8 @@
 		t.wz wz,
 		t.sl sl,
 		CASE t.sfky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END sfky,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -401,10 +395,8 @@
 		t.xh xh,
 		t.azxs azxs,
 		to_char(t.jskcc,'fm9999999990.00') jskcc,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -447,10 +439,8 @@
 		t.wz wz,
 		CASE t.ywlqsxt WHEN '1' THEN '有' WHEN '0' THEN '无' END ywlqsxt,
 		t.gsqd gsqd,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -469,10 +459,8 @@
 		t.wz wz,
 		t.sl sl,
 		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -490,10 +478,8 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -513,10 +499,8 @@
 		t.pmylx pmylx,
 		t.pmycl pmycl,
 		t.pmbzdll pmbzdll,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -580,10 +564,8 @@
 		t.xh xh,
 		t.sl sl,
 		t.ll ll,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -601,10 +583,8 @@
 		t.ssjz ssjz,
 		t.wz wz,
 		t.sl sl,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -623,10 +603,8 @@
 		t.wz wz,
 		t.sl sl,
 		t.edyl edyl,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -645,10 +623,8 @@
 		t.wz wz,
 		t.sl sl,
 		t.edyl edyl,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -666,10 +642,8 @@
 		t.wz wz,
 		CASE t.iszdbj WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END iszdbj,
 		CASE t.isldkz WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isldkz,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -685,10 +659,8 @@
 		t.uuid uuid,
 		t.xfssid xfssid,
 		t.wz wz,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -705,10 +677,8 @@
 		t.xfssid xfssid,
 		t.qbwz qbwz,
 		CASE t.isky WHEN '1' THEN '可用' WHEN '0' THEN '不可用' END isky,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -727,10 +697,8 @@
 		t.qywz qywz,
 		t.fgss fgss,
 		t.fgwz fgwz,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -747,10 +715,8 @@
 		t.xfssid xfssid,
 		t.qbwz qbwz,
 		t.zyfw zyfw,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -767,10 +733,8 @@
 		t.xfssid xfssid,
 		t.qbwz qbwz,
 		t.zyfw zyfw,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,
@@ -787,10 +751,8 @@
 		t.xfssid xfssid,
 		t.wz wz,
 		t.ms ms,
-
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
-
 		t.jdh jdh,
 		TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
 		t.reserve1 reserve1,

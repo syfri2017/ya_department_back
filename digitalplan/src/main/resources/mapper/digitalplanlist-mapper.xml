@@ -13,7 +13,7 @@
 			and t.yalx = #{yalx}
 		</if>
 		<if test="yamc != null and yamc != '' ">
-			and t.yamc = #{yamc}
+			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
 		</if>
 		<if test="yazt != null and yazt != '' ">
 			and t.yazt = #{yazt}
@@ -92,6 +92,12 @@
 		</if>
 		<if test="reserve4 != null and reserve4 != '' ">
 			and t.reserve4 = #{reserve4}
+		</if>
+		<if test="begintime != null and begintime != '' ">
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &gt;= #{begintime}
+		</if>
+		<if test="endtime != null and endtime != '' ">
+			and TO_CHAR(t.shsj,'yyyy/MM/dd') &lt;= #{endtime}
 		</if>
 	</sql>
 

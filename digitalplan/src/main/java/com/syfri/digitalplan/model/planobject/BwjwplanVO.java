@@ -19,6 +19,7 @@ public class BwjwplanVO extends ValueObject implements Serializable{
 	private String hdcswz;	//活动场所位置
 	private String zdbw;	//重点部位
 	private String xfgx;	//消防管辖
+	private String xfgxmc;  //消防管辖名称
 	private String lsyhqk;	//临时用火情况
 	private String lsydqk;	//临时用电情况
 	private String lsdjpjqk;	//临时搭建棚架情况
@@ -47,6 +48,9 @@ public class BwjwplanVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
+
+	private byte[] photo;
+	private String photo64;
 
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
 	private String dxmc;     //高级搜索中对象名称（对应保卫警卫中hdzt字段）
@@ -118,6 +122,13 @@ public class BwjwplanVO extends ValueObject implements Serializable{
 	public void setXfgx(String xfgx){
 		this.xfgx = xfgx;
 	}
+	public String getXfgxmc() {
+		return xfgxmc;
+	}
+	public void setXfgxmc(String xfgxmc) {
+		this.xfgxmc = xfgxmc;
+	}
+
 	public String getLsyhqk(){
 		return lsyhqk;
 	}
@@ -285,6 +296,19 @@ public class BwjwplanVO extends ValueObject implements Serializable{
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	public String getPhoto64() {
+		return photo64;
+	}
+	public void setPhoto64(String photo64) {
+		this.photo64 = photo64;
 	}
 
 	public String getYadxType() {

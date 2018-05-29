@@ -10,7 +10,7 @@ public interface BwjwplanDAO extends BaseDAO<BwjwplanVO>{
     List<BwjwplanVO> doSearchByVO(BwjwplanVO bwjwplanVO);
 
     /*--根据重点单位id获取重点单位详情.--*/
-    List<BwjwplanVO> doFindDetailById(String bwjwplanId);
+    BwjwplanVO doFindDetailById(String bwjwplanId);
 
 
 }
