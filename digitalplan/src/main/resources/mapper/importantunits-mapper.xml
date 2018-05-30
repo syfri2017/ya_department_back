@@ -215,7 +215,7 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		) t
-		where rownum &lt;= 100
+		where rownum &lt;= 20
 		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
 			and t.xfdwlxmc = #{xfdwlxmc}
 		</if>
