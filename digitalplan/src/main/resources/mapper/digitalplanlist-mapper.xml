@@ -25,7 +25,7 @@
 			and t.dxid = #{dxid}
 		</if>
 		<if test="dxmc != null and dxmc != '' ">
-			and t.dxmc = #{dxmc}
+			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="jgid != null and jgid != '' ">
 			and t.jgid = #{jgid}
