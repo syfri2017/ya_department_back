@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.syfri.digitalplan.dao.xfbwjw.XfbwjwDAO">
+<mapper namespace="com.syfri.digitalplan.dao.digitalplan.GuardobjectsplanDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="uuid != null and uuid != '' ">
@@ -147,13 +147,13 @@
 	</sql>
 
 	<!--3.查询记录数-->
-	<select id="doSearchCount" parameterType="XfbwjwVO" resultType="java.lang.Integer">
+	<select id="doSearchCount" parameterType="GuardobjectsplanVO" resultType="java.lang.Integer">
 		SELECT COUNT(0) AS NUM FROM YAGL_YA_BWJW t WHERE 1=1 AND DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--4.按条件查询记录-->
-	<select id="doSearchListByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO"> 
+	<select id="doSearchListByVO" parameterType="GuardobjectsplanVO"  resultType="GuardobjectsplanVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
 		FROM YAGL_YA_BWJW t  WHERE t.DELETE_FLAG = 'N'
@@ -161,7 +161,7 @@
 	</select>
 
 	<!--5.根据ID查询记录-->
-	<select id="doFindById" parameterType="XfbwjwVO"  resultType="XfbwjwVO">  
+	<select id="doFindById" parameterType="GuardobjectsplanVO"  resultType="GuardobjectsplanVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YA_BWJW t
@@ -169,7 +169,7 @@
 	</select>
 
 	<!--6.按照VO插入-->
-	<insert  id="doInsertByVO"  parameterType="XfbwjwVO"> 
+	<insert  id="doInsertByVO"  parameterType="GuardobjectsplanVO"> 
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
@@ -196,7 +196,7 @@
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="XfbwjwVO"> 
+	<update  id="doUpdateByVO"  parameterType="GuardobjectsplanVO"> 
 		UPDATE   YAGL_YA_BWJW
 		<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
@@ -280,7 +280,7 @@
 	</update>
 
 	<!--11.根据对象查询记录-->
-	<select id="doFindByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO">  
+	<select id="doFindByVO" parameterType="GuardobjectsplanVO"  resultType="GuardobjectsplanVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YA_BWJW t
@@ -289,7 +289,7 @@
 	</select>
 
 	<!--12.根据消防保卫警卫对象查询-->
-	<select id="doSearchByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO">
+	<select id="doSearchByVO" parameterType="GuardobjectsplanVO"  resultType="GuardobjectsplanVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		c1.CODE_NAME yalxmc,
@@ -304,7 +304,7 @@
 	</select>
 
 	<!--13.根据ID查询记录-->
-	<select id="doFindDetailById" parameterType="String"  resultType="XfbwjwVO">
+	<select id="doFindDetailById" parameterType="String"  resultType="GuardobjectsplanVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		c1.CODE_NAME yalxmc,
