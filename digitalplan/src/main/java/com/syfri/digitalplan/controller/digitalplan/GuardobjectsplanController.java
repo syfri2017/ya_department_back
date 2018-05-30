@@ -1,4 +1,4 @@
-package com.syfri.digitalplan.controller.xfbwjw;
+package com.syfri.digitalplan.controller.digitalplan;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
@@ -14,8 +14,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.syfri.digitalplan.model.xfbwjw.XfbwjwVO;
-import com.syfri.digitalplan.service.xfbwjw.XfbwjwService;
+import com.syfri.digitalplan.model.digitalplan.GuardobjectsplanVO;
+import com.syfri.digitalplan.service.digitalplan.GuardobjectsplanService;
 import com.syfri.baseapi.controller.BaseController;
 
 import java.util.List;
@@ -23,19 +23,19 @@ import java.util.List;
 @Api(value = "保卫警卫",tags = "保卫警卫",description = "保卫警卫")
 @RestController
 @RequestMapping("xfbwjw")
-public class XfbwjwController extends BaseController<XfbwjwVO>{
+public class GuardobjectsplanController extends BaseController<GuardobjectsplanVO>{
 
-	private static final Logger logger  = LoggerFactory.getLogger(XfbwjwController.class);
+	private static final Logger logger  = LoggerFactory.getLogger(GuardobjectsplanController.class);
 
 	@Autowired
 	protected Environment environment;
 
 	@Autowired
-	private XfbwjwService xfbwjwService;
+	private GuardobjectsplanService guardobjectsplanService;
 
 	@Override
-	public XfbwjwService getBaseService() {
-		return this.xfbwjwService;
+	public GuardobjectsplanService getBaseService() {
+		return this.guardobjectsplanService;
 	}
 	/**
 	 * @Description:
@@ -68,10 +68,10 @@ public class XfbwjwController extends BaseController<XfbwjwVO>{
 	@ApiOperation(value="根据条件获取预案信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="预案信息对象")
 	@PostMapping("/findByVO")
-	public @ResponseBody ResultVO findByVO(@RequestBody XfbwjwVO xfbwjwVO){
+	public @ResponseBody ResultVO findByVO(@RequestBody GuardobjectsplanVO guardobjectsplanVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			List<XfbwjwVO> result = xfbwjwService.doFindXfbwjwlist(xfbwjwVO);
+			List<GuardobjectsplanVO> result = guardobjectsplanService.doFindXfbwjwlist(guardobjectsplanVO);
 			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
@@ -89,10 +89,10 @@ public class XfbwjwController extends BaseController<XfbwjwVO>{
 	public @ResponseBody ResultVO getDetail(@PathVariable String pkid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			XfbwjwVO xfbwjwVO = xfbwjwService.doFindDetailById(pkid);
-			String photo64 = Base64ImageUtil.byteArr2String(xfbwjwVO.getPhoto());
-			xfbwjwVO.setPhoto64(photo64);
-			resultVO.setResult(xfbwjwVO);
+			GuardobjectsplanVO guardobjectsplanVO = guardobjectsplanService.doFindDetailById(pkid);
+			String photo64 = Base64ImageUtil.byteArr2String(guardobjectsplanVO.getPhoto());
+			guardobjectsplanVO.setPhoto64(photo64);
+			resultVO.setResult(guardobjectsplanVO);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

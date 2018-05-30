@@ -1,10 +1,10 @@
-package com.syfri.digitalplan.model.xfbwjw;
+package com.syfri.digitalplan.model.digitalplan;
 
 import java.io.Serializable;
 
 import com.syfri.baseapi.model.ValueObject;
 
-public class XfbwjwVO extends ValueObject implements Serializable{
+public class GuardobjectsplanVO extends ValueObject implements Serializable{
 /**
  * @Description:
  * @Param: 
