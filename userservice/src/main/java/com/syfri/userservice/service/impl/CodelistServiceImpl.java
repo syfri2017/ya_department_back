@@ -283,15 +283,13 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 					tree.setCodeName(codelistDetailVO.getCodeName());
 					tree.setCodeValue(codelistDetailVO.getCodeValue());
 					List<CodelistTree> children = new ArrayList();
-					if(codelistDetailVO.getCodeValue().startsWith("06")){
-						for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
-							// 只选出【其他消防队伍】的第二级类别
-							if (codelistDetailVO2.getCodeValue().startsWith("06")&&!codelistDetailVO2.equals(codelistDetailVO)){
-								CodelistTree tree2 = new CodelistTree();
-								tree2.setCodeName(codelistDetailVO2.getCodeName());
-								tree2.setCodeValue(codelistDetailVO2.getCodeValue());
-								children.add(tree2);
-							}
+					//第二级别
+					for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
+						if (codelistDetailVO2.getCodeValue().startsWith(codelistDetailVO.getCodeValue().substring(0,2))&&!codelistDetailVO2.equals(codelistDetailVO)){
+							CodelistTree tree2 = new CodelistTree();
+							tree2.setCodeName(codelistDetailVO2.getCodeName());
+							tree2.setCodeValue(codelistDetailVO2.getCodeValue());
+							children.add(tree2);
 						}
 					}
 					if(!children.isEmpty() )
