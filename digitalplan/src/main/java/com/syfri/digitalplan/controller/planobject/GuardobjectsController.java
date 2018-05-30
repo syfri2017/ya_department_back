@@ -2,6 +2,7 @@ package com.syfri.digitalplan.controller.planobject;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.digitalplan.model.planobject.GuardobjectsVO;
 import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -12,22 +13,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import com.syfri.digitalplan.model.planobject.BwjwplanVO;
-import com.syfri.digitalplan.service.planobject.BwjwplanService;
+import com.syfri.digitalplan.service.planobject.GuardobjectsService;
 import com.syfri.baseapi.controller.BaseController;
 
 @RestController
 @RequestMapping("bwjwplan")
-public class BwjwplanController  extends BaseController<BwjwplanVO>{
+public class GuardobjectsController extends BaseController<GuardobjectsVO>{
 
 	@Autowired
-	private BwjwplanService bwjwplanService;
+	private GuardobjectsService guardobjectsService;
 
 
 
 	@Override
-	public BwjwplanService getBaseService() {
-		return this.bwjwplanService;
+	public GuardobjectsService getBaseService() {
+		return this.guardobjectsService;
 	}
 
 	@Autowired
@@ -61,10 +61,10 @@ public class BwjwplanController  extends BaseController<BwjwplanVO>{
 
 	@PostMapping("/findByVO")
 	public @ResponseBody
-	ResultVO findByVO(@RequestBody BwjwplanVO bwjwplanVO){
+	ResultVO findByVO(@RequestBody GuardobjectsVO guardobjectsVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(bwjwplanService.doFindBwjwplanlist(bwjwplanVO));
+			resultVO.setResult(guardobjectsService.doFindBwjwplanlist(guardobjectsVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -101,11 +101,11 @@ public class BwjwplanController  extends BaseController<BwjwplanVO>{
 	public @ResponseBody ResultVO getDetail(@PathVariable String uuid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			BwjwplanVO bwjwplanVO = bwjwplanService.doFindDetailById(uuid);
+			GuardobjectsVO guardobjectsVO = guardobjectsService.doFindDetailById(uuid);
 			//将二进制转为Base64格式字符串
-			String photo64 = Base64ImageUtil.byteArr2String(bwjwplanVO.getPhoto());
-			bwjwplanVO.setPhoto64(photo64);
-			resultVO.setResult(bwjwplanVO);
+			String photo64 = Base64ImageUtil.byteArr2String(guardobjectsVO.getPhoto());
+			guardobjectsVO.setPhoto64(photo64);
+			resultVO.setResult(guardobjectsVO);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

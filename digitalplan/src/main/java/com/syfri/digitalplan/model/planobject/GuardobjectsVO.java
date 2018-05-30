@@ -4,7 +4,7 @@ import com.syfri.baseapi.model.ValueObject;
 
 import java.io.Serializable;
 
-public class BwjwplanVO extends ValueObject implements Serializable{
+public class GuardobjectsVO extends ValueObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
