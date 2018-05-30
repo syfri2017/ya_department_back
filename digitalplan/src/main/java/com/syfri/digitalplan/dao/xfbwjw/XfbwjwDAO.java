@@ -19,7 +19,7 @@ public interface XfbwjwDAO extends BaseDAO<XfbwjwVO>{
     /*--根据条件查询记录.--*/
     List<XfbwjwVO> doSearchByVO(XfbwjwVO xfbwjwVO);
 
-    /*--根据装备id获取装备详情.--*/
-    List<XfbwjwVO> doFindDetailById(String id);
+    /*--根据预案ID获取预案详情.--*/
+    XfbwjwVO doFindDetailById(String id);
 
 }

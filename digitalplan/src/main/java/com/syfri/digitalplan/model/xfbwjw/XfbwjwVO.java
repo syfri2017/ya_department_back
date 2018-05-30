@@ -51,6 +51,13 @@ public class XfbwjwVO extends ValueObject implements Serializable{
 
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
 
+	private String yalxmc; //预案类型名称
+	private String sfkqymc; //是否跨区域名称
+	private String jgidmc;  //制作机构名称
+
+	private byte[] photo; //照片二进制
+	private String photo64;  //照片字符串
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -255,5 +262,36 @@ public class XfbwjwVO extends ValueObject implements Serializable{
 	}
 	public void setYadxType(String yadxType) {
 		this.yadxType = yadxType;
+	}
+
+	public String getYalxmc() {
+		return yalxmc;
+	}
+	public void setYalxmc(String yalxmc) {
+		this.yalxmc = yalxmc;
+	}
+	public String getSfkqymc() {
+		return sfkqymc;
+	}
+	public void setSfkqymc(String sfkqymc) {
+		this.sfkqymc = sfkqymc;
+	}
+	public String getJgidmc() {
+		return jgidmc;
+	}
+	public void setJgidmc(String jgidmc) {
+		this.jgidmc = jgidmc;
+	}
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	public String getPhoto64() {
+		return photo64;
+	}
+	public void setPhoto64(String photo64) {
+		this.photo64 = photo64;
 	}
 }
