@@ -215,7 +215,7 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		) t
-		where rownum &lt;= 100
+		where rownum &lt;= 20
 		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
 			and t.xfdwlxmc = #{xfdwlxmc}
 		</if>
@@ -223,7 +223,8 @@
 	</select>
 <!--lxy start-->
 	<select id="doSearchZddwListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
-		select t.DWMC,t.DWXZ,t.DWDZ,t.ZBDH,c2.CODE_NAME dwxzmc  from
+		select t.DWMC,t.DWXZ,t.DWDZ,t.ZBDH,	t.xzqh xzqh,t.gis_x gisX,
+		t.gis_y gisY,c2.CODE_NAME dwxzmc  from
 		YAGL_DX_ZDDW t
 		<!--单位性质-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'DWXZ' And c1.DELETE_FLAG = 'N'
@@ -465,7 +466,7 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		) t
-		where rownum &lt;= 100
+		where rownum &lt;= 20
 		<if test="mhdzidmc != null and mhdzidmc != '' and mhdzidmc != '全部'">
 			and t.mhdzidmc = #{mhdzidmc}
 		</if>
