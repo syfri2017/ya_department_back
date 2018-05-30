@@ -99,6 +99,10 @@
 		<if test="endtime != null and endtime != '' ">
 			and TO_CHAR(t.shsj,'yyyy/MM/dd') &lt;= #{endtime}
 		</if>
+		<!--预案审核列表不加载状态为编辑中的预案 add by yushch-->
+		<if test="isApprove ==1 ">
+			and t.yazt != '01'
+		</if>
 	</sql>
 
 	<!--2.查询内容-->
