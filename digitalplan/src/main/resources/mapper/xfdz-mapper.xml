@@ -4,130 +4,79 @@
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="dzid != null and dzid != '' ">
-		 and t.dzid = #{dzid}
+			and t.dzid = #{dzid}
 		</if>
 		<if test="sjdzid != null and sjdzid != '' ">
-		 and t.sjdzid = #{sjdzid}
+			and t.sjdzid = #{sjdzid}
 		</if>
 		<if test="dzlx != null and dzlx != '' ">
-		 and t.dzlx = #{dzlx}
+			and t.dzlx = #{dzlx}
 		</if>
 		<if test="dzbm != null and dzbm != '' ">
-		 and t.dzbm = #{dzbm}
+			and t.dzbm = #{dzbm}
 		</if>
 		<if test="dzmc != null and dzmc != '' ">
-		 and t.dzmc like concat(concat('%',#{dzmc}),'%')
+			and t.dzmc = #{dzmc}
 		</if>
 		<if test="dzjc != null and dzjc != '' ">
-		 and t.dzjc = #{dzjc}
+			and t.dzjc = #{dzjc}
 		</if>
 		<if test="dzdz != null and dzdz != '' ">
-		 and t.dzdz like concat(concat('%',#{dzdz}),'%')
+			and t.dzdz = #{dzdz}
 		</if>
-		<if test="bdLon != null and bdLon != '' ">
-		 and t.bd_lon = #{bdLon}
+		<if test="lon != null and lon != '' ">
+			and t.lon = #{lon}
 		</if>
-		<if test="bdLat != null and bdLat != '' ">
-		 and t.bd_lat = #{bdLat}
+		<if test="lat != null and lat != '' ">
+			and t.lat = #{lat}
 		</if>
 		<if test="xzqh != null and xzqh != '' ">
-		 and t.xzqh = #{xzqh}
+			and t.xzqh = #{xzqh}
 		</if>
 		<if test="lxr != null and lxr != '' ">
-		 and t.lxr = #{lxr}
+			and t.lxr = #{lxr}
 		</if>
 		<if test="lxdh != null and lxdh != '' ">
-		 and t.lxdh = #{lxdh}
+			and t.lxdh = #{lxdh}
 		</if>
 		<if test="czhm != null and czhm != '' ">
-		 and t.czhm = #{czhm}
+			and t.czhm = #{czhm}
 		</if>
-		<if test="sxdsl != null and sxdsl != '' ">
-		 and t.sxdsl = #{sxdsl}
+		<if test="zqcls != null and zqcls != '' ">
+			and t.zqcls = #{zqcls}
 		</if>
-		<if test="xygbrs != null and xygbrs != '' ">
-		 and t.xygbrs = #{xygbrs}
+		<if test="zbqcs != null and zbqcs != '' ">
+			and t.zbqcs = #{zbqcs}
 		</if>
-		<if test="zfzzxfys != null and zfzzxfys != '' ">
-		 and t.zfzzxfys = #{zfzzxfys}
+		<if test="mhjzl != null and mhjzl != '' ">
+			and t.mhjzl = #{mhjzl}
 		</if>
-		<if test="zfwys != null and zfwys != '' ">
-		 and t.zfwys = #{zfwys}
+		<if test="gxsys != null and gxsys != '' ">
+			and t.gxsys = #{gxsys}
 		</if>
-		<if test="xygbsl != null and xygbsl != '' ">
-		 and t.xygbsl = #{xygbsl}
-		</if>
-		<if test="wzgysl != null and wzgysl != '' ">
-		 and t.wzgysl = #{wzgysl}
-		</if>
-		<if test="zqrs != null and zqrs != '' ">
-		 and t.zqrs = #{zqrs}
-		</if>
-		<if test="zdymc != null and zdymc != '' ">
-		 and t.zdymc = #{zdymc}
-		</if>
-		<if test="zdydh != null and zdydh != '' ">
-		 and t.zdydh = #{zdydh}
-		</if>
-		<if test="dzcm != null and dzcm != '' ">
-		 and t.dzcm = #{dzcm}
-		</if>
-		<if test="dzdh != null and dzdh != '' ">
-		 and t.dzdh = #{dzdh}
-		</if>
-		<if test="zqcl != null and zqcl != '' ">
-		 and t.zqcl = #{zqcl}
-		</if>
-		<if test="mhjl != null and mhjl != '' ">
-		 and t.mhjl = #{mhjl}
-		</if>
-		<if test="sysl != null and sysl != '' ">
-		 and t.sysl = #{sysl}
-		</if>
-		<if test="zddwsl != null and zddwsl != '' ">
-		 and t.zddwsl = #{zddwsl}
+		<if test="gxzddws != null and gxzddws != '' ">
+			and t.gxzddws = #{gxzddws}
 		</if>
 		<if test="xqmj != null and xqmj != '' ">
-		 and t.xqmj = #{xqmj}
+			and t.xqmj = #{xqmj}
 		</if>
 		<if test="xqfw != null and xqfw != '' ">
-		 and t.xqfw = #{xqfw}
-		</if>
-		<if test="sfdljj != null and sfdljj != '' ">
-		 and t.sfdljj = #{sfdljj}
-		</if>
-		<if test="cjrid != null and cjrid != '' ">
-		 and t.cjrid = #{cjrid}
-		</if>
-		<if test="cjrmc != null and cjrmc != '' ">
-		 and t.cjrmc = #{cjrmc}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-		 and t.cjsj = #{cjsj}
-		</if>
-		<if test="xgrid != null and xgrid != '' ">
-		 and t.xgrid = #{xgrid}
-		</if>
-		<if test="xgrmc != null and xgrmc != '' ">
-		 and t.xgrmc = #{xgrmc}
-		</if>
-		<if test="xgsj != null and xgsj != '' ">
-		 and t.xgsj = #{xgsj}
+			and t.xqfw = #{xqfw}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
+			and t.delete_flag = #{deleteFlag}
 		</if>
 		<if test="datasource != null and datasource != '' ">
-		 and t.datasource = #{datasource}
+			and t.datasource = #{datasource}
 		</if>
 		<if test="bz != null and bz != '' ">
-		 and t.bz = #{bz}
+			and t.bz = #{bz}
 		</if>
 		<if test="jdh != null and jdh != '' ">
-		 and t.jdh = #{jdh}
+			and t.jdh = #{jdh}
 		</if>
 		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
+			and t.sjc = #{sjc}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
 		 and t.reserve1 = #{reserve1}
@@ -170,36 +119,19 @@
 		t.dzmc dzmc,
 		t.dzjc dzjc,
 		t.dzdz dzdz,
-		t.bd_lon bdLon,
-		t.bd_lat bdLat,
+		t.lon lon,
+		t.lat lat,
 		t.xzqh xzqh,
 		t.lxr lxr,
 		t.lxdh lxdh,
 		t.czhm czhm,
-		t.sxdsl sxdsl,
-		t.xygbrs xygbrs,
-		t.zfzzxfys zfzzxfys,
-		t.zfwys zfwys,
-		t.xygbsl xygbsl,
-		t.wzgysl wzgysl,
-		t.zqrs zqrs,
-		t.zdymc zdymc,
-		t.zdydh zdydh,
-		t.dzcm dzcm,
-		t.dzdh dzdh,
-		t.zqcl zqcl,
-		t.mhjl mhjl,
-		t.sysl sysl,
-		t.zddwsl zddwsl,
+		t.zqcls zqcls,
+		t.zbqcs zbqcs,
+		t.mhjzl mhjzl,
+		t.gxsys gxsys,
+		t.gxzddws gxzddws,
 		t.xqmj xqmj,
 		t.xqfw xqfw,
-		t.sfdljj sfdljj,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
 		t.bz bz,
@@ -243,23 +175,23 @@
 	</select>
 
 	<!--6.按照VO插入-->
-	<insert  id="doInsertByVO"  parameterType="XfdzVO"> 
-		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
-			SELECT SYS_GUID() AS pkid FROM DUAL
+	<insert  id="doInsertByVO"  parameterType="XfdzVO">
+		<selectKey resultType="String" order="BEFORE" keyProperty="dzid">
+			SELECT SYS_GUID() AS dzid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_XFDZ(dzid,sjdzid,dzlx,dzbm,dzmc,dzjc,dzdz,bd_lon,bd_lat,xzqh,lxr,lxdh,czhm,sxdsl,xygbrs,zfzzxfys,zfwys,xygbsl,wzgysl,zqrs,zdymc,zdydh,dzcm,dzdh,zqcl,mhjl,sysl,zddwsl,xqmj,xqfw,sfdljj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{dzid,jdbcType=VARCHAR},#{sjdzid,jdbcType=VARCHAR},#{dzlx,jdbcType=VARCHAR},#{dzbm,jdbcType=VARCHAR},#{dzmc,jdbcType=VARCHAR},#{dzjc,jdbcType=VARCHAR},#{dzdz,jdbcType=VARCHAR},#{bdLon,jdbcType=DOUBLE},#{bdLat,jdbcType=DOUBLE},#{xzqh,jdbcType=VARCHAR},#{lxr,jdbcType=VARCHAR},#{lxdh,jdbcType=VARCHAR},#{czhm,jdbcType=VARCHAR},#{sxdsl,jdbcType=DOUBLE},#{xygbrs,jdbcType=DOUBLE},#{zfzzxfys,jdbcType=DOUBLE},#{zfwys,jdbcType=DOUBLE},#{xygbsl,jdbcType=DOUBLE},#{wzgysl,jdbcType=DOUBLE},#{zqrs,jdbcType=DOUBLE},#{zdymc,jdbcType=VARCHAR},#{zdydh,jdbcType=VARCHAR},#{dzcm,jdbcType=VARCHAR},#{dzdh,jdbcType=VARCHAR},#{zqcl,jdbcType=DOUBLE},#{mhjl,jdbcType=DOUBLE},#{sysl,jdbcType=DOUBLE},#{zddwsl,jdbcType=DOUBLE},#{xqmj,jdbcType=DOUBLE},#{xqfw,jdbcType=VARCHAR},#{sfdljj,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
-	 </insert>
+		INSERT INTO YAGL_XFDZ(dzid,sjdzid,dzlx,dzbm,dzmc,dzjc,dzdz,lon,lat,xzqh,lxr,lxdh,czhm,zqcls,zbqcs,mhjzl,gxsys,gxzddws,xqmj,xqfw,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4,gis_x,gis_y)
+		VALUES(#{dzid,jdbcType=VARCHAR},#{sjdzid,jdbcType=VARCHAR},#{dzlx,jdbcType=VARCHAR},#{dzbm,jdbcType=VARCHAR},#{dzmc,jdbcType=VARCHAR},#{dzjc,jdbcType=VARCHAR},#{dzdz,jdbcType=VARCHAR},#{lon,jdbcType=DOUBLE},#{lat,jdbcType=DOUBLE},#{xzqh,jdbcType=VARCHAR},#{lxr,jdbcType=VARCHAR},#{lxdh,jdbcType=VARCHAR},#{czhm,jdbcType=VARCHAR},#{zqcls,jdbcType=DOUBLE},#{zbqcs,jdbcType=DOUBLE},#{mhjzl,jdbcType=DOUBLE},#{gxsys,jdbcType=DOUBLE},#{gxzddws,jdbcType=DOUBLE},#{xqmj,jdbcType=DOUBLE},#{xqfw,jdbcType=VARCHAR},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE})
+	</insert>
 
 	<!--7.批量插入-->
-	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
-		INSERT INTO YAGL_XFDZ(dzid,sjdzid,dzlx,dzbm,dzmc,dzjc,dzdz,bd_lon,bd_lat,xzqh,lxr,lxdh,czhm,sxdsl,xygbrs,zfzzxfys,zfwys,xygbsl,wzgysl,zqrs,zdymc,zdydh,dzcm,dzdh,zqcl,mhjl,sysl,zddwsl,xqmj,xqfw,sfdljj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		SELECT SYS_GUID() pkid, A.* 
-		FROM ( 
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List">
+		INSERT INTO YAGL_XFDZ(dzid,sjdzid,dzlx,dzbm,dzmc,dzjc,dzdz,lon,lat,xzqh,lxr,lxdh,czhm,zqcls,zbqcs,mhjzl,gxsys,gxzddws,xqmj,xqfw,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4,gis_x,gis_y)
+		SELECT SYS_GUID() dzid, A.*
+		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
-		SELECT
-			#{item.dzid,jdbcType=VARCHAR} dzid,#{item.sjdzid,jdbcType=VARCHAR} sjdzid,#{item.dzlx,jdbcType=VARCHAR} dzlx,#{item.dzbm,jdbcType=VARCHAR} dzbm,#{item.dzmc,jdbcType=VARCHAR} dzmc,#{item.dzjc,jdbcType=VARCHAR} dzjc,#{item.dzdz,jdbcType=VARCHAR} dzdz,#{item.bdLon,jdbcType=DOUBLE} bd_lon,#{item.bdLat,jdbcType=DOUBLE} bd_lat,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.lxr,jdbcType=VARCHAR} lxr,#{item.lxdh,jdbcType=VARCHAR} lxdh,#{item.czhm,jdbcType=VARCHAR} czhm,#{item.sxdsl,jdbcType=DOUBLE} sxdsl,#{item.xygbrs,jdbcType=DOUBLE} xygbrs,#{item.zfzzxfys,jdbcType=DOUBLE} zfzzxfys,#{item.zfwys,jdbcType=DOUBLE} zfwys,#{item.xygbsl,jdbcType=DOUBLE} xygbsl,#{item.wzgysl,jdbcType=DOUBLE} wzgysl,#{item.zqrs,jdbcType=DOUBLE} zqrs,#{item.zdymc,jdbcType=VARCHAR} zdymc,#{item.zdydh,jdbcType=VARCHAR} zdydh,#{item.dzcm,jdbcType=VARCHAR} dzcm,#{item.dzdh,jdbcType=VARCHAR} dzdh,#{item.zqcl,jdbcType=DOUBLE} zqcl,#{item.mhjl,jdbcType=DOUBLE} mhjl,#{item.sysl,jdbcType=DOUBLE} sysl,#{item.zddwsl,jdbcType=DOUBLE} zddwsl,#{item.xqmj,jdbcType=DOUBLE} xqmj,#{item.xqfw,jdbcType=VARCHAR} xqfw,#{item.sfdljj,jdbcType=VARCHAR} sfdljj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
-		FROM DUAL
+			SELECT
+			#{item.dzid,jdbcType=VARCHAR} dzid,#{item.sjdzid,jdbcType=VARCHAR} sjdzid,#{item.dzlx,jdbcType=VARCHAR} dzlx,#{item.dzbm,jdbcType=VARCHAR} dzbm,#{item.dzmc,jdbcType=VARCHAR} dzmc,#{item.dzjc,jdbcType=VARCHAR} dzjc,#{item.dzdz,jdbcType=VARCHAR} dzdz,#{item.lon,jdbcType=DOUBLE} lon,#{item.lat,jdbcType=DOUBLE} lat,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.lxr,jdbcType=VARCHAR} lxr,#{item.lxdh,jdbcType=VARCHAR} lxdh,#{item.czhm,jdbcType=VARCHAR} czhm,#{item.zqcls,jdbcType=DOUBLE} zqcls,#{item.zbqcs,jdbcType=DOUBLE} zbqcs,#{item.mhjzl,jdbcType=DOUBLE} mhjzl,#{item.gxsys,jdbcType=DOUBLE} gxsys,#{item.gxzddws,jdbcType=DOUBLE} gxzddws,#{item.xqmj,jdbcType=DOUBLE} xqmj,#{item.xqfw,jdbcType=VARCHAR} xqfw,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y
+			FROM DUAL
 		</foreach>
 		) A
 	</insert>
@@ -270,46 +202,29 @@
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="XfdzVO"> 
-		UPDATE   YAGL_XFDZ  
+	<update  id="doUpdateByVO"  parameterType="XfdzVO">
+		UPDATE   YAGL_XFDZ
 		<set>
-			<if test="dzid != null">dzid=#{dzid},</if>
+		<!--	<if test="dzid != null">dzid=#{dzid},</if> -->
 			<if test="sjdzid != null">sjdzid=#{sjdzid},</if>
 			<if test="dzlx != null">dzlx=#{dzlx},</if>
 			<if test="dzbm != null">dzbm=#{dzbm},</if>
 			<if test="dzmc != null">dzmc=#{dzmc},</if>
 			<if test="dzjc != null">dzjc=#{dzjc},</if>
 			<if test="dzdz != null">dzdz=#{dzdz},</if>
-			<if test="bdLon != null">bd_lon=#{bdLon},</if>
-			<if test="bdLat != null">bd_lat=#{bdLat},</if>
+			<if test="lon != null">lon=#{lon},</if>
+			<if test="lat != null">lat=#{lat},</if>
 			<if test="xzqh != null">xzqh=#{xzqh},</if>
 			<if test="lxr != null">lxr=#{lxr},</if>
 			<if test="lxdh != null">lxdh=#{lxdh},</if>
 			<if test="czhm != null">czhm=#{czhm},</if>
-			<if test="sxdsl != null">sxdsl=#{sxdsl},</if>
-			<if test="xygbrs != null">xygbrs=#{xygbrs},</if>
-			<if test="zfzzxfys != null">zfzzxfys=#{zfzzxfys},</if>
-			<if test="zfwys != null">zfwys=#{zfwys},</if>
-			<if test="xygbsl != null">xygbsl=#{xygbsl},</if>
-			<if test="wzgysl != null">wzgysl=#{wzgysl},</if>
-			<if test="zqrs != null">zqrs=#{zqrs},</if>
-			<if test="zdymc != null">zdymc=#{zdymc},</if>
-			<if test="zdydh != null">zdydh=#{zdydh},</if>
-			<if test="dzcm != null">dzcm=#{dzcm},</if>
-			<if test="dzdh != null">dzdh=#{dzdh},</if>
-			<if test="zqcl != null">zqcl=#{zqcl},</if>
-			<if test="mhjl != null">mhjl=#{mhjl},</if>
-			<if test="sysl != null">sysl=#{sysl},</if>
-			<if test="zddwsl != null">zddwsl=#{zddwsl},</if>
+			<if test="zqcls != null">zqcls=#{zqcls},</if>
+			<if test="zbqcs != null">zbqcs=#{zbqcs},</if>
+			<if test="mhjzl != null">mhjzl=#{mhjzl},</if>
+			<if test="gxsys != null">gxsys=#{gxsys},</if>
+			<if test="gxzddws != null">gxzddws=#{gxzddws},</if>
 			<if test="xqmj != null">xqmj=#{xqmj},</if>
 			<if test="xqfw != null">xqfw=#{xqfw},</if>
-			<if test="sfdljj != null">sfdljj=#{sfdljj},</if>
-			<if test="cjrid != null">cjrid=#{cjrid},</if>
-			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="xgrid != null">xgrid=#{xgrid},</if>
-			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="deleteFlag != null">delete_flag='N',</if>
 			<if test="datasource != null">datasource=#{datasource},</if>
 			<if test="bz != null">bz=#{bz},</if>
@@ -318,65 +233,52 @@
 			<if test="reserve1 != null">reserve1=#{reserve1},</if>
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
-			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
+			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="gisX != null">gis_x=#{gisX},</if>
+			<if test="gisY != null">gis_y=#{gisY}</if>
 		</set>
-		WHERE  DZID = #{dzid}
+		WHERE  dzid = #{dzid}
 	</update>
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_XFDZ(dzid,sjdzid,dzlx,dzbm,dzmc,dzjc,dzdz,bd_lon,bd_lat,xzqh,lxr,lxdh,czhm,sxdsl,xygbrs,zfzzxfys,zfwys,xygbsl,wzgysl,zqrs,zdymc,zdydh,dzcm,dzdh,zqcl,mhjl,sysl,zddwsl,xqmj,xqfw,sfdljj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_XFDZ(dzid,sjdzid,dzlx,dzbm,dzmc,dzjc,dzdz,lon,lat,xzqh,lxr,lxdh,czhm,zqcls,zbqcs,mhjzl,gxsys,gxzddws,xqmj,xqfw,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4,gis_x,gis_y)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.dzid,jdbcType=VARCHAR} dzid,#{item.sjdzid,jdbcType=VARCHAR} sjdzid,#{item.dzlx,jdbcType=VARCHAR} dzlx,#{item.dzbm,jdbcType=VARCHAR} dzbm,#{item.dzmc,jdbcType=VARCHAR} dzmc,#{item.dzjc,jdbcType=VARCHAR} dzjc,#{item.dzdz,jdbcType=VARCHAR} dzdz,#{item.bdLon,jdbcType=DOUBLE} bd_lon,#{item.bdLat,jdbcType=DOUBLE} bd_lat,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.lxr,jdbcType=VARCHAR} lxr,#{item.lxdh,jdbcType=VARCHAR} lxdh,#{item.czhm,jdbcType=VARCHAR} czhm,#{item.sxdsl,jdbcType=DOUBLE} sxdsl,#{item.xygbrs,jdbcType=DOUBLE} xygbrs,#{item.zfzzxfys,jdbcType=DOUBLE} zfzzxfys,#{item.zfwys,jdbcType=DOUBLE} zfwys,#{item.xygbsl,jdbcType=DOUBLE} xygbsl,#{item.wzgysl,jdbcType=DOUBLE} wzgysl,#{item.zqrs,jdbcType=DOUBLE} zqrs,#{item.zdymc,jdbcType=VARCHAR} zdymc,#{item.zdydh,jdbcType=VARCHAR} zdydh,#{item.dzcm,jdbcType=VARCHAR} dzcm,#{item.dzdh,jdbcType=VARCHAR} dzdh,#{item.zqcl,jdbcType=DOUBLE} zqcl,#{item.mhjl,jdbcType=DOUBLE} mhjl,#{item.sysl,jdbcType=DOUBLE} sysl,#{item.zddwsl,jdbcType=DOUBLE} zddwsl,#{item.xqmj,jdbcType=DOUBLE} xqmj,#{item.xqfw,jdbcType=VARCHAR} xqfw,#{item.sfdljj,jdbcType=VARCHAR} sfdljj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.dzid,jdbcType=VARCHAR} dzid,#{item.sjdzid,jdbcType=VARCHAR} sjdzid,#{item.dzlx,jdbcType=VARCHAR} dzlx,#{item.dzbm,jdbcType=VARCHAR} dzbm,#{item.dzmc,jdbcType=VARCHAR} dzmc,#{item.dzjc,jdbcType=VARCHAR} dzjc,#{item.dzdz,jdbcType=VARCHAR} dzdz,#{item.lon,jdbcType=DOUBLE} lon,#{item.lat,jdbcType=DOUBLE} lat,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.lxr,jdbcType=VARCHAR} lxr,#{item.lxdh,jdbcType=VARCHAR} lxdh,#{item.czhm,jdbcType=VARCHAR} czhm,#{item.zqcls,jdbcType=DOUBLE} zqcls,#{item.zbqcs,jdbcType=DOUBLE} zbqcs,#{item.mhjzl,jdbcType=DOUBLE} mhjzl,#{item.gxsys,jdbcType=DOUBLE} gxsys,#{item.gxzddws,jdbcType=DOUBLE} gxzddws,#{item.xqmj,jdbcType=DOUBLE} xqmj,#{item.xqfw,jdbcType=VARCHAR} xqfw,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y
 		</foreach>
-		ON DUPLICATE KEY UPDATE   
-			dzid = VALUES(dzid),
-			sjdzid = VALUES(sjdzid),
-			dzlx = VALUES(dzlx),
-			dzbm = VALUES(dzbm),
-			dzmc = VALUES(dzmc),
-			dzjc = VALUES(dzjc),
-			dzdz = VALUES(dzdz),
-			bd_lon = VALUES(bd_lon),
-			bd_lat = VALUES(bd_lat),
-			xzqh = VALUES(xzqh),
-			lxr = VALUES(lxr),
-			lxdh = VALUES(lxdh),
-			czhm = VALUES(czhm),
-			sxdsl = VALUES(sxdsl),
-			xygbrs = VALUES(xygbrs),
-			zfzzxfys = VALUES(zfzzxfys),
-			zfwys = VALUES(zfwys),
-			xygbsl = VALUES(xygbsl),
-			wzgysl = VALUES(wzgysl),
-			zqrs = VALUES(zqrs),
-			zdymc = VALUES(zdymc),
-			zdydh = VALUES(zdydh),
-			dzcm = VALUES(dzcm),
-			dzdh = VALUES(dzdh),
-			zqcl = VALUES(zqcl),
-			mhjl = VALUES(mhjl),
-			sysl = VALUES(sysl),
-			zddwsl = VALUES(zddwsl),
-			xqmj = VALUES(xqmj),
-			xqfw = VALUES(xqfw),
-			sfdljj = VALUES(sfdljj),
-			cjrid = VALUES(cjrid),
-			cjrmc = VALUES(cjrmc),
-			cjsj = VALUES(cjsj),
-			xgrid = VALUES(xgrid),
-			xgrmc = VALUES(xgrmc),
-			xgsj = VALUES(xgsj),
-			delete_flag = VALUES(delete_flag),
-			datasource = VALUES(datasource),
-			bz = VALUES(bz),
-			jdh = VALUES(jdh),
-			sjc = VALUES(sjc),
-			reserve1 = VALUES(reserve1),
-			reserve2 = VALUES(reserve2),
-			reserve3 = VALUES(reserve3),
-			reserve4 = VALUES(reserve4)
+		ON DUPLICATE KEY UPDATE
+		dzid = VALUES(dzid),
+		sjdzid = VALUES(sjdzid),
+		dzlx = VALUES(dzlx),
+		dzbm = VALUES(dzbm),
+		dzmc = VALUES(dzmc),
+		dzjc = VALUES(dzjc),
+		dzdz = VALUES(dzdz),
+		lon = VALUES(lon),
+		lat = VALUES(lat),
+		xzqh = VALUES(xzqh),
+		lxr = VALUES(lxr),
+		lxdh = VALUES(lxdh),
+		czhm = VALUES(czhm),
+		zqcls = VALUES(zqcls),
+		zbqcs = VALUES(zbqcs),
+		mhjzl = VALUES(mhjzl),
+		gxsys = VALUES(gxsys),
+		gxzddws = VALUES(gxzddws),
+		xqmj = VALUES(xqmj),
+		xqfw = VALUES(xqfw),
+		delete_flag = VALUES(delete_flag),
+		datasource = VALUES(datasource),
+		bz = VALUES(bz),
+		jdh = VALUES(jdh),
+		sjc = VALUES(sjc),
+		reserve1 = VALUES(reserve1),
+		reserve2 = VALUES(reserve2),
+		reserve3 = VALUES(reserve3),
+		reserve4 = VALUES(reserve4),
+		gis_x = VALUES(gis_x),
+		gis_y = VALUES(gis_y)
 	</update>
 
 	<!--11.根据对象查询记录-->
