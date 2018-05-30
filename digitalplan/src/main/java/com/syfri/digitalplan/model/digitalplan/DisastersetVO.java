@@ -222,6 +222,7 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	private String hzwxxmc;	//工业建筑火灾危险性
 	private List<ForcedevVO> forcedevList;	//力量部署list
 	private KeypointsVO keypointsMap;	//要点提示Map
+	private String jzmc;	//建筑分区名称
 
 	public String getZqdjmc(){
 		return zqdjmc;
@@ -257,6 +258,11 @@ public class DisastersetVO extends ValueObject implements Serializable{
 	public void setForcedevList(List<ForcedevVO> forcedevList) { this.forcedevList = forcedevList; }
 	public KeypointsVO getKeypointsMap() { return keypointsMap; }
 	public void setKeypointsMap(KeypointsVO keypointsMap) { this.keypointsMap = keypointsMap; }
-
+	public String getJzmc(){
+		return jzmc;
+	}
+	public void setJzmc(String jzmc){
+		this.jzmc = jzmc;
+	}
 
 }

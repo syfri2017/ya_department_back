@@ -16,10 +16,10 @@
 		 and t.yabbh = #{yabbh}
 		</if>
 		<if test="yalx != null and yalx != '' ">
-		 and t.yalx = #{yalx}
+		 and t.yalx LIKE concat(RTRIM(#{yalx},0),'%')
 		</if>
 		<if test="yamc != null and yamc != '' ">
-			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
+		 and t.yamc LIKE concat(concat('%',#{yamc}),'%')
 		</if>
 		<if test="yajb != null and yajb != '' ">
 		 and t.yajb = #{yajb}
@@ -28,7 +28,7 @@
 		 and t.dxid = #{dxid}
 		</if>
 		<if test="dxmc != null and dxmc != '' ">
-			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
+		 and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="bwid != null and bwid != '' ">
 		 and t.bwid = #{bwid}
@@ -40,7 +40,12 @@
 		 and t.sfkqy = #{sfkqy}
 		</if>
 		<if test="jgid != null and jgid != '' ">
-		 and t.jgid = #{jgid}
+		 and t.jgid IN (
+		  SELECT UUID
+		  FROM SYS_ORGANIZATION t
+		  START WITH t.UUID = #{jgid}
+		  CONNECT BY PRIOR t.UUID = SJJGID
+		 )
 		</if>
 		<if test="jgbm != null and jgbm != '' ">
 		 and t.jgbm = #{jgbm}
@@ -283,38 +288,34 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据单位名称查询-->
+	<!--12.根据消防保卫警卫对象查询-->
 	<select id="doSearchByVO" parameterType="XfbwjwVO"  resultType="XfbwjwVO">
 		SELECT
-		<include refid="SQL_CONTENT"/>
+		<include refid="SQL_CONTENT"/>,
+		c1.CODE_NAME yalxmc,
+		CASE sfkqy WHEN '0' THEN '否' ELSE '是' END AS sfkqymc,
+		z.JGMC jgidmc
 		FROM YAGL_YA_BWJW t
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.yalx = c1.CODE_VALUE AND c1.codetype = 'YALX' AND c1.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_ORGANIZATION z ON (t.JGID = z.UUID AND z.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
-		<if test="yamc != null and yamc != '' ">
-			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
-		</if>
-		<if test="dxmc != null and dxmc != '' ">
-			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
-		</if>
-		<!--<if test="begintime != null and begintime != '' ">-->
-			<!--and t.cjsj &gt;= to_date(#{begintime},'yyyy/MM/dd')-->
-		<!--</if>-->
-		<!--<if test="endtime != null and endtime != '' ">-->
-			<!--and t.cjsj &lt;=to_date(#{endtime},'yyyy/MM/dd')-->
-		<!--</if>-->
-		<if test="yalx != null and yalx != '' ">
-			and t.yalx LIKE concat(rtrim(#{yalx},'0'),'%')
-		</if>
-		<if test="sfkqy != null and sfkqy != '' ">
-			and t.sfkqy = #{sfkqy}
-		</if>
+		<include refid="SQL_CONDITION"/>
+		ORDER BY (CASE WHEN t.xgsj IS NULL THEN t.cjsj ELSE t.xgsj END) DESC
 	</select>
 
 	<!--13.根据ID查询记录-->
 	<select id="doFindDetailById" parameterType="String"  resultType="XfbwjwVO">
-	SELECT
-	<include refid="SQL_CONTENT"/>
-	FROM YAGL_YA_BWJW t
-	WHERE t.JLZT = '1' AND  t.PKID = #{uuid}
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		c1.CODE_NAME yalxmc,
+		CASE sfkqy WHEN '0' THEN '否' ELSE '是' END AS sfkqymc,
+		z.JGMC jgidmc,
+		pic_blob photo
+		FROM YAGL_YA_BWJW t
+		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.yalx = c1.CODE_VALUE AND c1.codetype = 'YALX' AND c1.DELETE_FLAG = 'N')
+		LEFT JOIN SYS_ORGANIZATION z ON (t.JGID = z.UUID AND z.DELETE_FLAG = 'N')
+		INNER JOIN SYS_CODELIST_PICTURE s ON s.pic_type = 'YALB' AND pic_value = '02'
+		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
 

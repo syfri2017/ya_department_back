@@ -10,5 +10,5 @@ public interface XfbwjwService  extends BaseService<XfbwjwVO>{
     List<XfbwjwVO> doFindXfbwjwlist(XfbwjwVO xfbwjwVO);
 
     /*--根据重点单位ID获取重点单位详情-*/
-    List<XfbwjwVO> doFindDetailById(String xfbwjwId);
+    XfbwjwVO doFindDetailById(String xfbwjwId);
 }

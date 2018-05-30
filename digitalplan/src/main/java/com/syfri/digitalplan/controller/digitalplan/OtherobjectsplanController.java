@@ -1,5 +1,6 @@
 package com.syfri.digitalplan.controller.digitalplan;
 
+import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -78,7 +79,10 @@ public class OtherobjectsplanController extends BaseController<OtherobjectsplanV
 	public @ResponseBody ResultVO getDetail(@PathVariable String uuid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(otherobjectsplanService.doFindById(uuid));
+			OtherobjectsplanVO otherobjectsplanVO = otherobjectsplanService.doFindById(uuid);
+			String photo64 = Base64ImageUtil.byteArr2String(otherobjectsplanVO.getPhoto());
+			otherobjectsplanVO.setPhoto64(photo64);
+			resultVO.setResult(otherobjectsplanVO);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

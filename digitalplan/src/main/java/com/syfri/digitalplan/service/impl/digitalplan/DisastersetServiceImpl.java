@@ -40,7 +40,11 @@ public class DisastersetServiceImpl extends BaseServiceImpl<DisastersetVO> imple
 			List<ForcedevVO> forcedevList = this.forcedevDAO.doFindByPlanId(vo.getZqid());
 			vo.setForcedevList(forcedevList);
 			KeypointsVO keypointsMap = this.keypointsDAO.doFindByPlanId(vo.getZqid());
-			vo.setKeypointsMap(keypointsMap);
+			if(keypointsMap==null){
+				vo.setKeypointsMap(new KeypointsVO());
+			}else{
+				vo.setKeypointsMap(keypointsMap);
+			}
 		}
 		return resultList;
 	}

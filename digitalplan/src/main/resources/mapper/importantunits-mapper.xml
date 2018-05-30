@@ -283,7 +283,8 @@
 	</select>
 	<!--lxy start-->
 	<select id="doSearchZddwListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
-		select t.DWMC,t.DWXZ,t.DWDZ,t.ZBDH,c2.CODE_NAME dwxzmc  from
+		select t.DWMC,t.DWXZ,t.DWDZ,t.ZBDH,	t.xzqh xzqh,t.gis_x gisX,
+		t.gis_y gisY,c2.CODE_NAME dwxzmc  from
 		YAGL_DX_ZDDW t
 		<!--单位性质-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'DWXZ' And c1.DELETE_FLAG = 'N'

@@ -2,8 +2,7 @@ package com.syfri.digitalplan.controller.xfbwjw;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
-import com.syfri.digitalplan.controller.digitalplan.DigitalplanlistController;
-import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
+import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -90,7 +89,10 @@ public class XfbwjwController extends BaseController<XfbwjwVO>{
 	public @ResponseBody ResultVO getDetail(@PathVariable String pkid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(xfbwjwService.doFindById(pkid));
+			XfbwjwVO xfbwjwVO = xfbwjwService.doFindDetailById(pkid);
+			String photo64 = Base64ImageUtil.byteArr2String(xfbwjwVO.getPhoto());
+			xfbwjwVO.setPhoto64(photo64);
+			resultVO.setResult(xfbwjwVO);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

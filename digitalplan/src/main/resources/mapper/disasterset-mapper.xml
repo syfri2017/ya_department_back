@@ -153,7 +153,7 @@
 			SELECT SYS_GUID() AS zqid FROM DUAL
 		</selectKey>
 		INSERT INTO YAGL_YA_ZQSD(zqid,yaid,zdbwid,jzid,zqbw,zqdj,qhyy,gyjzhzwxx,zhcs,rswz,qhbwgd,rsmj,zqms,zqsdyj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{zqid,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},#{zdbwid,jdbcType=VARCHAR},#{jzid,jdbcType=VARCHAR},#{zqbw,jdbcType=VARCHAR},#{zqdj,jdbcType=VARCHAR},#{qhyy,jdbcType=VARCHAR},#{gyjzhzwxx,jdbcType=VARCHAR},#{zhcs,jdbcType=VARCHAR},#{rswz,jdbcType=VARCHAR},#{qhbwgd,jdbcType=DOUBLE},#{rsmj,jdbcType=DOUBLE},#{zqms,jdbcType=VARCHAR},#{zqsdyj,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+		VALUES(#{zqid,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},#{zdbwid,jdbcType=VARCHAR},#{jzid,jdbcType=VARCHAR},#{zqbw,jdbcType=VARCHAR},#{zqdj,jdbcType=VARCHAR},#{qhyy,jdbcType=VARCHAR},#{gyjzhzwxx,jdbcType=VARCHAR},#{zhcs,jdbcType=VARCHAR},#{rswz,jdbcType=VARCHAR},#{qhbwgd,jdbcType=DOUBLE},#{rsmj,jdbcType=DOUBLE},#{zqms,jdbcType=VARCHAR},#{zqsdyj,jdbcType=VARCHAR},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},sysdate,#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	 </insert>
 
 	<!--7.批量插入-->
@@ -267,7 +267,8 @@
 		c4.CODE_NAME rswzmc,
 		c6.CODE_NAME zhcsmc,
 		c8.CODE_NAME qhyymc,
-		c10.CODE_NAME hzwxxmc
+		c10.CODE_NAME hzwxxmc,
+		x.JZMC jzmc
 		FROM YAGL_YA_ZQSD t
 		<!--灾情等级-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'ZQDJ' And c1.DELETE_FLAG = 'N'
@@ -284,7 +285,10 @@
 		<!--火灾危险性-->
 		Left Join SYS_CODELIST c9 on c9.CODETYPE = 'HZWXX' And c9.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c10 On c9.CODEID = c10.CODEID And c10.DELETE_FLAG = 'N' and t.GYJZHZWXX = c10.CODE_VALUE
+		<!--建筑名称-->
+		Left Join YAGL_DWJZXX x on x.JZID = t.JZID And x.DELETE_FLAG = 'N'
 		WHERE t.DELETE_FLAG = 'N' AND  t.YAID = #{value}
+		ORDER BY cjsj ASC
 	</select>
 
 	<!--8.按预案id删除-->

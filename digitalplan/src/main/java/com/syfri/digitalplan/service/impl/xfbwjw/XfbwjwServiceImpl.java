@@ -37,7 +37,7 @@ public class XfbwjwServiceImpl extends BaseServiceImpl<XfbwjwVO> implements Xfbw
 
 	/*--根据重点单位id获取重点单位详情--*/
 	@Override
-	public List<XfbwjwVO> doFindDetailById(String xfbwjwId) {
+	public XfbwjwVO doFindDetailById(String xfbwjwId) {
 		return xfbwjwDAO.doFindDetailById(xfbwjwId);
 	}
 
