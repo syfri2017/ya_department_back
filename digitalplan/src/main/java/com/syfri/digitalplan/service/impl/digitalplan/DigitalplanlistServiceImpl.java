@@ -78,11 +78,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
      */
     @Override
     public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO) {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String zzsj = sdf.format(date);
         //预案插入
-//		digitalplanlistVO.setZzsj(zzsj);
         digitalplanlistVO.setDeleteFlag("N");
         digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
         //灾情插入
@@ -93,7 +89,18 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
             dsVO.setYaid(digitalplanlistVO.getUuid());//预案id
             dsVO.setZdbwid(ds.get("zdbwid").toString());//重点部位id
             dsVO.setJzid(ds.get("jzid").toString());
-            dsVO.setZqbw(ds.get("bwmc").toString());
+            dsVO.setZqbw(ds.get("zqbw").toString());
+            dsVO.setQhyy(ds.get("qhyy").toString());
+            dsVO.setGyjzhzwxx(ds.get("gyjzhzwxx").toString());
+            dsVO.setZhcs(ds.get("zhcs").toString());
+            dsVO.setQhbwgd(ds.get("qhbwgd").toString());
+            dsVO.setRsmj(ds.get("rsmj").toString());
+            dsVO.setZqms(ds.get("zqms").toString());
+            dsVO.setZqsdyj(ds.get("zqsdyj").toString());
+            dsVO.setCjrid(digitalplanlistVO.getZzrid());
+            dsVO.setCjrmc(digitalplanlistVO.getZzrmc());
+            dsVO.setDeleteFlag("N");
+            //灾情等级
             if (ds.get("zqdj") == "" || ds.get("zqdj") == null) {
                 dsVO.setZqdj("");
             } else {
@@ -102,9 +109,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                     dsVO.setZqdj(zqdj.get(zqdj.size() - 1).toString());
                 }
             }
-            dsVO.setQhyy(ds.get("qhyy").toString());
-            dsVO.setGyjzhzwxx(ds.get("hzwxx").toString());
-            dsVO.setZhcs(ds.get("zhcs").toString());
+            //燃烧物质
             if (ds.get("rswz") == "" || ds.get("rswz") == null) {
                 dsVO.setRswz("");
             } else {
@@ -113,19 +118,11 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                     dsVO.setRswz(rswz.get(rswz.size() - 1).toString());
                 }
             }
-            dsVO.setQhbwgd(ds.get("qhbwgd").toString());
-            dsVO.setRsmj(ds.get("rsmj").toString());
-            dsVO.setZqms(ds.get("zqms").toString());
-            dsVO.setZqsdyj(ds.get("zqsdyj").toString());
-            dsVO.setCjrid(digitalplanlistVO.getZzrid());
-            dsVO.setCjrmc(digitalplanlistVO.getZzrmc());
-//			dsVO.setCjsj(zzsj);
-            dsVO.setDeleteFlag("N");
             disastersetDAO.doInsertByVO(dsVO);
             //力量部署插入
             List forceList = (List) ds.get("forcedevList");
             for (int k = 0; k < forceList.size(); k++) {
-                Map fd = (Map) forceList.get(i);
+                Map fd = (Map) forceList.get(k);
                 ForcedevVO fdVO = new ForcedevVO();
                 fdVO.setZqid(dsVO.getZqid());
                 fdVO.setDjfalx(fd.get("djfalx").toString());
@@ -147,7 +144,6 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                 kpVO.setTbjs(kp.get("tbjs").toString());
                 kpVO.setCjrid(digitalplanlistVO.getZzrid());
                 kpVO.setCjrmc(digitalplanlistVO.getZzrmc());
-//			kpVO.setCjsj(zzsj);
                 kpVO.setDeleteFlag("N");
                 keypointsDAO.doInsertByVO(kpVO);
             }
