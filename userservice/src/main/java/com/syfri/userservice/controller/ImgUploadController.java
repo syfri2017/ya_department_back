@@ -319,4 +319,29 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 		}
 		return resultVO;
 	}
+
+	/**
+	 * @Description: 根据手动输入图片类型查询图片数量
+	 * @Param: [picName]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/4/27 9:53
+	 */
+	@ApiOperation(value="根据手动输入图片类型查询图片数量",notes="查询")
+	@ApiImplicitParam(name="picType",value="图片类型")
+	@GetMapping("/getInputNum/{picType}")
+	public @ResponseBody ResultVO getInputNum(@PathVariable String picType){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			ImgUploadVO imgUploadVO = new ImgUploadVO();
+			imgUploadVO.setPicType(picType);
+			List<ImgUploadVO> result = imgUploadService.doSearchListByInputPicType(imgUploadVO);
+			resultVO.setResult(result.size());
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

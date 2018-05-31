@@ -57,4 +57,14 @@ public class ImgUploadServiceImpl extends BaseServiceImpl<ImgUploadVO> implement
 	public List<ImgUploadVO> doSearchSavedListByVO(){
 		return imgUploadDAO.doSearchSavedListByVO();
 	}
+
+	/**
+	 * @Description: 查询手动输入的类型是否存在
+	 * @Param: [vo]
+	 * @Return: java.util.List<com.syfri.userservice.model.ImgUploadVO>
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/5/31 15:44
+	 */
+	public List<ImgUploadVO> doSearchListByInputPicType(ImgUploadVO vo){return imgUploadDAO.doSearchListByInputPicType(vo);}
 }

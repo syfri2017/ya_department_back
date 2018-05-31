@@ -209,4 +209,15 @@
 		,t.pic_type picType
 		FROM SYS_CODELIST_PICTURE t  WHERE t.DELETE_FLAG = 'N'
 	</select>
+
+	<!--16.按手动输入的图片类型查询记录-->
+	<select id="doSearchListByInputPicType" parameterType="ImguploadVO"  resultType="ImguploadVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_CODELIST_PICTURE t  WHERE t.DELETE_FLAG = 'N'
+		<if test="picType != null and picType != '' ">
+			and t.pic_type = #{picType}
+		</if>
+		ORDER BY t.pic_type,t.pic_value
+	</select>
 </mapper>
