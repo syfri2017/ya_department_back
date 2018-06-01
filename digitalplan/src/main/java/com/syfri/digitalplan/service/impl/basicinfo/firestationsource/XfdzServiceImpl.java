@@ -20,4 +20,28 @@ public class XfdzServiceImpl extends BaseServiceImpl<XfdzVO> implements XfdzServ
 	public XfdzDAO getBaseDAO() {
 		return xfdzDAO;
 	}
+
+	public XfdzVO doFindDzDetailByVo(XfdzVO xfdzVO){
+		String dzlx = xfdzVO.getDzlx().substring(0,2);
+		XfdzVO vo = new XfdzVO();
+		switch (dzlx){
+			case "02":
+				vo = xfdzDAO.doFindDzZongDDetailByVo(xfdzVO);
+				break;
+			case "03":
+				vo = xfdzDAO.doFindDzZhiDDetailByVo(xfdzVO);
+				break;
+			case "05":
+				vo = xfdzDAO.doFindDzDaDDetailByVo(xfdzVO);
+				break;
+			case "09":
+				vo = xfdzDAO.doFindDzZongDDetailByVo(xfdzVO);
+				break;
+			case "0A":
+
+				break;
+		}
+
+		return vo;
+	}
 }

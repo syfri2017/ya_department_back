@@ -161,7 +161,8 @@
 		<!--队站类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'DZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DZLX = c2.CODE_VALUE
-        Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
+        <!--行政区划-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
         Left Join SYS_CODELIST_DETAIL c4 On c3.CODEID = c4.CODEID And c4.DELETE_FLAG = 'N' and t.xzqh = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
         <include refid="SQL_CONDITION"/>
@@ -294,4 +295,258 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 -->
+
+	<!--根据id关联总队表查询总队队站详情-->
+	<resultMap id="DzZongDMap" type="com.syfri.digitalplan.model.basicinfo.firestationsource.XfdzVO">
+		<id property="dzid" column="dzid"/>
+		<result property="sjdzid" column="sjdzid"/>
+		<result property="dzlx" column="dzlx"/>
+		<result property="dzbm" column="dzbm"/>
+		<result property="dzmc" column="dzmc"/>
+		<result property="dzjc" column="dzjc"/>
+		<result property="dzdz" column="dzdz"/>
+		<result property="lon" column="lon"/>
+		<result property="lat" column="lat"/>
+		<result property="xzqh" column="xzqh"/>
+		<result property="lxr" column="lxr"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="czhm" column="czhm"/>
+		<result property="zqcls" column="zqcls"/>
+		<result property="zbqcs" column="zbqcs"/>
+		<result property="mhjzl" column="mhjzl"/>
+		<result property="gxsys" column="gxsys"/>
+		<result property="gxzddws" column="gxzddws"/>
+		<result property="xqmj" column="xqmj"/>
+		<result property="xqfw" column="xqfw"/>
+		<result property="bz" column="bz"/>
+		<result property="gisX" column="gisX"/>
+		<result property="gisY" column="gisY"/>
+		<collection property="zongdVO" ofType="com.syfri.digitalplan.model.basicinfo.firestationsource.ZongdVO">
+			<id property="uuid" column="uuid"></id>
+			<result property="dzid" column="dzid"/>
+			<result property="xygbrs" column="xygbrs"/>
+			<result property="zfzzxfys" column="zfzzxfys"/>
+			<result property="wzgys" column="wzgys"/>
+			<result property="xxzhids" column="xxzhids"/>
+			<result property="xxzhongds" column="xxzhongds"/>
+			<result property="zdzxm" column="zdzxm"/>
+			<result property="zdzlxfs" column="zdzlxfs"/>
+			<result property="zdzwxm" column="zdzwxm"/>
+			<result property="zdzwlxfs" column="zdzwlxfs"/>
+		</collection>
+	</resultMap>
+	<select id="doFindDzZongDDetailByVo" parameterType="XfdzVO"  resultMap="DzZongDMap">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		t2.uuid uuid,
+		t2.xygbrs xygbrs,
+		t2.zfzzxfys zfzzxfys,
+		t2.wzgys wzgys,
+		t2.xxzhids xxzhids,
+		t2.xxzhongds xxzhongds,
+		t2.zdzxm zdzxm,
+		t2.zdzlxfs zdzlxfs,
+		t2.zdzwxm zdzwxm,
+		t2.zdzwlxfs zdzwlxfs
+		FROM YAGL_XFDZ t
+		LEFT JOIN YAGL_XFDZ_ZONGD t2 ON t.dzid=t2.dzid AND t2.DELETE_FLAG = 'N'
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--根据id关联支队表查询支队队站详情-->
+	<resultMap id="DzZhiDMap" type="com.syfri.digitalplan.model.basicinfo.firestationsource.XfdzVO">
+		<id property="dzid" column="dzid"/>
+		<result property="sjdzid" column="sjdzid"/>
+		<result property="dzlx" column="dzlx"/>
+		<result property="dzbm" column="dzbm"/>
+		<result property="dzmc" column="dzmc"/>
+		<result property="dzjc" column="dzjc"/>
+		<result property="dzdz" column="dzdz"/>
+		<result property="lon" column="lon"/>
+		<result property="lat" column="lat"/>
+		<result property="xzqh" column="xzqh"/>
+		<result property="lxr" column="lxr"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="czhm" column="czhm"/>
+		<result property="zqcls" column="zqcls"/>
+		<result property="zbqcs" column="zbqcs"/>
+		<result property="mhjzl" column="mhjzl"/>
+		<result property="gxsys" column="gxsys"/>
+		<result property="gxzddws" column="gxzddws"/>
+		<result property="xqmj" column="xqmj"/>
+		<result property="xqfw" column="xqfw"/>
+		<result property="bz" column="bz"/>
+		<result property="gisX" column="gisX"/>
+		<result property="gisY" column="gisY"/>
+		<collection property="zhidVO" ofType="com.syfri.digitalplan.model.basicinfo.firestationsource.ZhidVO">
+			<id property="uuid" column="uuid"></id>
+			<result property="dzid" column="dzid"/>
+			<result property="xygbrs" column="xygbrs"/>
+			<result property="zfzzxfys" column="zfzzxfys"/>
+			<result property="xfwys" column="xfwys"/>
+			<result property="xxdads" column="xxdads"/>
+			<result property="xxzhongds" column="xxzhongds"/>
+			<result property="sfdljj" column="sfdljj"/>
+			<result property="zdzxm" column="zdzxm"/>
+			<result property="zdzlxfs" column="zdzlxfs"/>
+			<result property="zdzwxm" column="zdzwxm"/>
+			<result property="zdzwlxfs" column="zdzwlxfs"/>
+		</collection>
+	</resultMap>
+	<select id="doFindDzZhiDDetailByVo" parameterType="XfdzVO"  resultMap="DzZhiDMap">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		t2.uuid uuid,
+		t2.xygbrs xygbrs,
+		t2.zfzzxfys zfzzxfys,
+		t2.xfwys xfwys,
+		t2.xxdads xxdads,
+		t2.xxzhongds xxzhongds,
+		CASE t2.sfdljj WHEN '1' THEN '是' WHEN '0' THEN '否' END sfdljj,
+		t2.zdzxm zdzxm,
+		t2.zdzlxfs zdzlxfs,
+		t2.zdzwxm zdzwxm,
+		t2.zdzwlxfs zdzwlxfs
+		FROM YAGL_XFDZ t
+		LEFT JOIN YAGL_XFDZ_ZHID t2 ON t.dzid=t2.dzid AND t2.DELETE_FLAG = 'N'
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--根据id关联大队表查询大队队站详情-->
+	<resultMap id="DzDaDMap" type="com.syfri.digitalplan.model.basicinfo.firestationsource.XfdzVO">
+		<id property="dzid" column="dzid"/>
+		<result property="sjdzid" column="sjdzid"/>
+		<result property="dzlx" column="dzlx"/>
+		<result property="dzbm" column="dzbm"/>
+		<result property="dzmc" column="dzmc"/>
+		<result property="dzjc" column="dzjc"/>
+		<result property="dzdz" column="dzdz"/>
+		<result property="lon" column="lon"/>
+		<result property="lat" column="lat"/>
+		<result property="xzqh" column="xzqh"/>
+		<result property="lxr" column="lxr"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="czhm" column="czhm"/>
+		<result property="zqcls" column="zqcls"/>
+		<result property="zbqcs" column="zbqcs"/>
+		<result property="mhjzl" column="mhjzl"/>
+		<result property="gxsys" column="gxsys"/>
+		<result property="gxzddws" column="gxzddws"/>
+		<result property="xqmj" column="xqmj"/>
+		<result property="xqfw" column="xqfw"/>
+		<result property="bz" column="bz"/>
+		<result property="gisX" column="gisX"/>
+		<result property="gisY" column="gisY"/>
+		<collection property="dadVO" ofType="com.syfri.digitalplan.model.basicinfo.firestationsource.DadVO">
+			<id property="uuid" column="uuid"></id>
+			<result property="dzid" column="dzid"/>
+			<result property="xygbrs" column="xygbrs"/>
+			<result property="zfzzxfys" column="zfzzxfys"/>
+			<result property="xfwys" column="xfwys"/>
+			<result property="xxzhongds" column="xxzhongds"/>
+			<result property="sfdljj" column="sfdljj"/>
+			<result property="ddzxm" column="ddzxm"/>
+			<result property="ddzlxfs" column="ddzlxfs"/>
+			<result property="jdyxm" column="jdyxm"/>
+			<result property="jdylxfs" column="jdylxfs"/>
+			<result property="fddzxm" column="fddzxm"/>
+			<result property="fddzlxfs" column="fddzlxfs"/>
+			<result property="fjdyxm" column="fjdyxm"/>
+			<result property="fjdylxfs" column="fjdylxfs"/>
+		</collection>
+	</resultMap>
+	<select id="doFindDzDaDDetailByVo" parameterType="XfdzVO"  resultMap="DzDaDMap">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		t2.uuid uuid,
+		t2.xygbrs xygbrs,
+		t2.zfzzxfys zfzzxfys,
+		t2.xfwys xfwys,
+		t2.xxzhongds xxzhongds,
+		CASE t2.sfdljj WHEN '1' THEN '是' WHEN '0' THEN '否' END sfdljj,
+		t2.ddzxm ddzxm,
+		t2.ddzlxfs ddzlxfs,
+		t2.jdyxm jdyxm,
+		t2.jdylxfs jdylxfs,
+		t2.fddzxm fddzxm,
+		t2.fddzlxfs fddzlxfs,
+		t2.fjdyxm fjdyxm,
+		t2.fjdylxfs fjdylxfs
+		FROM YAGL_XFDZ t
+		LEFT JOIN YAGL_XFDZ_DAD t2 ON t.dzid=t2.dzid AND t2.DELETE_FLAG = 'N'
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
+
+	<!--根据id关联大队表查询中队队站详情-->
+	<resultMap id="DzZhongDMap" type="com.syfri.digitalplan.model.basicinfo.firestationsource.XfdzVO">
+		<id property="dzid" column="dzid"/>
+		<result property="sjdzid" column="sjdzid"/>
+		<result property="dzlx" column="dzlx"/>
+		<result property="dzbm" column="dzbm"/>
+		<result property="dzmc" column="dzmc"/>
+		<result property="dzjc" column="dzjc"/>
+		<result property="dzdz" column="dzdz"/>
+		<result property="lon" column="lon"/>
+		<result property="lat" column="lat"/>
+		<result property="xzqh" column="xzqh"/>
+		<result property="lxr" column="lxr"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="czhm" column="czhm"/>
+		<result property="zqcls" column="zqcls"/>
+		<result property="zbqcs" column="zbqcs"/>
+		<result property="mhjzl" column="mhjzl"/>
+		<result property="gxsys" column="gxsys"/>
+		<result property="gxzddws" column="gxzddws"/>
+		<result property="xqmj" column="xqmj"/>
+		<result property="xqfw" column="xqfw"/>
+		<result property="bz" column="bz"/>
+		<result property="gisX" column="gisX"/>
+		<result property="gisY" column="gisY"/>
+		<collection property="zhongdVO" ofType="com.syfri.digitalplan.model.basicinfo.firestationsource.ZhongdVO">
+			<id property="uuid" column="uuid"></id>
+			<result property="dzid" column="dzid"/>
+			<result property="xyrs" column="xyrs"/>
+			<result property="zfzzxfys" column="zfzzxfys"/>
+			<result property="mrzqrs" column="mrzqrs"/>
+			<result property="zdzxm" column="zdzxm"/>
+			<result property="zdzlxfs" column="zdzlxfs"/>
+			<result property="zdyxm" column="zdyxm"/>
+			<result property="zdylxfs" column="zdylxfs"/>
+			<result property="fzdyxm" column="fzdyxm"/>
+			<result property="fzdylxfs" column="fzdylxfs"/>
+			<result property="fzdzxm1" column="fzdzxm1"/>
+			<result property="fzdzlxfs1" column="fzdzlxfs1"/>
+			<result property="fzdzxm2" column="fzdzxm2"/>
+			<result property="fzdzlxfs2" column="fzdzlxfs2"/>
+			<result property="fzdzxm3" column="fzdzxm3"/>
+			<result property="fzdzlxfs3" column="fzdzlxfs3"/>
+		</collection>
+	</resultMap>
+	<select id="doFindDzZhongDDetailByVo" parameterType="XfdzVO"  resultMap="DzZhongDMap">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		t2.uuid uuid,
+		t2.xyrs xyrs,
+		t2.zfzzxfys zfzzxfys,
+		t2.mrzqrs mrzqrs,
+		t2.zdzxm zdzxm,
+		t2.zdzlxfs zdzlxfs,
+		t2.zdyxm zdyxm,
+		t2.zdylxfs zdylxfs,
+		t2.fzdyxm fzdyxm,
+		t2.fzdylxfs fzdylxfs,
+		t2.fzdzxm1 fzdzxm1,
+		t2.fzdzlxfs1 fzdzlxfs1,
+		t2.fzdzxm2 fzdzxm2,
+		t2.fzdzlxfs2 fzdzlxfs2,
+		t2.fzdzxm3 fzdzxm3,
+		t2.fzdzlxfs3 fzdzlxfs3
+		FROM YAGL_XFDZ t
+		LEFT JOIN YAGL_XFDZ_ZHONGD t2 ON t.dzid=t2.dzid AND t2.DELETE_FLAG = 'N'
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+	</select>
 </mapper>

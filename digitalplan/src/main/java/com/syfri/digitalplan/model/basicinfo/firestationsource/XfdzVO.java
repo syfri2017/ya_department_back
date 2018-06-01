@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.model.basicinfo.firestationsource;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.syfri.baseapi.model.ValueObject;
 
@@ -46,6 +47,12 @@ public class XfdzVO extends ValueObject implements Serializable{
 	private String gisX_max;	//undefined
 	private String gisY_min;	//undefined
 	private String gisY_max;	//undefined
+
+	private ZongdVO zongdVO;    //总队信息
+	private ZhidVO zhidVO;  //支队信息
+	private DadVO dadVO;  //大队信息
+	private ZhongdVO zhongdVO;  //中队信息
+	private QtxfdwVO qtxfdwVO;  //其他消防队伍信息
 
 	public String getDzid(){
 		return dzid;
@@ -270,5 +277,36 @@ public class XfdzVO extends ValueObject implements Serializable{
 	}
 	public void setGisY_max(String gisY_max) {
 		this.gisY_max = gisY_max;
+	}
+
+	public ZongdVO getZongdVO() {
+		return zongdVO;
+	}
+	public void setZongdVO(ZongdVO zongdVO) {
+		this.zongdVO = zongdVO;
+	}
+	public ZhidVO getZhidVO() {
+		return zhidVO;
+	}
+	public void setZhidVO(ZhidVO zhidVO) {
+		this.zhidVO = zhidVO;
+	}
+	public DadVO getDadVO() {
+		return dadVO;
+	}
+	public void setDadVO(DadVO dadVO) {
+		this.dadVO = dadVO;
+	}
+	public ZhongdVO getZhongdVO() {
+		return zhongdVO;
+	}
+	public void setZhongdVO(ZhongdVO zhongdVO) {
+		this.zhongdVO = zhongdVO;
+	}
+	public QtxfdwVO getQtxfdwVO() {
+		return qtxfdwVO;
+	}
+	public void setQtxfdwVO(QtxfdwVO qtxfdwVO) {
+		this.qtxfdwVO = qtxfdwVO;
 	}
 }
