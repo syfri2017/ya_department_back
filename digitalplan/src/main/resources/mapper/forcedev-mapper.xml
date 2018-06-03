@@ -146,19 +146,19 @@
 	<update  id="doUpdateByVO"  parameterType="ForcedevVO"> 
 		UPDATE   YAGL_YA_LLBS  
 		<set>
-			<if test="uuid != null">uuid=#{uuid},</if>
-			<if test="zqid != null">zqid=#{zqid},</if>
+			<!--<if test="uuid != null">uuid=#{uuid},</if>-->
+			<!--<if test="zqid != null">zqid=#{zqid},</if>-->
 			<if test="djfalx != null">djfalx=#{djfalx},</if>
 			<if test="dzid != null">dzid=#{dzid},</if>
 			<if test="tkwz != null">tkwz=#{tkwz},</if>
 			<if test="clzbts != null">clzbts=#{clzbts},</if>
 			<if test="cjrid != null">cjrid=#{cjrid},</if>
 			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="cjsj != null">cjsj=sysdate,</if>
 			<if test="xgrid != null">xgrid=#{xgrid},</if>
 			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="xgsj != null">xgsj=sysdate,</if>
+			<if test="deleteFlag != null">delete_flag=#{deleteFlag},</if>
 			<if test="datasource != null">datasource=#{datasource},</if>
 			<if test="bz != null">bz=#{bz},</if>
 			<if test="jdh != null">jdh=#{jdh},</if>

@@ -19,33 +19,33 @@ import java.util.List;
 @Service("disastersetService")
 public class DisastersetServiceImpl extends BaseServiceImpl<DisastersetVO> implements DisastersetService {
 
-	@Autowired
-	private DisastersetDAO disastersetDAO;
+    @Autowired
+    private DisastersetDAO disastersetDAO;
 
-	@Autowired
-	private ForcedevDAO forcedevDAO;
+    @Autowired
+    private ForcedevDAO forcedevDAO;
 
-	@Autowired
-	private KeypointsDAO keypointsDAO;
+    @Autowired
+    private KeypointsDAO keypointsDAO;
 
-	@Override
-	public DisastersetDAO getBaseDAO() {
-		return disastersetDAO;
-	}
+    @Override
+    public DisastersetDAO getBaseDAO() {
+        return disastersetDAO;
+    }
 
-	@Override
-	public List<DisastersetVO> doFindByPlanId(String yaid){
-		List<DisastersetVO> resultList= disastersetDAO.doFindByPlanId(yaid);
-		for (DisastersetVO vo : resultList) {
-			List<ForcedevVO> forcedevList = this.forcedevDAO.doFindByPlanId(vo.getZqid());
-			vo.setForcedevList(forcedevList);
-			KeypointsVO keypointsMap = this.keypointsDAO.doFindByPlanId(vo.getZqid());
-			if(keypointsMap==null){
-				vo.setKeypointsMap(new KeypointsVO());
-			}else{
-				vo.setKeypointsMap(keypointsMap);
-			}
-		}
-		return resultList;
-	}
+    @Override
+    public List<DisastersetVO> doFindByPlanId(String yaid) {
+        List<DisastersetVO> resultList = disastersetDAO.doFindByPlanId(yaid);
+        for (DisastersetVO vo : resultList) {
+            List<ForcedevVO> forcedevList = this.forcedevDAO.doFindByPlanId(vo.getZqid());
+            vo.setForcedevList(forcedevList);
+            KeypointsVO keypointsMap = this.keypointsDAO.doFindByPlanId(vo.getZqid());
+            if (keypointsMap == null) {
+                vo.setKeypointsMap(new KeypointsVO());
+            } else {
+                vo.setKeypointsMap(keypointsMap);
+            }
+        }
+        return resultList;
+    }
 }
