@@ -65,6 +65,20 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
         String shztmc = digitalplanlistDAO.doFindShztmcByShzt(shzt);
         digitalplanlistVO.setShztmc(shztmc);
+        switch (shzt){
+            case "01":
+                digitalplanlistVO.setYashztButtonType("danger");
+                break;
+            case "02":
+                digitalplanlistVO.setYashztButtonType("warning");
+                break;
+            case "03":
+                digitalplanlistVO.setYashztButtonType("success");
+                break;
+            default:
+                digitalplanlistVO.setYashztButtonType("text");
+                break;
+        }
         return digitalplanlistVO;
     }
 
