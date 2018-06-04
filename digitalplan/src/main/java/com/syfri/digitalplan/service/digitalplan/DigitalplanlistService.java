@@ -61,4 +61,8 @@ public interface DigitalplanlistService extends BaseService<DigitalplanlistVO> {
      * @Date: 2018/5/23 10:22
      */
     List<DigitalplanlistVO> doFindListByZddwId(String zddwId);
+
+    //审核初始化时加载List
+    //by yushch 20180604
+    List<DigitalplanlistVO> doSearchApproveListByVO(DigitalplanlistVO vo);
 }

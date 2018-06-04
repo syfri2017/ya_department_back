@@ -43,7 +43,8 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String begintime;	//开始时间
 	private String endtime;	//结束时间
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
-	private String isApprove; //预案审核初始化列表标识（不加载编辑中预案）
+	private String yashztButtonType;  //预案审核状态按钮样式（已审核为绿色，未审核为红色，未通过为黄色）
+
 
 	public String getBegintime(){
 		return begintime;
@@ -282,10 +283,11 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	public void setYadxType(String yadxType) {
 		this.yadxType = yadxType;
 	}
-	public String getIsApprove() {
-		return isApprove;
+
+	public String getYashztButtonType() {
+		return yashztButtonType;
 	}
-	public void setIsApprove(String isApprove) {
-		this.isApprove = isApprove;
+	public void setYashztButtonType(String yashztButtonType) {
+		this.yashztButtonType = yashztButtonType;
 	}
 }

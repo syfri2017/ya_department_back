@@ -167,4 +167,17 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		}
 		return resultVO;
 	}
+
+	@ApiOperation(value="查询审核列表",notes="列表信息")
+	@ApiImplicitParam(name="vo",value = "业务实体")
+	@PostMapping("listForApprove")
+	public @ResponseBody ResultVO listForApprove(@RequestBody DigitalplanlistVO vo ) {
+		ResultVO resultVO = ResultVO.build();
+		try {
+			resultVO.setResult(digitalplanlistService.doSearchApproveListByVO(vo));
+		} catch (Exception e) {
+			logger.error("{}",e.getMessage());
+		}
+		return resultVO;
+	}
 }

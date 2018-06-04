@@ -99,10 +99,6 @@
 		<if test="endtime != null and endtime != '' ">
 			and TO_CHAR(t.shsj,'yyyy/MM/dd') &lt;= #{endtime}
 		</if>
-		<!--预案审核列表不加载状态为编辑中的预案 add by yushch-->
-		<if test="isApprove ==1 ">
-			and t.yazt != '01'
-		</if>
 	</sql>
 
 	<!--2.查询内容-->
@@ -344,5 +340,38 @@
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YA_ZDDW t
 		WHERE t.DELETE_FLAG = 'N' AND  t.DXID = #{value}
+	</select>
+
+	<!--审核加载预案List-->
+	<select id="doSearchApproveListByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		CASE t.SHZT
+		WHEN '01' THEN 'danger'
+		WHEN '02' THEN 'warning'
+		WHEN '03' THEN 'success'
+		ELSE 'text' END yashztButtonType,
+		c2.code_name yalxmc,
+		c4.code_name yaztmc,
+		c6.code_name yajbmc,
+		c8.code_name shztmc
+		FROM YAGL_YA_ZDDW t
+		<!--预案类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.YALX = c2.CODE_VALUE
+		<!--预案状态-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'YAZT' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.YAZT = c4.CODE_VALUE
+		<!--预案级别-->
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'YAJB' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t.YAJB = c6.CODE_VALUE
+		<!--审核状态-->
+		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'YASHZT' And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t.SHZT = c8.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<!--预案审核列表不加载状态为编辑中的预案-->
+		and t.yazt != '01'
+		ORDER BY t.SHZT
 	</select>
 </mapper>

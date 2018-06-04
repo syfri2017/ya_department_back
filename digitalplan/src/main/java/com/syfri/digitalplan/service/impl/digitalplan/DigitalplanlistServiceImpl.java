@@ -401,4 +401,12 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         List<DigitalplanlistVO> resultList = this.digitalplanlistDAO.doFindListByZddwId(zddwId);
         return resultList;
     }
+
+    /*审核加载预案List
+   * by yushch
+   * 20180604
+   **/
+    public List<DigitalplanlistVO> doSearchApproveListByVO(DigitalplanlistVO vo){
+        return digitalplanlistDAO.doSearchApproveListByVO(vo);
+    }
 }
