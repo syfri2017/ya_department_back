@@ -35,10 +35,10 @@ public class XfdzServiceImpl extends BaseServiceImpl<XfdzVO> implements XfdzServ
 				vo = xfdzDAO.doFindDzDaDDetailByVo(xfdzVO);
 				break;
 			case "09":
-				vo = xfdzDAO.doFindDzZongDDetailByVo(xfdzVO);
+				vo = xfdzDAO.doFindDzZhongDDetailByVo(xfdzVO);
 				break;
 			case "0A":
-
+				vo = xfdzDAO.doFindDzQtxfdwDetailByVo(xfdzVO);
 				break;
 		}
 
