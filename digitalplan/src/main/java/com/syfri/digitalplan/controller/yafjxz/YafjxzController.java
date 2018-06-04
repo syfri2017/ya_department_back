@@ -287,4 +287,17 @@ public class YafjxzController extends BaseController<YafjxzVO> {
 		}
 		return resultVO;
 	}
+
+	@ApiOperation(value="根据预案id复合更新附件信息",notes="修改")
+	@RequestMapping("/doUpdateByVO")
+	public @ResponseBody ResultVO doUpdateByVO(@RequestBody YafjxzVO yafjxzVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(yafjxzService.doUpdateByVO(yafjxzVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

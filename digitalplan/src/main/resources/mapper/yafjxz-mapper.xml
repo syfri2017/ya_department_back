@@ -146,19 +146,19 @@
 	<update  id="doUpdateByVO"  parameterType="YafjxzVO"> 
 		UPDATE   YAGL_YA_ZDDW_FJ  
 		<set>
-			<if test="uuid != null">uuid=#{uuid},</if>
-			<if test="yaid != null">yaid=#{yaid},</if>
+			<!--<if test="uuid != null">uuid=#{uuid},</if>-->
+			<!--<if test="yaid != null">yaid=#{yaid},</if>-->
 			<if test="xzlj != null">xzlj=#{xzlj},</if>
 			<if test="yllj != null">yllj=#{yllj},</if>
 			<if test="wjm != null">wjm=#{wjm},</if>
 			<if test="kzm != null">kzm=#{kzm},</if>
 			<if test="cjrid != null">cjrid=#{cjrid},</if>
 			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<if test="cjsj != null">cjsj=sysdate,</if>
 			<if test="xgrid != null">xgrid=#{xgrid},</if>
 			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="deleteFlag != null">delete_flag='N',</if>
+			<if test="xgsj != null">xgsj=sysdate,</if>
+			<if test="deleteFlag != null">delete_flag=#{deleteFlag},</if>
 			<if test="datasource != null">datasource=#{datasource},</if>
 			<if test="bz != null">bz=#{bz},</if>
 			<if test="jdh != null">jdh=#{jdh},</if>
@@ -168,7 +168,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  UUID = #{uuid}
+		WHERE  YAID = #{yaid}
 	</update>
 
 	<!--10.批量修改-->
