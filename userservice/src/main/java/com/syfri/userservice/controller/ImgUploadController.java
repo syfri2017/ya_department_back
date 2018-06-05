@@ -337,7 +337,7 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 			ImgUploadVO imgUploadVO = new ImgUploadVO();
 			imgUploadVO.setPicType(picType);
 			List<ImgUploadVO> result = imgUploadService.doSearchListByInputPicType(imgUploadVO);
-			resultVO.setResult(result.size());
+			resultVO.setResult(result);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
