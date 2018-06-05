@@ -405,11 +405,14 @@
 		and t.pkid = #{pkid}
 	</select>
 
-	<!--通过重点单位id查询包含分区id-->
-	<select id="doFindFqidListByZddwid" parameterType="String"  resultType="String">
-		SELECT JZID
- 		FROM YAGL_DX_ZDDW_JZFQ WHERE DELETE_FLAG = 'N'
- 		AND ZDDWID = #{value}
+	<!--通过重点单位id查询包含建筑id，建筑类型-->
+	<select id="doFindJzidJzlxListByZddwid" parameterType="String"  resultType="BuildingVO">
+		SELECT t.JZID,t2.JZLX
+		FROM YAGL_DX_ZDDW_JZFQ t
+		LEFT JOIN YAGL_DWJZXX t2
+		ON t.JZID=t2.JZID
+		AND t2.DELETE_FLAG='N'
+ 		WHERE t.ZDDWID = #{value}
 	</select>
 
 	<!--通过重点单位id查询建筑信息list-->

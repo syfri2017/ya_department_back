@@ -47,9 +47,6 @@ public class ImportantunitsController  extends BaseController<ImportantunitsVO>{
 		return resultVO;
 	}
 
-
-
-
 	/**
 	 * 通过重点单位 查询包含消防队伍详情
 	 */
@@ -76,13 +73,13 @@ public class ImportantunitsController  extends BaseController<ImportantunitsVO>{
 	@PostMapping("/doFindBuildingDetailsByVo")
 	public @ResponseBody ResultVO doFindBuildingDetailsByVo(@RequestBody ImportantunitsVO vo) {
 		ResultVO resultVO = ResultVO.build();
-//		try{
+		try{
 			List<BuildingVO> result= importantunitsService.doFindBuildingDetailsByVo(vo);
 			resultVO.setResult(result);
-//		}catch(Exception e){
-//			logger.error("{}",e.getMessage());
-//			resultVO.setCode(EConstants.CODE.FAILURE);
-//		}
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
 		return resultVO;
 	}
 

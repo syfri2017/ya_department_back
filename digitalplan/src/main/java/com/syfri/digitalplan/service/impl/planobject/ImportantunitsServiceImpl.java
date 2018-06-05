@@ -51,18 +51,12 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 	public List<BuildingVO> doFindBuildingDetailsByVo(ImportantunitsVO vo) {
 		List<BuildingVO> resultList = new ArrayList<>();
 		String zddwid = vo.getUuid();
-		String jzfl = vo.getJzfl();
-		if("".equals(jzfl) || jzfl!=null){
-			List<String> list = this.buildingDAO.doFindFqidListByZddwid(zddwid);
-			for(String jzid : list){
-				BuildingVO buildingVO = new BuildingVO();
-				buildingVO.setJzid(jzid);
-				buildingVO.setJzlx(jzfl);
-
-				System.out.println(jzid+jzfl);
+		//根据重点单位id查询包含建筑id和建筑类型列表
+		List<BuildingVO> list = this.buildingDAO.doFindJzidJzlxListByZddwid(zddwid);
+		for(BuildingVO buildingVO : list){
+			//根据建筑id和建筑类型查询建筑详情
 			BuildingVO resultVO = this.buildingService.doFindFqDetailByVo(buildingVO);
 			resultList.add(resultVO);
-			}
 		}
 		return resultList;
 	}
@@ -71,8 +65,9 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 	public Map<String, List> doFindFireFacilitiesDetailsByVo(ImportantunitsVO vo) {
 		Map<String,List> resultMap = new HashMap<String,List>();
 		String zddwid = vo.getUuid();
-		List<String> list = this.buildingDAO.doFindFqidListByZddwid(zddwid);
-		for(String jzid : list){
+		List<BuildingVO> list = this.buildingDAO.doFindJzidJzlxListByZddwid(zddwid);
+		for(BuildingVO buildingVO : list){
+			String jzid = buildingVO.getJzid();
 			FirefacilitiesVO firefacilitiesVO = new FirefacilitiesVO();
 			firefacilitiesVO.setJbxx_jzid(jzid);
 			Map<String, List> eachMap = new HashMap<String,List>();
@@ -93,15 +88,9 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 	public List<BuildingVO> doFindBuildingDetailsAndFirefacilitiesByVo(ImportantunitsVO vo) {
 		List<BuildingVO> resultList = new ArrayList<>();
 		String zddwid = vo.getUuid();
-		String jzfl = vo.getJzfl();
-		if("".equals(jzfl) || jzfl!=null){
-			List<String> list = this.buildingDAO.doFindFqidListByZddwid(zddwid);
-			for(String jzid : list){
-				BuildingVO buildingVO = new BuildingVO();
-				buildingVO.setJzid(jzid);
-				buildingVO.setJzlx(jzfl);
-
-				System.out.println(jzid+jzfl);
+			List<BuildingVO> list = this.buildingDAO.doFindJzidJzlxListByZddwid(zddwid);
+			for(BuildingVO buildingVO : list){
+				String jzid = buildingVO.getJzid();
 				BuildingVO resultVO = this.buildingService.doFindFqDetailByVo(buildingVO);
 
 				FirefacilitiesVO firefacilitiesVO = new FirefacilitiesVO();
@@ -110,7 +99,6 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 				resultVO.setFirefacilites(firefacilites);
 				resultList.add(resultVO);
 			}
-		}
 		return resultList;
 	}
 
