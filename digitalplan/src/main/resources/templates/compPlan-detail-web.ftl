@@ -31,14 +31,14 @@
                 <div class="update-row">
                     <table>
                         <tr>
-                            <th width="140" style="text-align:right">预案状态：</th>
+                            <th width="160" style="text-align:right">预案状态：</th>
                             <td style="text-align:left"><#if compPlanInfo.yaztmc??>${compPlanInfo.yaztmc}</#if></td>
                             <th width="125" style="text-align:right">制作人姓名：</th>
                             <td style="text-align:left"><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if></td>
                             <th width="125" style="text-align:right">制作人职务：</th>
                             <td style="text-align:left"><#if compPlanInfo.zzrmc??>${compPlanInfo.zzrmc}</#if></td>
                             <th width="120" style="text-align:right">制作时间：</th>
-                            <td style="text-align:left"><#if compPlanInfo.zzsj??>${compPlanInfo.zzsj}</#if></td>
+                            <td style="text-align:left"><#if compPlanInfo.zzsj??>${compPlanInfo.zzsj?substring(0,10)}</#if></td>
                         </tr>
                         <tr>
                             <th width="140" style="text-align:right">审核状态：</th>
@@ -48,7 +48,7 @@
                             <th width="125" style="text-align:right">审核人职务：</th>
                             <td style="text-align:left"><#if compPlanInfo.shrmc??>${compPlanInfo.shrmc}</#if></td>
                             <th width="120" style="text-align:right">审核时间：</th>
-                            <td style="text-align:left"><#if compPlanInfo.shsj??>${compPlanInfo.shsj}</#if></td>
+                            <td style="text-align:left"><#if compPlanInfo.shsj??>${compPlanInfo.shsj?substring(0,10)}</#if></td>
                         </tr>
                     </table>
                 </div>

@@ -20,6 +20,7 @@ import com.syfri.digitalplan.service.digitalplan.DisastersetService;
 import com.syfri.digitalplan.service.digitalplan.ForcedevService;
 import com.syfri.digitalplan.service.digitalplan.KeypointsService;
 import com.syfri.digitalplan.service.importantparts.ImportantpartsService;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,18 +68,19 @@ public class CompZddwShareController {
             @ApiImplicitParam(name = "target", value = "输出目标(PC端:web/移动端:dev)", required = true, dataType = "String",
                     paramType = "path")
     })
-    @GetMapping("/page/{uuid}/{target}")
+    @GetMapping("/page/{uuid}/{type}/{target}")
     public String getPage(Model model,
                           @PathVariable("uuid") String uuid,
+                          @PathVariable("type") String type,
                           @PathVariable("target") String target) {
         String result = null;
 
-        logger.debug(String.format("[IN] uuid: %s target: %s", uuid, target));
+        logger.debug(String.format("[IN] uuid: %s type: %s target: %s", uuid, type, target));
 
 //        Map<String, Object> conditions = new HashMap<String, Object>();
 //        conditions.put("uuid", uuid);
 
-        Map<String,ImportantunitsVO> zddwWrapperMap = new HashMap<String,ImportantunitsVO>();
+        Map<String, ImportantunitsVO> zddwWrapperMap = new HashMap<String, ImportantunitsVO>();
 //        String url = shareConfig.getUrlPrefix() + shareConfig.getZddwPostfix();
 //        JSONObject params = new JSONObject(conditions);
 //        MediaType mediaType = MediaType.APPLICATION_FORM_URLENCODED;
@@ -97,20 +99,19 @@ public class CompZddwShareController {
         model.addAttribute("compPlanInfo", digitalplanlistService.doFindById(uuid));
         // 重点单位基础信息
         model.addAttribute("compZddwInfo", vo);
-        // 灾情设定
+        // 灾情设定、力量部署、要点提示
         model.addAttribute("disastersetList", disastersetService.doFindByPlanId(uuid));
-        // 力量部署
-        model.addAttribute("forcedevList", forcedevService.doFindByPlanId(uuid));
-        // 要点提示
-        model.addAttribute("keypointsInfo", keypointsService.doFindByPlanId(uuid));
-        // 重点部位（建筑类）
-        model.addAttribute("jzlpartsList", importantpartsService.doFindJzlListByZddwId(zddwid));
-        // 重点部位（装置类）
-        model.addAttribute("zzlpartsList", importantpartsService.doFindZzlListByZddwId(zddwid));
-        // 重点部位（储罐类）
-        model.addAttribute("cglpartsList", importantpartsService.doFindCglListByZddwId(zddwid));
-        // 建筑分区和消防设施
-        model.addAttribute("areaBuildingList", importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo));
+        if (type.equals("detail")) {
+            // 重点部位（建筑类）
+            model.addAttribute("jzlpartsList", importantpartsService.doFindJzlListByZddwId(zddwid));
+            // 重点部位（装置类）
+            model.addAttribute("zzlpartsList", importantpartsService.doFindZzlListByZddwId(zddwid));
+            // 重点部位（储罐类）
+            model.addAttribute("cglpartsList", importantpartsService.doFindCglListByZddwId(zddwid));
+            // 建筑分区和消防设施
+            model.addAttribute("areaBuildingList", importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo));
+        }
+
 //        // 功能分区-装置
 //        model.addAttribute("areaDeviceList", zddwWrapperMap.get("areaDeviceList"));
 //        // 消防设施
@@ -137,7 +138,7 @@ public class CompZddwShareController {
 //        model.addAttribute("szpmtMap", zddwWrapperMap.get("szpmtMap"));
 
 //        result = shareConfig.getZddwTemplateNamePrefix() + "-" + target;
-        result = "compPlan" + "-" + target;
+        result = "compPlan" + "-" + type + "-" + target;
 
         logger.debug(String.format("[OUT]"));
 
