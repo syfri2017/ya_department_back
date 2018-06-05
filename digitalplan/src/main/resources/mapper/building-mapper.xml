@@ -158,7 +158,7 @@
 		c2.code_name jzlxmc
 		FROM YAGL_DWJZXX t
 		<!--建筑分区类型关联代码集-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
@@ -171,7 +171,7 @@
 		c2.code_name jzlxmc
 		FROM YAGL_DWJZXX t
 		<!--建筑分区类型关联代码集-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND  t.JZID = #{value}
 	</select>
@@ -262,7 +262,7 @@
 		c2.code_name jzlxmc
 		FROM YAGL_DWJZXX t
 		<!--建筑分区类型关联代码集-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
@@ -282,7 +282,7 @@
 			c8.code_name jzl_jzjgmc
 			FROM YAGL_DWJZXX t
 			LEFT JOIN YAGL_DWJZXX_JZL t_jzl ON t.jzid = t_jzl.jzid AND t_jzl.DELETE_FLAG = 'N'
-			<!--建筑分区类型关联代码集-->Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+			<!--建筑分区类型关联代码集-->Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 			Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 			<!--
 			建筑类型-->Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZLX' And c3.DELETE_FLAG = 'N'
@@ -299,7 +299,7 @@
 			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 		)tt,SYS_CODELIST_PICTURE s
-		WHERE s.pic_type = 'JZFL' and pic_value = #{jzlx}
+		WHERE s.pic_type = 'JZLX' and pic_value = #{jzlx}
 	</select>
 
 	<!--查找建筑分区详情关联建筑分区-装置类-->
@@ -314,7 +314,7 @@
 			c4.code_name zzl_jzjgmc
 			FROM YAGL_DWJZXX t
 			LEFT JOIN YAGL_DWJZXX_ZZL t_zzl ON t.jzid = t_zzl.jzid AND t_zzl.DELETE_FLAG = 'N'
-			<!--建筑分区类型关联代码集-->Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+			<!--建筑分区类型关联代码集-->Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 			Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 			<!--
 			建筑结构-->Left Join SYS_CODELIST c3 on c3.CODETYPE = 'JZJG' And c3.DELETE_FLAG = 'N'
@@ -323,7 +323,7 @@
 			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 		)tt,SYS_CODELIST_PICTURE s
-		WHERE s.pic_type = 'JZFL' and pic_value = #{jzlx}
+		WHERE s.pic_type = 'JZLX' and pic_value = #{jzlx}
 	</select>
 
 	<!--查找建筑分区详情关联建筑分区-储罐类-->
@@ -338,12 +338,12 @@
 			FROM YAGL_DWJZXX t
 			LEFT JOIN YAGL_DWJZXX_CGL t_cgl ON t.jzid = t_cgl.jzid AND t_cgl.DELETE_FLAG = 'N'
 			<!--建筑分区类型关联代码集-->
-			Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+			Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 			Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 		)tt,SYS_CODELIST_PICTURE s
-		WHERE s.pic_type = 'JZFL' and pic_value = #{jzlx}
+		WHERE s.pic_type = 'JZLX' and pic_value = #{jzlx}
 	</select>
 
 	<!--通过建筑ID查询所有危险介质信息-->
@@ -418,7 +418,7 @@
 		c2.code_name jzlxmc
 		FROM YAGL_DX_ZDDW_JZFQ z,YAGL_DWJZXX t
 		<!--建筑分区类型关联代码集-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		and z.jzid = t.jzid
