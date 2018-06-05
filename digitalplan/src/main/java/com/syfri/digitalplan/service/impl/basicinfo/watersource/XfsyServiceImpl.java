@@ -57,13 +57,13 @@ public class XfsyServiceImpl extends BaseServiceImpl<XfsyVO> implements XfsyServ
 			list = xfsyDAO.doFindListByVO(xfsyVO);
 		else {
 			switch (sylx){
-				case "1100":
+				case "01":
 					list = xfsyDAO.doFindXhsListByVO(xfsyVO);
 					break;
-				case "1200":
+				case "02":
 					list = xfsyDAO.doFindXfshListByVO(xfsyVO);
 					break;
-				case "1300":
+				case "03":
 					list = xfsyDAO.doFindXfscListByVO(xfsyVO);
 					break;
 				case "2100":
