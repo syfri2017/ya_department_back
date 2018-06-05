@@ -2,6 +2,7 @@ package com.syfri.digitalplan.model.buildingzoning;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.syfri.baseapi.model.ValueObject;
 
@@ -110,6 +111,7 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private String cgl_reserve4;	//备用字段4
 	private List<ChuguanVO> ChuguanList;	//储罐list
 	private String zddwid;	//重点单位id
+	private Map<String, List> firefacilites;//消防设施
 
 	public String getJzid() {
 		return jzid;
@@ -659,5 +661,12 @@ public class BuildingVO extends ValueObject implements Serializable{
 	}
 	public void setZddwid(String zddwid) {
 		this.zddwid = zddwid;
+	}
+
+	public Map<String, List> getFirefacilites() {
+		return firefacilites;
+	}
+	public void setFirefacilites(Map<String, List> firefacilites) {
+		this.firefacilites = firefacilites;
 	}
 }

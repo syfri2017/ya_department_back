@@ -98,12 +98,6 @@
                         <th>联系方式：</th>
                         <td><#if compZddwInfo.xfglrdh??>${compZddwInfo.xfglrdh}</#if></td>
                     </tr>
-                <#--<tr>-->
-                <#--<th>微型消防站：</th>-->
-                <#--<td>--</td>-->
-                <#--<th>联系方式：</th>-->
-                <#--<td>--</td>-->
-                <#--</tr>-->
                 </table>
                 <table class="data-table">
                     <tr>
@@ -111,29 +105,21 @@
                     </tr>
                     <tr>
                         <th width="64">东：</th>
-                        <td><#if compZddwInfo.blgxd??>${compZddwInfo.blgxd}</#if></td>
+                        <td><#if compZddwInfo.blgxd??>${compZddwInfo.plqkd}</#if></td>
                     </tr>
                     <tr>
                         <th>西：</th>
-                        <td><#if compZddwInfo.blgxx??>${compZddwInfo.blgxx}</#if></td>
+                        <td><#if compZddwInfo.blgxx??>${compZddwInfo.plqkx}</#if></td>
                     </tr>
                     <tr>
                         <th>南：</th>
-                        <td><#if compZddwInfo.blgxn??>${compZddwInfo.blgxn}</#if></td>
+                        <td><#if compZddwInfo.blgxn??>${compZddwInfo.plqkn}</#if></td>
                     </tr>
                     <tr>
                         <th>北：</th>
-                        <td><#if compZddwInfo.blgxb??>${compZddwInfo.blgxb}</#if></td>
+                        <td><#if compZddwInfo.blgxb??>${compZddwInfo.plqkb}</#if></td>
                     </tr>
                 </table>
-            <#--<table class="data-table">-->
-            <#--<tr>-->
-            <#--<th class="block-th">周边危险源</th>-->
-            <#--</tr>-->
-            <#--<tr>-->
-            <#--<td>--</td>-->
-            <#--</tr>-->
-            <#--</table>-->
                 <table class="data-table">
                     <tr>
                         <th class="block-th">单位概况</th>
@@ -164,2013 +150,936 @@
         <!-- end 单位基本情况 -->
 
         <!-- 单位建筑信息 -->
-    <#--<div id="gnfq" class="content-block block-level-1" data-menu-text="建筑和消防设施">-->
-    <#--<h2 class="block-header">-->
-    <#--<span class="header-title-inner">单位建筑信息和消防设施</span>-->
-    <#--</h2>-->
-    <#--<!-- 单体建筑 and 建筑群（建筑类） &ndash;&gt;-->
-    <#--<#list areaBuildingList as areaBuilding>-->
-    <#--<#if areaBuilding.compZddwPartDTO??>-->
-    <#--<div id="gnfq-${areaBuilding.compZddwPartDTO.uuid}" class="sub-block block-level-2" data-menu-text="-->
-    <#--<#if areaBuilding.compZddwPartDTO.name??>-->
-    <#--建筑类-${areaBuilding.compZddwPartDTO.name}-->
-    <#--</#if>">-->
-    <#--<h3 class="sub-block-header">-->
-    <#--<span class="header-title-inner">单体建筑 --->
-    <#--<#if areaBuilding.compZddwPartDTO.name??>-->
-    <#--${areaBuilding.compZddwPartDTO.name}-->
-    <#--</#if></span>-->
-    <#--<!-- <span class="header-title-inner">建筑群（建筑类） - {{建筑名称}}</span> &ndash;&gt;-->
-    <#--<!-- 这两个下面显示的字段一样 &ndash;&gt;-->
-    <#--</h3>-->
-    <#--<div class="sub-block-body">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">建筑使用性质：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.syxz??>-->
-    <#--<#list syxzMap?keys as k>-->
-    <#--<#if k == areaBuilding.compZddwPartDTO.syxz>-->
-    <#--<#if (syxzMap[k].oKey?? && syxzMap[k].tKey?? && syxzMap[k].sKey??)>-->
-    <#--${syxzMap[k].oKey} / ${syxzMap[k].tKey} / ${syxzMap[k].sKey}-->
-    <#--<#else>-->
-    <#--<#if (syxzMap[k].oKey?? && syxzMap[k].tKey??)>-->
-    <#--${syxzMap[k].oKey} / ${syxzMap[k].tKey}-->
-    <#--<#else>-->
-    <#--<#if syxzMap[k].oKey??>-->
-    <#--${syxzMap[k].oKey}-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</#if></td>-->
-    <#--<th width="120">建筑结构：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.jzjg??>-->
-    <#--<#list dictionaryMap?keys as k>-->
-    <#--<#if k == areaBuilding.compZddwPartDTO.jzjg>-->
-    <#--${dictionaryMap[k]}-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>占地面积：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.zdmj??>-->
-    <#--${areaBuilding.compZddwPartDTO.zdmj}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--㎡-->
-    <#--</td>-->
-    <#--<th>建筑面积：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.zjzmj??>-->
-    <#--${areaBuilding.compZddwPartDTO.zjzmj}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--㎡-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>地上高度：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.heightDs??>-->
-    <#--${areaBuilding.compZddwPartDTO.heightDs}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--米-->
-    <#--</td>-->
-    <#--<th>地下高度：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.heightDx??>-->
-    <#--${areaBuilding.compZddwPartDTO.heightDx}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--米-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>地上层数：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.floorDs??>-->
-    <#--${areaBuilding.compZddwPartDTO.floorDs}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--层-->
-    <#--</td>-->
-    <#--<th>地下层数：</th>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.floorDx??>-->
-    <#--${areaBuilding.compZddwPartDTO.floorDx}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--层-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">功能分区(或楼层)说明</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.subCompZddwPartDTOWrappers??>-->
-    <#--<#list areaBuilding.subCompZddwPartDTOWrappers as subPart>-->
-    <#--<strong class="tag-item">-->
-    <#--<#if subPart.compZddwPartDTO??>-->
-    <#--<#if subPart.compZddwPartDTO.partType == "ZDDW_BUILDING_FLOOR">-->
-    <#--${subPart.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</strong>-->
-    <#--</#list>-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">备注</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if areaBuilding.compZddwPartDTO.remark??>-->
-    <#--${areaBuilding.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">安全疏散设施</th>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaBuilding.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_SECURITY_EXIT">-->
-    <#--<tr>-->
-    <#--<th width="120">安全出口：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_EVACUATION_STAIR">-->
-    <#--<tr>-->
-    <#--<th width="120">疏散楼梯：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_ELEVATOR">-->
-    <#--<tr>-->
-    <#--<th width="120">消防电梯：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_YJGB_SYSTEM">-->
-    <#--<tr>-->
-    <#--<th width="120">应急广播：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.isHaving>-->
-    <#--有-->
-    <#--<#else>-->
-    <#--无-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">消防控制室</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">防排烟设施</th>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaBuilding.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_FPY_SYSTEM">-->
-    <#--<tr>-->
-    <#--<th width="120">防排烟系统：</th>-->
-    <#--<td><#if facility.compZddwPartDTO.isHaving>-->
-    <#--有-->
-    <#--<#else>-->
-    <#--无-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" class="block-th">其他消防设施</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">描述：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">消防水系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaBuilding.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_FIRE_XFBF">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="6" style="text-align:left">-->
-    <#--<strong>消防泵房</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">消火栓泵流量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.xhsbLl??>-->
-    <#--${facility.compZddwPartDTO.xhsbLl}-->
-    <#--</#if>-->
-    <#--L/s-->
-    <#--</td>-->
-    <#--<th width="120">喷淋泵流量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.plbLl??>-->
-    <#--${facility.compZddwPartDTO.plbLl}-->
-    <#--</#if>-->
-    <#--L/s-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">消火栓泵数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.xhsbSl??>-->
-    <#--${facility.compZddwPartDTO.xhsbSl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">喷淋泵数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.plbSl??>-->
-    <#--${facility.compZddwPartDTO.plbSl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_SX">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消防水箱</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">容量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.capacityTotal??>-->
-    <#--${facility.compZddwPartDTO.capacityTotal}-->
-    <#--</#if>-->
-    <#--m³-->
-    <#--</td>-->
-    <#--<th width="120">补给方式：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.supplyMode??>-->
-    <#--${facility.compZddwPartDTO.supplyMode}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_SC">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消防水池</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">容量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.capacityTotal??>-->
-    <#--${facility.compZddwPartDTO.capacityTotal}-->
-    <#--</#if>-->
-    <#--m³-->
-    <#--</td>-->
-    <#--<th width="120">补给方式：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.supplyMode??>-->
-    <#--${facility.compZddwPartDTO.supplyMode}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_INDOOR_XHS">-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--<#if facility.compZddwPartDTO.name?contains("栓")>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消火栓</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.snxhsStatus??>-->
-    <#--${facility.compZddwPartDTO.snxhsStatus}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">名称：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--${facility.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_INDOOR_XHS">-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--<#if facility.compZddwPartDTO.name?contains("消防水炮")>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>固定消防水炮</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.snxhsStatus??>-->
-    <#--${facility.compZddwPartDTO.snxhsStatus}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">名称：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--${facility.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_INDOOR_XHS">-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--<#if facility.compZddwPartDTO.name?contains("半固定")>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>半固定设施</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.snxhsStatus??>-->
-    <#--${facility.compZddwPartDTO.snxhsStatus}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">名称：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--${facility.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_PUMP_ADAPTER">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>水泵接合器</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">分区描述：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.fqms??>-->
-    <#--${facility.compZddwPartDTO.fqms}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_ZDPS_SYSTEM">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th style="text-align:left"><strong>喷淋系统</strong></th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.isHaving>-->
-    <#--有-->
-    <#--<#else>-->
-    <#--无-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">其他灭火系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaBuilding.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_QT_SYSTEM">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>气体灭火系统</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.qywz??>-->
-    <#--${facility.compZddwPartDTO.qywz}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">气源位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.qywz??>-->
-    <#--${facility.compZddwPartDTO.qywz}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">气体供给强度：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.gjqd??>-->
-    <#--${facility.compZddwPartDTO.gjqd}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">气体额定供给压力：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.gjyl??>-->
-    <#--${facility.compZddwPartDTO.gjyl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">灭火气体种类：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.mhqtzl??>-->
-    <#--${facility.compZddwPartDTO.mhqtzl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>干粉灭火系统</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<!-- end 单体建筑 and 建筑群（建筑类） &ndash;&gt;-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--<!-- 建筑群（装置类） &ndash;&gt;-->
-    <#--<#list areaDeviceList as areaDevice>-->
-    <#--<#if areaDevice.compZddwPartDTO??>-->
-    <#--<div id="gnfq-${areaDevice.compZddwPartDTO.uuid}" class="sub-block block-level-2"-->
-    <#--data-menu-text="装置类-${areaDevice.compZddwPartDTO.name}">-->
-    <#--<h3 class="sub-block-header">-->
-    <#--<span class="header-title-inner">建筑群（装置类） --->
-    <#--<#if areaDevice.compZddwPartDTO.name??>-->
-    <#--${areaDevice.compZddwPartDTO.name}-->
-    <#--</#if></span>-->
-    <#--</h3>-->
-    <#--<div class="sub-block-body">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">装置名称：</th>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.name??>-->
-    <#--${areaDevice.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">建筑结构：</th>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.jzjg??>-->
-    <#--<#list dictionaryMap?keys as k>-->
-    <#--<#if k == areaDevice.compZddwPartDTO.jzjg>-->
-    <#--${dictionaryMap[k]}-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>占地面积：</th>-->
-    <#--<td>-- ㎡</td>-->
-    <#--<th>地上高度：</th>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.heightDs??>-->
-    <#--${areaDevice.compZddwPartDTO.heightDs}-->
-    <#--<#else>-->
-    <#--0-->
-    <#--</#if>-->
-    <#--米-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>技术负责人：</th>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.jsfzr??>-->
-    <#--${areaDevice.compZddwPartDTO.jsfzr}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th>联系方式：</th>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.jsfzrContact??>-->
-    <#--${areaDevice.compZddwPartDTO.jsfzrContact}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">装置组成（组成单元）</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.zzzc??>-->
-    <#--${areaDevice.compZddwPartDTO.zzzc}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">物料信息</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left"><strong>物料名称</strong> 储量：---->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">理化性质：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">工艺流程描述</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td><#if areaDevice.compZddwPartDTO.gylcms??>-->
-    <#--${areaDevice.compZddwPartDTO.gylcms}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">关键阀组说明</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.gjfmwz??>-->
-    <#--${areaDevice.compZddwPartDTO.gjfmwz}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">备注</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if areaDevice.compZddwPartDTO.remark??>-->
-    <#--${areaDevice.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">安全疏散设施</th>-->
-    <#--</tr>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaDevice.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_SECURITY_EXIT">-->
-    <#--<tr>-->
-    <#--<th width="120">安全出口：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_EVACUATION_STAIR">-->
-    <#--<tr>-->
-    <#--<th width="120">疏散楼梯：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_ELEVATOR">-->
-    <#--<tr>-->
-    <#--<th width="120">消防电梯：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_YJGB_SYSTEM">-->
-    <#--<tr>-->
-    <#--<th width="120">应急广播：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.isHaving>-->
-    <#--有-->
-    <#--<#else>-->
-    <#--无-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">消防控制室</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">泡沫灭火系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="6" style="text-align:left">-->
-    <#--<strong>泡沫泵房</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">位置：</th>-->
-    <#--<td colspan="5">--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">泵流量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">泡沫液类型：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">泡沫液储量：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>泡沫栓</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>固定泡沫炮</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>半固定设施</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>泡沫发生器</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">型号：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" class="block-th">其他消防设施</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">描述：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">消防水系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaDevice.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_FIRE_XFBF">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="6" style="text-align:left">-->
-    <#--<strong>消防泵房</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">消火栓泵流量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.xhsbLl??>-->
-    <#--${facility.compZddwPartDTO.xhsbLl}-->
-    <#--</#if>-->
-    <#--L/s-->
-    <#--</td>-->
-    <#--<th width="120">喷淋泵流量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.plbLl??>-->
-    <#--${facility.compZddwPartDTO.plbLl}-->
-    <#--</#if>-->
-    <#--L/s-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">消火栓泵数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.xhsbSl??>-->
-    <#--${facility.compZddwPartDTO.xhsbSl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">喷淋泵数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.plbSl??>-->
-    <#--${facility.compZddwPartDTO.plbSl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_SC">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消防水池</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">容量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.capacityTotal??>-->
-    <#--${facility.compZddwPartDTO.capacityTotal}-->
-    <#--</#if>-->
-    <#--m³-->
-    <#--</td>-->
-    <#--<th width="120">补给方式：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.supplyMode??>-->
-    <#--${facility.compZddwPartDTO.supplyMode}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_INDOOR_XHS">-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--<#if facility.compZddwPartDTO.name?contains("栓")>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消火栓</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.snxhsStatus??>-->
-    <#--${facility.compZddwPartDTO.snxhsStatus}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">名称：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--${facility.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_INDOOR_XHS">-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--<#if facility.compZddwPartDTO.name?contains("消防水炮")>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>固定消防水炮</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.snxhsStatus??>-->
-    <#--${facility.compZddwPartDTO.snxhsStatus}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">名称：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--${facility.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_FIRE_INDOOR_XHS">-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--<#if facility.compZddwPartDTO.name?contains("半固定")>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>半固定设施</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.count??>-->
-    <#--${facility.compZddwPartDTO.count}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.snxhsStatus??>-->
-    <#--${facility.compZddwPartDTO.snxhsStatus}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">名称：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.name??>-->
-    <#--${facility.compZddwPartDTO.name}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.location??>-->
-    <#--${facility.compZddwPartDTO.location}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--<#elseif facility.compZddwPartDTO.partType == "ZDDW_ZDPS_SYSTEM">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th style="text-align:left"><strong>喷淋系统</strong></th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.isHaving>-->
-    <#--有-->
-    <#--<#else>-->
-    <#--无-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">其他灭火系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<#list facilityList as facility>-->
-    <#--<#if facility.compZddwPartDTO??>-->
-    <#--<#if facility.compZddwPartDTO.belongToPartUuid == areaDevice.compZddwPartDTO.uuid>-->
-    <#--<#if facility.compZddwPartDTO.partType == "ZDDW_QT_SYSTEM">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>气体灭火系统</strong>-->
-    <#--<span class="more-btn"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').show()">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.qywz??>-->
-    <#--${facility.compZddwPartDTO.qywz}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<div id="${facility.compZddwPartDTO.uuid}" class="dialog">-->
-    <#--<div class="dialog-content">-->
-    <#--<header class="dialog-header">-->
-    <#--<h4 class="dialog-title"></h4>-->
-    <#--<span class="close"-->
-    <#--onclick="$('#${facility.compZddwPartDTO.uuid}').hide()">×</span>-->
-    <#--</header>-->
-    <#--<div class="dialog-body">-->
-    <#--<div class="dialog-content-inner">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">气源位置：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.qywz??>-->
-    <#--${facility.compZddwPartDTO.qywz}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">气体供给强度：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.gjqd??>-->
-    <#--${facility.compZddwPartDTO.gjqd}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">气体额定供给压力：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.gjyl??>-->
-    <#--${facility.compZddwPartDTO.gjyl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">灭火气体种类：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.mhqtzl??>-->
-    <#--${facility.compZddwPartDTO.mhqtzl}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">备注：</th>-->
-    <#--<td>-->
-    <#--<#if facility.compZddwPartDTO.remark??>-->
-    <#--${facility.compZddwPartDTO.remark}-->
-    <#--</#if>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>干粉灭火系统</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>蒸汽灭火系统</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<!-- end 建筑群（装置类） &ndash;&gt;-->
-    <#--</#if>-->
-    <#--</#list>-->
-    <#--<!-- 建筑群（储罐类） &ndash;&gt;-->
-    <#--<div id="gnfq_3" class="sub-block block-level-2" data-menu-text="储罐类-储罐名称">-->
-    <#--<h3 class="sub-block-header">-->
-    <#--<span class="header-title-inner">建筑群（储罐类） - 储罐名称</span>-->
-    <#--</h3>-->
-    <#--<div class="sub-block-body">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th width="120">储罐区名称：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">储罐编号：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>技术负责人：</th>-->
-    <#--<td>--</td>-->
-    <#--<th>联系方式：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="6" class="block-th">罐体信息</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">储罐类型：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">存储温度：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">工作压力：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>容量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th>罐顶面积：</th>-->
-    <#--<td>-- ㎡</td>-->
-    <#--<th>储罐间距：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>直径：</th>-->
-    <#--<td>--</td>-->
-    <#--<th>高度：</th>-->
-    <#--<td>--</td>-->
-    <#--<th>周长：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">存储介质</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left"><strong>名称</strong></th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">实际储量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">液位高度：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th>理化性质：</th>-->
-    <#--<td colspan="3">--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">关键阀组说明</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">备注</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<!-- 以下设施部分，和建筑群（装置类）相同 &ndash;&gt;-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">安全疏散设施</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">安全出口：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">消防控制室</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">泡沫灭火系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="6" style="text-align:left">-->
-    <#--<strong>泡沫泵房</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">位置：</th>-->
-    <#--<td colspan="5">--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">泵流量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">泡沫液类型：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">泡沫液储量：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>泡沫栓</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>固定泡沫炮</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>半固定设施</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>泡沫发生器</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">型号：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" class="block-th">其他消防设施</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">描述：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" class="block-th">消防水系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="6" style="text-align:left">-->
-    <#--<strong>消防泵房</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">消火栓泵流量：</th>-->
-    <#--<td>-- L/s</td>-->
-    <#--<th width="120">喷淋泵流量：</th>-->
-    <#--<td>-- L/s</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消防水池</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">容量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">补给方式：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>消火栓</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>固定消防水炮</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="4" style="text-align:left">-->
-    <#--<strong>半固定设施</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="80">数量：</th>-->
-    <#--<td>--</td>-->
-    <#--<th width="120">是否可用：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th style="text-align:left"><strong>喷淋系统</strong></th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">其他灭火系统</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>气体灭火系统</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>干粉灭火系统</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th colspan="2" style="text-align:left">-->
-    <#--<strong>蒸汽灭火系统</strong>-->
-    <#--<span class="more-btn">查看详情</span>-->
-    <#--</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">位置：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th width="120">作用范围：</th>-->
-    <#--<td>--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</div>-->
-    <#--<!-- end建筑群（储罐类） &ndash;&gt;-->
-    <#--</div>-->
+        <div id="gnfq" class="content-block block-level-1" data-menu-text="建筑和消防设施">
+            <h2 class="block-header">
+                <span class="header-title-inner">单位建筑信息和消防设施</span>
+            </h2>
+        <#list areaBuildingList as areaBuilding>
+            <#if areaBuilding??>
+                <div id="gnfq-<#if areaBuilding.jzid??>${areaBuilding.jzid}</#if>" class="sub-block block-level-2"
+                     data-menu-text="<#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if>-<#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>">
+                    <h3 class="sub-block-header">
+                    <span class="header-title-inner">
+                        ${areaBuilding_index+1} - <#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if> - <#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
+                    </span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <!--基础信息(单体建筑 and 建筑群)-->
+                        <#if areaBuilding.jzlx=='10'||areaBuilding.jzlx=='20'>
+                            <table class="data-table">
+                                <tr>
+                                    <th width="120">建筑使用性质：</th>
+                                    <td><#if areaBuilding.jzl_jzsyxzmc??>${areaBuilding.jzl_jzsyxzmc}</#if></td>
+                                    <th width="120">建筑结构：</th>
+                                    <td><#if areaBuilding.jzl_jzjgmc??>${areaBuilding.jzl_jzjgmc}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>占地面积：</th>
+                                    <td><#if areaBuilding.jzl_zdmj??>${areaBuilding.jzl_zdmj}㎡</#if>
+                                    </td>
+                                    <th>建筑面积：</th>
+                                    <td><#if areaBuilding.jzl_jzmj??>${areaBuilding.jzl_jzmj}㎡</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>地上高度：</th>
+                                    <td><#if areaBuilding.jzl_dsgd??>${areaBuilding.jzl_dsgd}m</#if></td>
+                                    <th>地下高度：</th>
+                                    <td><#if areaBuilding.jzl_dxgd??>${areaBuilding.jzl_dxgd}m</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>地上层数：</th>
+                                    <td><#if areaBuilding.jzl_dscs??>${areaBuilding.jzl_dscs}层</#if></td>
+                                    <th>地下层数：</th>
+                                    <td><#if areaBuilding.jzl_dxcs??>${areaBuilding.jzl_dxcs}层</#if></td>
+                                </tr>
+                                <tr>
+                                    <th width="120">功能描述：</th>
+                                    <td colspan="3"><#if areaBuilding.jzl_gnms??>${areaBuilding.jzl_gnms}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th width="120">备注：</th>
+                                    <td colspan="3"><#if areaBuilding.bz??>${areaBuilding.bz}</#if></td>
+                                </tr>
+                            </table>
+                        </#if>
+                        <!--基础信息(建筑群(装置类))-->
+                        <#if areaBuilding.jzlx=='30'>
+                            <table class="data-table">
+                                <tr>
+                                    <th width="120">装置名称：</th>
+                                    <td><#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if></td>
+                                    <th width="120">建筑结构：</th>
+                                    <td><#if areaBuilding.zzl_jzjg??>${areaBuilding.zzl_jzjg}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>占地面积：</th>
+                                    <td><#if areaBuilding.zzl_zdmj??>${areaBuilding.zzl_zdmj}㎡</#if></td>
+                                    <th>装置高度：</th>
+                                    <td><#if areaBuilding.zzl_zzgd??>${areaBuilding.zzl_zzgd}m</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>技术负责人：</th>
+                                    <td><#if areaBuilding.zzl_jsfzr??>${areaBuilding.zzl_jsfzr}</#if></td>
+                                    <th>联系方式：</th>
+                                    <td><#if areaBuilding.zzl_jsfzrdh??>${areaBuilding.zzl_jsfzrdh}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th width="120">备注：</th>
+                                    <td colspan="3"><#if areaBuilding.bz??>${areaBuilding.bz}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" class="block-th">装置组成</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><#if areaBuilding.zzl_zzzc??>${areaBuilding.zzl_zzzc}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" class="block-th">装置原料</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><#if areaBuilding.zzl_ylxx??>${areaBuilding.zzl_ylxx}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" class="block-th">装置产物</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><#if areaBuilding.zzl_cwxx??>${areaBuilding.zzl_cwxx}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" class="block-th">工艺流程描述</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><#if areaBuilding.zzl_gylc??>${areaBuilding.zzl_gylc}</#if></td>
+                                </tr>
+                            </table>
+                        </#if>
+                        <!--基础信息(建筑群(储罐类))-->
+                        <#if areaBuilding.jzlx=='40'>
+                            <table class="data-table">
+                                <tr>
+                                    <th width="120">总容积：</th>
+                                    <td width="300"><#if areaBuilding.cgl_zrj??>${areaBuilding.cgl_zrj}m³</#if></td>
+                                    <th width="120">储罐数量：</th>
+                                    <td><#if areaBuilding.cgl_cgsl??>${areaBuilding.cgl_cgsl}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th width="120">技术负责人：</th>
+                                    <td><#if areaBuilding.cgl_jsfzr??>${areaBuilding.cgl_jsfzr}</#if></td>
+                                    <th width="120">联系方式：</th>
+                                    <td><#if areaBuilding.cgl_jsfzrdh??>${areaBuilding.cgl_jsfzrdh}</#if></td>
+                                </tr>
+                                <tr>
+                                    <th>备注：</th>
+                                    <td colspan="3"><#if areaBuilding.bz??>${areaBuilding.bz}</#if></td>
+                                </tr>
+                            </table>
+                            <#if areaBuilding.ChuguanList??>
+                                <table class="data-table">
+                                    <tr>
+                                        <th colspan="6" class="block-th">罐体信息</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <#list areaBuilding.ChuguanList as pot>
+                                                <table class="data-table">
+                                                    <tr>
+                                                        <th colspan="6" style="text-align:left">
+                                                            <strong><#if pot.cgmc??>${pot.cgmc}</#if></strong></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">储罐名称：</th>
+                                                        <td width="165"><#if pot.cgmc??>${pot.cgmc}</#if></td>
+                                                        <th width="120">储罐类型：</th>
+                                                        <td width="165"><#if pot.cglxmc??>${pot.cglxmc}</#if></td>
+                                                        <th width="120">存储温度：</th>
+                                                        <td><#if pot.ccwd??>${pot.ccwd}</#if></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">工作压力：</th>
+                                                        <td><#if pot.gzyl??>${pot.gzyl}</#if></td>
+                                                        <th>容量：</th>
+                                                        <td><#if pot.cgrl??>${pot.cgrl}</#if></td>
+                                                        <th>罐顶面积：</th>
+                                                        <td><#if pot.gdmj??>${pot.gdmj}</#if> ㎡</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">直径：</th>
+                                                        <td><#if pot.cgzj??>${pot.cgzj}</#if></td>
+                                                        <th>高度：</th>
+                                                        <td><#if pot.cggd??>${pot.cggd}</#if></td>
+                                                        <th>周长：</th>
+                                                        <td><#if pot.cgzc??>${pot.cgzc}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="6" style="text-align:left">
+                                                            <strong>存储介质-<#if pot.ccjzmc??>${pot.ccjzmc}</#if></strong>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">实际储量：</th>
+                                                        <td colspan="2"><#if pot.ccjzsjcl??>${pot.ccjzsjcl}</#if></td>
+                                                        <th width="120">液位高度：</th>
+                                                        <td colspan="2"><#if pot.ccjzywgd??>${pot.ccjzywgd}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>理化性质：</th>
+                                                        <td colspan="5"><#if pot.ccjzlhxz??>${pot.ccjzlhxz}</#if></td>
+                                                    </tr>
+                                                </table>
+                                            </#list>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </#if>
+                        </#if>
+                        <!--安全疏散设施-->
+                        <table class="data-table">
+                            <tr>
+                                <th colspan="4" class="block-th">安全疏散设施</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['1001']?? || areaBuilding.firefacilites['1002']?? || areaBuilding.firefacilites['1003']?? ||
+                            areaBuilding.firefacilites['1004']?? || areaBuilding.firefacilites['1005']??>
+                                <#if areaBuilding.firefacilites['1001']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>安全出口</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['1001'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['1002']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>疏散楼梯</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['1002'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['1003']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>消防电梯</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['1003'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['1004']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="2" style="text-align:left">
+                                                        <strong>避难层</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['1004'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['1005']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>应急广播</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['1005'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">有无应急广播：</th>
+                                                        <td width="150"><#if xfss.ywyjgb??>${xfss.ywyjgb}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--消防水系统-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">消防水系统</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['2001']?? || areaBuilding.firefacilites['2002']?? || areaBuilding.firefacilites['2003']?? ||
+                            areaBuilding.firefacilites['2004']?? || areaBuilding.firefacilites['2005']?? || areaBuilding.firefacilites['2006']?? ||
+                            areaBuilding.firefacilites['2007']?? || areaBuilding.firefacilites['2008']?? || areaBuilding.firefacilites['2009']?? ||
+                            areaBuilding.firefacilites['2010']??>
+                                <#if areaBuilding.firefacilites['2001']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>消防泵房</strong>
+                                                    </th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2001'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td colspan="3"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">消火栓泵数量：</th>
+                                                        <td><#if xfss.xhssl??>${xfss.xhssl}</#if></td>
+                                                        <th width="130">消火栓最大流量：</th>
+                                                        <td><#if xfss.xhszdll??>${xfss.xhszdll} L/s</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">喷淋泵数量：</th>
+                                                        <td><#if xfss.blbsl??>${xfss.blbsl}</#if></td>
+                                                        <th width="130">喷淋泵最大流量：</th>
+                                                        <td><#if xfss.plbzdll??>${xfss.plbzdll} L/s</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2002']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>消防水箱</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2002'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td colspan="3"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">水箱容量：</th>
+                                                        <td><#if xfss.sxrl??>${xfss.sxrl} m³</#if></td>
+                                                        <th width="120">补给速度：</th>
+                                                        <td><#if xfss.bjsd??>${xfss.bjsd} L/s</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2003']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>消防水池</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2003'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td colspan="3"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">水箱容量：</th>
+                                                        <td><#if xfss.sxrl??>${xfss.sxrl} m³</#if></td>
+                                                        <th width="165">是否有取水口（井）：</th>
+                                                        <td><#if xfss.ywqsj??>${xfss.ywqsj}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">补给速度：</th>
+                                                        <td><#if xfss.bjsd??>${xfss.bjsd} L/s</#if></td>
+                                                        <th width="165">取水口（井）位置：</th>
+                                                        <td><#if xfss.qsjwz??>${xfss.qsjwz}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2004']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>室内消火栓</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2004'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="100">是否可用：</th>
+                                                        <td width="120"><#if xfss.sfky??>${xfss.sfky}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2005']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>室外消火栓</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2005'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="100">是否可用：</th>
+                                                        <td width="120"><#if xfss.sfky??>${xfss.sfky}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2006']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>水泵接合器</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2006'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">型号：</th>
+                                                        <td><#if xfss.xh??>${xfss.xh}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">安装形式：</th>
+                                                        <td><#if xfss.azxsmc??>${xfss.azxsmc}</#if></td>
+                                                        <th width="120">进水口尺寸：</th>
+                                                        <td><#if xfss.jskcc??>${xfss.jskcc}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2007']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>喷淋系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2007'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">有无喷淋系统：</th>
+                                                        <td><#if xfss.ywplxt??>${xfss.ywplxt}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2008']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>冷却水系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2008'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td colspan="3"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">供水强度：</th>
+                                                        <td><#if xfss.gsqd??>${xfss.gsqd} L/min.m2</#if></td>
+                                                        <th width="130">有无冷却水系统：</th>
+                                                        <td><#if xfss.ywlqsxt??>${xfss.ywlqsxt}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2009']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>固定水炮</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2009'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="100">是否可用：</th>
+                                                        <td width="120"><#if xfss.isky??>${xfss.isky}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['2010']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>半固定设施</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['2010'] as xfss>
+                                                    <tr>
+                                                        <th width="80">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--泡沫系统-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">泡沫系统</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['3001']?? || areaBuilding.firefacilites['3002']?? || areaBuilding.firefacilites['3003']?? ||
+                            areaBuilding.firefacilites['3004']?? || areaBuilding.firefacilites['3005']??>
+                                <#if areaBuilding.firefacilites['3001']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>泡沫泵房</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['3001'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="140">泡沫液类型：</th>
+                                                        <td><#if xfss.pmylxmc??>${xfss.pmylxmc}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">泡沫液储量：</th>
+                                                        <td><#if xfss.pmycl??>${xfss.pmycl} t</#if></td>
+                                                        <th width="140">泡沫泵最大流量：</th>
+                                                        <td><#if xfss.pmbzdll??>${xfss.pmbzdll} L/s</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['3002']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>泡沫消火栓</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['3002'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">是否可用：</th>
+                                                        <td><#if xfss.isky??>${xfss.isky}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['3003']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>固定泡沫炮</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['3003'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">数量：</th>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="120">是否可用：</th>
+                                                        <td><#if xfss.sfky??>${xfss.sfky}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['3004']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>泡沫发生器</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['3004'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">型号：</th>
+                                                        <td><#if xfss.xh??>${xfss.xh}</#if></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="120">数量：</th>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="120">流量：</th>
+                                                        <td><#if xfss.ll??>${xfss.ll} L/s</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['3005']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>半固定设施</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['3005'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">数量：</th>
+                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--蒸汽灭火系统-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">蒸汽灭火系统</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['4001']?? || areaBuilding.firefacilites['4002']??>
+                                <#if areaBuilding.firefacilites['4001']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>固定式蒸汽系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['4001'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">数量：</th>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="120">额定压力：</th>
+                                                        <td><#if xfss.edyl??>${xfss.edyl} Mpa</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['4002']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>半固定式蒸汽系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['4002'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="120">数量：</th>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="120">额定压力：</th>
+                                                        <td><#if xfss.edyl??>${xfss.edyl} Mpa</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--消防控制室-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">消防控制室</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['5000']??>
+                                <tr>
+                                    <td>
+                                        <table class="data-table">
+                                            <#list areaBuilding.firefacilites['5000'] as xfss>
+                                                <tr>
+                                                    <th width="140">位置：</th>
+                                                    <td colspan="3"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="140">自动报警是否可用：</th>
+                                                    <td><#if xfss.iszdbj??>${xfss.iszdbj}</#if></td>
+                                                    <th width="140">联动控制是否可用：</th>
+                                                    <td><#if xfss.isldkz??>${xfss.isldkz}</#if></td>
+                                                </tr>
+                                            </#list>
+                                        </table>
+                                    </td>
+                                </tr>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--防排烟措施-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">防排烟措施</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['6001']?? || areaBuilding.firefacilites['6002']??>
+                                <#if areaBuilding.firefacilites['6001']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="2" style="text-align:left">
+                                                        <strong>排烟口/出烟口</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['6001'] as xfss>
+                                                    <tr>
+                                                        <th width="120">位置：</th>
+                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['6002']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>防排烟系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['6002'] as xfss>
+                                                    <tr>
+                                                        <th width="120">系统启闭位置：</th>
+                                                        <td><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
+                                                        <th width="120">是否可用：</th>
+                                                        <td><#if xfss.isky??>${xfss.isky}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--防火分区-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">防火分区</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['7000']??>
+                                <tr>
+                                    <td>
+                                        <table class="data-table">
+                                            <#list areaBuilding.firefacilites['7000'] as xfss>
+                                                <tr>
+                                                    <th width="120">区域位置：</th>
+                                                    <td><#if xfss.qywz??>${xfss.qywz}</#if></td>
+                                                    <th width="120">区域面积：</th>
+                                                    <td><#if xfss.qymj??>${xfss.qymj} ㎡</#if></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="120">分隔设施：</th>
+                                                    <td><#if xfss.fgss??>${xfss.fgss}</#if></td>
+                                                    <th width="120">分隔位置：</th>
+                                                    <td><#if xfss.fgwz??>${xfss.fgwz}</#if></td>
+                                                </tr>
+                                            </#list>
+                                        </table>
+                                    </td>
+                                </tr>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--其他灭火系统-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">其他灭火系统</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['8001']?? || areaBuilding.firefacilites['8002']??>
+                                <#if areaBuilding.firefacilites['8001']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>气体灭火系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['8001'] as xfss>
+                                                    <tr>
+                                                        <th width="120">起闭位置：</th>
+                                                        <td><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
+                                                        <th width="120">作用范围：</th>
+                                                        <td><#if xfss.zyfw??>${xfss.zyfw}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if areaBuilding.firefacilites['8002']??>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th colspan="4" style="text-align:left">
+                                                        <strong>干粉灭火系统</strong></th>
+                                                </tr>
+                                                <#list areaBuilding.firefacilites['8002'] as xfss>
+                                                    <tr>
+                                                        <th width="120">起闭位置：</th>
+                                                        <td><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
+                                                        <th width="120">作用范围：</th>
+                                                        <td><#if xfss.zyfw??>${xfss.zyfw}</#if></td>
+                                                    </tr>
+                                                </#list>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                        <!--其他消防设施-->
+                        <table class="data-table">
+                            <tr>
+                                <th class="block-th">其他消防设施</th>
+                            </tr>
+                            <#if areaBuilding.firefacilites['9000']??>
+                                <tr>
+                                    <td>
+                                        <table class="data-table">
+                                            <#list areaBuilding.firefacilites['7000'] as xfss>
+                                                <tr>
+                                                    <th width="120">位置：</th>
+                                                    <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="120">描述：</th>
+                                                    <td><#if xfss.ms??>${xfss.ms}</#if></td>
+                                                </tr>
+                                            </#list>
+                                        </table>
+                                    </td>
+                                </tr>
+                            <#else>
+                                <tr>
+                                    <td>无</td>
+                                </tr>
+                            </#if>
+                        </table>
+                    </div>
+                </div>
+            </#if>
+        </#list>
+        </div>
         <!-- end 单位建筑信息 -->
 
         <!-- 重点部位 -->
@@ -2380,7 +1289,8 @@
                                         <#list region.ChuguanList as pot>
                                             <table class="data-table">
                                                 <tr>
-                                                    <th colspan="6" style="text-align:left"><strong><#if pot.cgmc??>${pot.cgmc}</#if></strong></th>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong><#if pot.cgmc??>${pot.cgmc}</#if></strong></th>
                                                 </tr>
                                                 <tr>
                                                     <th width="120">储罐名称：</th>
@@ -2408,7 +1318,8 @@
                                                     <td><#if pot.cgzc??>${pot.cgzc}</#if></td>
                                                 </tr>
                                                 <tr>
-                                                    <th colspan="6" style="text-align:left"><strong>存储介质-<#if pot.ccjzmc??>${pot.ccjzmc}</#if></strong></th>
+                                                    <th colspan="6" style="text-align:left">
+                                                        <strong>存储介质-<#if pot.ccjzmc??>${pot.ccjzmc}</#if></strong></th>
                                                 </tr>
                                                 <tr>
                                                     <th width="120">实际储量：</th>
@@ -2454,7 +1365,7 @@
         </div>
         <!-- end 重点部位 -->
 
-        <!-- 灾情设定与力量部署 -->
+        <!-- 灾情设定与力量部署、要点提示 -->
         <div id="zqsd" class="content-block block-level-1" data-menu-text="灾情设定与力量部署">
             <h2 class="block-header">
                 <span class="header-title-inner">灾情设定与力量部署</span>
@@ -2581,34 +1492,7 @@
             </#if>
         </#list>
         </div>
-        <!-- end 灾情设定与力量部署 -->
-
-
-        <!-- 要点提示 -->
-    <#--<div id="ydts" class="content-block block-level-1" data-menu-text="要点提示">-->
-    <#--<h2 class="block-header">-->
-    <#--<span class="header-title-inner">要点提示</span>-->
-    <#--</h2>-->
-    <#--<#if keypointsInfo??>-->
-    <#--<div class="sub-block-body">-->
-    <#--<table class="data-table">-->
-    <#--<tr>-->
-    <#--<th class="block-th">战术要点</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td><#if keypointsInfo.zsyd??>${keypointsInfo.zsyd}</#if></td>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<th class="block-th">特别警示</th>-->
-    <#--</tr>-->
-    <#--<tr>-->
-    <#--<td><#if keypointsInfo.tbjs??>${keypointsInfo.tbjs}</#if></td>-->
-    <#--</tr>-->
-    <#--</table>-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</div>-->
-        <!-- end 要点提示 -->
+        <!-- end 灾情设定与力量部署、要点提示 -->
 
         <!-- 这段注释说不定以后能用上 -->
         <!-- <div id="xgzy" class="content-block block-level-1" data-menu-text="相关资源">

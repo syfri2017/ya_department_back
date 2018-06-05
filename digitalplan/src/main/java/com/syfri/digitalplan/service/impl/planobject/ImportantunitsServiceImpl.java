@@ -82,6 +82,38 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 		return resultMap;
 	}
 
+	/***
+	 * @Description: 通过重点单位 查询包含分区详情和消防设施
+	 * @Param: [vo]
+	 * @Return: java.util.List<com.syfri.digitalplan.model.buildingzoning.BuildingVO>
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/6/5 9:55
+	 */
+	public List<BuildingVO> doFindBuildingDetailsAndFirefacilitiesByVo(ImportantunitsVO vo) {
+		List<BuildingVO> resultList = new ArrayList<>();
+		String zddwid = vo.getUuid();
+		String jzfl = vo.getJzfl();
+		if("".equals(jzfl) || jzfl!=null){
+			List<String> list = this.buildingDAO.doFindFqidListByZddwid(zddwid);
+			for(String jzid : list){
+				BuildingVO buildingVO = new BuildingVO();
+				buildingVO.setJzid(jzid);
+				buildingVO.setJzlx(jzfl);
+
+				System.out.println(jzid+jzfl);
+				BuildingVO resultVO = this.buildingService.doFindFqDetailByVo(buildingVO);
+
+				FirefacilitiesVO firefacilitiesVO = new FirefacilitiesVO();
+				firefacilitiesVO.setJbxx_jzid(jzid);
+				Map<String, List> firefacilites = this.firefacilitiesService.doFindlist(firefacilitiesVO);
+				resultVO.setFirefacilites(firefacilites);
+				resultList.add(resultVO);
+			}
+		}
+		return resultList;
+	}
+
 	/**
 	 * author lxy
 	 * @param vo
