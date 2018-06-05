@@ -352,7 +352,7 @@
 		t.uuid uuid,
 		t.bwid bwid,
 		t.jzmc jzmc,
-		t.jzsjcl jzsjcl,
+		to_char(t.jzsjcl,'fm9999999990.00') jzsjcl,
 		t.jzlhtx jzlhtx,
 		t.jzbz jzbz,
 		t.delete_flag deleteFlag,
