@@ -92,10 +92,11 @@ public class CompZddwShareController {
 //        }
 //        zddwWrapperMap.put("compZddwInfo",importantpartsService.doFindById(uuid));
         String zddwid = digitalplanlistService.doFindById(uuid).getDxid();
+        ImportantunitsVO vo = importantunitsService.doFindById(zddwid);
         // 预案基础信息
         model.addAttribute("compPlanInfo", digitalplanlistService.doFindById(uuid));
         // 重点单位基础信息
-        model.addAttribute("compZddwInfo", importantunitsService.doFindById(zddwid));
+        model.addAttribute("compZddwInfo", vo);
         // 灾情设定
         model.addAttribute("disastersetList", disastersetService.doFindByPlanId(uuid));
         // 力量部署
@@ -108,8 +109,8 @@ public class CompZddwShareController {
         model.addAttribute("zzlpartsList", importantpartsService.doFindZzlListByZddwId(zddwid));
         // 重点部位（储罐类）
         model.addAttribute("cglpartsList", importantpartsService.doFindCglListByZddwId(zddwid));
-//        // 功能分区-建筑
-//        model.addAttribute("areaBuildingList", zddwWrapperMap.get("areaBuildingList"));
+        // 建筑分区和消防设施
+        model.addAttribute("areaBuildingList", importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo));
 //        // 功能分区-装置
 //        model.addAttribute("areaDeviceList", zddwWrapperMap.get("areaDeviceList"));
 //        // 消防设施

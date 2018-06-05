@@ -20,6 +20,9 @@ public interface ImportantunitsService  extends BaseService<ImportantunitsVO>{
     //通过重点单位 查询包含消防设施详情
     public Map<String, List> doFindFireFacilitiesDetailsByVo(ImportantunitsVO vo);
 
+    //通过重点单位 查询建筑分区详情包含消防设施详情
+    public List<BuildingVO> doFindBuildingDetailsAndFirefacilitiesByVo(ImportantunitsVO vo);
+
     /**
      * author lxy
      * @param vo

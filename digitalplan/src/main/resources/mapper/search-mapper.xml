@@ -62,7 +62,7 @@
 		c2.code_name jzlxmc
 		FROM YAGL_DWJZXX t
 		<!--建筑分区类型关联代码集-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="jzmc != null and jzmc != '' ">
@@ -78,7 +78,7 @@
 		FROM YAGL_DWJZXX t
 		LEFT JOIN YAGL_DWJZXX_JZL t_jzl ON t.jzid = t_jzl.jzid AND t_jzl.DELETE_FLAG = 'N'
 		<!--建筑分区类型关联代码集-->
-		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="jzmc != null and jzmc != '' ">
@@ -109,7 +109,7 @@
         FROM YAGL_DWJZXX t
         LEFT JOIN YAGL_DWJZXX_ZZL t_zzl ON t.jzid = t_zzl.jzid AND t_zzl.DELETE_FLAG = 'N'
         <!--建筑分区类型关联代码集-->
-        Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+        Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
         Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
         WHERE t.DELETE_FLAG = 'N'
         <if test="jzmc != null and jzmc != '' ">
@@ -131,7 +131,7 @@
         FROM YAGL_DWJZXX t
         LEFT JOIN YAGL_DWJZXX_CGL t_cgl ON t.jzid = t_cgl.jzid AND t_cgl.DELETE_FLAG = 'N'
         <!--建筑分区类型关联代码集-->
-        Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZFL' And c1.DELETE_FLAG = 'N'
+        Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
         Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
         WHERE t.DELETE_FLAG = 'N'
         <if test="jzmc != null and jzmc != '' ">

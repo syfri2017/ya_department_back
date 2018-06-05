@@ -9,6 +9,8 @@ import com.syfri.userservice.model.OrganizationVO;
 import com.syfri.userservice.service.OrganizationService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("organizationService")
 public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationVO> implements OrganizationService {
@@ -25,5 +27,10 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationVO> imp
 	@Override
 	public OrganizationVO doFindOrganizationByUserid(String userid){
 		return organizationDAO.doFindOrganizationByUserid(userid);
+	}
+
+	/*获取所有总队*/
+	public List<OrganizationVO> getZongdui(){
+		return organizationDAO.getZongdui();
 	}
 }

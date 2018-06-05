@@ -4,124 +4,88 @@
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="uuid != null and uuid != '' ">
-		 and t.uuid = #{uuid}
+			and t.uuid = #{uuid}
 		</if>
-		<if test="sybh != null and sybh != '' ">
-		 and t.sybh = #{sybh}
+		<if test="sybm != null and sybm != '' ">
+			and t.sybm = #{sybm}
 		</if>
 		<if test="symc != null and symc != '' ">
-		 and t.symc like concat(concat('%',#{symc}),'%')
+			and t.symc = #{symc}
 		</if>
 		<if test="sydz != null and sydz != '' ">
-		 and t.sydz like concat(concat('%',#{sydz}),'%')
+			and t.sydz = #{sydz}
 		</if>
 		<if test="sylx != null and sylx != '' ">
-		 and t.sylx = #{sylx}
+			and t.sylx = #{sylx}
 		</if>
 		<if test="sysxxxid != null and sysxxxid != '' ">
-		 and t.sysxxxid = #{sysxxxid}
+			and t.sysxxxid = #{sysxxxid}
 		</if>
 		<if test="gxdz != null and gxdz != '' ">
-		 and t.gxdz = #{gxdz}
+			and t.gxdz = #{gxdz}
 		</if>
 		<if test="gxdzmc != null and gxdzmc != '' ">
-		 and t.gxdzmc = #{gxdzmc}
+			and t.gxdzmc = #{gxdzmc}
 		</if>
-		<if test="xzqy != null and xzqy != '' ">
-		 and t.xzqy = #{xzqy}
+		<if test="xzqh != null and xzqh != '' ">
+			and t.xzqh = #{xzqh}
 		</if>
-		<if test="qsxs != null and qsxs != '' ">
-		 and t.qsxs = #{qsxs}
+		<if test="ssdw != null and ssdw != '' ">
+			and t.ssdw = #{ssdw}
 		</if>
 		<if test="kyzt != null and kyzt != '' ">
-		 and t.kyzt = #{kyzt}
+			and t.kyzt = #{kyzt}
 		</if>
-		<if test="xz != null and xz != '' ">
-		 and t.xz = #{xz}
+		<if test="sygs != null and sygs != '' ">
+			and t.sygs = #{sygs}
 		</if>
 		<if test="gisX != null and gisX != '' ">
-		 and t.gis_x = #{gisX}
+			and t.gis_x = #{gisX}
 		</if>
 		<if test="gisY != null and gisY != '' ">
-		 and t.gis_y = #{gisY}
+			and t.gis_y = #{gisY}
 		</if>
 		<if test="gisH != null and gisH != '' ">
-		 and t.gis_h = #{gisH}
+			and t.gis_h = #{gisH}
 		</if>
-		<if test="glid != null and glid != '' ">
-		 and t.glid = #{glid}
+		<if test="lon != null and lon != '' ">
+			and t.lon = #{lon}
 		</if>
-		<if test="bdLon != null and bdLon != '' ">
-		 and t.bd_lon = #{bdLon}
+		<if test="lat != null and lat != '' ">
+			and t.lat = #{lat}
 		</if>
-		<if test="bdLat != null and bdLat != '' ">
-		 and t.bd_lat = #{bdLat}
+		<if test="gsdw != null and gsdw != '' ">
+			and t.gsdw = #{gsdw}
 		</if>
-		<if test="ssld != null and ssld != '' ">
-		 and t.ssld = #{ssld}
-		</if>
-		<if test="jzsj != null and jzsj != '' ">
-		 and t.jzsj = #{jzsj}
-		</if>
-		<if test="qysj != null and qysj != '' ">
-		 and t.qysj = #{qysj}
-		</if>
-		<if test="blgxd != null and blgxd != '' ">
-		 and t.blgxd = #{blgxd}
-		</if>
-		<if test="blgxn != null and blgxn != '' ">
-		 and t.blgxn = #{blgxn}
-		</if>
-		<if test="blgxx != null and blgxx != '' ">
-		 and t.blgxx = #{blgxx}
-		</if>
-		<if test="blgxb != null and blgxb != '' ">
-		 and t.blgxb = #{blgxb}
-		</if>
-		<if test="cjrid != null and cjrid != '' ">
-		 and t.cjrid = #{cjrid}
-		</if>
-		<if test="cjrmc != null and cjrmc != '' ">
-		 and t.cjrmc = #{cjrmc}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-		 and t.cjsj = #{cjsj}
-		</if>
-		<if test="xgrid != null and xgrid != '' ">
-		 and t.xgrid = #{xgrid}
-		</if>
-		<if test="xgrmc != null and xgrmc != '' ">
-		 and t.xgrmc = #{xgrmc}
-		</if>
-		<if test="xgsj != null and xgsj != '' ">
-		 and t.xgsj = #{xgsj}
+		<if test="gsdwlxfs != null and gsdwlxfs != '' ">
+			and t.gsdwlxfs = #{gsdwlxfs}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
+			and t.delete_flag = #{deleteFlag}
 		</if>
 		<if test="datasource != null and datasource != '' ">
-		 and t.datasource = #{datasource}
+			and t.datasource = #{datasource}
 		</if>
 		<if test="bz != null and bz != '' ">
-		 and t.bz = #{bz}
+			and t.bz = #{bz}
 		</if>
 		<if test="jdh != null and jdh != '' ">
-		 and t.jdh = #{jdh}
+			and t.jdh = #{jdh}
 		</if>
 		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
+			and t.sjc = #{sjc}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
+			and t.reserve1 = #{reserve1}
 		</if>
 		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
+			and t.reserve2 = #{reserve2}
 		</if>
 		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
+			and t.reserve3 = #{reserve3}
 		</if>
 		<if test="reserve4 != null and reserve4 != '' ">
-		 and t.reserve4 = #{reserve4}
+			and t.reserve4 = #{reserve4}
 		</if>
 		<if test="gisX_min != null and gisX_min != '' ">
 			and t.gis_X > #{gisX_min}
@@ -199,36 +163,24 @@
 	<!--2.查询内容-->
 	<sql id="SQL_CONTENT">
 		t.uuid uuid,
-		t.sybh sybh,
+		t.sybm sybm,
 		t.symc symc,
 		t.sydz sydz,
 		t.sylx sylx,
 		t.sysxxxid sysxxxid,
 		t.gxdz gxdz,
 		t.gxdzmc gxdzmc,
-		t.xzqy xzqy,
-		t.qsxs qsxs,
+		t.xzqh xzqh,
+		t.ssdw ssdw,
 		t.kyzt kyzt,
-		t.xz xz,
+		t.sygs sygs,
 		t.gis_x gisX,
 		t.gis_y gisY,
 		t.gis_h gisH,
-		t.glid glid,
-		t.bd_lon bdLon,
-		t.bd_lat bdLat,
-		t.ssld ssld,
-		TO_CHAR(t.jzsj,'yyyy-MM-dd') jzsj,
-		TO_CHAR(t.qysj,'yyyy-MM-dd') qysj,
-		t.blgxd blgxd,
-		t.blgxn blgxn,
-		t.blgxx blgxx,
-		t.blgxb blgxb,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+		t.lon lon,
+		t.lat lat,
+		t.gsdw gsdw,
+		t.gsdwlxfs gsdwlxfs,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
 		t.bz bz,
@@ -645,11 +597,10 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
 		tcode3.code_name kyztmc,
 		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5'and tcode1.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D'and tcode2.DELETE_FLAG = 'N')
+
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F'and tcode3.DELETE_FLAG = 'N')
 		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
