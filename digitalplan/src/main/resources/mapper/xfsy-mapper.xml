@@ -102,9 +102,6 @@
 	</sql>
 	<!--消火栓查询条件-->
 	<sql id="SQL_XHS_CONDITION">
-		<if test="xhs_gwid != null and xhs_gwid != '' ">
-			and t2.gwid like concat(concat('%',#{xhs_gwid}),'%')
-		</if>
 		<if test="xhs_szxs != null and xhs_szxs != '' ">
 			and t2.szxs = #{xhs_szxs}
 		</if>
@@ -117,47 +114,17 @@
 	</sql>
 	<!--消防水鹤查询条件-->
 	<sql id="SQL_XFSH_CONDITION">
-		<if test="xfsh_gwid != null and xfsh_gwid != '' ">
-			and t2.gwid like concat(concat('%',#{xfsh_gwid}),'%')
-		</if>
-		<if test="xfsh_shgd != null and xfsh_shgd != '' ">
-			and t2.shgd = #{xfsh_shgd}
-		</if>
-		<if test="xfsh_jscd != null and xfsh_jscd != '' ">
-			and t2.jscd = #{xfsh_jscd}
+		<if test="xfsh_cskgd != null and xfsh_cskgd != '' ">
+			and t2.cskgd = #{xfsh_cskgd}
 		</if>
 	</sql>
 	<!--消防水池查询条件-->
 	<sql id="SQL_XFSC_CONDITION">
-		<if test="xfsc_rl != null and xfsc_rl != '' ">
-			and t2.rl = #{xfsc_rl}
-		</if>
 		<if test="xfsc_gwxs != null and xfsc_gwxs != '' ">
 			and t2.gwxs = #{xfsc_gwxs}
 		</if>
 		<if test="xfsc_tcwz != null and xfsc_tcwz != '' ">
-			and t2.tcwz = #{xfsc_tcwz}
-		</if>
-	</sql>
-	<!--消防码头查询条件-->
-	<sql id="SQL_XFMT_CONDITION">
-		<if test="xfmt_tcwz != null and xfmt_tcwz != '' ">
-			and t2.tcwz = #{xfmt_tcwz}
-		</if>
-		<if test="xfmt_ksq != null and xfmt_ksq != '' ">
-			and t2.ksq = #{xfmt_ksq}
-		</if>
-		<if test="xfmt_sz != null and xfmt_sz != '' ">
-			and t2.sz = #{xfmt_sz}
-		</if>
-	</sql>
-	<!--天然水源查询条件-->
-	<sql id="SQL_TRSY_CONDITION">
-		<if test="trsy_trsylx != null and trsy_trsylx != '' ">
-			and t2.trsylx = #{trsy_trsylx}
-		</if>
-		<if test="trsy_ywksq != null and trsy_ywksq != '' ">
-			and t2.ywksq = #{trsy_ywksq}
+			and t2.tcwz LIKE concat(concat('%',#{xfsc_tcwz}),'%')
 		</if>
 	</sql>
 	<!--2.查询内容-->
@@ -195,25 +162,16 @@
 	<!--消火栓查询内容-->
 	<sql id="SQL_XHS_CONTENT">
 		t2.uuid xhs_uuid,
-		t2.gwid xhs_gwid,
 		t2.szxs xhs_szxs,
-		t2.gsdw xhs_gsdw,
-		t2.lxfs xhs_lxfs,
+		t2.gwylfw xhs_gwylfw,
 		t2.gwxs xhs_gwxs,
 		t2.gwzj xhs_gwzj,
-		t2.gwyl xhs_gwyl,
+		t2.gwyllx xhs_gwyllx,
 		t2.jkxs xhs_jkxs,
 		t2.jkkj xhs_jkkj,
-		t2.ll xhs_ll,
-		t2.cjrid xhs_cjrid,
-		t2.cjrmc xhs_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xhs_cjsj,
-		t2.xgrid xhs_xgrid,
-		t2.xgrmc xhs_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xhs_xgsj,
+		t2.zdll xhs_zdll,
 		t2.delete_flag xhs_deleteFlag,
 		t2.datasource xhs_datasource,
-		t2.bz xhs_bz,
 		t2.jdh xhs_jdh,
 		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xhs_sjc,
 		t2.reserve1 xhs_reserve1,
@@ -225,21 +183,15 @@
 	<sql id="SQL_XFSC_CONTENT">
 		t2.uuid xfsc_uuid,
 		t2.sybgc xfsc_sybgc,
-		t2.rl xfsc_rl,
+		t2.csl xfsc_csl,
 		t2.jsll xfsc_jsll,
 		t2.qszdll xfsc_qszdll,
 		t2.gwxs xfsc_gwxs,
 		t2.tcwz xfsc_tcwz,
-		t2.tcsl xfsc_tcsl,
-		t2.cjrid xfsc_cjrid,
-		t2.cjrmc xfsc_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xfsc_cjsj,
-		t2.xgrid xfsc_xgrid,
-		t2.xgrmc xfsc_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xfsc_xgsj,
+		t2.tsqscls xfsc_tsqscls,
+		t2.bssj xfsc_bssj,
 		t2.delete_flag xfsc_deleteFlag,
 		t2.datasource xfsc_datasource,
-		t2.bz xfsc_bz,
 		t2.jdh xfsc_jdh,
 		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xfsc_sjc,
 		t2.reserve1 xfsc_reserve1,
@@ -250,23 +202,12 @@
 	<!--消防水鹤查询内容-->
 	<sql id="SQL_XFSH_CONTENT">
 		t2.uuid xfsh_uuid,
-		t2.gwid xfsh_gwid,
-		t2.szxs xfsh_szxs,
+		t2.gwzj xfsh_gwzj,
 		t2.gwyl xfsh_gwyl,
-		t2.shgd xfsh_shgd,
-		t2.ll xfsh_ll,
-		t2.jsgzj xfsh_jsgzj,
-		t2.csgzj xfsh_csgzj,
-		t2.jscd xfsh_jscd,
-		t2.cjrid xfsh_cjrid,
-		t2.cjrmc xfsh_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xfsh_cjsj,
-		t2.xgrid xfsh_xgrid,
-		t2.xgrmc xfsh_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xfsh_xgsj,
+		t2.cskgd xfsh_cskgd,
+		t2.zdll xfsh_zdll,
 		t2.delete_flag xfsh_deleteFlag,
 		t2.datasource xfsh_datasource,
-		t2.bz xfsh_bz,
 		t2.jdh xfsh_jdh,
 		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xfsh_sjc,
 		t2.reserve1 xfsh_reserve1,
@@ -276,53 +217,38 @@
 	</sql>
 	<!--消防码头查询内容-->
 	<sql id="SQL_XFMT_CONTENT">
-		t2.uuid xfmt_uuid,
-		t2.sybgc xfmt_sybgc,
-		t2.tcwz xfmt_tcwz,
-		t2.tcsl xfmt_tcsl,
-		t2.ksq xfmt_ksq,
-		t2.sz xfmt_sz,
-		t2.cjrid xfmt_cjrid,
-		t2.cjrmc xfmt_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') xfmt_cjsj,
-		t2.xgrid xfmt_xgrid,
-		t2.xgrmc xfmt_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') xfmt_xgsj,
-		t2.delete_flag xfmt_deleteFlag,
-		t2.datasource xfmt_datasource,
-		t2.bz xfmt_bz,
-		t2.jdh xfmt_jdh,
-		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') xfmt_sjc,
-		t2.reserve1 xfmt_reserve1,
-		t2.reserve2 xfmt_reserve2,
-		t2.reserve3 xfmt_reserve3,
-		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') xfmt_reserve4
+		t2.uuid trsyqsd_uuid,
+		t2.sybgc trsyqsd_sybgc,
+		t2.tcwz trsyqsd_tcwz,
+		t2.tsqscls trsyqsd_tsqscls,
+		t2.qsxs trsyqsd_qsxs,
+		t2.trsyid trsyqsd_trsyid,
+		t2.delete_flag trsyqsd_deleteFlag,
+		t2.datasource trsyqsd_datasource,
+		t2.jdh trsyqsd_jdh,
+		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') trsyqsd_sjc,
+		t2.reserve1 trsyqsd_reserve1,
+		t2.reserve2 trsyqsd_reserve2,
+		t2.reserve3 trsyqsd_reserve3,
+		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') trsyqsd_reserve4
 	</sql>
 	<!--天然水源查询内容-->
 	<sql id="SQL_TRSY_CONTENT">
-		t2.uuid trsy_uuid,
-		t2.trsylx trsy_trsylx,
-		t2.sz trsy_sz,
-		t2.ywksq trsy_ywksq,
-		t2.sjbh trsy_sjbh,
-		t2.trsyrl trsy_trsyrl,
-		t2.trsymj trsy_trsymj,
-		t2.xssd trsy_xssd,
-		t2.cjrid trsy_cjrid,
-		t2.cjrmc trsy_cjrmc,
-		TO_CHAR(t2.cjsj,'yyyy-MM-dd HH24:mi:ss') trsy_cjsj,
-		t2.xgrid trsy_xgrid,
-		t2.xgrmc trsy_xgrmc,
-		TO_CHAR(t2.xgsj,'yyyy-MM-dd HH24:mi:ss') trsy_xgsj,
-		t2.delete_flag trsy_deleteFlag,
-		t2.datasource trsy_datasource,
-		t2.bz trsy_bz,
-		t2.jdh trsy_jdh,
-		TO_CHAR(t2.sjc,'yyyy-MM-dd HH24:mi:ss') trsy_sjc,
-		t2.reserve1 trsy_reserve1,
-		t2.reserve2 trsy_reserve2,
-		t2.reserve3 trsy_reserve3,
-		TO_CHAR(t2.reserve4,'yyyy-MM-dd HH24:mi:ss') trsy_reserve4
+		t3.uuid trsy_uuid,
+		t3.trsylx trsy_trsylx,
+		t3.ywksq trsy_ywksq,
+		t3.ksqsj trsy_ksqsj,
+		t3.delete_flag trsy_deleteFlag,
+		t3.datasource trsy_datasource,
+		t3.jdh trsy_jdh,
+		TO_CHAR(t3.sjc,'yyyy-MM-dd HH24:mi:ss') trsy_sjc,
+		t3.reserve1 trsy_reserve1,
+		t3.reserve2 trsy_reserve2,
+		t3.reserve3 trsy_reserve3,
+		TO_CHAR(t3.reserve4,'yyyy-MM-dd HH24:mi:ss') trsy_reserve4,
+		t3.szms trsy_szms,
+		t3.ywqsd trsy_ywqsd,
+		t3.sz trsy_sz
 	</sql>
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="XfsyVO" resultType="java.lang.Integer">
@@ -497,20 +423,26 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		<include refid="SQL_XHS_CONTENT"/>,
-		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
-		tcode3.code_name xhs_szxsmc,
-		tcode4.code_name xhs_gwxsmc,
-		tcode5.code_name xhs_jkxsmc,
-		tcode6.code_name kyztmc
+		c2.code_name sylxmc,
+		c4.code_name kyztmc,
+		c6.code_name xhs_szxsmc
 		FROM YAGL_XFSY t
 		LEFT JOIN YAGL_XFSY_XHS t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t2.szxs = tcode3.code_value AND tcode3.codeid='010060F3865E45C2A1F1C640B1AE5590')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.gwxs = tcode4.code_value AND tcode4.codeid='4E94D5E9DDA7410DA445657230E95578')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode5 ON (t2.jkxs = tcode5.code_value AND tcode5.codeid='6A16194EFC2A1324E053B077770A516F')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode6 ON (t.kyzt = tcode6.code_value AND tcode6.codeid='B9B2B370D9D54F6499C31523A1369C4F')
+		<!--水源类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		<!--水源可用状态-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
+		<!--消火栓设置形式-->
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'XHSSZXS' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t2.szxs = c6.CODE_VALUE
+		<!--管网形式-->
+		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'GWXS' And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t2.gwxs = c8.CODE_VALUE
+		<!--消火栓接口形式-->
+		Left Join SYS_CODELIST c9 on c9.CODETYPE = 'XHSJKXS' And c9.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c10 On c10.CODEID = c9.CODEID And c10.DELETE_FLAG = 'N' and t2.jkxs = c10.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
@@ -519,16 +451,20 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		<include refid="SQL_XFSC_CONTENT"/>,
-		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc,
-		tcode4.code_name xfsc_gwxsmc
+		c2.code_name sylxmc,
+		c4.code_name kyztmc,
+		c6.code_name xfsc_gwxsmc
 		FROM YAGL_XFSY t
 		LEFT JOIN YAGL_XFSY_XFSC t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.gwxs = tcode4.code_value AND tcode4.codeid='4E94D5E9DDA7410DA445657230E95578')
+		<!--水源类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		<!--水源可用状态-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
+		<!--管网形式-->
+		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'GWXS' And c5.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t2.gwxs = c6.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
@@ -537,40 +473,43 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		<include refid="SQL_XFSH_CONTENT"/>,
-		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc,
-		tcode4.code_name xfsh_jscdmc
+		c2.code_name sylxmc,
+		c4.code_name kyztmc
 		FROM YAGL_XFSY t
 		LEFT JOIN YAGL_XFSY_XFSH t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.jscd = tcode4.code_value AND tcode4.codeid='6841EC7E2AC54C07BFB80C0D5B9AFC1E')
+		<!--水源类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		<!--水源可用状态-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
 	<!--关联消防码头属性-->
-	<select id="doFindSyAndXFMTByVo" parameterType="XfsyVO"  resultType="XfsyVO">
+	<select id="doFindSyAndTrsyqsdByVo" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
-		<include refid="SQL_XFMT_CONTENT"/>,
-		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
-		tcode3.code_name kyztmc,
-		tcode4.code_name xfmt_ksqmc,
-		tcode5.code_name xfmt_szmc
+		c2.code_name sylxmc,
+		c4.code_name kyztmc,
+		tt.*
 		FROM YAGL_XFSY t
-		LEFT JOIN YAGL_XFSY_XFMT t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode4 ON (t2.ksq = tcode4.code_value AND tcode4.codeid='AB88633159A440CC80FEACEAC3F65420')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode5 ON (t2.sz = tcode5.code_value AND tcode5.codeid='6A16194EFC321324E053B077770A516F')
+		LEFT JOIN
+		(select
+		<include refid="SQL_XFMT_CONTENT"/>,
+		<include refid="SQL_TRSY_CONTENT"/>
+		from YAGL_XFSY_TRSYQSD t2  LEFT JOIN YAGL_XFSY_TRSY t3 ON t2.trsyid = t3.uuid AND t2.DELETE_FLAG = 'N'and t3.DELETE_FLAG = 'N')tt
+		ON t.sysxxxid = tt.trsyqsd_uuid
+		<!--水源类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		<!--水源可用状态-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
-	<!--关联天然水源属性-->
+	<!--关联天然水源属性
 	<select id="doFindSyAndTRSYByVo" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
@@ -592,7 +531,7 @@
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
-
+	-->
 	<select id="doFindListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
@@ -615,12 +554,11 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
 		tcode3.code_name kyztmc,
 		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XHS t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5'and tcode1.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D'and tcode2.DELETE_FLAG = 'N')
+
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F'and tcode3.DELETE_FLAG = 'N')
 		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
@@ -636,12 +574,11 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
 		tcode3.code_name kyztmc,
 		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFSH t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5'and tcode1.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D'and tcode2.DELETE_FLAG = 'N')
+
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F'and tcode3.DELETE_FLAG = 'N')
 		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
@@ -657,12 +594,10 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
 		tcode3.code_name kyztmc,
 		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFSC t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5'and tcode1.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D'and tcode2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F'and tcode3.DELETE_FLAG = 'N')
 		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
@@ -673,28 +608,41 @@
 		</if>
 		AND rownum &lt;= 100
 	</select>
-	<!--查询消防码头-->
-	<select id="doFindXfmtListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
+	<!--查询天然水源取水点-->
+	<select id="doFindTrsyqsdListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		tcode1.code_name sylxmc,
-		tcode2.code_name xzmc,
 		tcode3.code_name kyztmc,
 		txfdz.dzjc dzjc
-		FROM YAGL_XFSY t LEFT JOIN YAGL_XFSY_XFMT t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+		FROM YAGL_XFSY t
+		LEFT JOIN
+		(select
+		<include refid="SQL_XFMT_CONTENT"/>,
+		<include refid="SQL_TRSY_CONTENT"/>
+		from YAGL_XFSY_TRSYQSD t2  LEFT JOIN YAGL_XFSY_TRSY t3 ON t2.trsyid = t3.uuid AND t2.DELETE_FLAG = 'N'and t3.DELETE_FLAG = 'N')tt
+		ON t.sysxxxid = tt.trsyqsd_uuid
+
 		LEFT JOIN SYS_CODELIST_DETAIL tcode1 ON (t.sylx = tcode1.code_value AND tcode1.codeid='9C617DE8210445AB9AE776686ABAC3B5'and tcode1.DELETE_FLAG = 'N')
-		LEFT JOIN SYS_CODELIST_DETAIL tcode2 ON (t.xz = tcode2.code_value AND tcode2.codeid='SYXZ00000064A72BA5AAF5B1F2F4B6D'and tcode2.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_CODELIST_DETAIL tcode3 ON (t.kyzt = tcode3.code_value AND tcode3.codeid='B9B2B370D9D54F6499C31523A1369C4F'and tcode3.DELETE_FLAG = 'N')
 		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
-		<include refid="SQL_XFMT_CONDITION"/>
+		<if test="trsyqsd_tcwz != null and trsyqsd_tcwz != '' ">
+			and tt.trsyqsd_tcwz like concat(#{trsyqsd_tcwz},'%')
+		</if>
+		<if test="trsy_ywksq != null and trsy_ywksq != '' ">
+			and tt.trsy_ywksq = #{trsy_ywksq}
+		</if>
+		<if test="trsy_sz != null and trsy_sz != '' ">
+			and tt.trsy_sz = #{trsy_sz}
+		</if>
 		<if test="dzbm != null and dzbm != '' ">
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
 		AND rownum &lt;= 100
 	</select>
-	<!--查询天然水源-->
+	<!--查询天然水源
 	<select id="doFindTrsyListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>,
@@ -714,5 +662,5 @@
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
 		AND rownum &lt;= 100
-	</select>
+	</select>-->
 </mapper>

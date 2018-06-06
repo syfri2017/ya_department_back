@@ -29,20 +29,17 @@ public class XfsyServiceImpl extends BaseServiceImpl<XfsyVO> implements XfsyServ
 		String sylx = xfsyVO.getSylx();
 		XfsyVO vo = new XfsyVO();
 		switch (sylx){
-			case "11":
+			case "01":
 				vo = xfsyDAO.doFindSyAndXHSByVo(xfsyVO);
 				break;
-			case "12":
+			case "02":
 				vo = xfsyDAO.doFindSyAndXFSHByVo(xfsyVO);
 				break;
-			case "13":
+			case "03":
 				vo = xfsyDAO.doFindSyAndXFSCByVo(xfsyVO);
 				break;
-			case "21":
-				vo = xfsyDAO.doFindSyAndXFMTByVo(xfsyVO);
-				break;
-			case "29":
-				vo = xfsyDAO.doFindSyAndTRSYByVo(xfsyVO);
+			case "04":
+				vo = xfsyDAO.doFindSyAndTrsyqsdByVo(xfsyVO);
 				break;
 			default:
 				vo = xfsyDAO.doFindSyAndSxByVo(xfsyVO);
@@ -66,11 +63,8 @@ public class XfsyServiceImpl extends BaseServiceImpl<XfsyVO> implements XfsyServ
 				case "03":
 					list = xfsyDAO.doFindXfscListByVO(xfsyVO);
 					break;
-				case "2100":
-					list = xfsyDAO.doFindXfmtListByVO(xfsyVO);
-					break;
-				case "2900":
-					list = xfsyDAO.doFindTrsyListByVO(xfsyVO);
+				case "04":
+					list = xfsyDAO.doFindTrsyqsdListByVO(xfsyVO);
 					break;
 				default:
 					list = xfsyDAO.doFindListByVO(xfsyVO);

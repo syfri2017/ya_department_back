@@ -10,14 +10,13 @@ public interface XfsyDAO extends BaseDAO<XfsyVO>{
     public XfsyVO doFindSyAndXHSByVo(XfsyVO vo);
     public XfsyVO doFindSyAndXFSCByVo(XfsyVO vo);
     public XfsyVO doFindSyAndXFSHByVo(XfsyVO vo);
-    public XfsyVO doFindSyAndXFMTByVo(XfsyVO vo);
-    public XfsyVO doFindSyAndTRSYByVo(XfsyVO vo);
+    public XfsyVO doFindSyAndTrsyqsdByVo(XfsyVO vo);
 
     public List<XfsyVO> doFindListByVO(XfsyVO vo);
     public List<XfsyVO> doFindXhsListByVO(XfsyVO vo);
     public List<XfsyVO> doFindXfshListByVO(XfsyVO vo);
     public List<XfsyVO> doFindXfscListByVO(XfsyVO vo);
-    public List<XfsyVO> doFindXfmtListByVO(XfsyVO vo);
-    public List<XfsyVO> doFindTrsyListByVO(XfsyVO vo);
+    public List<XfsyVO> doFindTrsyqsdListByVO(XfsyVO vo);
+
 
 }

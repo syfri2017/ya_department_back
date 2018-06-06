@@ -38,7 +38,6 @@ public class XfsyVO extends ValueObject implements Serializable{
     private String reserve4;	//undefined
 
 	private String sylxmc;  //水源类型名称
-	private String xzmc;  //水源性质名称
 	private String xzqymc;    //行政区域名称
 	private String kyztmc;  //可用状态
 	private String dzjc;  //队站简称
@@ -51,12 +50,13 @@ public class XfsyVO extends ValueObject implements Serializable{
     //消火栓属性信息
     private String xhs_uuid;	//主键
     private String xhs_szxs;	//设置形式
-    private String xhs_gwxs;	//管网形式
-    private String xhs_gwzj;	//管网直径
-    private String xhs_gwyl;	//管网压力
-    private String xhs_jkxs;	//接口形式
-    private String xhs_jkkj;	//接口口径
-    private String xhs_zdll;	//最大流量
+    private String xhs_gwylfw;	//管网形式
+    private String xhs_gwxs;	//管网直径
+    private String xhs_gwzj;	//接口形式
+    private String xhs_gwyllx;	//接口口径
+    private String xhs_jkxs;	//最大流量
+    private String xhs_jkkj;
+    private String xhs_zdll;
     private String xhs_deleteFlag;	//删除标志
     private String xhs_datasource;	//数据来源[100000一体化]
     private String xhs_jdh;	//节点号
@@ -65,8 +65,6 @@ public class XfsyVO extends ValueObject implements Serializable{
     private String xhs_reserve2;	//备用字段2
     private String xhs_reserve3;	//备用字段3
     private String xhs_reserve4;	//备用字段4
-    private String xhs_gwyllx; //管网压力类型
-    private String xhs_gwylfw; //管网压力范围
 
 	private String xhs_szxsmc; //设置形式名称
 	private String xhs_gwxsmc;  //管网形式名称
@@ -108,7 +106,6 @@ public class XfsyVO extends ValueObject implements Serializable{
     private String xfsh_reserve3;	//备用字段3
     private String xfsh_reserve4;	//备用字段4
 
-	private String xfsh_jscdmc;	//加水车道名称
 
     //天然水源取水点属性信息
     private String trsyqsd_uuid;	//主键
@@ -328,6 +325,12 @@ public class XfsyVO extends ValueObject implements Serializable{
     public void setXhs_szxs(String xhs_szxs) {
         this.xhs_szxs = xhs_szxs;
     }
+    public String getXhs_gwylfw() {
+        return xhs_gwylfw;
+    }
+    public void setXhs_gwylfw(String xhs_gwylfw) {
+        this.xhs_gwylfw = xhs_gwylfw;
+    }
     public String getXhs_gwxs() {
         return xhs_gwxs;
     }
@@ -340,11 +343,11 @@ public class XfsyVO extends ValueObject implements Serializable{
     public void setXhs_gwzj(String xhs_gwzj) {
         this.xhs_gwzj = xhs_gwzj;
     }
-    public String getXhs_gwyl() {
-        return xhs_gwyl;
+    public String getXhs_gwyllx() {
+        return xhs_gwyllx;
     }
-    public void setXhs_gwyl(String xhs_gwyl) {
-        this.xhs_gwyl = xhs_gwyl;
+    public void setXhs_gwyllx(String xhs_gwyllx) {
+        this.xhs_gwyllx = xhs_gwyllx;
     }
     public String getXhs_jkxs() {
         return xhs_jkxs;
@@ -411,18 +414,6 @@ public class XfsyVO extends ValueObject implements Serializable{
     }
     public void setXhs_reserve4(String xhs_reserve4) {
         this.xhs_reserve4 = xhs_reserve4;
-    }
-    public String getXhs_gwyllx() {
-        return xhs_gwyllx;
-    }
-    public void setXhs_gwyllx(String xhs_gwyllx) {
-        this.xhs_gwyllx = xhs_gwyllx;
-    }
-    public String getXhs_gwylfw() {
-        return xhs_gwylfw;
-    }
-    public void setXhs_gwylfw(String xhs_gwylfw) {
-        this.xhs_gwylfw = xhs_gwylfw;
     }
 
     public String getXfsc_uuid() {
@@ -789,12 +780,6 @@ public class XfsyVO extends ValueObject implements Serializable{
 	public void setSylxmc(String sylxmc) {
 		this.sylxmc = sylxmc;
 	}
-	public String getXzmc() {
-		return xzmc;
-	}
-	public void setXzmc(String xzmc) {
-		this.xzmc = xzmc;
-	}
 	public String getXzqymc() {
 		return xzqymc;
 	}
@@ -825,12 +810,7 @@ public class XfsyVO extends ValueObject implements Serializable{
 	public void setXfsc_gwxsmc(String xfsc_gwxsmc) {
 		this.xfsc_gwxsmc = xfsc_gwxsmc;
 	}
-	public String getXfsh_jscdmc() {
-		return xfsh_jscdmc;
-	}
-	public void setXfsh_jscdmc(String xfsh_jscdmc) {
-		this.xfsh_jscdmc = xfsh_jscdmc;
-	}
+
 	public String getTrsy_trsylxmc() {
 		return trsy_trsylxmc;
 	}
