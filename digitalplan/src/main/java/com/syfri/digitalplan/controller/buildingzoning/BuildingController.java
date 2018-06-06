@@ -36,11 +36,7 @@ public class BuildingController  extends BaseController<BuildingVO>{
 	public @ResponseBody ResultVO findById(@RequestBody BuildingVO buildingVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			BuildingVO vo = buildingService.doFindFqDetailByVo(buildingVO);
-			//将二进制转为Base64格式字符串
-			String photo64 = Base64ImageUtil.byteArr2String(vo.getPhoto());
-			vo.setPhoto64(photo64);
-			resultVO.setResult(vo);
+			resultVO.setResult(buildingService.doFindFqDetailByVo(buildingVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

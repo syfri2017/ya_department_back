@@ -270,10 +270,7 @@
 
 	<!--查找建筑分区详情关联建筑分区-建筑类-->
 	<select id="doFindFqAndJzDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
-		SELECT tt.*,
-		s.pic_blob photo FROM
-		(
-			SELECT
+		SELECT
 			<include refid="SQL_CONTENT"/>,
 			c2.code_name jzlxmc,
 			<include refid="SQL_JZ_CONTENT"/>,
@@ -298,16 +295,12 @@
 			.CODE_VALUE
 			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
-		)tt,SYS_CODELIST_PICTURE s
-		WHERE s.pic_type = 'JZLX' and pic_value = #{jzlx}
+
 	</select>
 
 	<!--查找建筑分区详情关联建筑分区-装置类-->
 	<select id="doFindFqAndZzDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
-		SELECT tt.*,
-		s.pic_blob photo FROM
-		(
-			SELECT
+		SELECT
 			<include refid="SQL_CONTENT"/>,
 			c2.code_name jzlxmc,
 			<include refid="SQL_ZZ_CONTENT"/>,
@@ -322,16 +315,12 @@
 			CODE_VALUE
 			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
-		)tt,SYS_CODELIST_PICTURE s
-		WHERE s.pic_type = 'JZLX' and pic_value = #{jzlx}
+
 	</select>
 
 	<!--查找建筑分区详情关联建筑分区-储罐类-->
 	<select id="doFindFqAndCgDetailByVo" parameterType="BuildingVO"  resultType="BuildingVO">
-		SELECT tt.*,
-		s.pic_blob photo FROM
-		(
-			SELECT
+		SELECT
 			<include refid="SQL_CONTENT"/>,
 			c2.code_name jzlxmc,
 			<include refid="SQL_CG_CONTENT"/>
@@ -342,8 +331,6 @@
 			Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
 			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
-		)tt,SYS_CODELIST_PICTURE s
-		WHERE s.pic_type = 'JZLX' and pic_value = #{jzlx}
 	</select>
 
 	<!--通过建筑ID查询所有危险介质信息-->
