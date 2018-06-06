@@ -185,7 +185,7 @@
 
 	<!--13.上传图片-->
 	<update id="doInsertImg" parameterType="ImgUploadVO">
-		UPDATE  SYS_CODELIST_PICTURE t SET t.pic_blob = #{imgFile,jdbcType=BLOB}   WHERE t.pic_name = #{picName}
+		UPDATE  SYS_CODELIST_PICTURE t SET t.pic_blob = #{imgFile,jdbcType=BLOB}   WHERE t.pic_name = #{picName} and t.pic_type = #{picType}
 	</update>
 
 	<!--14.按图片名称查询记录-->

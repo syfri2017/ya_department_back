@@ -196,10 +196,11 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	@RequestMapping("/insertImage")
 	@ResponseBody
 	public
-	Map<String, Object> uploadAttachment(HttpServletRequest request, ImgUploadVO UploadVO,String picName)
+	Map<String, Object> uploadAttachment(HttpServletRequest request, ImgUploadVO UploadVO,String picName,String picType)
 			throws UnsupportedEncodingException {
 
 		System.out.print(picName);
+		System.out.print(picType);
 		Map<String, Object> result = new HashMap<String, Object>();
 		int res = 0;
 		try {
@@ -234,6 +235,7 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 				ImgUploadVO imgUploadVO=new ImgUploadVO();
 				imgUploadVO.setImgFile(buffer);
 				imgUploadVO.setPicName(UploadVO.getPicName());
+				imgUploadVO.setPicType(UploadVO.getPicType());
 
 				imgUploadDAO.doInsertImg(imgUploadVO);
 			}
