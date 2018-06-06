@@ -225,7 +225,7 @@
 		SELECT *
 		FROM ( SELECT t1.*,
 		c2.CODE_NAME dwxzmc,
-		c4.CODE_NAME xzqhmc,
+-- 		c4.CODE_NAME xzqhmc,
 		c6.CODE_NAME jzflmc,
 		c8.CODE_NAME fhdjmc,
 		c9.DZMC mhdzidmc,
@@ -241,24 +241,24 @@
 		FROM (SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_DX_ZDDW  t
-		where rownum &lt;= 100
-		and t.delete_flag = 'N'
+		where t.delete_flag = 'N'
+		and rownum &lt;= 100
 		<include refid="SQL_CONDITION"/>
 		) t1
 		Left Join SYS_CODELIST c1
-		on c1.CODETYPE = 'ZDDWLB'
+		on c1.CODETYPE = 'DWXZ'
 		And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2
 		On c1.CODEID = c2.CODEID
 		And c2.DELETE_FLAG = 'N'
 		and t1.DWXZ = c2.CODE_VALUE
-		Left Join SYS_CODELIST c3
-		on c3.CODETYPE = 'XZQH'
-		And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4
-		On c3.CODEID = c4.CODEID
-		And c4.DELETE_FLAG = 'N'
-		and t1.XZQH = c4.CODE_VALUE
+-- 		Left Join SYS_CODELIST c3
+-- 		on c3.CODETYPE = 'XZQH'
+-- 		And c3.DELETE_FLAG = 'N'
+-- 		Left Join SYS_CODELIST_DETAIL c4
+-- 		On c3.CODEID = c4.CODEID
+-- 		And c4.DELETE_FLAG = 'N'
+-- 		and t1.XZQH = c4.CODE_VALUE
 		Left Join SYS_CODELIST c5
 		on c5.CODETYPE = 'JZFL'
 		And c5.DELETE_FLAG = 'N'
@@ -275,9 +275,13 @@
 		and t1.FHDJ = c8.CODE_VALUE
 		LEFT JOIN YAGL_XFDZ c9
 		ON (t1.MHDZID = c9.DZID AND c9.DELETE_FLAG = 'N')
+		<if test="mhdzbm != null and mhdzbm != '' ">
+			INNER JOIN YAGL_XFDZ c10
+			ON (t1.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))
+		</if>
 		WHERE t1.deleteFlag = 'N') t999
-		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">-->
-			and t999.xfdwlxmc = #{xfdwlxmc}
+		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
+			where t999.xfdwlxmc = #{xfdwlxmc}
 		</if>
 		ORDER BY XZQH, DWXZ, DWMC ASC
 	</select>
