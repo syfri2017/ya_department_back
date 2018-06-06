@@ -353,9 +353,7 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		,xfgxmc
-		,pic_blob photo
 		FROM YAGL_DX_BWJW t
-		INNER JOIN SYS_CODELIST_PICTURE s ON s.pic_type = 'YADX' and pic_value = '02'
 		LEFT JOIN (select dzbm,dzjc xfgxmc FROM YAGL_XFDZ WHERE DELETE_FLAG = 'N') t1 ON t.xfgx = t1.dzbm
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{uuid}
 	</select>

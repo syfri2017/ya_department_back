@@ -37,8 +37,6 @@ public class OtherobjectsVO extends ValueObject implements Serializable{
 	private String reserve4;	//备用字段4
 
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
-	private byte[] photo;
-	private String photo64;
 
 	public String getUuid(){
 		return uuid;
@@ -208,17 +206,5 @@ public class OtherobjectsVO extends ValueObject implements Serializable{
 	}
 	public void setXfgxmc(String xfgxmc) {
 		this.xfgxmc = xfgxmc;
-	}
-	public byte[] getPhoto() {
-		return photo;
-	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-	public String getPhoto64() {
-		return photo64;
-	}
-	public void setPhoto64(String photo64) {
-		this.photo64 = photo64;
 	}
 }

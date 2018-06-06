@@ -309,12 +309,10 @@
 		<include refid="SQL_CONTENT"/>,
 		c1.CODE_NAME yalxmc,
 		CASE sfkqy WHEN '0' THEN '否' ELSE '是' END AS sfkqymc,
-		z.JGMC jgidmc,
-		pic_blob photo
+		z.JGMC jgidmc
 		FROM YAGL_YA_BWJW t
 		LEFT JOIN SYS_CODELIST_DETAIL c1 ON (t.yalx = c1.CODE_VALUE AND c1.codetype = 'YALX' AND c1.DELETE_FLAG = 'N')
 		LEFT JOIN SYS_ORGANIZATION z ON (t.JGID = z.UUID AND z.DELETE_FLAG = 'N')
-		INNER JOIN SYS_CODELIST_PICTURE s ON s.pic_type = 'YALB' AND pic_value = '02'
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 

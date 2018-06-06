@@ -30,11 +30,7 @@ public class OtherobjectsController  extends BaseController<OtherobjectsVO>{
 	ResultVO getDetail(@PathVariable String ID){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			OtherobjectsVO otherobjectsVO = otherobjectsService.doFindById(ID);
-			//将二进制转为Base64格式字符串
-			String photo64 = Base64ImageUtil.byteArr2String(otherobjectsVO.getPhoto());
-			otherobjectsVO.setPhoto64(photo64);
-			resultVO.setResult(otherobjectsVO);
+			resultVO.setResult(otherobjectsService.doFindById(ID));
 		}catch (Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

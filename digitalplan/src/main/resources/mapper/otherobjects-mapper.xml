@@ -135,10 +135,8 @@
 	<select id="doFindById" parameterType="OtherobjectsVO"  resultType="OtherobjectsVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		,pic_blob photo
-		FROM YAGL_DX_QTDX t,SYS_CODELIST_PICTURE s
+		FROM YAGL_DX_QTDX t
 		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
-		AND s.pic_type = 'YADX' and pic_value = '03'
 	</select>
 
 	<!--6.按照VO插入-->

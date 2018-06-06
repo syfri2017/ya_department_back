@@ -79,10 +79,7 @@ public class OtherobjectsplanController extends BaseController<OtherobjectsplanV
 	public @ResponseBody ResultVO getDetail(@PathVariable String uuid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			OtherobjectsplanVO otherobjectsplanVO = otherobjectsplanService.doFindById(uuid);
-			String photo64 = Base64ImageUtil.byteArr2String(otherobjectsplanVO.getPhoto());
-			otherobjectsplanVO.setPhoto64(photo64);
-			resultVO.setResult(otherobjectsplanVO);
+			resultVO.setResult(otherobjectsplanService.doFindById(uuid));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

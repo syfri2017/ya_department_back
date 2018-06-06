@@ -49,9 +49,6 @@ public class GuardobjectsVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
-	private byte[] photo;
-	private String photo64;
-
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
 	private String dxmc;     //高级搜索中对象名称（对应保卫警卫中hdzt字段）
 	private String dxdz;		//高级搜索中对象地址（对应保卫警卫中 hdcswz 字段）
@@ -296,19 +293,6 @@ public class GuardobjectsVO extends ValueObject implements Serializable{
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
-	}
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-	public String getPhoto64() {
-		return photo64;
-	}
-	public void setPhoto64(String photo64) {
-		this.photo64 = photo64;
 	}
 
 	public String getYadxType() {

@@ -89,10 +89,7 @@ public class GuardobjectsplanController extends BaseController<GuardobjectsplanV
 	public @ResponseBody ResultVO getDetail(@PathVariable String pkid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			GuardobjectsplanVO guardobjectsplanVO = guardobjectsplanService.doFindDetailById(pkid);
-			String photo64 = Base64ImageUtil.byteArr2String(guardobjectsplanVO.getPhoto());
-			guardobjectsplanVO.setPhoto64(photo64);
-			resultVO.setResult(guardobjectsplanVO);
+			resultVO.setResult(guardobjectsplanService.doFindDetailById(pkid));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

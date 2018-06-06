@@ -101,11 +101,7 @@ public class GuardobjectsController extends BaseController<GuardobjectsVO>{
 	public @ResponseBody ResultVO getDetail(@PathVariable String uuid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			GuardobjectsVO guardobjectsVO = guardobjectsService.doFindDetailById(uuid);
-			//将二进制转为Base64格式字符串
-			String photo64 = Base64ImageUtil.byteArr2String(guardobjectsVO.getPhoto());
-			guardobjectsVO.setPhoto64(photo64);
-			resultVO.setResult(guardobjectsVO);
+			resultVO.setResult(guardobjectsService.doFindDetailById(uuid));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
