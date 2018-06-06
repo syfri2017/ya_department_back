@@ -14,8 +14,8 @@ public class Firefacilities_xfsxt_xfbfVO extends ValueObject implements Serializ
 	private String wz;	//位置
 	private String xhssl;	//消火栓泵数量
 	private String xhszdll;	//消火栓最大流量(L/s）
-	private String blbsl;	//喷淋泵数量
-	private String blbzdll;	//喷淋泵最大流量(L/s）
+	private String plbsl;	//喷淋泵数量
+	private String plbzdll;	//喷淋泵最大流量(L/s）
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
 	private String jdh;	//节点号
@@ -61,19 +61,18 @@ public class Firefacilities_xfsxt_xfbfVO extends ValueObject implements Serializ
 	public void setXhszdll(String xhszdll){
 		this.xhszdll = xhszdll;
 	}
-	public String getBlbsl(){
-		return blbsl;
+	public String getPlbsl(){
+		return plbsl;
 	}
-	public void setBlbsl(String blbsl){
-		this.blbsl = blbsl;
+	public void setPlbsl(String blbsl){
+		this.plbsl = plbsl;
 	}
-	public String getBlbzdll(){
-		return blbzdll;
+	public String getPlbzdll() {
+		return plbzdll;
 	}
-	public void setBlbzdll(String blbzdll){
-		this.blbzdll = blbzdll;
+	public void setPlbzdll(String plbzdll) {
+		this.plbzdll = plbzdll;
 	}
-
 	public String getDeleteFlag(){
 		return deleteFlag;
 	}
