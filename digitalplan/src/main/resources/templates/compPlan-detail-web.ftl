@@ -155,12 +155,13 @@
                 <span class="header-title-inner">单位建筑信息和消防设施</span>
             </h2>
         <#list areaBuildingList as areaBuilding>
-            <#if areaBuilding??>
+            <#if areaBuilding.jzid??>
                 <div id="gnfq-<#if areaBuilding.jzid??>${areaBuilding.jzid}</#if>" class="sub-block block-level-2"
                      data-menu-text="<#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if>-<#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>">
                     <h3 class="sub-block-header">
                     <span class="header-title-inner">
-                        ${areaBuilding_index+1} - <#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if> - <#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
+                        ${areaBuilding_index+1}
+                            - <#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if> - <#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
                     </span>
                     </h3>
                     <div class="sub-block-body">
@@ -1493,7 +1494,55 @@
         </#list>
         </div>
         <!-- end 灾情设定与力量部署、要点提示 -->
-
+        <!-- 附图 -->
+        <div id="photos" class="content-block block-level-1" data-menu-text="附图（张）">
+            <h2 class="block-header">
+                <span class="header-title-inner">附图</span>
+            </h2>
+            <div class="sub-block">
+                <div id="photos_1" class="sub-block block-level-2" data-menu-text="实景照片-万达中心">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">实景照片 - 万达中心</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/sjtp.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_2" class="sub-block block-level-2" data-menu-text="总平面图-万达中心">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">总平面图 - 万达中心</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/zpmt.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_3" class="sub-block block-level-2" data-menu-text="内部平面图-B1层平面图">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">内部平面图 - B1层平面图</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/nbpmtB1.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_4" class="sub-block block-level-2" data-menu-text="内部平面图-4层平面图">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">内部平面图 - 4层平面图</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/nbpmt4.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_5" class="sub-block block-level-2" data-menu-text="作战部署图-灾情4-33层力量部署图">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">作战部署图 - 灾情4 - 33层力量部署图</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/1clbst.png" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end 附图 -->
         <!-- 这段注释说不定以后能用上 -->
         <!-- <div id="xgzy" class="content-block block-level-1" data-menu-text="相关资源">
             <h2 class="block-header">
