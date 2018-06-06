@@ -65,7 +65,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
         String shztmc = digitalplanlistDAO.doFindShztmcByShzt(shzt);
         digitalplanlistVO.setShztmc(shztmc);
-        switch (shzt){
+        switch (shzt) {
             case "01":
                 digitalplanlistVO.setYashztButtonType("danger");
                 break;
@@ -93,6 +93,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
     @Override
     public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO) {
         //预案插入
+        String yabm = this.createPlanCode(digitalplanlistVO.getJgbm(),"01");//灾害类型暂定为火灾01
+        digitalplanlistVO.setYabm(yabm);
         digitalplanlistVO.setDeleteFlag("N");
         digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
         //灾情插入
@@ -420,7 +422,15 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
    * by yushch
    * 20180604
    **/
-    public List<DigitalplanlistVO> doSearchApproveListByVO(DigitalplanlistVO vo){
+    public List<DigitalplanlistVO> doSearchApproveListByVO(DigitalplanlistVO vo) {
         return digitalplanlistDAO.doSearchApproveListByVO(vo);
+    }
+
+    public String createPlanCode(String jgid, String zhlx) {
+        String yabmPre = jgid + zhlx;
+        int count = digitalplanlistDAO.doFindCountByJgAndZhlx(yabmPre);
+        String yabm = yabmPre + String.format("%04d", count + 1);
+
+        return yabm;
     }
 }
