@@ -374,4 +374,11 @@
 		and t.yazt != '01'
 		ORDER BY t.SHZT
 	</select>
+
+	<!--查询组织机构和灾害类型下预案数量-->
+	<select id="doFindCountByJgAndZhlx" parameterType="String"  resultType="java.lang.Integer">
+		SELECT count(0)
+		FROM YAGL_YA_ZDDW t
+		WHERE t.yabm LIKE concat(#{value},'%')
+	</select>
 </mapper>
