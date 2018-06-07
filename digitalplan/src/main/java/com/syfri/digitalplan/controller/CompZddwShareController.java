@@ -1,10 +1,16 @@
 package com.syfri.digitalplan.controller;
 
+import com.github.pagehelper.StringUtil;
+import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
+import com.syfri.digitalplan.model.firefacilities.*;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
+import com.syfri.digitalplan.utils.Pic;
+import com.syfri.digitalplan.utils.VelocityUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +27,9 @@ import com.syfri.digitalplan.service.digitalplan.ForcedevService;
 import com.syfri.digitalplan.service.digitalplan.KeypointsService;
 import com.syfri.digitalplan.service.importantparts.ImportantpartsService;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * @Description: 数字化预案分享
@@ -88,7 +95,7 @@ public class CompZddwShareController {
 
 //        zddwWrapperMap = convertJson2Map(jsonStr);
 //        if (zddwWrapperMap == null) {
-//            logger.warn(String.format(" zddwWrapperMap is null !"));
+//            logger.warn(Pic.getImageStr(String.format(" zddwWrapperMap is null !"));
 //
 //            return "error";
 //        }
@@ -156,4 +163,245 @@ public class CompZddwShareController {
 //
 //        return res;
 //    }
+
+
+    /**
+     *下载预案信息word
+     * @param uuid 主健
+     * @return
+     */
+    @GetMapping("/downWord/{uuid}/{titles}")
+    public String downWord(HttpServletRequest request, HttpServletResponse response, @PathVariable("uuid") String uuid
+            , @PathVariable("titles") String titles) {
+
+        String basePath="D:\\pic\\%s.png";
+        try {
+            VelocityContext vc = new VelocityContext();
+
+            String zddwid = digitalplanlistService.doFindById(uuid).getDxid();
+            ImportantunitsVO vo = importantunitsService.doFindById(zddwid);
+            // 预案基础信息
+            vc.put("compPlanInfo", digitalplanlistService.doFindById(uuid));
+            // 重点单位基础信息
+            vc.put("compZddwInfo", importantunitsService.doFindById(zddwid));
+            // 灾情设定 力量部署 要点提示
+            vc.put("disastersetList", disastersetService.doFindByPlanId(uuid));
+            // 重点部位（建筑类）
+            vc.put("jzlpartsList", importantpartsService.doFindJzlListByZddwId(zddwid));
+            // 重点部位（装置类）
+            vc.put("zzlpartsList", importantpartsService.doFindZzlListByZddwId(zddwid));
+            // 重点部位（储罐类）
+            vc.put("cglpartsList", importantpartsService.doFindCglListByZddwId(zddwid));
+            // 建筑分区和消防设施
+
+            List<BuildingVO> bvs=importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo);
+            vc.put("areaBuildingList", doJxsl(bvs));
+            //titles="dwjbqk-dwjzxx-zdbw-zqsd-";
+            vc.put("titleNum", doTitleNum(titles));
+            vc.put("titles", titles);
+
+            //word中图片
+            vc.put("sjtp", Pic.getImageStr(String.format(basePath,"sjtp")));
+            vc.put("zpmt", Pic.getImageStr(String.format(basePath,"zpmt")));
+            vc.put("clbst1", Pic.getImageStr(String.format(basePath,"1clbst")));
+            vc.put("scjglxt1",Pic.getImageStr(String.format(basePath,"1scjglxt")));
+            vc.put("clbst2",Pic.getImageStr(String.format(basePath,"2clbst")));
+            vc.put("scjglxt2",Pic.getImageStr(String.format(basePath,"2scjglxt")));
+            vc.put("clbst3",Pic.getImageStr(String.format(basePath,"3clbst")));
+            vc.put("scjglxt3",Pic.getImageStr(String.format(basePath,"3scjglxt")));
+            vc.put("clbst4",Pic.getImageStr(String.format(basePath,"4clbst")));
+            vc.put("scjglxt4",Pic.getImageStr(String.format(basePath,"4scjglxt")));
+            vc.put("cllbst18",Pic.getImageStr(String.format(basePath,"18cllbst")));
+            vc.put("cllbst24",Pic.getImageStr(String.format(basePath,"24cllbst")));
+            vc.put("cllbst433",Pic.getImageStr(String.format(basePath,"433cllbst")));
+            vc.put("B1czdbst",Pic.getImageStr(String.format(basePath,"B1czdbst")));
+            vc.put("lmt",Pic.getImageStr(String.format(basePath,"lmt")));
+            vc.put("lmt18",Pic.getImageStr(String.format(basePath,"lmt18")));
+            vc.put("lmt90",Pic.getImageStr(String.format(basePath,"lmt90")));
+            vc.put("nbpmt4",Pic.getImageStr(String.format(basePath,"nbpmt4")));
+            vc.put("nbpmt18",Pic.getImageStr(String.format(basePath,"nbpmt18")));
+            vc.put("nbpmt33",Pic.getImageStr(String.format(basePath,"nbpmt33")));
+            vc.put("nbpmtB1",Pic.getImageStr(String.format(basePath,"nbpmtB1")));
+
+            VelocityUtil.createDoc("yuanxiazai.vm", vc, request, response,
+                    "文档名称.doc",-1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null ;
+    }
+    public Map<String,Object> doTitleNum(String select){
+        Map<String,Object> titleNumMap=new HashMap<String,Object>();
+
+        int c=1;
+        if(select.contains("dwjbqk")){
+            titleNumMap.put("dwjbqkNum",toChinese(c+""));
+            c++;
+        }
+        if(select.contains("dwjzxx")){
+            titleNumMap.put("dwjzxxNum",toChinese(c+""));
+            c++;
+        }
+        if(select.contains("zdbw")){
+            titleNumMap.put("zdbwNum",toChinese(c+""));
+            c++;
+        }
+        if(select.contains("zqsd")){
+            titleNumMap.put("zqsdNum",toChinese(c+""));
+        }
+
+        return titleNumMap;
+    }
+
+    private String toChinese(String string) {
+        String[] s1 = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+        String[] s2 = { "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千" };
+
+        String result = "";
+
+        int n = string.length();
+        for (int i = 0; i < n; i++) {
+
+            int num = string.charAt(i) - '0';
+
+            if (i != n - 1 && num != 0) {
+                result += s1[num] + s2[n - 2 - i];
+            } else {
+                result += s1[num];
+            }
+            System.out.println("  "+result);
+        }
+
+        System.out.println("----------------");
+        System.out.println(result);
+        return result;
+
+    }
+
+    public List<BuildingVO> doJxsl(List<BuildingVO> bvs){
+
+        for(BuildingVO bv: bvs){
+            Map<String,Object> data=new HashMap<String,Object>();
+            int aqcksl=0;
+            int ssltsl=0;
+            int xfdtsl=0;
+            String bnc="";
+            String yjgb="";
+            String xfkzs="";
+            String fpyss="无";
+            String qtxfss="";
+
+            Map<String, List>ls=bv.getFirefacilites();
+            //安全出口
+            List aqck=ls.get("1001");
+            if(aqck!=null){
+                for (int i = 0; i < aqck.size(); i++) {
+                    Firefacilities_aqsscs_aqckVO ff =(Firefacilities_aqsscs_aqckVO)aqck.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getSl())){
+                        aqcksl+=Integer.parseInt(ff.getSl());
+                    }
+
+                }
+            }
+
+            //疏散楼梯
+            List sslts=ls.get("1002");
+            if(sslts!=null){
+                for (int i = 0; i < sslts.size(); i++) {
+                    Firefacilities_aqsscs_ssltVO ff =(Firefacilities_aqsscs_ssltVO)sslts.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getSl())){
+                        ssltsl+=Integer.parseInt(ff.getSl());
+                    }
+                }
+            }
+
+            //消防电梯
+            List xfdts=ls.get("1003");
+            if(xfdts!=null) {
+                for (int i = 0; i < xfdts.size(); i++) {
+                    Firefacilities_aqsscs_xfdtVO ff =(Firefacilities_aqsscs_xfdtVO)xfdts.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getSl())){
+                        xfdtsl+=Integer.parseInt(ff.getSl());
+                    }
+
+                }
+            }
+            //避难层
+            //bnc
+            List bncs=ls.get("1004");
+            if(bncs!=null) {
+                bnc=bncs.size()+"个/";
+                for (int i = 0; i < bncs.size(); i++) {
+                    Firefacilities_aqsscs_bncVO ff =(Firefacilities_aqsscs_bncVO)bncs.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getWz())){
+                        bnc=bnc+ff.getWz()+"、";
+                    }
+                }
+                bnc=bnc.substring(0,bnc.length()-1);
+            }
+            //应急广播
+            List yjgbs=ls.get("1005");
+            if(yjgbs!=null) {
+                if (yjgbs.size() > 0) {
+                    yjgb = "有/";
+                }
+                for (int i = 0; i < yjgbs.size(); i++) {
+                    Firefacilities_aqsscs_yjgbVO ff =(Firefacilities_aqsscs_yjgbVO)yjgbs.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getWz())){
+                        yjgb = yjgb + ff.getWz() + "、";
+                    }
+                }
+                yjgb = yjgb.substring(0, yjgb.length()-1);
+            }
+
+            //消防控制室
+            List xfkzss=ls.get("5000");
+            if(xfkzss!=null) {
+                if (xfkzss.size() > 0) {
+                    xfkzs = "有/";
+                }
+                for (int i = 0; i < xfkzss.size(); i++) {
+                    Firefacilities_xfkzsVO ff =(Firefacilities_xfkzsVO)xfkzss.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getWz())){
+                        xfkzs = xfkzs + ff.getWz() + "、";
+                    }
+                }
+                xfkzs = xfkzs.substring(0, xfkzs.length()-1);
+            }
+            //防排烟设施
+            List fpysss=ls.get("6002");
+            if(fpysss!=null) {
+                if (fpysss.size() > 0) {
+                    fpyss = "有";
+                }
+            }
+            //其他消防设施
+            List qtxfsss=ls.get("7000");
+            if(qtxfsss!=null) {
+                if (qtxfsss.size() > 0) {
+                    qtxfss = "有/";
+                }
+                for (int i = 0; i < qtxfsss.size(); i++) {
+                    Firefacilities_qtxfssVO ff =(Firefacilities_qtxfssVO)qtxfsss.get(i);
+                    if(ff!=null&&StringUtil.isNotEmpty(ff.getWz())){
+                        qtxfss = qtxfss + ff.getWz() + "、";
+                    }
+                }
+                qtxfss = qtxfss.substring(0, qtxfss.length()-1);
+            }
+            data.put("aqcksl",aqcksl);
+            data.put("ssltsl",ssltsl);
+            data.put("xfdtsl",xfdtsl);
+            data.put("bnc",bnc);
+            data.put("qtxfss",qtxfss);
+            data.put("yjgb",yjgb);
+            data.put("xfkzs",xfkzs);
+            data.put("fpyss",fpyss);
+            data.put("qtxfss",qtxfss);
+
+            bv.setAqssss(data);
+        }
+
+        return bvs;
+    }
 }

@@ -110,6 +110,15 @@ public class BuildingVO extends ValueObject implements Serializable{
 	private List<ChuguanVO> ChuguanList;	//储罐list
 	private String zddwid;	//重点单位id
 	private Map<String, List> firefacilites;//消防设施
+	private Map<String, Object> aqssss;//word安全疏散设施
+
+	public Map<String, Object> getAqssss() {
+		return aqssss;
+	}
+
+	public void setAqssss(Map<String, Object> aqssss) {
+		this.aqssss = aqssss;
+	}
 
 	public String getJzid() {
 		return jzid;

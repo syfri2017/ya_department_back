@@ -1,5 +1,6 @@
 package com.syfri.userservice.service.impl;
 
+import com.syfri.userservice.utils.CurrentUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,4 +68,34 @@ public class ImgUploadServiceImpl extends BaseServiceImpl<ImgUploadVO> implement
 	 * @Date: 2018/5/31 15:44
 	 */
 	public List<ImgUploadVO> doSearchListByInputPicType(ImgUploadVO vo){return imgUploadDAO.doSearchListByInputPicType(vo);}
+
+	/**
+	 * @Description: 新增图片
+	 * @Param: [imgUploadVO]
+	 * @Return: int
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/6/7 11:06
+	 */
+	public int doInsertImgByVO(ImgUploadVO imgUploadVO) {
+		imgUploadVO.setCreateId(CurrentUserUtil.getCurrentUserId());
+		imgUploadVO.setCreateName(CurrentUserUtil.getCurrentUserName());
+
+		return imgUploadDAO.doInsertByVO(imgUploadVO);
+	}
+
+	/**
+	 * @Description: 修改图片
+	 * @Param: [imgUploadVO]
+	 * @Return: int
+	 * @Author: dongbo
+	 * @Modified By:
+	 * @Date: 2018/6/7 11:12
+	 */
+	public int doUpdateImgByVO(ImgUploadVO imgUploadVO){
+		imgUploadVO.setAlterId(CurrentUserUtil.getCurrentUserId());
+		imgUploadVO.setAlterName(CurrentUserUtil.getCurrentUserName());
+
+		return imgUploadDAO.doUpdateByVO(imgUploadVO);
+	}
 }

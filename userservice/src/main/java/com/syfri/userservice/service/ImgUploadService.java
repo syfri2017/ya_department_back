@@ -45,4 +45,24 @@ public interface ImgUploadService extends BaseService<ImgUploadVO>{
      * @Date: 2018/5/31 15:43
      */
     List<ImgUploadVO> doSearchListByInputPicType(ImgUploadVO vo);
+
+    /**
+     * @Description: 新增图片
+     * @Param: [vo]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/6/7 10:57
+     */
+    int doInsertImgByVO(ImgUploadVO vo);
+    
+    /**
+     * @Description: 修改图片
+     * @Param: [vo]
+     * @Return: int
+     * @Author: dongbo
+     * @Modified By:
+     * @Date: 2018/6/7 11:12
+     */
+    int doUpdateImgByVO(ImgUploadVO vo);
 }

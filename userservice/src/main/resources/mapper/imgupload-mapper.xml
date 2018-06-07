@@ -82,7 +82,7 @@
 		<if test="picName != null and picName != '' ">
 			and t.pic_name LIKE concat(concat('%',#{picName}),'%')
 		</if>
-		ORDER BY t.pic_type,t.pic_value
+		ORDER BY nvl(alter_time,create_time) DESC
 	</select>
 
 	<!--5.根据ID查询记录-->
@@ -98,8 +98,8 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="pkid">
 			SELECT SYS_GUID() AS pkid FROM DUAL
 		</selectKey>
-		INSERT INTO SYS_CODELIST_PICTURE(pkid,pic_type,pic_typename,pic_value,pic_name,pic_blob,delete_flag,remark,create_id,create_name,create_time,alter_id,alter_name,alter_time)
-		VALUES(#{pkid,jdbcType=VARCHAR},#{picType,jdbcType=VARCHAR},#{picTypename,jdbcType=VARCHAR},#{picValue,jdbcType=VARCHAR},#{picName,jdbcType=VARCHAR},#{picBlob,jdbcType=VARCHAR},'N',#{remark,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE,#{alterId,jdbcType=VARCHAR},#{alterName,jdbcType=VARCHAR},SYSDATE)
+		INSERT INTO SYS_CODELIST_PICTURE(pkid,pic_type,pic_typename,pic_value,pic_name,pic_blob,delete_flag,remark,create_id,create_name,create_time)
+		VALUES(#{pkid,jdbcType=VARCHAR},#{picType,jdbcType=VARCHAR},#{picTypename,jdbcType=VARCHAR},#{picValue,jdbcType=VARCHAR},#{picName,jdbcType=VARCHAR},#{picBlob,jdbcType=VARCHAR},'N',#{remark,jdbcType=VARCHAR},#{createId,jdbcType=VARCHAR},#{createName,jdbcType=VARCHAR},SYSDATE)
 	 </insert>
 
 	<!--7.批量插入-->
@@ -131,12 +131,9 @@
 			<if test="picName != null">pic_name=#{picName},</if>
 			<if test="deleteFlag != null">delete_flag='N',</if>
 			<if test="remark != null">remark=#{remark},</if>
-			<if test="createId != null">create_id=#{createId},</if>
-			<if test="createName != null">create_name=#{createName},</if>
-			<if test="createTime != null">create_time=TO_DATE(#{createTime},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="alterId != null">alter_id=#{alterId},</if>
-			<if test="alterName != null">alter_name=#{alterName},</if>
-			<if test="alterTime != null">alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss')</if>
+			alter_id=#{alterId},
+			alter_name=#{alterName},
+			alter_time=SYSDATE
 		</set>
 		WHERE  PKID = #{pkid}
 	</update>
@@ -185,7 +182,7 @@
 
 	<!--13.上传图片-->
 	<update id="doInsertImg" parameterType="ImgUploadVO">
-		UPDATE  SYS_CODELIST_PICTURE t SET t.pic_blob = #{imgFile,jdbcType=BLOB}   WHERE t.pic_name = #{picName}
+		UPDATE  SYS_CODELIST_PICTURE t SET t.pic_blob = #{imgFile,jdbcType=BLOB}   WHERE t.pic_name = #{picName} and t.pic_type = #{picType}
 	</update>
 
 	<!--14.按图片名称查询记录-->
