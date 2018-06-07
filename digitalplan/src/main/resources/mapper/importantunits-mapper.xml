@@ -225,7 +225,7 @@
 		SELECT *
 		FROM ( SELECT t1.*,
 		c2.CODE_NAME dwxzmc,
--- 		c4.CODE_NAME xzqhmc,
+		c4.CODE_NAME xzqhmc,
 		c6.CODE_NAME jzflmc,
 		c8.CODE_NAME fhdjmc,
 		c9.DZMC mhdzidmc,
@@ -252,13 +252,13 @@
 		On c1.CODEID = c2.CODEID
 		And c2.DELETE_FLAG = 'N'
 		and t1.DWXZ = c2.CODE_VALUE
--- 		Left Join SYS_CODELIST c3
--- 		on c3.CODETYPE = 'XZQH'
--- 		And c3.DELETE_FLAG = 'N'
--- 		Left Join SYS_CODELIST_DETAIL c4
--- 		On c3.CODEID = c4.CODEID
--- 		And c4.DELETE_FLAG = 'N'
--- 		and t1.XZQH = c4.CODE_VALUE
+		Left Join SYS_CODELIST c3
+		on c3.CODETYPE = 'XZQH'
+		And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4
+		On c3.CODEID = c4.CODEID
+		And c4.DELETE_FLAG = 'N'
+		and t1.XZQH = c4.CODE_VALUE
 		Left Join SYS_CODELIST c5
 		on c5.CODETYPE = 'JZFL'
 		And c5.DELETE_FLAG = 'N'

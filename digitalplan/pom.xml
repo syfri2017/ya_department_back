@@ -32,6 +32,12 @@
             <artifactId>shiro-core</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <!-- 本地使用 velocity 作为代码生成器，兼容idea -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
 
         <!--redis缓存-->
         <dependency>
