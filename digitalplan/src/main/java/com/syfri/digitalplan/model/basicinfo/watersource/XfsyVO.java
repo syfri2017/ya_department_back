@@ -40,6 +40,7 @@ public class XfsyVO extends ValueObject implements Serializable{
 	private String sylxmc;  //水源类型名称
 	private String xzqymc;    //行政区域名称
 	private String kyztmc;  //可用状态
+    private String sygsmc;	//水源归属名称
 	private String dzjc;  //队站简称
 	private String dzbm; //队站编码
 	private String gisX_min;	//GIS_X
@@ -311,6 +312,12 @@ public class XfsyVO extends ValueObject implements Serializable{
     }
     public void setReserve4(String reserve4){
         this.reserve4 = reserve4;
+    }
+    public String getSygsmc() {
+        return sygsmc;
+    }
+    public void setSygsmc(String sygsmc) {
+        this.sygsmc = sygsmc;
     }
 
     public String getXhs_uuid() {
