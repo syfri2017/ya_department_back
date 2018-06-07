@@ -593,4 +593,21 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
+
+	<!--查询行政区划所在省的所有队站-->
+	<select id="doSearchProvinceList" parameterType="XfdzVO"  resultType="XfdzVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		c2.code_name dzlxmc,
+		c4.code_name xzqhmc
+		FROM YAGL_XFDZ t
+		<!--队站类型-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'DZLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.DZLX = c2.CODE_VALUE
+		<!--行政区划-->
+		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'XZQH' And c3.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c4 On c3.CODEID = c4.CODEID And c4.DELETE_FLAG = 'N' and t.xzqh = c4.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N' and t.xzqh like concat(#{xzqh},'%')
+		ORDER BY t.dzbm
+	</select>
 </mapper>
