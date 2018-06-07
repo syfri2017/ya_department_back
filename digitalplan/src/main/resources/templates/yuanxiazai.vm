@@ -15054,7 +15054,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>实景照片——万达中心</w:t>
+                    <w:t>实景照片——${compPlanInfo.yamc}</w:t>
                 </w:r>
                 <aml:annotation aml:id="1" w:type="Word.Comment.End"/>
                 <w:r>
@@ -15151,7 +15151,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>总平面图——万达中心</w:t>
+                    <w:t>总平面图——${compPlanInfo.yamc}</w:t>
                 </w:r>
                 <aml:annotation aml:id="2" w:type="Word.Comment.End"/>
                 <w:r>
@@ -16813,7 +16813,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>——万达中心</w:t>
+                    <w:t>——${compPlanInfo.yamc}</w:t>
                 </w:r>
             </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
