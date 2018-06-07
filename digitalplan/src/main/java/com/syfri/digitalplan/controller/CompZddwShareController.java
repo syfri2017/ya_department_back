@@ -269,11 +269,7 @@ public class CompZddwShareController {
             } else {
                 result += s1[num];
             }
-            System.out.println("  "+result);
         }
-
-        System.out.println("----------------");
-        System.out.println(result);
         return result;
 
     }

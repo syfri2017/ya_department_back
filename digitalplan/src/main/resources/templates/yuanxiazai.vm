@@ -937,7 +937,7 @@
                                 <w:sz w:val="22"/>
                                 <w:sz-cs w:val="22"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.yabm}</w:t>
+                            <w:t>#if($compPlanInfo.yabm)${compPlanInfo.yabm}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -2112,7 +2112,7 @@
                                 <w:sz w:val="72"/>
                                 <w:sz-cs w:val="72"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.yamc}</w:t>
+                            <w:t>#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -4823,7 +4823,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.dwlbmc}</w:t>
+                            <w:t>#if($compZddwInfo.dwlbmc)${compZddwInfo.dwlbmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -4969,7 +4969,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.yajbmc}</w:t>
+                            <w:t>#if($compPlanInfo.yajbmc)${compPlanInfo.yajbmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -5115,7 +5115,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.fhdjmc}</w:t>
+                            <w:t>#if($compZddwInfo.fhdjmc)${compZddwInfo.fhdjmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -5261,7 +5261,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.fhdzmc}
+                            <w:t>#if($compPlanInfo.fhdzmc)${compPlanInfo.fhdzmc}#end
                 </w:t>
                         </w:r>
                     </w:p>
@@ -5408,7 +5408,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.mhdzmc}
+                            <w:t>#if($compPlanInfo.mhdzmc)${compPlanInfo.mhdzmc}#end
                 </w:t>
                         </w:r>
                     </w:p>
@@ -6027,7 +6027,7 @@
                                 <w:sz w:val="22"/>
                                 <w:sz-cs w:val="22"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.zzrmc}/</w:t>
+                            <w:t>#if($compPlanInfo.zzrmc)${compPlanInfo.zzrmc}#end/</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
@@ -6038,7 +6038,7 @@
                                 <w:sz w:val="22"/>
                                 <w:sz-cs w:val="22"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.zzrmc}</w:t>
+                            <w:t>#if($compPlanInfo.zzrmc)${compPlanInfo.zzrmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -6189,7 +6189,7 @@
                                 <w:sz w:val="22"/>
                                 <w:sz-cs w:val="22"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.shrmc}/</w:t>
+                            <w:t>#if($compPlanInfo.shrmc)${compPlanInfo.shrmc}#end/</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
@@ -6200,7 +6200,7 @@
                                 <w:sz w:val="22"/>
                                 <w:sz-cs w:val="22"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.shrmc}</w:t>
+                            <w:t>#if($compPlanInfo.shrmc)${compPlanInfo.shrmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -6351,7 +6351,7 @@
                                 <w:sz w:val="22"/>
                                 <w:sz-cs w:val="22"/>
                             </w:rPr>
-                            <w:t>${compPlanInfo.shsj}</w:t>
+                            <w:t>#if($compPlanInfo.shsj)${compPlanInfo.shsj}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -6617,8 +6617,8 @@
                 <w:trPr>
                     <w:trHeight w:h-rule="exact" w:val="567"/>
                 </w:trPr>
-                <w:tc>
-                    <w:tcPr>
+            <w:tc>
+                <w:tcPr>
                         <w:tcW w:w="11184" w:type="dxa"/>
                         <w:gridSpan w:val="24"/>
                         <w:tcBorders>
@@ -6629,11 +6629,11 @@
                         </w:tcBorders>
                         <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
                     </w:tcPr>
-#end
+            #end
 
             #if(${titles.contains("dwjbqk")})
-                    ##原有包含位置
-                    <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
+            ##原有包含位置
+                <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                         <w:pPr>
                             <w:widowControl/>
                             <w:textAlignment w:val="center"/>
@@ -6659,9 +6659,9 @@
                             <w:t>${titleNum.dwjbqkNum}、单位基本情况</w:t>
                         </w:r>
                     </w:p>
-                </w:tc>
+            </w:tc>
             </w:tr>
-            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -6737,7 +6737,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.dwmc}</w:t>
+                            <w:t>#if($compZddwInfo.dwmc)${compZddwInfo.dwmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -6813,7 +6813,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.dwdz}</w:t>
+                            <w:t>#if($compZddwInfo.dwdz)${compZddwInfo.dwdz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -6970,7 +6970,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.zbdh}</w:t>
+                            <w:t>#if($compZddwInfo.zbdh)${compZddwInfo.zbdh}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -7051,7 +7051,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.xfzrr}/${compZddwInfo.xfzrrdh}</w:t>
+                            <w:t>#if($compZddwInfo.xfzrr)${compZddwInfo.xfzrr}#end/#if($compZddwInfo.xfzrrdh)${compZddwInfo.xfzrrdh}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -7127,7 +7127,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.xfglr}/${compZddwInfo.xfglrdh}</w:t>
+                            <w:t>#if($compZddwInfo.xfglr)${compZddwInfo.xfglr}#end/#if($compZddwInfo.xfglrdh)${compZddwInfo.xfglrdh}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -7652,7 +7652,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.jzmj}㎡</w:t>
+                            <w:t>#if($compZddwInfo.jzmj)${compZddwInfo.jzmj}#end㎡</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -7728,7 +7728,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.zdmj}㎡</w:t>
+                            <w:t>#if($compZddwInfo.zdmj)${compZddwInfo.zdmj}#end㎡</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -7849,7 +7849,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.plqkd}</w:t>
+                            <w:t>#if($compZddwInfo.plqkd)${compZddwInfo.plqkd}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -7957,7 +7957,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.plqkx}</w:t>
+                            <w:t>#if($compZddwInfo.plqkx)${compZddwInfo.plqkx}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -8066,7 +8066,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.plqkn}</w:t>
+                            <w:t>#if($compZddwInfo.plqkn)${compZddwInfo.plqkn}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -8175,7 +8175,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.plqkb}</w:t>
+                            <w:t>#if($compZddwInfo.plqkb)${compZddwInfo.plqkb}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -8258,7 +8258,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${compZddwInfo.dwgk}</w:t>
+                            <w:t>#if($compZddwInfo.dwgk)${compZddwInfo.dwgk}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -8381,12 +8381,12 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
-            <w:trPr>
+            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                <w:trPr>
                     <w:trHeight w:h-rule="exact" w:val="567"/>
                 </w:trPr>
-        <w:tc>
-            <w:tcPr>
+            <w:tc>
+                <w:tcPr>
                         <w:tcW w:w="11184" w:type="dxa"/>
                         <w:gridSpan w:val="24"/>
                         <w:tcBorders>
@@ -8398,11 +8398,11 @@
                         <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
                         <w:vAlign w:val="center"/>
                     </w:tcPr>
-#end
-#if(${titles.contains("dwjzxx")})
-            #foreach($areaBuilding in ${areaBuildingList})
-                #if($areaBuilding.jzlx=='10'||$areaBuilding.jzlx=='20')
-                    <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
+            #end
+            #if(${titles.contains("dwjzxx")})
+                #foreach($areaBuilding in ${areaBuildingList})
+                    #if($areaBuilding.jzlx=='10'||$areaBuilding.jzlx=='20')
+                        <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                         <w:pPr>
                             <w:widowControl/>
                             <w:jc w:val="left"/>
@@ -8426,12 +8426,12 @@
                                 <w:sz w:val="32"/>
                                 <w:sz-cs w:val="32"/>
                             </w:rPr>
-                            <w:t>${titleNum.dwjzxxNum}、单位建筑信息和消防设施$!{velocityCount}——${areaBuilding.jzlxmc}——${compPlanInfo.yamc}</w:t>
+                            <w:t>${titleNum.dwjzxxNum}、单位建筑信息和消防设施$!{velocityCount}——${areaBuilding.jzlxmc}——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                         </w:r>
                     </w:p>
-                </w:tc>
-                </w:tr>
-                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                    </w:tc>
+                    </w:tr>
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -10075,8 +10075,8 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-            #foreach($xfss in ${areaBuilding.firefacilites['2001']})#if($velocityCount==1||$areaBuilding.firefacilites['2001'].size()==0)
-            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        #foreach($xfss in ${areaBuilding.firefacilites['2001']})#if($velocityCount==1||$areaBuilding.firefacilites['2001'].size()==0)
+                            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -10231,7 +10231,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -10307,7 +10307,8 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.xhszdll}L/s</w:t>
+                            <w:t>#if($xfss.xhszdll)${xfss.xhszdll}#end
+                                L/s</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -10382,12 +10383,13 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.plbzdll}L/s</w:t>
+                            <w:t>#if($xfss.plbzdll)${xfss.plbzdll}#end
+                                L/s</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
             </w:tr>#end#if($velocityCount>1)
-                <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
+                            <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -10688,8 +10690,8 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-            #end#end#foreach($xfss in ${areaBuilding.firefacilites['2002']})
-            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        #end#end#foreach($xfss in ${areaBuilding.firefacilites['2002']})
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -10921,7 +10923,7 @@
                     </w:p>
                 </w:tc>
             </w:tr>#end#foreach($xfss in ${areaBuilding.firefacilites['2003']})
-            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -11163,7 +11165,7 @@
                     </w:p>
                 </w:tc>
             </w:tr>#end#foreach($xfss in ${areaBuilding.firefacilites['2004']})
-                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -11385,8 +11387,8 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #end#foreach($xfss in ${areaBuilding.firefacilites['2005']})
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                    #end#foreach($xfss in ${areaBuilding.firefacilites['2005']})
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -11609,9 +11611,9 @@
                 </w:tc>
             </w:tr>#end
 
-            ##水泵接合器
-            #foreach($xfss in ${areaBuilding.firefacilites['2006']})
-                <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
+                    ##水泵接合器
+                        #foreach($xfss in ${areaBuilding.firefacilites['2006']})
+                            <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -11912,10 +11914,10 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-            #end
-##喷淋系统
-            #foreach($xfss in ${areaBuilding.firefacilites['2007']})
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        #end
+                    ##喷淋系统
+                        #foreach($xfss in ${areaBuilding.firefacilites['2007']})
+                            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -12138,9 +12140,9 @@
                 </w:tc>
             </w:tr>#end
 
-            ##冷却水系统
-            #foreach($xfss in ${areaBuilding.firefacilites['2008']})
-                <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
+                    ##冷却水系统
+                        #foreach($xfss in ${areaBuilding.firefacilites['2008']})
+                            <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -12441,11 +12443,11 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-            #end
+                        #end
 
-            ##固定水炮
-            #foreach($xfss in ${areaBuilding.firefacilites['2009']})
-                <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
+                    ##固定水炮
+                        #foreach($xfss in ${areaBuilding.firefacilites['2009']})
+                            <w:tr wsp:rsidR="00101495" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -12746,10 +12748,10 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-            #end
-            ##半固定设施
-            #foreach($xfss in ${areaBuilding.firefacilites['2010']})
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        #end
+                    ##半固定设施
+                        #foreach($xfss in ${areaBuilding.firefacilites['2010']})
+                            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -12972,12 +12974,12 @@
                 </w:tc>
             </w:tr>#end
 
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
-                    <w:trPr>
+                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                        <w:trPr>
                     <w:trHeight w:h-rule="exact" w:val="567"/>
                 </w:trPr>
-                <w:tc>
-                    <w:tcPr>
+                    <w:tc>
+                        <w:tcPr>
                         <w:tcW w:w="11184" w:type="dxa"/>
                         <w:gridSpan w:val="24"/>
                         <w:tcBorders>
@@ -12993,21 +12995,21 @@
 
 
 
-        #end#end
+                    #end#end
 
-#end
-
-
-
-#if(${titles.contains("zdbw")})
-##重点部位
-            #foreach($region in ${jzlpartsList})
+            #end
 
 
 
+            #if(${titles.contains("zdbw")})
+            ##重点部位
+                #foreach($region in ${jzlpartsList})
 
 
-                <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
+
+
+
+                    <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                         <w:pPr>
                             <w:widowControl/>
                             <w:jc w:val="left"/>
@@ -13030,12 +13032,12 @@
                                 <w:sz w:val="32"/>
                                 <w:sz-cs w:val="32"/>
                             </w:rPr>
-                            <w:t>${titleNum.zdbwNum}、重点部位$!{velocityCount}——单体建筑——${compPlanInfo.yamc}——${region.zdbwmc}</w:t>
+                            <w:t>${titleNum.zdbwNum}、重点部位$!{velocityCount}——单体建筑——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end——${region.zdbwmc}</w:t>
                         </w:r>
                     </w:p>
-            </w:tc>
-            </w:tr>
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
+                </w:tc>
+                </w:tr>
+                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -13360,14 +13362,14 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #foreach($danger in ${region.weixianjiezhiList})
+                    #foreach($danger in ${region.weixianjiezhiList})
 
 
 
 
 
 
-                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -13672,14 +13674,14 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #end
+                    #end
 
 
 
 
 
 
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
+                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
                 <w:trPr>
                     <w:trHeight w:val="570"/>
                 </w:trPr>
@@ -13759,12 +13761,12 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-            <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
-                <w:trPr>
+                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B06244">
+                    <w:trPr>
                     <w:trHeight w:h-rule="exact" w:val="567"/>
                 </w:trPr>
-            <w:tc>
-                <w:tcPr>
+                <w:tc>
+                    <w:tcPr>
                         <w:tcW w:w="11184" w:type="dxa"/>
                         <w:gridSpan w:val="24"/>
                         <w:tcBorders>
@@ -13778,14 +13780,14 @@
                     </w:tcPr>#end
 
 
-//标题结束
-#end
+                //标题结束
+            #end
 
 
-##灾情设定与作战部署
-#if(${titles.contains("zqsd")})
- #foreach($disaster in ${disastersetList})
-                <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
+        ##灾情设定与作战部署
+            #if(${titles.contains("zqsd")})
+                #foreach($disaster in ${disastersetList})
+                    <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                         <w:pPr>
                             <w:widowControl/>
                             <w:jc w:val="left"/>
@@ -13811,9 +13813,9 @@
                             <w:t>${titleNum.zqsdNum}、灾情设定与作战部署——灾情${velocityCount}</w:t>
                         </w:r>
                     </w:p>
-            </w:tc>
-            </w:tr>
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                </w:tc>
+                </w:tr>
+                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="480"/>
                 </w:trPr>
@@ -14340,8 +14342,8 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #foreach($forcedev in ${disaster.forcedevList})  #if($forcedev.djfalx == '1')
-                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B81284">
+                    #foreach($forcedev in ${disaster.forcedevList})  #if($forcedev.djfalx == '1')
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -14447,11 +14449,11 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #end#end
+                    #end#end
 
 
 
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B81284">
+                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -14573,8 +14575,8 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #foreach($forcedev in ${disaster.forcedevList})  #if($forcedev.djfalx == '2')
-                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B81284">
+                    #foreach($forcedev in ${disaster.forcedevList})  #if($forcedev.djfalx == '2')
+                        <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B81284">
                 <w:trPr>
                     <w:trHeight w:val="284"/>
                 </w:trPr>
@@ -14680,8 +14682,8 @@
                     </w:p>
                 </w:tc>
             </w:tr>
-                #end#end
-                <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
+                    #end#end
+                    <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:val="285"/>
                 </w:trPr>
@@ -15004,19 +15006,19 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.keypointsMap.bz}</w:t>
+                            <w:t>#if($disaster.keypointsMap.bz)${disaster.keypointsMap.bz}#end</w:t>
                         </w:r>
                         <aml:annotation aml:id="0" w:type="Word.Bookmark.Start" w:name="_GoBack"/>
                         <aml:annotation aml:id="0" w:type="Word.Bookmark.End"/>
                     </w:p>
                 </w:tc>
             </w:tr>
-            #end##灾情设定与作战部署包含结束
-#end
+                #end##灾情设定与作战部署包含结束
+            #end
         </w:tbl>
-#if(${titles.contains("tp")})
+        #if(${titles.contains("tp")})
 
-        <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
             <w:pPr>
                 <w:jc w:val="left"/>
                 <w:rPr>
@@ -15054,7 +15056,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>实景照片——${compPlanInfo.yamc}</w:t>
+                    <w:t>实景照片——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                 </w:r>
                 <aml:annotation aml:id="1" w:type="Word.Comment.End"/>
                 <w:r>
@@ -15151,7 +15153,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>总平面图——${compPlanInfo.yamc}</w:t>
+                    <w:t>总平面图——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                 </w:r>
                 <aml:annotation aml:id="2" w:type="Word.Comment.End"/>
                 <w:r>
@@ -16813,7 +16815,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>——${compPlanInfo.yamc}</w:t>
+                    <w:t>——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                 </w:r>
             </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
@@ -17033,11 +17035,11 @@
             <w:cols w:space="425"/>
             <w:docGrid w:type="lines-and-chars" w:line-pitch="435"/>
         </w:sectPr>
-##图片结束
-#end
+        ##图片结束
+        #end
 
-#if(!${titles.contains("tp")})
-	<w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+        #if(!${titles.contains("tp")})
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
             <w:pPr>
                 <w:jc w:val="left"/>
                 <w:rPr>
