@@ -170,8 +170,9 @@ public class CompZddwShareController {
      * @param uuid 主健
      * @return
      */
-    @GetMapping("/downWord/{uuid}")
-    public String downWord(HttpServletRequest request, HttpServletResponse response, @PathVariable("uuid") String uuid) {
+    @GetMapping("/downWord/{uuid}/{titles}")
+    public String downWord(HttpServletRequest request, HttpServletResponse response, @PathVariable("uuid") String uuid
+            , @PathVariable("titles") String titles) {
 
         String basePath="D:\\pic\\%s.png";
         try {
@@ -195,6 +196,10 @@ public class CompZddwShareController {
 
             List<BuildingVO> bvs=importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo);
             vc.put("areaBuildingList", doJxsl(bvs));
+            //titles="dwjbqk-dwjzxx-zdbw-zqsd-";
+            vc.put("titleNum", doTitleNum(titles));
+            vc.put("titles", titles);
+
             //word中图片
             vc.put("sjtp", Pic.getImageStr(String.format(basePath,"sjtp")));
             vc.put("zpmt", Pic.getImageStr(String.format(basePath,"zpmt")));
@@ -224,6 +229,53 @@ public class CompZddwShareController {
             e.printStackTrace();
         }
         return null ;
+    }
+    public Map<String,Object> doTitleNum(String select){
+        Map<String,Object> titleNumMap=new HashMap<String,Object>();
+
+        int c=1;
+        if(select.contains("dwjbqk")){
+            titleNumMap.put("dwjbqkNum",toChinese(c+""));
+            c++;
+        }
+        if(select.contains("dwjzxx")){
+            titleNumMap.put("dwjzxxNum",toChinese(c+""));
+            c++;
+        }
+        if(select.contains("zdbw")){
+            titleNumMap.put("zdbwNum",toChinese(c+""));
+            c++;
+        }
+        if(select.contains("zqsd")){
+            titleNumMap.put("zqsdNum",toChinese(c+""));
+        }
+
+        return titleNumMap;
+    }
+
+    private String toChinese(String string) {
+        String[] s1 = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+        String[] s2 = { "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千" };
+
+        String result = "";
+
+        int n = string.length();
+        for (int i = 0; i < n; i++) {
+
+            int num = string.charAt(i) - '0';
+
+            if (i != n - 1 && num != 0) {
+                result += s1[num] + s2[n - 2 - i];
+            } else {
+                result += s1[num];
+            }
+            System.out.println("  "+result);
+        }
+
+        System.out.println("----------------");
+        System.out.println(result);
+        return result;
+
     }
 
     public List<BuildingVO> doJxsl(List<BuildingVO> bvs){
