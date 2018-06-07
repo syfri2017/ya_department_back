@@ -410,6 +410,7 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
+
 	<select id="doFindSyAndSxByVo" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
@@ -417,74 +418,91 @@
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
-
 	<!--关联消火栓属性-->
 	<select id="doFindSyAndXHSByVo" parameterType="XfsyVO"  resultType="XfsyVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>,
-		<include refid="SQL_XHS_CONTENT"/>,
-		c2.code_name sylxmc,
-		c4.code_name kyztmc,
-		c6.code_name xhs_szxsmc
+		SELECT tt.*,
+        <include refid="SQL_XHS_CONTENT"/>,
+        c2.code_name sylxmc,
+        c4.code_name kyztmc,
+        c6.code_name xhs_szxsmc,
+        c8.code_name xhs_gwxs,
+        c10.code_name xhs_jkxs,
+        txfdz.dzjc dzjc
+        FROM
+        (SELECT
+		<include refid="SQL_CONTENT"/>
 		FROM YAGL_XFSY t
-		LEFT JOIN YAGL_XFSY_XHS t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+        WHERE t.DELETE_FLAG = 'N'
+        AND t.uuid = #{uuid})tt
+        LEFT JOIN YAGL_XFSY_XHS t2 ON t2.DELETE_FLAG = 'N' AND tt.sysxxxid = t2.uuid
+        <!--消防队站-->
+        LEFT JOIN YAGL_XFDZ txfdz ON tt.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		<!--水源类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and tt.sylx = c2.CODE_VALUE
 		<!--水源可用状态-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
-		<!--消火栓设置形式-->
-		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'XHSSZXS' And c5.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t2.szxs = c6.CODE_VALUE
-		<!--管网形式-->
-		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'GWXS' And c7.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t2.gwxs = c8.CODE_VALUE
-		<!--消火栓接口形式-->
-		Left Join SYS_CODELIST c9 on c9.CODETYPE = 'XHSJKXS' And c9.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c10 On c10.CODEID = c9.CODEID And c10.DELETE_FLAG = 'N' and t2.jkxs = c10.CODE_VALUE
-		WHERE t.DELETE_FLAG = 'N'
-		AND t.uuid = #{uuid}
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and tt.kyzt = c4.CODE_VALUE
+        <!--消火栓设置形式-->
+        Left Join SYS_CODELIST c5 on c5.CODETYPE = 'XHSSZXS' And c5.DELETE_FLAG = 'N'
+        Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t2.szxs = c6.CODE_VALUE
+        <!--管网形式-->
+        Left Join SYS_CODELIST c7 on c7.CODETYPE = 'GWXS' And c7.DELETE_FLAG = 'N'
+        Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t2.gwxs = c8.CODE_VALUE
+        <!--消火栓接口形式-->
+        Left Join SYS_CODELIST c9 on c9.CODETYPE = 'XHSJKXS' And c9.DELETE_FLAG = 'N'
+        Left Join SYS_CODELIST_DETAIL c10 On c10.CODEID = c9.CODEID And c10.DELETE_FLAG = 'N' and t2.jkxs = c10.CODE_VALUE
 	</select>
 	<!--关联消防水池属性-->
 	<select id="doFindSyAndXFSCByVo" parameterType="XfsyVO"  resultType="XfsyVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>,
-		<include refid="SQL_XFSC_CONTENT"/>,
-		c2.code_name sylxmc,
-		c4.code_name kyztmc,
-		c6.code_name xfsc_gwxsmc
+		SELECT tt.*,
+        <include refid="SQL_XFSC_CONTENT"/>,
+        c2.code_name sylxmc,
+        c4.code_name kyztmc,
+        c6.code_name xfsc_gwxsmc,
+        txfdz.dzjc dzjc
+        FROM
+        (SELECT
+		<include refid="SQL_CONTENT"/>
 		FROM YAGL_XFSY t
-		LEFT JOIN YAGL_XFSY_XFSC t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+        WHERE t.DELETE_FLAG = 'N'
+        AND t.uuid = #{uuid})tt
+        LEFT JOIN YAGL_XFSY_XFSC t2 ON tt.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N'
+        <!--消防队站-->
+        LEFT JOIN YAGL_XFDZ txfdz ON tt.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		<!--水源类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and tt.sylx = c2.CODE_VALUE
 		<!--水源可用状态-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and tt.kyzt = c4.CODE_VALUE
 		<!--管网形式-->
 		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'GWXS' And c5.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t2.gwxs = c6.CODE_VALUE
-		WHERE t.DELETE_FLAG = 'N'
-		AND t.uuid = #{uuid}
 	</select>
 	<!--关联消防水鹤属性-->
 	<select id="doFindSyAndXFSHByVo" parameterType="XfsyVO"  resultType="XfsyVO">
-		SELECT
-		<include refid="SQL_CONTENT"/>,
-		<include refid="SQL_XFSH_CONTENT"/>,
-		c2.code_name sylxmc,
-		c4.code_name kyztmc
+		SELECT tt.*,
+        <include refid="SQL_XFSH_CONTENT"/>,
+        c2.code_name sylxmc,
+        c4.code_name kyztmc,
+        txfdz.dzjc dzjc
+        FROM
+        (SELECT
+		<include refid="SQL_CONTENT"/>
 		FROM YAGL_XFSY t
-		LEFT JOIN YAGL_XFSY_XFSH t2 ON (t.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N')
+        WHERE t.DELETE_FLAG = 'N'
+        AND t.uuid = #{uuid})tt
+        LEFT JOIN YAGL_XFSY_XFSH t2 ON tt.sysxxxid = t2.uuid AND t2.DELETE_FLAG = 'N'
+        <!--消防队站-->
+        LEFT JOIN YAGL_XFDZ txfdz ON tt.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		<!--水源类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and tt.sylx = c2.CODE_VALUE
 		<!--水源可用状态-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'SYKYZT' And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.kyzt = c4.CODE_VALUE
-		WHERE t.DELETE_FLAG = 'N'
-		AND t.uuid = #{uuid}
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and tt.kyzt = c4.CODE_VALUE
+
 	</select>
 	<!--关联天然水源取水点属性-->
 	<select id="doFindSyAndTrsyqsdByVo" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -492,14 +510,16 @@
 		<include refid="SQL_CONTENT"/>,
 		c2.code_name sylxmc,
 		c4.code_name kyztmc,
-		tt.*
+		tt.*,
+        txfdz.dzjc dzjc
 		FROM YAGL_XFSY t
 		LEFT JOIN
 		(select
 		<include refid="SQL_XFMT_CONTENT"/>,
 		<include refid="SQL_TRSY_CONTENT"/>
-		from YAGL_XFSY_TRSYQSD t2  LEFT JOIN YAGL_XFSY_TRSY t3 ON t2.trsyid = t3.uuid AND t2.DELETE_FLAG = 'N'and t3.DELETE_FLAG = 'N')tt
-		ON t.sysxxxid = tt.trsyqsd_uuid
+		from YAGL_XFSY_TRSYQSD t2  LEFT JOIN YAGL_XFSY_TRSY t3 ON t2.trsyid = t3.uuid AND t2.DELETE_FLAG = 'N'and t3.DELETE_FLAG = 'N')tt ON t.sysxxxid = tt.trsyqsd_uuid
+        <!--消防队站-->
+        LEFT JOIN YAGL_XFDZ txfdz ON t.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		<!--水源类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'SYLX' And c1.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.sylx = c2.CODE_VALUE
@@ -509,6 +529,7 @@
 		WHERE t.DELETE_FLAG = 'N'
 		AND t.uuid = #{uuid}
 	</select>
+
 
 	<select id="doFindListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
 		SELECT tt.*,
@@ -566,7 +587,7 @@
 		<!--水源归属-->
 		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'SYGS' And c5.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t.sygs = c6.CODE_VALUE
-		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
+		LEFT JOIN YAGL_XFDZ txfdz ON t.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XHS_CONDITION"/>
@@ -594,7 +615,7 @@
 		<!--水源归属-->
 		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'SYGS' And c5.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t.sygs = c6.CODE_VALUE
-		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
+        LEFT JOIN YAGL_XFDZ txfdz ON t.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XFSH_CONDITION"/>
@@ -622,7 +643,7 @@
 		<!--水源归属-->
 		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'SYGS' And c5.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t.sygs = c6.CODE_VALUE
-		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
+        LEFT JOIN YAGL_XFDZ txfdz ON t.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<include refid="SQL_XFSC_CONDITION"/>
@@ -657,7 +678,7 @@
 		<!--水源归属-->
 		Left Join SYS_CODELIST c5 on c5.CODETYPE = 'SYGS' And c5.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c6 On c6.CODEID = c5.CODEID And c6.DELETE_FLAG = 'N' and t.sygs = c6.CODE_VALUE
-		LEFT JOIN YAGL_XFDZ txfdz ON (t.gxdz = txfdz.dzid)
+        LEFT JOIN YAGL_XFDZ txfdz ON t.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<if test="trsyqsd_tcwz != null and trsyqsd_tcwz != '' ">
