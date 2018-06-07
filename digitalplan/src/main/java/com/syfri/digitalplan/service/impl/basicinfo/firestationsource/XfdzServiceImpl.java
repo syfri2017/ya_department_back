@@ -9,39 +9,46 @@ import com.syfri.digitalplan.model.basicinfo.firestationsource.XfdzVO;
 import com.syfri.digitalplan.service.basicinfo.firestationsource.XfdzService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 @Service("xfdzService")
 public class XfdzServiceImpl extends BaseServiceImpl<XfdzVO> implements XfdzService {
 
-	@Autowired
-	private XfdzDAO xfdzDAO;
+    @Autowired
+    private XfdzDAO xfdzDAO;
 
-	@Override
-	public XfdzDAO getBaseDAO() {
-		return xfdzDAO;
-	}
+    @Override
+    public XfdzDAO getBaseDAO() {
+        return xfdzDAO;
+    }
 
-	public XfdzVO doFindDzDetailByVo(XfdzVO xfdzVO){
-		String dzlx = xfdzVO.getDzlx().substring(0,2);
-		XfdzVO vo = new XfdzVO();
-		switch (dzlx){
-			case "02":
-				vo = xfdzDAO.doFindDzZongDDetailByVo(xfdzVO);
-				break;
-			case "03":
-				vo = xfdzDAO.doFindDzZhiDDetailByVo(xfdzVO);
-				break;
-			case "05":
-				vo = xfdzDAO.doFindDzDaDDetailByVo(xfdzVO);
-				break;
-			case "09":
-				vo = xfdzDAO.doFindDzZhongDDetailByVo(xfdzVO);
-				break;
-			case "0A":
-				vo = xfdzDAO.doFindDzQtxfdwDetailByVo(xfdzVO);
-				break;
-		}
+    public XfdzVO doFindDzDetailByVo(XfdzVO xfdzVO) {
+        String dzlx = xfdzVO.getDzlx().substring(0, 2);
+        XfdzVO vo = new XfdzVO();
+        switch (dzlx) {
+            case "02":
+                vo = xfdzDAO.doFindDzZongDDetailByVo(xfdzVO);
+                break;
+            case "03":
+                vo = xfdzDAO.doFindDzZhiDDetailByVo(xfdzVO);
+                break;
+            case "05":
+                vo = xfdzDAO.doFindDzDaDDetailByVo(xfdzVO);
+                break;
+            case "09":
+                vo = xfdzDAO.doFindDzZhongDDetailByVo(xfdzVO);
+                break;
+            case "0A":
+                vo = xfdzDAO.doFindDzQtxfdwDetailByVo(xfdzVO);
+                break;
+        }
 
-		return vo;
-	}
+        return vo;
+    }
+
+    public List<XfdzVO> doSearchProvinceList(XfdzVO xfdzVO) {
+        List<XfdzVO> vo = xfdzDAO.doSearchProvinceList(xfdzVO);
+        return vo;
+    }
 }
