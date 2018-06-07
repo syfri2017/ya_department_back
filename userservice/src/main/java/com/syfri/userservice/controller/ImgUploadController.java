@@ -175,7 +175,7 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	public @ResponseBody ResultVO insertByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(imgUploadService.doInsertByVO(imgUploadVO));
+			resultVO.setResult(imgUploadService.doInsertImgByVO(imgUploadVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -314,7 +314,7 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	public @ResponseBody ResultVO updateByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(imgUploadService.doUpdateByVO(imgUploadVO));
+			resultVO.setResult(imgUploadService.doUpdateImgByVO(imgUploadVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
