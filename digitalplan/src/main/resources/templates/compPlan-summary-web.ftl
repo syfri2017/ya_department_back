@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <th width="120">单位性质：</th>
-                        <td width="300"><#if compZddwInfo.dwlbmc??>${compZddwInfo.dwlbmc}</#if></td>
+                        <td width="300"><#if compZddwInfo.dwxzmc??>${compZddwInfo.dwxzmc}</#if></td>
                         <th width="120">值班电话：</th>
                         <td><#if compZddwInfo.zbdh??>${compZddwInfo.zbdh}</#if></td>
                     </tr>
@@ -158,7 +158,9 @@
             <#if disaster??>
                 <div id="zzbs_1" class="sub-block block-level-2" data-menu-text="灾情部位-${disaster.zqbw}">
                     <h3 class="sub-block-header">
-                        <span class="header-title-inner">灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if></span>
+                        <span class="header-title-inner">
+                            ${disaster_index+1}.灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if>
+                        </span>
                     </h3>
                     <div class="sub-block-body">
                         <table class="data-table">
