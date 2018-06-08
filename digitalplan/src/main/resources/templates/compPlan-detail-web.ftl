@@ -161,7 +161,7 @@
                     <h3 class="sub-block-header">
                     <span class="header-title-inner">
                         ${areaBuilding_index+1}
-                            - <#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if> - <#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
+                            . <#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if>-<#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
                     </span>
                     </h3>
                     <div class="sub-block-body">
@@ -601,7 +601,8 @@
                                                     </tr>
                                                     <tr>
                                                         <th width="120">供水强度：</th>
-                                                        <td width="300"><#if xfss.gsqd??>${xfss.gsqd} L/min.m2</#if></td>
+                                                        <td width="300"><#if xfss.gsqd??>${xfss.gsqd}
+                                                            L/min.m2</#if></td>
                                                         <th width="140">有无冷却水系统：</th>
                                                         <td><#if xfss.ywlqsxt??>${xfss.ywlqsxt}</#if></td>
                                                     </tr>
@@ -1016,7 +1017,7 @@
                      data-menu-text="建筑类-${region.zdbwmc}">
                     <h3 class="sub-block-header">
                             <span class="header-title-inner">
-                                ${region_index+1} - 建筑类 - <#if region.zdbwmc??>${region.zdbwmc}</#if>
+                                建筑类-<#if region.zdbwmc??>${region.zdbwmc}</#if>
                             </span>
                     </h3>
                     <div class="sub-block-body">
@@ -1097,7 +1098,7 @@
                      data-menu-text="装置类-${region.zdbwmc}">
                     <h3 class="sub-block-header">
                             <span class="header-title-inner">
-                                ${region_index+1} - 装置类 - <#if region.zdbwmc??>${region.zdbwmc}</#if>
+                                装置类 - <#if region.zdbwmc??>${region.zdbwmc}</#if>
                             </span>
                     </h3>
                     <div class="sub-block-body">
@@ -1177,7 +1178,7 @@
                      data-menu-text="储罐类-${region.zdbwmc}">
                     <h3 class="sub-block-header">
                             <span class="header-title-inner">
-                                ${region_index+1} - 储罐类 - <#if region.zdbwmc??>${region.zdbwmc}</#if>
+                                储罐类 - <#if region.zdbwmc??>${region.zdbwmc}</#if>
                             </span>
                     </h3>
                     <div class="sub-block-body">
@@ -1296,7 +1297,9 @@
             <#if disaster??>
                 <div id="zzbs_1" class="sub-block block-level-2" data-menu-text="灾情部位-${disaster.zqbw}">
                     <h3 class="sub-block-header">
-                        <span class="header-title-inner">灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if></span>
+                        <span class="header-title-inner">
+                            ${disaster_index+1}. 灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if>
+                        </span>
                     </h3>
                     <div class="sub-block-body">
                         <table class="data-table">
