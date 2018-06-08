@@ -28,7 +28,12 @@
 			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="jgid != null and jgid != '' ">
-			and t.jgid = #{jgid}
+			and t.jgid IN (
+			SELECT UUID
+			FROM SYS_ORGANIZATION t
+			START WITH t.UUID = #{jgid}
+			CONNECT BY PRIOR t.UUID = SJJGID
+			)
 		</if>
 		<if test="jgbm != null and jgbm != '' ">
 			and t.jgbm = #{jgbm}

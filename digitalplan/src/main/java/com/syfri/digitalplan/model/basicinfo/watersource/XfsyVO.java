@@ -38,7 +38,7 @@ public class XfsyVO extends ValueObject implements Serializable{
     private String reserve4;	//undefined
 
 	private String sylxmc;  //水源类型名称
-	private String xzqymc;    //行政区域名称
+	private String xzqhmc;    //行政区域名称
 	private String kyztmc;  //可用状态
     private String sygsmc;	//水源归属名称
 	private String dzjc;  //队站简称
@@ -51,11 +51,11 @@ public class XfsyVO extends ValueObject implements Serializable{
     //消火栓属性信息
     private String xhs_uuid;	//主键
     private String xhs_szxs;	//设置形式
-    private String xhs_gwylfw;	//管网形式
-    private String xhs_gwxs;	//管网直径
-    private String xhs_gwzj;	//接口形式
-    private String xhs_gwyllx;	//接口口径
-    private String xhs_jkxs;	//最大流量
+    private String xhs_gwylfw;
+    private String xhs_gwxs;
+    private String xhs_gwzj;
+    private String xhs_gwyllx;
+    private String xhs_jkxs;
     private String xhs_jkkj;
     private String xhs_zdll;
     private String xhs_deleteFlag;	//删除标志
@@ -70,6 +70,7 @@ public class XfsyVO extends ValueObject implements Serializable{
 	private String xhs_szxsmc; //设置形式名称
 	private String xhs_gwxsmc;  //管网形式名称
 	private String xhs_jkxsmc;  //接口形式名称
+    private String xhs_gwyllxmc; //管网压力类型名称
 
     //消防水池属性信息
     private String xfsc_uuid;	//主键
@@ -123,6 +124,8 @@ public class XfsyVO extends ValueObject implements Serializable{
     private String trsyqsd_reserve2;	//备用字段2
     private String trsyqsd_reserve3;	//备用字段3
     private String trsyqsd_reserve4;	//备用字段4
+
+    private String trsyqsd_qsxsmc;	//取水形式名称
 
     //天然水源属性信息
     private String trsy_uuid;	//主键
@@ -421,6 +424,12 @@ public class XfsyVO extends ValueObject implements Serializable{
     }
     public void setXhs_reserve4(String xhs_reserve4) {
         this.xhs_reserve4 = xhs_reserve4;
+    }
+    public String getXhs_gwyllxmc() {
+        return xhs_gwyllxmc;
+    }
+    public void setXhs_gwyllxmc(String xhs_gwyllxmc) {
+        this.xhs_gwyllxmc = xhs_gwyllxmc;
     }
 
     public String getXfsc_uuid() {
@@ -787,13 +796,13 @@ public class XfsyVO extends ValueObject implements Serializable{
 	public void setSylxmc(String sylxmc) {
 		this.sylxmc = sylxmc;
 	}
-	public String getXzqymc() {
-		return xzqymc;
-	}
-	public void setXzqymc(String xzqymc) {
-		this.xzqymc = xzqymc;
-	}
-	public String getXhs_szxsmc() {
+    public String getXzqhmc() {
+        return xzqhmc;
+    }
+    public void setXzqhmc(String xzqhmc) {
+        this.xzqhmc = xzqhmc;
+    }
+    public String getXhs_szxsmc() {
 		return xhs_szxsmc;
 	}
 	public void setXhs_szxsmc(String xhs_szxsmc) {
@@ -818,7 +827,13 @@ public class XfsyVO extends ValueObject implements Serializable{
 		this.xfsc_gwxsmc = xfsc_gwxsmc;
 	}
 
-	public String getTrsy_trsylxmc() {
+    public String getTrsyqsd_qsxsmc() {
+        return trsyqsd_qsxsmc;
+    }
+    public void setTrsyqsd_qsxsmc(String trsyqsd_qsxsmc) {
+        this.trsyqsd_qsxsmc = trsyqsd_qsxsmc;
+    }
+    public String getTrsy_trsylxmc() {
 		return trsy_trsylxmc;
 	}
 	public void setTrsy_trsylxmc(String trsy_trsylxmc) {
