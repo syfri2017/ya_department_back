@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.controller;
 
 import com.github.pagehelper.StringUtil;
+import com.syfri.digitalplan.config.properties.YafjxzProperties;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.firefacilities.*;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
@@ -65,6 +66,8 @@ public class CompZddwShareController {
 
     @Autowired
     private KeypointsService keypointsService;
+    @Autowired
+    private YafjxzProperties yafjxzProperties;
 
     @ApiOperation(value = "获取重点单位共享信息", notes = "根据url的districtCode和uuid来指定获取对象，并根据传过来的target信息来确定输出目标")
     @ApiImplicitParams({
@@ -174,7 +177,9 @@ public class CompZddwShareController {
     public String downWord(HttpServletRequest request, HttpServletResponse response, @PathVariable("uuid") String uuid
             , @PathVariable("titles") String titles) {
 
-        String basePath="D:\\pic\\%s.png";
+        //String basePath="D:\\pic\\%s.png";
+        String basePath=yafjxzProperties.getSavePath()+"pic\\%s.png";
+
         try {
             VelocityContext vc = new VelocityContext();
 
