@@ -1633,7 +1633,8 @@
             new Viewer(item);
         })
         var currentUrl = window.location.href;
-        var qrcodeAPI = 'http://pan.baidu.com/share/qrcode?w=150&h=150&url=';
+//        var qrcodeAPI = 'http://pan.baidu.com/share/qrcode?w=150&h=150&url=';
+        var qrcodeAPI = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=';
         $('.qrcode-img').attr('src', qrcodeAPI + currentUrl);
 
 
