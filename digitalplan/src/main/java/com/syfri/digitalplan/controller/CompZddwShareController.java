@@ -230,6 +230,12 @@ public class CompZddwShareController {
         }
         return null ;
     }
+
+    /**
+     * 标题计数
+     * @param select 标题选中列表
+     * @return
+     */
     public Map<String,Object> doTitleNum(String select){
         Map<String,Object> titleNumMap=new HashMap<String,Object>();
 
@@ -253,6 +259,11 @@ public class CompZddwShareController {
         return titleNumMap;
     }
 
+    /**
+     * 数字转中文
+     * @param string 源数字
+     * @return 中文数字
+     */
     private String toChinese(String string) {
         String[] s1 = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
         String[] s2 = { "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千" };
@@ -274,6 +285,11 @@ public class CompZddwShareController {
 
     }
 
+    /**
+     * 信息统计
+     * @param bvs
+     * @return
+     */
     public List<BuildingVO> doJxsl(List<BuildingVO> bvs){
 
         for(BuildingVO bv: bvs){
