@@ -170,7 +170,7 @@
                             <table class="data-table">
                                 <tr>
                                     <th width="120">建筑使用性质：</th>
-                                    <td><#if areaBuilding.jzl_jzsyxzmc??>${areaBuilding.jzl_jzsyxzmc}</#if></td>
+                                    <td width="300"><#if areaBuilding.jzl_jzsyxzmc??>${areaBuilding.jzl_jzsyxzmc}</#if></td>
                                     <th width="120">建筑结构：</th>
                                     <td><#if areaBuilding.jzl_jzjgmc??>${areaBuilding.jzl_jzjgmc}</#if></td>
                                 </tr>
@@ -194,11 +194,11 @@
                                     <td><#if areaBuilding.jzl_dxcs??>${areaBuilding.jzl_dxcs}层</#if></td>
                                 </tr>
                                 <tr>
-                                    <th width="120">功能描述：</th>
+                                    <th>功能描述：</th>
                                     <td colspan="3"><#if areaBuilding.jzl_gnms??>${areaBuilding.jzl_gnms}</#if></td>
                                 </tr>
                                 <tr>
-                                    <th width="120">备注：</th>
+                                    <th>备注：</th>
                                     <td colspan="3"><#if areaBuilding.bz??>${areaBuilding.bz}</#if></td>
                                 </tr>
                             </table>
@@ -208,7 +208,7 @@
                             <table class="data-table">
                                 <tr>
                                     <th width="120">装置名称：</th>
-                                    <td><#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if></td>
+                                    <td width="300"><#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if></td>
                                     <th width="120">建筑结构：</th>
                                     <td><#if areaBuilding.zzl_jzjg??>${areaBuilding.zzl_jzjg}</#if></td>
                                 </tr>
@@ -225,7 +225,7 @@
                                     <td><#if areaBuilding.zzl_jsfzrdh??>${areaBuilding.zzl_jsfzrdh}</#if></td>
                                 </tr>
                                 <tr>
-                                    <th width="120">备注：</th>
+                                    <th>备注：</th>
                                     <td colspan="3"><#if areaBuilding.bz??>${areaBuilding.bz}</#if></td>
                                 </tr>
                                 <tr>
@@ -264,9 +264,9 @@
                                     <td><#if areaBuilding.cgl_cgsl??>${areaBuilding.cgl_cgsl}</#if></td>
                                 </tr>
                                 <tr>
-                                    <th width="120">技术负责人：</th>
+                                    <th>技术负责人：</th>
                                     <td><#if areaBuilding.cgl_jsfzr??>${areaBuilding.cgl_jsfzr}</#if></td>
-                                    <th width="120">联系方式：</th>
+                                    <th>联系方式：</th>
                                     <td><#if areaBuilding.cgl_jsfzrdh??>${areaBuilding.cgl_jsfzrdh}</#if></td>
                                 </tr>
                                 <tr>
@@ -297,7 +297,7 @@
 
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">工作压力：</th>
+                                                        <th>工作压力：</th>
                                                         <td><#if pot.gzyl??>${pot.gzyl}</#if></td>
                                                         <th>容量：</th>
                                                         <td><#if pot.cgrl??>${pot.cgrl}</#if></td>
@@ -305,7 +305,7 @@
                                                         <td><#if pot.gdmj??>${pot.gdmj}</#if> ㎡</td>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">直径：</th>
+                                                        <th>直径：</th>
                                                         <td><#if pot.cgzj??>${pot.cgzj}</#if></td>
                                                         <th>高度：</th>
                                                         <td><#if pot.cggd??>${pot.cggd}</#if></td>
@@ -318,9 +318,9 @@
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">实际储量：</th>
+                                                        <th>实际储量：</th>
                                                         <td colspan="2"><#if pot.ccjzsjcl??>${pot.ccjzsjcl}</#if></td>
-                                                        <th width="120">液位高度：</th>
+                                                        <th>液位高度：</th>
                                                         <td colspan="2"><#if pot.ccjzywgd??>${pot.ccjzywgd}</#if></td>
                                                     </tr>
                                                     <tr>
@@ -341,9 +341,9 @@
                             </tr>
                             <#if areaBuilding.firefacilites['1001']?? || areaBuilding.firefacilites['1002']?? || areaBuilding.firefacilites['1003']?? ||
                             areaBuilding.firefacilites['1004']?? || areaBuilding.firefacilites['1005']??>
-                                <#if areaBuilding.firefacilites['1001']??>
-                                    <tr>
-                                        <td>
+                                <tr>
+                                    <td>
+                                        <#if areaBuilding.firefacilites['1001']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -354,16 +354,13 @@
                                                         <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
                                                     </tr>
                                                 </#list>
+
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['1002']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['1002']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -374,16 +371,12 @@
                                                         <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['1003']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['1003']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -394,16 +387,12 @@
                                                         <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['1004']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['1004']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="2" style="text-align:left">
@@ -416,12 +405,8 @@
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['1005']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['1005']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -432,13 +417,13 @@
                                                         <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="120">有无应急广播：</th>
-                                                        <td width="150"><#if xfss.ywyjgb??>${xfss.ywyjgb}</#if></td>
+                                                        <td width="120"><#if xfss.ywyjgb??>${xfss.ywyjgb}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
                             <#else>
                                 <tr>
                                     <td>无</td>
@@ -454,9 +439,9 @@
                             areaBuilding.firefacilites['2004']?? || areaBuilding.firefacilites['2005']?? || areaBuilding.firefacilites['2006']?? ||
                             areaBuilding.firefacilites['2007']?? || areaBuilding.firefacilites['2008']?? || areaBuilding.firefacilites['2009']?? ||
                             areaBuilding.firefacilites['2010']??>
-                                <#if areaBuilding.firefacilites['2001']??>
-                                    <tr>
-                                        <td>
+                                <tr>
+                                    <td>
+                                        <#if areaBuilding.firefacilites['2001']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -470,24 +455,20 @@
                                                     </tr>
                                                     <tr>
                                                         <th width="120">消火栓泵数量：</th>
-                                                        <td><#if xfss.xhssl??>${xfss.xhssl}</#if></td>
-                                                        <th width="130">消火栓最大流量：</th>
+                                                        <td width="300"><#if xfss.xhssl??>${xfss.xhssl}</#if></td>
+                                                        <th width="140">消火栓最大流量：</th>
                                                         <td><#if xfss.xhszdll??>${xfss.xhszdll} L/s</#if></td>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">喷淋泵数量：</th>
+                                                        <th>喷淋泵数量：</th>
                                                         <td><#if xfss.blbsl??>${xfss.blbsl}</#if></td>
-                                                        <th width="130">喷淋泵最大流量：</th>
+                                                        <th>喷淋泵最大流量：</th>
                                                         <td><#if xfss.plbzdll??>${xfss.plbzdll} L/s</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2002']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2002']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -500,18 +481,14 @@
                                                     </tr>
                                                     <tr>
                                                         <th width="120">水箱容量：</th>
-                                                        <td><#if xfss.sxrl??>${xfss.sxrl} m³</#if></td>
+                                                        <td width="300"><#if xfss.sxrl??>${xfss.sxrl} m³</#if></td>
                                                         <th width="120">补给速度：</th>
                                                         <td><#if xfss.bjsd??>${xfss.bjsd} L/s</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2003']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2003']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -524,24 +501,20 @@
                                                     </tr>
                                                     <tr>
                                                         <th width="120">水箱容量：</th>
-                                                        <td><#if xfss.sxrl??>${xfss.sxrl} m³</#if></td>
+                                                        <td width="300"><#if xfss.sxrl??>${xfss.sxrl} m³</#if></td>
                                                         <th width="165">是否有取水口（井）：</th>
                                                         <td><#if xfss.ywqsj??>${xfss.ywqsj}</#if></td>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">补给速度：</th>
+                                                        <th>补给速度：</th>
                                                         <td><#if xfss.bjsd??>${xfss.bjsd} L/s</#if></td>
-                                                        <th width="165">取水口（井）位置：</th>
+                                                        <th>取水口（井）位置：</th>
                                                         <td><#if xfss.qsjwz??>${xfss.qsjwz}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2004']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2004']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="6" style="text-align:left">
@@ -550,20 +523,16 @@
                                                 <#list areaBuilding.firefacilites['2004'] as xfss>
                                                     <tr>
                                                         <th width="80">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
                                                         <th width="100">是否可用：</th>
                                                         <td width="120"><#if xfss.sfky??>${xfss.sfky}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2005']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2005']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="6" style="text-align:left">
@@ -572,20 +541,16 @@
                                                 <#list areaBuilding.firefacilites['2005'] as xfss>
                                                     <tr>
                                                         <th width="80">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
                                                         <th width="100">是否可用：</th>
                                                         <td width="120"><#if xfss.sfky??>${xfss.sfky}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2006']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2006']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -593,25 +558,21 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['2006'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
+                                                        <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">型号：</th>
-                                                        <td><#if xfss.xh??>${xfss.xh}</#if></td>
+                                                        <th width="100">安装形式：</th>
+                                                        <td width="120"><#if xfss.azxsmc??>${xfss.azxsmc}</#if></td>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">安装形式：</th>
-                                                        <td><#if xfss.azxsmc??>${xfss.azxsmc}</#if></td>
-                                                        <th width="120">进水口尺寸：</th>
+                                                        <th>型号：</th>
+                                                        <td><#if xfss.xh??>${xfss.xh}</#if></td>
+                                                        <th>进水口尺寸：</th>
                                                         <td><#if xfss.jskcc??>${xfss.jskcc}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2007']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2007']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -619,19 +580,15 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['2007'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
+                                                        <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="120">有无喷淋系统：</th>
-                                                        <td><#if xfss.ywplxt??>${xfss.ywplxt}</#if></td>
+                                                        <td width="120"><#if xfss.ywplxt??>${xfss.ywplxt}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2008']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2008']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -644,18 +601,14 @@
                                                     </tr>
                                                     <tr>
                                                         <th width="120">供水强度：</th>
-                                                        <td><#if xfss.gsqd??>${xfss.gsqd} L/min.m2</#if></td>
-                                                        <th width="130">有无冷却水系统：</th>
+                                                        <td width="300"><#if xfss.gsqd??>${xfss.gsqd} L/min.m2</#if></td>
+                                                        <th width="140">有无冷却水系统：</th>
                                                         <td><#if xfss.ywlqsxt??>${xfss.ywlqsxt}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2009']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2009']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="6" style="text-align:left">
@@ -664,20 +617,16 @@
                                                 <#list areaBuilding.firefacilites['2009'] as xfss>
                                                     <tr>
                                                         <th width="80">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
                                                         <th width="100">是否可用：</th>
                                                         <td width="120"><#if xfss.isky??>${xfss.isky}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['2010']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['2010']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -688,13 +637,13 @@
                                                         <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="80">数量：</th>
-                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
                             <#else>
                                 <tr>
                                     <td>无</td>
@@ -708,9 +657,9 @@
                             </tr>
                             <#if areaBuilding.firefacilites['3001']?? || areaBuilding.firefacilites['3002']?? || areaBuilding.firefacilites['3003']?? ||
                             areaBuilding.firefacilites['3004']?? || areaBuilding.firefacilites['3005']??>
-                                <#if areaBuilding.firefacilites['3001']??>
-                                    <tr>
-                                        <td>
+                                <tr>
+                                    <td>
+                                        <#if areaBuilding.firefacilites['3001']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -719,24 +668,20 @@
                                                 <#list areaBuilding.firefacilites['3001'] as xfss>
                                                     <tr>
                                                         <th width="120">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <td width="300"><#if xfss.wz??>${xfss.wz}</#if></td>
                                                         <th width="140">泡沫液类型：</th>
                                                         <td><#if xfss.pmylxmc??>${xfss.pmylxmc}</#if></td>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">泡沫液储量：</th>
+                                                        <th>泡沫液储量：</th>
                                                         <td><#if xfss.pmycl??>${xfss.pmycl} t</#if></td>
-                                                        <th width="140">泡沫泵最大流量：</th>
+                                                        <th>泡沫泵最大流量：</th>
                                                         <td><#if xfss.pmbzdll??>${xfss.pmbzdll} L/s</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['3002']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['3002']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -744,19 +689,15 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['3002'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
+                                                        <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">是否可用：</th>
-                                                        <td><#if xfss.isky??>${xfss.isky}</#if></td>
+                                                        <th width="100">是否可用：</th>
+                                                        <td width="120"><#if xfss.isky??>${xfss.isky}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['3003']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['3003']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="6" style="text-align:left">
@@ -764,21 +705,17 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['3003'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">数量：</th>
+                                                        <th width="80">位置：</th>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
                                                         <td><#if xfss.sl??>${xfss.sl}</#if></td>
-                                                        <th width="120">是否可用：</th>
-                                                        <td><#if xfss.sfky??>${xfss.sfky}</#if></td>
+                                                        <th width="100">是否可用：</th>
+                                                        <td width="120"><#if xfss.sfky??>${xfss.sfky}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['3004']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['3004']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -786,25 +723,21 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['3004'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">型号：</th>
-                                                        <td><#if xfss.xh??>${xfss.xh}</#if></td>
+                                                        <th width="80">位置：</th>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
                                                     </tr>
                                                     <tr>
-                                                        <th width="120">数量：</th>
-                                                        <td><#if xfss.sl??>${xfss.sl}</#if></td>
-                                                        <th width="120">流量：</th>
+                                                        <th>型号：</th>
+                                                        <td><#if xfss.xh??>${xfss.xh}</#if></td>
+                                                        <th>流量：</th>
                                                         <td><#if xfss.ll??>${xfss.ll} L/s</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['3005']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['3005']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -812,16 +745,16 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['3005'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
+                                                        <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">数量：</th>
-                                                        <td width="150"><#if xfss.sl??>${xfss.sl}</#if></td>
+                                                        <th width="80">数量：</th>
+                                                        <td width="120"><#if xfss.sl??>${xfss.sl}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
                             <#else>
                                 <tr>
                                     <td>无</td>
@@ -834,9 +767,9 @@
                                 <th class="block-th">蒸汽灭火系统</th>
                             </tr>
                             <#if areaBuilding.firefacilites['4001']?? || areaBuilding.firefacilites['4002']??>
-                                <#if areaBuilding.firefacilites['4001']??>
-                                    <tr>
-                                        <td>
+                                <tr>
+                                    <td>
+                                        <#if areaBuilding.firefacilites['4001']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="6" style="text-align:left">
@@ -844,21 +777,17 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['4001'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">数量：</th>
+                                                        <th width="80">位置：</th>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
                                                         <td><#if xfss.sl??>${xfss.sl}</#if></td>
-                                                        <th width="120">额定压力：</th>
-                                                        <td><#if xfss.edyl??>${xfss.edyl} Mpa</#if></td>
+                                                        <th width="100">额定压力：</th>
+                                                        <td width="120"><#if xfss.edyl??>${xfss.edyl} Mpa</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['4002']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['4002']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="6" style="text-align:left">
@@ -866,18 +795,18 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['4002'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
-                                                        <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="120">数量：</th>
+                                                        <th width="80">位置：</th>
+                                                        <td width="340"><#if xfss.wz??>${xfss.wz}</#if></td>
+                                                        <th width="80">数量：</th>
                                                         <td><#if xfss.sl??>${xfss.sl}</#if></td>
-                                                        <th width="120">额定压力：</th>
-                                                        <td><#if xfss.edyl??>${xfss.edyl} Mpa</#if></td>
+                                                        <th width="100">额定压力：</th>
+                                                        <td width="120"><#if xfss.edyl??>${xfss.edyl} Mpa</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
                             <#else>
                                 <tr>
                                     <td>无</td>
@@ -895,13 +824,13 @@
                                         <table class="data-table">
                                             <#list areaBuilding.firefacilites['5000'] as xfss>
                                                 <tr>
-                                                    <th width="140">位置：</th>
+                                                    <th width="150">位置：</th>
                                                     <td colspan="3"><#if xfss.wz??>${xfss.wz}</#if></td>
                                                 </tr>
                                                 <tr>
-                                                    <th width="140">自动报警是否可用：</th>
-                                                    <td><#if xfss.iszdbj??>${xfss.iszdbj}</#if></td>
-                                                    <th width="140">联动控制是否可用：</th>
+                                                    <th width="150">自动报警是否可用：</th>
+                                                    <td width="270"><#if xfss.iszdbj??>${xfss.iszdbj}</#if></td>
+                                                    <th width="150">联动控制是否可用：</th>
                                                     <td><#if xfss.isldkz??>${xfss.isldkz}</#if></td>
                                                 </tr>
                                             </#list>
@@ -920,9 +849,9 @@
                                 <th class="block-th">防排烟措施</th>
                             </tr>
                             <#if areaBuilding.firefacilites['6001']?? || areaBuilding.firefacilites['6002']??>
-                                <#if areaBuilding.firefacilites['6001']??>
-                                    <tr>
-                                        <td>
+                                <tr>
+                                    <td>
+                                        <#if areaBuilding.firefacilites['6001']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="2" style="text-align:left">
@@ -930,17 +859,13 @@
                                                 </tr>
                                                 <#list areaBuilding.firefacilites['6001'] as xfss>
                                                     <tr>
-                                                        <th width="120">位置：</th>
+                                                        <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['6002']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['6002']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -950,14 +875,14 @@
                                                     <tr>
                                                         <th width="120">系统启闭位置：</th>
                                                         <td><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
-                                                        <th width="120">是否可用：</th>
-                                                        <td><#if xfss.isky??>${xfss.isky}</#if></td>
+                                                        <th width="100">是否可用：</th>
+                                                        <td width="120"><#if xfss.isky??>${xfss.isky}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
                             <#else>
                                 <tr>
                                     <td>无</td>
@@ -976,14 +901,14 @@
                                             <#list areaBuilding.firefacilites['7000'] as xfss>
                                                 <tr>
                                                     <th width="120">区域位置：</th>
-                                                    <td><#if xfss.qywz??>${xfss.qywz}</#if></td>
+                                                    <td width="300"><#if xfss.qywz??>${xfss.qywz}</#if></td>
                                                     <th width="120">区域面积：</th>
                                                     <td><#if xfss.qymj??>${xfss.qymj} ㎡</#if></td>
                                                 </tr>
                                                 <tr>
-                                                    <th width="120">分隔设施：</th>
+                                                    <th>分隔设施：</th>
                                                     <td><#if xfss.fgss??>${xfss.fgss}</#if></td>
-                                                    <th width="120">分隔位置：</th>
+                                                    <th>分隔位置：</th>
                                                     <td><#if xfss.fgwz??>${xfss.fgwz}</#if></td>
                                                 </tr>
                                             </#list>
@@ -1002,9 +927,9 @@
                                 <th class="block-th">其他灭火系统</th>
                             </tr>
                             <#if areaBuilding.firefacilites['8001']?? || areaBuilding.firefacilites['8002']??>
-                                <#if areaBuilding.firefacilites['8001']??>
-                                    <tr>
-                                        <td>
+                                <tr>
+                                    <td>
+                                        <#if areaBuilding.firefacilites['8001']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -1013,18 +938,14 @@
                                                 <#list areaBuilding.firefacilites['8001'] as xfss>
                                                     <tr>
                                                         <th width="120">起闭位置：</th>
-                                                        <td><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
+                                                        <td width="300"><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
                                                         <th width="120">作用范围：</th>
                                                         <td><#if xfss.zyfw??>${xfss.zyfw}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
-                                <#if areaBuilding.firefacilites['8002']??>
-                                    <tr>
-                                        <td>
+                                        </#if>
+                                        <#if areaBuilding.firefacilites['8002']??>
                                             <table class="data-table">
                                                 <tr>
                                                     <th colspan="4" style="text-align:left">
@@ -1033,15 +954,15 @@
                                                 <#list areaBuilding.firefacilites['8002'] as xfss>
                                                     <tr>
                                                         <th width="120">起闭位置：</th>
-                                                        <td><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
+                                                        <td width="300"><#if xfss.qbwz??>${xfss.qbwz}</#if></td>
                                                         <th width="120">作用范围：</th>
                                                         <td><#if xfss.zyfw??>${xfss.zyfw}</#if></td>
                                                     </tr>
                                                 </#list>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
                             <#else>
                                 <tr>
                                     <td>无</td>
