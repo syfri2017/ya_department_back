@@ -560,7 +560,7 @@
                                                     <tr>
                                                         <th width="80">位置：</th>
                                                         <td><#if xfss.wz??>${xfss.wz}</#if></td>
-                                                        <th width="100">安装形式：</th>
+                                                        <th width="120">安装形式：</th>
                                                         <td width="120"><#if xfss.azxsmc??>${xfss.azxsmc}</#if></td>
                                                     </tr>
                                                     <tr>
