@@ -4,133 +4,136 @@
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="uuid != null and uuid != '' ">
-		 and t.uuid = #{uuid}
+			and t.uuid = #{uuid}
 		</if>
 		<if test="jgid != null and jgid != '' ">
-		 and t.jgid = #{jgid}
+			and t.jgid = #{jgid}
 		</if>
 		<if test="sjjgid != null and sjjgid != '' ">
-		 and t.sjjgid = #{sjjgid}
+			and t.sjjgid = #{sjjgid}
 		</if>
 		<if test="jgmc != null and jgmc != '' ">
-		 and t.jgmc = #{jgmc}
+			and t.jgmc = #{jgmc}
 		</if>
 		<if test="jgjc != null and jgjc != '' ">
-		 and t.jgjc = #{jgjc}
+			and t.jgjc = #{jgjc}
 		</if>
 		<if test="jgxzdm != null and jgxzdm != '' ">
-		 and t.jgxzdm = #{jgxzdm}
+			and t.jgxzdm = #{jgxzdm}
 		</if>
 		<if test="jgdz != null and jgdz != '' ">
-		 and t.jgdz = #{jgdz}
+			and t.jgdz = #{jgdz}
 		</if>
 		<if test="jgms != null and jgms != '' ">
-		 and t.jgms = #{jgms}
+			and t.jgms = #{jgms}
 		</if>
 		<if test="xzqh != null and xzqh != '' ">
-		 and t.xzqh = #{xzqh}
+			and t.xzqh = #{xzqh}
 		</if>
 		<if test="yzbm != null and yzbm != '' ">
-		 and t.yzbm = #{yzbm}
+			and t.yzbm = #{yzbm}
 		</if>
 		<if test="lxdh != null and lxdh != '' ">
-		 and t.lxdh = #{lxdh}
+			and t.lxdh = #{lxdh}
 		</if>
 		<if test="czhm != null and czhm != '' ">
-		 and t.czhm = #{czhm}
+			and t.czhm = #{czhm}
 		</if>
 		<if test="lxr != null and lxr != '' ">
-		 and t.lxr = #{lxr}
+			and t.lxr = #{lxr}
 		</if>
 		<if test="ssym != null and ssym != '' ">
-		 and t.ssym = #{ssym}
+			and t.ssym = #{ssym}
 		</if>
+		<!--<if test="zp != null and zp != '' ">-->
+		<!--and t.zp = #{zp}-->
+		<!--</if>-->
 		<if test="zqdwbz != null and zqdwbz != '' ">
-		 and t.zqdwbz = #{zqdwbz}
+			and t.zqdwbz = #{zqdwbz}
 		</if>
 		<if test="bdLon != null and bdLon != '' ">
-		 and t.bd_lon = #{bdLon}
+			and t.bd_lon = #{bdLon}
 		</if>
 		<if test="bdLat != null and bdLat != '' ">
-		 and t.bd_lat = #{bdLat}
+			and t.bd_lat = #{bdLat}
 		</if>
 		<if test="gisX != null and gisX != '' ">
-		 and t.gis_x = #{gisX}
+			and t.gis_x = #{gisX}
 		</if>
 		<if test="gisY != null and gisY != '' ">
-		 and t.gis_y = #{gisY}
+			and t.gis_y = #{gisY}
 		</if>
 		<if test="gisH != null and gisH != '' ">
-		 and t.gis_h = #{gisH}
+			and t.gis_h = #{gisH}
 		</if>
 		<if test="glid != null and glid != '' ">
-		 and t.glid = #{glid}
+			and t.glid = #{glid}
 		</if>
 		<if test="xqglid != null and xqglid != '' ">
-		 and t.xqglid = #{xqglid}
+			and t.xqglid = #{xqglid}
 		</if>
 		<if test="jgtree != null and jgtree != '' ">
-		 and t.jgtree = #{jgtree}
+			and t.jgtree = #{jgtree}
 		</if>
 		<if test="jgqz != null and jgqz != '' ">
-		 and t.jgqz = #{jgqz}
+			and t.jgqz = #{jgqz}
 		</if>
 		<if test="xqmj != null and xqmj != '' ">
-		 and t.xqmj = #{xqmj}
+			and t.xqmj = #{xqmj}
 		</if>
 		<if test="xqfw != null and xqfw != '' ">
-		 and t.xqfw = #{xqfw}
+			and t.xqfw = #{xqfw}
 		</if>
 		<if test="jgcxzt != null and jgcxzt != '' ">
-		 and t.jgcxzt = #{jgcxzt}
+			and t.jgcxzt = #{jgcxzt}
 		</if>
 		<if test="jgcxsj != null and jgcxsj != '' ">
-		 and t.jgcxsj = #{jgcxsj}
+			and t.jgcxsj = #{jgcxsj}
 		</if>
 		<if test="cjrid != null and cjrid != '' ">
-		 and t.cjrid = #{cjrid}
+			and t.cjrid = #{cjrid}
 		</if>
 		<if test="cjrmc != null and cjrmc != '' ">
-		 and t.cjrmc = #{cjrmc}
+			and t.cjrmc = #{cjrmc}
 		</if>
 		<if test="cjsj != null and cjsj != '' ">
-		 and t.cjsj = #{cjsj}
+			and t.cjsj = #{cjsj}
 		</if>
 		<if test="xgrid != null and xgrid != '' ">
-		 and t.xgrid = #{xgrid}
+			and t.xgrid = #{xgrid}
 		</if>
 		<if test="xgrmc != null and xgrmc != '' ">
-		 and t.xgrmc = #{xgrmc}
+			and t.xgrmc = #{xgrmc}
 		</if>
 		<if test="xgsj != null and xgsj != '' ">
-		 and t.xgsj = #{xgsj}
+			and t.xgsj = #{xgsj}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
+			and t.delete_flag = #{deleteFlag}
 		</if>
 		<if test="datasource != null and datasource != '' ">
-		 and t.datasource = #{datasource}
+			and t.datasource = #{datasource}
 		</if>
 		<if test="bz != null and bz != '' ">
-		 and t.bz = #{bz}
+			and t.bz = #{bz}
 		</if>
 		<if test="jdh != null and jdh != '' ">
-		 and t.jdh = #{jdh}
+			and t.jdh = #{jdh}
 		</if>
 		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
+			and t.sjc = #{sjc}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
+			and t.reserve1 = #{reserve1}
 		</if>
 		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
+			and t.reserve2 = #{reserve2}
 		</if>
 		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
+			and t.reserve3 = #{reserve3}
 		</if>
 		<if test="reserve4 != null and reserve4 != '' ">
-		 and t.reserve4 = #{reserve4}
+			and t.reserve4 = #{reserve4}
 		</if>
 	</sql>
 
@@ -150,6 +153,7 @@
 		t.czhm czhm,
 		t.lxr lxr,
 		t.ssym ssym,
+		-- 		t.zp zp,
 		t.zqdwbz zqdwbz,
 		t.bd_lon bdLon,
 		t.bd_lat bdLat,
@@ -188,51 +192,51 @@
 	</select>
 
 	<!--4.按条件查询记录-->
-	<select id="doSearchListByVO" parameterType="OrganizationVO"  resultType="OrganizationVO"> 
-		SELECT 
-			<include refid="SQL_CONTENT"/>
-		FROM SYS_ORGANIZATION t  WHERE t.DELETE_FLAG = 'N' 
-			<include refid="SQL_CONDITION"/>
+	<select id="doSearchListByVO" parameterType="OrganizationVO"  resultType="OrganizationVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_ORGANIZATION t  WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--5.根据ID查询记录-->
-	<select id="doFindById" parameterType="OrganizationVO"  resultType="OrganizationVO">  
-		SELECT 
+	<select id="doFindById" parameterType="OrganizationVO"  resultType="OrganizationVO">
+		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM SYS_ORGANIZATION t 
-		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value} 
+		FROM SYS_ORGANIZATION t
+		WHERE t.DELETE_FLAG = 'N' AND  t.UUID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
-	<insert  id="doInsertByVO"  parameterType="OrganizationVO"> 
-		<selectKey resultType="String" order="BEFORE" keyProperty="UUID">
-			SELECT SYS_GUID() AS UUID FROM DUAL
+	<insert  id="doInsertByVO"  parameterType="OrganizationVO">
+		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
+			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
 		INSERT INTO SYS_ORGANIZATION(uuid,jgid,sjjgid,jgmc,jgjc,jgxzdm,jgdz,jgms,xzqh,yzbm,lxdh,czhm,lxr,ssym,zqdwbz,bd_lon,bd_lat,gis_x,gis_y,gis_h,glid,xqglid,jgtree,jgqz,xqmj,xqfw,jgcxzt,jgcxsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES(#{uuid,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{sjjgid,jdbcType=VARCHAR},#{jgmc,jdbcType=VARCHAR},#{jgjc,jdbcType=VARCHAR},#{jgxzdm,jdbcType=VARCHAR},#{jgdz,jdbcType=VARCHAR},#{jgms,jdbcType=VARCHAR},#{xzqh,jdbcType=VARCHAR},#{yzbm,jdbcType=VARCHAR},#{lxdh,jdbcType=VARCHAR},#{czhm,jdbcType=VARCHAR},#{lxr,jdbcType=VARCHAR},#{ssym,jdbcType=VARCHAR},#{zqdwbz,jdbcType=VARCHAR},#{bdLon,jdbcType=DOUBLE},#{bdLat,jdbcType=DOUBLE},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE},#{gisH,jdbcType=DOUBLE},#{glid,jdbcType=VARCHAR},#{xqglid,jdbcType=VARCHAR},#{jgtree,jdbcType=VARCHAR},#{jgqz,jdbcType=DOUBLE},#{xqmj,jdbcType=DOUBLE},#{xqfw,jdbcType=VARCHAR},#{jgcxzt,jdbcType=VARCHAR},#{jgcxsj,jdbcType=DATE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
-	 </insert>
+	</insert>
 
 	<!--7.批量插入-->
-	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List">
 		INSERT INTO SYS_ORGANIZATION(uuid,jgid,sjjgid,jgmc,jgjc,jgxzdm,jgdz,jgms,xzqh,yzbm,lxdh,czhm,lxr,ssym,zqdwbz,bd_lon,bd_lat,gis_x,gis_y,gis_h,glid,xqglid,jgtree,jgqz,xqmj,xqfw,jgcxzt,jgcxsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		SELECT SYS_GUID() UUID, A.*
-		FROM ( 
+		SELECT SYS_GUID() uuid, A.*
+		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
-		SELECT
+			SELECT
 			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.sjjgid,jdbcType=VARCHAR} sjjgid,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.jgjc,jdbcType=VARCHAR} jgjc,#{item.jgxzdm,jdbcType=VARCHAR} jgxzdm,#{item.jgdz,jdbcType=VARCHAR} jgdz,#{item.jgms,jdbcType=VARCHAR} jgms,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.yzbm,jdbcType=VARCHAR} yzbm,#{item.lxdh,jdbcType=VARCHAR} lxdh,#{item.czhm,jdbcType=VARCHAR} czhm,#{item.lxr,jdbcType=VARCHAR} lxr,#{item.ssym,jdbcType=VARCHAR} ssym,#{item.zqdwbz,jdbcType=VARCHAR} zqdwbz,#{item.bdLon,jdbcType=DOUBLE} bd_lon,#{item.bdLat,jdbcType=DOUBLE} bd_lat,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.gisH,jdbcType=DOUBLE} gis_h,#{item.glid,jdbcType=VARCHAR} glid,#{item.xqglid,jdbcType=VARCHAR} xqglid,#{item.jgtree,jdbcType=VARCHAR} jgtree,#{item.jgqz,jdbcType=DOUBLE} jgqz,#{item.xqmj,jdbcType=DOUBLE} xqmj,#{item.xqfw,jdbcType=VARCHAR} xqfw,#{item.jgcxzt,jdbcType=VARCHAR} jgcxzt,#{item.jgcxsj,jdbcType=DATE} jgcxsj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
-		FROM DUAL
+			FROM DUAL
 		</foreach>
 		) A
 	</insert>
 
 	<!--8.按主键逻辑删除-->
-	<update id="doDeleteById"  parameterType="String"> 
+	<update id="doDeleteById"  parameterType="String">
 		UPDATE  SYS_ORGANIZATION t SET t.DELETE_FLAG = 'Y'  WHERE 1=1   AND t.UUID = #{value}
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="OrganizationVO"> 
-		UPDATE   SYS_ORGANIZATION  
+	<update  id="doUpdateByVO"  parameterType="OrganizationVO">
+		UPDATE   SYS_ORGANIZATION
 		<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="jgid != null">jgid=#{jgid},</if>
@@ -248,6 +252,7 @@
 			<if test="czhm != null">czhm=#{czhm},</if>
 			<if test="lxr != null">lxr=#{lxr},</if>
 			<if test="ssym != null">ssym=#{ssym},</if>
+			-- 			<if test="zp != null">zp=#{zp},</if>
 			<if test="zqdwbz != null">zqdwbz=#{zqdwbz},</if>
 			<if test="bdLon != null">bd_lon=#{bdLon},</if>
 			<if test="bdLat != null">bd_lat=#{bdLat},</if>
@@ -278,7 +283,7 @@
 			<if test="reserve3 != null">reserve3=#{reserve3},</if>
 			<if test="reserve4 != null">reserve4=TO_DATE(#{reserve4},'yyyy-MM-dd HH24:mi:ss')</if>
 		</set>
-		WHERE  UUID = #{UUID}
+		WHERE  UUID = #{uuid}
 	</update>
 
 	<!--10.批量修改-->
@@ -288,62 +293,128 @@
 		<foreach collection="list" item="item" index="index" separator="," >
 			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.sjjgid,jdbcType=VARCHAR} sjjgid,#{item.jgmc,jdbcType=VARCHAR} jgmc,#{item.jgjc,jdbcType=VARCHAR} jgjc,#{item.jgxzdm,jdbcType=VARCHAR} jgxzdm,#{item.jgdz,jdbcType=VARCHAR} jgdz,#{item.jgms,jdbcType=VARCHAR} jgms,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.yzbm,jdbcType=VARCHAR} yzbm,#{item.lxdh,jdbcType=VARCHAR} lxdh,#{item.czhm,jdbcType=VARCHAR} czhm,#{item.lxr,jdbcType=VARCHAR} lxr,#{item.ssym,jdbcType=VARCHAR} ssym,#{item.zqdwbz,jdbcType=VARCHAR} zqdwbz,#{item.bdLon,jdbcType=DOUBLE} bd_lon,#{item.bdLat,jdbcType=DOUBLE} bd_lat,#{item.gisX,jdbcType=DOUBLE} gis_x,#{item.gisY,jdbcType=DOUBLE} gis_y,#{item.gisH,jdbcType=DOUBLE} gis_h,#{item.glid,jdbcType=VARCHAR} glid,#{item.xqglid,jdbcType=VARCHAR} xqglid,#{item.jgtree,jdbcType=VARCHAR} jgtree,#{item.jgqz,jdbcType=DOUBLE} jgqz,#{item.xqmj,jdbcType=DOUBLE} xqmj,#{item.xqfw,jdbcType=VARCHAR} xqfw,#{item.jgcxzt,jdbcType=VARCHAR} jgcxzt,#{item.jgcxsj,jdbcType=DATE} jgcxsj,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
-		ON DUPLICATE KEY UPDATE   
-			uuid = VALUES(uuid),
-			jgid = VALUES(jgid),
-			sjjgid = VALUES(sjjgid),
-			jgmc = VALUES(jgmc),
-			jgjc = VALUES(jgjc),
-			jgxzdm = VALUES(jgxzdm),
-			jgdz = VALUES(jgdz),
-			jgms = VALUES(jgms),
-			xzqh = VALUES(xzqh),
-			yzbm = VALUES(yzbm),
-			lxdh = VALUES(lxdh),
-			czhm = VALUES(czhm),
-			lxr = VALUES(lxr),
-			ssym = VALUES(ssym),
-			zqdwbz = VALUES(zqdwbz),
-			bd_lon = VALUES(bd_lon),
-			bd_lat = VALUES(bd_lat),
-			gis_x = VALUES(gis_x),
-			gis_y = VALUES(gis_y),
-			gis_h = VALUES(gis_h),
-			glid = VALUES(glid),
-			xqglid = VALUES(xqglid),
-			jgtree = VALUES(jgtree),
-			jgqz = VALUES(jgqz),
-			xqmj = VALUES(xqmj),
-			xqfw = VALUES(xqfw),
-			jgcxzt = VALUES(jgcxzt),
-			jgcxsj = VALUES(jgcxsj),
-			cjrid = VALUES(cjrid),
-			cjrmc = VALUES(cjrmc),
-			cjsj = VALUES(cjsj),
-			xgrid = VALUES(xgrid),
-			xgrmc = VALUES(xgrmc),
-			xgsj = VALUES(xgsj),
-			delete_flag = VALUES(delete_flag),
-			datasource = VALUES(datasource),
-			bz = VALUES(bz),
-			jdh = VALUES(jdh),
-			sjc = VALUES(sjc),
-			reserve1 = VALUES(reserve1),
-			reserve2 = VALUES(reserve2),
-			reserve3 = VALUES(reserve3),
-			reserve4 = VALUES(reserve4)
+		ON DUPLICATE KEY UPDATE
+		uuid = VALUES(uuid),
+		jgid = VALUES(jgid),
+		sjjgid = VALUES(sjjgid),
+		jgmc = VALUES(jgmc),
+		jgjc = VALUES(jgjc),
+		jgxzdm = VALUES(jgxzdm),
+		jgdz = VALUES(jgdz),
+		jgms = VALUES(jgms),
+		xzqh = VALUES(xzqh),
+		yzbm = VALUES(yzbm),
+		lxdh = VALUES(lxdh),
+		czhm = VALUES(czhm),
+		lxr = VALUES(lxr),
+		ssym = VALUES(ssym),
+		-- 			zp = VALUES(zp),
+		zqdwbz = VALUES(zqdwbz),
+		bd_lon = VALUES(bd_lon),
+		bd_lat = VALUES(bd_lat),
+		gis_x = VALUES(gis_x),
+		gis_y = VALUES(gis_y),
+		gis_h = VALUES(gis_h),
+		glid = VALUES(glid),
+		xqglid = VALUES(xqglid),
+		jgtree = VALUES(jgtree),
+		jgqz = VALUES(jgqz),
+		xqmj = VALUES(xqmj),
+		xqfw = VALUES(xqfw),
+		jgcxzt = VALUES(jgcxzt),
+		jgcxsj = VALUES(jgcxsj),
+		cjrid = VALUES(cjrid),
+		cjrmc = VALUES(cjrmc),
+		cjsj = VALUES(cjsj),
+		xgrid = VALUES(xgrid),
+		xgrmc = VALUES(xgrmc),
+		xgsj = VALUES(xgsj),
+		delete_flag = VALUES(delete_flag),
+		datasource = VALUES(datasource),
+		bz = VALUES(bz),
+		jdh = VALUES(jdh),
+		sjc = VALUES(sjc),
+		reserve1 = VALUES(reserve1),
+		reserve2 = VALUES(reserve2),
+		reserve3 = VALUES(reserve3),
+		reserve4 = VALUES(reserve4)
 	</update>
 
 	<!--11.根据对象查询记录-->
-	<select id="doFindByVO" parameterType="OrganizationVO"  resultType="OrganizationVO">  
-		SELECT 
+	<select id="doFindByVO" parameterType="OrganizationVO"  resultType="OrganizationVO">
+		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM SYS_ORGANIZATION t 
-		WHERE t.DELETE_FLAG = 'N' 
+		FROM SYS_ORGANIZATION t
+		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据用户ID获取其组织机构-->
+	<!--12.根据单位名称查询-->
+	<select id="doSearchByVO" parameterType="OrganizationVO"  resultType="OrganizationVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_ORGANIZATION t
+		WHERE t.DELETE_FLAG = 'N'
+		<if test="zzjg != null and zzjg != '' ">
+			and t.zzjg LIKE concat(concat('%',#{zzjg}),'%')
+		</if>
+	</select>
+
+	<!--13.根据ID查询记录-->
+	<select id="doFindDetailById" parameterType="String"  resultType="OrganizationVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_ORGANIZATION t
+		WHERE t.DELETE_FLAG = 'N' AND  t.JGID = #{organizationId}
+	</select>
+
+	<!--  树形节点	-->
+	<!--16.根据角色列表查询资源-->
+	<select id="doFindResourceByRoleList" parameterType="java.util.List" resultType="OrganizationVO">
+		SELECT DISTINCT r.resourceid,r.resourcename FROM SYS_ROLE_RESOURCE c
+		LEFT JOIN SYS_RESOURCE r ON c.resourceid = r.resourceid
+		WHERE c.delete_flag = 'N' AND r.delete_flag = 'N'
+		AND ROLEID IN
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator="," >
+			#{item.roleid,jdbcType=VARCHAR}
+		</foreach>
+	</select>
+
+	<!--17.根据角色列表，父节点获取资源列表-->
+	<select id="doFindResourceByParentId" parameterType="java.util.Map" resultType="OrganizationVO">
+		SELECT DISTINCT r.glid,r.xqglid
+		FROM JGTREE r
+		LEFT JOIN SYS_ROLE_RESOURCE c ON r.resourceid = c.resourceid
+		WHERE r.delete_flag = 'N'
+		<if test="roleList != null and roleList.size() > 0">
+			AND roleid IN
+			<foreach collection="roleList" item="item" index="index" open="(" close=")" separator="," >
+				#{item.roleid,jdbcType=VARCHAR}
+			</foreach>
+		</if>
+		<if test="parentid!=null">
+			AND parentid = #{parentid}
+		</if>
+		ORDER BY seqno
+	</select>
+
+	<!--18.根据父节点ID查询最大序号-->
+	<select id="getMaxSegno" parameterType="String" resultType="String">
+		SELECT MAX(seqno) seqno FROM sys_resource WHERE delete_flag = 'N' AND parentid = #{VALUE}
+	</select>
+
+	<!--19.获取所有机构-->
+	<select id="doFindAllOrganization" parameterType="OrganizationVO"  resultType="OrganizationVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM SYS_ORGANIZATION t
+		WHERE t.DELETE_FLAG = 'N'
+		AND t.JGID ='01000000'
+		OR (SUBSTR(t.JGID,0,1) != '0' AND (t.JGJC LIKE '%总队' OR t.JGJC LIKE '%支队' OR t.JGJC LIKE '%大队' OR t.JGJC LIKE '%中队'))
+		ORDER BY JGID
+	</select>
+
+	<!--20.根据用户ID获取其组织机构-->
 	<select id="doFindOrganizationByUserid" parameterType="String" resultType="OrganizationVO">
 		SELECT <include refid="SQL_CONTENT"/>
 		FROM SYS_ORGANIZATION t
@@ -352,7 +423,7 @@
 		AND uuid = (SELECT organization_id FROM SYS_USER WHERE userid = #{value})
 	</select>
 
-	<!--13.获取所有总队-->
+	<!--21.获取所有总队-->
 	<select id="getZongdui" resultType="OrganizationVO">
 		SELECT <include refid="SQL_CONTENT"/>
 		FROM SYS_ORGANIZATION t

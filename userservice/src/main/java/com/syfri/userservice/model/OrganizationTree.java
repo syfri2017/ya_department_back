@@ -1,4 +1,4 @@
-package com.syfri.digitalplan.model.basicinfo.organization;
+package com.syfri.userservice.model;
 
 import com.syfri.baseapi.model.ValueObject;
 

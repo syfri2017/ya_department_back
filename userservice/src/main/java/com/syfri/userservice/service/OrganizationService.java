@@ -1,6 +1,7 @@
 package com.syfri.userservice.service;
 
 import com.syfri.baseapi.service.BaseService;
+import com.syfri.userservice.model.OrganizationTree;
 import com.syfri.userservice.model.OrganizationVO;
 
 import java.util.List;
@@ -12,4 +13,10 @@ public interface OrganizationService  extends BaseService<OrganizationVO>{
 
 	/*获取所有总队*/
 	List<OrganizationVO> getZongdui();
+
+	/*--根据重点单位ID获取重点单位详情-*/
+	List<OrganizationVO> doFindDetailById(String organizationId);
+
+	/*--获取全部机构.--*/
+	List<OrganizationTree> doFindAllOrganization();
 }

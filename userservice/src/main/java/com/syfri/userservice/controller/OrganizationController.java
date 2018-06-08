@@ -2,6 +2,7 @@ package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
+import com.syfri.userservice.model.OrganizationTree;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.userservice.model.OrganizationVO;
 import com.syfri.userservice.service.OrganizationService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("organization")
@@ -24,7 +27,7 @@ public class OrganizationController  extends BaseController<OrganizationVO>{
 	}
 
 	/**
-	 * 根据权限获取资源信息
+	 * 获取所有总队信息
 	 */
 	@ApiOperation(value="获取所有总队",notes="列表信息")
 //	@RequiresPermissions("organization:list")
@@ -33,6 +36,39 @@ public class OrganizationController  extends BaseController<OrganizationVO>{
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(organizationService.getZongdui());
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 获取全部机构树
+	 */
+	@ApiOperation(value="获取全部机构树",notes="查询")
+	@PostMapping("/getOrganizationtree")
+	public @ResponseBody ResultVO getOrganizationtree(){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			List<OrganizationTree> result = organizationService.doFindAllOrganization();
+			resultVO.setResult(result);
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 根据id获取预案信息
+	 */
+	@ApiOperation(value="根据id获取预案信息",notes="列表信息")
+	@GetMapping("/doFindById/{pkid}")
+	public @ResponseBody ResultVO doFindDetailById(@PathVariable String pkid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(organizationService.doFindDetailById(pkid));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
