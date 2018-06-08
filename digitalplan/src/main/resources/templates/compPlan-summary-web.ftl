@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <th width="120">单位性质：</th>
-                        <td width="300"><#if compZddwInfo.dwlbmc??>${compZddwInfo.dwlbmc}</#if></td>
+                        <td width="300"><#if compZddwInfo.dwxzmc??>${compZddwInfo.dwxzmc}</#if></td>
                         <th width="120">值班电话：</th>
                         <td><#if compZddwInfo.zbdh??>${compZddwInfo.zbdh}</#if></td>
                     </tr>
@@ -158,7 +158,9 @@
             <#if disaster??>
                 <div id="zzbs_1" class="sub-block block-level-2" data-menu-text="灾情部位-${disaster.zqbw}">
                     <h3 class="sub-block-header">
-                        <span class="header-title-inner">灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if></span>
+                        <span class="header-title-inner">
+                            ${disaster_index+1}.灾情部位-<#if disaster.zqbw??>${disaster.zqbw}</#if>
+                        </span>
                     </h3>
                     <div class="sub-block-body">
                         <table class="data-table">
@@ -277,71 +279,56 @@
         </#list>
         </div>
         <!-- end 灾情设定与力量部署、要点提示 -->
-
-        <!-- 这段注释说不定以后能用上 -->
-        <!-- <div id="xgzy" class="content-block block-level-1" data-menu-text="相关资源">
+        <!-- 附图 -->
+        <div id="photos" class="content-block block-level-1" data-menu-text="附图（张）">
             <h2 class="block-header">
-                <span class="header-title-inner">相关资源</span>
+                <span class="header-title-inner">附图</span>
             </h2>
-            <div class="block-body">
-                <table class="data-table">
-                    <tr>
-                        <td style="text-align:center">
-                            <a href="#" class="attachment-item file-type-doc" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-xls" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-ppt" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-pdf" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-txt" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-img" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-video" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-audio" target="_blank">{{文件名}}</a>
-                            <a href="#" class="attachment-item file-type-unkonwn" target="_blank">{{文件名}}</a>
-                        </td>
-                    </tr>
-                </table>
+            <div class="sub-block">
+                <div id="photos_1" class="sub-block block-level-2" data-menu-text="实景照片-万达中心">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">实景照片 - 万达中心</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/sjtp.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_2" class="sub-block block-level-2" data-menu-text="总平面图-万达中心">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">总平面图 - 万达中心</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/zpmt.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_3" class="sub-block block-level-2" data-menu-text="内部平面图-B1层平面图">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">内部平面图 - B1层平面图</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/nbpmtB1.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_4" class="sub-block block-level-2" data-menu-text="内部平面图-4层平面图">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">内部平面图 - 4层平面图</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/nbpmt4.png" alt=""/>
+                    </div>
+                </div>
+                <div id="photos_5" class="sub-block block-level-2" data-menu-text="作战部署图-灾情4-33层力量部署图">
+                    <h3 class="sub-block-header">
+                        <span class="header-title-inner">作战部署图 - 灾情4 - 33层力量部署图</span>
+                    </h3>
+                    <div class="sub-block-body">
+                        <img class="photo-tag" src="http://localhost:8090/upload/pic/1clbst.png" alt=""/>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- end 附图 -->
 
-        <div id="gjts" class="content-block block-level-1" data-menu-text="关键图示">
-            <h2 class="block-header">
-                <span class="header-title-inner">关键图示</span>
-            </h2>
-            <div class="block-body">
-                <table class="data-table">
-                    <tr>
-                        <td style="text-align:center">
-                            <ul class="images-wrap">
-                                <li style="background-image:url('')">
-                                    <img src="" alt="{{描述}}" />
-                                </li>
-                                <li style="background-image:url('')">
-                                    <img src="" alt="{{描述}}" />
-                                </li>
-                                <li style="background-image:url('')">
-                                    <img src="" alt="{{描述}}" />
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div> -->
-
-    <#--<div id="qjmy" class="content-block block-level-1" data-menu-text="全景漫游">-->
-    <#--<h2 class="block-header">-->
-    <#--<span class="header-title-inner">全景漫游</span>-->
-    <#--</h2>-->
-    <#--<#if panoList??>-->
-    <#--<#list panoList as pano>-->
-    <#--<div class="block-body" style="text-align:center;">-->
-    <#--<a href="${pano.publishUrl}" class="pano-item" target="_blank">-->
-    <#--<span class="pano-item-title">全景漫游</span>-->
-    <#--&lt;#&ndash;<span class="pano-item-desc">{漫游描述}</span>&ndash;&gt;-->
-    <#--</a>-->
-    <#--</div>-->
-    <#--</#list>-->
-    <#--</#if>-->
-    <#--</div>-->
     </div>
 </div>
 
@@ -368,7 +355,8 @@
             new Viewer(item);
         })
         var currentUrl = window.location.href;
-        var qrcodeAPI = 'http://pan.baidu.com/share/qrcode?w=150&h=150&url=';
+//        var qrcodeAPI = 'http://pan.baidu.com/share/qrcode?w=150&h=150&url=';
+        var qrcodeAPI = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=';
         $('.qrcode-img').attr('src', qrcodeAPI + currentUrl);
 
 
