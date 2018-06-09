@@ -403,4 +403,26 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		}
 		return resultVO;
 	}
+
+	/**
+	 * @Description: 查询燃烧物质树状资源，数据结构为（1，2）
+	 * @Param: [codetype]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/6/9 16:40
+	 */
+	@ApiOperation(value="查询燃烧物质树状资源",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@GetMapping("/getRswzTree/{codetype}")
+	public @ResponseBody ResultVO getRswzTree(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindRswzCodelisttree(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
