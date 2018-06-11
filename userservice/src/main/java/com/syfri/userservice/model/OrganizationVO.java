@@ -53,6 +53,9 @@ public class OrganizationVO extends ValueObject implements Serializable{
 	private String reserve3;	//
 	private String reserve4;
 
+	private String jgxzmc; //机构性质名称
+	private String xzqhmc; //行政区划名称
+
 	public String getUuid(){
 		return uuid;
 	}
@@ -316,5 +319,18 @@ public class OrganizationVO extends ValueObject implements Serializable{
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public String getJgxzmc() {
+		return jgxzmc;
+	}
+	public void setJgxzmc(String jgxzmc) {
+		this.jgxzmc = jgxzmc;
+	}
+	public String getXzqhmc() {
+		return xzqhmc;
+	}
+	public void setXzqhmc(String xzqhmc) {
+		this.xzqhmc = xzqhmc;
 	}
 }

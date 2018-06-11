@@ -7,22 +7,24 @@
 			and t.uuid = #{uuid}
 		</if>
 		<if test="zbbm != null and zbbm != '' ">
-			and t.zbbm = #{zbbm}
+			and t.zbbm LIKE concat(concat('%',#{zbbm}),'%')
 		</if>
 		<if test="zbmc != null and zbmc != '' ">
-			and t.zbmc = #{zbmc}
+			and t.zbmc LIKE concat(concat('%',#{zbmc}),'%')
 		</if>
 		<if test="ssdz != null and ssdz != '' ">
-			and t.ssdz = #{ssdz}
+			and t.ssdz IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZID = #{ssdz}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
 		</if>
-		<if test="ssdzmc != null and ssdzmc != '' ">
-			and t.ssdzmc = #{ssdzmc}
+		<if test="xzqh != null and xzqh != '' ">
+			and t.xzqh = #{xzqh}
 		</if>
-		<if test="xzqy != null and xzqy != '' ">
-			and t.xzqy = #{xzqy}
-		</if>
-		<if test="xssd != null and xssd != '' ">
-			and t.xssd = #{xssd}
+		<if test="zblx != null and zblx != '' ">
+			and t.zblx LIKE concat(#{zblx},'%')
 		</if>
 		<if test="sccj != null and sccj != '' ">
 			and t.sccj = #{sccj}
@@ -30,35 +32,23 @@
 		<if test="zcbl != null and zcbl != '' ">
 			and t.zcbl = #{zcbl}
 		</if>
-		<if test="kcsl != null and kcsl != '' ">
-			and t.kcsl = #{kcsl}
+		<if test="kysl != null and kysl != '' ">
+			and t.kysl = #{kysl}
+		</if>
+		<if test="kysl_min != null and kysl_min != '' ">
+			and t.kysl &gt;= #{kysl_min}
+		</if>
+		<if test="kysl_max != null and kysl_max != '' ">
+			and t.kysl &lt;= #{kysl_max}
 		</if>
 		<if test="zzsl != null and zzsl != '' ">
 			and t.zzsl = #{zzsl}
 		</if>
-		<if test="wxsl != null and wxsl != '' ">
-			and t.wxsl = #{wxsl}
+		<if test="shsl != null and shsl != '' ">
+			and t.shsl = #{shsl}
 		</if>
 		<if test="ztsl != null and ztsl != '' ">
 			and t.ztsl = #{ztsl}
-		</if>
-		<if test="cjrid != null and cjrid != '' ">
-			and t.cjrid = #{cjrid}
-		</if>
-		<if test="cjrmc != null and cjrmc != '' ">
-			and t.cjrmc = #{cjrmc}
-		</if>
-		<if test="cjsj != null and cjsj != '' ">
-			and t.cjsj = #{cjsj}
-		</if>
-		<if test="xgrid != null and xgrid != '' ">
-			and t.xgrid = #{xgrid}
-		</if>
-		<if test="xgrmc != null and xgrmc != '' ">
-			and t.xgrmc = #{xgrmc}
-		</if>
-		<if test="xgsj != null and xgsj != '' ">
-			and t.xgsj = #{xgsj}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
 			and t.delete_flag = #{deleteFlag}
@@ -96,20 +86,14 @@
 		t.zbmc zbmc,
 		t.ssdz ssdz,
 		t.ssdzmc ssdzmc,
-		t.xzqy xzqy,
-		t.xssd xssd,
+		t.xzqh xzqh,
+		t.zblx zblx,
 		t.sccj sccj,
 		t.zcbl zcbl,
-		t.kcsl kcsl,
+		t.kysl kysl,
 		t.zzsl zzsl,
-		t.wxsl wxsl,
+		t.shsl shsl,
 		t.ztsl ztsl,
-		t.cjrid cjrid,
-		t.cjrmc cjrmc,
-		TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
-		t.xgrid xgrid,
-		t.xgrmc xgrmc,
-		TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
 		t.delete_flag deleteFlag,
 		t.datasource datasource,
 		t.bz bz,
@@ -139,10 +123,10 @@
 		Left Join YAGL_XFDZ dz On dz.DZID = t.SSDZ And dz.DELETE_FLAG = 'N'
 		<!--行政区划-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'XZQH' And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.XZQY = c2.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c2 On c2.CODEID = c1.CODEID And c2.DELETE_FLAG = 'N' and t.XZQH = c2.CODE_VALUE
 		<!--装备类型-->
 		Left Join SYS_CODELIST c3 on c3.CODETYPE = 'ZBQCLX' And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.XSSD = c4.CODE_VALUE
+		Left Join SYS_CODELIST_DETAIL c4 On c4.CODEID = c3.CODEID And c4.DELETE_FLAG = 'N' and t.ZBLX = c4.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		ORDER BY ssdz,zbmc ASC
@@ -161,18 +145,18 @@
 		<selectKey resultType="String" order="BEFORE" keyProperty="uuid">
 			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
-		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqy,xssd,sccj,zcbl,kcsl,zzsl,wxsl,ztsl,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{uuid,jdbcType=VARCHAR},#{zbbm,jdbcType=VARCHAR},#{zbmc,jdbcType=VARCHAR},#{ssdz,jdbcType=VARCHAR},#{ssdzmc,jdbcType=VARCHAR},#{xzqy,jdbcType=VARCHAR},#{xssd,jdbcType=DOUBLE},#{sccj,jdbcType=VARCHAR},#{zcbl,jdbcType=DOUBLE},#{kcsl,jdbcType=DOUBLE},#{zzsl,jdbcType=DOUBLE},#{wxsl,jdbcType=DOUBLE},#{ztsl,jdbcType=DOUBLE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqh,zblx,sccj,zcbl,kysl,zzsl,shsl,ztsl,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		VALUES(#{uuid,jdbcType=VARCHAR},#{zbbm,jdbcType=VARCHAR},#{zbmc,jdbcType=VARCHAR},#{ssdz,jdbcType=VARCHAR},#{ssdzmc,jdbcType=VARCHAR},#{xzqh,jdbcType=VARCHAR},#{zblx,jdbcType=DOUBLE},#{sccj,jdbcType=VARCHAR},#{zcbl,jdbcType=DOUBLE},#{kysl,jdbcType=DOUBLE},#{zzsl,jdbcType=DOUBLE},#{shsl,jdbcType=DOUBLE},#{ztsl,jdbcType=DOUBLE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	</insert>
 
 	<!--7.批量插入-->
 	<insert  id="doBatchInsertByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqy,xssd,sccj,zcbl,kcsl,zzsl,wxsl,ztsl,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqh,zblx,sccj,zcbl,kysl,zzsl,shsl,ztsl,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		SELECT SYS_GUID() uuid, A.*
 		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
 			SELECT
-			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.zbbm,jdbcType=VARCHAR} zbbm,#{item.zbmc,jdbcType=VARCHAR} zbmc,#{item.ssdz,jdbcType=VARCHAR} ssdz,#{item.ssdzmc,jdbcType=VARCHAR} ssdzmc,#{item.xzqy,jdbcType=VARCHAR} xzqy,#{item.xssd,jdbcType=DOUBLE} xssd,#{item.sccj,jdbcType=VARCHAR} sccj,#{item.zcbl,jdbcType=DOUBLE} zcbl,#{item.kcsl,jdbcType=DOUBLE} kcsl,#{item.zzsl,jdbcType=DOUBLE} zzsl,#{item.wxsl,jdbcType=DOUBLE} wxsl,#{item.ztsl,jdbcType=DOUBLE} ztsl,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.zbbm,jdbcType=VARCHAR} zbbm,#{item.zbmc,jdbcType=VARCHAR} zbmc,#{item.ssdz,jdbcType=VARCHAR} ssdz,#{item.ssdzmc,jdbcType=VARCHAR} ssdzmc,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.zblx,jdbcType=DOUBLE} zblx,#{item.sccj,jdbcType=VARCHAR} sccj,#{item.zcbl,jdbcType=DOUBLE} zcbl,#{item.kysl,jdbcType=DOUBLE} kysl,#{item.zzsl,jdbcType=DOUBLE} zzsl,#{item.shsl,jdbcType=DOUBLE} shsl,#{item.ztsl,jdbcType=DOUBLE} ztsl,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 			FROM DUAL
 		</foreach>
 		) A
@@ -192,20 +176,14 @@
 			<if test="zbmc != null">zbmc=#{zbmc},</if>
 			<if test="ssdz != null">ssdz=#{ssdz},</if>
 			<if test="ssdzmc != null">ssdzmc=#{ssdzmc},</if>
-			<if test="xzqy != null">xzqy=#{xzqy},</if>
-			<if test="xssd != null">xssd=#{xssd},</if>
+			<if test="xzqh != null">xzqh=#{xzqh},</if>
+			<if test="zblx != null">zblx=#{zblx},</if>
 			<if test="sccj != null">sccj=#{sccj},</if>
 			<if test="zcbl != null">zcbl=#{zcbl},</if>
-			<if test="kcsl != null">kcsl=#{kcsl},</if>
+			<if test="kysl != null">kysl=#{kysl},</if>
 			<if test="zzsl != null">zzsl=#{zzsl},</if>
-			<if test="wxsl != null">wxsl=#{wxsl},</if>
+			<if test="shsl != null">shsl=#{shsl},</if>
 			<if test="ztsl != null">ztsl=#{ztsl},</if>
-			<if test="cjrid != null">cjrid=#{cjrid},</if>
-			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="xgrid != null">xgrid=#{xgrid},</if>
-			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="deleteFlag != null">delete_flag='N',</if>
 			<if test="datasource != null">datasource=#{datasource},</if>
 			<if test="bz != null">bz=#{bz},</if>
@@ -221,10 +199,10 @@
 
 	<!--10.批量修改-->
 	<update id="doBatchUpdateByList"  parameterType="java.util.List">
-		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqy,xssd,sccj,zcbl,kcsl,zzsl,wxsl,ztsl,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
+		INSERT INTO YAGL_WL_XFZBXX(uuid,zbbm,zbmc,ssdz,ssdzmc,xzqh,zblx,sccj,zcbl,kysl,zzsl,shsl,ztsl,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator="," >
-			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.zbbm,jdbcType=VARCHAR} zbbm,#{item.zbmc,jdbcType=VARCHAR} zbmc,#{item.ssdz,jdbcType=VARCHAR} ssdz,#{item.ssdzmc,jdbcType=VARCHAR} ssdzmc,#{item.xzqy,jdbcType=VARCHAR} xzqy,#{item.xssd,jdbcType=DOUBLE} xssd,#{item.sccj,jdbcType=VARCHAR} sccj,#{item.zcbl,jdbcType=DOUBLE} zcbl,#{item.kcsl,jdbcType=DOUBLE} kcsl,#{item.zzsl,jdbcType=DOUBLE} zzsl,#{item.wxsl,jdbcType=DOUBLE} wxsl,#{item.ztsl,jdbcType=DOUBLE} ztsl,#{item.cjrid,jdbcType=VARCHAR} cjrid,#{item.cjrmc,jdbcType=VARCHAR} cjrmc,#{item.cjsj,jdbcType=DATE} cjsj,#{item.xgrid,jdbcType=VARCHAR} xgrid,#{item.xgrmc,jdbcType=VARCHAR} xgrmc,#{item.xgsj,jdbcType=DATE} xgsj,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
+			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.zbbm,jdbcType=VARCHAR} zbbm,#{item.zbmc,jdbcType=VARCHAR} zbmc,#{item.ssdz,jdbcType=VARCHAR} ssdz,#{item.ssdzmc,jdbcType=VARCHAR} ssdzmc,#{item.xzqh,jdbcType=VARCHAR} xzqh,#{item.zblx,jdbcType=DOUBLE} zblx,#{item.sccj,jdbcType=VARCHAR} sccj,#{item.zcbl,jdbcType=DOUBLE} zcbl,#{item.kysl,jdbcType=DOUBLE} kysl,#{item.zzsl,jdbcType=DOUBLE} zzsl,#{item.shsl,jdbcType=DOUBLE} shsl,#{item.ztsl,jdbcType=DOUBLE} ztsl,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.bz,jdbcType=VARCHAR} bz,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.sjc,jdbcType=DATE} sjc,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
 		ON DUPLICATE KEY UPDATE
 		uuid = VALUES(uuid),
@@ -232,20 +210,14 @@
 		zbmc = VALUES(zbmc),
 		ssdz = VALUES(ssdz),
 		ssdzmc = VALUES(ssdzmc),
-		xzqy = VALUES(xzqy),
-		xssd = VALUES(xssd),
+		xzqh = VALUES(xzqh),
+		zblx = VALUES(zblx),
 		sccj = VALUES(sccj),
 		zcbl = VALUES(zcbl),
-		kcsl = VALUES(kcsl),
+		kysl = VALUES(kysl),
 		zzsl = VALUES(zzsl),
-		wxsl = VALUES(wxsl),
+		shsl = VALUES(shsl),
 		ztsl = VALUES(ztsl),
-		cjrid = VALUES(cjrid),
-		cjrmc = VALUES(cjrmc),
-		cjsj = VALUES(cjsj),
-		xgrid = VALUES(xgrid),
-		xgrmc = VALUES(xgrmc),
-		xgsj = VALUES(xgsj),
 		delete_flag = VALUES(delete_flag),
 		datasource = VALUES(datasource),
 		bz = VALUES(bz),

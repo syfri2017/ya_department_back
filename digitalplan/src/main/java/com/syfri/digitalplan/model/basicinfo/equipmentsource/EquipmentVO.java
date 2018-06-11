@@ -13,20 +13,14 @@ public class EquipmentVO extends ValueObject implements Serializable{
 	private String zbmc;	//装备名称
 	private String ssdz;	//所属队站
 	private String ssdzmc;	//所属队站名称
-	private String xzqy;	//行政区划CODE（到区县）
-	private String xssd;	//装备类型ZBLX
+	private String xzqh;	//行政区划CODE（到区县）
+	private String zblx;	//装备类型ZBLX
 	private String sccj;	//生产厂家
 	private String zcbl;	//总储备量
-	private String kcsl;	//库存数量（可用）
+	private String kysl;	//库存数量（可用）
 	private String zzsl;	//装载数量
-	private String wxsl;	//维修数量（损坏）
+	private String shsl;	//维修数量（损坏）
 	private String ztsl;	//在途数量
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
-	private String xgrid;	//修改人ID
-	private String xgrmc;	//修改人姓名
-	private String xgsj;	//修改时间
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
 	private String bz;	//备注
@@ -67,17 +61,17 @@ public class EquipmentVO extends ValueObject implements Serializable{
 	public void setSsdzmc(String ssdzmc){
 		this.ssdzmc = ssdzmc;
 	}
-	public String getXzqy(){
-		return xzqy;
+	public String getXzqh(){
+		return xzqh;
 	}
-	public void setXzqy(String xzqy){
-		this.xzqy = xzqy;
+	public void setXzqh(String xzqh){
+		this.xzqh = xzqh;
 	}
-	public String getXssd(){
-		return xssd;
+	public String getZblx(){
+		return zblx;
 	}
-	public void setXssd(String xssd){
-		this.xssd = xssd;
+	public void setZblx(String zblx){
+		this.zblx = zblx;
 	}
 	public String getSccj(){
 		return sccj;
@@ -91,11 +85,11 @@ public class EquipmentVO extends ValueObject implements Serializable{
 	public void setZcbl(String zcbl){
 		this.zcbl = zcbl;
 	}
-	public String getKcsl(){
-		return kcsl;
+	public String getKysl(){
+		return kysl;
 	}
-	public void setKcsl(String kcsl){
-		this.kcsl = kcsl;
+	public void setKysl(String kysl){
+		this.kysl = kysl;
 	}
 	public String getZzsl(){
 		return zzsl;
@@ -103,53 +97,17 @@ public class EquipmentVO extends ValueObject implements Serializable{
 	public void setZzsl(String zzsl){
 		this.zzsl = zzsl;
 	}
-	public String getWxsl(){
-		return wxsl;
+	public String getShsl(){
+		return shsl;
 	}
-	public void setWxsl(String wxsl){
-		this.wxsl = wxsl;
+	public void setShsl(String shsl){
+		this.shsl = shsl;
 	}
 	public String getZtsl(){
 		return ztsl;
 	}
 	public void setZtsl(String ztsl){
 		this.ztsl = ztsl;
-	}
-	public String getCjrid(){
-		return cjrid;
-	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getXgrid(){
-		return xgrid;
-	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
-	}
-	public String getXgrmc(){
-		return xgrmc;
-	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
-	}
-	public String getXgsj(){
-		return xgsj;
-	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
 	}
 	public String getDeleteFlag(){
 		return deleteFlag;
@@ -206,19 +164,19 @@ public class EquipmentVO extends ValueObject implements Serializable{
 		this.reserve4 = reserve4;
 	}
 
-	private String kcsl_min;
-	private String kcsl_max;
-	public String getKcsl_min(){
-		return kcsl_min;
+	private String kysl_min;
+	private String kysl_max;
+	public String getKysl_min(){
+		return kysl_min;
 	}
-	public void setKcsl_min(String kcsl_min){
-		this.kcsl_min = kcsl_min;
+	public void setKysl_min(String kysl_min){
+		this.kysl_min = kysl_min;
 	}
-	public String getKcsl_max(){
-		return kcsl_max;
+	public String getKysl_max(){
+		return kysl_max;
 	}
-	public void setKcsl_max(String kcsl_max){
-		this.kcsl_max = kcsl_max;
+	public void setKysl_max(String kysl_max){
+		this.kysl_max = kysl_max;
 	}
 
 	private String dzmc;	//队站名称

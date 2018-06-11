@@ -309,7 +309,7 @@
 
 	<!--12.展示到总队数据-->
 	<select id="doSearchContingents" resultType="UtilXfdzVO">
-		SELECT DZBM codeValue,DZJC codeName
+		SELECT DZBM codeValue,DZJC codeName,DZID dzid
 		FROM YAGL_XFDZ t
 		WHERE t.DELETE_FLAG = 'N'
 		AND SUBSTR(DZBM,3,6) = '000000'

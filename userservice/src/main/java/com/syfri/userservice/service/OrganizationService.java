@@ -15,7 +15,7 @@ public interface OrganizationService  extends BaseService<OrganizationVO>{
 	List<OrganizationVO> getZongdui();
 
 	/*--根据重点单位ID获取重点单位详情-*/
-	List<OrganizationVO> doFindDetailById(String organizationId);
+	OrganizationVO doFindDetailById(String uuid);
 
 	/*--获取全部机构.--*/
 	List<OrganizationTree> doFindAllOrganization();
