@@ -14,7 +14,7 @@ public interface OrganizationDAO extends BaseDAO<OrganizationVO>{
 	List<OrganizationVO> getZongdui();
 
 	/*--根据机构id获取机构详情.--*/
-	List<OrganizationVO> doFindDetailById(String organizationId);
+	OrganizationVO doFindDetailById(String uuid);
 
 	/*--获取全部机构.--*/
 	List<OrganizationVO> doFindAllOrganization();

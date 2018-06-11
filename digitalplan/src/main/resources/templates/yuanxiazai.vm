@@ -15037,6 +15037,11 @@
         </w:p>
 
         <wx:sect>
+                       <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                 <w:pPr>
                     <w:spacing w:line="400" w:line-rule="exact"/>
@@ -15048,7 +15053,6 @@
                         <w:sz w:val="40"/>
                     </w:rPr>
                 </w:pPr>
-                <aml:annotation aml:id="1" w:type="Word.Comment.Start"/>
                 <w:r>
                     <w:rPr>
                         <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
@@ -15058,30 +15062,11 @@
                     </w:rPr>
                     <w:t>实景照片——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                 </w:r>
-                <aml:annotation aml:id="1" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="1" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:25:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312" w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                    <w:t>体现单位实景全貌，宜采用航拍图或正面照片</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
-                </w:r>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
             </w:p>
 
 
@@ -15128,12 +15113,11 @@
 
 
 
-            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                      <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
                 </w:pPr>
             </w:p>
-            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7"/>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                 <w:pPr>
                     <w:spacing w:line="400" w:line-rule="exact"/>
@@ -15145,7 +15129,6 @@
                         <w:sz w:val="40"/>
                     </w:rPr>
                 </w:pPr>
-                <aml:annotation aml:id="2" w:type="Word.Comment.Start"/>
                 <w:r>
                     <w:rPr>
                         <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
@@ -15155,30 +15138,11 @@
                     </w:rPr>
                     <w:t>总平面图——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
                 </w:r>
-                <aml:annotation aml:id="2" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="2" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:26:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312" w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                    <w:t>体现周边道路、水源和毗邻情况，并将单位外部消防设施标注在图上，规模较大的建筑群类单位宜使用单位精制的总平面图。规模较小的建筑群类单位和单体建筑可采用二维地图截图或卫星图截图。主要作为车辆部署和外部进攻线路标绘的底图。</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
-                </w:r>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
             </w:p>
 
 
@@ -15223,12 +15187,11 @@
 
 
 
-            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                       <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
                 </w:pPr>
             </w:p>
-            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7"/>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
                 <w:pPr>
                     <w:spacing w:line="400" w:line-rule="exact"/>
@@ -15240,7 +15203,6 @@
                         <w:sz w:val="40"/>
                     </w:rPr>
                 </w:pPr>
-                <aml:annotation aml:id="3" w:type="Word.Comment.Start"/>
                 <w:r>
                     <w:rPr>
                         <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
@@ -15250,76 +15212,11 @@
                     </w:rPr>
                     <w:t>内部平面图——B1层平面图</w:t>
                 </w:r>
-                <aml:annotation aml:id="3" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="3" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:30:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>内部平面图按照《二维数字化预案图示说明》的要求制作，</w:t>
-                                </w:r>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312" w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                    <w:t>每张图中</w:t>
-                                </w:r>
-                                <w:proofErr w:type="gramStart"/>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312" w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                    <w:t>应标注各类</w:t>
-                                </w:r>
-                                <w:proofErr w:type="gramEnd"/>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312" w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                    <w:t>消防设施和重点部位。内部平面图作为阵地设置的标绘底图。</w:t>
-                                </w:r>
-                            </w:p>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:cs="仿宋_GB2312" w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                        <w:color w:val="000000"/>
-                                        <w:sz-cs w:val="32"/>
-                                    </w:rPr>
-                                    <w:t>二维预案输出时，不需要输出全部的内部平面图，只需输出与灾情设定相关的内部平面图即可。</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
-                </w:r>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
             </w:p>
 
 
@@ -15576,7 +15473,21 @@
 
 
 
-
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
@@ -15593,7 +15504,6 @@
                         <w:sz w:val="40"/>
                     </w:rPr>
                 </w:pPr>
-                <aml:annotation aml:id="4" w:type="Word.Comment.Start"/>
                 <w:r>
                     <w:rPr>
                         <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
@@ -15601,54 +15511,7 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>作战部署图</w:t>
-                </w:r>
-                <aml:annotation aml:id="4" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="4" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:31:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>每个灾情的作战</w:t>
-                                </w:r>
-                                <w:proofErr w:type="gramStart"/>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>部署图分三张</w:t>
-                                </w:r>
-                                <w:proofErr w:type="gramEnd"/>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>，车辆部署图、进攻路线图和阵地部署图</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
-                </w:r>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
-                        <wx:font wx:val="华文中宋"/>
-                        <w:b/>
-                        <w:sz w:val="40"/>
-                    </w:rPr>
-                    <w:t>——灾情1——车辆部署图</w:t>
+                    <w:t>作战部署图——灾情1——车辆部署图</w:t>
                 </w:r>
             </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
@@ -15708,6 +15571,16 @@
 
 
 
+                      <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
@@ -15736,42 +15609,14 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>作战部署图——灾情1——</w:t>
-                </w:r>
-                <aml:annotation aml:id="5" w:type="Word.Comment.Start"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
-                        <wx:font wx:val="华文中宋"/>
-                        <w:b/>
-                        <w:sz w:val="40"/>
-                    </w:rPr>
-                    <w:t>首层进攻路线图</w:t>
-                </w:r>
-                <aml:annotation aml:id="5" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="5" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:33:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>标注可能的进攻路线，和首选进攻路线</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
+                    <w:t>作战部署图——灾情1——首层进攻路线图</w:t>
                 </w:r>
             </w:p>
-
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
 
 
 
@@ -15822,6 +15667,16 @@
 
 
 
+                     <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
@@ -15850,42 +15705,14 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>作战部署图——灾情1——</w:t>
-                </w:r>
-                <aml:annotation aml:id="6" w:type="Word.Comment.Start"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
-                        <wx:font wx:val="华文中宋"/>
-                        <w:b/>
-                        <w:sz w:val="40"/>
-                    </w:rPr>
-                    <w:t>B1层阵地部署图</w:t>
-                </w:r>
-                <aml:annotation aml:id="6" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="6" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:33:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>将标注过消防设施的内部平面图作为底图，在其上进行标注</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
+                    <w:t>作战部署图——灾情1——B1层阵地部署图</w:t>
                 </w:r>
             </w:p>
-
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
 
 
 
@@ -16766,17 +16593,45 @@
             </w:p>
         </wx:sect>
         <wx:sect>
-            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="006E1EEF">
+                <w:pPr>
+                    <w:spacing w:line="400" w:line-rule="exact"/>
+                    <w:jc w:val="center"/>
                     <w:rPr>
-                        <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:cs="宋体"/>
-                        <wx:font wx:val="宋体"/>
-                        <w:sz w:val="22"/>
-                        <w:sz-cs w:val="22"/>
+                        <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋"/>
+                        <wx:font wx:val="华文中宋"/>
+                        <w:b/>
+                        <w:sz w:val="40"/>
                     </w:rPr>
                 </w:pPr>
-                <aml:annotation aml:id="7" w:type="Word.Comment.Start"/>
                 <w:r>
                     <w:rPr>
                         <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
@@ -16784,49 +16639,12 @@
                         <w:b/>
                         <w:sz w:val="40"/>
                     </w:rPr>
-                    <w:t>立面图</w:t>
-                </w:r>
-                <aml:annotation aml:id="7" w:type="Word.Comment.End"/>
-                <w:r>
-                    <w:rPr>
-                        <w:rStyle w:val="a7"/>
-                    </w:rPr>
-                    <aml:annotation aml:id="7" w:type="Word.Comment" aml:author="Microsoft" aml:createdate="2018-05-07T09:43:00Z" w:initials="M">
-                        <aml:content>
-                            <w:p wsp:rsidR="006E1EEF" wsp:rsidRDefault="006E1EEF">
-                                <w:pPr>
-                                    <w:pStyle w:val="a3"/>
-                                </w:pPr>
-                                <w:r>
-                                    <w:rPr>
-                                        <w:rFonts w:hint="fareast"/>
-                                        <wx:font wx:val="微软雅黑"/>
-                                    </w:rPr>
-                                    <w:t>如能获取建筑立面图，可作为标注举高车作业面的底图。</w:t>
-                                </w:r>
-                            </w:p>
-                        </aml:content>
-                    </aml:annotation>
-                </w:r>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:ascii="华文中宋" w:fareast="华文中宋" w:h-ansi="华文中宋" w:hint="fareast"/>
-                        <wx:font wx:val="华文中宋"/>
-                        <w:b/>
-                        <w:sz w:val="40"/>
-                    </w:rPr>
-                    <w:t>——#if($compPlanInfo.yamc)${compPlanInfo.yamc}#end</w:t>
+                     <w:t>立面图</w:t>
                 </w:r>
             </w:p>
             <w:p wsp:rsidR="00FD36D7" wsp:rsidRDefault="00FD36D7">
                 <w:pPr>
                     <w:jc w:val="center"/>
-                    <w:rPr>
-                        <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:cs="宋体"/>
-                        <wx:font wx:val="宋体"/>
-                        <w:sz w:val="22"/>
-                        <w:sz-cs w:val="22"/>
-                    </w:rPr>
                 </w:pPr>
             </w:p>
 

@@ -61,14 +61,14 @@ public class OrganizationController  extends BaseController<OrganizationVO>{
 	}
 
 	/**
-	 * 根据id获取预案信息
+	 * 根据id获取组织机构信息
 	 */
-	@ApiOperation(value="根据id获取预案信息",notes="列表信息")
-	@GetMapping("/doFindById/{pkid}")
-	public @ResponseBody ResultVO doFindDetailById(@PathVariable String pkid){
+	@ApiOperation(value="根据id获取组织机构信息",notes="列表信息")
+	@GetMapping("/doFindById/{uuid}")
+	public @ResponseBody ResultVO doFindDetailById(@PathVariable String uuid){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(organizationService.doFindDetailById(pkid));
+			resultVO.setResult(organizationService.doFindDetailById(uuid));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

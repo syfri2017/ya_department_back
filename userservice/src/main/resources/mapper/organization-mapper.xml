@@ -364,8 +364,12 @@
 	<select id="doFindDetailById" parameterType="String"  resultType="OrganizationVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
+		,t1.code_name jgxzmc
+		,t2.code_name xzqhmc
 		FROM SYS_ORGANIZATION t
-		WHERE t.DELETE_FLAG = 'N' AND  t.JGID = #{organizationId}
+		LEFT JOIN (select code_value,code_name FROM sys_codelist_detail WHERE delete_flag = 'N' AND codetype= 'JGXZ') t1 ON t.jgxzdm = t1.code_value
+		LEFT JOIN (select code_value,code_name FROM sys_codelist_detail WHERE delete_flag = 'N' AND codetype= 'XZQH') t2 ON t.xzqh = t2.code_value
+		WHERE t.DELETE_FLAG = 'N' AND  t.uuid = #{value}
 	</select>
 
 	<!--  树形节点	-->

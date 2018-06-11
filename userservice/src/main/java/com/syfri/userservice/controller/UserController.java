@@ -145,4 +145,22 @@ public class UserController  extends BaseController<UserVO>{
 		return resultVO;
 	}
 
+	/**
+	 * 根据机构ID查询用户
+	 */
+	@ApiOperation(value="根据机构ID查询用户信息",notes="列表信息")
+	@ApiImplicitParam(name="jgid",value="机构iD")
+	@GetMapping("/findByJGID/{jgid}")
+	public @ResponseBody ResultVO findByJGID(@PathVariable String jgid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			UserVO userVO = new UserVO();
+			userVO.setOrganizationId(jgid);
+			resultVO.setResult(userService.doSearchListByVO(userVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
