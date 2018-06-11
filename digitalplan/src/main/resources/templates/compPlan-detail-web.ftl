@@ -978,7 +978,7 @@
                                 <tr>
                                     <td>
                                         <table class="data-table">
-                                            <#list areaBuilding.firefacilites['7000'] as xfss>
+                                            <#list areaBuilding.firefacilites['9000'] as xfss>
                                                 <tr>
                                                     <th width="120">位置：</th>
                                                     <td><#if xfss.wz??>${xfss.wz}</#if></td>
