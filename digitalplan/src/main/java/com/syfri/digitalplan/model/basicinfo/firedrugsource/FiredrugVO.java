@@ -13,18 +13,14 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	private String yjmc;	//药剂名称
 	private String ssdz;	//所属队站
 	private String ssdzmc;	//所属队站名称
-	private String xzqy;	//行政区划CODE（到区县）
+	private String xzqh;	//行政区划CODE（到区县）
 	private String yjlx;	//药剂类型YJLX
 	private String sccj;	//生产厂家
-	private String pc;	//批次
-	private String cbl;	//储备量（t）
-	private String czl;	//车载量（t）
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
-	private String xgrid;	//修改人ID
-	private String xgrmc;	//修改人姓名
-	private String xgsj;	//修改时间
+	private String pc;		//批次
+	private String zcbl;	//总储备量（t）
+	private String czl;		//车载量（t）
+	private String kcl;		//库存量（t）
+	private String scsj;	//生产时间
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
 	private String bz;	//备注
@@ -34,6 +30,20 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
+	private String hhb;	//混合比
+
+	public String getHhb() {
+		return hhb;
+	}
+	public void setHhb(String hhb) {
+		this.hhb = hhb;
+	}
+	public String getKcl() {
+		return kcl;
+	}
+	public void setKcl(String kcl) {
+		this.kcl = kcl;
+	}
 
 	public String getUuid(){
 		return uuid;
@@ -65,11 +75,11 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	public void setSsdzmc(String ssdzmc){
 		this.ssdzmc = ssdzmc;
 	}
-	public String getXzqy(){
-		return xzqy;
+	public String getXzqh(){
+		return xzqh;
 	}
-	public void setXzqy(String xzqy){
-		this.xzqy = xzqy;
+	public void setXzqh(String xzqh){
+		this.xzqh = xzqh;
 	}
 	public String getYjlx(){
 		return yjlx;
@@ -89,11 +99,11 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	public void setPc(String pc){
 		this.pc = pc;
 	}
-	public String getCbl(){
-		return cbl;
+	public String getZcbl(){
+		return zcbl;
 	}
-	public void setCbl(String cbl){
-		this.cbl = cbl;
+	public void setZcbl(String zcbl){
+		this.zcbl = zcbl;
 	}
 	public String getCzl(){
 		return czl;
@@ -101,41 +111,11 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	public void setCzl(String czl){
 		this.czl = czl;
 	}
-	public String getCjrid(){
-		return cjrid;
+	public String getScsj(){
+		return scsj;
 	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
-	}
-	public String getCjrmc(){
-		return cjrmc;
-	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
-	}
-	public String getCjsj(){
-		return cjsj;
-	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
-	}
-	public String getXgrid(){
-		return xgrid;
-	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
-	}
-	public String getXgrmc(){
-		return xgrmc;
-	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
-	}
-	public String getXgsj(){
-		return xgsj;
-	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
+	public void setScsj(String scsj){
+		this.scsj = scsj;
 	}
 	public String getDeleteFlag(){
 		return deleteFlag;
@@ -192,20 +172,20 @@ public class FiredrugVO extends ValueObject implements Serializable{
 		this.reserve4 = reserve4;
 	}
 
-	private String cbl_min;	//储备量（t）
-	public String getCbl_min(){
-		return cbl_min;
+	private String zcbl_min;	//储备量（t）
+	public String getZcbl_min(){
+		return zcbl_min;
 	}
-	public void setCbl_min(String cbl_min){
-		this.cbl_min = cbl_min;
+	public void setZcbl_min(String zcbl_min){
+		this.zcbl_min = zcbl_min;
 	}
 
-	private String cbl_max;
-	public String getCbl_max(){
-		return cbl_max;
+	private String zcbl_max;
+	public String getZcbl_max(){
+		return zcbl_max;
 	}
-	public void setCbl_max(String cbl_max){
-		this.cbl_max = cbl_max;
+	public void setZcbl_max(String zcbl_max){
+		this.zcbl_max = zcbl_max;
 	}
 
 	private String czl_min;	//车载量（t）
@@ -224,6 +204,14 @@ public class FiredrugVO extends ValueObject implements Serializable{
 		this.czl_max = czl_max;
 	}
 
+	private String xzqhmc;	//行政区划CODE（到区县）
+	public String getXzqhmc() {
+		return xzqhmc;
+	}
+	public void setXzqhmc(String xzqhmc) {
+		this.xzqhmc = xzqhmc;
+	}
+
 	private String dzmc;	//队站名称
 	private String yjlxmc;	//药剂类型名称
 	public String getDzmc(){
@@ -238,4 +226,6 @@ public class FiredrugVO extends ValueObject implements Serializable{
 	public void setYjlxmc(String yjlxmc){
 		this.yjlxmc = yjlxmc;
 	}
+
+
 }

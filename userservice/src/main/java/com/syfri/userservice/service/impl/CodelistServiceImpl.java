@@ -242,22 +242,30 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 																	children4.add(tree5);
 																}
 															}
-															tree4.setChildren(children4);
+															if(!children4.isEmpty()){
+																tree4.setChildren(children4);
+															}
 														}
 														children3.add(tree4);
 													}
 												}
-												tree3.setChildren(children3);
+												if(!children3.isEmpty()){
+													tree3.setChildren(children3);
+												}
 											}
 											children2.add(tree3);
 										}
 									}
-									tree2.setChildren(children2);
+									if(!children2.isEmpty()){
+										tree2.setChildren(children2);
+									}
 								}
 								children.add(tree2);
 							}
 						}
-						tree.setChildren(children);
+						if(!children.isEmpty()){
+							tree.setChildren(children);
+						}
 					}
 					codelistTrees.add(tree);
 				}
@@ -342,4 +350,51 @@ public class CodelistServiceImpl extends BaseServiceImpl<CodelistVO> implements 
 		}
 		return codelistTrees;
 	}
+
+    /*--查询药剂类型树状资源
+    * 去掉第一级40000000，数据结构为（2，2，2）
+    * -- by liurui -- */
+    public List<CodelistTree> doFindYjlxCodelisttree(String codetype) {
+        // 目的树
+        List<CodelistTree> codelistTrees = new ArrayList<>();
+        // 源数据
+        List<CodelistDetailVO> codelistDetailVOs = codelistDAO.doFindCodelistByType(codetype);
+        if (codelistDetailVOs != null && codelistDetailVOs.size() > 0) {
+            for (CodelistDetailVO codelistDetailVO : codelistDetailVOs) {
+                // 选出第一级类别
+                if ((!codelistDetailVO.getCodeValue().endsWith("0000000")) && codelistDetailVO.getCodeValue().endsWith("000000")) {
+                    CodelistTree tree = new CodelistTree();
+                    tree.setCodeName(codelistDetailVO.getCodeName());
+                    tree.setCodeValue(codelistDetailVO.getCodeValue());
+                    List<CodelistTree> children = new ArrayList();
+                    //第二级别
+                    for (CodelistDetailVO codelistDetailVO2 : codelistDetailVOs) {
+                        if (codelistDetailVO2.getCodeValue().startsWith(codelistDetailVO.getCodeValue().substring(0, 2)) &&
+                                codelistDetailVO2.getCodeValue().endsWith("0000") && !codelistDetailVO2.equals(codelistDetailVO)) {
+                            CodelistTree tree2 = new CodelistTree();
+                            tree2.setCodeName(codelistDetailVO2.getCodeName());
+                            tree2.setCodeValue(codelistDetailVO2.getCodeValue());
+                            //第三级别
+                            List<CodelistTree> children2 = new ArrayList();
+                            for (CodelistDetailVO codelistDetailVO3 : codelistDetailVOs) {
+                                if (codelistDetailVO3.getCodeValue().startsWith(codelistDetailVO2.getCodeValue().substring(0, 4)) && !codelistDetailVO3.equals(codelistDetailVO2)) {
+                                    CodelistTree tree3 = new CodelistTree();
+                                    tree3.setCodeName(codelistDetailVO3.getCodeName());
+                                    tree3.setCodeValue(codelistDetailVO3.getCodeValue());
+                                    children2.add(tree3);
+                                }
+                            }
+                            if (!children2.isEmpty())
+                                tree2.setChildren(children2);
+                            children.add(tree2);
+                        }
+                    }
+                    if (!children.isEmpty())
+                        tree.setChildren(children);
+                    codelistTrees.add(tree);
+                }
+            }
+        }
+        return codelistTrees;
+    }
 }

@@ -24,7 +24,7 @@
 			and t.xzqh = #{xzqh}
 		</if>
 		<if test="zblx != null and zblx != '' ">
-			and t.zblx LIKE concat(#{zblx},'%')
+			and t.zblx LIKE concat(rtrim(#{zblx},'0'),'%')
 		</if>
 		<if test="sccj != null and sccj != '' ">
 			and t.sccj = #{sccj}
