@@ -12,14 +12,14 @@
 		<if test="clmc != null and clmc != '' ">
 			and t.clmc = #{clmc}
 		</if>
-		<if test="ssdz != null and ssdz != '' ">
-			and t.ssdz = #{ssdz}
-		</if>
+		<!--<if test="ssdz != null and ssdz != '' ">-->
+			<!--and t.ssdz = #{ssdz}-->
+		<!--</if>-->
 		<if test="ssdzmc != null and ssdzmc != '' ">
 			and t.ssdzmc = #{ssdzmc}
 		</if>
 		<if test="xzqh != null and xzqh != '' ">
-			and t.xzqh = #{xzqh}
+			and t.xzqh LIKE concat(RTRIM(#{xzqh},0),'%')
 		</if>
 		<if test="cllx != null and cllx != '' ">
 			and t.cllx LIKE concat(RTRIM(#{cllx},0),'%')
@@ -28,7 +28,7 @@
 			and t.cphm LIKE concat(concat('%',#{cphm}),'%')
 		</if>
 		<if test="clzt != null and clzt != '' ">
-			and t.clzt LIKE concat(RTRIM(#{clzt},0),'%')
+			and substr(t.clzt,2,1) = substr(#{clzt},1,1)
 		</if>
 		<if test="sccj != null and sccj != '' ">
 			and t.sccj = #{sccj}
@@ -148,7 +148,8 @@
 		c2.CODE_NAME xzqhmc,
 		c4.CODE_NAME cllxmc,
 		c6.CODE_NAME clztmc,
-		c7.DZMC ssdzmc
+		c8.CODE_NAME czmhjlbmc,
+		c9.DZMC ssdzmc
 		FROM YAGL_WL_XFCLXX t
 		<!-- 行政区划 -->
 		Left Join SYS_CODELIST c1
@@ -173,11 +174,25 @@
 		Left Join SYS_CODELIST_DETAIL c6
 		On c5.CODEID = c6.CODEID
 		And c6.DELETE_FLAG = 'N'
-		and t.CLZT = c6.CODE_VALUE
+		and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		<!-- 车载灭火剂类别 -->
+		Left Join SYS_CODELIST c7
+		on c7.CODETYPE = 'YJLX'
+		And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8
+		On c7.CODEID = c8.CODEID
+		And c8.DELETE_FLAG = 'N'
+		and t.czmhjlb = c8.CODE_VALUE
 		<!-- 所属队站 -->
-		LEFT JOIN YAGL_XFDZ c7 ON (t.SSDZ=c7.DZID AND c7.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.SSDZ=c9.DZID AND c9.DELETE_FLAG = 'N')
+		<!-- 所属队站条件 -->
+		<if test="ssdz != null and ssdz != '' ">
+			INNER JOIN YAGL_XFDZ c10
+			ON (t.SSDZ=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{ssdz},0),'%'))
+		</if>
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
+		ORDER BY XZQH,CLLX,CPHM ASC
 	</select>
 
 	<!--5.根据ID查询记录-->
@@ -187,7 +202,8 @@
 		c2.CODE_NAME xzqhmc,
 		c4.CODE_NAME cllxmc,
 		c6.CODE_NAME clztmc,
-		c7.DZMC ssdzmc
+		c8.CODE_NAME czmhjlbmc,
+		c9.DZMC ssdzmc
 		FROM YAGL_WL_XFCLXX t
 		<!-- 行政区划 -->
 		Left Join SYS_CODELIST c1
@@ -212,10 +228,19 @@
 		Left Join SYS_CODELIST_DETAIL c6
 		On c5.CODEID = c6.CODEID
 		And c6.DELETE_FLAG = 'N'
-		and t.CLZT = c6.CODE_VALUE
+		and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		<!-- 车载灭火剂类别 -->
+		Left Join SYS_CODELIST c7
+		on c7.CODETYPE = 'YJLX'
+		And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8
+		On c7.CODEID = c8.CODEID
+		And c8.DELETE_FLAG = 'N'
+		and t.czmhjlb = c8.CODE_VALUE
 		<!-- 所属队站 -->
-		LEFT JOIN YAGL_XFDZ c7 ON (t.SSDZ=c7.DZID AND c7.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.SSDZ=c9.DZID AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N' AND  t.uuid = #{value}
+		ORDER BY XZQH,CLLX,CPHM ASC
 	</select>
 
 	<!--6.按照VO插入-->
@@ -330,7 +355,8 @@
 		c2.CODE_NAME xzqhmc,
 		c4.CODE_NAME cllxmc,
 		c6.CODE_NAME clztmc,
-		c7.DZMC ssdzmc
+		c8.CODE_NAME czmhjlbmc,
+		c9.DZMC ssdzmc
 		FROM YAGL_WL_XFCLXX t
 		<!-- 行政区划 -->
 		Left Join SYS_CODELIST c1
@@ -355,11 +381,25 @@
 		Left Join SYS_CODELIST_DETAIL c6
 		On c5.CODEID = c6.CODEID
 		And c6.DELETE_FLAG = 'N'
-		and t.CLZT = c6.CODE_VALUE
+		and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		<!-- 车载灭火剂类别 -->
+		Left Join SYS_CODELIST c7
+		on c7.CODETYPE = 'YJLX'
+		And c7.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c8
+		On c7.CODEID = c8.CODEID
+		And c8.DELETE_FLAG = 'N'
+		and t.czmhjlb = c8.CODE_VALUE
 		<!-- 所属队站 -->
-		LEFT JOIN YAGL_XFDZ c7 ON (t.SSDZ=c7.DZID AND c7.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.SSDZ=c9.DZID AND c9.DELETE_FLAG = 'N')
+		<!-- 所属队站条件 -->
+		<if test="ssdz != null and ssdz != '' ">
+			INNER JOIN YAGL_XFDZ c8
+			ON (t.SSDZ=c8.DZID AND c8.DELETE_FLAG = 'N' AND c8.dzbm LIKE concat(RTRIM(#{ssdz},0),'%'))
+		</if>
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
+		ORDER BY XZQH,CLLX,CPHM ASC
 	</select>
 
 </mapper>
