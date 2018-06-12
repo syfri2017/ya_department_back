@@ -170,7 +170,11 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 	/*--将ResourceVO对象转换成ResourceTree对象.--*/
 	@Override
 	public ResourceTree getResourceToTree(ResourceVO resourceVO){
-		return new ResourceTree(resourceVO.getResourceid(), resourceVO.getResourcename(), resourceVO.getResourceinfo(),resourceVO.getIcon(), resourceVO.getParentid());
+		return new ResourceTree(resourceVO.getResourceid(), resourceVO.getResourcename(),
+				resourceVO.getResourceinfo(),resourceVO.getIcon(), resourceVO.getParentid(),
+				resourceVO.getSeqno(),resourceVO.getType(),resourceVO.getCreateName(),
+				resourceVO.getCreateTime(),resourceVO.getAlterName(),resourceVO.getAlterTime());
+
 	}
 
 	/*--根据角色ID获取树状资源.--*/

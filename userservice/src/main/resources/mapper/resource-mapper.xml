@@ -136,7 +136,7 @@
 	<update  id="doUpdateByVO"  parameterType="ResourceVO"> 
 		UPDATE   SYS_RESOURCE  
 		<set>
-			<if test="resourceid != null">resourceid=#{resourceid},</if>
+		<!--	<if test="resourceid != null">resourceid=#{resourceid},</if>	-->
 			<if test="resourcename != null">resourcename=#{resourcename},</if>
 			<if test="resourceinfo != null">resourceinfo=#{resourceinfo},</if>
 			<if test="parentid != null">parentid=#{parentid},</if>
@@ -266,7 +266,12 @@
 
 	<!--17.根据角色列表，父节点获取资源列表-->
 	<select id="doFindResourceByParentId" parameterType="java.util.Map" resultType="ResourceVO">
-		SELECT DISTINCT r.resourceid,r.resourcename,r.resourceinfo,r.parentid,r.seqno,r.icon
+		SELECT DISTINCT r.resourceid,r.resourcename,r.resourceinfo,r.parentid,r.seqno,r.icon，
+		r.type,
+		r.create_name createName,
+		TO_CHAR(r.create_time,'yyyy-MM-dd HH24:mi:ss') createTime,
+		r.alter_name alterName,
+		TO_CHAR(r.alter_time,'yyyy-MM-dd HH24:mi:ss') alterTime
 		FROM SYS_RESOURCE r
 		LEFT JOIN SYS_ROLE_RESOURCE c ON r.resourceid = c.resourceid
 		WHERE r.delete_flag = 'N'

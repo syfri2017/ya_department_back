@@ -37,15 +37,24 @@ public class ResourceTree implements Serializable{
 	/*子资源.*/
 	private List<ResourceTree> children;
 
-	public ResourceTree() {
-	}
+	private String createName;
+	private String createTime;	//创建时间
+	private String alterName;	//修改人
+	private String alterTime;	//修改时间
 
-	public ResourceTree(String resourceid, String url, String resourceinfo, String icon, String parentId) {
+	public ResourceTree(String resourceid, String resourcename, String resourceinfo, String icon, String parentId, Integer seqno,String type, String createName,String createTime,String alterName,String alterTime) {
 		this.resourceid = resourceid;
-		this.url = url;
+		this.resourcename = resourcename;
+		this.url = resourcename;
 		this.resourceinfo = resourceinfo;
 		this.icon = icon;
 		this.parentId = parentId;
+		this.seqno = seqno;
+		this.type = type;
+		this.createName = createName;
+		this.createTime = createTime;
+		this.alterName = alterName;
+		this.alterTime = alterTime;
 	}
 
 	public String getResourceid() {
@@ -126,5 +135,37 @@ public class ResourceTree implements Serializable{
 
 	public void setChildren(List<ResourceTree> children) {
 		this.children = children;
+	}
+
+	public String getCreateName() {
+		return createName;
+	}
+
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getAlterName() {
+		return alterName;
+	}
+
+	public void setAlterName(String alterName) {
+		this.alterName = alterName;
+	}
+
+	public String getAlterTime() {
+		return alterTime;
+	}
+
+	public void setAlterTime(String alterTime) {
+		this.alterTime = alterTime;
 	}
 }
