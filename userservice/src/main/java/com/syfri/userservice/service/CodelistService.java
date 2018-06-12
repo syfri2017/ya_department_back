@@ -57,4 +57,7 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--查询燃烧物质树状资源-- by liurui*/
 	List<CodelistTree> doFindRswzCodelisttree(String codetype);
+
+	/*--查询药剂类型树状资源-- by liurui*/
+	List<CodelistTree> doFindYjlxCodelisttree(String codetype);
 }

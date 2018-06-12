@@ -425,4 +425,18 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		}
 		return resultVO;
 	}
+
+	@ApiOperation(value="查询药剂类型树状资源",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@RequestMapping("/getYjlxTree/{codetype}")
+	public @ResponseBody ResultVO getYjlxTree(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindYjlxCodelisttree(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
