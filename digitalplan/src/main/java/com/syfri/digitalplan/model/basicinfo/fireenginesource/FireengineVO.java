@@ -13,20 +13,20 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String clmc;	//车辆名称
 	private String ssdz;	//所属队站
 	private String ssdzmc;	//所属队站名称
-	private String xzqy;	//行政区划CODE（到区县）
-	private String cllx;	//车辆类型CLLX
+	private String xzqh;	//行政区划
+	private String cllx;	//车辆类型
 	private String cphm;	//车牌号码
-	private String clzt;	//车辆状态（代码）
+	private String clzt;	//车辆状态
 	private String sccj;	//生产厂家
-	private String jglgd;	//举高类车辆高度（m）
-	private String sbll;	//水泵流量（L/s）
-	private String zsl;	//载水量（t）
-	private String cjrid;	//创建人ID
-	private String cjrmc;	//创建人名称
-	private String cjsj;	//创建时间
-	private String xgrid;	//修改人ID
-	private String xgrmc;	//修改人姓名
-	private String xgsj;	//修改时间
+	private String jglgd;	//举高类车辆高度(m)
+	private String sbll;	//水泵流量(L/s)
+	private String zsl;	//载水量(t)
+	private String xfpll;	//消防炮流量(L/s)
+	private String sbedyl;	//水泵额定压力(Mpa)
+	private String czmhjlb;	//车载灭火剂类别
+	private String czmhjl;	//车载灭火剂量(t)
+	private String mhjhhb;	//灭火剂混合比
+	private String gpsbh;	//GPS编号
 	private String deleteFlag;	//删除标志
 	private String datasource;	//数据来源[100000一体化]
 	private String bz;	//备注
@@ -36,6 +36,9 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String reserve2;	//备用字段2
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
+	private String gisX;	//GIS_X
+	private String gisY;	//GIS_X
+	private String xzqhmc;	//行政区划（名称）
 	private String cllxmc;	//车辆类型（名称）
 	private String clztmc;	//车辆状态（名称）
 
@@ -43,21 +46,6 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String sbll_max;
 	private String zsl_min;
 	private String zsl_max;
-	private String gisX;	//GIS_X
-	private String gisY;	//GIS_Y
-
-	public String getGisX(){
-		return gisX;
-	}
-	public void setGisX(String gisX){
-		this.gisX = gisX;
-	}
-	public String getGisY(){
-		return gisY;
-	}
-	public void setGisY(String gisY){
-		this.gisY = gisY;
-	}
 
 	public String getUuid(){
 		return uuid;
@@ -89,11 +77,11 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setSsdzmc(String ssdzmc){
 		this.ssdzmc = ssdzmc;
 	}
-	public String getXzqy(){
-		return xzqy;
+	public String getXzqh(){
+		return xzqh;
 	}
-	public void setXzqy(String xzqy){
-		this.xzqy = xzqy;
+	public void setXzqh(String xzqh){
+		this.xzqh = xzqh;
 	}
 	public String getCllx(){
 		return cllx;
@@ -137,41 +125,41 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setZsl(String zsl){
 		this.zsl = zsl;
 	}
-	public String getCjrid(){
-		return cjrid;
+	public String getXfpll(){
+		return xfpll;
 	}
-	public void setCjrid(String cjrid){
-		this.cjrid = cjrid;
+	public void setXfpll(String xfpll){
+		this.xfpll = xfpll;
 	}
-	public String getCjrmc(){
-		return cjrmc;
+	public String getSbedyl(){
+		return sbedyl;
 	}
-	public void setCjrmc(String cjrmc){
-		this.cjrmc = cjrmc;
+	public void setSbedyl(String sbedyl){
+		this.sbedyl = sbedyl;
 	}
-	public String getCjsj(){
-		return cjsj;
+	public String getCzmhjlb(){
+		return czmhjlb;
 	}
-	public void setCjsj(String cjsj){
-		this.cjsj = cjsj;
+	public void setCzmhjlb(String czmhjlb){
+		this.czmhjlb = czmhjlb;
 	}
-	public String getXgrid(){
-		return xgrid;
+	public String getCzmhjl(){
+		return czmhjl;
 	}
-	public void setXgrid(String xgrid){
-		this.xgrid = xgrid;
+	public void setCzmhjl(String czmhjl){
+		this.czmhjl = czmhjl;
 	}
-	public String getXgrmc(){
-		return xgrmc;
+	public String getMhjhhb(){
+		return mhjhhb;
 	}
-	public void setXgrmc(String xgrmc){
-		this.xgrmc = xgrmc;
+	public void setMhjhhb(String mhjhhb){
+		this.mhjhhb = mhjhhb;
 	}
-	public String getXgsj(){
-		return xgsj;
+	public String getGpsbh(){
+		return gpsbh;
 	}
-	public void setXgsj(String xgsj){
-		this.xgsj = xgsj;
+	public void setGpsbh(String gpsbh){
+		this.gpsbh = gpsbh;
 	}
 	public String getDeleteFlag(){
 		return deleteFlag;
@@ -227,11 +215,36 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
 	}
-
-	public String getCllxmc() { return cllxmc; }
-	public void setCllxmc(String cllxmc) { this.cllxmc = cllxmc; }
-	public String getClztmc() {	return clztmc; }
-	public void setClztmc(String clztmc) { this.clztmc = clztmc; }
+	public String getGisX(){
+		return gisX;
+	}
+	public void setGisX(String gisX){
+		this.gisX = gisX;
+	}
+	public String getGisY(){
+		return gisY;
+	}
+	public void setGisY(String gisY){
+		this.gisY = gisY;
+	}
+	public String getXzqhmc() {
+		return xzqhmc;
+	}
+	public void setXzqhmc(String xzqhmc) {
+		this.xzqhmc = xzqhmc;
+	}
+	public String getCllxmc() {
+		return cllxmc;
+	}
+	public void setCllxmc(String cllxmc) {
+		this.cllxmc = cllxmc;
+	}
+	public String getClztmc() {
+		return clztmc;
+	}
+	public void setClztmc(String clztmc) {
+		this.clztmc = clztmc;
+	}
 
 	public String getSbll_min() { return sbll_min; }
 	public void setSbll_min(String sbll_min) { this.sbll_min = sbll_min; }
