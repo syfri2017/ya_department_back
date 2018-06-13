@@ -94,19 +94,27 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationVO> imp
 														children4.add(tree5);
 													}
 												}
-												tree4.setChildren(children4);
+												if(!children4.isEmpty()) {
+													tree4.setChildren(children4);
+												}
 												children3.add(tree4);
 											}
 										}
-										tree3.setChildren(children3);
+										if(!children3.isEmpty()) {
+											tree3.setChildren(children3);
+										}
 										children2.add(tree3);
 									}
 								}
-								tree2.setChildren(children2);
+								if(!children2.isEmpty()) {
+									tree2.setChildren(children2);
+								}
 								children.add(tree2);
 							}
 						}
-						tree.setChildren(children);
+						if(!children.isEmpty()) {
+							tree.setChildren(children);
+						}
 						organizationTrees.add(tree);
 					}
 				}
