@@ -77,9 +77,9 @@
                     </tr>
                     <tr>
                         <th>总建筑面积：</th>
-                        <td><#if compZddwInfo.jzmj??>${compZddwInfo.jzmj}</#if> ㎡</td>
+                        <td><#if compZddwInfo.jzmj??>${compZddwInfo.jzmj} ㎡</#if></td>
                         <th>总占地面积：</th>
-                        <td><#if compZddwInfo.zdmj??>${compZddwInfo.zdmj}</#if> ㎡</td>
+                        <td><#if compZddwInfo.zdmj??>${compZddwInfo.zdmj} ㎡</#if></td>
                     </tr>
                 </table>
                 <table class="data-table">
@@ -160,7 +160,8 @@
                      data-menu-text="<#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if>-<#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>">
                     <h3 class="sub-block-header">
                     <span class="header-title-inner">
-                        ${areaBuilding_index+1}.<#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if>-<#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
+                        ${areaBuilding_index+1}
+                            .<#if areaBuilding.jzlxmc??>${areaBuilding.jzlxmc}</#if>-<#if areaBuilding.jzmc??>${areaBuilding.jzmc}</#if>
                     </span>
                     </h3>
                     <div class="sub-block-body">
@@ -175,22 +176,22 @@
                                 </tr>
                                 <tr>
                                     <th>占地面积：</th>
-                                    <td><#if areaBuilding.jzl_zdmj??>${areaBuilding.jzl_zdmj}㎡</#if>
+                                    <td><#if areaBuilding.jzl_zdmj??>${areaBuilding.jzl_zdmj} ㎡</#if>
                                     </td>
                                     <th>建筑面积：</th>
-                                    <td><#if areaBuilding.jzl_jzmj??>${areaBuilding.jzl_jzmj}㎡</#if></td>
+                                    <td><#if areaBuilding.jzl_jzmj??>${areaBuilding.jzl_jzmj} ㎡</#if></td>
                                 </tr>
                                 <tr>
                                     <th>地上高度：</th>
-                                    <td><#if areaBuilding.jzl_dsgd??>${areaBuilding.jzl_dsgd}m</#if></td>
+                                    <td><#if areaBuilding.jzl_dsgd??>${areaBuilding.jzl_dsgd} m</#if></td>
                                     <th>地下高度：</th>
-                                    <td><#if areaBuilding.jzl_dxgd??>${areaBuilding.jzl_dxgd}m</#if></td>
+                                    <td><#if areaBuilding.jzl_dxgd??>${areaBuilding.jzl_dxgd} m</#if></td>
                                 </tr>
                                 <tr>
                                     <th>地上层数：</th>
-                                    <td><#if areaBuilding.jzl_dscs??>${areaBuilding.jzl_dscs}层</#if></td>
+                                    <td><#if areaBuilding.jzl_dscs??>${areaBuilding.jzl_dscs} 层</#if></td>
                                     <th>地下层数：</th>
-                                    <td><#if areaBuilding.jzl_dxcs??>${areaBuilding.jzl_dxcs}层</#if></td>
+                                    <td><#if areaBuilding.jzl_dxcs??>${areaBuilding.jzl_dxcs} 层</#if></td>
                                 </tr>
                                 <tr>
                                     <th>功能描述：</th>
@@ -213,9 +214,9 @@
                                 </tr>
                                 <tr>
                                     <th>占地面积：</th>
-                                    <td><#if areaBuilding.zzl_zdmj??>${areaBuilding.zzl_zdmj}㎡</#if></td>
+                                    <td><#if areaBuilding.zzl_zdmj??>${areaBuilding.zzl_zdmj} ㎡</#if></td>
                                     <th>装置高度：</th>
-                                    <td><#if areaBuilding.zzl_zzgd??>${areaBuilding.zzl_zzgd}m</#if></td>
+                                    <td><#if areaBuilding.zzl_zzgd??>${areaBuilding.zzl_zzgd} m</#if></td>
                                 </tr>
                                 <tr>
                                     <th>技术负责人：</th>
@@ -258,7 +259,7 @@
                             <table class="data-table">
                                 <tr>
                                     <th width="120">总容积：</th>
-                                    <td width="300"><#if areaBuilding.cgl_zrj??>${areaBuilding.cgl_zrj}m³</#if></td>
+                                    <td width="300"><#if areaBuilding.cgl_zrj??>${areaBuilding.cgl_zrj} m³</#if></td>
                                     <th width="120">储罐数量：</th>
                                     <td><#if areaBuilding.cgl_cgsl??>${areaBuilding.cgl_cgsl}</#if></td>
                                 </tr>
@@ -301,7 +302,7 @@
                                                         <th>容量：</th>
                                                         <td><#if pot.cgrl??>${pot.cgrl}</#if></td>
                                                         <th>罐顶面积：</th>
-                                                        <td><#if pot.gdmj??>${pot.gdmj}</#if> ㎡</td>
+                                                        <td><#if pot.gdmj??>${pot.gdmj} ㎡</#if></td>
                                                     </tr>
                                                     <tr>
                                                         <th>直径：</th>
@@ -1031,7 +1032,7 @@
                                 <th>建筑结构：</th>
                                 <td><#if region.jzl_jzjgmc??>${region.jzl_jzjgmc}</#if></td>
                                 <th>区域面积：</th>
-                                <td><#if region.jzl_qymj??>${region.jzl_qymj}</#if> ㎡</td>
+                                <td><#if region.jzl_qymj??>${region.jzl_qymj} ㎡</#if></td>
                             </tr>
                         </table>
                         <table class="data-table">
@@ -1110,9 +1111,9 @@
                             </tr>
                             <tr>
                                 <th>占地面积：</th>
-                                <td><#if region.zzl_zdmj??>${region.zzl_zdmj}</#if> ㎡</td>
+                                <td><#if region.zzl_zdmj??>${region.zzl_zdmj} ㎡</#if></td>
                                 <th>装置高度：</th>
-                                <td><#if region.zzl_zzgd??>${region.zzl_zzgd}</#if> m</td>
+                                <td><#if region.zzl_zzgd??>${region.zzl_zzgd} m</#if></td>
                             </tr>
                             <tr>
                                 <th>技术负责人：</th>
@@ -1190,7 +1191,7 @@
                             </tr>
                             <tr>
                                 <th width="120">总容积：</th>
-                                <td><#if region.cgl_zrj??>${region.cgl_zrj}</#if> m³</td>
+                                <td><#if region.cgl_zrj??>${region.cgl_zrj} m³</#if></td>
                                 <th width="120">储罐间距：</th>
                                 <td><#if region.cgl_cgjg??>${region.cgl_cgjg}</#if></td>
                             </tr>
@@ -1229,7 +1230,7 @@
                                                     <th>容量：</th>
                                                     <td><#if pot.cgrl??>${pot.cgrl}</#if></td>
                                                     <th>罐顶面积：</th>
-                                                    <td><#if pot.gdmj??>${pot.gdmj}</#if> ㎡</td>
+                                                    <td><#if pot.gdmj??>${pot.gdmj} ㎡</#if></td>
                                                 </tr>
                                                 <tr>
                                                     <th width="120">直径：</th>
@@ -1349,9 +1350,9 @@
                                                 <#list disaster.forcedevList as forcedev>
                                                     <#if forcedev.djfalx == '1'>
                                                         <tr>
-                                                            <th width="140">队站名称：</th>
-                                                            <td width="260"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
-                                                            <th width="140">停靠位置：</th>
+                                                            <th width="120">队站名称：</th>
+                                                            <td width="300"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
+                                                            <th width="120">停靠位置：</th>
                                                             <td><#if forcedev.tkwz??>${forcedev.tkwz}</#if></td>
                                                         </tr>
                                                         <tr>
@@ -1370,9 +1371,9 @@
                                                 <#list disaster.forcedevList as forcedev>
                                                     <#if forcedev.djfalx == '2'>
                                                         <tr>
-                                                            <th width="140">队站名称：</th>
-                                                            <td width="260"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
-                                                            <th width="140">停靠位置：</th>
+                                                            <th width="120">队站名称：</th>
+                                                            <td width="300"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
+                                                            <th width="120">停靠位置：</th>
                                                             <td><#if forcedev.tkwz??>${forcedev.tkwz}</#if></td>
                                                         </tr>
                                                         <tr>
@@ -1389,28 +1390,27 @@
                             <!-- end 力量部署 -->
                             <!-- 要点提示 -->
                             <#if disaster.keypointsMap??>
-                            <table class="data-table">
-                                <tr>
-                                    <th class="block-th">要点提示</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table class="data-table">
-                                            <tr>
-                                                <th width="140">战术要点：</th>
-                                                <td><#if disaster.keypointsMap.zsyd??>${disaster.keypointsMap.zsyd}</#if></td>
-                                            </tr>
-                                            <tr>
-                                                <th>特别警示：</th>
-                                                <td><#if disaster.keypointsMap.tbjs??>${disaster.keypointsMap.tbjs}</#if></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-
+                                <table class="data-table">
+                                    <tr>
+                                        <th class="block-th">要点提示</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table class="data-table">
+                                                <tr>
+                                                    <th width="120">战术要点：</th>
+                                                    <td><#if disaster.keypointsMap.zsyd??>${disaster.keypointsMap.zsyd}</#if></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>特别警示：</th>
+                                                    <td><#if disaster.keypointsMap.tbjs??>${disaster.keypointsMap.tbjs}</#if></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
                             </#if>
                             <!-- end 要点提示 -->
-                        </table>
                     </div>
                 </div>
             </#if>
