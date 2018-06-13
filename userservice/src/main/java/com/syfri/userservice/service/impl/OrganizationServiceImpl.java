@@ -50,9 +50,9 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationVO> imp
 	public List<OrganizationTree> doFindAllOrganization() {
 		// 目的树
 		List<OrganizationTree> organizationTrees = new ArrayList<>();
-		if(redisService.exists("organization")){
-			organizationTrees = (List<OrganizationTree>) redisService.get("organization");
-		}else{
+//		if(redisService.exists("organization")){
+//			organizationTrees = (List<OrganizationTree>) redisService.get("organization");
+//		}else{
 			// 源树
 			List<OrganizationVO> organizationVOs = organizationDAO.doFindAllOrganization();
 
@@ -119,8 +119,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<OrganizationVO> imp
 					}
 				}
 			}
-			redisService.set("organization", organizationTrees);
-		}
+//			redisService.set("organization", organizationTrees);
+//		}
 		return organizationTrees;
 	}
 }
