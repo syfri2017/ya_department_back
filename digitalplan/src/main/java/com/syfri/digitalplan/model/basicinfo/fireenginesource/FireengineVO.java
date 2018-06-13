@@ -41,7 +41,12 @@ public class FireengineVO extends ValueObject implements Serializable{
 	private String xzqhmc;	//行政区划（名称）
 	private String cllxmc;	//车辆类型（名称）
 	private String clztmc;	//车辆状态（名称）
+	private String czmhjlbmc;	//车载灭火剂类别（名称）
 
+	private String gisX_min;	//GIS_X
+	private String gisX_max;	//GIS_X
+	private String gisY_min;	//GIS_Y
+	private String gisY_max;	//GIS_Y
 	private String sbll_min;
 	private String sbll_max;
 	private String zsl_min;
@@ -245,7 +250,37 @@ public class FireengineVO extends ValueObject implements Serializable{
 	public void setClztmc(String clztmc) {
 		this.clztmc = clztmc;
 	}
+	public String getCzmhjlbmc() {
+		return czmhjlbmc;
+	}
+	public void setCzmhjlbmc(String czmhjlbmc) {
+		this.czmhjlbmc = czmhjlbmc;
+	}
 
+	public String getGisX_min() {
+		return gisX_min;
+	}
+	public void setGisX_min(String gisX_min) {
+		this.gisX_min = gisX_min;
+	}
+	public String getGisX_max() {
+		return gisX_max;
+	}
+	public void setGisX_max(String gisX_max) {
+		this.gisX_max = gisX_max;
+	}
+	public String getGisY_min() {
+		return gisY_min;
+	}
+	public void setGisY_min(String gisY_min) {
+		this.gisY_min = gisY_min;
+	}
+	public String getGisY_max() {
+		return gisY_max;
+	}
+	public void setGisY_max(String gisY_max) {
+		this.gisY_max = gisY_max;
+	}
 	public String getSbll_min() { return sbll_min; }
 	public void setSbll_min(String sbll_min) { this.sbll_min = sbll_min; }
 	public String getSbll_max() { return sbll_max; }
