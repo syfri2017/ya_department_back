@@ -93,11 +93,17 @@
 		<if test="reserve4 != null and reserve4 != '' ">
 			and t.reserve4 = #{reserve4}
 		</if>
-		<if test="gisX != null and gisX != '' ">
-			and t.gis_x = #{gisX}
+		<if test="gisX_min != null and gisX_min != '' ">
+			and t.gis_X > #{gisX_min}
 		</if>
-		<if test="gisY != null and gisY != '' ">
-			and t.gis_y = #{gisY}
+		<if test="gisX_max != null and gisX_max != '' ">
+			and t.gis_X &lt; #{gisX_max}
+		</if>
+		<if test="gisY_min != null and gisY_min != '' ">
+			and t.gis_Y > #{gisY_min}
+		</if>
+		<if test="gisY_max != null and gisY_max != '' ">
+			and t.gis_Y &lt; #{gisY_max}
 		</if>
 	</sql>
 

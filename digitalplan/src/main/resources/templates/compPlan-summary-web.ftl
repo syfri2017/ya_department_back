@@ -77,9 +77,9 @@
                     </tr>
                     <tr>
                         <th>总建筑面积：</th>
-                        <td><#if compZddwInfo.jzmj??>${compZddwInfo.jzmj}</#if> ㎡</td>
+                        <td><#if compZddwInfo.jzmj??>${compZddwInfo.jzmj} ㎡</#if></td>
                         <th>总占地面积：</th>
-                        <td><#if compZddwInfo.zdmj??>${compZddwInfo.zdmj}</#if> ㎡</td>
+                        <td><#if compZddwInfo.zdmj??>${compZddwInfo.zdmj} ㎡</#if></td>
                     </tr>
                 </table>
                 <table class="data-table">

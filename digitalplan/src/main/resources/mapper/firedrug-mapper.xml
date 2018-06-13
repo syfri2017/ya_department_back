@@ -10,7 +10,7 @@
 		 and f.yjbm = #{yjbm}
 		</if>
 		<if test="yjmc != null and yjmc != '' ">
-		 and f.yjmc = #{yjmc}
+		 and f.yjmc LIKE concat(concat('%',#{yjmc}),'%')
 		</if>
 		<if test="ssdz != null and ssdz != '' ">
 			and f.ssdz IN (
@@ -46,12 +46,6 @@
 		</if>
 		<if test="czl != null and czl != '' ">
 		 and f.czl = #{czl}
-		</if>
-		<if test="czl_min != null and czl_min != '' ">
-			and f.czl &gt;= #{czl_min}
-		</if>
-		<if test="czl_max != null and czl_max != '' ">
-			and f.czl &lt;= #{czl_max}
 		</if>
 		<if test="kcl != null and kcl != '' ">
 			and f.kcl = #{kcl}
