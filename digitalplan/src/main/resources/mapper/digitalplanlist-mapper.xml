@@ -361,6 +361,7 @@
 		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'YASHZT' And c7.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t.SHZT = c8.CODE_VALUE
 		WHERE t.DELETE_FLAG = 'N' AND  t.DXID = #{value}
+		ORDER BY yajb ASC
 	</select>
 
 	<!--审核加载预案List-->
