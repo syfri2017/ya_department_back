@@ -209,7 +209,7 @@
                                                     </th>
                                                 </tr>
                                                 <#list disaster.forcedevList as forcedev>
-                                                    <#if forcedev.djfalx == '1'>
+                                                    <#if forcedev.djfalx?? && forcedev.djfalx == '1'>
                                                         <tr>
                                                             <th width="140">队站名称：</th>
                                                             <td width="260"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
@@ -230,7 +230,7 @@
                                                     </th>
                                                 </tr>
                                                 <#list disaster.forcedevList as forcedev>
-                                                    <#if forcedev.djfalx == '2'>
+                                                    <#if forcedev.djfalx?? && forcedev.djfalx == '2'>
                                                         <tr>
                                                             <th width="140">队站名称：</th>
                                                             <td width="260"><#if forcedev.dzmc??>${forcedev.dzmc}</#if></td>
