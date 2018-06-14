@@ -23,6 +23,7 @@ import com.syfri.digitalplan.utils.ZipCompressUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -299,5 +300,26 @@ public class YafjxzController extends BaseController<YafjxzVO> {
 			resultVO.setCode(EConstants.CODE.FAILURE);
 		}
 		return resultVO;
+	}
+
+	@RequestMapping(value = "/downTemplet", method = RequestMethod.GET)
+	public void down(HttpServletRequest request,HttpServletResponse response) {
+		String zipfilename= ClassUtils.getDefaultClassLoader().getResource("").getPath()+"attachment/重点单位预案-大中队级.docx";
+		BufferedInputStream bis = null;
+		try {
+			bis = new BufferedInputStream(new FileInputStream(new File(zipfilename)));
+			//返回浏览器输出流
+			DownloadUtil.doc(bis, request, response,  "重点单位预案-大中队级.docx");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (bis != null) {
+				try {
+					bis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
