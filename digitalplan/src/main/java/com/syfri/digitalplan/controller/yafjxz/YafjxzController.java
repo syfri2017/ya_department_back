@@ -322,4 +322,31 @@ public class YafjxzController extends BaseController<YafjxzVO> {
 			}
 		}
 	}
+
+	/**
+	 * 下载临时预案简版
+	 * @param request
+	 * @param response
+	 * @param yawjmc 预案文件名称
+	 */
+	@RequestMapping(value = "/downTempYa", method = RequestMethod.GET)
+	public void down(HttpServletRequest request,HttpServletResponse response,String yawjmc) {
+		String zipfilename= ClassUtils.getDefaultClassLoader().getResource("").getPath()+"attachment/"+yawjmc;
+		BufferedInputStream bis = null;
+		try {
+			bis = new BufferedInputStream(new FileInputStream(new File(zipfilename)));
+			//返回浏览器输出流
+			DownloadUtil.doc(bis, request, response,  yawjmc);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (bis != null) {
+				try {
+					bis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }

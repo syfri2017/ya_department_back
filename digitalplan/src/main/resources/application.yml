@@ -51,7 +51,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
   redis:
-    host: 127.0.0.1
+    host: 10.119.119.233
     port: 6379
 #------------------------------------------------------------
 #pagehelper分页插件设置
