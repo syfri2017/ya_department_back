@@ -581,7 +581,6 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>,
 		t2.uuid uuid,
-		t2.xyrs xyrs,
 		t2.xfdyzrs xfdyzrs,
 		t2.mrzqrs mrzqrs,
 		t2.gxdw gxdw,
