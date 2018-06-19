@@ -257,4 +257,32 @@ public class ResourceController  extends BaseController<ResourceVO>{
 		}
 		return resultVO;
 	}
+
+	/**
+	 * 删除一条资源，同时删除其权限信息
+	 * add by yushch
+	 */
+	@ApiOperation(value="根据主键删除资源资源及其权限信息",notes="删除")
+	@ApiImplicitParam(name="id",value="资源主键")
+	@GetMapping("/deleteOneById/{resourceid}")
+	public @ResponseBody ResultVO deleteOneById(@PathVariable String resourceid){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			ResourceVO resourceVO = new ResourceVO();
+			resourceVO.setParentid(resourceid);
+			List<ResourceVO> list = resourceService.doSearchListByVO(resourceVO);
+			if(list.size()>0){
+				for (int i=0;i<list.size();i++){
+					String id = list.get(i).getResourceid();
+					resourceService.doDeleteResourcePermissions(id);
+				}
+			}
+			resourceService.doDeleteResourcePermissions(resourceid);
+			resultVO.setMsg("删除成功");
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
