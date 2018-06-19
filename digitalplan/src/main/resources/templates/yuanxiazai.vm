@@ -6612,7 +6612,7 @@
                 <w:gridCol w:w="356"/>
                 <w:gridCol w:w="1066"/>
             </w:tblGrid>
-            #if(${titles.contains("zqsd")})
+            #if(${titles}!=("fm-tp-")&&${titles}!=("fm-tp"))
             <w:tr wsp:rsidR="00FD36D7" wsp:rsidRPr="00B17FA3">
                 <w:trPr>
                     <w:trHeight w:h-rule="exact" w:val="567"/>
@@ -8398,6 +8398,7 @@
                         <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
                         <w:vAlign w:val="center"/>
                     </w:tcPr>
+
             #end
             #if(${titles.contains("dwjzxx")})
                 #foreach($areaBuilding in ${areaBuildingList})
@@ -13779,8 +13780,6 @@
                         <w:vAlign w:val="center"/>
                     </w:tcPr>#end
 
-
-                //标题结束
             #end
 
 
@@ -15011,10 +15010,14 @@
                         <aml:annotation aml:id="0" w:type="Word.Bookmark.Start" w:name="_GoBack"/>
                         <aml:annotation aml:id="0" w:type="Word.Bookmark.End"/>
                     </w:p>
-                </w:tc>
-            </w:tr>
+
                 #end##灾情设定与作战部署包含结束
             #end
+            #if(${titles}!=("fm-tp-")&&${titles}!=("fm-tp"))
+                <w:p></w:p>
+        </w:tc>
+        </w:tr>
+    #end
         </w:tbl>
         #if(${titles.contains("tp")})
 
