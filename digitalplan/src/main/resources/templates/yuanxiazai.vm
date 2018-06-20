@@ -10535,7 +10535,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -10611,7 +10611,8 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.xhszdll}L/s</w:t>
+                            <w:t>#if($xfss.xhszdll)${xfss.xhszdll}#end
+                                L/s</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -10686,7 +10687,8 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.plbzdll}L/s</w:t>
+                            <w:t>#if($xfss.plbzdll)${xfss.plbzdll}#end
+                                L/s</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -10833,7 +10835,8 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sxrl}m³</w:t>
+                            <w:t>#if($xfss.sxrl)${xfss.sxrl}#end
+                                m³</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -10909,7 +10912,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.bjsd}</w:t>
+                            <w:t>#if($xfss.bjsd)${xfss.bjsd}#end</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
@@ -11065,7 +11068,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sxrl}</w:t>
+                            <w:t>#if($xfss.sxrl)${xfss.sxrl}#end</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
@@ -11151,7 +11154,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.bjsd}</w:t>
+                            <w:t>#if($xfss.bjsd)${xfss.bjsd}#end</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
@@ -11307,7 +11310,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sl}</w:t>
+                            <w:t>#if($xfss.sl)${xfss.sl}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -11383,7 +11386,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sfky}</w:t>
+                            <w:t>#if($xfss.sfky)${xfss.sfky}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -11530,7 +11533,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sl}</w:t>
+                            <w:t>#if($xfss.sl)${xfss.sl}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -11606,7 +11609,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sfky}</w:t>
+                            <w:t>#if($xfss.sfky)${xfss.sfky}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -11759,7 +11762,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -11835,7 +11838,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.xh}</w:t>
+                            <w:t>#if($xfss.xh)${xfss.xh}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -11910,7 +11913,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.azxsmc}</w:t>
+                            <w:t>#if($xfss.azxsmc)${xfss.azxsmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12059,7 +12062,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12135,7 +12138,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.ywplxt}</w:t>
+                            <w:t>#if($xfss.ywplxt)${xfss.ywplxt}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12288,7 +12291,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12364,7 +12367,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.gsqd} L/min.m2</w:t>
+                            <w:t>#if($xfss.gsqd)${xfss.gsqd}#end L/min.m2</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12439,7 +12442,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.ywlqsxt}</w:t>
+                            <w:t>#if($xfss.ywlqsxt)${xfss.ywlqsxt}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12593,7 +12596,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12669,7 +12672,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sl}</w:t>
+                            <w:t>#if($xfss.sl)${xfss.sl}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12744,7 +12747,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.isky}</w:t>
+                            <w:t>#if($xfss.isky)${xfss.isky}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12893,7 +12896,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.wz}</w:t>
+                            <w:t>#if($xfss.wz)${xfss.wz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -12969,7 +12972,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${xfss.sl}</w:t>
+                            <w:t>#if($xfss.sl)${xfss.sl}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13114,7 +13117,7 @@
                                 <w:sz w:val="21"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${region.zdbwwz}/</w:t>
+                            <w:t>#if($region.zdbwwz)${region.zdbwwz}#end/</w:t>
                         </w:r>
                         <w:proofErr w:type="gramEnd"/>
                         <w:r>
@@ -13201,7 +13204,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${region.jzl_jzjgmc}</w:t>
+                            <w:t>#if($region.jzl_jzjgmc)${region.jzl_jzjgmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13282,7 +13285,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${region.jzl_qymj}㎡</w:t>
+                            <w:t>#if($region.jzl_qymj)${region.jzl_qymj}#end㎡</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13358,7 +13361,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${region.jzl_syxz}</w:t>
+                            <w:t>#if($region.jzl_syxz)${region.jzl_syxz}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13486,7 +13489,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${danger.jzmc}</w:t>
+                            <w:t>#if($danger.jzmc)${danger.jzmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13562,7 +13565,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${danger.jzsjcl}</w:t>
+                            <w:t>#if($danger.jzsjcl)${danger.jzsjcl}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13670,7 +13673,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${danger.jzlhtx}</w:t>
+                            <w:t>#if($danger.jzlhtx)${danger.jzlhtx}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13757,7 +13760,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>该部位存有易燃液体柴油，且储量相对较大，其北侧设有油漆库，存放有少量油漆涂料等易燃可燃物，火灾风险较大。与其相邻的厨房设有煤气管道，有爆炸风险。</w:t>
+                            <w:t>#if($region.wxxfx)${region.wxxfx}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13889,7 +13892,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.zqbw}</w:t>
+                            <w:t>#if($disaster.zqbw)${disaster.zqbw}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -13974,7 +13977,7 @@
                                 <w:color w:val="000000"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.zqdjmc}</w:t>
+                            <w:t>#if($disaster.zqdjmc)${disaster.zqdjmc}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -14054,7 +14057,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.zqms}</w:t>
+                            <w:t>#if($disaster.zqms)${disaster.zqms}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -14145,7 +14148,7 @@
                                 <w:kern w:val="0"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.zqsdyj}</w:t>
+                            <w:t>#if($disaster.zqsdyj)${disaster.zqsdyj}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -14828,7 +14831,7 @@
                                 <w:color w:val="000000"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.keypointsMap.zsyd}</w:t>
+                            <w:t>#if($disaster.keypointsMap.zsyd)${disaster.keypointsMap.zsyd}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -14917,7 +14920,7 @@
                                 <w:color w:val="000000"/>
                                 <w:sz-cs w:val="21"/>
                             </w:rPr>
-                            <w:t>${disaster.keypointsMap.tbjs}</w:t>
+                            <w:t>#if($disaster.keypointsMap.tbjs)${disaster.keypointsMap.tbjs}#end</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
