@@ -73,6 +73,8 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceVO> implements 
 		resourceDAO.doDeleteResourcePermissions(resourceVO.getResourceid());
 		((ResourceService)AopContext.currentProxy()).insertResourcePermissionsBatch(resourceVO.getResourceid(), resourceVO.getPermissions());
 
+		//查询并返回修改后的资源数据
+		resourceVO = resourceDAO.doFindById(resourceVO.getResourceid());
 		return resourceVO;
 	}
 
