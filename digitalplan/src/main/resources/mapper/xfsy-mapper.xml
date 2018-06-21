@@ -567,7 +567,7 @@
 		</if>
 		<include refid="SQL_CONDITION"/>
 		AND rownum &lt;= 100
-        ORDER BY t.SYBM
+        ORDER BY t.SYMC
         )tt
 		<!--水源类型-->
 		LEFT JOIN SYS_CODELIST_DETAIL c2 ON (tt.sylx = c2.code_value AND c2.codeid='9C617DE8210445AB9AE776686ABAC3B5' AND c2.DELETE_FLAG = 'N')
