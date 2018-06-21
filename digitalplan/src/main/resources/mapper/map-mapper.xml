@@ -152,7 +152,9 @@
 		t.gis_y gisY,
 		t.zddwsl zddwsl
 		FROM T_MAP_ZDDW t
-		WHERE t.dzlx = '0200'
+		WHERE 1=1
+		and t.dzlx = '0200'
+-- 		and t.xzqh like '%0000'
 		and t.rq = (select max(rq) from t_map_zddw)
 		order by xzqh
 		--and t.xzqh like '%0000'
@@ -168,10 +170,13 @@
 		t.gis_y gisY,
 		t.zddwsl zddwsl
 		FROM T_MAP_ZDDW t
-		WHERE t.dzlx = '0300'
+		WHERE 1=1
+		and t.dzlx = '0300'
 		and t.xzqh like concat(substr(#{xzqh},0,2),'%')
 		and t.rq = (select max(rq) from t_map_zddw)
 		order by xzqh
+-- 		and t.xzqh not like '%0000'
+-- 		and t.rq like substr(sysdate,0,10)
 	</select>
 
 	<!--14.获取数量-->
