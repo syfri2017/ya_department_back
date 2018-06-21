@@ -55,7 +55,7 @@
             </div>
         </div>
         <!-- 单位基本情况 -->
-        <div id="wdgk" class="content-block block-level-1" data-menu-text="基本情况">
+        <div id="wdgk" class="content-block block-level-1" data-menu-text="单位基本情况">
             <h2 class="block-header">
                 <span class="header-title-inner">单位基本情况</span>
             </h2>
@@ -105,19 +105,19 @@
                     </tr>
                     <tr>
                         <th width="64">东：</th>
-                        <td><#if compZddwInfo.blgxd??>${compZddwInfo.plqkd}</#if></td>
+                        <td><#if compZddwInfo.plqkd??>${compZddwInfo.plqkd}</#if></td>
                     </tr>
                     <tr>
                         <th>西：</th>
-                        <td><#if compZddwInfo.blgxx??>${compZddwInfo.plqkx}</#if></td>
+                        <td><#if compZddwInfo.plqkx??>${compZddwInfo.plqkx}</#if></td>
                     </tr>
                     <tr>
                         <th>南：</th>
-                        <td><#if compZddwInfo.blgxn??>${compZddwInfo.plqkn}</#if></td>
+                        <td><#if compZddwInfo.plqkn??>${compZddwInfo.plqkn}</#if></td>
                     </tr>
                     <tr>
                         <th>北：</th>
-                        <td><#if compZddwInfo.blgxb??>${compZddwInfo.plqkb}</#if></td>
+                        <td><#if compZddwInfo.plqkb??>${compZddwInfo.plqkb}</#if></td>
                     </tr>
                 </table>
                 <table class="data-table">
