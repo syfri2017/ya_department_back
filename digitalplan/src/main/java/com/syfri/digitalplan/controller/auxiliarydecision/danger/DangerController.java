@@ -184,13 +184,27 @@ public class DangerController  extends BaseController<DangerVO>{
 		return resultVO;
 	}
 
-	@ApiOperation(value="删除预案",notes="列表信息")
-	@ApiImplicitParam(name="vo",value="预案")
+	@ApiOperation(value="删除化危品",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="化危品")
 	@PostMapping("/doDeleteDanger")
 	public @ResponseBody ResultVO doDeleteDanger(@RequestBody List<DangerVO> dangerList) {
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(dangerService.doDeleteDanger(dangerList));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="修改化危品",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="化危品")
+	@PostMapping("/doUpdateDanger")
+	public @ResponseBody ResultVO doUpdateDanger(@RequestBody DangerVO dangerVO) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(dangerService.doUpdateDanger(dangerVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

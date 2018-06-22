@@ -51,7 +51,7 @@ public class DangerServiceImpl extends BaseServiceImpl<DangerVO> implements Dang
         int count = 0;
         if (dangerList.size() > 0) {
             for (DangerVO dangerVO : dangerList) {
-                DangerVO vo =new DangerVO();
+                DangerVO vo = new DangerVO();
                 vo.setUuid(dangerVO.getUuid());
                 vo.setXgrid(dangerVO.getXgrid());
                 vo.setXgrmc(dangerVO.getXgrmc());
@@ -60,6 +60,23 @@ public class DangerServiceImpl extends BaseServiceImpl<DangerVO> implements Dang
                 count = count + dangerDAO.doUpdateByVO(vo);
             }
         }
+        return count;
+    }
+
+    /**
+     * @Description: 化危品修改
+     * @Param: [dangerVO]
+     * @Return: int
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/6/22 15:48
+     */
+    public int doUpdateDanger(DangerVO dangerVO) {
+        dangerVO.setCjrid(null);
+        dangerVO.setCjrmc(null);
+        dangerVO.setCjsj(null);
+        dangerVO.setXgsj("1");
+        int count = dangerDAO.doUpdateByVO(dangerVO);
         return count;
     }
 }

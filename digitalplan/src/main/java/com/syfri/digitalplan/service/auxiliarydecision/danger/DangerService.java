@@ -24,4 +24,14 @@ public interface DangerService  extends BaseService<DangerVO>{
      * @Date: 2018/6/22 14:28
      */
     int doDeleteDanger(List<DangerVO> dangerList);
+
+    /**
+     * @Description: 修改：化学危险品.
+     * @Param: [dangerVO]
+     * @Return: int
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/6/22 15:48
+     */
+    int doUpdateDanger(DangerVO dangerVO);
 }
