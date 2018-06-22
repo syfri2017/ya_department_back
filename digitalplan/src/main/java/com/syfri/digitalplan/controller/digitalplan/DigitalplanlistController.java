@@ -108,9 +108,16 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		return resultVO;
 	}
 
-
-	@ApiOperation(value="通过重点单位id查询建筑分区list",notes="列表信息")
-	@ApiImplicitParam(name="vo",value="建筑分区对象")
+	/**
+	 * @Description: 删除预案
+	 * @Param: [digitalplanList, digitalplanVo]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 15:52
+	 */
+	@ApiOperation(value="删除预案",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="预案")
 	@PostMapping("/doDeleteDigitalplan")
 	public @ResponseBody ResultVO doDeleteDigitalplan(@RequestBody List<DigitalplanlistVO> digitalplanList,DigitalplanlistVO digitalplanVo) {
 		ResultVO resultVO = ResultVO.build();
