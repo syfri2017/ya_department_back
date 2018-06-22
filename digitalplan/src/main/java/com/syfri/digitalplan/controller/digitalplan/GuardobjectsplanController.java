@@ -69,14 +69,14 @@ public class GuardobjectsplanController extends BaseController<GuardobjectsplanV
 	 */
 	@ApiOperation(value="根据条件获取消防保卫警卫预案信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="消防保卫警卫对象")
-	@PostMapping("/findByVO")
-	public @ResponseBody ResultVO findByVO(@RequestBody GuardobjectsplanVO guardobjectsplanVO){
+	@PostMapping("/findBwjwplanList")
+	public @ResponseBody ResultVO findBwjwplanList(@RequestBody GuardobjectsplanVO guardobjectsplanVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			guardobjectsplanVO.setPageSize(5);
-			guardobjectsplanVO.setPageNum(1);
-			List<GuardobjectsplanVO> result = guardobjectsplanService.doFindXfbwjwlist(guardobjectsplanVO);
-			resultVO.setResult(result);
+			PageHelper.startPage(guardobjectsplanVO.getPageNum(),guardobjectsplanVO.getPageSize());
+			List<GuardobjectsplanVO> list = guardobjectsplanService.doFindXfbwjwlist(guardobjectsplanVO);
+			PageInfo<GuardobjectsplanVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
