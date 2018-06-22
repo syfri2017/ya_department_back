@@ -62,12 +62,12 @@ public class GuardobjectsController extends BaseController<GuardobjectsVO>{
 	@ApiOperation(value="根据条件查询保卫警卫",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="保卫警卫")
 
-	@PostMapping("/findByVO")
+	@PostMapping("/findBwjwList")
 	public @ResponseBody ResultVO findByVO(@RequestBody GuardobjectsVO guardobjectsVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			PageHelper.startPage(guardobjectsVO.getPageNum(),guardobjectsVO.getPageSize());
-			List<GuardobjectsVO> list = guardobjectsService.doSearchListByVO(guardobjectsVO);
+			List<GuardobjectsVO> list = guardobjectsService.doFindBwjwplanlist(guardobjectsVO);
 			PageInfo<GuardobjectsVO> pageInfo = new PageInfo<>(list);
 			resultVO.setResult(pageInfo);
 		}catch(Exception e){
