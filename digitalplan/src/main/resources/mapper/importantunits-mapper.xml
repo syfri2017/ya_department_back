@@ -222,68 +222,136 @@
 		<!--ORDER BY XZQH,DWXZ,DWMC ASC-->
 	<!--</select>-->
 	<select id="doSearchListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
-		SELECT *
-		FROM ( SELECT t1.*,
-		c2.CODE_NAME dwxzmc,
-		c4.CODE_NAME xzqhmc,
-		c6.CODE_NAME jzflmc,
-		c8.CODE_NAME fhdjmc,
-		c9.DZMC mhdzidmc,
-		CASE (SELECT COUNT(t2.UUID)
-		FROM YAGL_DX_ZDDW_XFLL t2
-		WHERE t2.ZDDWID = t1.UUID
-		AND t2.DELETE_FLAG = 'N')
-		WHEN 0 THEN
-		'无'
-		ELSE
-		'有'
-		END AS xfdwlxmc
-		FROM (SELECT
-		<include refid="SQL_CONTENT"/>
-		FROM YAGL_DX_ZDDW  t
-		where t.delete_flag = 'N'
-		and rownum &lt;= 100
-		<include refid="SQL_CONDITION"/>
-		) t1
-		Left Join SYS_CODELIST c1
-		on c1.CODETYPE = 'DWXZ'
-		And c1.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c2
-		On c1.CODEID = c2.CODEID
-		And c2.DELETE_FLAG = 'N'
-		and t1.DWXZ = c2.CODE_VALUE
-		Left Join SYS_CODELIST c3
-		on c3.CODETYPE = 'XZQH'
-		And c3.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c4
-		On c3.CODEID = c4.CODEID
-		And c4.DELETE_FLAG = 'N'
-		and t1.XZQH = c4.CODE_VALUE
-		Left Join SYS_CODELIST c5
-		on c5.CODETYPE = 'JZFL'
-		And c5.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c6
-		On c5.CODEID = c6.CODEID
-		And c6.DELETE_FLAG = 'N'
-		and t1.JZFL = c6.CODE_VALUE
-		Left Join SYS_CODELIST c7
-		on c7.CODETYPE = 'FHDJ'
-		And c7.DELETE_FLAG = 'N'
-		Left Join SYS_CODELIST_DETAIL c8
-		On c7.CODEID = c8.CODEID
-		And c8.DELETE_FLAG = 'N'
-		and t1.FHDJ = c8.CODE_VALUE
-		LEFT JOIN YAGL_XFDZ c9
-		ON (t1.MHDZID = c9.DZID AND c9.DELETE_FLAG = 'N')
+		<!-- modified by li.xue start 2018/6/22 -->
+		WITH TEMP_XFDW AS(
+			SELECT ZDDWID,COUNT(1) XFDWLXMC FROM YAGL_DX_ZDDW_XFLL WHERE DELETE_FLAG = 'N' GROUP BY ZDDWID
+		)
+		SELECT
+		<include refid="SQL_CONTENT"/>,
+		C2.CODE_NAME DWXZMC,
+		C4.CODE_NAME XZQHMC,
+		C6.CODE_NAME JZFLMC,
+		C8.CODE_NAME FHDJMC,
+		C9.DZMC MHDZIDMC,
+		CASE WHEN C11.XFDWLXMC IS NOT NULL THEN '有' ELSE'无' END XFDWLXMC
+		FROM YAGL_DX_ZDDW T
+		LEFT JOIN SYS_CODELIST C1
+		ON C1.CODETYPE = 'DWXZ'
+		AND C1.DELETE_FLAG = 'N'
+		LEFT JOIN SYS_CODELIST_DETAIL C2
+		ON C1.CODEID = C2.CODEID
+		AND C2.DELETE_FLAG = 'N'
+		AND T.DWXZ = C2.CODE_VALUE
+		LEFT JOIN SYS_CODELIST C3
+		ON C3.CODETYPE = 'XZQH'
+		AND C3.DELETE_FLAG = 'N'
+		LEFT JOIN SYS_CODELIST_DETAIL C4
+		ON C3.CODEID = C4.CODEID
+		AND C4.DELETE_FLAG = 'N'
+		AND T.XZQH = C4.CODE_VALUE
+		LEFT JOIN SYS_CODELIST C5
+		ON C5.CODETYPE = 'JZFL'
+		AND C5.DELETE_FLAG = 'N'
+		LEFT JOIN SYS_CODELIST_DETAIL C6
+		ON C5.CODEID = C6.CODEID
+		AND C6.DELETE_FLAG = 'N'
+		AND T.JZFL = C6.CODE_VALUE
+		LEFT JOIN SYS_CODELIST C7
+		ON C7.CODETYPE = 'FHDJ'
+		AND C7.DELETE_FLAG = 'N'
+		LEFT JOIN SYS_CODELIST_DETAIL C8
+		ON C7.CODEID = C8.CODEID
+		AND C8.DELETE_FLAG = 'N'
+		AND T.FHDJ = C8.CODE_VALUE
+		LEFT JOIN YAGL_XFDZ C9
+		ON T.MHDZID = C9.DZID
+		AND C9.DELETE_FLAG = 'N'
+		LEFT JOIN TEMP_XFDW C11
+		ON T.UUID = C11.ZDDWID
 		<if test="mhdzbm != null and mhdzbm != '' ">
 			INNER JOIN YAGL_XFDZ c10
-			ON (t1.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))
+			ON (t.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))
 		</if>
-		WHERE t1.deleteFlag = 'N') t999
-		<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">
-			where t999.xfdwlxmc = #{xfdwlxmc}
+		WHERE T.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
+		<if test="xfdwlxmc == 1">
+			AND C11.XFDWLXMC IS NOT NULL
 		</if>
+		<if test="xfdwlxmc == 2">
+			AND C11.XFDWLXMC IS NULL
+		</if>
+		<!--<choose>-->
+			<!--<when test="xfdwlxmc == 1">AND C11.DWSL IS NOT NULL</when>-->
+			<!--<when test="xfdwlxmc == 0">AND C11.DWSL IS NULL</when>-->
+			<!--<when test="xfdwlxmc == null or xfdwlxmc == ''"></when>-->
+		<!--</choose>-->
+		<!--<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">-->
+			<!--AND XFDWLXMC = #{xfdwlxmc}-->
+		<!--</if>-->
 		ORDER BY XZQH, DWXZ, DWMC ASC
+		<!-- modified by li.xue end 2018/6/22 -->
+		<!--SELECT *-->
+		<!--FROM ( SELECT t1.*,-->
+		<!--c2.CODE_NAME dwxzmc,-->
+		<!--c4.CODE_NAME xzqhmc,-->
+		<!--c6.CODE_NAME jzflmc,-->
+		<!--c8.CODE_NAME fhdjmc,-->
+		<!--c9.DZMC mhdzidmc,-->
+		<!--CASE (SELECT COUNT(t2.UUID)-->
+		<!--FROM YAGL_DX_ZDDW_XFLL t2-->
+		<!--WHERE t2.ZDDWID = t1.UUID-->
+		<!--AND t2.DELETE_FLAG = 'N')-->
+		<!--WHEN 0 THEN-->
+		<!--'无'-->
+		<!--ELSE-->
+		<!--'有'-->
+		<!--END AS xfdwlxmc-->
+		<!--FROM (SELECT-->
+		<!--<include refid="SQL_CONTENT"/>-->
+		<!--FROM YAGL_DX_ZDDW  t-->
+		<!--where t.delete_flag = 'N'-->
+		<!--and rownum &lt;= 100-->
+		<!--<include refid="SQL_CONDITION"/>-->
+		<!--) t1-->
+		<!--Left Join SYS_CODELIST c1-->
+		<!--on c1.CODETYPE = 'DWXZ'-->
+		<!--And c1.DELETE_FLAG = 'N'-->
+		<!--Left Join SYS_CODELIST_DETAIL c2-->
+		<!--On c1.CODEID = c2.CODEID-->
+		<!--And c2.DELETE_FLAG = 'N'-->
+		<!--and t1.DWXZ = c2.CODE_VALUE-->
+		<!--Left Join SYS_CODELIST c3-->
+		<!--on c3.CODETYPE = 'XZQH'-->
+		<!--And c3.DELETE_FLAG = 'N'-->
+		<!--Left Join SYS_CODELIST_DETAIL c4-->
+		<!--On c3.CODEID = c4.CODEID-->
+		<!--And c4.DELETE_FLAG = 'N'-->
+		<!--and t1.XZQH = c4.CODE_VALUE-->
+		<!--Left Join SYS_CODELIST c5-->
+		<!--on c5.CODETYPE = 'JZFL'-->
+		<!--And c5.DELETE_FLAG = 'N'-->
+		<!--Left Join SYS_CODELIST_DETAIL c6-->
+		<!--On c5.CODEID = c6.CODEID-->
+		<!--And c6.DELETE_FLAG = 'N'-->
+		<!--and t1.JZFL = c6.CODE_VALUE-->
+		<!--Left Join SYS_CODELIST c7-->
+		<!--on c7.CODETYPE = 'FHDJ'-->
+		<!--And c7.DELETE_FLAG = 'N'-->
+		<!--Left Join SYS_CODELIST_DETAIL c8-->
+		<!--On c7.CODEID = c8.CODEID-->
+		<!--And c8.DELETE_FLAG = 'N'-->
+		<!--and t1.FHDJ = c8.CODE_VALUE-->
+		<!--LEFT JOIN YAGL_XFDZ c9-->
+		<!--ON (t1.MHDZID = c9.DZID AND c9.DELETE_FLAG = 'N')-->
+		<!--<if test="mhdzbm != null and mhdzbm != '' ">-->
+			<!--INNER JOIN YAGL_XFDZ c10-->
+			<!--ON (t1.MHDZID=c10.DZID AND c10.DELETE_FLAG = 'N' AND c10.dzbm LIKE concat(RTRIM(#{mhdzbm},0),'%'))-->
+		<!--</if>-->
+		<!--WHERE t1.deleteFlag = 'N') t999-->
+		<!--<if test="xfdwlxmc != null and xfdwlxmc != '' and xfdwlxmc != '全部'">-->
+			<!--where t999.xfdwlxmc = #{xfdwlxmc}-->
+		<!--</if>-->
+		<!--ORDER BY XZQH, DWXZ, DWMC ASC-->
 	</select>
 	<!--lxy start-->
 	<select id="doSearchZddwListByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
