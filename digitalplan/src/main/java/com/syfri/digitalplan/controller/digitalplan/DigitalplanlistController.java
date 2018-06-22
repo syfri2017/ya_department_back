@@ -1,5 +1,7 @@
 package com.syfri.digitalplan.controller.digitalplan;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
@@ -174,7 +176,10 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 	public @ResponseBody ResultVO listForApprove(@RequestBody DigitalplanlistVO vo ) {
 		ResultVO resultVO = ResultVO.build();
 		try {
-			resultVO.setResult(digitalplanlistService.doSearchApproveListByVO(vo));
+			PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+			List<DigitalplanlistVO> list = digitalplanlistService.doSearchApproveListByVO(vo);
+			PageInfo<DigitalplanlistVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		} catch (Exception e) {
 			logger.error("{}",e.getMessage());
 		}

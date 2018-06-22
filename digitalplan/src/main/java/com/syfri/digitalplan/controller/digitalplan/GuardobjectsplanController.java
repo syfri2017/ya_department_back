@@ -1,5 +1,7 @@
 package com.syfri.digitalplan.controller.digitalplan;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.utils.Base64ImageUtil;
@@ -63,14 +65,16 @@ public class GuardobjectsplanController extends BaseController<GuardobjectsplanV
 
 
 	/**
-	 * 根据条件获取预案信息
+	 * 根据条件获取防消保卫警卫预案信息
 	 */
-	@ApiOperation(value="根据条件获取预案信息",notes="列表信息")
-	@ApiImplicitParam(name="vo",value="预案信息对象")
+	@ApiOperation(value="根据条件获取消防保卫警卫预案信息",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="消防保卫警卫对象")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody GuardobjectsplanVO guardobjectsplanVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
+			guardobjectsplanVO.setPageSize(5);
+			guardobjectsplanVO.setPageNum(1);
 			List<GuardobjectsplanVO> result = guardobjectsplanService.doFindXfbwjwlist(guardobjectsplanVO);
 			resultVO.setResult(result);
 		}catch(Exception e){
@@ -82,9 +86,9 @@ public class GuardobjectsplanController extends BaseController<GuardobjectsplanV
 
 
 	/**
-	 * 根据id获取预案信息
+	 * 根据id获取消防保卫警卫预案信息
 	 */
-	@ApiOperation(value="根据id获取预案信息",notes="列表信息")
+	@ApiOperation(value="根据id获取消防保卫警卫预案信息",notes="列表信息")
 	@GetMapping("/doFindById/{pkid}")
 	public @ResponseBody ResultVO getDetail(@PathVariable String pkid){
 		ResultVO resultVO = ResultVO.build();
