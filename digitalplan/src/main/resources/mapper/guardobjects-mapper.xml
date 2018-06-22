@@ -319,7 +319,7 @@
 		<include refid="SQL_CONDITION"/>
 	</select>
 
-	<!--12.根据单位名称查询-->
+	<!--12.查询消防保卫警卫对象列表-->
 	<select id="doSearchByVO" parameterType="GuardobjectsVO"  resultType="GuardobjectsVO">
 		SELECT
 		<include refid="SQL_CONTENT"/>
