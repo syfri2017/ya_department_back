@@ -156,7 +156,9 @@
 	<select id="doSearchListByVO" parameterType="GuardobjectsplanVO"  resultType="GuardobjectsplanVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_YA_BWJW t  WHERE t.DELETE_FLAG = 'N'
+		FROM YAGL_YA_BWJW t
+
+		WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 	</select>
 
