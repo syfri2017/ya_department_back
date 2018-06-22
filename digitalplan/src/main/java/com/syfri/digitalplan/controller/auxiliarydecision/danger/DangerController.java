@@ -162,4 +162,39 @@ public class DangerController  extends BaseController<DangerVO>{
 		}
 		return result;
 	}
+	/**
+	 * @Description: 化危品新增
+	 * @Param: [dangerVO]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/6/22 14:13
+	 */
+	@ApiOperation(value="化危品新增",notes="新增")
+	@ApiImplicitParam(name="vo",value="化危品")
+	@PostMapping("/insertByVO")
+	public @ResponseBody ResultVO insertByVO(@RequestBody DangerVO dangerVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(dangerService.doInsertByVO(dangerVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="删除预案",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="预案")
+	@PostMapping("/doDeleteDanger")
+	public @ResponseBody ResultVO doDeleteDanger(@RequestBody List<DangerVO> dangerList) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(dangerService.doDeleteDanger(dangerList));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
