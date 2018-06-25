@@ -1,5 +1,7 @@
 package com.syfri.digitalplan.controller.basicinfo.watersource;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.digitalplan.model.basicinfo.watersource.XfsyVO;
 import com.syfri.digitalplan.service.basicinfo.watersource.XfsyService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("xfsy")
@@ -45,6 +49,26 @@ public class XfsyController  extends BaseController<XfsyVO>{
 
 	/**
 	 * 获取水源列表 关联不同从表
+	 * by lixue 20180625
+	 */
+	@ApiOperation(value="查询列表",notes="列表信息")
+	@ApiImplicitParam(name="vo",value = "水源对象")
+	@PostMapping("findlistPage")
+	public @ResponseBody ResultVO listPage(@RequestBody XfsyVO xfsyVO) {
+		ResultVO resultVO = ResultVO.build();
+		try {
+			PageHelper.startPage(xfsyVO.getPageNum(),xfsyVO.getPageSize());
+			List<XfsyVO> list = xfsyService.doFindListByVO(xfsyVO);
+			PageInfo<XfsyVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
+		} catch (Exception e) {
+			logger.error("{}",e.getMessage());
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 获取水源列表 关联不同从表
 	 * by yushch 20180419
 	 */
 	@ApiOperation(value="查询列表",notes="列表信息")
@@ -53,11 +77,11 @@ public class XfsyController  extends BaseController<XfsyVO>{
 	public @ResponseBody ResultVO list(@RequestBody XfsyVO xfsyVO) {
 		ResultVO resultVO = ResultVO.build();
 		try {
-			resultVO.setResult(xfsyService.doFindListByVO(xfsyVO));
+			List<XfsyVO> list = xfsyService.doFindListByVO(xfsyVO);
+			resultVO.setResult(list);
 		} catch (Exception e) {
 			logger.error("{}",e.getMessage());
 		}
 		return resultVO;
 	}
-
 }

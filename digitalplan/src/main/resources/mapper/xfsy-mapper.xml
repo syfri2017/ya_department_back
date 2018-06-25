@@ -566,7 +566,7 @@
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
 		<include refid="SQL_CONDITION"/>
-		AND rownum &lt;= 100
+		--AND rownum &lt;= 100
         ORDER BY t.SYMC
         )tt
 		<!--水源类型-->
