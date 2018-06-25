@@ -34,4 +34,15 @@ public interface DangerService  extends BaseService<DangerVO>{
      * @Date: 2018/6/22 15:48
      */
     int doUpdateDanger(DangerVO dangerVO);
+
+    /**
+     * @Description: 判断化危品名称是否已存在
+     * @Param: [dangerVO]
+     * @Return: int
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/6/22 16:04
+     */
+    int doCheckName(DangerVO dangerVO);
+
 }

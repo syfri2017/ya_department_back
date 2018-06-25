@@ -79,4 +79,18 @@ public class DangerServiceImpl extends BaseServiceImpl<DangerVO> implements Dang
         int count = dangerDAO.doUpdateByVO(dangerVO);
         return count;
     }
+
+    /**
+     * @Description: 判断化危品名称是否已存在
+     * @Param: [dangerVO]
+     * @Return: int
+     * @Author: liurui
+     * @Modified By:
+     * @Date: 2018/6/22 16:05
+     */
+    public int doCheckName(DangerVO dangerVO){
+        List<DangerVO> dangerList= dangerDAO.doCheckName(dangerVO);
+        int count = dangerList.size();
+        return count;
+    }
 }
