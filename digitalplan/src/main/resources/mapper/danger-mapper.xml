@@ -3,8 +3,8 @@
 <mapper namespace="com.syfri.digitalplan.dao.auxiliarydecision.danger.DangerDAO">
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
-		<if test="id != null and id != '' ">
-		 and t.uuid = #{id}
+		<if test="uuid != null and uuid != '' ">
+		 and t.uuid = #{uuid}
 		</if>
 		<if test="name != null and name != '' ">
 			and t.name = #{name}
@@ -195,7 +195,7 @@
 			FROM YAGL_ZHJC_HXWXP t
 			LEFT JOIN ZHJC_HWPLX p
 			ON t.TYPE = p.ID
-			WHERE t.JLZT = 1
+			WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -399,4 +399,15 @@
 		#{flagFile,jdbcType=BLOB},'6db150cf9e764dcfa50160e4d3c8a191'
 		)
 	</insert>
+
+	<!--判断化危品名称是否已存在-->
+	<select id="doCheckName" parameterType="DangerVO"  resultType="DangerVO">
+		SELECT t.uuid
+		FROM YAGL_ZHJC_HXWXP t
+		WHERE t.DELETE_FLAG = 'N'
+		and t.NAME = #{name}
+		<if test="uuid != null and uuid != '' ">
+			and t.uuid != #{uuid}
+		</if>
+	</select>
 </mapper>

@@ -211,4 +211,18 @@ public class DangerController  extends BaseController<DangerVO>{
 		}
 		return resultVO;
 	}
+
+	@ApiOperation(value="判断化危品名称是否已存在",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="化危品")
+	@PostMapping("/doCheckName")
+	public @ResponseBody ResultVO doCheckName(@RequestBody DangerVO dangerVO) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(dangerService.doCheckName(dangerVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
