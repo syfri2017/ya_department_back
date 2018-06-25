@@ -3,6 +3,8 @@ package com.syfri.digitalplan.controller.auxiliarydecision.firecalculation;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.dao.auxiliarydecision.firecalculation.FirecalculationlistDAO;
@@ -71,8 +73,10 @@ public class FirecalculationlistController  extends BaseController<Firecalculati
 	ResultVO findByVO(@RequestBody FirecalculationlistVO firecalculationlistVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			List<FirecalculationlistVO> result = firecalculationlistService.doFindlist(firecalculationlistVO);
-			resultVO.setResult(result);
+			PageHelper.startPage(firecalculationlistVO.getPageNum(),firecalculationlistVO.getPageSize());
+			List<FirecalculationlistVO> list = firecalculationlistService.doFindlist(firecalculationlistVO);
+			PageInfo<FirecalculationlistVO> pageInfo = new PageInfo<>(list);
+ 			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
