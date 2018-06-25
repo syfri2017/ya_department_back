@@ -551,30 +551,26 @@
 
 
 	<select id="doFindListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
-		SELECT tt.*,
+		SELECT
+		<include refid="SQL_CONTENT"/>,
 		c2.code_name sylxmc,
 		c4.code_name kyztmc,
-		c6.code_name sygsmc
-		FROM
-		(	SELECT
-		<include refid="SQL_CONTENT"/>,
+		c6.code_name sygsmc,
 		txfdz.dzjc dzjc
 		FROM YAGL_XFSY t
 		LEFT JOIN YAGL_XFDZ txfdz ON t.gxdz = txfdz.dzid AND txfdz.DELETE_FLAG = 'N'
+		<!--水源类型-->
+		LEFT JOIN SYS_CODELIST_DETAIL c2 ON (t.sylx = c2.code_value AND c2.codeid='9C617DE8210445AB9AE776686ABAC3B5' AND c2.DELETE_FLAG = 'N')
+		<!--水源可用状态-->
+		LEFT JOIN SYS_CODELIST_DETAIL c4 ON (t.kyzt = c4.code_value AND c4.codeid='B9B2B370D9D54F6499C31523A1369C4F' AND c4.DELETE_FLAG = 'N')
+		<!--水源归属-->
+		LEFT JOIN SYS_CODELIST_DETAIL c6 ON (t.sygs = c6.code_value AND c6.codeid='6B2210F144AF2372E053B077770A360E' And c6.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dzbm != null and dzbm != '' ">
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
 		<include refid="SQL_CONDITION"/>
-		--AND rownum &lt;= 100
-        ORDER BY t.SYMC
-        )tt
-		<!--水源类型-->
-		LEFT JOIN SYS_CODELIST_DETAIL c2 ON (tt.sylx = c2.code_value AND c2.codeid='9C617DE8210445AB9AE776686ABAC3B5' AND c2.DELETE_FLAG = 'N')
-		<!--水源可用状态-->
-		LEFT JOIN SYS_CODELIST_DETAIL c4 ON (tt.kyzt = c4.code_value AND c4.codeid='B9B2B370D9D54F6499C31523A1369C4F' AND c4.DELETE_FLAG = 'N')
-		<!--水源归属-->
-		LEFT JOIN SYS_CODELIST_DETAIL c6 ON (tt.kyzt = c6.code_value AND c6.codeid='6B2210F144AF2372E053B077770A360E' And c6.DELETE_FLAG = 'N')
+		ORDER BY t.SYBM
 	</select>
 	<!--查询消火栓-->
 	<select id="doFindXhsListByVO" parameterType="XfsyVO"  resultType="XfsyVO">
@@ -634,7 +630,7 @@
 		<if test="dzbm != null and dzbm != '' ">
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
-		AND rownum &lt;= 100
+		--AND rownum &lt;= 100
         ORDER BY t.SYBM
 	</select>
 	<!--查询消防水池-->
@@ -662,7 +658,7 @@
 		<if test="dzbm != null and dzbm != '' ">
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
-		AND rownum &lt;= 100
+		--AND rownum &lt;= 100
         ORDER BY t.SYBM
 	</select>
 	<!--查询天然水源取水点-->
@@ -705,7 +701,7 @@
 		<if test="dzbm != null and dzbm != '' ">
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
-		AND rownum &lt;= 100
+		--AND rownum &lt;= 100
         ORDER BY t.SYBM
 	</select>
 
