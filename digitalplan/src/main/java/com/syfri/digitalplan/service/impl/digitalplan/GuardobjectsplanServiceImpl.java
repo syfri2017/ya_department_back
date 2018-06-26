@@ -29,7 +29,7 @@ public class GuardobjectsplanServiceImpl extends BaseServiceImpl<Guardobjectspla
 	public GuardobjectsplanDAO getBaseDAO() {
 		return guardobjectsplanDAO;
 	}
-	/*--条件查询：重点单位.--*/
+	/*--条件查询：消防保卫警卫.--*/
 	@Override
 	public List<GuardobjectsplanVO> doFindXfbwjwlist(GuardobjectsplanVO guardobjectsplanVO){
 		return guardobjectsplanDAO.doSearchByVO(guardobjectsplanVO);

@@ -40,6 +40,9 @@ spring:
     mode: LEGACYHTML5
     prefix: classpath:/templates/
     suffix: .html
+  redis:
+      host: 10.119.119.233
+      port: 6379
 #------------------------------------------------------------
 #pagehelper分页插件设置
 pagehelper:
@@ -50,7 +53,10 @@ pagehelper:
   auto-dialect: true
 #------------------------------------------------------------
 logging:
-  level: debug
+  level.root: info
+  level.com.syfri: debug
+  path: logs/
+  file: userservice.log
 #------------------------------------------------------------
 #swagger:
 #  title: springboot
