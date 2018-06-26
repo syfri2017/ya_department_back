@@ -7,13 +7,13 @@
 		 and t.uuid = #{uuid}
 		</if>
 		<if test="name != null and name != '' ">
-			and t.name = #{name}
+            and t.name LIKE concat(concat('%',#{name}),'%')
 		</if>
 		<if test="englishName != null and englishName != '' ">
-			and t.english_name = #{englishName}
+            and t.english_name LIKE concat(concat('%',#{englishName}),'%')
 		</if>
 		<if test="cas != null and cas != '' ">
-			and t.cas = #{cas}
+            and t.cas LIKE concat(concat('%',#{cas}),'%')
 		</if>
 		<if test="rtecs != null and rtecs != '' ">
 			and t.rtecs = #{rtecs}
@@ -22,11 +22,11 @@
 			and t.un = #{un}
 		</if>
 		<if test="dangerId != null and dangerId != '' ">
-			and t.danger_id = #{dangerId}
+            and t.danger_id LIKE concat(concat('%',#{dangerId}),'%')
 		</if>
-		<if test="expression != null and expression != '' ">
-			and t.expression = #{expression}
-		</if>
+		<!--<if test="expression != null and expression != '' ">-->
+            <!--and t.expression LIKE concat(concat('%',#{expression}),'%')-->
+		<!--</if>-->
 		<if test="type != null and type != '' ">
 			and t.type = #{type}
 		</if>
@@ -188,18 +188,30 @@
 	</select>
 
 	<!--4.按条件查询记录-->
-	<select id="doSearchListByVO" parameterType="DangerVO"  resultType="DangerVO"> 
-		SELECT 
-			<include refid="SQL_CONTENT"/>
-			,p.DMZ
-			FROM YAGL_ZHJC_HXWXP t
-			LEFT JOIN ZHJC_HWPLX p
-			ON t.TYPE = p.ID
-			WHERE t.DELETE_FLAG = 'N'
-			<include refid="SQL_CONDITION"/>
-	</select>
+	<select id="doSearchListByVO" parameterType="DangerVO"  resultType="DangerVO">
+		SELECT
+		r.uuid uuid,
+		r.name name,
+		r.englishName englishName,
+		r.cas cas,
+		r.type type,
+		r.dangerId dangerId,
+		r.expression expression,
+		p.CODE_NAME dmz,
+		f.CODEID
+		FROM (SELECT <include refid="SQL_CONTENT"/>, upper(t.expression) exp FROM YAGL_ZHJC_HXWXP t WHERE t.DELETE_FLAG = 'N'<include refid="SQL_CONDITION"/>) r
+		LEFT JOIN SYS_CODELIST f
+		ON f.CODETYPE = 'HXWXPLX'
+		LEFT JOIN SYS_CODELIST_DETAIL p
+		ON f.CODEID = p.CODEID
+		AND r.TYPE = p.CODE_VALUE
+		<if test="expression != null and expression != '' ">
+			where r.exp LIKE concat(concat('%',#{expression}),'%')
+		</if>
+		ORDER BY NVL(r.xgsj,r.cjsj) DESC
+</select>
 
-	<!--5.根据UUID查询记录-->
+<!--5.根据UUID查询记录-->
 	<select id="doFindById" parameterType="DangerVO"  resultType="DangerVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
