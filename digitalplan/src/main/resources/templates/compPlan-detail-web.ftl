@@ -5,11 +5,11 @@
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>重点单位预案</title>
-    <link rel="stylesheet" href="/css/toolbar.css">
-    <link rel="stylesheet" href="/css/catalog.css">
-    <link rel="stylesheet" href="/css/dialog.css">
-    <link rel="stylesheet" href="/css/viewer.min.css">
-    <link rel="stylesheet" href="/css/project.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/toolbar.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/catalog.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/dialog.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/viewer.min.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/project.css">
 </head>
 <body>
 
@@ -1428,7 +1428,7 @@
                         <span class="header-title-inner">实景照片 - 万达中心</span>
                     </h3>
                     <div class="sub-block-body">
-                        <img class="photo-tag" src="http://localhost:8090/upload/pic/sjtp.png" alt=""/>
+                        <img class="photo-tag" src="http://localhost:80/upload/pic/sjtp.png" alt=""/>
                     </div>
                 </div>
                 <div id="photos_2" class="sub-block block-level-2" data-menu-text="总平面图-万达中心">
@@ -1436,7 +1436,7 @@
                         <span class="header-title-inner">总平面图 - 万达中心</span>
                     </h3>
                     <div class="sub-block-body">
-                        <img class="photo-tag" src="http://localhost:8090/upload/pic/zpmt.png" alt=""/>
+                        <img class="photo-tag" src="http://localhost:80/upload/pic/zpmt.png" alt=""/>
                     </div>
                 </div>
                 <div id="photos_3" class="sub-block block-level-2" data-menu-text="内部平面图-B1层平面图">
@@ -1444,7 +1444,7 @@
                         <span class="header-title-inner">内部平面图 - B1层平面图</span>
                     </h3>
                     <div class="sub-block-body">
-                        <img class="photo-tag" src="http://localhost:8090/upload/pic/nbpmtB1.png" alt=""/>
+                        <img class="photo-tag" src="http://localhost:80/upload/pic/nbpmtB1.png" alt=""/>
                     </div>
                 </div>
                 <div id="photos_4" class="sub-block block-level-2" data-menu-text="内部平面图-4层平面图">
@@ -1452,7 +1452,7 @@
                         <span class="header-title-inner">内部平面图 - 4层平面图</span>
                     </h3>
                     <div class="sub-block-body">
-                        <img class="photo-tag" src="http://localhost:8090/upload/pic/nbpmt4.png" alt=""/>
+                        <img class="photo-tag" src="http://localhost:80/upload/pic/nbpmt4.png" alt=""/>
                     </div>
                 </div>
                 <div id="photos_5" class="sub-block block-level-2" data-menu-text="作战部署图-灾情4-33层力量部署图">
@@ -1460,7 +1460,7 @@
                         <span class="header-title-inner">作战部署图 - 灾情4 - 33层力量部署图</span>
                     </h3>
                     <div class="sub-block-body">
-                        <img class="photo-tag" src="http://localhost:8090/upload/pic/1clbst.png" alt=""/>
+                        <img class="photo-tag" src="http://localhost:80/upload/pic/1clbst.png" alt=""/>
                     </div>
                 </div>
             </div>
@@ -1537,11 +1537,11 @@
     <div id="sideCatalog"></div>
 </div>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/toolbar.js"></script>
-<script src="/js/catalog.js"></script>
-<script src="/js/viewer.min.js"></script>
-<script src="/js/screenfull.min.js"></script>
+<script src="http://localhost:80/static/template/js/jquery.min.js"></script>
+<script src="http://localhost:80/static/template/js/toolbar.js"></script>
+<script src="http://localhost:80/static/template/js/catalog.js"></script>
+<script src="http://localhost:80/static/template/js/viewer.min.js"></script>
+<script src="http://localhost:80/static/template/js/screenfull.min.js"></script>
 <script type="text/javascript">
     var viewportSize = {
         width: $(window).width(),
