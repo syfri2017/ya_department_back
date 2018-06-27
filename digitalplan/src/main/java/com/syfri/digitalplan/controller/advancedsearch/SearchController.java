@@ -1,5 +1,7 @@
 package com.syfri.digitalplan.controller.advancedsearch;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
@@ -14,6 +16,8 @@ import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import com.syfri.baseapi.controller.BaseController;
 
 import com.syfri.digitalplan.service.advancedsearch.SearchService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("advancedsearch")
@@ -38,7 +42,10 @@ public class SearchController  extends BaseController<BuildingVO>{
     public @ResponseBody ResultVO gjssYaxxList(@RequestBody DigitalplanlistVO vo ) {
         ResultVO resultVO = ResultVO.build();
         try {
-            resultVO.setResult(searchService.doSearchGjssYaxxListByVO(vo));
+            PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+            List<DigitalplanlistVO> list = searchService.doSearchGjssYaxxListByVO(vo);
+            PageInfo<DigitalplanlistVO> pageInfo = new PageInfo<>(list);
+            resultVO.setResult(pageInfo);
         } catch (Exception e) {
             logger.error("{}",e.getMessage());
         }
@@ -52,10 +59,13 @@ public class SearchController  extends BaseController<BuildingVO>{
     @ApiOperation(value="高级搜索查询预案对象信息列表",notes="列表信息")
     @ApiImplicitParam(name="vo",value = "业务实体")
     @PostMapping("gjssYadxList")
-    public @ResponseBody ResultVO gjssYadxList(@RequestBody ImportantunitsVO vo ) {
+    public @ResponseBody ResultVO gjssYadxList(@RequestBody ImportantunitsVO vo) {
         ResultVO resultVO = ResultVO.build();
         try {
-            resultVO.setResult(searchService.doSearchGjssYadxListByVO(vo));
+            PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+            List<ImportantunitsVO> list = searchService.doSearchGjssYadxListByVO(vo);
+            PageInfo<ImportantunitsVO> pageInfo = new PageInfo<>(list);
+            resultVO.setResult(pageInfo);
         } catch (Exception e) {
             logger.error("{}",e.getMessage());
         }
@@ -73,7 +83,10 @@ public class SearchController  extends BaseController<BuildingVO>{
     public @ResponseBody ResultVO gjssDwjzList(@RequestBody BuildingVO vo ) {
         ResultVO resultVO = ResultVO.build();
         try {
-            resultVO.setResult(searchService.doSearchGjssDwjzListByVO(vo));
+            PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+            List<BuildingVO> list = searchService.doSearchGjssDwjzListByVO(vo);
+            PageInfo<BuildingVO> pageInfo = new PageInfo<>(list);
+            resultVO.setResult(pageInfo);
         } catch (Exception e) {
             logger.error("{}",e.getMessage());
         }

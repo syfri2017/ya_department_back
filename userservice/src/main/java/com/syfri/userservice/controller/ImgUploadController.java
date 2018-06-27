@@ -3,6 +3,8 @@ package com.syfri.userservice.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.userservice.dao.ImgUploadDAO;
@@ -124,7 +126,10 @@ public class ImgUploadController extends BaseController<ImgUploadVO>{
 	public @ResponseBody ResultVO findByVO(@RequestBody ImgUploadVO imgUploadVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(imgUploadService.doSearchListByVO(imgUploadVO));
+			PageHelper.startPage(imgUploadVO.getPageNum(),imgUploadVO.getPageSize());
+			List<ImgUploadVO> list = imgUploadService.doSearchListByVO(imgUploadVO);
+			PageInfo<ImgUploadVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
