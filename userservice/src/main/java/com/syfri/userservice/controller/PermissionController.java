@@ -3,6 +3,8 @@ package com.syfri.userservice.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import io.swagger.annotations.Api;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.userservice.model.PermissionVO;
 import com.syfri.userservice.service.PermissionService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @Api(value = "权限管理",tags = "权限管理API",description = "权限管理")
 @Controller
@@ -61,7 +65,10 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	public @ResponseBody ResultVO findByVO(@RequestBody PermissionVO permissionVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(permissionService.doSearchListByVO(permissionVO));
+			PageHelper.startPage(permissionVO.getPageNum(),permissionVO.getPageSize());
+			List<PermissionVO> list = permissionService.doSearchListByVO(permissionVO);
+			PageInfo<PermissionVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

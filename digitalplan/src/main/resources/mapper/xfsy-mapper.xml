@@ -705,7 +705,7 @@
 		<if test="dzbm != null and dzbm != '' ">
 			and txfdz.dzbm like concat(#{dzbm},'%')
 		</if>
- 		AND rownum &lt;= 100
+		AND rownum &lt;= 100
         ORDER BY t.SYBM
 	</select>
 

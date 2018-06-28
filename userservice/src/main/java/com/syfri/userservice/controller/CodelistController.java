@@ -3,11 +3,11 @@ package com.syfri.userservice.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
-import com.syfri.userservice.model.CodelistDetailVO;
-import com.syfri.userservice.model.CodelistParams;
-import com.syfri.userservice.model.CodelistTree;
+import com.syfri.userservice.model.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -19,11 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.syfri.userservice.model.CodelistVO;
 import com.syfri.userservice.service.CodelistService;
 import com.syfri.baseapi.controller.BaseController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Api(value = "代码集",tags = "代码集API",description = "代码集")
@@ -67,7 +65,10 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	public @ResponseBody ResultVO findByVO(@RequestBody CodelistVO codelistVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doFindCodelist(codelistVO));
+			PageHelper.startPage(codelistVO.getPageNum(),codelistVO.getPageSize());
+			List<CodelistVO> list = codelistService.doFindCodelist(codelistVO);
+			PageInfo<CodelistVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -174,11 +175,14 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="获取所有的代码集类型",notes="列表信息")
 	@RequiresPermissions("codelist:list")
-	@GetMapping("/detail/doFindById/{codeid}")
-	public @ResponseBody ResultVO getDetail(@PathVariable String codeid){
+	@PostMapping("/detail/doFindByCodeid")
+	public @ResponseBody ResultVO getDetail(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doFindDetail(codeid));
+			PageHelper.startPage(codelistDetailVO.getPageNum(),codelistDetailVO.getPageSize());
+			List<CodelistDetailVO> list= codelistService.doFindDetail(codelistDetailVO.getCodeid());
+			PageInfo<CodelistDetailVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -196,7 +200,10 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	public @ResponseBody ResultVO findByVO(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doFindCodelistDetail(codelistDetailVO));
+			PageHelper.startPage(codelistDetailVO.getPageNum(),codelistDetailVO.getPageSize());
+			List<CodelistDetailVO> list= codelistService.doFindCodelistDetail(codelistDetailVO);
+			PageInfo<CodelistDetailVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

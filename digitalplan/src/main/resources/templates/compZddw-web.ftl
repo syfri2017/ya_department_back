@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>重点单位预案</title>
-    <link rel="stylesheet" href="/css/toolbar.css">
-    <link rel="stylesheet" href="/css/catalog.css">
-    <link rel="stylesheet" href="/css/dialog.css">
-    <link rel="stylesheet" href="/css/viewer.min.css">
-    <link rel="stylesheet" href="/css/project.css">
+    <title>重点单位信息</title>
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/toolbar.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/catalog.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/dialog.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/viewer.min.css">
+    <link rel="stylesheet" href="http://localhost:80/static/template/css/project.css">
 </head>
 <body>
 
@@ -1443,11 +1443,11 @@
     <div id="sideCatalog"></div>
 </div>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/toolbar.js"></script>
-<script src="/js/catalog.js"></script>
-<script src="/js/viewer.min.js"></script>
-<script src="/js/screenfull.min.js"></script>
+<script src="http://localhost:80/static/template/js/jquery.min.js"></script>
+<script src="http://localhost:80/static/template/js/toolbar.js"></script>
+<script src="http://localhost:80/static/template/js/catalog.js"></script>
+<script src="http://localhost:80/static/template/js/viewer.min.js"></script>
+<script src="http://localhost:80/static/template/js/screenfull.min.js"></script>
 <script type="text/javascript">
     var viewportSize = {
         width: $(window).width(),

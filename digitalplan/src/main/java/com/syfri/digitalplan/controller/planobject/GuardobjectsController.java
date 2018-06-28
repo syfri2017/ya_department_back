@@ -1,9 +1,10 @@
 package com.syfri.digitalplan.controller.planobject;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.model.planobject.GuardobjectsVO;
-import com.syfri.digitalplan.utils.Base64ImageUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.syfri.digitalplan.service.planobject.GuardobjectsService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("bwjwplan")
@@ -59,12 +62,14 @@ public class GuardobjectsController extends BaseController<GuardobjectsVO>{
 	@ApiOperation(value="根据条件查询保卫警卫",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="保卫警卫")
 
-	@PostMapping("/findByVO")
-	public @ResponseBody
-	ResultVO findByVO(@RequestBody GuardobjectsVO guardobjectsVO){
+	@PostMapping("/findBwjwList")
+	public @ResponseBody ResultVO findByVO(@RequestBody GuardobjectsVO guardobjectsVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(guardobjectsService.doFindBwjwplanlist(guardobjectsVO));
+			PageHelper.startPage(guardobjectsVO.getPageNum(),guardobjectsVO.getPageSize());
+			List<GuardobjectsVO> list = guardobjectsService.doFindBwjwplanlist(guardobjectsVO);
+			PageInfo<GuardobjectsVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

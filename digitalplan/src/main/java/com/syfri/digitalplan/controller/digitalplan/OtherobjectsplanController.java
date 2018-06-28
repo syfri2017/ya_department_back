@@ -1,6 +1,7 @@
 package com.syfri.digitalplan.controller.digitalplan;
 
-import com.syfri.digitalplan.utils.Base64ImageUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -62,8 +63,10 @@ public class OtherobjectsplanController extends BaseController<OtherobjectsplanV
 	public @ResponseBody ResultVO findByVO(@RequestBody OtherobjectsplanVO otherobjectsplanVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			List<OtherobjectsplanVO> result = otherobjectsplanService.doSearchListByVO(otherobjectsplanVO);
-			resultVO.setResult(result);
+			PageHelper.startPage(otherobjectsplanVO.getPageNum(),otherobjectsplanVO.getPageSize());
+			List<OtherobjectsplanVO> list = otherobjectsplanService.doSearchListByVO(otherobjectsplanVO);
+			PageInfo<OtherobjectsplanVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

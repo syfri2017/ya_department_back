@@ -1,5 +1,7 @@
 package com.syfri.digitalplan.controller.digitalplan;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
@@ -106,9 +108,16 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 		return resultVO;
 	}
 
-
-	@ApiOperation(value="通过重点单位id查询建筑分区list",notes="列表信息")
-	@ApiImplicitParam(name="vo",value="建筑分区对象")
+	/**
+	 * @Description: 删除预案
+	 * @Param: [digitalplanList, digitalplanVo]
+	 * @Return: com.syfri.baseapi.model.ResultVO
+	 * @Author: liurui
+	 * @Modified By:
+	 * @Date: 2018/5/2 15:52
+	 */
+	@ApiOperation(value="删除预案",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="预案")
 	@PostMapping("/doDeleteDigitalplan")
 	public @ResponseBody ResultVO doDeleteDigitalplan(@RequestBody List<DigitalplanlistVO> digitalplanList,DigitalplanlistVO digitalplanVo) {
 		ResultVO resultVO = ResultVO.build();
@@ -174,7 +183,10 @@ public class DigitalplanlistController  extends BaseController<DigitalplanlistVO
 	public @ResponseBody ResultVO listForApprove(@RequestBody DigitalplanlistVO vo ) {
 		ResultVO resultVO = ResultVO.build();
 		try {
-			resultVO.setResult(digitalplanlistService.doSearchApproveListByVO(vo));
+			PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+			List<DigitalplanlistVO> list = digitalplanlistService.doSearchApproveListByVO(vo);
+			PageInfo<DigitalplanlistVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
 		} catch (Exception e) {
 			logger.error("{}",e.getMessage());
 		}

@@ -266,4 +266,5 @@ public class MybatisConfig implements EnvironmentAware {
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(ds);
 		return transactionManager;
 	}
+
 }
