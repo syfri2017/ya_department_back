@@ -26,6 +26,10 @@ public class MapVO extends ValueObject implements Serializable{
 	private String reserve3;	//备用字段3
 	private String reserve4;	//备用字段4
 
+	private String dzid;
+	private String dzjc;
+	private String dzlx;
+
 
 
 
@@ -130,5 +134,29 @@ public class MapVO extends ValueObject implements Serializable{
 	}
 	public void setReserve4(String reserve4){
 		this.reserve4 = reserve4;
+	}
+
+	public String getDzid() {
+		return dzid;
+	}
+
+	public void setDzid(String dzid) {
+		this.dzid = dzid;
+	}
+
+	public String getDzjc() {
+		return dzjc;
+	}
+
+	public void setDzjc(String dzjc) {
+		this.dzjc = dzjc;
+	}
+
+	public String getDzlx() {
+		return dzlx;
+	}
+
+	public void setDzlx(String dzlx) {
+		this.dzlx = dzlx;
 	}
 }
