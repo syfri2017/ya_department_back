@@ -59,7 +59,7 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	 */
 	@ApiOperation(value="根据资源查询资源及其权限信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="资源对象")
-	@RequiresPermissions("resource:list")
+	@RequiresPermissions("system/resource_list:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody ResourceVO resourceVO){
 		ResultVO resultVO = ResultVO.build();
@@ -77,7 +77,7 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	 */
 	@ApiOperation(value="根据资源新增资源及其权限信息",notes="新增")
 	@ApiImplicitParam(name="vo",value="资源对象")
-	@RequiresPermissions("resource:add")
+	@RequiresPermissions("system/resource_list:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody ResourceVO resourceVO){
 		ResultVO resultVO = ResultVO.build();
@@ -95,7 +95,7 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	 */
 	@ApiOperation(value="根据资源修改资源及其权限信息",notes="修改")
 	@ApiImplicitParam(name="vo",value="资源对象")
-	@RequiresPermissions("resource:update")
+	@RequiresPermissions("system/resource_list:update")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody ResourceVO resourceVO){
 		ResultVO resultVO = ResultVO.build();
@@ -113,7 +113,7 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	 */
 	@ApiOperation(value="根据主键删除资源资源及其权限信息",notes="删除")
 	@ApiImplicitParam(name="id",value="资源主键")
-	@RequiresPermissions("resource:delete")
+	@RequiresPermissions("system/resource_list:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
@@ -137,7 +137,7 @@ public class ResourceController  extends BaseController<ResourceVO>{
 	 */
 	@ApiOperation(value="根据角色获取资源树",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="资源对象")
-	@RequiresPermissions("resource:list")
+	@RequiresPermissions("system/resource_list:list")
 	@GetMapping("/getResourceTree")
 	public @ResponseBody ResultVO getResourceTree(List<RoleVO> roleList){
 		ResultVO resultVO = ResultVO.build();
