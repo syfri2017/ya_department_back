@@ -56,7 +56,7 @@ public class RoleController  extends BaseController<RoleVO>{
 	 */
 	@ApiOperation(value="根据角色查询角色及其资源信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="角色对象")
-	@RequiresPermissions("role:list")
+	@RequiresPermissions("system/role_list:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
@@ -74,7 +74,7 @@ public class RoleController  extends BaseController<RoleVO>{
 	 */
 	@ApiOperation(value="根据角色新增角色及其资源信息",notes="新增")
 	@ApiImplicitParam(name="vo",value="角色对象")
-	@RequiresPermissions("role:add")
+	@RequiresPermissions("system/role_list:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
@@ -92,7 +92,7 @@ public class RoleController  extends BaseController<RoleVO>{
 	 */
 	@ApiOperation(value="根据角色修改角色及其资源信息",notes="修改")
 	@ApiImplicitParam(name="vo",value="角色对象")
-	@RequiresPermissions("role:update")
+	@RequiresPermissions("system/role_list:update")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
@@ -110,7 +110,7 @@ public class RoleController  extends BaseController<RoleVO>{
 	 */
 	@ApiOperation(value="根据主键删除角色角色及其资源信息",notes="删除")
 	@ApiImplicitParam(name="id",value="角色主键")
-	@RequiresPermissions("role:delete")
+	@RequiresPermissions("system/role_list:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);

@@ -1,5 +1,7 @@
 package com.syfri.userservice.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.controller.BaseController;
 import com.syfri.userservice.model.*;
 import com.syfri.userservice.service.*;
@@ -62,12 +64,36 @@ public class TestController extends BaseController<UserVO>{
 
 
 	//3
-//	@RequestMapping("/findByVO")
-//	public List<UserVO> findByVO(){
-//		UserVO vo = new UserVO();
-//		vo.setUsername("aa");
-//		return userService.doSearchListByVO(vo);
-//	}
+	@RequestMapping("/findByVO")
+	@ResponseBody
+	public PageInfo<UserVO> findByVO(){
+		UserVO vo = new UserVO();
+		vo.setPageNum(1);
+		vo.setPageSize(3);
+		List<UserVO> list = userService.doSearchListByVO(vo);
+//		PageHelper.startPage(2,2);
+		PageInfo<UserVO> pageInfo = new PageInfo<>(list);
+		return pageInfo;
+	}
+	@RequestMapping("/findByVO2")
+	@ResponseBody
+	public List<UserVO> findByVO2(){
+		UserVO vo = new UserVO();
+		vo.setPageNum(2);
+		vo.setPageSize(3);
+		List<UserVO> list = userService.doSearchListByVO(vo);
+		return list;
+	}
+
+	@RequestMapping("/findByVO3")
+	@ResponseBody
+	public PageInfo<UserVO> findByVO3(){
+		UserVO vo = new UserVO();
+		PageHelper.startPage(1,1);
+		List<UserVO> list = userService.doSearchListByVO(vo);
+		PageInfo<UserVO> pageInfo = new PageInfo<UserVO>(list);
+		return pageInfo;
+	}
 
 	//4
 //	@RequestMapping("/insertByVO")
