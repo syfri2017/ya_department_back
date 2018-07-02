@@ -60,7 +60,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集查询代码集",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="代码集对象")
-	@RequiresPermissions("system/codelist_list:list")
+	@RequiresPermissions("system/codelist:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody CodelistVO codelistVO){
 		ResultVO resultVO = ResultVO.build();
@@ -81,7 +81,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集新增代码集",notes="新增")
 	@ApiImplicitParam(name="vo",value="代码集对象")
-	@RequiresPermissions("system/codelist_list:add")
+	@RequiresPermissions("system/codelist:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody CodelistVO codelistVO){
 		ResultVO resultVO = ResultVO.build();
@@ -99,7 +99,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集修改代码集",notes="修改")
 	@ApiImplicitParam(name="vo",value="代码集对象")
-	@RequiresPermissions("system/codelist_list:update")
+	@RequiresPermissions("system/codelist:update")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistVO codelistVO){
 		ResultVO resultVO = ResultVO.build();
@@ -117,7 +117,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据主键删除代码集代码集",notes="删除")
 	@ApiImplicitParam(name="id",value="代码集主键")
-	@RequiresPermissions("system/codelist_list:delete")
+	@RequiresPermissions("system/codelist:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
@@ -174,7 +174,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 * 获取所有的代码集类型
 	 */
 	@ApiOperation(value="获取所有的代码集类型",notes="列表信息")
-	@RequiresPermissions("system/codelist_list:list")
+	@RequiresPermissions("system/codelist:list")
 	@PostMapping("/detail/doFindByCodeid")
 	public @ResponseBody ResultVO getDetail(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
@@ -195,7 +195,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码值、代码名称查询代码值",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="代码集详细对象")
-	@RequiresPermissions("system/codelist_list:list")
+	@RequiresPermissions("system/codelist:list")
 	@PostMapping("/detail/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
@@ -216,7 +216,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集新增代码值",notes="新增")
 	@ApiImplicitParam(name="vo",value="代码值对象")
-	@RequiresPermissions("system/codelist_list:add")
+	@RequiresPermissions("system/codelist:add")
 	@PostMapping("/detail/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
@@ -234,7 +234,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集修改代码值",notes="修改")
 	@ApiImplicitParam(name="vo",value="代码值对象")
-	@RequiresPermissions("system/codelist_list:update")
+	@RequiresPermissions("system/codelist:update")
 	@PostMapping("/detail/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
@@ -252,7 +252,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据主键删除代码集代码值",notes="删除")
 	@ApiImplicitParam(name="id",value="代码值主键")
-	@RequiresPermissions("system/codelist_list:delete")
+	@RequiresPermissions("system/codelist:delete")
 	@PostMapping("/detail/deleteByIds")
 	public @ResponseBody ResultVO deleteDetailByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);

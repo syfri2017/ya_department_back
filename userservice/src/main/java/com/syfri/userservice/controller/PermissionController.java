@@ -60,7 +60,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	 */
 	@ApiOperation(value="根据权限查询权限及其资源信息",notes="列表信息")
 	@ApiImplicitParam(name="permissionVO",value="权限对象")
-	@RequiresPermissions("system/permission_list:list")
+	@RequiresPermissions("system/permission:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody PermissionVO permissionVO){
 		ResultVO resultVO = ResultVO.build();
@@ -81,7 +81,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	 */
 	@ApiOperation(value="根据权限新增权限及其资源信息",notes="新增")
 	@ApiImplicitParam(name="permissionVO",value="权限对象")
-	@RequiresPermissions("system/permission_list:add")
+	@RequiresPermissions("system/permission:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody PermissionVO permissionVO){
 		ResultVO resultVO = ResultVO.build();
@@ -99,7 +99,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	 */
 	@ApiOperation(value="根据权限修改权限及其资源信息",notes="修改")
 	@ApiImplicitParam(name="permissionVO",value="权限对象")
-	@RequiresPermissions("system/permission_list:update")
+	@RequiresPermissions("system/permission:update")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody PermissionVO permissionVO){
 		ResultVO resultVO = ResultVO.build();
@@ -117,7 +117,7 @@ public class PermissionController  extends BaseController<PermissionVO>{
 	 */
 	@ApiOperation(value="根据主键删除权限权限及其资源信息",notes="删除")
 	@ApiImplicitParam(name="id",value="权限主键")
-	@RequiresPermissions("system/permission_list:delete")
+	@RequiresPermissions("system/permission:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);

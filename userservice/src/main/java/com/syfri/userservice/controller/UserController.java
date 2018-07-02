@@ -72,7 +72,7 @@ public class UserController  extends BaseController<UserVO>{
 	 */
 	@ApiOperation(value="根据用户查询用户信息及角色信息",notes="列表信息")
 	@ApiImplicitParam(name="vo",value="用户对象")
-	@RequiresPermissions("system/user_list:list")
+	@RequiresPermissions("system/user:list")
 	@PostMapping("/findByVO")
 	public @ResponseBody ResultVO findByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
@@ -90,7 +90,7 @@ public class UserController  extends BaseController<UserVO>{
 	 */
 	@ApiOperation(value="根据用户新增用户（包括账户和角色）",notes="新增")
 	@ApiImplicitParam(name="vo",value="用户对象")
-	@RequiresPermissions("system/user_list:add")
+	@RequiresPermissions("system/user:add")
 	@PostMapping("/insertByVO")
 	public @ResponseBody ResultVO insertByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
@@ -108,7 +108,7 @@ public class UserController  extends BaseController<UserVO>{
 	 */
 	@ApiOperation(value="根据用户修改用户（包括账户和角色）",notes="修改")
 	@ApiImplicitParam(name="vo",value="用户对象")
-	@RequiresPermissions("system/user_list:update")
+	@RequiresPermissions("system/user:update")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
@@ -126,7 +126,7 @@ public class UserController  extends BaseController<UserVO>{
 	 */
 	@ApiOperation(value="根据主键删除用户（包括账户和角色）",notes="删除")
 	@ApiImplicitParam(name="id",value="用户主键")
-	@RequiresPermissions("system/user_list:delete")
+	@RequiresPermissions("system/user:delete")
 	@PostMapping("/deleteByIds")
 	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
 		JSONObject jsonObject = JSON.parseObject(id);
