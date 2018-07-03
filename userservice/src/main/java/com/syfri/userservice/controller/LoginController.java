@@ -1,6 +1,7 @@
 package com.syfri.userservice.controller;
 
 import com.syfri.baseapi.model.ResultVO;
+import com.syfri.userservice.model.AccountVO;
 import com.syfri.userservice.model.MenuTree;
 import com.syfri.userservice.model.ResourceTree;
 import com.syfri.userservice.model.ShiroUser;
@@ -8,10 +9,7 @@ import com.syfri.userservice.utils.CurrentUserUtil;
 import com.syfri.userservice.utils.ImageCodeUtil;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +27,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -74,14 +73,29 @@ public class LoginController {
 	}
 
 	/**
-	@PostMapping("/login")
-	public String login(String username, String password, String validateCode, String rememberMe){
+	@PostMapping("/login2")
+	public @ResponseBody String login(HttpServletRequest request, @RequestBody AccountVO vo){
 		logger.info("-----POST请求方式登录-----");
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
-		SecurityUtils.getSubject().login(token);
-		return "/bigscreen/big_screen_all";
+		Subject currentUser = SecurityUtils.getSubject();
+		//测试当前用户是否被验证
+		if(!currentUser.isAuthenticated()){
+			UsernamePasswordToken token = new UsernamePasswordToken(vo.getUsername(), vo.getPassword());
+			String code = (String)request.getSession().getAttribute("code");
+			if(code != null && code.equals(vo.getValidateCode())){
+				try{
+					currentUser.login(token);
+				}catch(AuthenticationException e){
+					System.out.println("登录失败--->" + e.getMessage());
+					return "falseDLZH";
+				}
+			}else{
+				return "falseYZM";
+			}
+		}
+		return "success";
 	}
 	*/
+
 
 	/**
 	 * 此方法不处理登录成功的情况，由shiro进行处理
@@ -111,7 +125,10 @@ public class LoginController {
 			}
 			map.put("msg",msg);
 			//以下是登录错误时返回login.html页面
-			return "/login";
+			//后台工程  by li.xue 2018/07/03
+			//return "/login";
+			//前台工程  by li.xue 2018/07/03
+			return "redirect:templates/login.html";
 		}
 	}
 
