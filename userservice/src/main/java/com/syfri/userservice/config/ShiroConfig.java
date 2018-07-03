@@ -108,6 +108,8 @@ public class ShiroConfig {
 		filterMap.put("/swagger-resources", "anon");
 		filterMap.put("/swagger-ui.html", "anon");
 
+		filterMap.put("/shiro", "anon");
+
 		//验证码可以不经授权访问
 		filterMap.put("/imageCode", "anon");
 
