@@ -9,6 +9,8 @@ yafjxz:
 #------------------------------------------------------------
 #spring
 spring:
+  profiles:
+    active: dev
   http:
       converters:
         preferred-json-mapper: fastjson
@@ -18,12 +20,6 @@ spring:
   druid:
     #配置druid连接池
     datasource:
-      type: com.alibaba.druid.pool.DruidDataSource
-      driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
-#      url: jdbc:oracle:thin:@localhost:1521/orcl
-      username: SZHYAGL
-      password: SZHYAGL
       initialSize: 5
       minIdle: 5
       maxActive: 20
@@ -84,3 +80,33 @@ logging:
 #    url: http://blog.didispace.com
 #  base-package: com.syfri
 #------------------------------------------------------------
+
+
+  ##########################################################
+  ###################  开发环境的profile  ###################
+  ##########################################################
+---
+spring:
+  profiles: dev
+  druid:
+    #配置druid连接池
+    datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
+      username: SZHYAGL
+      password: SZHYAGL
+  ##########################################################
+  ###################  正式环境的profile  ###################
+  ##########################################################
+---
+spring:
+  profiles: produce
+  druid:
+    #配置druid连接池
+    datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
+      username: SZHYAGL
+      password: SZHYAGL

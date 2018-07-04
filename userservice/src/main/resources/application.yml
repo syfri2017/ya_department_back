@@ -4,14 +4,11 @@ server:
 #------------------------------------------------------------
 #spring
 spring:
+  profiles:
+    active: dev
   druid:
     #配置druid连接池
     datasource:
-      type: com.alibaba.druid.pool.DruidDataSource
-      driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
-      username: SZHYAGL
-      password: SZHYAGL
       initialSize: 5
       minIdle: 5
       maxActive: 20
@@ -26,6 +23,7 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
 #      filters: stat,wall,slf4j
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
 
   mybatis:
 #    mapperLocations: classpath*:com/syfri/userservice/mapper/*-mapper.xml
@@ -59,6 +57,36 @@ logging:
   level.com.syfri: debug
   path: logs/
   file: userservice.log
+  ##########################################################
+  ###################  开发环境的profile  ###################
+  ##########################################################
+---
+spring:
+  profiles: dev
+  druid:
+    #配置druid连接池
+    datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
+      username: SZHYAGL
+      password: SZHYAGL
+  ##########################################################
+  ###################  正式环境的profile  ###################
+  ##########################################################
+---
+spring:
+  profiles: produce
+  druid:
+    #配置druid连接池
+    datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
+      username: SZHYAGL
+      password: SZHYAGL
+
+
 #------------------------------------------------------------
 #swagger:
 #  title: springboot
