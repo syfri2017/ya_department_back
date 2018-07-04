@@ -38,11 +38,13 @@
         </dependency>
         <!-- SpringBoot热部署   start -->
         <!-- 集成dubbo时不要采用SpringBoot提供的热启动，因为devtools提供两个ClassLoader-->
+        <!-- 取消热部署
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        -->
         <!-- SpringBoot热部署   end -->
     </dependencies>
 

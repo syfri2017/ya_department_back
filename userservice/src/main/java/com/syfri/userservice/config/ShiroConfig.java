@@ -13,11 +13,19 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import javax.servlet.Filter;
@@ -26,9 +34,17 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
-public class ShiroConfig {
+@AutoConfigureAfter(Environment.class)
+public class ShiroConfig implements EnvironmentAware {
 
 	private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
+
+	@Autowired
+	private Environment environment;
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
 
 	/**
 	 * 会话管理
@@ -40,6 +56,8 @@ public class ShiroConfig {
 		sessionManager.setSessionIdUrlRewritingEnabled(false);
 		//设置session失效时间30min
 		sessionManager.setGlobalSessionTimeout(30*60*1000);
+		//Redis会话管理
+		sessionManager.setSessionDAO(redisSessionDAO());
 		return sessionManager;
 	}
 
@@ -53,15 +71,44 @@ public class ShiroConfig {
 		return ehCacheManager;
 	}
 
+	@Bean("redisCacheManager")
+	public RedisCacheManager redisCacheManager(){
+		RedisCacheManager redisCacheManager = new RedisCacheManager();
+		redisCacheManager.setRedisManager(redisManager());
+		return redisCacheManager;
+	}
+
+	@Bean("redisManager")
+	public RedisManager redisManager(){
+		RedisManager redisManager = new RedisManager();
+		redisManager.setHost(environment.getProperty("spring.redis.host"));
+		redisManager.setPort(Integer.parseInt(environment.getProperty("spring.redis.port")));
+		if(environment.containsProperty("spring.redis.expire")){
+			redisManager.setExpire(Integer.parseInt(environment.getProperty("spring.redis.expire")));
+		}
+		if(environment.containsProperty("spring.redis.timeout")) {
+			redisManager.setTimeout(Integer.parseInt(environment.getProperty("spring.redis.timeout")));
+		}
+		return redisManager;
+	}
+
+	@Bean("redisSessionDAO")
+	public RedisSessionDAO redisSessionDAO(){
+		RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+		redisSessionDAO.setRedisManager(redisManager());
+		return redisSessionDAO;
+	}
+
 	/**
 	 * 安全管理
 	 */
 	@Bean("securityManager")
-	public SecurityManager securityManager(SessionManager sessionManager){
+	public SecurityManager securityManager(SessionManager sessionManager, RedisTemplate redisTemplate){
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myShiroRealm());
 		securityManager.setSessionManager(sessionManager);
-		securityManager.setCacheManager(ehCacheManager());
+		securityManager.setCacheManager(redisCacheManager());
+//		securityManager.setCacheManager(ehCacheManager());
 		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
 	}
