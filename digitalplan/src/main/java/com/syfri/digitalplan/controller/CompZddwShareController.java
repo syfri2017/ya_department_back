@@ -219,7 +219,7 @@ public class CompZddwShareController {
     @GetMapping("/downWord/{uuid}/{titles}")
     public String downWord(HttpServletRequest request, HttpServletResponse response, @PathVariable("uuid") String uuid
             , @PathVariable("titles") String titles) {
-        String basePath = yafjxzProperties.getSavePath() + "pic\\%s.png";
+        String basePath = yafjxzProperties.getSavePath() + "pic/%s.png";
         try {
             VelocityContext vc = new VelocityContext();
 
