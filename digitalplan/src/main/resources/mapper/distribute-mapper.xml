@@ -4,37 +4,37 @@
 	<!--1.查询条件-->
 	<sql id="SQL_CONDITION">
 		<if test="uuid != null and uuid != '' ">
-		 and t.uuid = #{uuid}
+			and t.uuid = #{uuid}
 		</if>
 		<if test="jgid != null and jgid != '' ">
-		 and t.jgid = #{jgid}
+			and t.jgid = #{jgid}
 		</if>
 		<if test="yaid != null and yaid != '' ">
-		 and t.yaid = #{yaid}
+			and t.yaid = #{yaid}
 		</if>
 		<if test="deleteFlag != null and deleteFlag != '' ">
-		 and t.delete_flag = #{deleteFlag}
+			and t.delete_flag = #{deleteFlag}
 		</if>
 		<if test="datasource != null and datasource != '' ">
-		 and t.datasource = #{datasource}
+			and t.datasource = #{datasource}
 		</if>
 		<if test="sjc != null and sjc != '' ">
-		 and t.sjc = #{sjc}
+			and t.sjc = #{sjc}
 		</if>
 		<if test="jdh != null and jdh != '' ">
-		 and t.jdh = #{jdh}
+			and t.jdh = #{jdh}
 		</if>
 		<if test="reserve1 != null and reserve1 != '' ">
-		 and t.reserve1 = #{reserve1}
+			and t.reserve1 = #{reserve1}
 		</if>
 		<if test="reserve2 != null and reserve2 != '' ">
-		 and t.reserve2 = #{reserve2}
+			and t.reserve2 = #{reserve2}
 		</if>
 		<if test="reserve3 != null and reserve3 != '' ">
-		 and t.reserve3 = #{reserve3}
+			and t.reserve3 = #{reserve3}
 		</if>
 		<if test="reserve4 != null and reserve4 != '' ">
-		 and t.reserve4 = #{reserve4}
+			and t.reserve4 = #{reserve4}
 		</if>
 	</sql>
 
@@ -60,19 +60,19 @@
 	</select>
 
 	<!--4.按条件查询记录-->
-	<select id="doSearchListByVO" parameterType="DistributeVO"  resultType="DistributeVO"> 
-		SELECT 
-			<include refid="SQL_CONTENT"/>
-		FROM YAGL_ORGANIZATION_YA t  WHERE t.DELETE_FLAG = 'N' 
-			<include refid="SQL_CONDITION"/>
+	<select id="doSearchListByVO" parameterType="DistributeVO"  resultType="DistributeVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		FROM YAGL_ORGANIZATION_YA t  WHERE t.DELETE_FLAG = 'N'
+		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--5.根据ID查询记录-->
-	<select id="doFindById" parameterType="DistributeVO"  resultType="DistributeVO">  
-		SELECT 
+	<select id="doFindById" parameterType="DistributeVO"  resultType="DistributeVO">
+		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_ORGANIZATION_YA t 
-		WHERE t.DELETE_FLAG = 'N' AND  t.uuid = #{value} 
+		FROM YAGL_ORGANIZATION_YA t
+		WHERE t.DELETE_FLAG = 'N' AND  t.uuid = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -82,17 +82,17 @@
 		</selectKey>
 		INSERT INTO YAGL_ORGANIZATION_YA(uuid,jgid,yaid,delete_flag,datasource,sjc,jdh,reserve1,reserve2,reserve3,reserve4)
 		VALUES(#{uuid,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},'N',#{datasource,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{jdh,jdbcType=VARCHAR},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
-	 </insert>
+	</insert>
 
 	<!--7.批量插入-->
-	<insert  id="doBatchInsertByList"  parameterType="java.util.List"> 
+	<insert  id="doBatchInsertByList"  parameterType="java.util.List">
 		INSERT INTO YAGL_ORGANIZATION_YA(uuid,jgid,yaid,delete_flag,datasource,sjc,jdh,reserve1,reserve2,reserve3,reserve4)
-		SELECT SYS_GUID() uuid, A.* 
-		FROM ( 
+		SELECT SYS_GUID() uuid, A.*
+		FROM (
 		<foreach collection="list" item="item" index="index" separator="UNION ALL" >
-		SELECT
+			SELECT
 			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.yaid,jdbcType=VARCHAR} yaid,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.sjc,jdbcType=DATE} sjc,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
-		FROM DUAL
+			FROM DUAL
 		</foreach>
 		) A
 	</insert>
@@ -103,8 +103,8 @@
 	</update>
 
 	<!--9.按复合条件逻辑更新-->
-	<update  id="doUpdateByVO"  parameterType="DistributeVO"> 
-		UPDATE   YAGL_ORGANIZATION_YA  
+	<update  id="doUpdateByVO"  parameterType="DistributeVO">
+		UPDATE   YAGL_ORGANIZATION_YA
 		<set>
 			<if test="uuid != null">uuid=#{uuid},</if>
 			<if test="jgid != null">jgid=#{jgid},</if>
@@ -128,46 +128,45 @@
 		<foreach collection="list" item="item" index="index" separator="," >
 			#{item.uuid,jdbcType=VARCHAR} uuid,#{item.jgid,jdbcType=VARCHAR} jgid,#{item.yaid,jdbcType=VARCHAR} yaid,'N' delete_flag,#{item.datasource,jdbcType=VARCHAR} datasource,#{item.sjc,jdbcType=DATE} sjc,#{item.jdh,jdbcType=VARCHAR} jdh,#{item.reserve1,jdbcType=VARCHAR} reserve1,#{item.reserve2,jdbcType=VARCHAR} reserve2,#{item.reserve3,jdbcType=VARCHAR} reserve3,#{item.reserve4,jdbcType=DATE} reserve4
 		</foreach>
-		ON DUPLICATE KEY UPDATE   
-			uuid = VALUES(uuid),
-			jgid = VALUES(jgid),
-			yaid = VALUES(yaid),
-			delete_flag = VALUES(delete_flag),
-			datasource = VALUES(datasource),
-			sjc = VALUES(sjc),
-			jdh = VALUES(jdh),
-			reserve1 = VALUES(reserve1),
-			reserve2 = VALUES(reserve2),
-			reserve3 = VALUES(reserve3),
-			reserve4 = VALUES(reserve4)
+		ON DUPLICATE KEY UPDATE
+		uuid = VALUES(uuid),
+		jgid = VALUES(jgid),
+		yaid = VALUES(yaid),
+		delete_flag = VALUES(delete_flag),
+		datasource = VALUES(datasource),
+		sjc = VALUES(sjc),
+		jdh = VALUES(jdh),
+		reserve1 = VALUES(reserve1),
+		reserve2 = VALUES(reserve2),
+		reserve3 = VALUES(reserve3),
+		reserve4 = VALUES(reserve4)
 	</update>
 
 	<!--11.根据对象查询记录-->
-	<select id="doFindByVO" parameterType="DistributeVO"  resultType="DistributeVO">  
-		SELECT 
+	<select id="doFindByVO" parameterType="DistributeVO"  resultType="DistributeVO">
+		SELECT
 		<include refid="SQL_CONTENT"/>
-		FROM YAGL_ORGANIZATION_YA t 
-		WHERE t.DELETE_FLAG = 'N' 
+		FROM YAGL_ORGANIZATION_YA t
+		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
 	<!--12.根据预案ID删除记录-->
-	<delete id="doDeleteByYaid" parameterType="String">
-		DELETE FROM YAGL_ORGANIZATION_YA WHERE yaid = #{value}
-	</delete>
+	<update id="doDeleteByYaid" parameterType="String">
+		UPDATE YAGL_ORGANIZATION_YA SET DELETE_FLAG = 'Y' WHERE yaid = #{value}
+	</update>
 
 	<!--13向组织机构预案中间表批量插入数据-->
 	<insert id="doInsertDistributeVO" parameterType="DistributeVO" >
-		INSERT INTO YAGL_ORGANIZATION_YA(uuid,jgid,yaid,delete_flag,datasource,sjc)
-		SELECT sys_guid(),s.jgid,#{yaid,jdbcType=VARCHAR},'N','10000000',sysdate
-		FROM sys_organization s where s.jgjc = #{jgid,jdbcType=VARCHAR}
+		INSERT INTO YAGL_ORGANIZATION_YA(uuid,jgid,yaid,delete_flag,jdh,datasource,sjc)
+		VALUES (sys_guid(),#{jgid,jdbcType=VARCHAR},#{yaid,jdbcType=VARCHAR},'N',#{jdh,jdbcType=VARCHAR},#{datasource,jdbcType=VARCHAR},sysdate)
 	</insert>
 
 	<!--14.根据预案ID查询分发的总队-->
-	<select id="doFindFfzd" parameterType="String" resultType="String">
-		SELECT jgjc FROM YAGL_ORGANIZATION_YA t
-		LEFT JOIN sys_organization s ON t.jgid = s.jgid
-		WHERE t.yaid = #{value}
+	<select id="doFindFfdzByYaid" parameterType="String" resultType="DistributeVO">
+		SELECT t.uuid,t.jgid,t.yaid FROM YAGL_ORGANIZATION_YA t
+		LEFT JOIN sys_organization s ON t.jgid = s.uuid
+		WHERE t.delete_flag = 'N' AND t.yaid = #{value}
 	</select>
 
 </mapper>
