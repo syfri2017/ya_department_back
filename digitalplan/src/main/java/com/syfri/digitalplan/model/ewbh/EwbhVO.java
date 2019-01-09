@@ -32,6 +32,15 @@ public class EwbhVO extends ValueObject implements Serializable{
 
 	private String zddwmc;	//重点单位名称
 	private String ewbhjson;
+	private String orgJgid;
+
+	public String getOrgJgid() {
+		return orgJgid;
+	}
+
+	public void setOrgJgid(String orgJgid) {
+		this.orgJgid = orgJgid;
+	}
 
 	public String getUuid(){
 		return uuid;

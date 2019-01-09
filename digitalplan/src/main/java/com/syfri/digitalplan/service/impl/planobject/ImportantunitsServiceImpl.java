@@ -1,5 +1,9 @@
 package com.syfri.digitalplan.service.impl.planobject;
 
+import com.syfri.digitalplan.dao.basicinfo.fireenginesource.FireengineDAO;
+import com.syfri.digitalplan.dao.basicinfo.watersource.XfsyDAO;
+import com.syfri.digitalplan.model.basicinfo.fireenginesource.FireengineVO;
+import com.syfri.digitalplan.model.basicinfo.watersource.XfsyVO;
 import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
 import com.syfri.digitalplan.model.firefacilities.FirefacilitiesVO;
 import com.syfri.digitalplan.model.importantparts.ImportantpartsVO;
@@ -37,6 +41,10 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 	private BuildingService buildingService;
 	@Autowired
 	private FirefacilitiesService firefacilitiesService;
+	@Autowired
+	private XfsyDAO xfsyDAO;
+	@Autowired
+	private FireengineDAO fireengineDAO;
 
 	@Override
 	public ImportantunitsDAO getBaseDAO() {
@@ -143,5 +151,93 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 			}
 		}
 		return list;
+	}
+
+	/**
+	 * 默认地球半径
+	 */
+	private static double EARTH_RADIUS = 6371;
+
+	/**
+	 * 通过重点单位Gis坐标 查询周围1公里水源信息
+	 */
+	public Map<String, List> doFindXfsyListByZddwGis(ImportantunitsVO vo) {
+		double longitude = Double.parseDouble(vo.getGisX());//单位经度
+		double latitude = Double.parseDouble(vo.getGisY());//单位纬度
+
+		//计算经纬度点对应正方形4个点的坐标
+		Map<String, double[]> squareMap = new HashMap<String, double[]>();
+		// 计算经度弧度,从弧度转换为角度
+		double dLongitude = 2 * (Math.asin(Math.sin(1 / (2 * EARTH_RADIUS)) / Math.cos(Math.toRadians(latitude))));
+		dLongitude = Math.toDegrees(dLongitude);
+		// 计算纬度角度
+		double dLatitude = 1 / EARTH_RADIUS;
+		dLatitude = Math.toDegrees(dLatitude);
+		// 正方形
+//        double[] leftTopPoint = {latitude + dLatitude, longitude - dLongitude};
+//        double[] rightTopPoint = {latitude + dLatitude, longitude + dLongitude};
+//        double[] leftBottomPoint = {latitude - dLatitude, longitude - dLongitude};
+//        double[] rightBottomPoint = {latitude - dLatitude, longitude + dLongitude};
+
+		XfsyVO xfsyVO = new XfsyVO();
+		xfsyVO.setGisX_min(String.valueOf(longitude - dLongitude));
+		xfsyVO.setGisX_max(String.valueOf(longitude + dLongitude));
+		xfsyVO.setGisY_min(String.valueOf(latitude - dLatitude));
+		xfsyVO.setGisY_max(String.valueOf(latitude + dLatitude));
+		List<XfsyVO> xfsyList = xfsyDAO.doFindListByVO(xfsyVO);
+		List xhs = new ArrayList();
+		List xfsh = new ArrayList();
+		List xfsc = new ArrayList();
+		List trsyqsd = new ArrayList();
+		for (XfsyVO data : xfsyList) {
+			switch (data.getSylx()) {
+				case "01":
+					xhs.add(data);
+					break;
+				case "02":
+					xfsh.add(data);
+					break;
+				case "03":
+					xfsc.add(data);
+					break;
+				case "04":
+					trsyqsd.add(data);
+					break;
+			}
+		}
+		Map<String, List> map = new HashMap<String, List>();
+		if (!xhs.isEmpty())
+			map.put("01", xhs);
+		if (!xfsh.isEmpty())
+			map.put("02", xfsh);
+		if (!xfsc.isEmpty())
+			map.put("03", xfsc);
+		if (!trsyqsd.isEmpty())
+			map.put("04", trsyqsd);
+		return map;
+	}
+
+	/**
+	 * 通过重点单位Gis坐标 查询周围1公里车辆信息
+	 */
+	public List<FireengineVO> doFindXfclListByZddwGis(ImportantunitsVO vo) {
+		double longitude = Double.parseDouble(vo.getGisX());//单位经度
+		double latitude = Double.parseDouble(vo.getGisY());//单位纬度
+
+		//计算经纬度点对应正方形4个点的坐标
+		Map<String, double[]> squareMap = new HashMap<String, double[]>();
+		// 计算经度弧度,从弧度转换为角度
+		double dLongitude = 2 * (Math.asin(Math.sin(1 / (2 * EARTH_RADIUS)) / Math.cos(Math.toRadians(latitude))));
+		dLongitude = Math.toDegrees(dLongitude);
+		// 计算纬度角度
+		double dLatitude = 1 / EARTH_RADIUS;
+		dLatitude = Math.toDegrees(dLatitude);
+
+		FireengineVO engineVO = new FireengineVO();
+		engineVO.setGisX_min(String.valueOf(longitude - dLongitude));
+		engineVO.setGisX_max(String.valueOf(longitude + dLongitude));
+		engineVO.setGisY_min(String.valueOf(latitude - dLatitude));
+		engineVO.setGisY_max(String.valueOf(latitude + dLatitude));
+		return fireengineDAO.doFindListByGis(engineVO);
 	}
 }

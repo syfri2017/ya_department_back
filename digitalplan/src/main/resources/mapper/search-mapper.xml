@@ -34,8 +34,8 @@
 	<sql id="SQL_CONDITION_YAXX">
 		<if test="yamc != null and yamc != '' ">
 			and
-			(t.yamc LIKE concat(concat('%',#{yamc}),'%')
-			or t.dxmc LIKE concat(concat('%',#{yamc}),'%')
+			(t.yamc LIKE concat(concat('%',#{yamc}),'%') ESCAPE '\'
+			or t.dxmc LIKE concat(concat('%',#{yamc}),'%') ESCAPE '\'
 			)
 		</if>
 		<if test="yalx != null and yalx != '' ">
@@ -53,10 +53,21 @@
 		<if test="endtime != null and endtime != '' ">
 			and TO_CHAR(t.zzsj,'yyyy/MM/dd') &lt;= #{endtime}
 		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
+		</if>
+		<if test="jgid != null and jgid != '' ">
+			AND t.jgid IN (
+			SELECT UUID
+			FROM SYS_ORGANIZATION t
+			START WITH t.UUID = #{jgid}
+			CONNECT BY PRIOR t.UUID = SJJGID
+			)
+		</if>
 	</sql>
 
 	<!--高级搜索单位建筑 初始化列表-->
-	<select id="doSearchGjssDwjzListByVO" parameterType="BuildingVO"  resultType="BuildingVO">
+	<select id="doSearchGjssDwjzListByVO" parameterType="BuildingVO" resultType="BuildingVO">
 		SELECT
 		<include refid="SQL_CONTENT_DWJZ"/>,
 		c2.code_name jzlxmc
@@ -67,11 +78,16 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="jzmc != null and jzmc != '' ">
 			AND
-            (t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
+			(t.jzmc LIKE concat(concat('%',#{jzmc}),'%') ESCAPE '\'
+			OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%') ESCAPE '\'
+			)
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
 		</if>
 	</select>
-    <!--高级搜索 建筑类-->
-	<select id="doSearchGjssJzlListByVO" parameterType="BuildingVO"  resultType="BuildingVO">
+	<!--高级搜索 建筑类-->
+	<select id="doSearchGjssJzlListByVO" parameterType="BuildingVO" resultType="BuildingVO">
 		SELECT
 		<include refid="SQL_CONTENT_DWJZ"/>,
 		c2.code_name jzlxmc
@@ -83,68 +99,77 @@
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="jzmc != null and jzmc != '' ">
 			AND
-            (t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
+			(t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
 		</if>
-        <if test="jzlx != null and jzlx != '' ">
-            AND t.jzlx = #{jzlx}
-        </if>
+		<if test="jzlx != null and jzlx != '' ">
+			AND t.jzlx = #{jzlx}
+		</if>
 		<if test="jzl_jzsyxz != null and jzl_jzsyxz != '' ">
 			AND t_jzl.jzsyxz LIKE concat(#{jzl_jzsyxz},'%')
 		</if>
 		<if test="jzl_jzjg != null and jzl_jzjg != '' ">
 			AND t_jzl.jzjg = #{jzl_jzjg}
 		</if>
-        <if test="jzl_dsgd_max != null and jzl_dsgd_max != '' ">
-            AND t_jzl.dsgd &lt;= #{jzl_dsgd_max}
-        </if>
-        <if test="jzl_dsgd_min != null and jzl_dsgd_min != '' ">
-            AND t_jzl.dsgd > #{jzl_dsgd_min}
-        </if>
+		<if test="jzl_dsgd_max != null and jzl_dsgd_max != '' ">
+			AND t_jzl.dsgd &lt;= #{jzl_dsgd_max}
+		</if>
+		<if test="jzl_dsgd_min != null and jzl_dsgd_min != '' ">
+			AND t_jzl.dsgd > #{jzl_dsgd_min}
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
+		</if>
 	</select>
-    <!--高级搜索 装置类-->
-    <select id="doSearchGjssZzlListByVO" parameterType="BuildingVO"  resultType="BuildingVO">
-        SELECT
-        <include refid="SQL_CONTENT_DWJZ"/>,
-        c2.code_name jzlxmc
-        FROM YAGL_DWJZXX t
-        LEFT JOIN YAGL_DWJZXX_ZZL t_zzl ON t.jzid = t_zzl.jzid AND t_zzl.DELETE_FLAG = 'N'
-        <!--建筑分区类型关联代码集-->
-        Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
-        Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
-        WHERE t.DELETE_FLAG = 'N'
-        <if test="jzmc != null and jzmc != '' ">
-            AND
-            (t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
-        </if>
-        <if test="jzlx != null and jzlx != '' ">
-            AND t.jzlx = #{jzlx}
-        </if>
-        <if test="zzl_jzjg != null and zzl_jzjg != '' ">
-            AND t_zzl.jzjg = #{zzl_jzjg}
-        </if>
-    </select>
-    <!--高级搜索 储罐类-->
-    <select id="doSearchGjssCglListByVO" parameterType="BuildingVO"  resultType="BuildingVO">
-        SELECT
-        <include refid="SQL_CONTENT_DWJZ"/>,
-        c2.code_name jzlxmc
-        FROM YAGL_DWJZXX t
-        LEFT JOIN YAGL_DWJZXX_CGL t_cgl ON t.jzid = t_cgl.jzid AND t_cgl.DELETE_FLAG = 'N'
-        <!--建筑分区类型关联代码集-->
-        Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
-        Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
-        WHERE t.DELETE_FLAG = 'N'
-        <if test="jzmc != null and jzmc != '' ">
-            AND
-            (t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
-        </if>
-        <if test="jzlx != null and jzlx != '' ">
-            AND t.jzlx = #{jzlx}
-        </if>
-    </select>
+	<!--高级搜索 装置类-->
+	<select id="doSearchGjssZzlListByVO" parameterType="BuildingVO" resultType="BuildingVO">
+		SELECT
+		<include refid="SQL_CONTENT_DWJZ"/>,
+		c2.code_name jzlxmc
+		FROM YAGL_DWJZXX t
+		LEFT JOIN YAGL_DWJZXX_ZZL t_zzl ON t.jzid = t_zzl.jzid AND t_zzl.DELETE_FLAG = 'N'
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<if test="jzmc != null and jzmc != '' ">
+			AND
+			(t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
+		</if>
+		<if test="jzlx != null and jzlx != '' ">
+			AND t.jzlx = #{jzlx}
+		</if>
+		<if test="zzl_jzjg != null and zzl_jzjg != '' ">
+			AND t_zzl.jzjg = #{zzl_jzjg}
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
+		</if>
+	</select>
+	<!--高级搜索 储罐类-->
+	<select id="doSearchGjssCglListByVO" parameterType="BuildingVO" resultType="BuildingVO">
+		SELECT
+		<include refid="SQL_CONTENT_DWJZ"/>,
+		c2.code_name jzlxmc
+		FROM YAGL_DWJZXX t
+		LEFT JOIN YAGL_DWJZXX_CGL t_cgl ON t.jzid = t_cgl.jzid AND t_cgl.DELETE_FLAG = 'N'
+		<!--建筑分区类型关联代码集-->
+		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'JZLX' And c1.DELETE_FLAG = 'N'
+		Left Join SYS_CODELIST_DETAIL c2 On c1.CODEID = c2.CODEID And c2.DELETE_FLAG = 'N' and t.jzlx = c2.CODE_VALUE
+		WHERE t.DELETE_FLAG = 'N'
+		<if test="jzmc != null and jzmc != '' ">
+			AND
+			(t.jzmc LIKE concat(concat('%',#{jzmc}),'%') OR t.jzwz LIKE concat(concat('%',#{jzmc}),'%'))
+		</if>
+		<if test="jzlx != null and jzlx != '' ">
+			AND t.jzlx = #{jzlx}
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
+		</if>
+	</select>
 
 	<!--高级搜索 预案信息 全部对象-->
-	<select id="doSearchGjssYaxxByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
+	<select id="doSearchGjssYaxxByVO" parameterType="DigitalplanlistVO" resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
 		'重点单位' yadxType,
@@ -191,7 +216,7 @@
 		<include refid="SQL_CONDITION_YAXX"/>
 	</select>
 	<!--高级搜索 预案信息 重点单位-->
-	<select id="doSearchGjssYaxxZddwByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
+	<select id="doSearchGjssYaxxZddwByVO" parameterType="DigitalplanlistVO" resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
 		'重点单位' yadxType,
@@ -208,7 +233,7 @@
 		<include refid="SQL_CONDITION_YAXX"/>
 	</select>
 	<!--高级搜索 预案信息 消防保卫警卫-->
-	<select id="doSearchGjssYaxxBwjwByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
+	<select id="doSearchGjssYaxxBwjwByVO" parameterType="DigitalplanlistVO" resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
 		'消防保卫警卫' yadxType,
@@ -225,7 +250,7 @@
 		<include refid="SQL_CONDITION_YAXX"/>
 	</select>
 	<!--高级搜索 预案信息 其他对象-->
-	<select id="doSearchGjssYaxxQtdxByVO" parameterType="DigitalplanlistVO"  resultType="DigitalplanlistVO">
+	<select id="doSearchGjssYaxxQtdxByVO" parameterType="DigitalplanlistVO" resultType="DigitalplanlistVO">
 		SELECT
 		<include refid="SQL_CONTENT_YAXX"/>,
 		'其他对象' yadxType,
@@ -243,7 +268,7 @@
 	</select>
 
 	<!--高级搜索 预案对象信息 全部对象-->
-	<select id="doSearchGjssYadxByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
+	<select id="doSearchGjssYadxByVO" parameterType="ImportantunitsVO" resultType="ImportantunitsVO">
 		SELECT * FROM
 		(SELECT
 		t.uuid uuid,
@@ -256,12 +281,19 @@
 		LEFT JOIN YAGL_XFDZ c9 ON (t.MHDZID=c9.DZID AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dxmc != null and dxmc != '' ">
-			and t.dwmc LIKE concat(concat('%',#{dxmc}),'%')
+			and t.dwmc LIKE concat(concat('%',#{dxmc}),'%') ESCAPE '\'
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-			and c9.dzbm like concat(#{xfgx},'%')
+			and t.mhdzid IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZBM = #{xfgx}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
 		</if>
-		and rownum &lt;= 100
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
+		</if>
 		ORDER BY t.XZQH,t.DWXZ,t.DWMC ASC)
 		UNION ALL
 		SELECT
@@ -272,13 +304,21 @@
 		'消防保卫警卫' yadxType
 		FROM YAGL_DX_BWJW t
 		<!--消防队站-->
-		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.DZBM AND c9.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.dzid AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dxmc != null and dxmc != '' ">
 			and t.hdzt LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-			and t.xfgx like concat(#{xfgx},'%')
+			and t.xfgx IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZBM = #{xfgx}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
 		</if>
 		UNION ALL
 		SELECT
@@ -289,18 +329,26 @@
 		'其他对象' yadxType
 		FROM YAGL_DX_QTDX t
 		<!--消防队站-->
-		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.DZBM AND c9.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.dzid AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dxmc != null and dxmc != '' ">
 			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-			and t.xfgx like concat(#{xfgx},'%')
+			and t.xfgx IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZBM = #{xfgx}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
 		</if>
 	</select>
 	<!--高级搜索 预案对象信息 重点单位-->
-	<select id="doSearchGjssYadxZddwByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
-	 SELECT
+	<select id="doSearchGjssYadxZddwByVO" parameterType="ImportantunitsVO" resultType="ImportantunitsVO">
+		SELECT
 		t.uuid uuid,
 		t.dwmc dxmc,
 		t.dwdz dxdz,
@@ -319,7 +367,12 @@
 			and t.dwmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-			and c9.dzbm like concat(#{xfgx},'%')
+			and t.mhdzid IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZBM = #{xfgx}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
 		</if>
 		<if test="dwxz != null and dwxz != '' ">
 			and t.dwxz = #{dwxz}
@@ -333,11 +386,13 @@
 		<if test="jzfl != null and jzfl != '' ">
 			and t.jzfl = #{jzfl}
 		</if>
-		AND rownum &lt;= 100
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
+		</if>
 		ORDER BY t.XZQH,t.DWXZ,t.DWMC ASC
 	</select>
 	<!--高级搜索 预案对象信息 消防保卫警卫-->
-	<select id="doSearchGjssYadxBwjwByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
+	<select id="doSearchGjssYadxBwjwByVO" parameterType="ImportantunitsVO" resultType="ImportantunitsVO">
 		SELECT
 		t.uuid uuid,
 		t.hdzt dxmc,
@@ -346,17 +401,25 @@
 		'消防保卫警卫' yadxType
 		FROM YAGL_DX_BWJW t
 		<!--消防队站-->
-		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.DZBM AND c9.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.dzid AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dxmc != null and dxmc != '' ">
 			and t.hdzt LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-			and t.xfgx like concat(#{xfgx},'%')
+			and t.xfgx IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZBM = #{xfgx}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
 		</if>
 	</select>
 	<!--高级搜索 预案对象信息 其他对象-->
-	<select id="doSearchGjssYadxQtdxByVO" parameterType="ImportantunitsVO"  resultType="ImportantunitsVO">
+	<select id="doSearchGjssYadxQtdxByVO" parameterType="ImportantunitsVO" resultType="ImportantunitsVO">
 		SELECT
 		t.uuid uuid,
 		t.dxmc dxmc,
@@ -365,13 +428,21 @@
 		'其他对象' yadxType
 		FROM YAGL_DX_QTDX t
 		<!--消防队站-->
-		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.DZBM AND c9.DELETE_FLAG = 'N')
+		LEFT JOIN YAGL_XFDZ c9 ON (t.xfgx=c9.dzid AND c9.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<if test="dxmc != null and dxmc != '' ">
 			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
 		</if>
 		<if test="xfgx != null and xfgx != '' ">
-			and t.xfgx like concat(#{xfgx},'%')
+			and t.xfgx IN (
+			SELECT DZID
+			FROM YAGL_XFDZ t
+			START WITH t.DZBM = #{xfgx}
+			CONNECT BY PRIOR t.DZID = SJDZID
+			)
+		</if>
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000'">
+			and t.jdh = #{jdh}
 		</if>
 	</select>
 </mapper>
