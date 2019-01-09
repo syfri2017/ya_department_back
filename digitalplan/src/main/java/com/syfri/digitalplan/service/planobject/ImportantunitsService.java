@@ -29,4 +29,7 @@ public interface ImportantunitsService  extends BaseService<ImportantunitsVO>{
      * @return
      */
     public List<ImportantunitsVO> doSearchZddwListByVO(ImportantunitsVO vo);
+
+    /*--根据重点单位ID查询单位建筑信息详情 by li.xue 2018/8/16--*/
+    List<BuildingVO> doFindJzxxDetailByZddwId(String zddwid);
 }

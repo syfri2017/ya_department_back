@@ -1,7 +1,9 @@
 package com.syfri.digitalplan.service.impl.planobject;
 
+import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
 import com.syfri.digitalplan.model.firefacilities.FirefacilitiesVO;
 import com.syfri.digitalplan.model.importantparts.ImportantpartsVO;
+import com.syfri.digitalplan.model.planobject.ImportantunitsBuildingVO;
 import com.syfri.digitalplan.model.planobject.XiaofangliliangVO;
 import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.service.planobject.ImportantunitsService;
 import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import com.syfri.digitalplan.service.firefacilities.FirefacilitiesService;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,4 +113,35 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 	public List<ImportantunitsVO> doSearchZddwListByVO(ImportantunitsVO vo){
 		return importantunitsDAO.doSearchZddwListByVO(vo);
 	};
+
+	/*--根据重点单位ID查询单位建筑信息详情 by li.xue 2018/8/16--*/
+	public List<BuildingVO> doFindJzxxDetailByZddwId(String zddwid) {
+		List<ImportantunitsBuildingVO> buildingList = importantunitsDAO.doFindJzxxListByZddwId(zddwid);
+		List<BuildingVO> list = new ArrayList<>();
+		for (ImportantunitsBuildingVO vo : buildingList) {
+			if (!StringUtils.isEmpty(vo.getJzid())) {
+				BuildingVO temp = new BuildingVO();
+				temp.setJzid(vo.getJzid());
+				if (vo.getJzlx() != null && vo.getJzlx() != "") {
+					switch (vo.getJzlx()) {
+						case "10":
+						case "20":
+							list.add(buildingDAO.doFindFqAndJzDetailByVo(temp));
+							break;
+						case "30":
+							list.add(buildingDAO.doFindFqAndZzDetailByVo(temp));
+							break;
+						case "40":
+							BuildingVO cgl = buildingDAO.doFindFqAndCgDetailByVo(temp);
+							ChuguanVO cg = new ChuguanVO();
+							cg.setPkid(cgl.getCgl_uuid());
+							cgl.setChuguanList(buildingDAO.doFindChuGuanList(cg));
+							list.add(cgl);
+							break;
+					}
+				}
+			}
+		}
+		return list;
+	}
 }

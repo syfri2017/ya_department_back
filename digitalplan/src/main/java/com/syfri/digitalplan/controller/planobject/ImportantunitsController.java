@@ -116,4 +116,22 @@ public class ImportantunitsController  extends BaseController<ImportantunitsVO>{
 		}
 		return resultVO;
 	}
+
+	/**
+	 * 通过重点单位ID查询建筑详细信息
+	 * by li.xue 2018/8/16
+	 */
+	@ApiOperation(value="通过重点单位ID查询建筑详细信息",notes="列表信息")
+	@ApiImplicitParam(name="String",value="重点单位对象ID")
+	@GetMapping("/doFindJzxxDetailByZddwId/{zddwId}")
+	public @ResponseBody ResultVO getJzxxDetailByZddwId(@PathVariable String zddwId) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(importantunitsService.doFindJzxxDetailByZddwId(zddwId));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }
