@@ -1,16 +1,19 @@
 package com.syfri.digitalplan.service.impl.digitalplan;
 
 import com.syfri.digitalplan.dao.digitalplan.DigitalplanlistDAO;
+import com.syfri.digitalplan.dao.digitalplan.DistributeDAO;
 import com.syfri.digitalplan.dao.digitalplan.DisastersetDAO;
 import com.syfri.digitalplan.dao.digitalplan.KeypointsDAO;
 import com.syfri.digitalplan.dao.digitalplan.ForcedevDAO;
 import com.syfri.digitalplan.dao.buildingzoning.BuildingDAO;
 
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
+import com.syfri.digitalplan.model.digitalplan.DistributeVO;
 import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.digitalplan.ForcedevVO;
 import com.syfri.digitalplan.model.digitalplan.KeypointsVO;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
     private ForcedevDAO forcedevDAO;
     @Autowired
     private BuildingDAO buildingDAO;
+    @Autowired
+    private DistributeDAO distributeDAO;
 
 
     @Override
@@ -93,9 +98,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
     @Override
     public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO) {
         //预案插入
-        String yabm = this.createPlanCode(digitalplanlistVO.getJgbm(),"01");//灾害类型暂定为火灾01
+        String yabm = ((DigitalplanlistService) AopContext.currentProxy()).createPlanCode(digitalplanlistVO.getJgbm(),"01");//灾害类型暂定为火灾01
         digitalplanlistVO.setYabm(yabm);
-        digitalplanlistVO.setDeleteFlag("N");
         digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
         //灾情插入
         List disasterList = digitalplanlistVO.getDisasterList();
@@ -104,6 +108,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
             Map ds = (Map) disasterList.get(i);
             DisastersetVO dsVO = new DisastersetVO();
             dsVO.setYaid(digitalplanlistVO.getUuid());//预案id
+            dsVO.setDatasource(digitalplanlistVO.getDatasource());
+            dsVO.setJdh(digitalplanlistVO.getJdh());
             dsVO.setZdbwid(ds.get("zdbwid") != null ? ds.get("zdbwid").toString() : "");//重点部位id
             dsVO.setJzid(ds.get("jzid") != null ? ds.get("jzid").toString() : "");
             dsVO.setZqbw(ds.get("zqbw") != null ? ds.get("zqbw").toString() : "");
@@ -138,6 +144,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                 Map fd = (Map) forceList.get(k);
                 ForcedevVO fdVO = new ForcedevVO();
                 fdVO.setZqid(dsVO.getZqid());
+                fdVO.setJdh(dsVO.getJdh());
+                fdVO.setDatasource(dsVO.getDatasource());
                 fdVO.setDjfalx(fd.get("djfalx") != null ? fd.get("djfalx").toString() : "");
                 fdVO.setDzid(fd.get("dzid") != null ? fd.get("dzid").toString() : "");
                 fdVO.setTkwz(fd.get("tkwz") != null ? fd.get("tkwz").toString() : "");
@@ -149,9 +157,11 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
             }
             //要点提示插入
             Map kp = (Map) ds.get("keypointsMap");
-            if (kp.get("zsyd") != "" && kp.get("zsyd") != null && kp.get("tbjs") != "" && kp.get("tbjs") != null) {
+            if ((kp.get("zsyd") != "" && kp.get("zsyd") != null) || (kp.get("tbjs") != "" && kp.get("tbjs") != null)) {
                 KeypointsVO kpVO = new KeypointsVO();
                 kpVO.setZqid(dsVO.getZqid());
+                kpVO.setJdh(dsVO.getJdh());
+                kpVO.setDatasource(dsVO.getDatasource());
                 kpVO.setZsyd(kp.get("zsyd") != null ? kp.get("zsyd").toString() : "");
                 kpVO.setTbjs(kp.get("tbjs") != null ? kp.get("tbjs").toString() : "");
                 kpVO.setCjrid(digitalplanlistVO.getZzrid());
@@ -176,16 +186,15 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         //预案
         digitalplanlistVO.setXgrid(digitalplanlistVO.getZzrid());
         digitalplanlistVO.setXgrmc(digitalplanlistVO.getZzrmc());
-        digitalplanlistVO.setXgsj("1");
         digitalplanlistDAO.doUpdateByVO(digitalplanlistVO);
         //灾情（新）
         List disasterList = digitalplanlistVO.getDisasterList();
         //灾情（旧）
         List<DisastersetVO> dslist = disastersetDAO.doFindByPlanId(digitalplanlistVO.getUuid());
         for (DisastersetVO vo : dslist) {
-            List<ForcedevVO> forcedevList = this.forcedevDAO.doFindByPlanId(vo.getZqid());
+            List<ForcedevVO> forcedevList = forcedevDAO.doFindByPlanId(vo.getZqid());
             vo.setForcedevList(forcedevList);
-            KeypointsVO keypointsMap = this.keypointsDAO.doFindByPlanId(vo.getZqid());
+            KeypointsVO keypointsMap = keypointsDAO.doFindByPlanId(vo.getZqid());
             if (keypointsMap == null) {
                 vo.setKeypointsMap(new KeypointsVO());
             } else {
@@ -198,21 +207,18 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
 
             DisastersetVO deleteDsVo = new DisastersetVO();
             deleteDsVo.setZqid(dsVo.getZqid());
-            deleteDsVo.setXgsj("1");
             deleteDsVo.setXgrid(digitalplanlistVO.getZzrid());
             deleteDsVo.setXgrmc(digitalplanlistVO.getZzrmc());
             deleteDsVo.setDeleteFlag("Y");
 
             ForcedevVO deleteFdVo = new ForcedevVO();
             deleteFdVo.setZqid(dsVo.getZqid());
-            deleteFdVo.setXgsj("1");
             deleteFdVo.setXgrid(digitalplanlistVO.getZzrid());
             deleteFdVo.setXgrmc(digitalplanlistVO.getZzrmc());
             deleteFdVo.setDeleteFlag("Y");
 
             KeypointsVO deleteKpVo = new KeypointsVO();
             deleteKpVo.setZqid(dsVo.getZqid());
-            deleteKpVo.setXgsj("1");
             deleteKpVo.setXgrid(digitalplanlistVO.getZzrid());
             deleteKpVo.setXgrmc(digitalplanlistVO.getZzrmc());
             deleteKpVo.setDeleteFlag("Y");
@@ -284,6 +290,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                 dsVO.setDeleteFlag("N");
                 disastersetDAO.doUpdateByVO(dsVO);
             } else { //灾情新增
+                dsVO.setJdh(digitalplanlistVO.getJdh());
+                dsVO.setDatasource(digitalplanlistVO.getDatasource());
                 dsVO.setCjrid(digitalplanlistVO.getZzrid());
                 dsVO.setCjrmc(digitalplanlistVO.getZzrmc());
                 dsVO.setDeleteFlag("N");
@@ -303,10 +311,11 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                     fdVO.setUuid(fd.get("uuid").toString());
                     fdVO.setXgrid(digitalplanlistVO.getZzrid());
                     fdVO.setXgrmc(digitalplanlistVO.getZzrmc());
-                    fdVO.setXgsj("1");
                     fdVO.setDeleteFlag("N");
                     forcedevDAO.doUpdateByVO(fdVO);
                 } else { //力量部署新增
+                    fdVO.setJdh(digitalplanlistVO.getJdh());
+                    fdVO.setDatasource(digitalplanlistVO.getDatasource());
                     fdVO.setCjrid(digitalplanlistVO.getZzrid());
                     fdVO.setCjrmc(digitalplanlistVO.getZzrmc());
                     fdVO.setDeleteFlag("N");
@@ -324,10 +333,11 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                     kpVO.setUuid(kp.get("uuid").toString());
                     kpVO.setXgrid(digitalplanlistVO.getZzrid());
                     kpVO.setXgrmc(digitalplanlistVO.getZzrmc());
-                    kpVO.setXgsj("1");
                     kpVO.setDeleteFlag("N");
                     keypointsDAO.doUpdateByVO(kpVO);
                 } else { //要点提示新增
+                    kpVO.setJdh(digitalplanlistVO.getJdh());
+                    kpVO.setDatasource(digitalplanlistVO.getDatasource());
                     kpVO.setCjrid(digitalplanlistVO.getZzrid());
                     kpVO.setCjrmc(digitalplanlistVO.getZzrmc());
                     kpVO.setDeleteFlag("N");
@@ -359,34 +369,32 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
                     for (DisastersetVO dsVo : disasterList) {
                         ForcedevVO fdVo = new ForcedevVO();
                         fdVo.setZqid(dsVo.getZqid());
-                        fdVo.setXgsj("1");
                         fdVo.setXgrid(xgrid);
                         fdVo.setXgrmc(xgrmc);
                         fdVo.setDeleteFlag("Y");
-                        forcedevDAO.doDeleteByVO(fdVo);
+                        forcedevDAO.doDeleteByVO(fdVo);//力量部署删除
 
                         KeypointsVO kpVo = new KeypointsVO();
                         kpVo.setZqid(dsVo.getZqid());
-                        kpVo.setXgsj("1");
                         kpVo.setXgrid(xgrid);
                         kpVo.setXgrmc(xgrmc);
                         kpVo.setDeleteFlag("Y");
-                        keypointsDAO.doDeleteByVO(kpVo);
+                        keypointsDAO.doDeleteByVO(kpVo);//要点提示删除
                     }
                 }
                 DisastersetVO dsVo = new DisastersetVO();
                 dsVo.setYaid(dpVo.getUuid());
-                dsVo.setXgsj("1");
                 dsVo.setXgrid(xgrid);
                 dsVo.setXgrmc(xgrmc);
                 dsVo.setDeleteFlag("Y");
-                disastersetDAO.doDeleteByVO(dsVo);
+                disastersetDAO.doDeleteByVO(dsVo);//灾情设定删除
 
-                dpVo.setXgsj("1");
                 dpVo.setXgrid(xgrid);
                 dpVo.setXgrmc(xgrmc);
                 dpVo.setDeleteFlag("Y");
-                num = num + digitalplanlistDAO.doUpdateByVO(dpVo);
+                num = num + digitalplanlistDAO.doUpdateByVO(dpVo);//预案删除
+
+                distributeDAO.doDeleteByYaid(dpVo.getUuid());//分发删除
             }
         }
         return num;
@@ -401,7 +409,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
      * @Date: 2018/5/23 10:20
      */
     public List<BuildingVO> doSearchJzListByZddwId(BuildingVO buildingVO) {
-        List<BuildingVO> resultList = this.buildingDAO.doSearchJzListByZddwId(buildingVO);
+        List<BuildingVO> resultList = buildingDAO.doSearchJzListByZddwId(buildingVO);
         return resultList;
     }
 
@@ -414,7 +422,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
      * @Date: 2018/5/23 10:20
      */
     public List<DigitalplanlistVO> doFindListByZddwId(String zddwId) {
-        List<DigitalplanlistVO> resultList = this.digitalplanlistDAO.doFindListByZddwId(zddwId);
+        List<DigitalplanlistVO> resultList = digitalplanlistDAO.doFindListByZddwId(zddwId);
         return resultList;
     }
 

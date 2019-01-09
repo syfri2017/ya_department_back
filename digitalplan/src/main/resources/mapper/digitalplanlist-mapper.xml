@@ -13,7 +13,7 @@
 			and t.yalx = #{yalx}
 		</if>
 		<if test="yamc != null and yamc != '' ">
-			and t.yamc LIKE concat(concat('%',#{yamc}),'%')
+			and t.yamc LIKE concat(concat('%',#{yamc}),'%') ESCAPE '\'
 		</if>
 		<if test="yazt != null and yazt != '' ">
 			and t.yazt = #{yazt}
@@ -25,7 +25,7 @@
 			and t.dxid = #{dxid}
 		</if>
 		<if test="dxmc != null and dxmc != '' ">
-			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%')
+			and t.dxmc LIKE concat(concat('%',#{dxmc}),'%') ESCAPE '\'
 		</if>
 		<if test="jgid != null and jgid != '' ">
 			and t.jgid IN (
@@ -80,7 +80,7 @@
 		<if test="bz != null and bz != '' ">
 			and t.bz = #{bz}
 		</if>
-		<if test="jdh != null and jdh != '' ">
+		<if test="jdh != null and jdh != '' and orgJgid != '01000000' ">
 			and t.jdh = #{jdh}
 		</if>
 		<if test="sjc != null and sjc != '' ">
@@ -153,7 +153,8 @@
 		c2.code_name yalxmc,
 		c4.code_name yaztmc,
 		c6.code_name yajbmc,
-		c8.code_name shztmc
+		c8.code_name shztmc,
+		c9.jgmc zzjgmc
 		FROM YAGL_YA_ZDDW t
 		<!--预案类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
@@ -167,6 +168,8 @@
 		<!--审核状态-->
 		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'YASHZT' And c7.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t.SHZT = c8.CODE_VALUE
+		<!--制作机构-->
+		Left Join SYS_ORGANIZATION c9 on c9.UUID = t.jgid
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		ORDER BY NVL(xgsj,zzsj) DESC
@@ -238,20 +241,20 @@
 			<if test="jgid != null">jgid=#{jgid},</if>
 			<if test="jgbm != null">jgbm=#{jgbm},</if>
 			<if test="jgmc != null">jgmc=#{jgmc},</if>
-			<if test="zzrid != null">zzrid=#{zzrid},</if>
-			<if test="zzrmc != null">zzrmc=#{zzrmc},</if>
-			<if test="zzsj != null">zzsj=sysdate,</if>
+			<!--<if test="zzrid != null">zzrid=#{zzrid},</if>-->
+			<!--<if test="zzrmc != null">zzrmc=#{zzrmc},</if>-->
+			<!--<if test="zzsj != null">zzsj=sysdate,</if>-->
 			<if test="shzt != null">shzt=#{shzt},</if>
 			<if test="shrid != null">shrid=#{shrid},</if>
 			<if test="shrmc != null">shrmc=#{shrmc},</if>
 			<if test="shsj != null">shsj=sysdate,</if>
 			<if test="xgrid != null">xgrid=#{xgrid},</if>
 			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=sysdate,</if>
+			xgsj=sysdate,
 			<if test="deleteFlag != null">delete_flag=#{deleteFlag},</if>
 			<if test="datasource != null">datasource=#{datasource},</if>
 			<if test="bz != null">bz=#{bz},</if>
-			<if test="jdh != null">jdh=#{jdh},</if>
+			<!--<if test="jdh != null">jdh=#{jdh},</if>-->
 			<if test="sjc != null">sjc=TO_DATE(#{sjc},'yyyy-MM-dd HH24:mi:ss'),</if>
 			<if test="reserve1 != null">reserve1=#{reserve1},</if>
 			<if test="reserve2 != null">reserve2=#{reserve2},</if>
@@ -308,7 +311,8 @@
 		c2.code_name yalxmc,
 		c4.code_name yaztmc,
 		c6.code_name yajbmc,
-		c8.code_name shztmc
+		c8.code_name shztmc,
+		c9.jgmc zzjgmc
 		FROM YAGL_YA_ZDDW t
 		<!--预案类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
@@ -322,6 +326,8 @@
 		<!--审核状态-->
 		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'YASHZT' And c7.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t.SHZT = c8.CODE_VALUE
+		<!--制作机构-->
+		Left Join SYS_ORGANIZATION c9 on c9.UUID = t.jgid
 		WHERE t.DELETE_FLAG = 'N'
 		ORDER BY NVL(xgsj,zzsj) DESC
 		<include refid="SQL_CONDITION"/>
@@ -376,7 +382,8 @@
 		c2.code_name yalxmc,
 		c4.code_name yaztmc,
 		c6.code_name yajbmc,
-		c8.code_name shztmc
+		c8.code_name shztmc,
+		c9.jgmc zzjgmc
 		FROM YAGL_YA_ZDDW t
 		<!--预案类型-->
 		Left Join SYS_CODELIST c1 on c1.CODETYPE = 'YALX' And c1.DELETE_FLAG = 'N'
@@ -390,6 +397,7 @@
 		<!--审核状态-->
 		Left Join SYS_CODELIST c7 on c7.CODETYPE = 'YASHZT' And c7.DELETE_FLAG = 'N'
 		Left Join SYS_CODELIST_DETAIL c8 On c8.CODEID = c7.CODEID And c8.DELETE_FLAG = 'N' and t.SHZT = c8.CODE_VALUE
+		Left Join SYS_ORGANIZATION c9 on c9.UUID = t.jgid
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<!--预案审核列表不加载状态为编辑中的预案-->

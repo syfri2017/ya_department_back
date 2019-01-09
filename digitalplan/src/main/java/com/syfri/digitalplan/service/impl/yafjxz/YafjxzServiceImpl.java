@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.syfri.baseapi.service.impl.BaseServiceImpl;
-import com.syfri.digitalplan.dao.yafjxz.YafjxzDAO;
-import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
 import com.syfri.digitalplan.service.yafjxz.YafjxzService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,13 +23,29 @@ public class YafjxzServiceImpl extends BaseServiceImpl<YafjxzVO> implements Yafj
 		return yafjxzDAO;
 	}
 
-	public void doDeletcNotIn(String oldYafjxzVOs){
+	public void doDeletcNotIn(String oldYafjxzVOs) {
 		yafjxzDAO.doDeletcNotIn(oldYafjxzVOs);
-	};
+	}
+
+	;
 
 	@Override
-	public List<YafjxzVO> doFindByPlanId(String yaid){
-		List<YafjxzVO> resultList= yafjxzDAO.doFindByPlanId(yaid);
+	public List<YafjxzVO> doFindByPlanId(YafjxzVO yafjxzVO) {
+		List<YafjxzVO> resultList = null;
+		if(yafjxzVO.getKzm().equals("pic")){
+			resultList = yafjxzDAO.doFindPicsByPlanId(yafjxzVO);
+		}else{
+			resultList = yafjxzDAO.doFindByPlanId(yafjxzVO);
+		}
+
 		return resultList;
+	}
+
+	public int doUpdateByVOList(List<YafjxzVO> yafjxzVOList) {
+		int count = 0;
+		for (YafjxzVO vo : yafjxzVOList) {
+			count = count + yafjxzDAO.doUpdateByVO(vo);
+		}
+		return count;
 	}
 }
