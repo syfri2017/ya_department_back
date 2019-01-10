@@ -1,13 +1,11 @@
 package com.syfri.userservice.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import com.syfri.userservice.model.*;
+import com.syfri.userservice.utils.CurrentUserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -99,7 +97,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集修改代码集",notes="修改")
 	@ApiImplicitParam(name="vo",value="代码集对象")
-	@RequiresPermissions("system/codelist:update")
+	@RequiresPermissions("system/codelist:edit")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistVO codelistVO){
 		ResultVO resultVO = ResultVO.build();
@@ -118,17 +116,11 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	@ApiOperation(value="根据主键删除代码集代码集",notes="删除")
 	@ApiImplicitParam(name="id",value="代码集主键")
 	@RequiresPermissions("system/codelist:delete")
-	@PostMapping("/deleteByIds")
-	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
-		JSONObject jsonObject = JSON.parseObject(id);
-		JSONArray ids = jsonObject.getJSONArray("ids");
+	@PostMapping("/deleteByList")
+	public @ResponseBody ResultVO deleteByList(@RequestBody List<CodelistVO> list){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			for(int i=0;i<ids.size();i++){
-				String codelistid = (String)ids.get(i);
-				codelistService.doDeleteCodelist(codelistid);
-			}
-			resultVO.setMsg("删除成功");
+			resultVO.setResult(codelistService.doDeleteCodelist(list));;
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -234,7 +226,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	 */
 	@ApiOperation(value="根据代码集修改代码值",notes="修改")
 	@ApiImplicitParam(name="vo",value="代码值对象")
-	@RequiresPermissions("system/codelist:update")
+	@RequiresPermissions("system/codelist:edit")
 	@PostMapping("/detail/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody CodelistDetailVO codelistDetailVO){
 		ResultVO resultVO = ResultVO.build();
@@ -253,17 +245,11 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	@ApiOperation(value="根据主键删除代码集代码值",notes="删除")
 	@ApiImplicitParam(name="id",value="代码值主键")
 	@RequiresPermissions("system/codelist:delete")
-	@PostMapping("/detail/deleteByIds")
-	public @ResponseBody ResultVO deleteDetailByIds(@RequestBody String id){
-		JSONObject jsonObject = JSON.parseObject(id);
-		JSONArray ids = jsonObject.getJSONArray("ids");
+	@PostMapping("/detail/deleteByList")
+	public @ResponseBody ResultVO deleteDetailByList(@RequestBody List<CodelistDetailVO> list){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			for(int i=0;i<ids.size();i++){
-				String pkid = (String)ids.get(i);
-				codelistService.doDeleteCodelistDetail(pkid);
-			}
-			resultVO.setMsg("删除成功");
+			resultVO.setResult(codelistService.doDeleteCodelistDetail(list));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -283,11 +269,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 			CodelistDetailVO codelistDetailVO = new CodelistDetailVO();
 			codelistDetailVO.setCodeValue(codevalue);
 			codelistDetailVO.setCodeid(codeid);
-				if(codelistService.doFindCodelistDetail(codelistDetailVO).size() == 0){
-				resultVO.setResult(0);
-			}else{
-				resultVO.setResult(1);
-			}
+			resultVO.setResult(codelistService.doFindByCodelistDetailNum(codelistDetailVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -411,6 +393,21 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		return resultVO;
 	}
 
+	@ApiOperation(value="查询行政区划",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@GetMapping("/getXzqhTreeByUser")
+	public @ResponseBody ResultVO getXzqhTreeByUser(){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			OrganizationVO organizationVO = CurrentUserUtil.getCurrentUser().getOrganizationVO();
+			resultVO.setResult(codelistService.getXzqhTreeByUser(organizationVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
 	/**
 	 * @Description: 查询燃烧物质树状资源，数据结构为（1，2）
 	 * @Param: [codetype]
@@ -440,6 +437,20 @@ public class CodelistController  extends BaseController<CodelistVO>{
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(codelistService.doFindYjlxCodelisttree(codetype));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	@ApiOperation(value="查询泡沫液类型树状资源",notes="查询")
+	@ApiImplicitParam(name="codetype",value="代码类型")
+	@RequestMapping("/getPmylxTree/{codetype}")
+	public @ResponseBody ResultVO getPmylxTree(@PathVariable String codetype){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(codelistService.doFindPmylxlisttree(codetype));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
