@@ -72,9 +72,6 @@ public class CompZddwShareController {
     private ImportantpartsService importantpartsService;
 
     @Autowired
-    private YafjxzService yafjxzService;
-
-    @Autowired
     private KeypointsService keypointsService;
     @Autowired
     private YafjxzProperties yafjxzProperties;
