@@ -98,7 +98,7 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
     @Override
     public DigitalplanlistVO doInsertDigitalplan(DigitalplanlistVO digitalplanlistVO) {
         //预案插入
-        String yabm = ((DigitalplanlistService) AopContext.currentProxy()).createPlanCode(digitalplanlistVO.getJgbm(),"01");//灾害类型暂定为火灾01
+        String yabm = ((DigitalplanlistService) AopContext.currentProxy()).createPlanCode(digitalplanlistVO.getJgbm(), "01");//灾害类型暂定为火灾01
         digitalplanlistVO.setYabm(yabm);
         digitalplanlistDAO.doInsertByVO(digitalplanlistVO);
         //灾情插入
@@ -223,23 +223,25 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
             deleteKpVo.setXgrmc(digitalplanlistVO.getZzrmc());
             deleteKpVo.setDeleteFlag("Y");
 
-            for (int i = 0; i < disasterList.size(); i++) {
-                Map ds = (Map) disasterList.get(i);
-                if (ds.get("zqid") != null && ds.get("zqid").equals(dsVo.getZqid())) {
-                    isDeleteDs = false;
-                    if (dsVo.getForcedevList() != null) {
-                        for (ForcedevVO fdVo : dsVo.getForcedevList()) {
-                            Boolean isDeleteFd = true;
-                            List forceList = (List) ds.get("forcedevList");
-                            for (int k = 0; k < forceList.size(); k++) {
-                                Map fd = (Map) forceList.get(k);
-                                if (fd.get("uuid") != null && fd.get("uuid").equals(fdVo.getUuid())) {
-                                    isDeleteFd = false;
+            if (disasterList != null) {
+                for (int i = 0; i < disasterList.size(); i++) {
+                    Map ds = (Map) disasterList.get(i);
+                    if (ds.get("zqid") != null && ds.get("zqid").equals(dsVo.getZqid())) {
+                        isDeleteDs = false;
+                        if (dsVo.getForcedevList() != null) {
+                            for (ForcedevVO fdVo : dsVo.getForcedevList()) {
+                                Boolean isDeleteFd = true;
+                                List forceList = (List) ds.get("forcedevList");
+                                for (int k = 0; k < forceList.size(); k++) {
+                                    Map fd = (Map) forceList.get(k);
+                                    if (fd.get("uuid") != null && fd.get("uuid").equals(fdVo.getUuid())) {
+                                        isDeleteFd = false;
+                                    }
                                 }
-                            }
-                            if (isDeleteFd) {
-                                deleteFdVo.setUuid(fdVo.getUuid());
-                                forcedevDAO.doUpdateByVO(deleteFdVo);
+                                if (isDeleteFd) {
+                                    deleteFdVo.setUuid(fdVo.getUuid());
+                                    forcedevDAO.doUpdateByVO(deleteFdVo);
+                                }
                             }
                         }
                     }
@@ -254,98 +256,99 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
             }
         }
         //灾情修改和新增
-        for (int i = 0; i < disasterList.size(); i++) {
-            Map ds = (Map) disasterList.get(i);
-            DisastersetVO dsVO = new DisastersetVO();
-            dsVO.setYaid(digitalplanlistVO.getUuid());//预案id
-            dsVO.setZdbwid(ds.get("zdbwid") != null ? ds.get("zdbwid").toString() : "");
-            dsVO.setJzid(ds.get("jzid") != null ? ds.get("jzid").toString() : "");
-            dsVO.setZqbw(ds.get("zqbw") != null ? ds.get("zqbw").toString() : "");
-            dsVO.setQhyy(ds.get("qhyy") != null ? ds.get("qhyy").toString() : "");
-            dsVO.setGyjzhzwxx(ds.get("gyjzhzwxx") != null ? ds.get("gyjzhzwxx").toString() : "");
-            dsVO.setZhcs(ds.get("zhcs") != null ? ds.get("zhcs").toString() : "");
-            dsVO.setQhbwgd(ds.get("qhbwgd") != null ? ds.get("qhbwgd").toString() : "");
-            dsVO.setRsmj(ds.get("rsmj") != null ? ds.get("rsmj").toString() : "");
-            dsVO.setZqms(ds.get("zqms") != null ? ds.get("zqms").toString() : "");
-            dsVO.setZqsdyj(ds.get("zqsdyj") != null ? ds.get("zqsdyj").toString() : "");
-            //灾情等级
-            if (ds.get("zqdj") != "" && ds.get("zqdj") != null) {
-                List zqdj = (List) ds.get("zqdj");
-                if (zqdj.size() >= 1) {
-                    dsVO.setZqdj(zqdj.get(zqdj.size() - 1).toString());
+        if (disasterList != null) {
+            for (int i = 0; i < disasterList.size(); i++) {
+                Map ds = (Map) disasterList.get(i);
+                DisastersetVO dsVO = new DisastersetVO();
+                dsVO.setYaid(digitalplanlistVO.getUuid());//预案id
+                dsVO.setZdbwid(ds.get("zdbwid") != null ? ds.get("zdbwid").toString() : "");
+                dsVO.setJzid(ds.get("jzid") != null ? ds.get("jzid").toString() : "");
+                dsVO.setZqbw(ds.get("zqbw") != null ? ds.get("zqbw").toString() : "");
+                dsVO.setQhyy(ds.get("qhyy") != null ? ds.get("qhyy").toString() : "");
+                dsVO.setGyjzhzwxx(ds.get("gyjzhzwxx") != null ? ds.get("gyjzhzwxx").toString() : "");
+                dsVO.setZhcs(ds.get("zhcs") != null ? ds.get("zhcs").toString() : "");
+                dsVO.setQhbwgd(ds.get("qhbwgd") != null ? ds.get("qhbwgd").toString() : "");
+                dsVO.setRsmj(ds.get("rsmj") != null ? ds.get("rsmj").toString() : "");
+                dsVO.setZqms(ds.get("zqms") != null ? ds.get("zqms").toString() : "");
+                dsVO.setZqsdyj(ds.get("zqsdyj") != null ? ds.get("zqsdyj").toString() : "");
+                //灾情等级
+                if (ds.get("zqdj") != "" && ds.get("zqdj") != null) {
+                    List zqdj = (List) ds.get("zqdj");
+                    if (zqdj.size() >= 1) {
+                        dsVO.setZqdj(zqdj.get(zqdj.size() - 1).toString());
+                    }
                 }
-            }
-            //燃烧物质
-            if (ds.get("rswz") != "" && ds.get("rswz") != null) {
-                List rswz = (List) ds.get("rswz");
-                if (rswz.size() >= 1) {
-                    dsVO.setRswz(rswz.get(rswz.size() - 1).toString());
+                //燃烧物质
+                if (ds.get("rswz") != "" && ds.get("rswz") != null) {
+                    List rswz = (List) ds.get("rswz");
+                    if (rswz.size() >= 1) {
+                        dsVO.setRswz(rswz.get(rswz.size() - 1).toString());
+                    }
                 }
-            }
-            if (ds.get("zqid") != null && ds.get("zqid") != "") { //灾情修改
-                dsVO.setZqid(ds.get("zqid").toString());
-                dsVO.setXgrid(digitalplanlistVO.getZzrid());
-                dsVO.setXgrmc(digitalplanlistVO.getZzrmc());
-                dsVO.setXgsj("1");
-                dsVO.setDeleteFlag("N");
-                disastersetDAO.doUpdateByVO(dsVO);
-            } else { //灾情新增
-                dsVO.setJdh(digitalplanlistVO.getJdh());
-                dsVO.setDatasource(digitalplanlistVO.getDatasource());
-                dsVO.setCjrid(digitalplanlistVO.getZzrid());
-                dsVO.setCjrmc(digitalplanlistVO.getZzrmc());
-                dsVO.setDeleteFlag("N");
-                disastersetDAO.doInsertByVO(dsVO);
-            }
-            //力量部署
-            List forceList = (List) ds.get("forcedevList");
-            for (int k = 0; k < forceList.size(); k++) {
-                Map fd = (Map) forceList.get(k);
-                ForcedevVO fdVO = new ForcedevVO();
-                fdVO.setZqid(dsVO.getZqid());
-                fdVO.setDjfalx(fd.get("djfalx") != null ? fd.get("djfalx").toString() : "");
-                fdVO.setDzid(fd.get("dzid") != null ? fd.get("dzid").toString() : "");
-                fdVO.setTkwz(fd.get("tkwz") != null ? fd.get("tkwz").toString() : "");
-                fdVO.setClzbts(fd.get("clzbts") != null ? fd.get("clzbts").toString() : "");
-                if (fd.get("uuid") != null && fd.get("uuid") != "") { //力量部署修改
-                    fdVO.setUuid(fd.get("uuid").toString());
-                    fdVO.setXgrid(digitalplanlistVO.getZzrid());
-                    fdVO.setXgrmc(digitalplanlistVO.getZzrmc());
-                    fdVO.setDeleteFlag("N");
-                    forcedevDAO.doUpdateByVO(fdVO);
-                } else { //力量部署新增
-                    fdVO.setJdh(digitalplanlistVO.getJdh());
-                    fdVO.setDatasource(digitalplanlistVO.getDatasource());
-                    fdVO.setCjrid(digitalplanlistVO.getZzrid());
-                    fdVO.setCjrmc(digitalplanlistVO.getZzrmc());
-                    fdVO.setDeleteFlag("N");
-                    forcedevDAO.doInsertByVO(fdVO);
+                if (ds.get("zqid") != null && ds.get("zqid") != "") { //灾情修改
+                    dsVO.setZqid(ds.get("zqid").toString());
+                    dsVO.setXgrid(digitalplanlistVO.getZzrid());
+                    dsVO.setXgrmc(digitalplanlistVO.getZzrmc());
+                    dsVO.setXgsj("1");
+                    dsVO.setDeleteFlag("N");
+                    disastersetDAO.doUpdateByVO(dsVO);
+                } else { //灾情新增
+                    dsVO.setJdh(digitalplanlistVO.getJdh());
+                    dsVO.setDatasource(digitalplanlistVO.getDatasource());
+                    dsVO.setCjrid(digitalplanlistVO.getZzrid());
+                    dsVO.setCjrmc(digitalplanlistVO.getZzrmc());
+                    dsVO.setDeleteFlag("N");
+                    disastersetDAO.doInsertByVO(dsVO);
                 }
-            }
-            //要点提示
-            Map kp = (Map) ds.get("keypointsMap");
-            if ((kp.get("zsyd") != "" && kp.get("zsyd") != null) || (kp.get("tbjs") != "" && kp.get("tbjs") != null)) {
-                KeypointsVO kpVO = new KeypointsVO();
-                kpVO.setZqid(dsVO.getZqid());
-                kpVO.setZsyd(kp.get("zsyd") != null ? kp.get("zsyd").toString() : "");
-                kpVO.setTbjs(kp.get("tbjs") != null ? kp.get("tbjs").toString() : "");
-                if (kp.get("uuid") != null && kp.get("uuid") != "") { //要点提示修改
-                    kpVO.setUuid(kp.get("uuid").toString());
-                    kpVO.setXgrid(digitalplanlistVO.getZzrid());
-                    kpVO.setXgrmc(digitalplanlistVO.getZzrmc());
-                    kpVO.setDeleteFlag("N");
-                    keypointsDAO.doUpdateByVO(kpVO);
-                } else { //要点提示新增
-                    kpVO.setJdh(digitalplanlistVO.getJdh());
-                    kpVO.setDatasource(digitalplanlistVO.getDatasource());
-                    kpVO.setCjrid(digitalplanlistVO.getZzrid());
-                    kpVO.setCjrmc(digitalplanlistVO.getZzrmc());
-                    kpVO.setDeleteFlag("N");
-                    keypointsDAO.doInsertByVO(kpVO);
+                //力量部署
+                List forceList = (List) ds.get("forcedevList");
+                for (int k = 0; k < forceList.size(); k++) {
+                    Map fd = (Map) forceList.get(k);
+                    ForcedevVO fdVO = new ForcedevVO();
+                    fdVO.setZqid(dsVO.getZqid());
+                    fdVO.setDjfalx(fd.get("djfalx") != null ? fd.get("djfalx").toString() : "");
+                    fdVO.setDzid(fd.get("dzid") != null ? fd.get("dzid").toString() : "");
+                    fdVO.setTkwz(fd.get("tkwz") != null ? fd.get("tkwz").toString() : "");
+                    fdVO.setClzbts(fd.get("clzbts") != null ? fd.get("clzbts").toString() : "");
+                    if (fd.get("uuid") != null && fd.get("uuid") != "") { //力量部署修改
+                        fdVO.setUuid(fd.get("uuid").toString());
+                        fdVO.setXgrid(digitalplanlistVO.getZzrid());
+                        fdVO.setXgrmc(digitalplanlistVO.getZzrmc());
+                        fdVO.setDeleteFlag("N");
+                        forcedevDAO.doUpdateByVO(fdVO);
+                    } else { //力量部署新增
+                        fdVO.setJdh(digitalplanlistVO.getJdh());
+                        fdVO.setDatasource(digitalplanlistVO.getDatasource());
+                        fdVO.setCjrid(digitalplanlistVO.getZzrid());
+                        fdVO.setCjrmc(digitalplanlistVO.getZzrmc());
+                        fdVO.setDeleteFlag("N");
+                        forcedevDAO.doInsertByVO(fdVO);
+                    }
+                }
+                //要点提示
+                Map kp = (Map) ds.get("keypointsMap");
+                if ((kp.get("zsyd") != "" && kp.get("zsyd") != null) || (kp.get("tbjs") != "" && kp.get("tbjs") != null)) {
+                    KeypointsVO kpVO = new KeypointsVO();
+                    kpVO.setZqid(dsVO.getZqid());
+                    kpVO.setZsyd(kp.get("zsyd") != null ? kp.get("zsyd").toString() : "");
+                    kpVO.setTbjs(kp.get("tbjs") != null ? kp.get("tbjs").toString() : "");
+                    if (kp.get("uuid") != null && kp.get("uuid") != "") { //要点提示修改
+                        kpVO.setUuid(kp.get("uuid").toString());
+                        kpVO.setXgrid(digitalplanlistVO.getZzrid());
+                        kpVO.setXgrmc(digitalplanlistVO.getZzrmc());
+                        kpVO.setDeleteFlag("N");
+                        keypointsDAO.doUpdateByVO(kpVO);
+                    } else { //要点提示新增
+                        kpVO.setJdh(digitalplanlistVO.getJdh());
+                        kpVO.setDatasource(digitalplanlistVO.getDatasource());
+                        kpVO.setCjrid(digitalplanlistVO.getZzrid());
+                        kpVO.setCjrmc(digitalplanlistVO.getZzrmc());
+                        kpVO.setDeleteFlag("N");
+                        keypointsDAO.doInsertByVO(kpVO);
+                    }
                 }
             }
         }
-
         return digitalplanlistVO;
     }
 
