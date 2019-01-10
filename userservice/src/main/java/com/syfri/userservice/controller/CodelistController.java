@@ -120,7 +120,7 @@ public class CodelistController  extends BaseController<CodelistVO>{
 	public @ResponseBody ResultVO deleteByList(@RequestBody List<CodelistVO> list){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			resultVO.setResult(codelistService.doDeleteCodelist(list));;
+			resultVO.setResult(codelistService.doDeleteCodelist(list));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
