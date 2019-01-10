@@ -7,6 +7,8 @@ import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
 import com.syfri.digitalplan.model.firefacilities.*;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
+import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
+import com.syfri.digitalplan.service.yafjxz.YafjxzService;
 import com.syfri.digitalplan.utils.Pic;
 import com.syfri.digitalplan.utils.VelocityUtil;
 import io.swagger.annotations.Api;
@@ -65,6 +67,9 @@ public class CompZddwShareController {
 
     @Autowired
     private ImportantpartsService importantpartsService;
+
+    @Autowired
+    private YafjxzService yafjxzService;
 
     @Autowired
     private KeypointsService keypointsService;
@@ -219,14 +224,14 @@ public class CompZddwShareController {
     @GetMapping("/downWord/{uuid}/{titles}")
     public String downWord(HttpServletRequest request, HttpServletResponse response, @PathVariable("uuid") String uuid
             , @PathVariable("titles") String titles) {
-        String basePath = yafjxzProperties.getSavePath() + "pic/%s.png";
+        String basePath = yafjxzProperties.getSavePath();
         try {
             VelocityContext vc = new VelocityContext();
-
-            String zddwid = digitalplanlistService.doFindById(uuid).getDxid();
+            DigitalplanlistVO dv=digitalplanlistService.doFindById(uuid);
+            String zddwid = dv.getDxid();
             ImportantunitsVO vo = importantunitsService.doFindById(zddwid);
             // 预案基础信息
-            vc.put("compPlanInfo", digitalplanlistService.doFindById(uuid));
+            vc.put("compPlanInfo", dv);
             // 重点单位基础信息
             vc.put("compZddwInfo", importantunitsService.doFindById(zddwid));
             // 灾情设定 力量部署 要点提示
@@ -242,36 +247,24 @@ public class CompZddwShareController {
             List<BuildingVO> bvs = importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo);
             vc.put("areaBuildingList", doJxsl(bvs));
             vc.put("titleNum", doTitleNum(titles));
-
-            if (titles.contains("tp")) {
-                titles=titles.replace("tp","");
-//                //word中图片
-//                vc.put("sjtp", Pic.getImageStr(String.format(basePath, "sjtp")));
-//                vc.put("zpmt", Pic.getImageStr(String.format(basePath, "zpmt")));
-//                vc.put("clbst1", Pic.getImageStr(String.format(basePath, "1clbst")));
-//                vc.put("scjglxt1", Pic.getImageStr(String.format(basePath, "1scjglxt")));
-//                vc.put("clbst2", Pic.getImageStr(String.format(basePath, "2clbst")));
-//                vc.put("scjglxt2", Pic.getImageStr(String.format(basePath, "2scjglxt")));
-//                vc.put("clbst3", Pic.getImageStr(String.format(basePath, "3clbst")));
-//                vc.put("scjglxt3", Pic.getImageStr(String.format(basePath, "3scjglxt")));
-//                vc.put("clbst4", Pic.getImageStr(String.format(basePath, "4clbst")));
-//                vc.put("scjglxt4", Pic.getImageStr(String.format(basePath, "4scjglxt")));
-//                vc.put("cllbst18", Pic.getImageStr(String.format(basePath, "18cllbst")));
-//                vc.put("cllbst24", Pic.getImageStr(String.format(basePath, "24cllbst")));
-//                vc.put("cllbst433", Pic.getImageStr(String.format(basePath, "433cllbst")));
-//                vc.put("B1czdbst", Pic.getImageStr(String.format(basePath, "B1czdbst")));
-//                vc.put("lmt", Pic.getImageStr(String.format(basePath, "lmt")));
-//                vc.put("lmt18", Pic.getImageStr(String.format(basePath, "lmt18")));
-//                vc.put("lmt90", Pic.getImageStr(String.format(basePath, "lmt90")));
-//                vc.put("nbpmt4", Pic.getImageStr(String.format(basePath, "nbpmt4")));
-//                vc.put("nbpmt18", Pic.getImageStr(String.format(basePath, "nbpmt18")));
-//                vc.put("nbpmt33", Pic.getImageStr(String.format(basePath, "nbpmt33")));
-//                vc.put("nbpmtB1", Pic.getImageStr(String.format(basePath, "nbpmtB1")));
-            }
-
             vc.put("titles", titles);
+            if (titles.contains("tp")) {
+                // 附图
+                YafjxzVO yafjxzVO = new YafjxzVO();
+                yafjxzVO.setYaid(uuid);
+                yafjxzVO.setKzm("pic");
+                //获取图片列表
+                List<YafjxzVO> yafjxzVOs=yafjxzService.doFindByPlanId(yafjxzVO);
+                for(YafjxzVO yv:yafjxzVOs){
+                    //图片二进制编码存放在Reserve1，图片标题存放在Reserve2
+                    yv.setReserve1(Pic.getImageStr(new StringBuffer(basePath).append(yv.getXzlj()).toString()));
+                    String wjm=yv.getWjm().substring(0,yv.getWjm().indexOf("."));
+                    yv.setReserve2(wjm);
+                }
+                vc.put("pictureList", yafjxzVOs);
+            }
             VelocityUtil.createDoc("yuanxiazai.vm", vc, request, response,
-                    vo.getDwmc()+".doc", -1);
+                    dv.getYamc()+".doc", -1);
         } catch (Exception e) {
             e.printStackTrace();
         }
