@@ -213,7 +213,7 @@
 			SELECT SYS_GUID() AS uuid FROM DUAL
 		</selectKey>
 		INSERT INTO SYS_ORGANIZATION(uuid,jgid,sjjgid,jgmc,jgjc,jgxzdm,jgdz,jgms,xzqh,yzbm,lxdh,czhm,lxr,ssym,zqdwbz,bd_lon,bd_lat,gis_x,gis_y,gis_h,glid,xqglid,jgtree,jgqz,xqmj,xqfw,jgcxzt,jgcxsj,cjrid,cjrmc,cjsj,xgrid,xgrmc,xgsj,delete_flag,datasource,bz,jdh,sjc,reserve1,reserve2,reserve3,reserve4)
-		VALUES(#{uuid,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{sjjgid,jdbcType=VARCHAR},#{jgmc,jdbcType=VARCHAR},#{jgjc,jdbcType=VARCHAR},#{jgxzdm,jdbcType=VARCHAR},#{jgdz,jdbcType=VARCHAR},#{jgms,jdbcType=VARCHAR},#{xzqh,jdbcType=VARCHAR},#{yzbm,jdbcType=VARCHAR},#{lxdh,jdbcType=VARCHAR},#{czhm,jdbcType=VARCHAR},#{lxr,jdbcType=VARCHAR},#{ssym,jdbcType=VARCHAR},#{zqdwbz,jdbcType=VARCHAR},#{bdLon,jdbcType=DOUBLE},#{bdLat,jdbcType=DOUBLE},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE},#{gisH,jdbcType=DOUBLE},#{glid,jdbcType=VARCHAR},#{xqglid,jdbcType=VARCHAR},#{jgtree,jdbcType=VARCHAR},#{jgqz,jdbcType=DOUBLE},#{xqmj,jdbcType=DOUBLE},#{xqfw,jdbcType=VARCHAR},#{jgcxzt,jdbcType=VARCHAR},#{jgcxsj,jdbcType=DATE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},#{cjsj,jdbcType=DATE},#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
+		VALUES(#{uuid,jdbcType=VARCHAR},#{jgid,jdbcType=VARCHAR},#{sjjgid,jdbcType=VARCHAR},#{jgmc,jdbcType=VARCHAR},#{jgjc,jdbcType=VARCHAR},#{jgxzdm,jdbcType=VARCHAR},#{jgdz,jdbcType=VARCHAR},#{jgms,jdbcType=VARCHAR},#{xzqh,jdbcType=VARCHAR},#{yzbm,jdbcType=VARCHAR},#{lxdh,jdbcType=VARCHAR},#{czhm,jdbcType=VARCHAR},#{lxr,jdbcType=VARCHAR},#{ssym,jdbcType=VARCHAR},#{zqdwbz,jdbcType=VARCHAR},#{bdLon,jdbcType=DOUBLE},#{bdLat,jdbcType=DOUBLE},#{gisX,jdbcType=DOUBLE},#{gisY,jdbcType=DOUBLE},#{gisH,jdbcType=DOUBLE},#{glid,jdbcType=VARCHAR},#{xqglid,jdbcType=VARCHAR},#{jgtree,jdbcType=VARCHAR},#{jgqz,jdbcType=DOUBLE},#{xqmj,jdbcType=DOUBLE},#{xqfw,jdbcType=VARCHAR},#{jgcxzt,jdbcType=VARCHAR},#{jgcxsj,jdbcType=DATE},#{cjrid,jdbcType=VARCHAR},#{cjrmc,jdbcType=VARCHAR},sysdate,#{xgrid,jdbcType=VARCHAR},#{xgrmc,jdbcType=VARCHAR},#{xgsj,jdbcType=DATE},'N',#{datasource,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR},#{jdh,jdbcType=VARCHAR},#{sjc,jdbcType=DATE},#{reserve1,jdbcType=VARCHAR},#{reserve2,jdbcType=VARCHAR},#{reserve3,jdbcType=VARCHAR},#{reserve4,jdbcType=DATE})
 	</insert>
 
 	<!--7.批量插入-->
@@ -238,7 +238,7 @@
 	<update  id="doUpdateByVO"  parameterType="OrganizationVO">
 		UPDATE   SYS_ORGANIZATION
 		<set>
-			<if test="uuid != null">uuid=#{uuid},</if>
+			<!--<if test="uuid != null">uuid=#{uuid},</if>-->
 			<if test="jgid != null">jgid=#{jgid},</if>
 			<if test="sjjgid != null">sjjgid=#{sjjgid},</if>
 			<if test="jgmc != null">jgmc=#{jgmc},</if>
@@ -252,7 +252,7 @@
 			<if test="czhm != null">czhm=#{czhm},</if>
 			<if test="lxr != null">lxr=#{lxr},</if>
 			<if test="ssym != null">ssym=#{ssym},</if>
-			-- 			<if test="zp != null">zp=#{zp},</if>
+			<!--<if test="zp != null">zp=#{zp},</if>-->
 			<if test="zqdwbz != null">zqdwbz=#{zqdwbz},</if>
 			<if test="bdLon != null">bd_lon=#{bdLon},</if>
 			<if test="bdLat != null">bd_lat=#{bdLat},</if>
@@ -267,13 +267,13 @@
 			<if test="xqfw != null">xqfw=#{xqfw},</if>
 			<if test="jgcxzt != null">jgcxzt=#{jgcxzt},</if>
 			<if test="jgcxsj != null">jgcxsj=TO_DATE(#{jgcxsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="cjrid != null">cjrid=#{cjrid},</if>
-			<if test="cjrmc != null">cjrmc=#{cjrmc},</if>
-			<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>
+			<!--<if test="cjrid != null">cjrid=#{cjrid},</if>-->
+			<!--<if test="cjrmc != null">cjrmc=#{cjrmc},</if>-->
+			<!--<if test="cjsj != null">cjsj=TO_DATE(#{cjsj},'yyyy-MM-dd HH24:mi:ss'),</if>-->
 			<if test="xgrid != null">xgrid=#{xgrid},</if>
 			<if test="xgrmc != null">xgrmc=#{xgrmc},</if>
-			<if test="xgsj != null">xgsj=TO_DATE(#{xgsj},'yyyy-MM-dd HH24:mi:ss'),</if>
-			<if test="deleteFlag != null">delete_flag='N',</if>
+			xgsj=sysdate,
+			<if test="deleteFlag != null">delete_flag=#{deleteFlag},</if>
 			<if test="datasource != null">datasource=#{datasource},</if>
 			<if test="bz != null">bz=#{bz},</if>
 			<if test="jdh != null">jdh=#{jdh},</if>
@@ -412,9 +412,9 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM SYS_ORGANIZATION t
-		WHERE t.DELETE_FLAG = 'N'
-		AND t.JGID ='01000000'
+		WHERE t.JGID ='01000000'
 		OR (SUBSTR(t.JGID,0,1) != '0' AND (t.JGJC LIKE '%总队' OR t.JGJC LIKE '%支队' OR t.JGJC LIKE '%大队' OR t.JGJC LIKE '%中队'))
+		AND t.DELETE_FLAG = 'N'
 		ORDER BY JGID
 	</select>
 
@@ -433,6 +433,11 @@
 		FROM SYS_ORGANIZATION t
 		WHERE t.DELETE_FLAG = 'N'
 		AND sjjgid = 'eb09df352cda4902b24c54dd2b2ce656' AND SUBSTR(jgid,3,6) = '000000' AND jgid BETWEEN '11000000' AND '65000000'
+	</select>
+
+	<!-- 17.根据上级机构ID查询机构列表 by li.xue -->
+	<select id="doFindJgBySjjgid" parameterType="String" resultType="OrganizationTree">
+		SELECT uuid,jgjc,jgid FROM SYS_ORGANIZATION WHERE delete_flag = 'N' AND sjjgid = #{value} order by jgid
 	</select>
 
 </mapper>

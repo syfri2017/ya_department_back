@@ -10,7 +10,7 @@
 		 and t.userid = #{userid}
 		</if>
 		<if test="realname != null and realname != '' ">
-		 and t.realname LIKE concat(concat('%',#{realname}),'%')
+		 and t.realname LIKE concat(concat('%',#{realname}),'%') ESCAPE '\'
 		</if>
 		<if test="birth != null and birth != '' ">
 		 and t.birth = #{birth}
@@ -210,7 +210,7 @@
 	<select id="doFindByVO" parameterType="UserVO"  resultType="UserVO">  
 		SELECT 
 		<include refid="SQL_CONTENT"/>
-		FROM SYS_USER t 
+		FROM SYS_USER t
 		WHERE t.DELETE_FLAG = 'N' 
 		<include refid="SQL_CONDITION"/>
 	</select>
@@ -231,14 +231,16 @@
 		<result property="phone" column="phone"/>
 		<result property="mobile" column="mobile"/>
 		<result property="email" column="email"/>
-		<result property="createName" column="create_name"/>
-		<result property="createTime" column="create_time"/>
-		<result property="alterName" column="alter_name"/>
-		<result property="alterTime" column="alter_time"/>
-		<result property="organizationId" column="organization_id"/>
+		<result property="createName" column="createName"/>
+		<result property="createTime" column="createTime"/>
+		<result property="alterName" column="alterName"/>
+		<result property="alterTime" column="alterTime"/>
+		<result property="organizationId" column="organizationId"/>
+		<result property="organizationName" column="organizationName"/>
 		<collection property="roles" ofType="com.syfri.userservice.model.RoleVO">
 			<id property="roleid" column="roleid"></id>
 			<result property="rolename" column="rolename"/>
+			<result property="roleinfo" column="roleinfo"/>
 		</collection>
 	</resultMap>
 
@@ -249,15 +251,47 @@
 		,a.password
 		,r.roleid
 		,r.rolename
+		,r.roleinfo
+		,jgjc organizationName
 		FROM SYS_USER t
 		INNER JOIN SYS_ACCOUNT a ON t.userid = a.userid
 		LEFT JOIN (select userid,roleid from SYS_ACCOUNT_ROLE where delete_flag = 'N') m ON t.userid = m.userid
-		LEFT JOIN (select roleid,rolename from SYS_ROLE where delete_flag = 'N') r ON r.roleid = m.roleid
+		LEFT JOIN (select roleid,rolename,roleinfo from SYS_ROLE where delete_flag = 'N') r ON r.roleid = m.roleid
+		LEFT JOIN sys_organization s ON t.organization_id = s.uuid
 		WHERE t.DELETE_FLAG = 'N' AND a.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 		<if test="username != null and username != '' ">
-			and a.username = #{username}
+			and a.username LIKE concat(concat('%',#{username}),'%') ESCAPE '\'
 		</if>
-		ORDER BY t.create_time DESC
+		ORDER BY NVL(t.alter_time,t.create_time) DESC
 	</select>
+
+	<!--获取未绑定组织机构的用户信息-->
+	<select id="findUsersNoOrg" parameterType="UserVO"  resultType="UserVO">
+		SELECT
+		<include refid="SQL_CONTENT"/>
+		,t1.username
+		FROM SYS_USER t
+		LEFT JOIN (SELECT userid,username FROM SYS_ACCOUNT WHERE delete_flag = 'N') t1
+		ON t.userid = t1.userid
+		WHERE t.DELETE_FLAG = 'N' and t.organization_id is null
+		<if test="realname != null and realname != '' ">
+			and t.realname LIKE concat(concat('%',#{realname}),'%') ESCAPE '\'
+		</if>
+		<if test="username != null and username != '' ">
+			and t1.username LIKE concat(concat('%',#{username}),'%') ESCAPE '\'
+		</if>
+	</select>
+
+	<!--根据组织机构id解绑用户-->
+	<update  id="doUpdateByJgid"  parameterType="UserVO">
+		UPDATE   SYS_USER
+		<set>
+			<if test="alterId != null">alter_id=#{alterId},</if>
+			<if test="alterName != null">alter_name=#{alterName},</if>
+			alter_time=TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi:ss'),
+			organization_id=''
+		</set>
+		WHERE  organization_id = #{organizationId}
+	</update>
 </mapper>
