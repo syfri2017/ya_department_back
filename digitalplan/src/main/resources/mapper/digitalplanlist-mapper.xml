@@ -10,7 +10,7 @@
 			and t.yabm = #{yabh}
 		</if>
 		<if test="yalx != null and yalx != '' ">
-			and t.yalx LIKE concat(#{yalx},'%')
+			and t.yalx LIKE concat(RTRIM(#{yalx},0),'%')
 		</if>
 		<if test="yamc != null and yamc != '' ">
 			and t.yamc LIKE concat(concat('%',#{yamc}),'%') ESCAPE '\'
