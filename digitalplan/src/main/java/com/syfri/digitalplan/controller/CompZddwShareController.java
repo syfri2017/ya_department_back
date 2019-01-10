@@ -66,6 +66,9 @@ public class CompZddwShareController {
     private ForcedevService forcedevService;
 
     @Autowired
+    private YafjxzService yafjxzService;
+
+    @Autowired
     private ImportantpartsService importantpartsService;
 
     @Autowired
@@ -128,7 +131,14 @@ public class CompZddwShareController {
             // 建筑分区和消防设施
             model.addAttribute("areaBuildingList", importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo));
         }
-
+// 附图
+        YafjxzVO yafjxzVO = new YafjxzVO();
+        yafjxzVO.setKzm("pic");
+        yafjxzVO.setYaid(uuid);
+        model.addAttribute("pictureList", yafjxzService.doFindByPlanId(yafjxzVO));
+        //lxy添加vue服务器路径
+        model.addAttribute("vueServerUrl", yafjxzProperties.getVueServerUrl());
+        model.addAttribute("serverUrl", yafjxzProperties.getFileServerUrl());
 //        // 功能分区-装置
 //        model.addAttribute("areaDeviceList", zddwWrapperMap.get("areaDeviceList"));
 //        // 消防设施
