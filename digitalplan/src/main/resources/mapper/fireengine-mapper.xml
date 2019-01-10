@@ -28,7 +28,7 @@
 			and t.cphm LIKE concat(concat('%',#{cphm}),'%')
 		</if>
 		<if test="clzt != null and clzt != '' ">
-			and substr(t.clzt,2,1) = substr(#{clzt},1,1)
+			and t.clzt = #{clzt}
 		</if>
 		<if test="sccj != null and sccj != '' ">
 			and t.sccj = #{sccj}
@@ -180,7 +180,8 @@
 		Left Join SYS_CODELIST_DETAIL c6
 		On c5.CODEID = c6.CODEID
 		And c6.DELETE_FLAG = 'N'
-		and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		--and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		and t.clzt = c6.code_value
 		<!-- 车载灭火剂类别 -->
 		Left Join SYS_CODELIST c7
 		on c7.CODETYPE = 'YJLX'
@@ -234,7 +235,8 @@
 		Left Join SYS_CODELIST_DETAIL c6
 		On c5.CODEID = c6.CODEID
 		And c6.DELETE_FLAG = 'N'
-		and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		--and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		and t.clzt = c6.code_value
 		<!-- 车载灭火剂类别 -->
 		Left Join SYS_CODELIST c7
 		on c7.CODETYPE = 'YJLX'
@@ -387,7 +389,8 @@
 		Left Join SYS_CODELIST_DETAIL c6
 		On c5.CODEID = c6.CODEID
 		And c6.DELETE_FLAG = 'N'
-		and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		--and substr(t.CLZT,2,1) = substr(c6.CODE_VALUE,1,1)
+		and t.clzt = c6.code_value
 		<!-- 车载灭火剂类别 -->
 		Left Join SYS_CODELIST c7
 		on c7.CODETYPE = 'YJLX'
