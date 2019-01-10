@@ -10,7 +10,7 @@
 		 and f.yjbm = #{yjbm}
 		</if>
 		<if test="yjmc != null and yjmc != '' ">
-		 and f.yjmc LIKE concat(concat('%',#{yjmc}),'%')
+		 and f.yjmc LIKE concat(concat('%',#{yjmc}),'%') ESCAPE '\'
 		</if>
 		<if test="ssdz != null and ssdz != '' ">
 			and f.ssdz IN (
