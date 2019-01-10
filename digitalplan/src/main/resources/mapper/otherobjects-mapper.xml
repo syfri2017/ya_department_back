@@ -126,7 +126,7 @@
 			,xfgxmc
 		FROM YAGL_DX_QTDX t
 		LEFT JOIN (select dzbm,dzjc xfgxmc FROM YAGL_XFDZ WHERE DELETE_FLAG = 'N') t1
-		ON t.xfgx = t1.dzbm
+		ON t.xfgx = t1.dzid
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
 	</select>
