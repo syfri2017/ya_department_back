@@ -608,6 +608,11 @@
 		LEFT JOIN SYS_CODELIST_DETAIL c6 ON (t.sygs = c6.code_value AND c6.codeid='6B2210F144AF2372E053B077770A360E' And c6.DELETE_FLAG = 'N')
 		WHERE t.DELETE_FLAG = 'N'
 		<include refid="SQL_CONDITION"/>
+		<!--add by yushch -->
+		<if test="dzbm != null and dzbm != '' ">
+			and dz.dzbm like concat(#{dzbm},'%')
+		</if>
+		<!--end-->
 		ORDER BY NVL(xgsj,cjsj),sybm DESC
 	</select>
 	<!--查询消火栓-->
