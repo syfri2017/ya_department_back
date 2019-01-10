@@ -29,6 +29,9 @@ public interface CodelistDAO extends BaseDAO<CodelistVO>{
 	/*--删除从表：根据codeid删除.--*/
 	int doDeleteCodelistDetailBatch(String pkid);
 
+	/*--查询从表数量 by li.xue 2018/11/26.--*/
+	int doFindByCodelistDetailNum(CodelistDetailVO codelistDetailVO);
+
 	/*--根据代码类型查询代码集.--*/
 	List<CodelistDetailVO> doFindCodelistByType(String codetype);
 
@@ -37,4 +40,6 @@ public interface CodelistDAO extends BaseDAO<CodelistVO>{
 
 	/*--查询行政区划，只保留31个省.--*/
 	List<CodelistDetailVO> doFindXzqhCodelist(String codetype);
+
+	List<CodelistDetailVO> doFindXzqhByDm(CodelistDetailVO codelistDetailVO);
 }

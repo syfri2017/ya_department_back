@@ -1,8 +1,5 @@
 package com.syfri.userservice.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import io.swagger.annotations.Api;
@@ -19,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.userservice.model.RoleVO;
 import com.syfri.userservice.service.RoleService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @Api(value = "角色管理",tags = "角色管理API",description = "角色管理")
 @Controller
@@ -92,7 +91,7 @@ public class RoleController  extends BaseController<RoleVO>{
 	 */
 	@ApiOperation(value="根据角色修改角色及其资源信息",notes="修改")
 	@ApiImplicitParam(name="vo",value="角色对象")
-	@RequiresPermissions("system/role:update")
+	@RequiresPermissions("system/role:edit")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody RoleVO roleVO){
 		ResultVO resultVO = ResultVO.build();
@@ -111,16 +110,11 @@ public class RoleController  extends BaseController<RoleVO>{
 	@ApiOperation(value="根据主键删除角色角色及其资源信息",notes="删除")
 	@ApiImplicitParam(name="id",value="角色主键")
 	@RequiresPermissions("system/role:delete")
-	@PostMapping("/deleteByIds")
-	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
-		JSONObject jsonObject = JSON.parseObject(id);
-		JSONArray ids = jsonObject.getJSONArray("ids");
+	@PostMapping("/deleteByList")
+	public @ResponseBody ResultVO deleteByList(@RequestBody List<RoleVO> list){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			for(int i=0;i<ids.size();i++){
-				String roleid = (String)ids.get(i);
-				roleService.doDeleteRole(roleid);
-			}
+			resultVO.setResult(roleService.doDeleteRoleResources(list));
 			resultVO.setMsg("删除成功");
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());

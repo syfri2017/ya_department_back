@@ -1,8 +1,7 @@
 package com.syfri.userservice.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.syfri.baseapi.model.ResultVO;
 import com.syfri.baseapi.utils.EConstants;
 import io.swagger.annotations.Api;
@@ -21,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import com.syfri.userservice.model.UserVO;
 import com.syfri.userservice.service.UserService;
 import com.syfri.baseapi.controller.BaseController;
+
+import java.util.List;
 
 @Api(value = "用户管理",tags = "用户管理API",description = "用户管理")
 @Controller
@@ -92,7 +93,7 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiImplicitParam(name="vo",value="用户对象")
 	@RequiresPermissions("system/user:add")
 	@PostMapping("/insertByVO")
-	public @ResponseBody ResultVO insertByVO(@RequestBody UserVO userVO){
+		public @ResponseBody ResultVO insertByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
 		try{
 			resultVO.setResult(userService.doInsertUserRoles(userVO));
@@ -108,7 +109,7 @@ public class UserController  extends BaseController<UserVO>{
 	 */
 	@ApiOperation(value="根据用户修改用户（包括账户和角色）",notes="修改")
 	@ApiImplicitParam(name="vo",value="用户对象")
-	@RequiresPermissions("system/user:update")
+	@RequiresPermissions("system/user:edit")
 	@PostMapping("/updateByVO")
 	public @ResponseBody ResultVO updateByVO(@RequestBody UserVO userVO){
 		ResultVO resultVO = ResultVO.build();
@@ -127,17 +128,11 @@ public class UserController  extends BaseController<UserVO>{
 	@ApiOperation(value="根据主键删除用户（包括账户和角色）",notes="删除")
 	@ApiImplicitParam(name="id",value="用户主键")
 	@RequiresPermissions("system/user:delete")
-	@PostMapping("/deleteByIds")
-	public @ResponseBody ResultVO deleteByIds(@RequestBody String id){
-		JSONObject jsonObject = JSON.parseObject(id);
-		JSONArray ids = jsonObject.getJSONArray("ids");
+	@PostMapping("/deleteByList")
+	public @ResponseBody ResultVO deleteByList(@RequestBody List<UserVO> list){
 		ResultVO resultVO = ResultVO.build();
 		try{
-			for(int i=0;i<ids.size();i++){
-				String pkid = (String)ids.get(i);
-				userService.doDeleteUserRoles(pkid);
-			}
-			resultVO.setMsg("删除成功");
+			resultVO.setResult(userService.doDeleteUserRoles(list));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);
@@ -157,6 +152,46 @@ public class UserController  extends BaseController<UserVO>{
 			UserVO userVO = new UserVO();
 			userVO.setOrganizationId(jgid);
 			resultVO.setResult(userService.doSearchListByVO(userVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 获取未绑定组织机构的用户信息
+	 */
+	@ApiOperation(value="获取未绑定组织机构的用户信息",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="用户对象")
+//	@RequiresPermissions("system/user:list")
+	@PostMapping("/findUsersNoOrg")
+	public @ResponseBody ResultVO findUsersNoOrg(@RequestBody UserVO userVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			PageHelper.startPage(userVO.getPageNum(),userVO.getPageSize());
+			List<UserVO> list = userService.findUsersNoOrg(userVO);
+			PageInfo<UserVO> pageInfo = new PageInfo<>(list);
+			resultVO.setResult(pageInfo);
+//			resultVO.setResult(userService.findUsersNoOrg(userVO));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
+
+	/**
+	 * 修改用户基本信息表，绑定组织机构
+	 */
+	@ApiOperation(value="修改用户基本信息表，绑定组织机构",notes="修改")
+	@ApiImplicitParam(name="vo",value="用户对象")
+//	@RequiresPermissions("system/user:edit")
+	@PostMapping("/updateJbxxByVO")
+	public @ResponseBody ResultVO updateJbxxByVO(@RequestBody UserVO userVO){
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(userService.doUpdateByVO(userVO));
 		}catch(Exception e){
 			logger.error("{}",e.getMessage());
 			resultVO.setCode(EConstants.CODE.FAILURE);

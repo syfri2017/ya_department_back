@@ -1,10 +1,7 @@
 package com.syfri.userservice.service;
 
 import com.syfri.baseapi.service.BaseService;
-import com.syfri.userservice.model.CodelistDetailVO;
-import com.syfri.userservice.model.CodelistParams;
-import com.syfri.userservice.model.CodelistTree;
-import com.syfri.userservice.model.CodelistVO;
+import com.syfri.userservice.model.*;
 
 import java.util.List;
 
@@ -23,7 +20,10 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 	CodelistVO doUpdateCodelist(CodelistVO codelistVO);
 
 	/*--删除：代码集.--*/
-	void doDeleteCodelist(String codeid);
+	int doDeleteCodelist(List<CodelistVO> list);
+
+	/*--查询从表数量 by li.xue 2018/11/26.--*/
+	int doFindByCodelistDetailNum(CodelistDetailVO codelistDetailVO);
 
 	/*--查询从表：根据代码集详情对象查询.--*/
 	List<CodelistDetailVO> doFindCodelistDetail(CodelistDetailVO codelistDetailVO);
@@ -35,7 +35,7 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 	CodelistDetailVO doUpdateCodelistDetail(CodelistDetailVO codelistDetailVO);
 
 	/*--删除从表：根据主键删除.--*/
-	void doDeleteCodelistDetail(String pkid);
+	int doDeleteCodelistDetail(List<CodelistDetailVO> list);
 
 	/*--根据代码类型查询代码集.--*/
 	List<CodelistDetailVO> doFindCodelistByType(String codetype);
@@ -60,4 +60,10 @@ public interface CodelistService  extends BaseService<CodelistVO>{
 
 	/*--查询药剂类型树状资源-- by liurui*/
 	List<CodelistTree> doFindYjlxCodelisttree(String codetype);
+
+	/*--查询行政区划树状结构 by li.xue.--*/
+	List<CodelistTree> getXzqhTreeByUser(OrganizationVO organizationVO);
+
+	/*--查询泡沫液类型树状结构 by liurui.--*/
+	List<CodelistTree> doFindPmylxlisttree(String codetype);
 }
