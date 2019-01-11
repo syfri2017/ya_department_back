@@ -5,12 +5,12 @@
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>重点单位预案详版</title>
-    <link rel="icon" href="http://localhost:80/static/images/logo-b.png">
-    <link rel="stylesheet" href="http://localhost:80/static/template/css/toolbar.css">
-    <link rel="stylesheet" href="http://localhost:80/static/template/css/catalog.css">
-    <link rel="stylesheet" href="http://localhost:80/static/template/css/dialog.css">
-    <link rel="stylesheet" href="http://localhost:80/static/template/css/viewer.min.css">
-    <link rel="stylesheet" href="http://localhost:80/static/template/css/project.css">
+    <link rel="icon" href="${vueServerUrl}static/images/logo-b.png">
+    <link rel="stylesheet" href="${vueServerUrl}static/template/css/toolbar.css">
+    <link rel="stylesheet" href="${vueServerUrl}static/template/css/catalog.css">
+    <link rel="stylesheet" href="${vueServerUrl}static/template/css/dialog.css">
+    <link rel="stylesheet" href="${vueServerUrl}static/template/css/viewer.min.css">
+    <link rel="stylesheet" href="${vueServerUrl}static/template/css/project.css">
 </head>
 <body>
 
@@ -1431,7 +1431,7 @@
                             <span class="header-title-inner"><#if pic.wjm??>${pic.wjm}</#if></span>
                         </h3>
                         <div class="sub-block-body">
-                            <img class="photo-tag" src="http://localhost:80/upload/${pic.yllj}" alt=""/>
+                            <img class="photo-tag" src="${serverUrl}${pic.yllj}" alt=""/>
                         </div>
                     </div>
                 </#if>
@@ -1534,11 +1534,11 @@
     <div id="sideCatalog"></div>
 </div>
 
-<script src="http://localhost:80/static/template/js/jquery.min.js"></script>
-<script src="http://localhost:80/static/template/js/toolbar.js"></script>
-<script src="http://localhost:80/static/template/js/catalog.js"></script>
-<script src="http://localhost:80/static/template/js/viewer.min.js"></script>
-<script src="http://localhost:80/static/template/js/screenfull.min.js"></script>
+<script src="${vueServerUrl}static/template/js/jquery.min.js"></script>
+<script src="${vueServerUrl}static/template/js/toolbar.js"></script>
+<script src="${vueServerUrl}static/template/js/catalog.js"></script>
+<script src="${vueServerUrl}static/template/js/viewer.min.js"></script>
+<script src="${vueServerUrl}static/template/js/screenfull.min.js"></script>
 <script type="text/javascript">
     var viewportSize = {
         width: $(window).width(),
