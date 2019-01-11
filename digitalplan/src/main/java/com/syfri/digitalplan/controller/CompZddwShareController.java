@@ -2,7 +2,6 @@ package com.syfri.digitalplan.controller;
 
 import com.syfri.digitalplan.model.yafjxz.YaxxzlVO;
 import com.syfri.digitalplan.service.yafjxz.YaxxzlService;
-import net.sf.json.JSONObject;
 import com.github.pagehelper.StringUtil;
 import com.syfri.digitalplan.config.properties.YafjxzProperties;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
@@ -23,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
