@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>重点单位预案简版</title>
+    <link rel="icon" href="http://localhost:80/static/images/logo-b.png">
     <link rel="stylesheet" href="http://localhost:80/static/template/css/toolbar.css">
     <link rel="stylesheet" href="http://localhost:80/static/template/css/catalog.css">
     <link rel="stylesheet" href="http://localhost:80/static/template/css/dialog.css">
