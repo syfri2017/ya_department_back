@@ -102,7 +102,27 @@
     <!--4.按条件查询记录-->
     <select id="doSearchListByVO" parameterType="EwbhVO" resultType="EwbhVO">
         SELECT
-        <include refid="SQL_CONTENT"/>,
+        t.uuid uuid,
+        t.zddwid zddwid,
+        t.xzlj xzlj,
+        t.wjm wjm,
+        t.kzm kzm,
+        t.cjrid cjrid,
+        t.cjrmc cjrmc,
+        TO_CHAR(t.cjsj,'yyyy-MM-dd HH24:mi:ss') cjsj,
+        t.xgrid xgrid,
+        t.xgrmc xgrmc,
+        TO_CHAR(t.xgsj,'yyyy-MM-dd HH24:mi:ss') xgsj,
+        t.delete_flag deleteFlag,
+        t.datasource datasource,
+        t.bz bz,
+        t.jdh jdh,
+        TO_CHAR(t.sjc,'yyyy-MM-dd HH24:mi:ss') sjc,
+        t.reserve1 reserve1,
+        t.reserve2 reserve2,
+        t.reserve3 reserve3,
+        TO_CHAR(t.reserve4,'yyyy-MM-dd HH24:mi:ss') reserve4,
+        t.bhnr bhnr,
         z.dwmc zddwmc
         FROM YAGL_EWBH_FJ t
         left join YAGL_DX_ZDDW z on z.DELETE_FLAG = 'N' and z.UUID = t.zddwid
