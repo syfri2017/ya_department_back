@@ -75,7 +75,7 @@
 
 	<!--3.查询记录数-->
 	<select id="doSearchCount" parameterType="YaxxzlVO" resultType="java.lang.Integer">
-		SELECT COUNT(0) AS NUM FROM YAGL_YAXXZL t WHERE 1=1 AND JLZT = '1'
+		SELECT COUNT(0) AS NUM FROM YAGL_YAXXZL t WHERE 1=1 AND JLZT = '0'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -83,7 +83,7 @@
 	<select id="doSearchListByVO" parameterType="YaxxzlVO"  resultType="YaxxzlVO"> 
 		SELECT 
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_YAXXZL t  WHERE t.JLZT = '1'
+		FROM YAGL_YAXXZL t  WHERE t.JLZT = '0'
 			<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -92,7 +92,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YAXXZL t 
-		WHERE t.JLZT = '1' AND  t.PKID = #{value}
+		WHERE t.JLZT = '0' AND  t.PKID = #{value}
 	</select>
 
 	<!--6.按照VO插入-->
@@ -177,7 +177,7 @@
 		SELECT 
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YAXXZL t 
-		WHERE t.JLZT = '1'
+		WHERE t.JLZT = '0'
 		<include refid="SQL_CONDITION"/>
 	</select>
 
@@ -187,7 +187,7 @@
 		SELECT
 		<include refid="SQL_CONTENT"/>
 		FROM YAGL_YAXXZL t
-		WHERE t.JLZT = '1' AND  t.YAID = #{value}
+		WHERE t.JLZT = '0' AND  t.YAID = #{value}
 	</select>
 
 </mapper>
