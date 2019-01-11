@@ -1457,9 +1457,6 @@
                                 <#if his.zlmc??>${his.zlmc}</#if><#if his.kzm??>${his.kzm}</#if>
                             </a>
                         </h3>
-                    <#--<div class="sub-block-body">-->
-                    <#--<img class="photo-tag" src="http://localhost:80/upload/${pic.yllj}" alt=""/>-->
-                    <#--</div>-->
                     </div>
                 </#if>
             </#list>
