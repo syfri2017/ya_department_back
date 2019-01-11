@@ -1,5 +1,8 @@
 package com.syfri.digitalplan.controller;
 
+import com.syfri.digitalplan.model.yafjxz.YaxxzlVO;
+import com.syfri.digitalplan.service.yafjxz.YaxxzlService;
+import net.sf.json.JSONObject;
 import com.github.pagehelper.StringUtil;
 import com.syfri.digitalplan.config.properties.YafjxzProperties;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
@@ -9,8 +12,7 @@ import com.syfri.digitalplan.model.firefacilities.*;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
 import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
 import com.syfri.digitalplan.service.yafjxz.YafjxzService;
-import com.syfri.digitalplan.utils.Pic;
-import com.syfri.digitalplan.utils.VelocityUtil;
+import com.syfri.digitalplan.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +37,8 @@ import com.syfri.digitalplan.service.importantparts.ImportantpartsService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 
 /**
@@ -67,6 +72,9 @@ public class CompZddwShareController {
 
     @Autowired
     private YafjxzService yafjxzService;
+
+    @Autowired
+    private YaxxzlService yaxxzlService;
 
     @Autowired
     private ImportantpartsService importantpartsService;
@@ -128,11 +136,15 @@ public class CompZddwShareController {
             // 建筑分区和消防设施
             model.addAttribute("areaBuildingList", importantunitsService.doFindBuildingDetailsAndFirefacilitiesByVo(vo));
         }
-// 附图
+        // 附图
         YafjxzVO yafjxzVO = new YafjxzVO();
         yafjxzVO.setKzm("pic");
         yafjxzVO.setYaid(uuid);
         model.addAttribute("pictureList", yafjxzService.doFindByPlanId(yafjxzVO));
+        //历史预案
+        YaxxzlVO yaxxzlVO = new YaxxzlVO();
+        yaxxzlVO.setYaid(uuid);
+        model.addAttribute("hisDetail", yaxxzlService.doSearchListByVO(yaxxzlVO));
         //lxy添加vue服务器路径
         model.addAttribute("vueServerUrl", yafjxzProperties.getVueServerUrl());
         model.addAttribute("serverUrl", yafjxzProperties.getFileServerUrl());

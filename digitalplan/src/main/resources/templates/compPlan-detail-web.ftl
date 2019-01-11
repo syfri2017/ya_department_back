@@ -1439,6 +1439,35 @@
             </div>
         </div>
         <!-- end 附图 -->
+        <!-- 历史预案-->
+        <div id="hisDetail" class="content-block block-level-1" data-menu-text="历史预案">
+            <h2 class="block-header">
+                <span class="header-title-inner">历史预案</span>
+            </h2>
+            <div class="sub-block">
+            <#list hisDetail as his>
+                <#if his??>
+                    <div id="his_${his_index+1}" class="sub-block block-level-2"
+                         data-menu-text="${his.zlmc}">
+                        <h3 class="sub-block-header">
+                            <a class="header-title-inner hisDetail"
+                               href="<#if compPlanInfo.jdh?substring(0,2)=='21'>http://10.119.119.232:11010/attachment/filemanage/configFile!showFile.action${his.xgxx}
+                                    <#elseif compPlanInfo.jdh?substring(0,2)=='32'>http://10.119.119.205:11010/attachment/filemanage/configFile!showFile.action${his.xgxx}</#if>">
+                            ${his.zlmc}
+                                <#--<#if his.xgxx??>-->
+                                    <#--${his.xgxx?substring("${his.xgxx?last_index_of(".")}" ,4)}-->
+                                <#--</#if>-->
+                            </a>
+                        </h3>
+                    <#--<div class="sub-block-body">-->
+                    <#--<img class="photo-tag" src="http://localhost:80/upload/${pic.yllj}" alt=""/>-->
+                    <#--</div>-->
+                    </div>
+                </#if>
+            </#list>
+            </div>
+        </div>
+        <!-- end 历史预案 -->
         <!-- 这段注释说不定以后能用上 -->
         <!-- <div id="xgzy" class="content-block block-level-1" data-menu-text="相关资源">
             <h2 class="block-header">
