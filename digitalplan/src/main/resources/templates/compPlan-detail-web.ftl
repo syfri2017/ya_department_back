@@ -1448,15 +1448,13 @@
             <#list hisDetail as his>
                 <#if his??>
                     <div id="his_${his_index+1}" class="sub-block block-level-2"
-                         data-menu-text="${his.zlmc}">
+                         data-menu-text="<#if his.zlmc??>${his.zlmc}</#if><#if his.kzm??>${his.kzm}</#if>">
                         <h3 class="sub-block-header">
                             <a class="header-title-inner hisDetail"
                                href="<#if compPlanInfo.jdh?substring(0,2)=='21'>http://10.119.119.232:11010/attachment/filemanage/configFile!showFile.action${his.xgxx}
-                                    <#elseif compPlanInfo.jdh?substring(0,2)=='32'>http://10.119.119.205:11010/attachment/filemanage/configFile!showFile.action${his.xgxx}</#if>">
-                            ${his.zlmc}
-                                <#--<#if his.xgxx??>-->
-                                    <#--${his.xgxx?substring("${his.xgxx?last_index_of(".")}" ,4)}-->
-                                <#--</#if>-->
+                                    <#elseif compPlanInfo.jdh?substring(0,2)=='32'>http://10.119.119.205:11010/attachment/filemanage/configFile!showFile.action${his.xgxx}</#if>"
+                               target="_blank">
+                                <#if his.zlmc??>${his.zlmc}</#if><#if his.kzm??>${his.kzm}</#if>
                             </a>
                         </h3>
                     <#--<div class="sub-block-body">-->

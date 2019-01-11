@@ -25,6 +25,8 @@ public class YaxxzlVO extends ValueObject implements Serializable{
 	private String ywxtbsid;	//undefined
 	private String sltfjdz;	//undefined
 
+	private String kzm;	//扩展名
+
 	public String getId(){
 		return id;
 	}
@@ -120,5 +122,13 @@ public class YaxxzlVO extends ValueObject implements Serializable{
 	}
 	public void setSltfjdz(String sltfjdz){
 		this.sltfjdz = sltfjdz;
+	}
+
+	public String getKzm() {
+		return kzm;
+	}
+
+	public void setKzm(String kzm) {
+		this.kzm = kzm;
 	}
 }

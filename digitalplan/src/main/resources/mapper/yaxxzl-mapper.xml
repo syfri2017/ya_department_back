@@ -82,7 +82,7 @@
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="YaxxzlVO"  resultType="YaxxzlVO"> 
 		SELECT 
-			<include refid="SQL_CONTENT"/>
+			<include refid="SQL_CONTENT"/>,substr(t.xgxx, instr(t.xgxx,'.',-1,1)) kzm
 		FROM YAGL_YAXXZL t  WHERE t.JLZT = '0'
 			<include refid="SQL_CONDITION"/>
 	</select>
