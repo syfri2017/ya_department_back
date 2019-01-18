@@ -18,10 +18,10 @@ public class YafjxzProperties {
     private String savePath = "E://test//upload//";
 
     private String zipPath="E://test//upload//";
+    //路径最后必须有斜杠
+    private String fileServerUrl= "http://localhost:80/";
 
-    private String fileServerUrl= "http://10.119.119.145:80";
-
-    private String vueServerUrl= "http://10.119.119.145:80";
+    private String vueServerUrl= "http://localhost:80/";
 
     public String getVueServerUrl() {
         return vueServerUrl;
