@@ -168,4 +168,21 @@ public class ImportantunitsController  extends BaseController<ImportantunitsVO>{
 		}
 		return resultVO;
 	}
+	/**
+	 * 通过重点单位id查询历史附件信息列表
+	 * by huangrui 2019/1/17
+	 */
+	@ApiOperation(value="通过重点单位id查询历史附件信息列表",notes="列表信息")
+	@ApiImplicitParam(name="vo",value="重点单位")
+	@PostMapping("/doFindHisPlanListByVo")
+	public @ResponseBody ResultVO doFindHisPlanListByVo(@RequestBody ImportantunitsVO vo) {
+		ResultVO resultVO = ResultVO.build();
+		try{
+			resultVO.setResult(importantunitsService.doFindHisPlanListByVo(vo));
+		}catch(Exception e){
+			logger.error("{}",e.getMessage());
+			resultVO.setCode(EConstants.CODE.FAILURE);
+		}
+		return resultVO;
+	}
 }

@@ -2,13 +2,17 @@ package com.syfri.digitalplan.service.impl.planobject;
 
 import com.syfri.digitalplan.dao.basicinfo.fireenginesource.FireengineDAO;
 import com.syfri.digitalplan.dao.basicinfo.watersource.XfsyDAO;
+import com.syfri.digitalplan.dao.digitalplan.DigitalplanlistDAO;
+import com.syfri.digitalplan.dao.yafjxz.YaxxzlDAO;
 import com.syfri.digitalplan.model.basicinfo.fireenginesource.FireengineVO;
 import com.syfri.digitalplan.model.basicinfo.watersource.XfsyVO;
 import com.syfri.digitalplan.model.buildingzoning.ChuguanVO;
+import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.firefacilities.FirefacilitiesVO;
 import com.syfri.digitalplan.model.importantparts.ImportantpartsVO;
 import com.syfri.digitalplan.model.planobject.ImportantunitsBuildingVO;
 import com.syfri.digitalplan.model.planobject.XiaofangliliangVO;
+import com.syfri.digitalplan.model.yafjxz.YaxxzlVO;
 import com.syfri.digitalplan.service.buildingzoning.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +40,11 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 	@Autowired
 	private ImportantunitsDAO importantunitsDAO;
 	@Autowired
+	private DigitalplanlistDAO digitalplanlistDAO;
+	@Autowired
 	private BuildingDAO buildingDAO;
+	@Autowired
+	private YaxxzlDAO yaxxzlDAO;
 	@Autowired
 	private BuildingService buildingService;
 	@Autowired
@@ -239,5 +247,29 @@ public class ImportantunitsServiceImpl extends BaseServiceImpl<ImportantunitsVO>
 		engineVO.setGisY_min(String.valueOf(latitude - dLatitude));
 		engineVO.setGisY_max(String.valueOf(latitude + dLatitude));
 		return fireengineDAO.doFindListByGis(engineVO);
+	}
+
+	@Override
+	public List<YaxxzlVO> doFindHisPlanListByVo(ImportantunitsVO vo) {
+		List<YaxxzlVO> resultList = new ArrayList<>();
+		DigitalplanlistVO digitalplanlistVO = new DigitalplanlistVO();
+		digitalplanlistVO.setDxid(vo.getUuid());
+		List<DigitalplanlistVO> digitalplanlist = digitalplanlistDAO.doSearchListByVO(digitalplanlistVO);
+		if(digitalplanlist.size() > 0){
+			for( int i = 0 ; i < digitalplanlist.size() ; i++) {
+				String yaid = digitalplanlist.get(i).getUuid();
+				YaxxzlVO yaxxzlVO = new YaxxzlVO();
+				yaxxzlVO.setYaid(yaid);
+				List<YaxxzlVO> yaxxzlList = yaxxzlDAO.doSearchListByVO(yaxxzlVO);
+				if(yaxxzlList.size() > 0) {
+					for (int j = 0; j < yaxxzlList.size(); j++) {
+						yaxxzlList.get(j).setYamc(digitalplanlist.get(i).getYamc());
+						yaxxzlList.get(j).setYajdh(digitalplanlist.get(i).getJdh());
+					}
+				}
+				resultList.addAll(yaxxzlList);
+			}
+		}
+		return resultList;
 	}
 }

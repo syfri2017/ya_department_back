@@ -6,6 +6,7 @@ import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.importantparts.ImportantpartsVO;
 import com.syfri.digitalplan.model.planobject.XiaofangliliangVO;
 import com.syfri.digitalplan.model.planobject.ImportantunitsVO;
+import com.syfri.digitalplan.model.yafjxz.YaxxzlVO;
 
 import java.util.List;
 import java.util.Map;
@@ -44,4 +45,10 @@ public interface ImportantunitsService  extends BaseService<ImportantunitsVO>{
      * author liurui
      */
     List<FireengineVO> doFindXfclListByZddwGis(ImportantunitsVO vo);
+
+    /**
+     * 通过重点单位id查询历史附件信息列表
+     * author huangrui
+     */
+    List<YaxxzlVO> doFindHisPlanListByVo(ImportantunitsVO vo);
 }

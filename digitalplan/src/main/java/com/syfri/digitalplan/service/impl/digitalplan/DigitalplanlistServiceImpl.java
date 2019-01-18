@@ -7,12 +7,14 @@ import com.syfri.digitalplan.dao.digitalplan.KeypointsDAO;
 import com.syfri.digitalplan.dao.digitalplan.ForcedevDAO;
 import com.syfri.digitalplan.dao.buildingzoning.BuildingDAO;
 
+import com.syfri.digitalplan.dao.yafjxz.YaxxzlDAO;
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.digitalplan.DistributeVO;
 import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.digitalplan.ForcedevVO;
 import com.syfri.digitalplan.model.digitalplan.KeypointsVO;
+import com.syfri.digitalplan.model.yafjxz.YaxxzlVO;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
     private BuildingDAO buildingDAO;
     @Autowired
     private DistributeDAO distributeDAO;
-
+    @Autowired
+    private YaxxzlDAO yaxxzlDAO;
 
     @Override
     public DigitalplanlistDAO getBaseDAO() {
@@ -443,5 +446,22 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         String yabm = yabmPre + String.format("%04d", count + 1);
 
         return yabm;
+    }
+
+    @Override
+    public List<YaxxzlVO> doFindHisPlanListByVo(DigitalplanlistVO vo) {
+        List<YaxxzlVO> resultList = new ArrayList<>();
+        String yaid = vo.getUuid();
+        String yajdh = vo.getJdh();
+        YaxxzlVO yaxxzlVO = new YaxxzlVO();
+        yaxxzlVO.setYaid(yaid);
+        List<YaxxzlVO> yaxxzlList =yaxxzlDAO.doSearchListByVO(yaxxzlVO);
+        resultList.addAll(yaxxzlList);
+        if(resultList.size() > 0){
+            for( int i = 0 ; i < resultList.size() ; i++) {
+                resultList.get(i).setYajdh(yajdh);
+            }
+        }
+        return resultList;
     }
 }
