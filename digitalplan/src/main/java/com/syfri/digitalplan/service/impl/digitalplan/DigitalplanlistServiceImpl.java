@@ -7,6 +7,7 @@ import com.syfri.digitalplan.dao.digitalplan.KeypointsDAO;
 import com.syfri.digitalplan.dao.digitalplan.ForcedevDAO;
 import com.syfri.digitalplan.dao.buildingzoning.BuildingDAO;
 
+import com.syfri.digitalplan.dao.yafjxz.YafjxzDAO;
 import com.syfri.digitalplan.dao.yafjxz.YaxxzlDAO;
 import com.syfri.digitalplan.model.digitalplan.DigitalplanlistVO;
 import com.syfri.digitalplan.model.digitalplan.DistributeVO;
@@ -14,6 +15,7 @@ import com.syfri.digitalplan.model.digitalplan.DisastersetVO;
 import com.syfri.digitalplan.model.buildingzoning.BuildingVO;
 import com.syfri.digitalplan.model.digitalplan.ForcedevVO;
 import com.syfri.digitalplan.model.digitalplan.KeypointsVO;
+import com.syfri.digitalplan.model.yafjxz.YafjxzVO;
 import com.syfri.digitalplan.model.yafjxz.YaxxzlVO;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,8 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
     private DistributeDAO distributeDAO;
     @Autowired
     private YaxxzlDAO yaxxzlDAO;
+    @Autowired
+    private YafjxzDAO yafjxzDAO;
 
     @Override
     public DigitalplanlistDAO getBaseDAO() {
@@ -460,6 +464,23 @@ public class DigitalplanlistServiceImpl extends BaseServiceImpl<DigitalplanlistV
         if(resultList.size() > 0){
             for( int i = 0 ; i < resultList.size() ; i++) {
                 resultList.get(i).setYajdh(yajdh);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<DigitalplanlistVO> doFindListWithFJListByVo(DigitalplanlistVO vo) {
+        List<DigitalplanlistVO> resultList = digitalplanlistDAO.doSearchListByVO(vo);
+        if(resultList.size() > 0){
+            for(int i=0;i<resultList.size();i++){
+                String yaid = resultList.get(i).getUuid();
+                String kzm = ".zip";
+                YafjxzVO yafjxzVO = new YafjxzVO();
+                yafjxzVO.setYaid(yaid);
+                yafjxzVO.setKzm(kzm);
+                List<YafjxzVO> yafjxzList = yafjxzDAO.doSearchListByVO(yafjxzVO);
+                resultList.get(i).setYafjxzList(yafjxzList);
             }
         }
         return resultList;

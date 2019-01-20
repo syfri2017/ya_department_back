@@ -73,4 +73,10 @@ public interface DigitalplanlistService extends BaseService<DigitalplanlistVO> {
      * author huangrui
      */
     List<YaxxzlVO> doFindHisPlanListByVo(DigitalplanlistVO vo);
+
+    /**
+     * 通过vo查询预案信息和附件信息
+     * author huangrui
+     */
+    List<DigitalplanlistVO> doFindListWithFJListByVo(DigitalplanlistVO vo);
 }

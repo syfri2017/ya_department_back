@@ -45,7 +45,6 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	private String yadxType;  //高级搜索预案对象类别（1为重点单位，2为消防保卫警卫，3为其他对象）
 	private String yashztButtonType;  //预案审核状态按钮样式（已审核为绿色，未审核为红色，未通过为黄色）
 
-
 	public String getBegintime(){
 		return begintime;
 	}
@@ -306,5 +305,13 @@ public class DigitalplanlistVO extends ValueObject implements Serializable{
 	}
 	public void setYashztButtonType(String yashztButtonType) {
 		this.yashztButtonType = yashztButtonType;
+	}
+
+	private List yafjxzList;//预案附件列表
+	public List getYafjxzList() {
+		return yafjxzList;
+	}
+	public void setYafjxzList(List yafjxzList) {
+		this.yafjxzList = yafjxzList;
 	}
 }
