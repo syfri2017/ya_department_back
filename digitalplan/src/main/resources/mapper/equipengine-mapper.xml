@@ -73,9 +73,9 @@
 
 	<!--4.按条件查询记录-->
 	<select id="doSearchListByVO" parameterType="EquipengineVO"  resultType="EquipengineVO"> 
-		SELECT 
+		SELECT
 			<include refid="SQL_CONTENT"/>
-		FROM YAGL_WL_XFZBXX_CL t  WHERE t.DELETE_FLAG = 'N' 
+		FROM YAGL_WL_XFZBXX_CL t  WHERE t.DELETE_FLAG = 'N'
 			<include refid="SQL_CONDITION"/>
 		ORDER BY ZBBM
 	</select>

@@ -3,11 +3,18 @@ server:
   port: 8005
 ###################  自定义项目配置  ###################
 yafjxz:
-  file-server-url: http://10.119.119.145:80
-  save-path: E://test//upload//   #预案上传保存位置
-  zip-path: E://test//upload//    #压缩文件存放路径
+  file-server-url: http://59.46.113.245:8088/upload/
+  vue-server-url: http://59.46.113.245:8088/
+  save-path: /data//test//upload//   #预案上传保存位置 http://59.46.113.245:8088
+  zip-path: /data//test//upload//    #压缩文件存放路径
+  ################转换历史预案   http://localhost:8005/zhyafj/down
+  ip-port: http://10.119.119.232:11010 #一体化文件系统地址 辽宁
+  #ip-port: http://10.119.119.205:11010 #一体化文件系统地址 江苏
+  #ip-port: http://192.168.1.105:11010 #一体化文件系统地址 西藏
+  action: /attachment/filemanage/configFile!showFile.action #一体化文件系统方法
+  max-size: 100  #单线程最大处理数据量
+  base-dir: H://ya/ #基础路径
 #------------------------------------------------------------
-#spring
 spring:
   profiles:
     active: dev
@@ -107,6 +114,6 @@ spring:
     datasource:
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@10.119.119.232:1521/SZHYAGLDB
+      url: jdbc:oracle:thin:@10.119.101.84:1521/SZHYAGLDB
       username: SZHYAGL
       password: SZHYAGL

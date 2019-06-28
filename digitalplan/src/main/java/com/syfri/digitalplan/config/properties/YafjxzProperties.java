@@ -23,6 +23,42 @@ public class YafjxzProperties {
 
     private String vueServerUrl= "http://localhost:80/";
 
+    private String ipPort= "http://10.119.119.232:11010";
+    private String action= "/attachment/filemanage/configFile!showFile.action";
+    private int maxSize= 100;
+    private String baseDir= "E://ya/";
+    public String getIpPort() {
+        return ipPort;
+    }
+
+    public void setIpPort(String ipPort) {
+        this.ipPort = ipPort;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    public String getBaseDir() {
+        return baseDir;
+    }
+
+    public void setBaseDir(String baseDir) {
+        this.baseDir = baseDir;
+    }
+
     public String getVueServerUrl() {
         return vueServerUrl;
     }
